@@ -39,7 +39,6 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
@@ -59,7 +58,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -273,7 +272,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 				"TreeUI", 					PLASTIC_PREFIX + "TreeUI",
 				
 				// Just to use Plastic colors
-				"InternalFrameUI",			PLASTIC_PREFIX + "InternalFrameUI",
+				"InternalFrameUI",			PLASTIC_PREFIX + "InternalFrameUI"
 			};
 		table.putDefaults(uiDefaults);
         if (!useMetalTabs) {
@@ -312,14 +311,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
 		Object internalFrameBorder		= getInternalFrameBorder();
 		Object paletteBorder			= getPaletteBorder();
-		
-		Object emptyBorder				= new BorderUIResource(
-											new EmptyBorder(0, 0, 0, 0));
-		Border thinLoweredBorder		= PlasticBorders.getThinLoweredBorder();
-		Border thinRaisedBorder			= PlasticBorders.getThinRaisedBorder();
-		Object statusCellBorder			= new BorderUIResource.CompoundBorderUIResource(
-											new EmptyBorder(2, 0, 1, 3),
-											thinLoweredBorder);
 		
 		Color controlColor 				= table.getColor("control");
 		
@@ -495,15 +486,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "CheckBox.border",                      marginBorder,
         "RadioButton.border",                   marginBorder,
         
-                
-		// ClearLook Borders ************************************************
-		"ClearLook.ScrollPaneReplacementBorder", 		emptyBorder,
-		"ClearLook.SplitPaneReplacementBorder",			emptyBorder,
-		"ClearLook.ThinLoweredBorder",					thinLoweredBorder,
-		"ClearLook.ThinRaisedBorder",					thinRaisedBorder,
-		"ClearLook.NetBeansScrollPaneBorder",			emptyBorder,
-		"ClearLook.NetBeansSpecialPanelBorder",			emptyBorder,
-		"ClearLook.NetBeansStatusCellBorder",			statusCellBorder,
+        // Fix of the issue #21
+        "ProgressBar.selectionForeground",      getSystemTextColor(),
+        "ProgressBar.selectionBackground",      getSystemTextColor()
 		};
 		table.putDefaults(defaults);
 	}
