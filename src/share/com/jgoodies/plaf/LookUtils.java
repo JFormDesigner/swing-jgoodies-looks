@@ -57,6 +57,8 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
  */
 
 public final class LookUtils {
+    
+    // Basics System Properties **********************************************
 
     /**
      * The <code>java.version</code> System Property.<p>
@@ -66,7 +68,24 @@ public final class LookUtils {
      */
     private static final String JAVA_VERSION = getSystemProperty("java.version");    
     
-    // Properties for internal use only - may change without notice 
+    /**
+     * The <code>os.name</code> System Property. Operating system name.<p>
+     *
+     * Defaults to <code>null</code> if the runtime does not have security 
+     * access to read this property or the property does not exist.
+     */
+    private static final String OS_NAME = getSystemProperty("os.name");
+
+    /**
+     * The <code>os.version</code> System Property. Operating system version.<p>
+     *
+     * Defaults to <code>null</code> if the runtime does not have security 
+     * access to read this property or the property does not exist.
+     */
+    private static final String OS_VERSION = getSystemProperty("os.version");
+
+    
+    // Requesting the Java Version ******************************************** 
 
     /**
      * True if this is Java 1.4.
@@ -87,21 +106,26 @@ public final class LookUtils {
         !startsWith(JAVA_VERSION, "1.4.0") &&
         !startsWith(JAVA_VERSION, "1.4.1");
     
+    
+    // Requesting the Operating System Name ***********************************
+    
     /**
-     * The <code>os.name</code> System Property. Operating system name.<p>
-     *
-     * Defaults to <code>null</code> if the runtime does not have security 
-     * access to read this property or the property does not exist.
+     * True if this is FreeBSD.
      */
-    private static final String OS_NAME = getSystemProperty("os.name");
+    public static final boolean IS_OS_FREEBSD = 
+        startsWithIgnoreCase(OS_NAME, "FreeBSD");
 
     /**
-     * The <code>os.version</code> System Property. Operating system version.<p>
-     *
-     * Defaults to <code>null</code> if the runtime does not have security 
-     * access to read this property or the property does not exist.
+     * True if this is Linux.
      */
-    private static final String OS_VERSION = getSystemProperty("os.version");
+    public static final boolean IS_OS_LINUX = 
+        startsWithIgnoreCase(OS_NAME, "Linux");
+
+    /**
+     * True if this is OS/2.
+     */
+    public static final boolean IS_OS_OS2 = 
+        startsWith(OS_NAME, "OS/2");
 
     /**
      * True if this is the Mac OS X.
@@ -127,6 +151,15 @@ public final class LookUtils {
     public static final boolean IS_OS_WINDOWS_XP =
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.1");
     
+    /**
+     * True if this is Solaris.
+     */
+    public static final boolean IS_OS_SOLARIS = 
+        startsWith(OS_NAME, "Solaris");
+    
+    
+    // Other Properties *******************************************************
+
     /**
      * True if the Windows XP Look&amp;Feel is enabled.
      */
@@ -389,6 +422,10 @@ public final class LookUtils {
     
     private static boolean startsWith(String str, String prefix) {
         return str != null && str.startsWith(prefix);
+    }
+    
+    private static boolean startsWithIgnoreCase(String str, String prefix) {
+        return str != null && str.toUpperCase().startsWith(prefix.toUpperCase());
     }
     
 }
