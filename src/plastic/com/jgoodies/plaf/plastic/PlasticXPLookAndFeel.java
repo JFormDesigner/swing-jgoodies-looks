@@ -99,6 +99,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object comboBoxButtonBorder = PlasticXPBorders.getComboBoxArrowButtonBorder();
         Object comboBoxEditorBorder = PlasticXPBorders.getComboBoxEditorBorder();
         Object radioButtonIcon      = PlasticXPIconFactory.getRadioButtonIcon();
+        Object scrollPaneBorder     = PlasticXPBorders.getScrollPaneBorder();
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
         Object toggleButtonBorder   = PlasticXPBorders.getToggleButtonBorder();
 
@@ -122,10 +123,14 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "ComboBox.editorBorder",          comboBoxEditorBorder,
             "ComboBox.borderPaintsFocus",     Boolean.TRUE,
 
+            "TextField.border",               textFieldBorder,
             "FormattedTextField.border",      textFieldBorder,
             "PasswordField.border",           textFieldBorder,
-            "TextField.border",               textFieldBorder,
-
+            "Spinner.border", 				  scrollPaneBorder,
+            
+            "ScrollPane.border",              scrollPaneBorder,
+            "Table.scrollPaneBorder", 		  scrollPaneBorder,
+            
             "RadioButton.icon",               radioButtonIcon,
             "RadioButton.check",              getToggleButtonCheckColor(),
             "RadioButton.interiorBackground", getControlHighlight(),

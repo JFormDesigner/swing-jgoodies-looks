@@ -31,6 +31,7 @@
 package com.jgoodies.plaf.plastic;
 
 import java.awt.Component;
+import java.awt.LayoutManager;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -43,7 +44,8 @@ import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
-import com.jgoodies.plaf.ExtBasicArrowButtonHandler;
+import com.jgoodies.plaf.common.ExtBasicArrowButtonHandler;
+import com.jgoodies.plaf.common.ExtBasicSpinnerLayout;
 
 
 /**
@@ -54,7 +56,7 @@ import com.jgoodies.plaf.ExtBasicArrowButtonHandler;
 public final class PlasticSpinnerUI extends BasicSpinnerUI {
 	
 	private static final Border EMPTY_BORDER 
-									= new BorderUIResource(new EmptyBorder(0, 0, 0, 0));
+									= new BorderUIResource(new EmptyBorder(2, 2, 2, 2));
 	
 	
 	public static ComponentUI createUI(JComponent b) {
@@ -120,6 +122,24 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
     }
 
 
+    /**
+     * Create a <code>LayoutManager</code> that manages the <code>editor</code>,
+     * <code>nextButton</code>, and <code>previousButton</code> children
+     * of the JSpinner. These three children must be added with a constraint
+     * that identifies their role: "Editor", "Next", and "Previous". The
+     * default layout manager can handle the absence of any of these children.
+     * 
+     * @return a LayoutManager for the editor, next button, and previous
+     *         button.
+     * @see #createNextButton
+     * @see #createPreviousButton
+     * @see #createEditor
+     */
+    protected LayoutManager createLayout() {
+        return new ExtBasicSpinnerLayout();
+    }
+    
+    
     /**
      * This method is called by installUI to get the editor component
      * of the <code>JSpinner</code>.  By default it just returns 

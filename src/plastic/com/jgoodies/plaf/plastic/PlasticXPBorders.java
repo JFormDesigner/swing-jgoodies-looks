@@ -62,6 +62,7 @@ final class PlasticXPBorders {
     private static Border buttonBorder;
     private static Border comboBoxArrowButtonBorder;
     private static Border comboBoxEditorBorder;
+    private static Border scrollPaneBorder;
     private static Border textFieldBorder;
     private static Border toggleButtonBorder;
     
@@ -100,6 +101,16 @@ final class PlasticXPBorders {
                                     new BasicBorders.MarginBorder());
         }
         return comboBoxEditorBorder;
+    }
+
+    /*
+     * Returns a border instance for a <code>JScrollPane</code>.
+     */
+    static Border getScrollPaneBorder() {
+        if (scrollPaneBorder == null) {
+            scrollPaneBorder = new BorderUIResource(new XPScrollPaneBorder());
+        }
+        return scrollPaneBorder;
     }
 
     /*
@@ -256,5 +267,31 @@ final class PlasticXPBorders {
         }
 	}
 
+    /*
+     * A border for text fields.
+     */
+    private static class XPScrollPaneBorder extends AbstractBorder  {
 
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            
+            g.setColor(c.isEnabled() 
+                    ? PlasticLookAndFeel.getControlDarkShadow()
+                    : MetalLookAndFeel.getControlShadow());
+            PlasticXPUtils.drawRect(g, x, y, w-1, h-1);
+        }    
+        
+        public Insets getBorderInsets(Component c) { return INSETS; }
+
+        public Insets getBorderInsets(Component c, Insets newInsets) {
+            newInsets.top    = INSETS.top;
+            newInsets.left   = INSETS.left;
+            newInsets.bottom = INSETS.bottom;
+            newInsets.right  = INSETS.right;
+            return newInsets;
+        }
+    }
+
+    
 }
