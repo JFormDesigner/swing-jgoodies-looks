@@ -194,7 +194,7 @@ public final class Tiny {
      */
     private Component createCenteredLabel(String text) {
         JLabel label = new JLabel(text);
-        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setBorder(new EmptyBorder(3, 3, 3, 3));
         return label;
     }
