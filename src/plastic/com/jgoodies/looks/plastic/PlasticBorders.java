@@ -35,7 +35,13 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
+import javax.swing.JInternalFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JToggleButton;
+import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -47,7 +53,6 @@ import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.text.JTextComponent;
 
 import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.common.ShadowPopupBorder;
 
 
 /**
@@ -55,7 +60,7 @@ import com.jgoodies.looks.common.ShadowPopupBorder;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 final class PlasticBorders {
@@ -72,7 +77,6 @@ final class PlasticBorders {
     private static Border menuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
-    private static Border dropShadowPopupMenuBorder;
     private static Border rolloverButtonBorder;
     private static Border scrollPaneBorder;
     private static Border separatorBorder;
@@ -213,20 +217,6 @@ final class PlasticBorders {
             popupMenuBorder = new PopupMenuBorder();
         }
         return popupMenuBorder;
-    }
-
-    /**
-     * Returns a border instance with drop shadow for a <code>JPopupMenu</code>.
-     * 
-     * @return the lazily created popup menu border
-     */
-    static Border getDropShadowPopupMenuBorder() {
-        if (dropShadowPopupMenuBorder == null) {
-            dropShadowPopupMenuBorder = new BorderUIResource.CompoundBorderUIResource(
-                    ShadowPopupBorder.getInstance(),
-                    new PopupMenuBorder());
-        }
-        return dropShadowPopupMenuBorder;
     }
 
     /**

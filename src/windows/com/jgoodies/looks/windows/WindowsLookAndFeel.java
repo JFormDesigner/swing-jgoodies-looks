@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -141,8 +141,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 			"CheckBoxMenuItemUI",    COMMON_PREFIX + "CheckBoxMenuItemUI", 
 			"RadioButtonMenuItemUI", COMMON_PREFIX + "RadioButtonMenuItemUI", 
 
-            // Optional drop shadow
-            "PopupMenuUI",           WINDOWS_PREFIX + "PopupMenuUI",
             // Has padding above and below the separator lines				
             "PopupMenuSeparatorUI",  COMMON_PREFIX + "PopupMenuSeparatorUI", 
 
@@ -337,7 +335,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "PasswordField.margin",       textInsets, // 1.4.1 Bug
             
             "PopupMenu.border",           WindowsBorders.getPopupMenuBorder(),
-            "PopupMenu.dropShadowBorder", WindowsBorders.getDropShadowPopupMenuBorder(),
             "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
             "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies

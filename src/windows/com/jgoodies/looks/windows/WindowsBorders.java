@@ -49,14 +49,12 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
-import com.jgoodies.looks.common.ShadowPopupBorder;
-
 /**
  * Consists of static inner classes that define different 
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class WindowsBorders {
     
@@ -65,7 +63,6 @@ final class WindowsBorders {
     private static Border menuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
-    private static Border dropShadowPopupMenuBorder;
     private static Border separatorBorder;
     private static Border etchedBorder;
     private static Border menuBarHeaderBorder;
@@ -159,20 +156,6 @@ final class WindowsBorders {
             popupMenuBorder = new PopupMenuBorder();
         }
         return popupMenuBorder;
-    }
-
-    /**
-     * Returns a border instance with drop shadow for a <code>JPopupMenu</code>.
-     * 
-     * @return the lazily created popup menu border
-     */
-    static Border getDropShadowPopupMenuBorder() {
-        if (dropShadowPopupMenuBorder == null) {
-            dropShadowPopupMenuBorder = new BorderUIResource.CompoundBorderUIResource(
-                    ShadowPopupBorder.getInstance(),
-                    new PopupMenuBorder());
-        }
-        return dropShadowPopupMenuBorder;
     }
 
     /**

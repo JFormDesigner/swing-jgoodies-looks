@@ -58,7 +58,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -254,8 +254,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 				"CheckBoxMenuItemUI",		COMMON_PREFIX + "CheckBoxMenuItemUI",
 				"RadioButtonMenuItemUI",	COMMON_PREFIX + "RadioButtonMenuItemUI",
 
-                // Provides a drop shadow
-                "PopupMenuUI",             PLASTIC_PREFIX + "PopupMenuUI",
 				// Has padding above and below the separator lines				
 		        "PopupMenuSeparatorUI",		COMMON_PREFIX + "PopupMenuSeparatorUI",
 		       
@@ -298,7 +296,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder();
 
 		Object popupMenuBorder			= PlasticBorders.getPopupMenuBorder();
-        Object dropShadowPopupMenuBorder= PlasticBorders.getDropShadowPopupMenuBorder();
     	
 		Object scrollPaneBorder			= PlasticBorders.getScrollPaneBorder();
 		Object tableHeaderBorder		= new BorderUIResource(
@@ -426,7 +423,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "PasswordField.margin",                         textInsets,             
 
 		"PopupMenu.border",								popupMenuBorder,
-        "PopupMenu.dropShadowBorder",                   dropShadowPopupMenuBorder,
 		"PopupMenuSeparator.margin",					new InsetsUIResource(3, 4, 3, 4),	
 
 		"RadioButton.margin",							checkBoxMargin,					
