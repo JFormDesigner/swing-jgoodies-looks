@@ -342,8 +342,9 @@ public final class LookUtils {
      * @return true if NetBeans could be detected, false otherwise
      */
     private static boolean isNetBeans() {
+        String property = getSystemProperty("netbeans.buildnumber");
         boolean hasNetBeansBuildNumber = 
-            getSystemProperty("netbeans.buildnumber") != null;
+             property != null && property.length() > 0;
         if (hasNetBeansBuildNumber) {
             log("NetBeans detected - dobry den!");
         }
