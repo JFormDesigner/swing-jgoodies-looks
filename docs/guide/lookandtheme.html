@@ -33,6 +33,8 @@
 	<br>::&nbsp;<a class="nav" href="../examples.html">Examples</a>
 	<br>::&nbsp;<a class="nav" href="../netbeans.html">NetBeans</a>
 	<br>::&nbsp;<a class="nav" href="../quickstart.html">Quick Start</a>
+	<br>::&nbsp;<a class="nav" href="../tips.html">Tips &amp; Tricks</a>
+	<br>::&nbsp;<a class="nav" href="../faq.html">FAQ</a>
 	<p>
 	<b>User's&nbsp;Guide</b>
 	<br>::&nbsp;<a class="nav" href="../guide/index.html">Introduction</a>
@@ -49,9 +51,9 @@
 	<b>Web Pages</b>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/">Project Home</a>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectDocumentList">Downloads</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">Announcements</a>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectMailingListList">Mailing Lists</a>
-	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracking</a>
-	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">News</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracker</a>
 	<br>::&nbsp;<a class="nav" href="http://www.jgoodies.com/freeware/">More Examples</a>
         
          <!-- *********** Ende der Seitennavigation ******************************* -->
@@ -88,6 +90,15 @@ The class can be one of:
 	</ul>
 
 
+	<h2>Java Web Start</h2>
+	
+	If you use a third party l&amp;f in a network launchable environment
+	such as Java Web Start, you must indicate where to find the l&amp;f classes:
+<pre>
+   UIManager.put("ClassLoader", LookUtils.class.getClassLoader());
+</pre>
+	
+
 	<h2>Setting a JGoodies Look by Name</h2>
 
 	You can set a JGoodies look using its class name:
@@ -106,22 +117,15 @@ The class can be one of:
 	You can override this default theme via:
 <pre>
    PlasticLookAndFeel.setMyCurrentTheme(new DesertBlue());
+   try {
+      UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+   } catch (Exception e) {}
 </pre>
 
-	 To make use of the new color theme, you must set the look&amp;feel 
-	 in the UIManager as described above <i>after</i> you set the theme.
-         Find predefined color themes in package <tt>com.jgoodies.plaf.plastic.theme</tt>.
+	 To make use of the new color theme, you must set the theme
+	 <strong>before</strong> you set the look&amp;feel. 
+     Find color themes in package <tt>com.jgoodies.plaf.plastic.theme</tt>.
 	     
-
-	<h2>Java Web Start</h2>
-	
-	If you use a third party l&amp;f in a network launchable environment
-	such as Java Web Start, you need to indicate where to find the l&amp;f classes.
-	Set the Swing class loader via:
-<pre>
-   UIManager.put("ClassLoader", LookUtils.class.getClassLoader());
-</pre>
-	
 
 	</td>
 	</tr>
@@ -136,7 +140,7 @@ The class can be one of:
 <tr>
     <td nowrap="nowrap" bgcolor="F4f3f3">
       <div style="font-size: 10px; margin-left: 17px; margin-top: 20px; margin-right: 10px; margin-bottom: 4px;">
-      (c) 2003 JGoodies
+      (c) 2004 JGoodies
       </div>
     </td>
     <td width="1" bgcolor="E7E5E5"></td>

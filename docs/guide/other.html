@@ -33,6 +33,8 @@
 	<br>::&nbsp;<a class="nav" href="../examples.html">Examples</a>
 	<br>::&nbsp;<a class="nav" href="../netbeans.html">NetBeans</a>
 	<br>::&nbsp;<a class="nav" href="../quickstart.html">Quick Start</a>
+	<br>::&nbsp;<a class="nav" href="../tips.html">Tips &amp; Tricks</a>
+	<br>::&nbsp;<a class="nav" href="../faq.html">FAQ</a>
 	<p>
 	<b>User's&nbsp;Guide</b>
 	<br>::&nbsp;<a class="nav" href="../guide/index.html">Introduction</a>
@@ -49,9 +51,9 @@
 	<b>Web Pages</b>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/">Project Home</a>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectDocumentList">Downloads</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">Announcements</a>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectMailingListList">Mailing Lists</a>
-	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracking</a>
-	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">News</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracker</a>
 	<br>::&nbsp;<a class="nav" href="http://www.jgoodies.com/freeware/">More Examples</a>
         
          <!-- *********** Ende der Seitennavigation ******************************* -->
@@ -126,16 +128,25 @@
 	<h2>Popup Menu Drop Shadow</h2>
 
 	You can enable or disable drop shadows for popup menus.
-	The default setting depends on the platform; currently drop shadows 
-	are automatically enabled on the Windows platform only.
+	As of the Looks 1.2.1 this feature is disabled by default.
+	The current implementation fails to paint heavy-weight popup 
+	drop-shadows under some conditions. 
+	Before you enable drop shadows, you should make sure that 
+    your application won't get into these problems. 
+    Heavy weight popups fail if you display cascaded popups 
+    or pull-down menus. If you are using cascaded menus and
+    the application won't be executed in full-screen mode,
+    users may experience paint glitches.	
+    
+	<p>
 	Note that this feature may be inactive even though it is enabled.
 	For example drop shadows are always inactive on the Mac OS X,
 	because this platform already provides drop shadows.
 	See also Options#isPopupDropShadowActive().
 <pre>
-   Options.setPopupDropShadowEnabled(false);
+   Options.setPopupDropShadowEnabled(true);
    
-   UIManager.set("jgoodies.popupDropShadowEnabled", Boolean.TRUE);
+   UIManager.put("jgoodies.popupDropShadowEnabled", Boolean.TRUE);
 </pre>
     Also, you can enable or disable this feature in the system properties.
     This will override the UIManager setting.
@@ -199,7 +210,7 @@ of the Metal lines style properties.
 <tr>
     <td nowrap="nowrap" bgcolor="F4f3f3">
       <div style="font-size: 10px; margin-left: 17px; margin-top: 20px; margin-right: 10px; margin-bottom: 4px;">
-      (c) 2003 JGoodies
+      (c) 2004 JGoodies
       </div>
     </td>
     <td width="1" bgcolor="E7E5E5"></td>
