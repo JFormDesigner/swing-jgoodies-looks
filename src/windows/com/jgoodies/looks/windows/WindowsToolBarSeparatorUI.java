@@ -48,7 +48,7 @@ import com.jgoodies.looks.LookUtils;
  * Used in in 1.4.0, 1.4.1 and 1.4.2 with XP turned off.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsToolBarSeparatorUI
     extends BasicToolBarSeparatorUI {
@@ -69,7 +69,6 @@ public final class WindowsToolBarSeparatorUI
         Color highlightColor = UIManager.getColor("ToolBar.highlight");
 
         Dimension size = c.getSize();
-        System.out.println(size);
 
         if (((JSeparator) c).getOrientation() == VERTICAL) {
             int x = (size.width / 2) - 1;
