@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 final class AlignmentTab {
     
@@ -94,15 +94,15 @@ final class AlignmentTab {
         
         builder.append(createCenteredLabel("Label"));
         builder.append(createCenteredLabel("Field"));
-        builder.append(createCenteredLabel("Area"));
-        builder.append(createCenteredLabel("Pane"));
+        builder.append(createCenteredLabel("Spinner"));
+        builder.append(createCenteredLabel("Combo"));
         builder.append(createCenteredLabel("Button"));
         builder.append(TEST_STR);
         builder.append(new JTextField(TEST_STR));
-        builder.append(createWrappedTextArea(TEST_STR));
-        builder.append(createWrappedEditorPane(TEST_STR));
+        builder.append(createSpinner(TEST_STR));
+        builder.append(createComboBox(TEST_STR, true));
         builder.append(createNarrowButton(TEST_STR));
-        
+
         builder.appendRow(FormFactory.PARAGRAPH_GAP_ROWSPEC);
         builder.nextLine(2);
         
@@ -122,15 +122,15 @@ final class AlignmentTab {
         
         builder.append(createCenteredLabel("Label"));
         builder.append(createCenteredLabel("Field"));
-        builder.append(createCenteredLabel("Combo"));
-        builder.append(createCenteredLabel("Spinner"));
+        builder.append(createCenteredLabel("Area"));
+        builder.append(createCenteredLabel("Pane"));
         builder.append(createCenteredLabel("Button"));
         builder.append(TEST_STR);
         builder.append(new JTextField(TEST_STR));
-        builder.append(createComboBox(TEST_STR, true));
-        builder.append(createSpinner(TEST_STR));
+        builder.append(createWrappedTextArea(TEST_STR));
+        builder.append(createWrappedEditorPane(TEST_STR));
         builder.append(createNarrowButton(TEST_STR));
-
+        
         return builder.getPanel();
     }
 
