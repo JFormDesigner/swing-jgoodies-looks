@@ -32,8 +32,8 @@ package com.jgoodies.looks.demo;
 
 import javax.swing.*;
 
+import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.looks.builder.*;
 import com.jgoodies.plaf.Options;
 
 /** 
@@ -77,7 +77,7 @@ final class HtmlTab {
         FormLayout layout = new FormLayout(
                 "right:max(50dlu;pref), 6dlu, pref",
                 "");
-        SimpleFormBuilder builder = new SimpleFormBuilder(layout);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
         
         builder.append("Button:",        button);
