@@ -46,7 +46,7 @@ import com.jgoodies.plaf.LookUtils;
 
 public final class PlasticXPUtils {
 
-    /**
+    /*
      * Draws a plain border for an xp button.
      */
     static void drawPlainButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -59,7 +59,7 @@ public final class PlasticXPUtils {
                       );
     }
 
-    /**
+    /*
      * Draws a border for a pressed xp button.
      */
     static void drawPressedButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -79,7 +79,7 @@ public final class PlasticXPUtils {
         g.translate(-x, -y);
     }
 
-    /**
+    /*
      * Draws a border for a default xp button.
      */
     static void drawDefaultButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -88,7 +88,7 @@ public final class PlasticXPUtils {
                     PlasticLookAndFeel.getPrimaryControlDarkShadow());
     }
 
-    /**
+    /*
      * Draws a border for a focused xp button.
      */
     static void drawFocusedButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -97,7 +97,7 @@ public final class PlasticXPUtils {
                     PlasticLookAndFeel.getFocusColor());
     }
     
-    /**
+    /*
      * Draws a border for a disabled xp button.
      */
     static void drawDisabledButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -109,7 +109,7 @@ public final class PlasticXPUtils {
     }
 
 
-    /**
+    /*
      * Draws a button border for an xp button with the given colors.
      */
     public static void drawButtonBorder(
@@ -141,7 +141,7 @@ public final class PlasticXPUtils {
         g.translate(-x, -y);
     }
     
-    /**
+    /*
      * Draws a button border for an xp button with the given colors.
      */
     private static void drawInnerButtonDecoration(
@@ -168,7 +168,7 @@ public final class PlasticXPUtils {
     }
         
 
-    /**
+    /*
      * An optimized version of Graphics.drawRect.
      */
     static void drawRect(Graphics g, int x, int y, int w, int h) {
@@ -181,6 +181,7 @@ public final class PlasticXPUtils {
     
     /**
      * Answers a color that is a translucent copy of the given color. 
+     * 
      * @param baseColor     the base color
      * @param alpha         the alpha value
      * @return Color        the translucent color with specified alpha

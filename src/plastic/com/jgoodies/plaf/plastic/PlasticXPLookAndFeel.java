@@ -71,6 +71,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     /**
      * Initializes the PlasticXP class defaults.
      * Overrides the check box and radio button UIs.
+     * 
+     * @param table   the UIDefaults table to work with
      */
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
@@ -86,6 +88,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     
 	/**
 	 * Initializes the PlasticXP component defaults.
+     * 
+     * @param table   the UIDefaults table to work with
 	 */	
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
@@ -143,6 +147,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
      * and the global <code>isNarrowButtonsEnabled</code> property.<p>
      *
      * Sun's L&F implementations use wide button margins.
+     * 
+     * @param narrow   true indicates a narrow margin, false a wide margin
+     * @return an Insets object that describes the button margin
      * @see Options#getUseNarrowButtons()
      */
     private static Insets createButtonMargin(boolean narrow) {

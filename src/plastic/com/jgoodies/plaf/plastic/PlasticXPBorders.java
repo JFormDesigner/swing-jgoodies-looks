@@ -68,7 +68,7 @@ final class PlasticXPBorders {
     private static Border toggleButtonBorder;
     
 
-    /**
+    /*
      * Returns a border instance for a <code>JButton</code>.
      */
     static Border getButtonBorder() {
@@ -80,7 +80,7 @@ final class PlasticXPBorders {
         return buttonBorder;
     }
 
-    /**
+    /*
      * Returns a border instance for a <code>JComboBox</code>'s arrow button.
      */
     static Border getComboBoxArrowButtonBorder() {
@@ -92,7 +92,7 @@ final class PlasticXPBorders {
         return comboBoxArrowButtonBorder;
     }
 
-    /**
+    /*
      * Returns a border instance for a <code>JComboBox</code>'s editor.
      */
     static Border getComboBoxEditorBorder() {
@@ -104,7 +104,7 @@ final class PlasticXPBorders {
         return comboBoxEditorBorder;
     }
 
-    /**
+    /*
      * Returns a border instance for a <code>JTextField</code>.
      */
     static Border getTextFieldBorder() {
@@ -116,7 +116,7 @@ final class PlasticXPBorders {
         return textFieldBorder;
     }
 
-    /**
+    /*
      * Returns a border instance for a <code>JToggleButton</code>.
      */
     static Border getToggleButtonBorder() {

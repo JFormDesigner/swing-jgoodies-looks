@@ -84,6 +84,9 @@ public final class LookUtils {
 
     /**
      * Checks and answers whether we have a true color system.
+     * 
+     * @param c   the component used to determine the toolkit
+     * @return true if the component's toolkit has a pixel size >= 24
      */
     public static boolean isTrueColor(Component c) {
         return c.getToolkit().getColorModel().getPixelSize() >= 24;
@@ -130,6 +133,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers whether we're on Windows.
+     * 
+     * @return true if the OS name starts with Windows
      */
     public static boolean isWindows() {
         return System.getProperty("os.name").startsWith("Windows");
@@ -137,6 +142,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers if we are on Windows 95 or NT.
+     * 
+     * @return true if this is Windows 95 or NT
      */
     public static boolean isClassicWindows() {
         String osName = System.getProperty("os.name");
@@ -146,6 +153,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers if we are on Windows 98/ME/2000/XP.
+     * 
+     * @return true if this is a Windows 98/ME/2000/XP
      */
     public static boolean isModernWindows() {
         String osName = System.getProperty("os.name");
@@ -155,6 +164,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers if we are on Windows XP.
+     * 
+     * @return true if this is a Windows XP
      */
     public static boolean isWindowsXP() {
         String osName = System.getProperty("os.name");
@@ -166,6 +177,9 @@ public final class LookUtils {
 
     /**
      * Installs a narrow margin, if property <code>isNarrow</code> has been set.
+     * 
+     * @param b    the button that shall get a narrow margin
+     * @param propertyPrefix   the component type prefeix for the UIDefaults
      */
     public static void installNarrowMargin(
         AbstractButton b,
@@ -187,6 +201,9 @@ public final class LookUtils {
      * 
      * Sun's L&F implementations use wide button margins.
      * @see Options#getUseNarrowButtons()
+     * 
+     * @param narrow    true to create a narrow margin, false for a wide margin
+     * @return an Insets object used to create a button margin
      */
     public static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
@@ -262,6 +279,8 @@ public final class LookUtils {
 
     /**
      * Enables or disables the logging.
+     * 
+     * @param enabled   true to enable logging, false to disable it
      */
     public static void setLoggingEnabled(boolean enabled) {
         loggingEnabled = enabled;
@@ -291,6 +310,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers if we are on a 1.2 or 1.3 runtime environment.
+     * 
+     * @return true in 1.2 and 1.3 environments, false otherwise
      */
     private static boolean isBefore14() {
         String version = System.getProperty("java.version");
@@ -299,6 +320,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers if we are on a J2SE 1.4.2 or later.
+     * 
+     * @return true in 1.4.2 or later
      */
     private static boolean is142orLater() {
         String version = System.getProperty("java.version");
@@ -310,6 +333,8 @@ public final class LookUtils {
 
     /**
      * Checks and answers whether this is a J2RE 1.4.0x
+     * 
+     * @return true in 1.4.0, false otherwise
      */
     private static boolean is140() {
         return System.getProperty("java.version").startsWith("1.4.0");
@@ -317,6 +342,9 @@ public final class LookUtils {
 
     /**
      * Checks and answers whether the screen resolution is low or high.
+     * Resolutions below 120 dpi are considere low, all others are high.
+     * 
+     * @return true if the screen resolution is smaller than 120 dpi
      */
     private static boolean isLowResolution() {
         return Toolkit.getDefaultToolkit().getScreenResolution() < 120;
@@ -325,6 +353,8 @@ public final class LookUtils {
     /**
      * Checks and answers whether we are in the Netbeans IDE
      * by looking for a NetBeans buildnumber. 
+     * 
+     * @return true if NetBeans could be detected, false otherwise
      */
     private static boolean isNetBeans() {
         boolean hasNetBeansBuildNumber = 

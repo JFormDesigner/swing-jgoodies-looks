@@ -58,6 +58,9 @@ public final class HeaderStyle {
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
      * from the <code>JToolBar</code.
+     * 
+     * @param menuBar   the menu bar to inspect
+     * @return the menu bar's header style
      */
    	public static HeaderStyle from(JMenuBar menuBar) {
    		return from0(menuBar);
@@ -67,6 +70,9 @@ public final class HeaderStyle {
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
      * from the <code>JToolBar</code.
+     * 
+     * @param toolBar   the tool bar to inspect
+     * @return the tool bar's header style
      */
    	public static HeaderStyle from(JToolBar toolBar) {
    		return from0(toolBar);
@@ -76,6 +82,9 @@ public final class HeaderStyle {
    	/**
    	 * Looks up the client property for the <code>HeaderStyle</code> 
    	 * from the specified <code>JComponent</code>.
+     * 
+     * @param c    the component to inspect
+     * @return the header style for the given component
    	 */
    	private static HeaderStyle from0(JComponent c) {
    		Object value = c.getClientProperty(Options.HEADER_STYLE_KEY);
@@ -92,6 +101,9 @@ public final class HeaderStyle {
    	
    	/**
    	 * Looks up and answers the <code>HeaderStyle</code> with the specified name.
+     * 
+     * @param name    the name of the HeaderStyle object to lookup
+     * @return the associated HeaderStyle
    	 */
 	private static HeaderStyle valueOf(String name) {
 		if (name.equalsIgnoreCase(SINGLE.name))

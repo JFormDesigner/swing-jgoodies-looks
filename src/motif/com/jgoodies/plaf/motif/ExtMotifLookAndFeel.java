@@ -52,6 +52,8 @@ public final class ExtMotifLookAndFeel extends MotifLookAndFeel {
 	
 	/**
 	 * Initializes component defaults; override two fonts and adds some icons.
+     * 
+     * @param table   the UIDefaults table to work with
 	 */
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);

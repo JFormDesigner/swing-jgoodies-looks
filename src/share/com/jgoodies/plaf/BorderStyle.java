@@ -56,7 +56,12 @@ public final class BorderStyle {
 	
 	
     /**
-     * Looks up the client property for the header style from the <code>JToolBar</code.
+     * Looks up the client property for the header style from the 
+     * <code>JToolBar</code.
+     * 
+     * @param toolBar  the tool bar to inspect
+     * @param clientPropertyKey   the key used to lookup the property
+     * @return the border style used to choose a border in the UI delegate
      */
    	public static BorderStyle from(JToolBar toolBar, String clientPropertyKey) {
    		return from0(toolBar, clientPropertyKey);
@@ -64,6 +69,10 @@ public final class BorderStyle {
    	
     /**
      * Looks up the client property for the header style from the <code>JToolBar</code.
+     * 
+     * @param menuBar  the menu bar to inspect
+     * @param clientPropertyKey   the key used to lookup the property
+     * @return the border style used to choose a border in the UI delegate
      */
    	public static BorderStyle from(JMenuBar menuBar, String clientPropertyKey) {
    		return from0(menuBar, clientPropertyKey);
@@ -73,6 +82,10 @@ public final class BorderStyle {
    	/**
    	 * Looks up the client property for the header style from the specified
    	 * <code>JComponent</code>.
+     * 
+     * @param c  the compoent to inspect
+     * @param clientPropertyKey   the key used to lookup the property
+     * @return the border style used to choose a border in the UI delegate
    	 */
    	private static BorderStyle from0(JComponent c, String clientPropertyKey) {
    		Object value = c.getClientProperty(clientPropertyKey);

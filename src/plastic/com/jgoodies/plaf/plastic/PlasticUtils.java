@@ -58,7 +58,7 @@ public final class PlasticUtils {
 	}
 
 
-	/**
+	/*
 	 * Unlike <code>MetalUtils</code> we first draw with highlight then dark shadow
 	 */
 	static void drawFlush3DBorder(Graphics g, int x, int y, int w, int h) {
@@ -73,7 +73,7 @@ public final class PlasticUtils {
 	}
 
 
-	/**
+	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
 	static void drawPressed3DBorder(Graphics g, int x, int y, int w, int h) {
@@ -86,7 +86,7 @@ public final class PlasticUtils {
 	}
 
 
-	/**
+	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
     static void drawButtonBorder(Graphics g, int x, int y, int w, int h, boolean active) {
@@ -97,7 +97,7 @@ public final class PlasticUtils {
 		}
     }
 
-	/**
+	/*
 	 * Copied from <code>MetalUtils</code>.
 	 */
     static void drawActiveButtonBorder(Graphics g, int x, int y, int w, int h) {
@@ -110,7 +110,7 @@ public final class PlasticUtils {
 		g.drawLine( w-2, y+2, w-2, h-2 );
     }
 
-	/**
+	/*
 	 * Modified edges.
 	 */
     static void drawDefaultButtonBorder(Graphics g, int x, int y, int w, int h, boolean active) {
@@ -174,18 +174,25 @@ public final class PlasticUtils {
 	// 3D Effects ***********************************************************************
 
 	/**
-	 * Checks and answers if the specified component type has 3D effects.
+	 * Checks and returns whether the specified component type has 3D effects.
+     * 
+     * @param keyPrefix    the prefix of the key used to lookup the setting
+     * @return true if the component type shall be rendered with a 3D effect
+     * @see #force3D(JComponent)
+     * @see #forceFlat(JComponent)
 	 */	
-	static boolean is3D(String key) {
-		Object value = UIManager.get(key + "is3DEnabled");
+	static boolean is3D(String keyPrefix) {
+		Object value = UIManager.get(keyPrefix + "is3DEnabled");
 		return Boolean.TRUE.equals(value);
 	}
 
 
 	/**
-	 * Checks and answers if we have a custom hint that forces the 3D mode.
+	 * Checks and returns whether we have a custom hint that forces the 3D mode.
 	 * 
-	 * @see #forceFlat
+     * @param c   the component to inspect
+     * @return true if the given component has a 3D hint set
+	 * @see #forceFlat(JComponent)
 	 */
 	static boolean force3D(JComponent c) {
 		Object value = c.getClientProperty(PlasticLookAndFeel.IS_3D_KEY);
@@ -194,9 +201,11 @@ public final class PlasticUtils {
 
 
 	/**
-	 * Checks and answers if we have a custom hint that forces the 3D mode.
+	 * Checks and returns whether we have a custom hint that prevents the 3D mode.
 	 * 
-	 * @see #forceFlat
+     * @param c   the component to inspect
+     * @return true if the given component has a flat hint set
+	 * @see #force3D(JComponent)
 	 */
 	static boolean forceFlat(JComponent c) {
 		Object value = c.getClientProperty(PlasticLookAndFeel.IS_3D_KEY);
@@ -287,7 +296,7 @@ public final class PlasticUtils {
 
     // Low level graphics ***************************************************
 
-    /**
+    /*
      * An optimized version of Graphics.drawRect.
      */
     private static void drawRect(Graphics g, int x, int y, int w, int h) {

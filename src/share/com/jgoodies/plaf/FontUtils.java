@@ -59,6 +59,7 @@ public final class FontUtils {
 	 * performance and compatibility issues, so allow this feature
 	 * to be switched off either at runtime or programmatically
 	 *
+     * @return true if system fonts shall be used
 	 */	
 	public static boolean useSystemFontSettings() {
 		String systemFonts = (String) java.security.AccessController.doPrivileged(
@@ -79,6 +80,15 @@ public final class FontUtils {
 	 * Sets different fonts to all known widget defaults.
 	 * If the specified <code>menuFont</code> is null,
 	 * the given defaults won't be overriden.
+     * 
+     * @param table   the UIDefaults table used to set fonts
+     * @param controlFont       the control font to be set
+     * @param controlBoldFont   a bold version of the control font
+     * @param fixedControlFont  a fixed size control font
+     * @param menuFont          the font used for menus
+     * @param messageFont       the font used in message
+     * @param toolTipFont       the font used in tool tips
+     * @param windowFont        the general dialog font
 	 */
 	public static void initFontDefaults(UIDefaults table, 
 		Object controlFont, Object controlBoldFont, Object fixedControlFont, 
@@ -154,6 +164,10 @@ public final class FontUtils {
 	 * <pre>
 	 *   System.setProperty(Options.MENU_FONT_KEY, "dialog-BOLD-12");
 	 * </pre>
+     * 
+     * @param table   the UIDefaults table to work with
+     * @param hints   the FontSizeHints used to determine the menu font
+     * @return the menu font for the given defaults and hints
 	 */
 	public static Font getMenuFont(UIDefaults table, FontSizeHints hints) {
 		// Check whether a concrete font has been specified in the system properties.
@@ -190,6 +204,10 @@ public final class FontUtils {
 	 * <pre>
 	 *   System.setProperty(Options.CONTROL_FONT_KEY, "Arial-ITALIC-12");
 	 * </pre>
+     * 
+     * @param table   the UIDefaults table to work with
+     * @param hints   the FontSizeHints used to determine the control font
+     * @return the control font for the given defaults and hints
 	 */
 	public static Font getControlFont(UIDefaults table, FontSizeHints hints) {
 		// Check whether a concrete font has been specified in the system properties.
@@ -225,7 +243,10 @@ public final class FontUtils {
 	/**
 	 * Makes a good guess for the platform's system font using the specified font size.
 	 * Tries to get the MS Tahoma font, that should be present on most Windows platforms; 
-	 * it comes with all recent Windows releases and with the MS Office.<p>
+	 * it comes with all recent Windows releases and with the MS Office.
+     * 
+     * @param size   the size of the font to be looked up
+     * @return a good guess of the system font 
 	 */
 	public static Font guessFont(int size) {
 		// Guess the system font name;

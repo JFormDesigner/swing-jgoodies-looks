@@ -53,6 +53,8 @@ final class ClearLookTab {
 
     /**
      * Builds the panel.
+     * 
+     * @return the built panel
      */
     JComponent build() {
         FormLayout fl = new FormLayout(
@@ -226,6 +228,8 @@ final class ClearLookTab {
      * Builds and answers the status bar, which demos a typical 
      * Swing misuse: it uses a <code>BevelBorder</code> to implement 
      * a status bar cell. ClearLook can correct this.
+     * 
+     * @return a status bar component with BevelBorder
      */
     private JComponent buildStatusBarWithBevelBorder() {
         JLabel statusBar = new JLabel(" Status bar with BevelBorder ");

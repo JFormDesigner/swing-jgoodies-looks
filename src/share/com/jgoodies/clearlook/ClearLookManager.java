@@ -96,8 +96,12 @@ public final class ClearLookManager {
 
     /**
      * Detects if ClearLook should replace the component's <code>Border</code>.
-     * In this case, it replaces the border and returns the original border.
-     * Otherwise, it returns <code>null</code>.
+     * In this case it replaces the border and returns the original border.
+     * Otherwise it returns <code>null</code>.
+     * 
+     * @param component    the decorated component to inspec
+     * @return the original border if it will be replaced, 
+     *     <code>null</code> otherwise
      */
     public static Border replaceBorder(JComponent component) {
         return mode.isEnabled()
@@ -128,6 +132,9 @@ public final class ClearLookManager {
     /**
      * Sets a new <code>ClearLook Mode</code>. 
      * Forces a log if the user has set a System property to choose the mode.
+     * 
+     * @param newMode   the ClearLookMOde to be set
+     * @param userChoosen  true if the user has set a System property
      */
     private static void setMode(ClearLookMode newMode, boolean userChoosen) {
         mode = newMode;
@@ -184,6 +191,8 @@ public final class ClearLookManager {
 
     /**
      * Returns the default mode used for the default mode installation.
+     * 
+     * @return the default ClearLookMode in the environment
      */
     private static ClearLookMode getDefaultMode() {
         return LookUtils.IS_NETBEANS ? NETBEANS_DEFAULT_MODE : DEFAULT_MODE;
@@ -258,6 +267,8 @@ public final class ClearLookManager {
 
     /**
      * Returns the default policy name used for the default policy installation.
+     * 
+     * @return the name of the default ClearLook policy in the environment
      */
     private static String getDefaultPolicyName() {
         return (

@@ -63,6 +63,10 @@ public final class ClearLookMode {
     /**
      * Constructs a <code>ClearLookMode</code> with the specified name, 
      * verbose and debug switches.
+     * 
+     * @param name     the mode's name
+     * @param verbose  true indicates that replacements shall log
+     * @param debug    true indicates a debug mode
      */
     private ClearLookMode(String name, boolean verbose, boolean debug) {
         this.name = name;
@@ -73,6 +77,8 @@ public final class ClearLookMode {
     /**
      * Returns the mode's name. Also used to check whether 
      * a mode has been installed successfully.
+     * 
+     * @return the name of this mode
      */
     public String getName() {
         return name;
@@ -81,6 +87,8 @@ public final class ClearLookMode {
     /**
      * Returns whether ClearLook will be used to analyse and replace
      * obsolete decorations.
+     * 
+     * @return true if ClearLook is enabled, false if disabled
      */
     public boolean isEnabled() {
         return this != OFF;
@@ -88,6 +96,8 @@ public final class ClearLookMode {
 
     /**
      * Returns whether this mode is verbose.
+     * 
+     * @return true if this mode logs many message, false if it's quiet
      */
     public boolean isVerbose() {
         return verbose;
@@ -95,6 +105,8 @@ public final class ClearLookMode {
 
     /**
      * Returns whether this mode indicates a debug state.
+     * 
+     * @return true if this mode is a debug mode
      */
     public boolean isDebug() {
         return debug;
@@ -102,6 +114,9 @@ public final class ClearLookMode {
 
     /**
      * Looks up and answers a <code>ClearLookMode</code> for the specified name.
+     * 
+     * @param name   the name of the ClearLook mode to lookup
+     * @return the associated ClearLookMode instance
      */
     public static ClearLookMode valueOf(String name) {
         if (name.equalsIgnoreCase(OFF.name))
@@ -119,6 +134,8 @@ public final class ClearLookMode {
 
     /**
      * Returns a string representation for this mode.
+     * 
+     * @return a string representation for this mode
      */
     public String toString() {
         StringBuffer buffer = new StringBuffer(getClass().getName());

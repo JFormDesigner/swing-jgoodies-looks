@@ -72,6 +72,8 @@ final class AlignmentTab {
     
     /**
      * Builds the panel.
+     * 
+     * @return the built panel
      */
     JComponent build() {
         initComponents();

@@ -81,7 +81,7 @@ public final class ClearLookUtils {
      * 
      * @param component   the component that holds the border
      * @param border      the border to be stored
-     * @see #hasCheckedBorder
+     * @see #hasCheckedBorder(JComponent)
      */
     public static void storeBorder(JComponent component, Border border) {
         Object borderOrMarker;

@@ -206,8 +206,11 @@ public final class Options {
     // Accessing Options ******************************************************
 
     /**
-     * Answers whether a hint is set in the <code>UIManager</code> 
+     * Returns whether a hint is set in the <code>UIManager</code> 
      * that indicates, that a look&amp;feel may use the native system fonts.
+     * 
+     * @return true if the UIManager indicates that system fonts shall be used
+     * @see #setUseSystemFonts(boolean)
      */
     public static boolean getUseSystemFonts() {
         return UIManager.get(USE_SYSTEM_FONTS_APP_KEY).equals(Boolean.TRUE);
@@ -216,13 +219,21 @@ public final class Options {
     /**
      * Sets a value in the <code>UIManager</code> to indicate, 
      * that a look&amp;feel may use the native system fonts.
+     * 
+     * @param useSystemFonts   true to enable system fonts in the UIManager
+     * @see #getUseSystemFonts()
      */
     public static void setUseSystemFonts(boolean useSystemFonts) {
         UIManager.put(USE_SYSTEM_FONTS_APP_KEY, new Boolean(useSystemFonts));
     }
 
     /**
-     * Answers the default icon size.
+     * Returns the default icon size that is used in menus, menu items and
+     * toolbars. Menu items that have no icon set are aligned using the default
+     * icon dimensions.
+     * 
+     * @return the dimension of the default icon
+     * @see #setDefaultIconSize(Dimension)
      */
     public static Dimension getDefaultIconSize() {
         Dimension size = UIManager.getDimension(DEFAULT_ICON_SIZE_KEY);
@@ -231,14 +242,20 @@ public final class Options {
 
     /**
      * Sets the default icon size.
+     * 
+     * @param defaultIconSize   the default icon size to set
+     * @see #getDefaultIconSize()
      */
     public static void setDefaultIconSize(Dimension defaultIconSize) {
         UIManager.put(DEFAULT_ICON_SIZE_KEY, defaultIconSize);
     }
 
     /**
-     * Answers the global <code>FontSizeHints</code>, can be overriden 
+     * Returns the global <code>FontSizeHints</code>, can be overriden 
      * by look specific setting.
+     * 
+     * @return the gobally used FontSizeHints object
+     * @see #setGlobalFontSizeHints(FontSizeHints)
      */
     public static FontSizeHints getGlobalFontSizeHints() {
         Object value = UIManager.get(FONT_SIZE_HINTS_KEY);
@@ -255,6 +272,9 @@ public final class Options {
 
     /**
      * Sets the global <code>FontSizeHints</code>.
+     * 
+     * @param hints   the FontSizeHints object to be used globally
+     * @see #getGlobalFontSizeHints()
      */
     public static void setGlobalFontSizeHints(FontSizeHints hints) {
         UIManager.put(FONT_SIZE_HINTS_KEY, hints);
@@ -270,6 +290,9 @@ public final class Options {
      * 
      * If you use narrow margin, you should take care of minimum button width,
      * either by the layout management or appropriate ButtonUI minimum widths.
+     * 
+     * @return true if all buttons shall use narrow margins
+     * @see #setUseNarrowButtons(boolean)
      */
     public static boolean getUseNarrowButtons() {
         Object value = UIManager.get(USE_NARROW_BUTTONS_KEY);
@@ -280,7 +303,8 @@ public final class Options {
     /**
      * Sets if we use narrow or standard button margins.
      * 
-     * @see #getUseNarrowButtons
+     * @param b   true to use narrow button margins globally
+     * @see #getUseNarrowButtons()
      */
     public static void setUseNarrowButtons(boolean b) {
         UIManager.put(USE_NARROW_BUTTONS_KEY, new Boolean(b));
@@ -293,6 +317,9 @@ public final class Options {
      * 
      * If the user has set a system property, we log a message 
      * about the choosen style.
+     * 
+     * @return true if icons in tabbed panes are enabled, false if disabled
+     * @see #setTabIconsEnabled(boolean)
      */
     public static boolean isTabIconsEnabled() {
         if (!LookUtils.IS_NETBEANS)
@@ -321,7 +348,8 @@ public final class Options {
     /**
      * Enables or disables the use of icons in <code>JTabbedPane</code>s.
      * 
-     * @see #isTabIconsEnabled
+     * @param b   true to enable icons in tabbed panes, false to disable them
+     * @see #isTabIconsEnabled()
      */
     public static void setTabIconsEnabled(boolean b) {
         UIManager.put(TAB_ICONS_ENABLED_KEY, new Boolean(b));
@@ -332,6 +360,11 @@ public final class Options {
     /**
      * Puts a replacement name for a given <code>LookAndFeel</code> 
      * class name in the list of all look and feel replacements.
+     * 
+     * @param original   the name of the look-and-feel to replace
+     * @param replacement   the name of the replacement look-and-feel
+     * @see #removeLookAndFeelReplacement(String)
+     * @see #getReplacementClassNameFor(String)
      */
     public static void putLookAndFeelReplacement(
         String original,
@@ -342,6 +375,10 @@ public final class Options {
     /**
      * Removes a replacement name for a given <code>LookAndFeel</code> 
      * class name from the list of all look and feel replacements.
+     * 
+     * @param original   the name of the look-and-feel that has been replaced
+     * @see #putLookAndFeelReplacement(String, String)
+     * @see #getReplacementClassNameFor(String)
      */
     public static void removeLookAndFeelReplacement(String original) {
         LAF_REPLACEMENTS.remove(original);
@@ -351,6 +388,10 @@ public final class Options {
      * Initializes some default class name replacements, that replace
      * Sun's Java look and feel, and Sun's Windows look and feel by
      * the appropriate JGoodies replacements.
+     * 
+     * @see #putLookAndFeelReplacement(String, String)
+     * @see #removeLookAndFeelReplacement(String)
+     * @see #getReplacementClassNameFor(String)
      */
     public static void initializeDefaultReplacements() {
         putLookAndFeelReplacement(
@@ -365,8 +406,14 @@ public final class Options {
     }
 
     /**
-     * Answers the class name that can be used to replace the specified
+     * Returns the class name that can be used to replace the specified
      * <code>LookAndFeel</code> class name.
+     * 
+     * @param className   the name of the look-and-feel class
+     * @return the name of the suggested replacement class
+     * @see #putLookAndFeelReplacement(String, String)
+     * @see #removeLookAndFeelReplacement(String)
+     * @see #initializeDefaultReplacements()
      */
     public static String getReplacementClassNameFor(String className) {
         String replacement = (String) LAF_REPLACEMENTS.get(className);
@@ -374,14 +421,20 @@ public final class Options {
     }
 
     /**
-     * Answers the class name for a cross-platform <code>LookAndFeel</code>.
+     * Returns the class name for a cross-platform <code>LookAndFeel</code>.
+     * 
+     * @return the name of a cross platform look-and-feel class
+     * @see #getSystemLookAndFeelClassName()
      */
     public static String getCrossPlatformLookAndFeelClassName() {
         return PLASTIC3D_NAME;
     }
 
     /**
-     * Answers the class name for a system specific <code>LookAndFeel</code>.
+     * Returns the class name for a system specific <code>LookAndFeel</code>.
+     * 
+     * @return the name of the system look-and-feel class
+     * @see #getCrossPlatformLookAndFeelClassName()
      */
     public static String getSystemLookAndFeelClassName() {
         String osName = System.getProperty("os.name");

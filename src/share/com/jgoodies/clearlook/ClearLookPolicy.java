@@ -37,6 +37,7 @@ import javax.swing.border.Border;
 /**
  * Describes a ClearLook(tm) policy as used by the {@link ClearLookManager}.
  *
+ * @version $Revision: 1.2 $
  * @author Karsten Lentzsch
  * @see	ClearLookManager
  * @see	DefaultClearLookPolicy
@@ -44,14 +45,20 @@ import javax.swing.border.Border;
 public interface ClearLookPolicy {
 
 	/**
-	 * Answers the policy's name.
+	 * Returns the policy's name.
+     * 
+     * @return this policy's name
 	 */
 	String getName();
 	
 	
 	/**
-	 * Detects if the component's border should be replaced.
-	 * In this case, the original border is returned, <code>null</code>otherwise.
+	 * Detects whether the component's border should be replaced.
+	 * If so the original border is returned, <code>null</code> otherwise.
+     * 
+     * @param component   the component to be inspected
+     * @return the original border in case of a replacement, <code>null</code>
+     *     otherwise
 	 */
 	Border replaceBorder(JComponent component);
 

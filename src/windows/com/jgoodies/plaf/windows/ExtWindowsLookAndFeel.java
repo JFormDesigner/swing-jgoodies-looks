@@ -92,7 +92,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
      * settings shadow the global users defaults as stored under 
      * key <code>FontSizeHints.KEY</code>.
 	 * 
-	 * @see Options#setGlobalFontSizeHints
+	 * @see Options#setGlobalFontSizeHints(FontSizeHints)
 	 * @see FontSizeHints
 	 */
 	public static FontSizeHints getFontSizeHints() { 
@@ -105,7 +105,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 	/**
 	 * Sets <code>FontSizeHints</code> that shadow the global font size hints.
 	 * 
-	 * @see Options#setGlobalFontSizeHints
+	 * @see Options#setGlobalFontSizeHints(FontSizeHints)
 	 * @see FontSizeHints
 	 */
 	public static void setFontSizeHints(FontSizeHints newHints) {

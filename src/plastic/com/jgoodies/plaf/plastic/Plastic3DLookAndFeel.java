@@ -67,6 +67,8 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 
     /**
      * Initializes the Plastic3D component defaults.
+     * 
+     * @param table   the UIDefaults table to work with
      */
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);

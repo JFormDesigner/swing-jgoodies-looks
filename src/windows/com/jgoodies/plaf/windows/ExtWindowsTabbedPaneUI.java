@@ -166,7 +166,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
      * Creates and answer a handler that listens to property changes.
      * Unlike the superclass BasicTabbedPane, the PlasticTabbedPaneUI
      * uses an extended Handler.
-     * @see javax.swing.plaf.basic.BasicTabbedPaneUI#createPropertyChangeListener()
      */
     protected PropertyChangeListener createPropertyChangeListener() {
         return new MyPropertyChangeHandler();
@@ -294,7 +293,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
 
     /**
      * Paints the top edge of the pane's content border 
-     *      * @see javax.swing.plaf.basic.BasicTabbedPaneUI#paintContentBorderTopEdge(Graphics, int, int, int, int, int, int)     */
+     */
     protected void paintContentBorderTopEdge(Graphics g, int tabPlacement,
                                          int selectedIndex, 
                                          int x, int y, int w, int h) {
@@ -352,8 +351,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
 
     /**
      * paints the left Edge of the pane's content border 
-     * 
-     * @see javax.swing.plaf.basic.BasicTabbedPaneUI#paintContentBorderTopEdge(Graphics, int, int, int, int, int, int)
      */
     protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement,
                                          int selectedIndex, 
@@ -384,8 +381,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
 
     /**
      * paints the right Edge of the pane's content border 
-     * 
-     * @see javax.swing.plaf.basic.BasicTabbedPaneUI#paintContentBorderTopEdge(Graphics, int, int, int, int, int, int)
      */
     protected void paintContentBorderRightEdge(Graphics g, int tabPlacement,
                                          int selectedIndex, 

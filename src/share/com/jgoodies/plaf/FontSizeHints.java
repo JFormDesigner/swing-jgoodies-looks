@@ -43,8 +43,9 @@ package com.jgoodies.plaf;
  * In 1.3 environments, the font guess is Tahoma on modern Windows,
  * "dialog" otherwise. In 1.4 environments, the system fonts will be used.
  *
+ * @version $Revision: 1.2 $
  * @author Karsten Lentzsch
- * @see	Options#setGlobalFontSizeHints
+ * @see	Options#setGlobalFontSizeHints(FontSizeHints)
  * @see	FontUtils
  */
 public final class FontSizeHints {
@@ -68,6 +69,11 @@ public final class FontSizeHints {
 	/**
 	 * Constructs <code>FontSizeHints</code> for the specified menu and
 	 * control fonts, both for low and high resolution environments.
+     * 
+     * @param loResMenuFontSize    the size of the menu font in low resolution
+     * @param loResControlFontSize the size of the control font in low resolution
+     * @param hiResMenuFontSize    the size of the menu font in low resolution
+     * @param hiResControlFontSize the size of the control font in low resolution
 	 */
 	public FontSizeHints(int loResMenuFontSize, int loResControlFontSize, 
 					  	  int hiResMenuFontSize, int hiResControlFontSize) {
@@ -79,31 +85,41 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Answers the low resolution menu font size.
+	 * Returns the low resolution menu font size.
+     * 
+     * @return the size of the menu font in low resolution mode
 	 */
 	public int loResMenuFontSize()		{ return loResMenuFontSize;	}
 
 
 	/**
-	 * Answers the low resolution control font size.
+	 * Returns the low resolution control font size.
+     * 
+     * @return the size of the control font in low resolution mode
 	 */
 	public int loResControlFontSize()	{ return loResControlFontSize;	}
 
 
 	/**
-	 * Answers the high resolution menu font size.
+	 * Returns the high resolution menu font size.
+     * 
+     * @return the size of the menu font in high resolution mode
 	 */
 	public int hiResMenuFontSize()		{ return hiResMenuFontSize;	}
 
 
 	/**
-	 * Answers the high resolution control font size.
+	 * Returns the high resolution control font size.
+     * 
+     * @return the size of the control font in high resolution mode
 	 */
 	public int hiResControlFontSize()	{ return hiResControlFontSize;	}
 	
 	
 	/**
-	 * Answers the menu font size.
+	 * Returns the menu font size.
+     * 
+     * @return the size of the menu font in the current resolution
 	 */
 	public int menuFontSize() {
 		return LookUtils.isLowRes ? loResMenuFontSize : hiResMenuFontSize();
@@ -111,7 +127,9 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Answers the control font size.
+	 * Returns the control font size.
+     * 
+     * @return the size of the control font in the current resolution
 	 */
 	public int controlFontSize() {
 		return LookUtils.isLowRes ? loResControlFontSize : hiResControlFontSize();
@@ -119,7 +137,11 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Answers the delta between system menu font size and our menu font size hint.
+	 * Returns the delta between the system menu font size and 
+     * our menu font size hint.
+     * 
+     * @return the delta between the system menu font size and 
+     *     our menu font size hint
 	 */
 	public float menuFontSizeDelta() {
 		return menuFontSize() - SYSTEM.menuFontSize();
@@ -127,7 +149,11 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Answers the delta between system control font size and our control font size hint.
+	 * Returns the delta between system control font size and 
+     * our control font size hint.
+     * 
+     * @return the delta between the system control font size and 
+     *     our control font size hint
 	 */
 	public float controlFontSizeDelta() {
 		return controlFontSize() - SYSTEM.controlFontSize();
@@ -136,7 +162,10 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Answers the <code>FontSizeHints</code> for the specified name.
+	 * Looksup and returns the <code>FontSizeHints</code> for the specified name.
+     * 
+     * @param name   the name of the FontSizeHints object
+     * @return the associated FontSizeHints object
 	 */
 	public static FontSizeHints valueOf(String name) {
 		if (name.equalsIgnoreCase("LARGE"))

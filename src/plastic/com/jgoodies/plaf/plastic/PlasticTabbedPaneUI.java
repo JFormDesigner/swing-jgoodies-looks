@@ -210,7 +210,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     /**
      * Creates the renderer used to lay out and paint the tabs.
-     * @param tabPane               the UIs component
+     * @param tabbedPane               the UIs component
      * @return AbstractRenderer     the renderer that will be used to paint
      */
     private AbstractRenderer createRenderer(JTabbedPane tabbedPane) {
@@ -240,8 +240,6 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Creates and answer a handler that listens to property changes.
      * Unlike the superclass BasicTabbedPane, the PlasticTabbedPaneUI
      * uses an extended Handler.
-     * 
-     * @see javax.swing.plaf.basic.BasicTabbedPaneUI#createPropertyChangeListener()
      */
     protected PropertyChangeListener createPropertyChangeListener() {
         return new MyPropertyChangeHandler();

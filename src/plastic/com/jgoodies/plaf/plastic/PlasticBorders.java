@@ -87,6 +87,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JButton</code>.
+     * 
+     * @return the lazily created button border
      */
     static Border getButtonBorder() {
         if (buttonBorder == null) {
@@ -99,6 +101,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JComboBox</code>'s editor.
+     * 
+     * @return the lazily created combo box editor border
      */
     static Border getComboBoxEditorBorder() {
         if (comboBoxEditorBorder == null) { 
@@ -111,6 +115,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JComboBox</code>'s button.
+     * 
+     * @return the lazily created combo box arrow button border
      */
     static Border getComboBoxArrowButtonBorder() {
         if (comboBoxArrowButtonBorder == null) { 
@@ -124,6 +130,8 @@ final class PlasticBorders {
     /**
      * Returns an etched border instance for <code>JMenuBar</code> or
      * <code>JToolBar</code>.
+     * 
+     * @return the lazily created etched border
      */
     static Border getEtchedBorder() {
         if (etchedBorder == null) {
@@ -136,6 +144,8 @@ final class PlasticBorders {
 
     /**
      * Returns a flushed 3D border.
+     * 
+     * @return the lazily created flushed 3D border
      */
     static Border getFlush3DBorder() {
         if (flush3DBorder == null) {
@@ -146,6 +156,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JInternalFrame</code>.
+     * 
+     * @return an internal frame border
      */
     static Border getInternalFrameBorder() {
         return new InternalFrameBorder();
@@ -154,6 +166,8 @@ final class PlasticBorders {
     /**
      * Returns a special border for a <code>JMenuBar</code> that 
      * is used in a header just above a <code>JToolBar</code>.
+     * 
+     * @return the lazily created menu bar header border
      */
     static Border getMenuBarHeaderBorder() {
         if (menuBarHeaderBorder == null) {
@@ -166,6 +180,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JMenu</code>.
+     * 
+     * @return the lazily created menu border
      */
     static Border getMenuBorder() {
         if (menuBorder == null) {
@@ -178,6 +194,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JMenuItem</code>.
+     * 
+     * @return the lazily created menu item border
      */
     static Border getMenuItemBorder() {
         if (menuItemBorder == null) {
@@ -189,6 +207,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JPopupMenu</code>.
+     * 
+     * @return the lazily created popup menu border
      */
     static Border getPopupMenuBorder() {
         if (popupMenuBorder == null) {
@@ -199,6 +219,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JInternalFrame</code>'s palette.
+     * 
+     * @return a border for an internal frame in palette mode
      */
     static Border getPaletteBorder() {
         return new PaletteBorder();
@@ -206,6 +228,8 @@ final class PlasticBorders {
 
     /**
      * Returns a rollover border for buttons in a <code>JToolBar</code>.
+     * 
+     * @return the lazily created rollover button border
      */
     static Border getRolloverButtonBorder() {
         if (rolloverButtonBorder == null) { 
@@ -218,6 +242,8 @@ final class PlasticBorders {
 
     /**
      * Returns a separator border instance for <code>JScrollPane</code>.
+     * 
+     * @return the lazily created scroll pane border
      */
     static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
@@ -229,6 +255,8 @@ final class PlasticBorders {
     /**
      * Returns a separator border instance for <code>JMenuBar</code> or
      * <code>JToolBar</code>.
+     * 
+     * @return the lazily created separator border
      */
     static Border getSeparatorBorder() {
         if (separatorBorder == null) {
@@ -241,6 +269,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a JTextField.
+     * 
+     * @return the lazily created text field border
      */
     static Border getTextFieldBorder() {
         if (textFieldBorder == null) {
@@ -253,6 +283,8 @@ final class PlasticBorders {
 
     /**
      * Returns a thin lowered border.
+     * 
+     * @return the lazily created thin lowered border
      */
     static Border getThinLoweredBorder() {
         if (thinLoweredBorder == null) {
@@ -263,6 +295,8 @@ final class PlasticBorders {
 
     /**
      * Returns a thin raised border.
+     * 
+     * @return the lazily created thin raised border
      */
     static Border getThinRaisedBorder() {
         if (thinRaisedBorder == null) {
@@ -273,6 +307,8 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a JToggleButton.
+     * 
+     * @return the lazily created toggle button border
      */
     static Border getToggleButtonBorder() {
         if (toggleButtonBorder == null) {
@@ -286,6 +322,8 @@ final class PlasticBorders {
     /**
      * Returns a special border for a <code>JToolBar</code> that 
      * is used in a header just below a <code>JMenuBar</code>.
+     * 
+     * @return the lazily created toolbar header border
      */
     static Border getToolBarHeaderBorder() {
         if (toolBarHeaderBorder == null) { 

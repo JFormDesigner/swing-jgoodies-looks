@@ -96,8 +96,12 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Detects and conditionally replaces the <code>Border</code> 
-     * of the specified <code>JComponent</code>. Answers the original 
+     * of the specified <code>JComponent</code>. Returns the original 
      * <code>Border</code>, or <code>null</code> if we did not replace it.
+     * 
+     * @param component    the component to be inspected
+     * @return the original border in case of a replacement, 
+     *     <code>null</code> otherwise
      */
     public Border replaceBorder(JComponent component) {
         // Do nothing if we detect an empty border.
@@ -141,9 +145,15 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Assigns the new border to the component - unless the component
-     * is a tabbed pane. In the latter case, the new border is returned,
+     * is a tabbed pane. In the latter case the new border is returned,
      * which in turn will be used by tabbed panes to recognize that
      * the content border shall be hidden.
+     * 
+     * @param c           the component that shall get a new border
+     * @param newBorder   the border to be set
+     * @return <code>null</code> if the new border is null,
+     *    the new border in case of a tabbed pane, 
+     *    otherwise the component's border
      */
     protected Border assignBorder(JComponent c, Border newBorder) {
         if (newBorder == null)
@@ -163,6 +173,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Detects decorators that are considered to be visual clutter.
+     * 
+     * @param component    the component to analyze
+     * @return the suggested replacement border
      */
     public Border analyse(JComponent component) {
         log("DefaultClearLookPolicy.analyse(JComponent)");
@@ -181,6 +194,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
      * in a <code>JTabbedPane</code> or in a <code>JSplitPane</code>
      * with a non-empty <code>Border</code>.
      * In both cases, returns a replacement border.
+     * 
+     * @param scrollPane    the component to analyze
+     * @return the suggested replacement border
      */
     public Border analyse(JScrollPane scrollPane) {
         log("DefaultClearLookPolicy.analyse(JScrollPane)");
@@ -194,6 +210,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Detects if the specified <code>JSplitPane</code> is nested in another
      * <code>JSplitPane</code> that has a non-empty border.
+     * 
+     * @param splitPane    the component to analyze
+     * @return the suggested replacement border
      */
     public Border analyse(JSplitPane splitPane) {
         log("DefaultClearLookPolicy.analyse(JSplitPane)");
@@ -207,6 +226,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Detects if the specified <code>JTabbedPane</code> is a special
      * NetBeans component that is considered to have visual clutter.
+     * 
+     * @param tab    the component to analyze
+     * @return the suggested replacement border
      */
     public Border analyse(JTabbedPane tab) {
         log("DefaultClearLookPolicy.analyse(JTabbedPane)");
@@ -222,6 +244,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Checks and answers if the specified <code>Border</code> is kind-of empty.
+     * 
+     * @param b   the border to inspect
+     * @return true if the border is null or an EmptyBorder
      */
     protected boolean isEmptyBorder(Border b) {
         return b == null || b instanceof EmptyBorder;
@@ -284,6 +309,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Checks and answers if the given component has an empty border.
+     * 
+     * @param component    the component to inspect
+     * @return true if the component has an empty border
      */
     protected boolean hasEmptyBorder(JComponent component) {
         return isEmptyBorder(component.getBorder())
@@ -292,6 +320,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Checks and answers if the component has a <code>BevelBorder</code>.
+     * 
+     * @param component    the component to inspect
+     * @return true if the component has a bevel border
      */
     private boolean hasBevelBorder(JComponent component) {
         Border border = component.getBorder();
@@ -301,9 +332,12 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Returns if the specified <code>JComponent</code> is decorated.
      * This default implementation checks, if the component's border
-     * is decorated.
-     * <p>
+     * is decorated.<p>
+     * 
      * Subclasses may check for special decorators.
+     * 
+     * @param c   the component to analyse
+     * @return true if the child is decorated
      */
     protected boolean isDecoratedChild(Component c) {
         if (c instanceof JScrollPane)
@@ -322,6 +356,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
      * is decorated.
      * <p>
      * Subclasses may check for special decorators.
+     * 
+     * @param c   the parent component to analyse
+     * @return true if the parent is decorating its child(ren)
      */
     protected boolean isDecoratingParent(Component c) {
         if (c instanceof JScrollPane)
@@ -357,6 +394,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
      * Answers whether the specified is kind-of <code>SplitPane</code>.
      * Subclasses may override to widen the set of panels, that 
      * is considered as candidates to remove child borders.
+     * 
+     * @param component   the component to be analysed
+     * @return true if the component is to be treated like a split pane
      */
     protected boolean isKindOfSplitPane(Component component) {
         return component instanceof JSplitPane;
@@ -365,6 +405,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Returns whether the specified <code>Component</code> is a
      * <code>JSplitPane</code> that has a non-empty border.
+     * 
+     * @param c   the component to be analysed
+     * @return true if the component is a decorated split pane
      */
     protected boolean isDecoratedSplitPane(Component c) {
         return isKindOfSplitPane(c)
@@ -376,6 +419,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
      * Detects and returns if the specified component has
      * double decoration, that is the component has a decorated border
      * and is nested in a container that has a decorating border.
+     * 
+     * @param c   the component to be analysed
+     * @return true if the component is decorated as well as its parent
      */
     protected boolean isDoubleDecorated(JComponent c) {
         return isDecoratedChild(c) && isDecoratingParent(c.getParent());
@@ -386,6 +432,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Answers the <code>Border</code> that will be used to replace
      * a double decorated component.
+     * 
+     * @return the border used to replace a double decoration
      */
     protected Border getDoubleDecorationBorder() {
         return isDebug() ? RED1_BORDER : EMPTY_BORDER;
@@ -395,6 +443,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
      * Answers the <code>Border</code> that will be used to replace
      * the <code>Border</code> of a <code>JScrollPane</code> that is
      * contained in a <code>JSplitPane</code>.
+     * 
+     * @return the border used to replace a scroll pane border
      */
     protected Border getScrollPaneReplacementBorder() {
         return isDebug()
@@ -404,6 +454,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Answers the replacement <code>Border</code> for SplitPane in SplitPane.
+     * 
+     * @return the border used to replace a split pane decoration
      */
     protected Border getSplitPaneReplacementBorder() {
         return isDebug()
@@ -414,6 +466,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
     /**
      * Answers the <code>Border</code> that will be used to replace
      * a BevelBorder.
+     * 
+     * @param bevelBorder   indicates a raised or lowered mode
+     * @return the border used to replace a BevelBorder
      */
     protected Border getThinBevelBorder(BevelBorder bevelBorder) {
         return bevelBorder.getBevelType() == BevelBorder.RAISED
@@ -423,6 +478,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Answers the replacement <code>Border</code> for lowered <code>BevelBorder</code>s.
+     * 
+     * @return the thin lowered bevel border to be used 
      */
     protected Border getThinLoweredBevelBorder() {
         return isDebug()
@@ -432,6 +489,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Answers the replacement <code>Border</code> for raised <code>BevelBorder</code>s.
+     * 
+     * @return the thin raised bevel border to be used 
      */
     protected Border getThinRaisedBevelBorder() {
         return isDebug()
@@ -443,6 +502,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Logs a message if we are in verbose mode.
+     * 
+     * @param message    the message to be logged
      */
     protected final void log(String message) {
         ClearLookManager.log(message);
@@ -450,6 +511,8 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Checks and answers if we are in debug mode.
+     * 
+     * @return true if ClearLook is in debug mode
      */
     protected final boolean isDebug() {
         return ClearLookManager.getMode().isDebug();
@@ -457,6 +520,9 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
 
     /**
      * Looks up and returns the appropriate analyse method.
+     * 
+     * @param c    the component parameter used to lookup the appropriate method
+     * @return an analyse method for the component's parameter type
      */
     private Method findAnalyseMethod(JComponent c) {
         for (Class clazz = c.getClass();

@@ -169,11 +169,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	// Special Properties ***************************************************
 	
     /**
-     * Answers the current <code>FontSizeHints</code>, 
+     * Returns the current <code>FontSizeHints</code>, 
      * where look specific settings shadow the global users defaults 
      * as stored under key <code>FontSizeHints.KEY</code>.
      * 
-     * @see Options#setGlobalFontSizeHints
+     * @return the current FontSizeHints
+     * @see Options#setGlobalFontSizeHints(FontSizeHints)
      * @see FontSizeHints
      */
     public static FontSizeHints getFontSizeHints() {
@@ -185,7 +186,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     /**
      * Sets <code>FontSizeHints</code> that shadow the global font size hints.
      * 
-     * @see Options#setGlobalFontSizeHints
+     * @param newHints   the font size hints to be set
+     * @see Options#setGlobalFontSizeHints(FontSizeHints)
      * @see FontSizeHints
      */
     public static void setFontSizeHints(FontSizeHints newHints) {
@@ -222,7 +224,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Initializes the class defaults, that is, overrides some UI delegates
 	 * with JGoodies Plastic implementations.
 	 * 
-	 * @see javax.swing.plaf.basic.BasicLookAndFeel#getDefaults
+     * @param table   the UIDefaults table to work with
+	 * @see javax.swing.plaf.basic.BasicLookAndFeel#getDefaults()
 	 */
 	protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
@@ -509,6 +512,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	/**
 	 * Unlike my superclass I register a unified shadow color.
 	 * This color is used by my ThinBevelBorder class.
+     * 
+     * @param table   the UIDefaults table to work with
 	 */
 	protected void initSystemColorDefaults(UIDefaults table) {
 		super.initSystemColorDefaults(table);
@@ -522,7 +527,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	private static final String THEME_CLASSNAME_PREFIX = "com.jgoodies.plaf.plastic.theme.";
 	
 	/**
-	 * Creates and answers the default color theme.
+	 * Creates and returns the default color theme. Honors the current platform
+     * and platform flavor - if available.
+     * 
+     * @return the default color theme for the current environemt
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
 		String defaultName = LookUtils.isWindowsXP() 
@@ -552,7 +560,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
 	
 	/**
-	 * Lazily initializes and answers the <code>List</code> of installed color themes.
+	 * Lazily initializes and returns the <code>List</code> of installed 
+     * color themes.
+     * 
+     * @return a list of installed color/font themes
 	 */
 	public static List getInstalledThemes() {
 		if (null == installedThemes)
@@ -600,7 +611,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
 	
 	/**
-	 * Creates and answers a color theme from the specified theme name.
+	 * Creates and returns a color theme from the specified theme name.
+     * 
+     * @param themeName   the unqualified name of the theme to create
+     * @return the associated color theme or <code>null</code> in case of
+     *     a problem
 	 */
 	protected static PlasticTheme createTheme(String themeName) {
 	    String className = THEME_CLASSNAME_PREFIX + themeName;
@@ -621,6 +636,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 	/**
 	 * Installs a color theme.
+     * 
+     * @param theme    the theme to install
 	 */
 	public static void installTheme(PlasticTheme theme) {
 		if (null == installedThemes)
@@ -631,6 +648,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 	/**
 	 * Gets the current <code>PlasticTheme</code>.
+     * 
+     * @return the current PlasticTheme
 	 */
 	public static PlasticTheme getMyCurrentTheme() {
 		return myCurrentTheme;
@@ -639,6 +658,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
 	/**
 	 * Sets a new <code>PlasticTheme</code> for colors and fonts.
+     * 
+     * @param theme    the PlasticTheme to be set
 	 */
 	public static void setMyCurrentTheme(PlasticTheme theme) {
 		myCurrentTheme = theme;
