@@ -46,9 +46,10 @@ import com.jgoodies.looks.LookUtils;
 /**
  * A Windows tool bar separator that honors the tool bar's border.
  * Used in in 1.4.0, 1.4.1 and 1.4.2 with XP turned off.
+ * In addition this class reuses a single UI instance.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsToolBarSeparatorUI
     extends BasicToolBarSeparatorUI {
@@ -57,9 +58,15 @@ public final class WindowsToolBarSeparatorUI
     private static final int VERTICAL = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? SwingConstants.VERTICAL
             : SwingConstants.HORIZONTAL;
+    
+    /** Shared UI component. */
+    private static WindowsToolBarSeparatorUI toolBarSeparatorUI;
 
     public static ComponentUI createUI(JComponent c) {
-        return new WindowsToolBarSeparatorUI();
+        if (toolBarSeparatorUI == null) {
+            toolBarSeparatorUI = new WindowsToolBarSeparatorUI();
+        }
+        return toolBarSeparatorUI;
     }
 
     public void paint(Graphics g, JComponent c) {
