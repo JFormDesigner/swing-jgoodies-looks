@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -77,7 +77,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
-                + " - \u00a9 2003 JGoodies Karsten Lentzsch";
+                + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
 
     // Special Properties ***************************************************
@@ -156,7 +156,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "TabbedPaneUI",          WINDOWS_PREFIX + "TabbedPaneUI", 
 
             // Corrected position of the tree button icon
-            "TreeUI",                WINDOWS_PREFIX + "TreeUI"};
+            "TreeUI",                WINDOWS_PREFIX + "TreeUI",
+            
+            // Just to use shared UI delegate
+            "SeparatorUI",           WINDOWS_PREFIX + "SeparatorUI"};
 
         if (LookUtils.IS_JAVA_1_4_2_OR_LATER) {
             // Modified Border
