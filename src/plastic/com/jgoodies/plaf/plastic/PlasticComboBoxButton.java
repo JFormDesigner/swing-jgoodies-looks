@@ -226,7 +226,7 @@ final class PlasticComboBoxButton extends JButton {
                     c,
                     this,
                     x,
-                    top + 1,
+                    top + 2,
                     cWidth,
                     myHeight,
                     shouldValidate);
@@ -236,7 +236,7 @@ final class PlasticComboBoxButton extends JButton {
                     c,
                     this,
                     x,
-                    top + 1,
+                    top + 2,
                     cWidth,
                     myHeight,
                     shouldValidate);
@@ -253,7 +253,7 @@ final class PlasticComboBoxButton extends JButton {
                     c,
                     this,
                     x,
-                    top + 1,
+                    top + 2,
                     cWidth,
                     myHeight,
                     shouldValidate);

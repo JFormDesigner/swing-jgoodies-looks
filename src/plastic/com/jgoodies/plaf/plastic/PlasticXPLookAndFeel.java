@@ -109,7 +109,10 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         String radioCheckIconName   = LookUtils.isLowRes
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
-        
+                                            
+        // Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
+        Object textInsets 		    = new InsetsUIResource(2, 3, 2, 2);
+                                            
 		Object[] defaults = {
             "Button.border",                  buttonBorder,
             "Button.margin",                  defaultButtonMargin,
@@ -123,9 +126,12 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "ComboBox.editorBorder",          comboBoxEditorBorder,
             "ComboBox.borderPaintsFocus",     Boolean.TRUE,
 
-            "TextField.border",               textFieldBorder,
+            "EditorPane.margin",              textInsets,
+
             "FormattedTextField.border",      textFieldBorder,
+            "FormattedTextField.margin",      textInsets,             
             "PasswordField.border",           textFieldBorder,
+            "PasswordField.margin",           textInsets,             
             "Spinner.border", 				  scrollPaneBorder,
             
             "ScrollPane.border",              scrollPaneBorder,
@@ -135,6 +141,10 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "RadioButton.check",              getToggleButtonCheckColor(),
             "RadioButton.interiorBackground", getControlHighlight(),
             "RadioButton.checkIcon",          makeIcon(getClass(), radioCheckIconName),
+            
+            "TextArea.margin",				  textInsets,	
+            "TextField.border",               textFieldBorder,
+            "TextField.margin", 			  textInsets,
             
             "ToggleButton.border",            toggleButtonBorder,
             "ToggleButton.margin",            defaultButtonMargin,

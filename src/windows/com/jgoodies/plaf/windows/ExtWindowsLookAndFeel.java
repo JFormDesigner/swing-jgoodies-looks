@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -120,7 +120,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         String WINDOWS_PREFIX = "com.jgoodies.plaf.windows.ExtWindows";
         String COMMON_PREFIX  = "com.jgoodies.plaf.common.ExtBasic";
 
-        String menuUIPrefix = LookUtils.IS_LAF_WINDOWS_XP
+        String menuUIPrefix = LookUtils.IS_LAF_WINDOWS_XP_ENABLED
                 ? WINDOWS_PREFIX
                 : COMMON_PREFIX;
 
@@ -168,7 +168,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         table.putDefaults(uiDefaults);
 
         Object[] otherDefaults;
-        if (LookUtils.IS_LAF_WINDOWS_XP) {
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             otherDefaults = new Object[] {
                 // Renders a circle, not the star ("*") character                       
                 "PasswordFieldUI",    WINDOWS_PREFIX + "XPPasswordFieldUI", 
@@ -200,7 +200,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
         
-        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP;
+        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
 
         // Override font settings if and only if we are allowed to.
         if (FontUtils.useSystemFontSettings()) {
@@ -291,6 +291,8 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
             "ComboBox.rendererMargin",    comboRendererMargin, // Added by JGoodies
+            
+            "EditorPane.margin",		  textInsets,
             
             // Begin 1.3 und 1.4.0
             "Menu.border",                menuBorder, // Fixed in 1.4.1

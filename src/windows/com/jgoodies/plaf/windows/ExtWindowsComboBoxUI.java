@@ -53,7 +53,7 @@ import com.jgoodies.plaf.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
@@ -124,7 +124,7 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * Overridden to paint black triangles.
      */
     protected JButton createArrowButton() {
-        return LookUtils.IS_LAF_WINDOWS_XP
+        return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
                     ? super.createArrowButton()
                     : new ExtWindowsArrowButton(SwingConstants.SOUTH);
     }

@@ -393,7 +393,7 @@ final class PlasticBorders {
 	
 	private static class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
 
-	    protected static final Insets INSETS = new Insets(2, 2, 2, 2);
+	    protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 	    public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 	        AbstractButton button = (AbstractButton) c;

@@ -144,7 +144,7 @@ final class PlasticXPBorders {
      */
     private static class XPButtonBorder extends AbstractBorder implements UIResource {
 
-        protected static final Insets INSETS = new Insets(3, 3, 3, 3);
+        protected static final Insets INSETS = new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
@@ -187,7 +187,7 @@ final class PlasticXPBorders {
      */
     private static class XPComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
 
-        protected static final Insets INSETS = new Insets(2, 2, 2, 2);
+        protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             PlasticComboBoxButton button = (PlasticComboBoxButton) c;
@@ -225,7 +225,7 @@ final class PlasticXPBorders {
      */
     private static class XPComboBoxEditorBorder extends AbstractBorder {
 
-        private static final Insets INSETS  = new Insets(2, 2, 2, 0);
+        private static final Insets INSETS  = new Insets(1, 1, 1, 0);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(c.isEnabled()
@@ -243,7 +243,7 @@ final class PlasticXPBorders {
      */
     private static class XPTextFieldBorder extends AbstractBorder  {
 
-        private static final Insets INSETS = new Insets(2, 2, 2, 2);
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             

@@ -92,7 +92,7 @@ public final class ExtWindowsSpinnerUI extends WindowsSpinnerUI {
      * @see #createNextButton
      */
     protected Component createPreviousButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP)
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
             return super.createPreviousButton();
         
         JButton b = new ExtWindowsArrowButton(SwingConstants.SOUTH);
@@ -115,7 +115,7 @@ public final class ExtWindowsSpinnerUI extends WindowsSpinnerUI {
      * @see #createPreviousButton
      */
     protected Component createNextButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP)
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
             return super.createNextButton();
         
         JButton b = new ExtWindowsArrowButton(SwingConstants.NORTH);

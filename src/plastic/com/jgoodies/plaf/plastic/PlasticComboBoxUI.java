@@ -56,7 +56,7 @@ import com.jgoodies.plaf.LookUtils;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.2 $
+* @version $Revision: 1.3 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -73,10 +73,12 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     protected ComboBoxEditor createEditor() {
         return new PlasticComboBoxEditor.UIResource();
     }
+    
 
     protected ComboPopup createPopup() {
         return new PlasticComboPopup(comboBox);
     }
+    
 
     /**
      * Gets the insets from the JComboBox.

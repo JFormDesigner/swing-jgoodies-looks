@@ -326,17 +326,17 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Object narrowButtonMargin		= LookUtils.createButtonMargin(true);
 		
 		// Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
-		Object textInsets 			    = LookUtils.isLowRes
+		Object textInsets 			    = LookUtils.isLowRes  || LookUtils.IS_OS_WINDOWS_XP
                                                 ? new InsetsUIResource(1, 2, 1, 2)
                                                 : new InsetsUIResource(2, 2, 2, 2);
-        Object wrappedTextInsets		= LookUtils.isLowRes
+        Object wrappedTextInsets		= LookUtils.isLowRes  || LookUtils.IS_OS_WINDOWS_XP
                                                 ? new InsetsUIResource(2, 3, 1, 2)
                                                 : new InsetsUIResource(3, 3, 2, 2);
                                                 
 		Object menuItemMargin			= LookUtils.isLowRes
 											? new InsetsUIResource(3, 0, 3, 0)
 											: new InsetsUIResource(2, 0, 2, 0);
-		Object menuMargin				= new InsetsUIResource(2, 2, 2, 2);
+		Object menuMargin				= new InsetsUIResource(2, 4, 2, 4);
 
 		Icon   menuItemCheckIcon		= new MinimumSizedIcon(); 
 		Icon   checkBoxMenuItemIcon		= PlasticIconFactory.getCheckBoxMenuItemIcon();
@@ -379,6 +379,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "ComboBox.arrowButtonBorder",                   PlasticBorders.getComboBoxArrowButtonBorder(),
         "ComboBox.editorBorder",                        PlasticBorders.getComboBoxEditorBorder(),
         "ComboBox.editorColumns",                       new Integer(5),
+        
+        "EditorPane.margin",                            wrappedTextInsets,
 
         "InternalFrame.border", 						internalFrameBorder,
         "InternalFrame.paletteBorder", 					paletteBorder,
@@ -442,6 +444,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"RadioButtonMenuItem.acceleratorSelectionBackground",	getMenuItemSelectedBackground(),
 		"Separator.foreground",							getControlDarkShadow(),
 		"ScrollPane.border",							scrollPaneBorder,
+		"ScrollPane.etchedBorder",   					scrollPaneBorder,
 //			"ScrollPane.background",					table.get("window"),
 
 		"SimpleInternalFrame.activeTitleForeground",	getSimpleInternalFrameForeground(),
