@@ -7,11 +7,6 @@ o Schriftwahl in Plastic-Themen überarbeiten
   + Tahoma-Hard code raus
 
 
-o 1.3: Discontinue support for three jars. Provide the looks-xxx.jar only.
-       Discontinue support for ClearLook as integrated tool;
-       replace it with a LintLook, DebugLook, or StylistLook.
-     
-
 o Bug in Plastic: Jay Gindin hat ScrollBar-Problem gefunden.
 o Bug: Tahoma ist schlechte Wahl in asiatischen Kulturräumen,
        weil Tahoma zwar gefunden wird, aber viele Zeichen nicht darstellt.
