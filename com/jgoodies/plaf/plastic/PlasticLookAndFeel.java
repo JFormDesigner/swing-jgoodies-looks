@@ -289,6 +289,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Color controlColor 				= table.getColor("control");
 		
 		Object checkBoxIcon				= PlasticIconFactory.getCheckBoxIcon();
+		Object checkBoxBorder			= LookUtils.IS_BEFORE_14
+												? table.get("CheckBox.border")
+												: marginBorder;
 		Object checkBoxMargin			= LookUtils.IS_BEFORE_14
 												? new InsetsUIResource(3, 0, 3, 1)
 												: new InsetsUIResource(2, 0, 2, 1); // 1.4.1 uses 2,2,2,2
@@ -328,6 +331,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"Button.margin",								defaultButtonMargin,
 		"Button.narrowMargin",							narrowButtonMargin,
 
+		// 1.4.1 uses a 2 pixel non-standard border, that leads to bad
+		// alignment in the typical case that the border is not painted
+		"CheckBox.border", 								checkBoxBorder,
 		"CheckBox.margin", 								checkBoxMargin,
 
 		// Use a modified check
@@ -399,6 +405,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"PopupMenu.border",								popupMenuBorder,
 		"PopupMenuSeparator.margin",					new InsetsUIResource(3, 4, 3, 4),	
 
+		// 1.4.1 uses a 2 pixel non-standard border, that leads to bad
+		// alignment in the typical case that the border is not painted
+		"RadioButton.border",							checkBoxBorder,
 		"RadioButton.margin",							checkBoxMargin,					
 		"RadioButtonMenuItem.border",					menuItemBorder,
 		"RadioButtonMenuItem.checkIcon",				radioButtonMenuItemIcon,
@@ -464,15 +473,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"ClearLook.NetBeansStatusCellBorder",			statusCellBorder,
 		};
 		table.putDefaults(defaults);
-        if (!LookUtils.IS_BEFORE_14) {
-            Object[] defaults14 = { 
-                // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
-                // alignment in the typical case that the border is not painted
-                "CheckBox.border",                      marginBorder,
-                "RadioButton.border",                   marginBorder,
-            };
-           table.putDefaults(defaults14);
-        }
 	}
 
 
