@@ -1,5 +1,3 @@
-# JGoodies Extended Motif L&F
-com.jgoodies.plaf.motif.ExtMotifLookAndFeel
 # JGoodies Plastic L&F- replacement for Metal
 com.jgoodies.plaf.plastic.PlasticLookAndFeel
 # JGoodies Plastic 3D L&F
