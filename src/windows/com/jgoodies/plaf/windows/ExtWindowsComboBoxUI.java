@@ -54,7 +54,7 @@ import com.jgoodies.plaf.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
@@ -146,16 +146,26 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
         if (arrowButton != null) {
             buttonSize = arrowButton.getWidth();
         }
-        if (comboBox.getComponentOrientation().isLeftToRight()) {
-            return new Rectangle(insets.left + rendererMargin.left, 
-                    insets.top + rendererMargin.top, width
-                    - (insets.left + + rendererMargin.left + insets.right + rendererMargin.right + buttonSize), height
-                    - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
+                if (comboBox.getComponentOrientation().isLeftToRight()) {
+            return new Rectangle(
+                    insets.left + rendererMargin.left,
+                    insets.top + rendererMargin.top,
+                    width
+                            - (insets.left + rendererMargin.left + insets.right
+                                    + rendererMargin.right + buttonSize),
+                    height
+                            - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
         } else {
-            return new Rectangle(insets.left + buttonSize, insets.top, width
-                    - (insets.left + insets.right + buttonSize), height
-                    - (insets.top + insets.bottom));
+            return new Rectangle(
+                    insets.left + rendererMargin.left + buttonSize,
+                    insets.top + rendererMargin.top,
+                    width
+                            - (insets.left + rendererMargin.left + insets.right
+                                    + rendererMargin.right + buttonSize),
+                    height
+                            - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
         }
+
     }
 
 
