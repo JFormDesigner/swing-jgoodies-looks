@@ -49,7 +49,7 @@ import com.jgoodies.uif_lite.panel.SimpleInternalFrame;
  * tabbed panes using two <code>SimpleInternalFrame</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class TabTestTab {
 
@@ -179,7 +179,7 @@ final class TabTestTab {
                 "Black", "White", "Red", "Green", "Blue", "Yellow" };
         for (int i = 0; i < colors.length; i++) {
             String color = colors[i];
-            tabbedPane.addTab(color, new JPanel());
+            tabbedPane.addTab(color, new JPanel(null));
         }
         return tabbedPane;
     }

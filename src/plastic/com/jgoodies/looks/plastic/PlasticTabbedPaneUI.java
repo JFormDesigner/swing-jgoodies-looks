@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     Options
  */
@@ -1800,7 +1800,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     private class ScrollableTabPanel extends JPanel implements UIResource {
 
         public ScrollableTabPanel() {
-            setLayout(null);
+            super(null);
             setOpaque(tabPane.isOpaque());
             Color bgColor = UIManager.getColor("TabbedPane.tabAreaBackground");
             if (bgColor == null) {

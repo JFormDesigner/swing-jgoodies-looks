@@ -46,7 +46,7 @@ import com.jgoodies.looks.common.ExtButtonAreaLayout;
  * minimum button with that complies better with the Windows UI style guide.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsOptionPaneUI extends BasicOptionPaneUI {
 
@@ -59,9 +59,8 @@ public final class WindowsOptionPaneUI extends BasicOptionPaneUI {
      * are created by calling <code>getButtons</code>.
      */
     protected Container createButtonArea() {
-        JPanel bottom = new JPanel();
+        JPanel bottom = new JPanel(new ExtButtonAreaLayout(true, 6));
         bottom.setBorder(UIManager.getBorder("OptionPane.buttonAreaBorder"));
-        bottom.setLayout(new ExtButtonAreaLayout(true, 6));
         addButtonComponents(bottom, getButtons(), getInitialValueIndex());
         return bottom;
     }

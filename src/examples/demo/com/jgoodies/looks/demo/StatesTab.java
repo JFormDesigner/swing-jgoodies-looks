@@ -48,7 +48,7 @@ import com.jgoodies.forms.layout.Sizes;
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 final class StatesTab {
 
@@ -216,9 +216,9 @@ final class StatesTab {
 
     private JComponent buildSpinnerRow() {
         return buildGrid(createSpinner(true),
-                         new JPanel(),
+                         new JPanel(null),
                          createSpinner(false),
-                         new JPanel());
+                         new JPanel(null));
     }
 
     private JComponent createSpinner(boolean enabled) {
