@@ -35,6 +35,7 @@ import java.awt.Font;
 import java.lang.reflect.Method;
 
 import javax.swing.Icon;
+import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -53,17 +54,19 @@ import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.common.MinimumSizedIcon;
 
 /**
- * The main class of the JGoodies Windows Look and Feel.
+ * The main class of the JGoodies Windows Look&amp;Feel.
  * This look provides several corrections and extensions to Sun's Windows L&F.
  * In addition it tries to provide a unified look for the J2SE 1.4.0x, 1.4.1x
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
-    /** Client property key to set a border style - shadows the header style. */
+    /** 
+     * Client property key to set a border style - shadows the header style. 
+     * */
     public static final String BORDER_STYLE_KEY = "jgoodies.windows.borderStyle";
 
     // The look dependent fontSizeHints
@@ -118,7 +121,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         String WINDOWS_PREFIX = "com.jgoodies.plaf.windows.ExtWindows";
         String COMMON_PREFIX  = "com.jgoodies.plaf.common.ExtBasic";
 
-        String menuUIPrefix = LookUtils.IS_JAVA_1_4_2_OR_LATER
+        String menuUIPrefix = LookUtils.IS_LAF_WINDOWS_XP
                 ? WINDOWS_PREFIX
                 : COMMON_PREFIX;
 
@@ -164,9 +167,13 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Object[] otherDefaults;
         if (LookUtils.IS_LAF_WINDOWS_XP) {
             otherDefaults = new Object[] {
+                // Renders a circle, not the star ("*") character                       
+                "PasswordFieldUI",    WINDOWS_PREFIX + "XPPasswordFieldUI", 
+
                 // Optional style and optional special borders; 
                 // rollover borders for compound buttons
                 "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI",
+                
             };
         } else {
             otherDefaults = new Object[]{
@@ -192,13 +199,15 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
      */
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
+        
+        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP;
 
         // Override font settings if and only if we are allowed to.
         if (FontUtils.useSystemFontSettings()) {
             initFontDefaults(table);
         }
 
-        if (!LookUtils.IS_LAF_WINDOWS_XP) {
+        if (!isXP) {
             initComponentDefaultsBefore142(table);
         }
 
@@ -242,7 +251,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 ? new InsetsUIResource(2, 3, 2, 3)
                 : new InsetsUIResource(2, 4, 2, 4);
 
-        int pad = LookUtils.IS_LAF_WINDOWS_XP ? 3 : 0;
+        int pad = isXP ? 3 : 0;
         Object popupMenuSeparatorMargin = LookUtils.isLowRes
                 ? new InsetsUIResource(2, pad, 3, pad)
                 : new InsetsUIResource(3, pad, 4, pad);
@@ -256,16 +265,16 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Class superclass = getClass().getSuperclass();
         Color controlColor = table.getColor("control");
 
-        Object menuBarBackground = LookUtils.IS_LAF_WINDOWS_XP 
+        Object menuBarBackground = isXP 
                 ? table.get("control") 
 				: table.get("menu");
-        Object menuSelectionBackground = LookUtils.IS_LAF_WINDOWS_XP
+        Object menuSelectionBackground = isXP
                 ? table.get("MenuItem.selectionBackground")
                 : table.get("Menu.background");
-        Object menuSelectionForeground = LookUtils.IS_LAF_WINDOWS_XP
+        Object menuSelectionForeground = isXP
                 ? table.get("MenuItem.selectionForeground")
                 : table.get("Menu.foreground");
-
+        
         Object[] defaults = {
             "Button.border",              buttonBorder, 
 			"Button.margin",              defaultButtonMargin, // 1.4.1 Bug
@@ -294,9 +303,12 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
             "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
 
-            "OptionPane.errorIcon",       makeIcon(superclass, "icons/Error.gif"),
-            "OptionPane.informationIcon", makeIcon(superclass, "icons/Inform.gif"), 
-			"OptionPane.warningIcon",     makeIcon(superclass, "icons/Warn.gif"), 
+            "OptionPane.errorIcon",       isXP ? makeIcon(getClass(), "icons/xp/Error.png")
+                                               : makeIcon(superclass, "icons/Error.gif"),
+            "OptionPane.informationIcon", isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
+                                               : makeIcon(superclass, "icons/Inform.gif"), 
+			"OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
+                                               : makeIcon(superclass, "icons/Warn.gif"), 
 			"OptionPane.questionIcon",    makeIcon(superclass, "icons/Question.gif"),
             "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
             "PasswordField.margin",       textInsets, // 1.4.1 Bug
@@ -319,6 +331,10 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
             "Tree.selectionBorderColor",  controlColor, // 1.4.1 Bug; active
             "Tree.rowHeight",             rowHeight, // 1.4.1 Bug
+            "Tree.openIcon",              isXP ? makeIcon(getClass(), "icons/xp/TreeOpen.png")
+                                               : makeIcon(getClass(), "icons/TreeOpen.gif"),
+            "Tree.closedIcon",            isXP ? makeIcon(getClass(), "icons/xp/TreeClosed.png")
+                                               : makeIcon(getClass(), "icons/TreeClosed.gif"),
         };
         table.putDefaults(defaults);
     }
@@ -488,9 +504,9 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 c = Class.forName(className, true, classLoader);
                 Method m = c.getMethod(methodName, null);
                 instance = m.invoke(c, null);
-            } catch (Exception e) {
+            } catch (Throwable t) {
                 LookUtils.log("Problem creating " + className + " with method "
-                        + methodName + e);
+                        + methodName + t);
             }
             return instance;
         }
