@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class Options {
@@ -362,7 +362,10 @@ public final class Options {
      * Otherwise the feature's enablement state is returned.<p>
      * 
      * Currently only the Mac OS X is detected as platform where
-     * the toolkit uses native drop shadows. 
+     * the toolkit uses native drop shadows.<p>
+     * 
+     * TODO: Consider delegating the check for native drop shadows
+     * to <code>LookUtils#getToolkitUsesNativeDropShadows()</code>.
      * 
      * @return true if drop shadows are active, false if inactive
      * 
@@ -417,7 +420,14 @@ public final class Options {
     /**
      * Checks and answers whether popup drop shadows are enabled
      * or disabled by default. True for modern Windows platforms:
-     * Windows 98/ME/2000/XP
+     * Windows 98/ME/2000/XP.<p>
+     * 
+     * TODO: Consider enabling popup drop shadows on Linux by default.<p>
+     * 
+     * TODO: Consider moving the default to the individual L&amp;F's
+     * component defaults initialization. For example Plastic and Plastic3D
+     * may disable this feature by default, while PlasticXP enables it
+     * by default.
      * 
      * @return false
      */
