@@ -7,14 +7,23 @@
 
 INTRODUCTION
 
-    This release is just adds service descriptors to all JARs
-    for automatic look&feel detection. 
+    This is a maintenance update that fixes minor bugs in the library 
+    and distribution. It also adds service descriptors to all JARs 
+    that can be used for an automatic look&feel detection. 
 
 
 DISTRIBUTION CHANGES
 
     o Added service descriptors to all library JARs
     o Removed class files from source zip
+    o Fixed broken classpath in demo jars
+    
+    
+OTHER CHANGES
+
+    o Docs: Added a note on how to set the class loader for 
+            network launchable environments like Java Web Start.
+    o Docs: Fixed typo in plastic.html
     
     
     
