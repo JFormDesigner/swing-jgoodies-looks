@@ -1,3 +1,5 @@
+o Check problem with wide toolbar buttons in ExtWindows (classic mode)
+
 o Add a comment to the Release notes regarding the overall progress.
 
 o Schriftwahl in Plastic-Themen überarbeiten

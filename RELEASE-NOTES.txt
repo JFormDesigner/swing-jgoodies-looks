@@ -1,6 +1,45 @@
 
 
 
+                    JGoodies Looks, Version 1.2.2
+                            Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance release fixes a couple of bugs.
+
+
+BUGS FIXED
+
+    o Wide toolbar rollover button margins if no margin has been set.   
+    
+
+NEW FEATURES
+
+    o All l&fs:  ...
+
+
+KNOWN ISSUES
+
+    o This release still lacks an improved font management
+      for the Plastic l&f family on non-Windows platforms.
+      For a workaround see issue #10.
+
+
+OTHER CHANGES
+
+    o Docs:      Added FAQ entry regarding the use of the extension path
+    o ExtWin:    ...
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
+
                     JGoodies Looks, Version 1.2.1
                             Release Notes
                         
