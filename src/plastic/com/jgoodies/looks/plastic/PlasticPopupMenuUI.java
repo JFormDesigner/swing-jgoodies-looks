@@ -45,7 +45,7 @@ import com.jgoodies.looks.common.ShadowPopupMenuUtils;
  * Adds support for a drop shadow.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupMenuUtils
@@ -91,7 +91,9 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
      */
 	public Popup getPopup(JPopupMenu aPopupMenu, int x, int y) {
         Popup popup = super.getPopup(aPopupMenu, x, y);
-        ShadowPopupMenuUtils.setTransparent(aPopupMenu, popup);
+        if (dropShadowActive) {
+            ShadowPopupMenuUtils.setTransparent(aPopupMenu, popup);
+        }
         return popup;
     }
     
