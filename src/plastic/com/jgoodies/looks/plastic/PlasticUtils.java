@@ -30,22 +30,16 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.*;
 
 import javax.swing.JComponent;
 import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 
 /**
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class PlasticUtils {
@@ -59,7 +53,7 @@ public final class PlasticUtils {
 
 
 	static void drawDisabledBorder(Graphics g, int x, int y, int w, int h) {
-		g.setColor(MetalLookAndFeel.getControlShadow());
+		g.setColor(PlasticLookAndFeel.getControlShadow());
 		drawRect(g, x, y, w - 1, h - 1);
 	}
 
@@ -85,7 +79,7 @@ public final class PlasticUtils {
 	static void drawPressed3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
 		drawFlush3DBorder(g, 0, 0, w, h);
-		g.setColor(MetalLookAndFeel.getControlShadow());
+		g.setColor(PlasticLookAndFeel.getControlShadow());
 		g.drawLine(1, 1, 1, h - 3);
 		g.drawLine(1, 1, w - 3, 1);
 		g.translate(-x, -y);
