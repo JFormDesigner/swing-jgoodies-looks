@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -39,24 +39,23 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
-
-import com.sun.java.swing.plaf.windows.WindowsToolBarSeparatorUI;
+import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
 /**
  * A Windows tool bar separator that honors the tool bar's border.
+ * Used in in 1.4.0, 1.4.1 and 1.4.2 with XP turned off.
+ * 
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.4 $
  */
 public final class ExtWindowsToolBarSeparatorUI
-    extends WindowsToolBarSeparatorUI {
+    extends BasicToolBarSeparatorUI {
 
     public static ComponentUI createUI(JComponent c) {
         return new ExtWindowsToolBarSeparatorUI();
     }
 
     public void paint(Graphics g, JComponent c) {
-        if (3 < 4) {
-            super.paint(g, c);
-            return;
-        }
         Color temp = g.getColor();
 
         Color shadowColor    = UIManager.getColor("ToolBar.shadow");
