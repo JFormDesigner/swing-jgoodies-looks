@@ -21,6 +21,7 @@ DISTRIBUTION CHANGES
     
 OTHER CHANGES
 
+    o Code: Documented empty blocks.
     o Docs: Added a note on how to set the class loader for 
             network launchable environments like Java Web Start.
     o Docs: Fixed typo in plastic.html
