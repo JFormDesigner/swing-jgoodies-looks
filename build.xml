@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.8 2004-01-04 20:10:43 karsten Exp $
+   $Id: build.xml,v 1.9 2004-02-16 15:18:19 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -96,6 +96,8 @@
 			bootclasspath="${build.boot.classpath}" />
 
 		<copy toDir="${build.main.dir}" >
+			<fileset dir="${src.share.dir}" 
+					 includes="com/jgoodies/plaf/common/shadow.png" />
 			<fileset dir="${src.plastic.dir}" 
 					 includes="com/jgoodies/plaf/plastic/icons/**/*" />
 			<fileset dir="${src.windows.dir}" 

@@ -28,6 +28,7 @@ KNOWN ISSUES
 
     o This release still lacks an improved font management
       for the Plastic l&f family on non-Windows platforms.
+      For a workaround see issue #10.
 
 
 OTHER CHANGES
@@ -35,7 +36,7 @@ OTHER CHANGES
     o ExtWin:    Reduced the number of updates to the UIDefaults.
     
     
--------------------------------------------------------------------------------
+---------------------------------------------------------------------------
 
 Find below the change history for older releases.
 
