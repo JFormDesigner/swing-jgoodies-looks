@@ -41,7 +41,7 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.plaf.Options;
+import com.jgoodies.looks.Options;
 
 /** 
  * Demonstrates the JGoodies Looks <i>narrowMargin</i> option. 
@@ -49,7 +49,7 @@ import com.jgoodies.plaf.Options;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class NarrowTab {
 

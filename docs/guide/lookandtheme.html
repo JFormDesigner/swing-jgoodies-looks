@@ -44,7 +44,6 @@
 	<br>::&nbsp;<a class="nav" href="../guide/3d.html">Plastic 3D Effects</a>
 	<br>::&nbsp;<a class="nav" href="../guide/plastic.html">Plastic Options</a>
 	<br>::&nbsp;<a class="nav" href="../guide/other.html">Other Options</a>
-	<br>::&nbsp;<a class="nav" href="../guide/clearlook.html">ClearLook</a>
 	<p>
 	<a class="nav" href="../api/index.html"><b>API Docs</b></a>
 	<p>
@@ -83,10 +82,10 @@
 </pre>
 The class can be one of:
 	<ul>
-       <li><tt>com.jgoodies.plaf.windows.ExtWindowsLookAndFeel</tt>
-       <li><tt>com.jgoodies.plaf.plastic.PlasticLookAndFeel</tt>
-       <li><tt>com.jgoodies.plaf.plastic.Plastic3DLookAndFeel</tt>
-       <li><tt>com.jgoodies.plaf.plastic.PlasticXPLookAndFeel</tt>
+       <li><tt>com.jgoodies.looks.windows.WindowsLookAndFeel</tt>
+       <li><tt>com.jgoodies.looks.plastic.PlasticLookAndFeel</tt>
+       <li><tt>com.jgoodies.looks.plastic.Plastic3DLookAndFeel</tt>
+       <li><tt>com.jgoodies.looks.plastic.PlasticXPLookAndFeel</tt>
 	</ul>
 
 
@@ -104,7 +103,7 @@ The class can be one of:
 	You can set a JGoodies look using its class name:
 <pre>
    try {
-      UIManager.setLookAndFeel("com.jgoodies.plaf.windows.ExtWindowsLookAndFeel");
+      UIManager.setLookAndFeel("com.jgoodies.looks.windows.WindowsLookAndFeel");
    } catch (Exception e) {}
 </pre>
 
@@ -124,7 +123,7 @@ The class can be one of:
 
 	 To make use of the new color theme, you must set the theme
 	 <strong>before</strong> you set the look&amp;feel. 
-     Find color themes in package <tt>com.jgoodies.plaf.plastic.theme</tt>.
+     Find color themes in package <tt>com.jgoodies.looks.plastic.theme</tt>.
 	     
 
 	</td>

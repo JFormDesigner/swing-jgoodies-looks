@@ -39,14 +39,14 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.plaf.LookUtils;
-import com.jgoodies.plaf.plastic.PlasticInternalFrameUI;
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.plastic.PlasticInternalFrameUI;
 
 /** 
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class DesktopTab {
     

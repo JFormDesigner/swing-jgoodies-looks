@@ -37,9 +37,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import com.jgoodies.plaf.Options;
-import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
-import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
+import com.jgoodies.looks.Options;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /**
  * Builds the menu bar and pull-down menus in the Simple Looks Demo. 
@@ -52,7 +52,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public class MenuBuilder {
@@ -74,7 +74,7 @@ public class MenuBuilder {
 							  settings.getMenuBarHeaderStyle());
 		bar.putClientProperty(PlasticLookAndFeel.BORDER_STYLE_KEY, 
 							  settings.getMenuBarPlasticBorderStyle());
-		bar.putClientProperty(ExtWindowsLookAndFeel.BORDER_STYLE_KEY, 
+		bar.putClientProperty(WindowsLookAndFeel.BORDER_STYLE_KEY, 
 							  settings.getMenuBarWindowsBorderStyle());
 		bar.putClientProperty(PlasticLookAndFeel.IS_3D_KEY,
 							  settings.getMenuBar3DHint());

@@ -32,12 +32,12 @@ package com.jgoodies.looks.demo;
 
 import javax.swing.LookAndFeel;
 
-import com.jgoodies.plaf.BorderStyle;
-import com.jgoodies.plaf.FontSizeHints;
-import com.jgoodies.plaf.HeaderStyle;
-import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
-import com.jgoodies.plaf.plastic.PlasticTheme;
-import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
+import com.jgoodies.looks.BorderStyle;
+import com.jgoodies.looks.FontSizeHints;
+import com.jgoodies.looks.HeaderStyle;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.plastic.PlasticTheme;
+import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 
 
 /** 
@@ -45,12 +45,12 @@ import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
- * @see     com.jgoodies.plaf.BorderStyle
- * @see     com.jgoodies.plaf.FontSizeHints
- * @see     com.jgoodies.plaf.HeaderStyle
- * @see     com.jgoodies.plaf.Options
+ * @see     com.jgoodies.looks.BorderStyle
+ * @see     com.jgoodies.looks.FontSizeHints
+ * @see     com.jgoodies.looks.HeaderStyle
+ * @see     com.jgoodies.looks.Options
  */
 public final class Settings {
     

@@ -18,6 +18,8 @@ BUGS FIXED
 
 CHANGES THAT AFFECT THE COMPATIBILITY
 
+    o Package names changed from com.jgoodies.plaf to com.jgoodies.looks
+    o ExtWindowsLookAndFeel -> WindowsLookAndFeel
     o All ClearLook classes have been removed from the Looks.
       These will show up as a LintLookAndFeel later.
 

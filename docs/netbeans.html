@@ -44,7 +44,6 @@
 	<br>::&nbsp;<a class="nav" href="guide/3d.html">Plastic 3D Effects</a>
 	<br>::&nbsp;<a class="nav" href="guide/plastic.html">Plastic Options</a>
 	<br>::&nbsp;<a class="nav" href="guide/other.html">Other Options</a>
-	<br>::&nbsp;<a class="nav" href="guide/clearlook.html">ClearLook</a>
 	<p>
 	<a class="nav" href="api/index.html"><b>API Docs</b></a>
 	<p>
@@ -87,10 +86,10 @@
 	Add <i>one of</i> the following lines to file <tt>&lt;netbeans-dir&gt;\bin\ide.cfg</tt>
 
 	<p><tt>
--ui com.jgoodies.plaf.plastic.PlasticXPLookAndFeel<br>
--ui com.jgoodies.plaf.plastic.PlasticLookAndFeel<br>
--ui com.jgoodies.plaf.plastic.Plastic3DLookAndFeel<br>
--ui com.jgoodies.plaf.windows.ExtWindowsLookAndFeel</tt>
+-ui com.jgoodies.looks.plastic.PlasticXPLookAndFeel<br>
+-ui com.jgoodies.looks.plastic.PlasticLookAndFeel<br>
+-ui com.jgoodies.looks.plastic.Plastic3DLookAndFeel<br>
+-ui com.jgoodies.looks.windows.WindowsLookAndFeel</tt>
 
 
 	<h2>Setting the Plastic Color Theme</h2>
@@ -103,15 +102,6 @@
 
 	You can change the Plastic tab style to make the selected tab easier to find:
 	<p><tt>-J-DPlastic.tabStyle=Metal</tt>
-
-	<p>
-	By default, the JGoodies l&amp;fs switch on ClearLook in NetBeans environments.
-	You can switch ClearLook off by adding:
-	<p><tt>-J-DClearLook.mode=OFF</tt>
-
-	<p>
-	To find visual clutter in NetBeans you can mark content borders of JTabbedPanes:
-	<p><tt>-J-DmarkContentBorders=true</tt>
 
 
 	<h2>Previewing Your Apps With a JGoodies L&amp;F</h2>

@@ -42,10 +42,10 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
-import com.jgoodies.plaf.LookUtils;
-import com.jgoodies.plaf.Options;
-import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
-import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /** 
  * Builds the main frame in the Simple Looks Demo. 
@@ -60,7 +60,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class DemoFrame extends JFrame {
 
@@ -197,7 +197,7 @@ public class DemoFrame extends JFrame {
             PlasticLookAndFeel.BORDER_STYLE_KEY,
             settings.getToolBarPlasticBorderStyle());
         toolBar.putClientProperty(
-            ExtWindowsLookAndFeel.BORDER_STYLE_KEY,
+            WindowsLookAndFeel.BORDER_STYLE_KEY,
             settings.getToolBarWindowsBorderStyle());
         toolBar.putClientProperty(
             PlasticLookAndFeel.IS_3D_KEY,
@@ -310,7 +310,6 @@ public class DemoFrame extends JFrame {
         tabbedPane.addTab("Dialog",    new DialogsTab().build(tabbedPane));
         tabbedPane.addTab("Desktop",   new DesktopTab().build());
         tabbedPane.addTab("Narrow",    new NarrowTab().build());
-        tabbedPane.addTab("ClearLook", new ClearLookTab().build());
     }
     
     protected String getWindowTitle() {

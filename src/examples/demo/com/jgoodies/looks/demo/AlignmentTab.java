@@ -38,14 +38,14 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
-import com.jgoodies.plaf.Options;
+import com.jgoodies.looks.Options;
 
 /** 
  * Consists of rows of centered components to check alignment
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 final class AlignmentTab {
     

@@ -14,9 +14,9 @@ import java.awt.Frame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import com.jgoodies.plaf.FontSizeHints;
-import com.jgoodies.plaf.LookUtils;
-import com.jgoodies.plaf.Options;
+import com.jgoodies.looks.FontSizeHints;
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
 
 
 /**
@@ -41,7 +41,7 @@ public final class Tiny {
 
     /**
      * Configures the UI; tries to set the system look on Mac, 
-     * <code>ExtWindowsLookAndFeel</code> on general Windows, and
+     * <code>WindowsLookAndFeel</code> on general Windows, and
      * <code>Plastic3DLookAndFeel</code> on Windows XP and all other OS.<p>
      * 
      * The JGoodies Swing Suite's <code>ApplicationStarter</code>,

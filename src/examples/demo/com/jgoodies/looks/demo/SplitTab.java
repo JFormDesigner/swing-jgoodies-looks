@@ -39,7 +39,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.plaf.LookUtils;
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.uif_lite.component.UIFSplitPane;
 
 /** 
@@ -47,7 +47,7 @@ import com.jgoodies.uif_lite.component.UIFSplitPane;
  * removes obsolete decorations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see UIFSplitPane
  */
