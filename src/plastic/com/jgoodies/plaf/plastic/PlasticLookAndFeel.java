@@ -525,9 +525,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return the default color theme for the current environemt
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
-		String defaultName = LookUtils.isWindowsXP() 
+		String defaultName = LookUtils.IS_OS_WINDOWS_XP 
 								? "ExperienceBlue"
-								: (LookUtils.isModernWindows() ? "DesertBluer" : "SkyBlue");
+								: (LookUtils.IS_OS_WINDOWS_MODERN ? "DesertBluer" : "SkyBlue");
 		// Don't use the default now, so we can detect that the users tried to set one.
 		String   userName  = LookUtils.getSystemProperty(DEFAULT_THEME_KEY, "");
 		boolean overridden = userName.length() > 0;

@@ -59,11 +59,61 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
 
 public final class LookUtils {
 
-    // Properties and Keys for Internal Use Only - May Change without Notice 
+    /**
+     * The <code>java.version</code> System Property.<p>
+     *
+     * Defaults to <code>null</code> if the runtime does not have security 
+     * access to read this property or the property does not exist.
+     */
+    private static final String JAVA_VERSION = getSystemProperty("java.version");    // Properties for internal use only - may change without notice 
 
-    public static final boolean IS_140            = is140();
-    public static final boolean IS_142_OR_LATER   = is142orLater();
-    public static final boolean IS_WINDOWS_XP_LAF = isWindowsXPLafEnabled();
+    /**
+     * True if this is Java 1.4.0 or 1.4.0_*.
+     */
+    static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
+    
+    /**
+     * True if this is Java 1.4.2 or later.
+     */
+    public static final boolean IS_JAVA_1_4_2_OR_LATER = 
+    startsWith(JAVA_VERSION, "1.4.2") || startsWith(JAVA_VERSION, "1.5");
+    
+    /**
+     * The <code>os.name</code> System Property. Operating system name.<p>
+     *
+     * Defaults to <code>null</code> if the runtime does not have security 
+     * access to read this property or the property does not exist.
+     */
+    private static final String OS_NAME = getSystemProperty("os.name");
+
+    /**
+     * The <code>os.version</code> System Property. Operating system version.<p>
+     *
+     * Defaults to <code>null</code> if the runtime does not have security 
+     * access to read this property or the property does not exist.
+     */
+    private static final String OS_VERSION = getSystemProperty("os.version");
+
+    /**
+     * True if this is Windows 98/ME/2000/XP.
+     */
+    public static final boolean IS_OS_WINDOWS_MODERN = 
+        startsWith(OS_NAME, "Windows") && !startsWith(OS_VERSION, "4.0");
+
+    /**
+     * True if this is Windows XP.
+     */
+    public static final boolean IS_OS_WINDOWS_XP =
+        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.1");
+    
+    /**
+     * True if the Windows XP Look&amp;Feel is enabled.
+     */
+    public static final boolean IS_LAF_WINDOWS_XP = isWindowsXPLafEnabled();
+    
+    /**
+     * True if this is a NetBeans environment.
+     */
     public static final boolean IS_NETBEANS;
 
     public static boolean isLowRes = isLowResolution();
@@ -83,24 +133,17 @@ public final class LookUtils {
     private LookUtils() {
         // Override default constructor; prevents instantiation.
     }
-
-    /**
-     * Checks and answers whether we have a true color system.
-     * 
-     * @param c   the component used to determine the toolkit
-     * @return true if the component's toolkit has a pixel size >= 24
-     */
-    public static boolean isTrueColor(Component c) {
-        return c.getToolkit().getColorModel().getPixelSize() >= 24;
-    }
     
+    
+    // Accessing System Configuration *****************************************
+
     /**
      * Tries to look up the System property for the given key.
      * In untrusted environments this may throw a SecurityException.
-     * In this case, we catch the exception and answer an empty string. 
+     * In this case we catch the exception and answer an empty string. 
      * 
      * @param key   the name of the system property
-     * @return the system property's String value, or null if there's
+     * @return the system property's String value, or <code>null</code> if there's
      *     no such value, or an empty String when
      *     a SecurityException has been catched
      */
@@ -108,7 +151,7 @@ public final class LookUtils {
         try {
             return System.getProperty(key);
         } catch (SecurityException e) {
-            log("Can't read the System property " + key + ".");
+            log("Can't access the System property " + key + ".");
             return "";
         }
     }
@@ -134,48 +177,6 @@ public final class LookUtils {
     }
 
     /**
-     * Checks and answers whether we're on Windows.
-     * 
-     * @return true if the OS name starts with Windows
-     */
-    public static boolean isWindows() {
-        return System.getProperty("os.name").startsWith("Windows");
-    }
-
-    /**
-     * Checks and answers if we are on Windows 95 or NT.
-     * 
-     * @return true if this is Windows 95 or NT
-     */
-    public static boolean isClassicWindows() {
-        String osName = System.getProperty("os.name");
-        String osVersion = System.getProperty("os.version");
-        return osName.startsWith("Windows") && osVersion.startsWith("4.0");
-    }
-
-    /**
-     * Checks and answers if we are on Windows 98/ME/2000/XP.
-     * 
-     * @return true if this is a Windows 98/ME/2000/XP
-     */
-    public static boolean isModernWindows() {
-        String osName = System.getProperty("os.name");
-        String osVersion = System.getProperty("os.version");
-        return osName.startsWith("Windows") && !osVersion.startsWith("4.0");
-    }
-
-    /**
-     * Checks and answers if we are on Windows XP.
-     * 
-     * @return true if this is a Windows XP
-     */
-    public static boolean isWindowsXP() {
-        String osName = System.getProperty("os.name");
-        String osVersion = System.getProperty("os.version");
-        return osName.startsWith("Windows") && osVersion.startsWith("5.1");
-    }
-    
-    /**
      * Checks and answers wether the Windows XP style is enabled. 
      * This method is intended to be called only if a Windows look&feel
      * is about to be installed or already active in the UIManager.
@@ -187,26 +188,42 @@ public final class LookUtils {
      * This method first checks the platform, platform version and Java version.
      * It then checks whether we can get an instance of the <code>XPStyle</code>
      * class. The accessor that this class provides will in turn check the
-     * OS desktop settings and the Java system properties.
+     * OS desktop settings and the Java system properties.<p>
+     * 
+     * In case an exception is thrown during the reflection, we guess that the 
+     * XP look&amp;feel is enabled. This will happen in untrusted environments 
+     * such as unsigned applets and web start applications that do not have 
+     * the permissions to switch off the SecurityManager's access control.
      *
      * @return true if the Windows XP style is enabled
      */ 
-    public static boolean isWindowsXPLafEnabled() {
-        if (!isWindowsXP() || !is142orLater())
+    private static boolean isWindowsXPLafEnabled() {
+        if (!IS_OS_WINDOWS_XP || !IS_JAVA_1_4_2_OR_LATER)
             return false;
         try {
             Class xpStyleClass = Class.forName(
                 "com.sun.java.swing.plaf.windows.XPStyle");
             Method getXPMethod = xpStyleClass.getDeclaredMethod("getXP", null);
+            getXPMethod.setAccessible(true);
             Object xpStyleInstance = getXPMethod.invoke(null, null);
             return xpStyleInstance != null;
-        } catch (Exception e) {
-            System.out.println(e);
-            return true; //false;
+        } catch (Throwable t) {
+            // Failed to read this property. Let's guess it's switched on.
+            return true;
         }
     }
     
-
+    /**
+     * Checks and answers whether we have a true color system.
+     * 
+     * @param c   the component used to determine the toolkit
+     * @return true if the component's toolkit has a pixel size >= 24
+     */
+    public static boolean isTrueColor(Component c) {
+        return c.getToolkit().getColorModel().getPixelSize() >= 24;
+    }
+    
+    
     // Working with Button Margins ******************************************
 
     /**
@@ -339,28 +356,6 @@ public final class LookUtils {
     // Private Helper Methods ***********************************************
 
     /**
-     * Checks and answers if we are on a J2SE 1.4.2 or later.
-     * 
-     * @return true in 1.4.2 or later
-     */
-    private static boolean is142orLater() {
-        String version = System.getProperty("java.version");
-        return !version.startsWith("1.2") 
-             && !version.startsWith("1.3")
-             && !version.startsWith("1.4.0")
-             && !version.startsWith("1.4.1");
-    }
-
-    /**
-     * Checks and answers whether this is a J2RE 1.4.0x
-     * 
-     * @return true in 1.4.0, false otherwise
-     */
-    private static boolean is140() {
-        return System.getProperty("java.version").startsWith("1.4.0");
-    }
-
-    /**
      * Checks and answers whether the screen resolution is low or high.
      * Resolutions below 120 dpi are considere low, all others are high.
      * 
@@ -386,5 +381,8 @@ public final class LookUtils {
         return hasNetBeansBuildNumber;
     }
     
-
+    private static boolean startsWith(String str, String prefix) {
+        return str != null && str.startsWith(prefix);
+    }
+    
 }

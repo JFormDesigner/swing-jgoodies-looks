@@ -216,7 +216,9 @@ public final class FontUtils {
 			//LookUtils.log("Button.font    =" + table.getFont("Button.font"));	
 			//LookUtils.log("OptionPane.font=" + table.getFont("OptionPane.font"));	
 		
-			String fontKey = LookUtils.IS_140 ? "Label.font" : "OptionPane.font";
+			String fontKey = LookUtils.IS_JAVA_1_4_0 
+                ? "Label.font" 
+                : "OptionPane.font";
 			controlFont		= table.getFont(fontKey);
 			if (controlFont.getName().equals("Tahoma")) {
 				float oldSize	= controlFont.getSize();
