@@ -43,25 +43,29 @@ import javax.swing.border.Border;
  * 
  * @author Stefan Matthias Aust
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupMenuUtils
  * @see java.awt.Robot
  */
 public final class ShadowPopupBorder implements Border {
     
+    /**
+     * The border's insets used if the shadow feature is active.
+     * The drop shadow needs 5 pixels at the bottom and the right hand side. 
+     */
+    private static final Insets SHADOW_INSETS = new Insets(0, 0, 5, 5);
+    
+    /**
+     * The border's insets used if the shadow feature is inactive.
+     */
+    private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+    
 	/**
 	 * The singleton instance used to draw all borders.
 	 */
 	private static ShadowPopupBorder instance = new ShadowPopupBorder();
 
-	/**
-	 * The border's shared insets (Plastic and PlasticXP style).
-	 * The drop shadow needs additional 5 pixels to the bottom and to the right 
-	 * edge of the component.  
-	 */
-	private static Insets borderInsets = new Insets(0, 0, 5, 5);
-	
 	/**
 	 * In the case of heavy weight menus, hShadowBg and vShadowBg hold a snapshot
 	 * of the screen background to simulate the drop shadow effect.  Due to the
@@ -76,12 +80,45 @@ public final class ShadowPopupBorder implements Border {
 	private static Image shadow
 		= new ImageIcon(ShadowPopupBorder.class.getResource("shadow.png")).getImage();
 
+    /**
+     * Describes whether the drop shadow is active or inactive.
+     * 
+     * @see #setActive(boolean)
+     */
+    private static boolean active = true;
+    
+    // Instance Creation *****************************************************
+    
 	/**
 	 * Returns the singleton instance used to draw all borders.
 	 */
 	public static ShadowPopupBorder getInstance() {
 		return instance;
 	}
+    
+    
+    // API *******************************************************************
+
+    /**
+     * Answers whether the drop shadow feature is active or inactive.
+     * 
+     * @return true for active drop shadows, false for inactive
+     * 
+     * @see #setActive(boolean)
+     */
+    private static boolean isActive() {
+        return active;
+    }
+    
+    
+    /**
+     * Activates or deactivates the drop shadow feature.
+     * 
+     * @param b true to activate, false to deactivate drop shadows
+     */
+    public static void setActive(boolean b) {
+        active = b;
+    }
 
 	/**
 	 * The next time the border is drawn no background snaphot is used.  
@@ -89,9 +126,10 @@ public final class ShadowPopupBorder implements Border {
 	public static void clearSnapshot() {
 		hShadowBg = vShadowBg = null;
 	}
+    
 
 	/**
-	 * Snapshots the background.  The next time the border is drawn, this
+	 * Snapshots the background. The next time the border is drawn, this
 	 * background will be used.<p>
      * 
      * Uses a robot on the default screen device to capture the screen region
@@ -127,9 +165,13 @@ public final class ShadowPopupBorder implements Border {
 	}
 
 	/**
-	 * Paints the border for the specified component with the specified position and size. 
+	 * Paints the border for the specified component with the specified 
+     * position and size. Does nothing if the drop shadow is inactive. 
 	 */
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+        if (!isActive())
+            return;
+        
 		// fake drop shadow effect in case of heavy weight menus
 		if (hShadowBg != null) {
 			g.drawImage(hShadowBg, x, y + height - 5, c);
@@ -139,7 +181,7 @@ public final class ShadowPopupBorder implements Border {
 		}
 		
 		// draw drop shadow
-		g.drawImage(shadow, x + 5, y + height - 5, x + 10, y + height, 0, 6, 5, 11, null, c);
+		g.drawImage(shadow, x +  5, y + height - 5, x + 10, y + height, 0, 6, 5, 11, null, c);
 		g.drawImage(shadow, x + 10, y + height - 5, x + width - 5, y + height, 5, 6, 6, 11, null, c);
 		g.drawImage(shadow, x + width - 5, y + 5, x + width, y + 10, 6, 0, 11, 5, null, c);
 		g.drawImage(shadow, x + width - 5, y + 10, x + width, y + height - 5, 6, 5, 11, 6, null, c);
@@ -147,10 +189,11 @@ public final class ShadowPopupBorder implements Border {
 	}
 
 	/**
-	 * Returns the insets of the border.
+	 * Returns the insets of the border. If the drop shadow feature is
+     * inactive, empty insets are used.
 	 */
 	public Insets getBorderInsets(Component c) {
-		return borderInsets;
+		return isActive() ? SHADOW_INSETS : EMPTY_INSETS;
 	}
     
 }

@@ -51,7 +51,8 @@ import javax.swing.Popup;
  * silently and drop shadow support is inactive.
  * 
  * @author Stefan Matthias Aust
- * @version $Revision: 1.3 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.4 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupBorder
  */
@@ -73,7 +74,9 @@ public final class ShadowPopupMenuUtils {
 			getComponentMethod = Popup.class.getDeclaredMethod("getComponent", null);
 			getComponentMethod.setAccessible(true);
 		} catch (Exception e) {
-            // Likely we have no permission to access this method. Do nothing.
+            // Likely we have no permission to access this method.
+            // Deactivate drop shadows.
+            ShadowPopupBorder.setActive(false);
 		}
 	}
 
@@ -99,8 +102,10 @@ public final class ShadowPopupMenuUtils {
 					ShadowPopupBorder.makeSnapshot((JWindow) component);
 				} 
 			} catch (Exception e) {
-				// Something went wrong; stop trying.
+				// Something went wrong.
+                // Deactivate drop shadows and stop trying.
 				getComponentMethod = null;
+                ShadowPopupBorder.setActive(false);
 			}
 		}
 	}

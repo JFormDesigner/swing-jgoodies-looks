@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public final class Options {
@@ -434,7 +434,7 @@ public final class Options {
      * @return true if the drop shadow feature is enabled by default
      */
     private static boolean isPopupDropShadowEnabledDefault() {
-        return LookUtils.IS_OS_WINDOWS;
+        return LookUtils.IS_OS_WINDOWS_MODERN;
     }
 
 
