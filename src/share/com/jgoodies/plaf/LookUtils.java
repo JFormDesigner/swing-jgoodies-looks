@@ -34,7 +34,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
@@ -140,39 +139,37 @@ public final class LookUtils {
     /**
      * Tries to look up the System property for the given key.
      * In untrusted environments this may throw a SecurityException.
-     * In this case we catch the exception and answer an empty string. 
+     * In this case we catch the exception and answer <code>null</code>. 
      * 
      * @param key   the name of the system property
      * @return the system property's String value, or <code>null</code> if there's
-     *     no such value, or an empty String when
-     *     a SecurityException has been catched
+     *     no such value, or a SecurityException has been catched
      */
     public static String getSystemProperty(String key) {
         try {
             return System.getProperty(key);
         } catch (SecurityException e) {
             log("Can't access the System property " + key + ".");
-            return "";
+            return null;
         }
     }
 
     /**
      * Tries to look up the System property for the given key.
      * In untrusted environments this may throw a SecurityException.
-     * In this case, we catch the exception and answer an empty string. 
+     * In this case, we catch the exception and answer the default value. 
      * 
      * @param key          the name of the system property
      * @param defaultValue the default value if no property exists.
      * @return the system property's String value, or the defaultValue 
-     *     if there's no such value, or an empty String when
-     *     a SecurityException has been catched
+     *     if there's no such value, or a SecurityException has been catched
      */
     public static String getSystemProperty(String key, String defaultValue) {
         try {
             return System.getProperty(key, defaultValue);
         } catch (SecurityException e) {
             log("Can't read the System property " + key + ".");
-            return "";
+            return defaultValue;
         }
     }
 
@@ -185,32 +182,18 @@ public final class LookUtils {
      * in the Windows desktop as well as in the Java runtime by setting
      * a System property.<p>
      * 
-     * This method first checks the platform, platform version and Java version.
-     * It then checks whether we can get an instance of the <code>XPStyle</code>
-     * class. The accessor that this class provides will in turn check the
-     * OS desktop settings and the Java system properties.<p>
+     * First checks the platform, platform version and Java version. Then 
+     * checks whether the desktop property <tt>win.xpstyle.themeActive</tt>
+     * is set or not.
      * 
-     * In case an exception is thrown during the reflection, we guess that the 
-     * XP look&amp;feel is enabled. This will happen in untrusted environments 
-     * such as unsigned applets and web start applications that do not have 
-     * the permissions to switch off the SecurityManager's access control.
-     *
      * @return true if the Windows XP style is enabled
      */ 
     private static boolean isWindowsXPLafEnabled() {
-        if (!IS_OS_WINDOWS_XP || !IS_JAVA_1_4_2_OR_LATER)
-            return false;
-        try {
-            Class xpStyleClass = Class.forName(
-                "com.sun.java.swing.plaf.windows.XPStyle");
-            Method getXPMethod = xpStyleClass.getDeclaredMethod("getXP", null);
-            getXPMethod.setAccessible(true);
-            Object xpStyleInstance = getXPMethod.invoke(null, null);
-            return xpStyleInstance != null;
-        } catch (Throwable t) {
-            // Failed to read this property. Let's guess it's switched on.
-            return true;
-        }
+        return IS_OS_WINDOWS_XP 
+             && IS_JAVA_1_4_2_OR_LATER 
+             && ((Boolean) Toolkit.getDefaultToolkit().
+                     getDesktopProperty("win.xpstyle.themeActive")).booleanValue()
+             && getSystemProperty("swing.noxp") == null;
     }
     
     /**

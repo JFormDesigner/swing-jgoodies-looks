@@ -170,7 +170,7 @@ public final class FontUtils {
 	 */
 	public static Font getMenuFont(UIDefaults table, FontSizeHints hints) {
 		// Check whether a concrete font has been specified in the system properties.
-		String fontDescription = LookUtils.getSystemProperty(Options.MENU_FONT_KEY, null);
+		String fontDescription = LookUtils.getSystemProperty(Options.MENU_FONT_KEY);
 		if (fontDescription != null) {
 			return Font.decode(fontDescription);
 		}
@@ -206,7 +206,7 @@ public final class FontUtils {
 	 */
 	public static Font getControlFont(UIDefaults table, FontSizeHints hints) {
 		// Check whether a concrete font has been specified in the system properties.
-		String fontDescription = LookUtils.getSystemProperty(Options.CONTROL_FONT_KEY, null);
+		String fontDescription = LookUtils.getSystemProperty(Options.CONTROL_FONT_KEY);
 		if (fontDescription != null) {
 			return Font.decode(fontDescription);
 		}
