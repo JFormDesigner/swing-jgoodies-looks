@@ -52,7 +52,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public class MenuBuilder {
@@ -135,8 +135,10 @@ public class MenuBuilder {
 		menu.add(createMenuItem("2 WinXPUtils.java",       '2'));
 		menu.add(createMenuItem("3 WinXPBorders.java",     '3'));
 		menu.add(createMenuItem("4 WinXPLookAndFeel.java", '4'));
-		menu.addSeparator();
-		menu.add(createMenuItem("Exit", 'E'));
+        if (!isQuitInOSMenu()) {
+            menu.addSeparator();
+            menu.add(createMenuItem("Exit", 'E'));
+        }
 		return menu;
 	}
     
@@ -340,6 +342,31 @@ public class MenuBuilder {
     protected JCheckBoxMenuItem createCheckBoxMenuItem(String text, boolean selected) {
         return new JCheckBoxMenuItem(text, selected);
     }
+    
+
+    // Subclass will override the following methods ***************************
+    
+    /**
+     * Checks and answers whether the quit action has been moved to an
+     * operating system specific menu, e.g. the OS X application menu.
+     *  
+     * @return true if the quit action is in an OS-specific menu
+     */
+    protected boolean isQuitInOSMenu() {
+        return false;
+    }
+    
+
+    /**
+     * Checks and answers whether the about action has been moved to an
+     * operating system specific menu, e.g. the OS X application menu.
+     *  
+     * @return true if the about action is in an OS-specific menu
+     */
+    protected boolean isAboutInOSMenu() {
+        return false;
+    }
+    
     
     // Higher Level Factory Methods *****************************************
     
