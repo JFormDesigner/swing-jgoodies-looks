@@ -13,7 +13,8 @@ INTRODUCTION
 
 BUGS FIXED
 
-    o Plastic internal frames use the outdated Java cup icon.   
+    o Plastic internal frames use the outdated Java cup icon.  
+    o Inactive drop shadows still try to snapshot via the Robot.
     
 
 CHANGES THAT AFFECT THE COMPATIBILITY
@@ -36,6 +37,7 @@ KNOWN ISSUES
 OTHER CHANGES
 
     o Docs:      Added and fixed version tags.
+    o Corrected implementation title and vendor in the JAR manifest.
     o Demo:      ...
     
     
