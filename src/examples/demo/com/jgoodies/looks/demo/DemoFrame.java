@@ -56,13 +56,12 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * that can be automatically corrected by ClearLook.<p>
  * 
  * This class provides a couple of protected methods that create
- * components or a build. 
- * The full JGoodies Looks Demo overrides these methods to vend
- * components or builders from the JGoodies UI framework that 
- * better handle different platforms.
+ * components or a builder. The full JGoodies Looks Demo overrides 
+ * these methods to vend components or builders from the 
+ * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class DemoFrame extends JFrame {
 
@@ -137,11 +136,11 @@ public class DemoFrame extends JFrame {
         JCheckBox checkBox = new JCheckBox();
         checkBox.getUI().uninstallUI(checkBox);
 
-//        try {
-//            UIManager.setLookAndFeel(selectedLaf);
-//        } catch (Exception e) {
-//            System.out.println("Can't change L&F: " + e);
-//        }
+        try {
+            UIManager.setLookAndFeel(selectedLaf);
+        } catch (Exception e) {
+            System.out.println("Can't change L&F: " + e);
+        }
 
     }
 
