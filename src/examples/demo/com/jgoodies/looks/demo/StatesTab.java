@@ -44,40 +44,35 @@ import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.builder.*;
 
 /** 
- * Contains a bunch of buttons with in different states and configurations.
+ * Presents a larger set of Swing components in different states and 
+ * configurations.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
  */
 final class StatesTab {
 
     /**
-     * Builds the panel.
+     * Builds and returns the states panel.
      */
     JComponent build() {
         FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref), 6dlu, pref",
-                "");
+                "right:max(50dlu;pref), 6dlu, pref");
         SimpleFormBuilder builder = new SimpleFormBuilder(layout);
         builder.setDefaultDialogBorder();
 
-        // Buttons	
-        builder.append("Standard:",      buildButtonRow(true, true));
-        builder.append("No Content:",    buildButtonRow(true, false));
-        builder.append("No Border:",     buildButtonRow(false, true));
-        builder.append("Radio Button:",  buildRadioButtonRow());
-        builder.append("Check Box:",     buildCheckBoxRow());
-        builder.append("Combo Box:",     buildComboBoxRow());
-        builder.append("Text Field:",    buildTextRow(JTextField.class, false));
-        Class formattedTextFieldClass = getFormattedTextFieldClass();
-        if (formattedTextFieldClass != null) {
-            builder.append("Formatted Field:",   buildTextRow(formattedTextFieldClass, false));
-        }
-        builder.append("Password:",      buildTextRow(JPasswordField.class, false));
-        builder.append("Text Area:",     buildTextRow(JTextArea.class, true));
-        Class spinnerClass = getSpinnerClass();
-        if (spinnerClass != null) {
-            builder.append("Spinner:",   buildSpinnerRow(spinnerClass));
-        }
+        builder.append("Standard:",        buildButtonRow(true, true));
+        builder.append("No Content:",      buildButtonRow(true, false));
+        builder.append("No Border:",       buildButtonRow(false, true));
+        builder.append("Radio Button:",    buildRadioButtonRow());
+        builder.append("Check Box:",       buildCheckBoxRow());
+        builder.append("Combo Box:",       buildComboBoxRow());
+        builder.append("Text Field:",      buildTextRow(JTextField.class, false));
+        builder.append("Formatted Field:", buildTextRow(JFormattedTextField.class, false));
+        builder.append("Password:",        buildTextRow(JPasswordField.class, false));
+        builder.append("Text Area:",       buildTextRow(JTextArea.class, true));
+        builder.append("Spinner:",         buildSpinnerRow());
+        
         return builder.getPanel();
     }
 
@@ -145,7 +140,7 @@ final class StatesTab {
     // Text Rows ************************************************************
 
     /**
-     * Creates and answers a bar with 4 text components.
+     * Creates and returns a bar with 4 text components.
      * These are created using the given class;
      * they are wrapped in a <code>JScrollpane</code> iff the
      * wrap flag is set. 
@@ -209,7 +204,7 @@ final class StatesTab {
         boolean enabled,
         boolean editable) {
         JComboBox box =
-            new JComboBox(new String[] { text, "Two", "Three", "Four" });
+            new JComboBox(new String[] { text, "Two", "Three", "Four", "A Quite Long Label" });
         box.setEnabled(enabled);
         box.setEditable(editable);
         box.setRenderer(new CustomComboBoxRenderer());
@@ -218,21 +213,15 @@ final class StatesTab {
         return box;
     }
 
-    private JComponent buildSpinnerRow(Class spinnerClass) {
-        return buildGrid(createSpinner(spinnerClass, true),
+    private JComponent buildSpinnerRow() {
+        return buildGrid(createSpinner(true),
                          new JPanel(),
-                         createSpinner(spinnerClass, false),
+                         createSpinner(false),
                          new JPanel());
     }
 
-    private JComponent createSpinner(Class spinnerClass, boolean enabled) {
-        JComponent spinner = new JPanel();
-        try {
-            spinner = (JComponent) spinnerClass.newInstance();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
+    private JComponent createSpinner(boolean enabled) {
+        JSpinner spinner = new JSpinner();
         spinner.setEnabled(enabled);
         return spinner;
     }
@@ -250,20 +239,19 @@ final class StatesTab {
             int index,
             boolean isSelected,
             boolean cellHasFocus) {
-            if (isSelected) {
-                label.setBackground(list.getSelectionBackground());
-                label.setForeground(list.getSelectionForeground());
-            } else {
-                label.setBackground(list.getBackground());
-                label.setForeground(list.getForeground());
-            }
+            label.setBackground(isSelected 
+                    ? list.getSelectionBackground()
+                    : list.getBackground());
+            label.setForeground(isSelected
+                    ? list.getSelectionForeground()
+                    : list.getForeground());
 
             label.setFont(list.getFont());
 
             if (value instanceof Icon) {
                 label.setIcon((Icon) value);
             } else {
-                label.setText((value == null) ? "" : value.toString());
+                label.setText(value == null ? "" : value.toString());
             }
             label.setOpaque(true);
             return label;
@@ -303,23 +291,6 @@ final class StatesTab {
         builder.add(c3, cc.xy(5, 1));
         builder.add(c4, cc.xy(7, 1));
         return builder.getPanel();
-    }
-
-
-    private Class getFormattedTextFieldClass() {
-        try {
-            return Class.forName("javax.swing.JFormattedTextField");
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private Class getSpinnerClass() {
-        try {
-            return Class.forName("javax.swing.JSpinner");
-        } catch (Exception e) {
-            return null;
-        }
     }
 
 

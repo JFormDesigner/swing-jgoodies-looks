@@ -120,7 +120,7 @@ public class DemoFrame extends JFrame {
         } else if (selectedLaf.getClass() == MetalLookAndFeel.class) {
             MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
         }
-
+        
         // Workaround caching in MetalRadioButtonUI
         JRadioButton radio = new JRadioButton();
         radio.getUI().uninstallUI(radio);
@@ -285,9 +285,9 @@ public class DemoFrame extends JFrame {
     protected void addTabs(JTabbedPane tabbedPane) {
         tabbedPane.addTab("Desktop", new DesktopTab().build());
         tabbedPane.addTab("States", new StatesTab().build());
-        tabbedPane.addTab("HTML Labels", new HtmlTab().build());
+        tabbedPane.addTab("HTML", new HtmlTab().build());
         tabbedPane.addTab("Dialogs", new DialogsTab().build(tabbedPane));
-        tabbedPane.addTab("Narrow Test", new NarrowTab().build());
+        tabbedPane.addTab("Narrow", new NarrowTab().build());
         tabbedPane.addTab("Alignment", new AlignmentTab().build());
         tabbedPane.addTab("ClearLook", new ClearLookTab().build());
     }

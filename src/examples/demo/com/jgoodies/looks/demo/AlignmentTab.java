@@ -135,14 +135,14 @@ final class AlignmentTab {
         panel.add(new JLabel("Align:"), gbc);
 
         gbc.anchor = GridBagConstraints.WEST;
-        gbc.weightx = 1.0;
+        gbc.weightx = 0.0;
         gbc.insets = new Insets(0, 0, 0, 6);
         panel.add(new JTextField("Align"), gbc);
         panel.add(createComboBox(true), gbc);
         panel.add(createComboBox(false), gbc);
         gbc.gridwidth = GridBagConstraints.REMAINDER;
         gbc.fill = GridBagConstraints.NONE;
-        gbc.weightx = 0.0;
+        gbc.weightx = 1.0;
         gbc.insets = new Insets(0, 0, 0, 0);
         panel.add(new JButton("Align"), gbc);
 
@@ -156,18 +156,18 @@ final class AlignmentTab {
         gbc.anchor = GridBagConstraints.WEST;
         panel.add(new JLabel("Align:"), gbc);
 
-        gbc.anchor = GridBagConstraints.WEST;
-        gbc.weightx = 1.0;
-        gbc.insets = new Insets(0, 0, 0, 6);
-        panel.add(new JTextField("Align"), gbc);
-        panel.add(new JRadioButton("Align"), gbc);
-        panel.add(new JCheckBox("Align"), gbc);
-        gbc.gridwidth = GridBagConstraints.REMAINDER;
-        gbc.gridheight = GridBagConstraints.REMAINDER;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.weightx = 0.0;
-        gbc.insets = new Insets(0, 0, 0, 0);
-        panel.add(new JButton("Align"), gbc);
+//        gbc.anchor = GridBagConstraints.WEST;
+//        gbc.weightx = 0.0;
+//        gbc.insets = new Insets(0, 0, 0, 6);
+//        panel.add(new JTextField("Align"), gbc);
+//        panel.add(new JRadioButton("Align"), gbc);
+//        panel.add(new JCheckBox("Align"), gbc);
+//        gbc.gridwidth = GridBagConstraints.REMAINDER;
+//        gbc.gridheight = GridBagConstraints.REMAINDER;
+//        gbc.fill = GridBagConstraints.NONE;
+//        gbc.weightx = 0.0;
+//        gbc.insets = new Insets(0, 0, 0, 0);
+//        panel.add(new JButton("Align"), gbc);
 
         return panel;
     }
@@ -176,7 +176,7 @@ final class AlignmentTab {
 
     private JComboBox createComboBox(boolean editable) {
         JComboBox box =
-            new JComboBox(new String[] { "Align", "Two", "Three", "Four" });
+            new JComboBox(new String[] { "Align", "1", "2", "3", "4", "5", "Two", "Three", "Four", /* "This is a quite long label"*/ });
         box.setEditable(editable);
         return box;
     }
