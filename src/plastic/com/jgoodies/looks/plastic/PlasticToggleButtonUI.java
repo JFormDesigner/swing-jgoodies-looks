@@ -56,14 +56,15 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * choose an appropriate margin.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ * 
+ * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
-
 public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 
     private static final PlasticToggleButtonUI INSTANCE =
         new PlasticToggleButtonUI();
-        
+    
     /* 
      * Implementation note: The protected visibility prevents
      * the String value from being encrypted by the obfuscator.
@@ -73,6 +74,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     protected static final String HTML_KEY = BasicHTML.propertyKey;
 
     private boolean borderPaintsFocus;
+    private PropertyChangeListener buttonMarginListener;
 
     public static ComponentUI createUI(JComponent b) {
         return INSTANCE;
@@ -94,10 +96,10 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
      */
     public void installListeners(AbstractButton b) {
         super.installListeners(b);
-        PropertyChangeListener listener =
-            new ButtonMarginListener(getPropertyPrefix());
-        b.putClientProperty(ButtonMarginListener.CLIENT_KEY, listener);
-        b.addPropertyChangeListener(Options.IS_NARROW_KEY, listener);
+        if (buttonMarginListener == null) {
+            buttonMarginListener = new ButtonMarginListener(getPropertyPrefix());
+        }
+        b.addPropertyChangeListener(Options.IS_NARROW_KEY, buttonMarginListener);
     }
 
     /**
@@ -105,10 +107,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
      */
     public void uninstallListeners(AbstractButton b) {
         super.uninstallListeners(b);
-        PropertyChangeListener listener =
-            (PropertyChangeListener) b.getClientProperty(
-                ButtonMarginListener.CLIENT_KEY);
-        b.removePropertyChangeListener(listener);
+        b.removePropertyChangeListener(buttonMarginListener);
     }
 
     // Painting ***************************************************************

@@ -32,6 +32,7 @@ package com.jgoodies.looks.common;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.Serializable;
 
 import javax.swing.AbstractButton;
 
@@ -43,12 +44,12 @@ import com.jgoodies.looks.Options;
  * and installs a wide or narrow margin.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ * 
+ * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
 
-public final class ButtonMarginListener implements PropertyChangeListener {
-
-    public static final String CLIENT_KEY = "jgoodies.buttonMarginListener";
+public final class ButtonMarginListener implements PropertyChangeListener, Serializable {
 
     private final String propertyPrefix;
 
@@ -56,10 +57,9 @@ public final class ButtonMarginListener implements PropertyChangeListener {
         this.propertyPrefix = propertyPrefix;
     }
 
-    public void propertyChange(PropertyChangeEvent e) {
-        String prop = e.getPropertyName();
-        AbstractButton button = (AbstractButton) e.getSource();
-        if (prop.equals(Options.IS_NARROW_KEY)) {
+    public void propertyChange(PropertyChangeEvent evt) {
+        AbstractButton button = (AbstractButton) evt.getSource();
+        if (Options.IS_NARROW_KEY.equals(evt.getPropertyName())) {
             LookUtils.installNarrowMargin(button, propertyPrefix);
         }
     }

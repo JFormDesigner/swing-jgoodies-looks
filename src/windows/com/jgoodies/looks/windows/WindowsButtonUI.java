@@ -46,12 +46,16 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * <code>jgoodies.isNarrow</code> property to choose an appropriate margin.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ * 
+ * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
 public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.WindowsButtonUI {
 
     private static final WindowsButtonUI INSTANCE = new WindowsButtonUI();
 
+    private PropertyChangeListener buttonMarginListener;
+    
     public static ComponentUI createUI(JComponent b) {
         return INSTANCE;
     }
@@ -69,10 +73,10 @@ public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.Windo
      */
     public void installListeners(AbstractButton b) {
         super.installListeners(b);
-        PropertyChangeListener listener =
-            new ButtonMarginListener(getPropertyPrefix());
-        b.putClientProperty(ButtonMarginListener.CLIENT_KEY, listener);
-        b.addPropertyChangeListener(Options.IS_NARROW_KEY, listener);
+        if (buttonMarginListener == null) {
+            buttonMarginListener = new ButtonMarginListener(getPropertyPrefix());
+        }
+        b.addPropertyChangeListener(Options.IS_NARROW_KEY, buttonMarginListener);
     }
 
     /**
@@ -80,10 +84,7 @@ public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.Windo
      */
     public void uninstallListeners(AbstractButton b) {
         super.uninstallListeners(b);
-        PropertyChangeListener listener =
-            (PropertyChangeListener) b.getClientProperty(
-                ButtonMarginListener.CLIENT_KEY);
-        b.removePropertyChangeListener(listener);
+        b.removePropertyChangeListener(buttonMarginListener);
     }
 
 }
