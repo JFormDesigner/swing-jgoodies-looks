@@ -40,14 +40,14 @@ import javax.swing.JToolBar;
  * <code>BorderStyle</code>.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see	BorderStyle
  */
 public final class HeaderStyle {
 	
 	public static final HeaderStyle SINGLE = new HeaderStyle("Single");
-	public static final HeaderStyle BOTH	 = new HeaderStyle("Both");
+	public static final HeaderStyle BOTH   = new HeaderStyle("Both");
 
 	private final String name;
 
