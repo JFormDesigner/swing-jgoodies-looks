@@ -45,7 +45,7 @@ import com.jgoodies.plaf.Options;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class AlignmentTab {
     
@@ -73,7 +73,7 @@ final class AlignmentTab {
     
     private JComponent buildAlignmentTestPanel() {
         FormLayout layout = new FormLayout(
-                "p, 2px, 36dlu, 2px, 36dlu, 2px, 36dlu, 2px, max(36dlu;p)");
+                "p, 2px, 38dlu, 2px, 38dlu, 2px, 38dlu, 2px, max(38dlu;p)");
         
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setLineGapSize(Sizes.pixel(1));
