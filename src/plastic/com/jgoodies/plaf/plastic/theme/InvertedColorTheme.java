@@ -46,7 +46,7 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
  * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 
@@ -199,24 +199,24 @@ public abstract class InvertedColorTheme extends PlasticTheme {
         return Colors.GRAY_FOCUS;
     }
 
-    public FontUIResource getControlTextFont() {
-        return getFont();
-    }
-    
-    public FontUIResource getMenuTextFont() {
-        return getFont();
-    }
-    
-    public FontUIResource getWindowTitleFont() {
-        return getFont();
-    }
-    
-    public FontUIResource getSystemTextFont() {
-        return getFont();
-    }
-    
-    public FontUIResource getUserTextFont() {
-        return getFont();
-    }
+//    public FontUIResource getControlTextFont() {
+//        return getFont();
+//    }
+//    
+//    public FontUIResource getMenuTextFont() {
+//        return getFont();
+//    }
+//    
+//    public FontUIResource getWindowTitleFont() {
+//        return getFont();
+//    }
+//    
+//    public FontUIResource getSystemTextFont() {
+//        return getFont();
+//    }
+//    
+//    public FontUIResource getUserTextFont() {
+//        return getFont();
+//    }
 
 }

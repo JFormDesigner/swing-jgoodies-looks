@@ -112,6 +112,27 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
 
     // Accessing Fonts ******************************************************
 
+    public FontUIResource getTitleTextFont() {
+//        return getControlTextFont();
+        
+        if (titleFont == null) {
+            titleFont =
+                new FontUIResource(
+                    Font.getFont(
+                        "swing.plaf.metal.controlFont",
+                        new Font("Dialog", Font.BOLD, 12)));
+        }
+        return titleFont;
+    }
+
+    public FontUIResource getControlTextFont() {
+        return getFont();
+    }
+    
+    public FontUIResource getMenuTextFont() {
+        return getFont();
+    }
+    
     public FontUIResource getSubTextFont() {
         if (smallFont == null) {
             smallFont =
@@ -121,17 +142,6 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
                         new Font("Dialog", Font.PLAIN, 10)));
         }
         return smallFont;
-    }
-
-    public FontUIResource getTitleTextFont() {
-        if (titleFont == null) {
-            titleFont =
-                new FontUIResource(
-                    Font.getFont(
-                        "swing.plaf.metal.controlFont",
-                        new Font("Dialog", Font.BOLD, 12)));
-        }
-        return titleFont;
     }
 
     public FontUIResource getSystemTextFont() {
@@ -156,14 +166,6 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
         return userFont;
     }
 
-    public FontUIResource getControlTextFont() {
-        return getFont();
-    }
-    
-    public FontUIResource getMenuTextFont() {
-        return getFont();
-    }
-    
     public FontUIResource getWindowTitleFont() {
         return getFont();
     }
