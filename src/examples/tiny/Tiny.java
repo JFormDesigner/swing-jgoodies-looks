@@ -55,7 +55,7 @@ public final class Tiny {
         Options.setDefaultIconSize(new Dimension(18, 18));
 
         String lafName =
-            LookUtils.isWindowsXP()
+            LookUtils.IS_OS_WINDOWS_XP
                 ? Options.getCrossPlatformLookAndFeelClassName()
                 : Options.getSystemLookAndFeelClassName();
 
