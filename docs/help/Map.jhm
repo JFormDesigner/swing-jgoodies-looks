@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE map
+  PUBLIC "-//Sun Microsystems Inc.//DTD JavaHelp Map Version 1.0//EN"
+         "http://java.sun.com/products/javahelp/map_1_0.dtd">
+
+<map version="1.0">
+	<mapID target="release.requirements"	url="release/requirements.html"	/>
+	<mapID target="release.history"			url="release/history.html"		/>
+	<mapID target="release.limitations"		url="release/limitations.html"	/>
+	<mapID target="release.security"		url="release/security.html"		/>
+
+	<mapID target="launcher.swing"			url="launcher/swing.html"		/>
+	<mapID target="launcher.globals"		url="launcher/globals.html"		/>
+	<mapID target="launcher.bars"			url="launcher/bars.html"		/>
+	<mapID target="launcher.clearlook"		url="launcher/clearlook.html"	/>
+
+	<mapID target="demo.menus"				url="demo/menus.html"			/>
+	<mapID target="demo.menubar"			url="demo/menubar.html"			/>
+	<mapID target="demo.toolbar"			url="demo/toolbar.html"			/>
+	<mapID target="demo.splitpane"			url="demo/splitpane.html"		/>
+	<mapID target="demo.tabbedpane"			url="demo/tabbedpane.html"			/>
+	<mapID target="demo.states"				url="demo/states.html"			/>
+	<mapID target="demo.html"				url="demo/html.html"			/>
+	<mapID target="demo.dialogs"			url="demo/dialogs.html"			/>
+	<mapID target="demo.desktop"			url="demo/desktop.html"			/>
+	<mapID target="demo.narrow"				url="demo/narrow.html"			/>
+	<mapID target="demo.alignment"			url="demo/alignment.html"		/>
+	<mapID target="demo.clearlook"			url="demo/clearlook.html"		/>
+
+	<mapID target="reference.general"		url="reference/general.html"	/>
+	<mapID target="reference.look"			url="reference/look.html"		/>
+	<mapID target="reference.fonts"			url="reference/fonts.html"		/>
+	<mapID target="reference.bars"			url="reference/bars.html"		/>
+	<mapID target="reference.3D"			url="reference/3d.html"			/>
+	<mapID target="reference.plastic"		url="reference/plastic.html"		/>
+	<mapID target="reference.other"			url="reference/other.html"		/>
+	<mapID target="reference.clearlook"		url="reference/clearlook.html"	/>
+
+	<mapID target="introduction"			url="introduction.html"			/>
+	<mapID target="features"				url="features.html"				/>
+	<mapID target="license"					url="license.html" 				/>
+	<mapID target="contact"					url="contact.html" 				/>
+	<mapID target="faq"						url="faq.html" 					/>
+</map>

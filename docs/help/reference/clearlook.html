@@ -1,0 +1,89 @@
+<HTML>
+<HEAD>
+	<TITLE>ClearLook</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<H3>ClearLook</H3>
+
+ClearLook is an add-on to the JGoodies looks. 
+It can automatically correct the most critical 
+and typical Swing misuse.
+<p>
+This is work in progress, and currently I don't advocate to use it
+in production systems. Nevertheless, it can improve finished products
+that you cannot easily overhaul.
+<p>
+Anyway, I recommend to switch on the debug
+mode and check whether ClearLook detects and marks any decorations.
+You should then remove visual clutter by hand so that your
+app will look clean, even without the JGoodies looks.
+
+
+<h4>Setting the ClearLook Mode</h4>
+
+Although ClearLook will typlically improve the
+appearance of your application, it may lead to
+incompatible layout, and so, it is switched off by default.
+<p>
+You can switch it <i>on</i>, enable a <i>verbose mode</i>,
+which will log reports about the performed
+modifications to the console or use the <i>debug mode</i>.
+In debug mode, ClearLook will mark decorations that
+it has identified as visual clutter using saturated colors.
+<pre>
+   ClearLookManager.setMode(ClearLookMode.DEBUG);
+</pre>
+
+
+<br><h4>Setting a ClearLook Policy</h4>
+
+ClearLook comes with a prebuilt policy, that is used by default 
+and that can detect several misuse situations.
+In addition ClearLook allows to use custom ClearLook policies,
+that implement the <tt>ClearLookPolicy</tt> interface,
+which you can set using an instance or class name:
+<pre>
+   ClearLookManager.setPolicy(new JoesClearLookPolicy());
+
+   ClearLookManager.setPolicy("com.joe.JoesClearLookPolicy");
+</pre>
+
+
+<br><h4>How ClearLook Works</h4>
+
+I have just started to identify a general set of rules for 
+finding and replacing obsolete borders, etc.,
+where each single rule defines when and how to remove
+or replace obsolete decorations and visual clutter, 
+for example nested beveled borders, and nested splitpane borders.
+<p>
+ClearLook works as follows: a UI delegate asks 
+the <tt>ClearLookManager</tt> to check for available
+modifications, which in turn asks the current ClearLook
+policy to do the job.
+An implementation of <tt>ClearLookPolicy</tt> 
+comprises a set of modification rules.
+Firstly, it checks whether one of these rules applies to the 
+component's context, i.&nbsp;e. the component state and component tree.
+If so, it looks up a replacement decoration for the choosen rule,
+and finally installs a replacement or modifies the component tree.
+
+<p>
+I have prebuilt the <tt>DefaultClearLookPolicy</tt> which 
+comprises a foundation of rules, behavior to identify 
+common component states, and a lookup mechanism, 
+that involves the current look&amp;feel to get modifications.
+One can extend or replace the default policy with a custom policy.
+For example, I have extended the default policy to add 
+a set of custom rules for the NetBeans IDE, which has become
+kind-of reference application for testing.
+I have tested it against different NetBeans versions -
+and I'm quite satisfied with the results. 
+<p>
+Hopefully, there are some tricks left, that ClearLook
+can't easily apply - otherwise I'd become more and more
+redundant as a user interface consultant ;)
+
+</BODY>
+</HTML>

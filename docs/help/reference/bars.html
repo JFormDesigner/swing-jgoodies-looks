@@ -1,0 +1,61 @@
+<HTML>
+<HEAD>
+	<TITLE>Menu- and Tool Bars</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+
+<H3>Menu Bar and Tool Bar Options</H3>
+
+The following JGoodies options enable you 
+to tweak the visual appearance of your menu- and tool bars.
+
+<br><h4>Setting Header Style</h4>
+
+Setting a header style is the recommended way
+to tell the JGoodies looks, that a menu bar
+or tool bar is in the application header.
+Each JGoodies look will look for a header style
+and then choose an appropriate look-specific border and 3D effect.
+<pre>
+   JMenuBar menuBar = new JMenuBar();
+   menuBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
+   
+   JToolBar toolBar = new JToolBar();
+   toolBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.BOTH);
+</pre>
+
+Use the <tt>HeaderStyle.BOTH</tt> if both, menu bar and tool bar
+are in the application's header. The look may then wrap both
+components with a border. Use <tt>HeaderStyle.SINGLE</tt>
+in case, you have just a menu bar <i>or</i> tool bar
+in the header.
+
+
+<br><h4>Border Style</h4>
+
+You can override the header style by setting a look-specific 
+<tt>BorderStyle</tt>: <tt>EMPTY</tt>, <tt>ETCHED</tt>, 
+or <tt>SEPARATOR</tt>. For example:
+
+<pre>
+   JMenuBar menuBar = new JMenuBar();
+   menuBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.SINGLE);
+   menuBar.putClientProperty(PlasticLookAndFeel.BORDER_STYLE_KEY, BorderStyle.SEPARATOR);
+</pre>
+
+
+<h4>Plastic 3D Hint</h4>
+
+Plastic chooses an appropriate default pseudo 3D effect
+for the specified header and border style.
+You can override the default by setting a Plastic 3D hint:
+<pre>
+   JMenuBar menuBar = new JMenuBar();
+   menuBar.putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.SINGLE);
+   menuBar.putClientProperty(PlasticLookAndFeel.IS_3D_KEY, Boolean.FALSE);
+</pre>
+
+
+</BODY>
+</HTML>

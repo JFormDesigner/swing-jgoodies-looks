@@ -1,0 +1,42 @@
+<HTML>
+<HEAD>
+  	<TITLE>Security</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+
+<H3>Security</H3>
+
+<h4>Digitally Signed Code</h4>
+
+For data integrity and self-authentication the code has been 
+digitally signed using a public-key certificate with the following owner: 
+"CN=Karsten Lentzsch, OU=jGoodies.com, O=Karsten Lentzsch, L=Kiel, ST=Schleswig-Holstein, C=DE",
+verified by the Thawte certification authority.
+
+<p>
+If you are using Java Web Start compatible technology to launch 
+the application, the code will be automatically verified during startup. 
+If you have a Java Development Kit (JDK), you can verify the 
+code's data integrity, using the <tt>jarsigner</tt> tool.
+
+
+<br><h4>No Internet Connection</h4>
+The application does neither require nor establish an Internet connection.
+Hence, auto generated error logs can't be sent automatically; 
+they must be sent with your standard e-mail tool.
+To help you send error log mail, the application provides 
+a "Copy-to-Clipboard" mechanism that copies mail contents 
+to the system clipboard.
+
+
+<br><h4>Protected Privacy</h4>
+
+If you experienced a runtime error the application will create
+a <tt>console.log</tt> file. This file contains information
+about the name, version, and hardware architecture of your
+operating system. These information help me find bugs.
+You can delete these information before sending the file.
+
+</BODY>
+</HTML>

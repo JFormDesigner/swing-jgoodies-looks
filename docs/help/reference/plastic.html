@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+	<TITLE>Plastic Options</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<H3>Plastic Options</H3>
+
+<br><h4>Plastic Tabbed Pane Style</h4>
+
+You can choose between two styles for Plastic tabs:
+a flat Plastic 1.0 style vs. the Metal L&amp;F tabs.
+The default is the Plastic 1.0 style.
+
+You can choose one of: 
+<pre>
+   PlasticLookAndFeel.setTabStyle(PlasticLookAndFeel.TAB_STYLE_DEFAULT_VALUE);
+   PlasticLookAndFeel.setTabStyle("Default");
+   PlasticLookAndFeel.setTabStyle(PlasticLookAndFeel.TAB_STYLE_METAL_VALUE);
+   PlasticLookAndFeel.setTabStyle("Metal");
+</pre>
+
+Also, you can preset this option under the System property key
+<tt>Plastic.tabStyle</tt>, in a command line:
+<pre>
+   java -DPlastic.tabStyle=Metal -jar ...
+</pre>
+
+
+<br><h4>Plastic Focus Color Contrast</h4>
+
+You can choose between two styles for Plastic focus colors:
+low vs. high contrast; the default is low.
+
+You can choose one of: 
+<pre>
+   PlasticLookAndFeel.setHighContrastFocusColorEnabled(true);
+</pre>
+
+
+
+<br><h4>Custom Color Themes</h4>
+
+You can create and use custom Plastic themes; they must 
+subclass <tt>com.jgoodies.plaf.Plastic.PlasticTheme</tt>.
+
+
+<br><h4>Plastic Scroll Bar Max Bump Width</h4>
+
+You can set a global property to set a maximum width
+for the Plastic scroll bar bumps. For example, 
+the Plastic theme <i>Desert Bluer</i> uses this effect.
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,45 @@
+<HTML>
+<HEAD>
+	<TITLE>Look and Theme</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+
+<H3>Look and Theme</H3>
+
+<h4>Setting a JGoodies Look</h4>
+
+This is the preferred way, if you are allowed to import 
+third party libraries:
+
+<pre>
+   try {
+      UIManager.setLookAndFeel(new Plastic3DLookAndFeel());
+   } catch (Exception e) {
+   }
+</pre>
+
+
+<br><h4>Setting a JGoodies Look by Name</h4>
+
+You can set a JGoodies look using its class name:
+<pre>
+   try {
+      UIManager.setLookAndFeel("com.jgoodies.plaf.windows.ExtWindowsLookAndFeel");
+   } catch (Exception e) {
+   }
+</pre>
+
+
+<br><h4>Setting a Plastic Theme</h4>
+
+Plastic and Plastic3D choose a default theme that should be 
+appropriate for the given operating system. 
+You can set a theme via:
+
+<pre>
+   PlasticLookAndFeel.setMyCurrentTheme(new DesertBlue());
+</pre>
+
+</BODY>
+</HTML>

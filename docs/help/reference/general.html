@@ -1,0 +1,55 @@
+<HTML>
+<HEAD>
+	<TITLE>General</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+<H3>General Implementation and API Remarks</H3>
+
+The implementations of the JGoodies looks have been
+optimized for:
+<ul>
+<li>a small library size, 
+<li>compliance with the Swing API,
+<li>consistent look for all version of the J2SE since 1.3,
+<li>precise layout,
+<li>high-fidelity Windows emulation,
+<li>simple API.
+</ul>
+
+
+<h4>Swing Compliance</h4>
+
+The JGoodies looks are compliant with the Swing API
+and honor all Swing settings in the same way as
+the Sun look and feel implementations do.
+
+
+<br><h4>Global vs. Look-Specific Settings</h4>
+
+The JGoodies Windows L&amp;F and the JGoodies Plastic L&amp;F
+introduce and share several optional settings. You can find
+all global options in class <tt>com.jgoodies.plaf.Options</tt>,
+and look-specific settings in the particular LookAndFeel
+subclasses: <tt>ExtWindowsLookAndFeel</tt>, <tt>PlasticLookAndFeel</tt>, 
+and <tt>Plastic3DLookAndFeel</tt>.
+
+
+<br><h4>UIManager vs. JGoodies Classes</h4>
+
+You can either specify JGoodies options via the <tt>UIManager</tt> class
+or via JGoodies classes, most noticably the <tt>Options</tt> class.
+<p>
+You can put values for specific keys in the UIManager.
+This decouples your application code from the JGoodies implementations,
+and so avoids the need to import JGoodies classes in your code. 
+This is the recommended way, if you cannot (easily) modify your code, 
+or if you are not allowed to import third party libraries.
+<p>
+Calling the JGoodies methods enables static compiler checks
+and will be the preferred way to set options, if you have
+full control over your application code.
+
+
+</BODY>
+</HTML>

@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+	<TITLE>Tool Bar</TITLE>
+	<link rel=stylesheet type="text/css" href="../style.css">
+</HEAD>
+<BODY>
+
+<H3>Tool Bar</H3>
+
+The tool bar can be tweaked to use look-specific 
+special borders: empty, etched, separator
+and can use a flat or light pseudo 3D effect.
+
+<p>
+You can either set a header style, or a 
+look-specific border style. 
+See the <a href="../reference/bars.html">reference</a> for details.
+
+<br><h4>Corrected Rollover Borders</h4>
+
+Both JGoodies looks use tool bar rollover borders
+that enable you to properly switch the look at runtime.
+If you have choosen a non-JGoodies look in the Launcher,
+or have switched from such a look to a JGoodies look,
+you may experience a broken rollover effect.
+The toolbar buttons then have fixed borders 
+or borders from a previously used look.
+
+
+<br><h4>Look Hot Swap Test</h4>
+
+To properly switch a look&amp;feel at runtime, look-specific
+resources such as a border must implement the <tt>UIResource</tt> interface.
+The button on the right side tests and shows if
+all button border resources implement that interface.
+Also, this button shall show a border, when the mouse is over.
+
+</BODY>
+</HTML>
