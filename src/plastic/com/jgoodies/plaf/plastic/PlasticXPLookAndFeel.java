@@ -51,7 +51,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     /**
      * Constructs the JGoodies PlasticXP look&amp;feel.
      */
-    public PlasticXPLookAndFeel() {}
+    public PlasticXPLookAndFeel() {
+        // Provide an empty constructor for subclassing.
+    }
 
     public String getID() {
         return "JGoodies Plastic XP";
