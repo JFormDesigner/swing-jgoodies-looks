@@ -38,6 +38,7 @@ OTHER CHANGES
     o Shared:   Renamed constants in LookUtils to follow the naming conventions 
                 as used by the Jakarta Commons Lang SystemUtils class.
     o ExtWin:   Improved detection of the Windows XP style on Windows XP
+    o ExtWin:   Added Windows XP icons for error, warning and info
     
     
 -------------------------------------------------------------------------------
