@@ -57,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * be displayed as selected.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
@@ -65,25 +65,18 @@ import com.jgoodies.looks.LookUtils;
 
 public class SimpleInternalFrame extends JPanel {
 
-    private JLabel          titleLabel;
-    private GradientPanel   gradientPanel;
-    private JPanel          headerPanel;
-    private boolean        isSelected;
+    private JLabel        titleLabel;
+    private GradientPanel gradientPanel;
+    private JPanel        headerPanel;
+    private boolean       selected;
     
     
     // Instance Creation ****************************************************
 
     /**
-     * Constructs an empty SimpleInternalFrame that
-     * has neither an icon, nor a title, nor a toolbar.
-     */
-    public SimpleInternalFrame() {
-        this("");
-    }
-    
-    
-    /**
      * Constructs a SimpleInternalFrame with the specified title.
+     * The title is intended to be non-blank, or in other words
+     * should contain non-space characters.
      * 
      * @param title       the initial title
      */
@@ -132,7 +125,7 @@ public class SimpleInternalFrame extends JPanel {
         JToolBar bar,
         JComponent content) {
         super(new BorderLayout());
-        this.isSelected = false;
+        this.selected = false;
         this.titleLabel = new JLabel(title, icon, SwingConstants.LEADING);
         JPanel top = buildHeader(titleLabel, bar);
 
@@ -252,7 +245,7 @@ public class SimpleInternalFrame extends JPanel {
      *                  (currently active) and false means it is not  
      */
     public boolean isSelected() {
-        return isSelected;
+        return selected;
     }
     
     
@@ -267,7 +260,7 @@ public class SimpleInternalFrame extends JPanel {
      */
     public void setSelected(boolean newValue) {
         boolean oldValue = isSelected();
-        isSelected = newValue;
+        selected = newValue;
         updateHeader();
         firePropertyChange("selected", oldValue, newValue);
     }
@@ -337,20 +330,20 @@ public class SimpleInternalFrame extends JPanel {
      * Tries to lookup a special color from the L&amp;F.
      * In case it is absent, it uses the standard internal frame forground.
      * 
-     * @param selected   true to lookup the active color, false for the inactive
+     * @param isSelected   true to lookup the active color, false for the inactive
      * @return the color of the foreground text
      */
-    protected Color getTextForeground(boolean selected) {
+    protected Color getTextForeground(boolean isSelected) {
         Color c =
             UIManager.getColor(
-                selected
+                isSelected
                     ? "SimpleInternalFrame.activeTitleForeground"
                     : "SimpleInternalFrame.inactiveTitleForeground");
         if (c != null) {
             return c;
         }
         return UIManager.getColor(
-            selected 
+            isSelected 
                 ? "InternalFrame.activeTitleForeground" 
                 : "Label.foreground");
 
