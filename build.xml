@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<!--
+   $Id: build.xml,v 1.1 2003-07-19 16:07:10 karsten Exp $
+
+   This is a build file for use with the Jakarta Ant build tool, see
+   http://jakarta.apache.org/ant/index.html
+
+   To build, go to the directory where this file is located and run
+     ant <target>
+   with one of the following targets:
+   
+     clean          removes temporary files and directories
+     compile        compiles all looks
+     javadoc        creates the API documentation
+     jar            creates all library jars
+     package        builds a distribution tree: docs, sources, jars
+     package-zip    builds a zipped distribution
+     
+-->
+
+<project default="jar" basedir=".">
+
+    <!-- ***************************************************************** -->
+    <!-- Give users a chance to override build properties.                 -->
+    <!-- ***************************************************************** -->
+    <property file="${user.home}/looks.build.properties" />
+    <property file="${user.home}/build.properties" />
+    <property file="${basedir}/build.properties" />
+    <property file="${basedir}/default.properties" />
+ 
+ 
+    <!-- ***************************************************************** -->
+    <!-- P A T H S                                                         -->
+    <!-- ***************************************************************** -->
+    <path id="classpath.1.3">
+        <pathelement location="${build.1.3.dir}" 	/> 
+    </path>
+    
+  
+  
+    <!-- ***************************************************************** -->
+    <!-- C L E A N                                                         -->
+    <!-- ***************************************************************** -->
+	<target name="clean"  
+		    description="Removes all temporary files and directories." >
+
+		<delete dir="${build.dir}" />
+		<delete dir="${dist.dir}"  />
+	</target>
+	
+
+    <!-- ***************************************************************** -->
+    <!-- P R E P A R A T I O N                                             -->
+    <!-- ***************************************************************** -->
+	<target name="prepare" 
+	        description="Prepares the build and distribution targets." >
+
+        <tstamp>
+           <format property="DATE" pattern="yyyy-MM-dd hh:mm:ss" />
+        </tstamp>
+        
+		<mkdir dir="${build.1.3.dir}"	  />
+		<mkdir dir="${build.1.4.dir}"     />
+	</target>
+	
+	
+    <!-- ***************************************************************** -->
+    <!-- C O M P I L A T I O N                                             -->
+    <!-- ***************************************************************** -->
+	<target name="compile" depends="compile-1.3, compile-1.4" 
+	        description="Compiles all sources." />
+	        
+    <!-- ***************************************************************** -->
+	<target name="compile-1.3" depends="prepare"
+	        description="Compiles all 1.3 sources." >
+		<javac 
+			srcdir     ="${src.share.dir}:${src.motif.dir}:${src.plastic.dir}:${src.windows.dir}" 
+			destdir    ="${build.1.3.dir}"
+        	encoding   ="${build.encoding}"
+        	executable ="${build.compile.executable.1.3}"
+        	fork       ="${build.compile.fork.1.3}"
+			debug      ="${build.compile.debug}"
+			depend     ="${build.compile.depend}"
+			deprecation="${build.compile.deprecation}"
+			nowarn     ="${build.compile.nowarn}" 
+			optimize   ="${build.compile.optimize}"
+			target     ="${build.compile.target}"
+			verbose    ="${build.compile.verbose}" >
+		</javac>
+		<copy toDir="${build.1.3.dir}" >
+			<fileset dir="${src.motif.dir}" 
+					 includes="com/jgoodies/plaf/motif/icons/*" />
+			<fileset dir="${src.plastic.dir}" 
+					 includes="com/jgoodies/plaf/plastic/icons/*" />
+			<fileset dir="${src.windows.dir}" 
+					 includes="com/jgoodies/plaf/windows/icons/*" />
+		</copy>
+	</target>
+	
+    <!-- ***************************************************************** -->
+	<target name="compile-1.4" depends="compile-1.3"
+	        description="Compiles the 1.4 sources." >
+		<javac 
+			srcdir     ="${src.1.4.dir}" 
+			destdir    ="${build.1.4.dir}"
+        	encoding   ="${build.encoding}"
+        	executable ="${build.compile.executable.1.4}"
+        	fork       ="${build.compile.fork.1.4}"
+			debug      ="${build.compile.debug}"
+			depend     ="${build.compile.depend}"
+			deprecation="${build.compile.deprecation}"
+			nowarn     ="${build.compile.nowarn}" 
+			optimize   ="${build.compile.optimize}"
+			target     ="${build.compile.target}"
+			verbose    ="${build.compile.verbose}" >
+		    <classpath refid="classpath.1.3" />
+		</javac>
+	</target>
+
+	
+    <!-- ***************************************************************** -->
+    <!-- J A V A D O C                                                     -->
+    <!-- ***************************************************************** -->
+    <target name="javadoc" depends="prepare" 
+            description="Creates the API documentation using JavaDoc." >
+		<mkdir dir="${build.javadocs.dir}"	/>
+        <javadoc 
+        	sourcepath="${src.share.dir}:${src.motif.dir}:${src.plastic.dir}:${src.windows.dir}:${src.1.4.dir}"
+            packagenames="${javadoc.packages}"
+        	destdir="${build.javadocs.dir}"
+        	encoding="${build.encoding}"
+            access="protected" 
+            author="true" 
+            version="true" 
+            use="true" 
+            link="${javadoc.link}"
+            windowtitle="${Name} ${spec.version} API" 
+            doctitle="${Name} ${spec.version} API"
+            bottom="${copyright.message}" >
+         </javadoc>
+    </target>
+    
+    
+    <!-- ***************************************************************** -->
+    <!-- J A R                                       				       -->
+    <!-- ***************************************************************** -->
+	<target name="jar" depends="jar-all, jar-plastic, jar-windows"
+	        description="Creates all library jars." >
+	</target>
+	
+    <!-- ***************************************************************** -->
+	<target name="jar-all" depends="compile"
+	        description="Creates the library jar with all JGoodies l&amp;fs." >
+		<jar 
+			destfile="${build.all.jar}" >
+			<fileset dir="${build.1.3.dir}" />
+			<fileset dir="${build.1.4.dir}" />
+            <manifest>
+                <attribute name ="Built-By" 
+                           value="${user.name}"/>
+                           
+                <section name="com/jgoodies/plaf" >
+                    <attribute name ="Specification-Title"
+                               value="${Name}" />
+                    <attribute name ="Specification-Version"
+                               value="${spec.version}" />
+                    <attribute name ="Specification-Vendor"
+                               value="${vendor}" />
+             		<attribute name ="Implementation-Title"
+                               value="com.jgoodies.plaf" />
+             		<attribute name ="Implementation-Version"
+                               value="${impl.version} ${DATE}" />
+                    <attribute name ="Implementation-Vendor"
+                               value="${vendor}" />
+                </section>
+           </manifest>
+		</jar>
+	</target>
+	
+    <!-- ***************************************************************** -->
+	<target name="jar-plastic" depends="compile"
+	        description="Creates the library jar for the Plastic l&amp;fs." >
+		<jar 
+			destfile="${build.plastic.jar}" >
+			<fileset dir="${build.1.3.dir}" 
+			         excludes="com/jgoodies/plaf/motif/**/*,
+					 	       com/jgoodies/plaf/windows/**/*"  />
+			<fileset dir="${build.1.4.dir}"  
+                     excludes="com/jgoodies/plaf/motif/**/*,
+					 	       com/jgoodies/plaf/windows/**/*"   />
+            <manifest>
+                <attribute name ="Built-By" 
+                           value="${user.name}"/>
+                           
+                <section name="com/jgoodies/plaf" >
+                    <attribute name ="Specification-Title"
+                               value="${Name}" />
+                    <attribute name ="Specification-Version"
+                               value="${spec.version}" />
+                    <attribute name ="Specification-Vendor"
+                               value="${vendor}" />
+             		<attribute name ="Implementation-Title"
+                               value="com.jgoodies.plaf" />
+             		<attribute name ="Implementation-Version"
+                               value="${impl.version} ${DATE}" />
+                    <attribute name ="Implementation-Vendor"
+                               value="${vendor}" />
+                </section>
+           </manifest>
+		</jar>
+	</target>
+	
+    <!-- ***************************************************************** -->
+	<target name="jar-windows" depends="compile"
+	        description="Creates the library jar for the windows l&amp;f." >
+		<jar 
+			destfile="${build.windows.jar}" >
+			<fileset dir="${build.1.3.dir}" 
+			         excludes="com/jgoodies/plaf/motif/**/*,
+					 	       com/jgoodies/plaf/plastic/**/*"  />
+			<fileset dir="${build.1.4.dir}"   
+			         excludes="com/jgoodies/plaf/motif/**/*,
+					 	       com/jgoodies/plaf/plastic/**/*"  />
+            <manifest>
+                <attribute name ="Built-By" 
+                           value="${user.name}"/>
+                           
+                <section name="com/jgoodies/plaf" >
+                    <attribute name ="Specification-Title"
+                               value="${Name}" />
+                    <attribute name ="Specification-Version"
+                               value="${spec.version}" />
+                    <attribute name ="Specification-Vendor"
+                               value="${vendor}" />
+             		<attribute name ="Implementation-Title"
+                               value="com.jgoodies.plaf" />
+             		<attribute name ="Implementation-Version"
+                               value="${impl.version} ${DATE}" />
+                    <attribute name ="Implementation-Vendor"
+                               value="${vendor}" />
+                </section>
+           </manifest>
+		</jar>
+	</target>
+	
+	
+    <!-- ***************************************************************** -->
+    <!-- P A C K A G E                                                     -->
+    <!-- ***************************************************************** -->
+	<target name="package" depends="clean, compile, javadoc, jar"
+	        description="Creates the distribution directory tree." >
+	
+		<mkdir dir="${dist.dir}" />
+		
+		<!-- Copy the documentation. -->
+		<copy todir="${dist.docs.dir}" >
+		    <fileset dir="${build.docs.dir}" />
+		</copy>
+		
+		<!-- Copy the source directories. -->
+		<copy todir="${dist.src.dir}" >
+		    <fileset dir="${src.dir}" />
+		</copy>
+		
+		<!-- Copy the distribution files. -->
+		<copy todir="${dist.dir}" >
+			<fileset dir="${top.dir}" 
+				     includes="*.txt, *.xml, *.properties" />
+		</copy>
+		<copy todir="${dist.dir}" file="${docs.dir}/quickstart.txt" />
+
+		<!-- Copy the jar files. -->
+		<copy tofile="${dist.all.jar}"     file="${build.all.jar}" />
+		<copy tofile="${dist.plastic.jar}" file="${build.plastic.jar}" />
+		<copy tofile="${dist.windows.jar}" file="${build.windows.jar}" />
+		
+	</target>
+
+    <!-- ***************************************************************** -->
+	<target name="package-zip" depends="package"
+	        description="Packages the distribution as a zip file." >
+	        
+        <zip 
+        	destfile="${dist.zip}" 
+        	basedir="${dist.root.dir}"
+        	includes="${dist.subdir}/**/*" />
+	</target>
+	
+    
+</project>

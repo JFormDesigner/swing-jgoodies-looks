@@ -1,0 +1,140 @@
+
+
+                 JGoodies Looks(tm) Change History
+                        
+
+1.1.2 (July-17-2003)
+
+   o Distribution changed:
+     + Demo removed 
+     + Build overhauled 
+   o Obsolete null-check in FontUtils removed
+
+
+1.1.1 (June-22-2003)
+
+   o Code is now available under the BSD license
+   o Packaging reflects the new license
+   o Library jars are unobfuscated
+   o looks-all.jar is unsigned
+
+
+1.1 (May-05-2003)
+
+   o Removed leading text inset for Plastic in 1.3.
+
+
+b30-20030427 (Apr-27-2003)
+
+   o Plastic buttons lowered by 2 pixel in low res mode
+   o Fixed UIDefaults cycle in Plastic 1.3 initialization
+
+
+b29-20030422 (Apr-22-2003)
+
+   o Fixed broken alignment of Windows submenu items
+   o Added option to hide tree lines, see Options.TREE_LINE_STYLE*
+   o Replaced deprecated method invocations
+   o Improved ClearLook implementation of labels and panels
+   o Moved NetBeans specific code to NetBeansClearLookPolicy
+   o Windows 1.4.1: Menu mnemonics reactivated
+   o Several shadowing variables renamed, unused fields removed
+   o Plastic global option: use Metal tabs vs. Plastic tabs, see
+     PlasticLookAndFeel.setTabStyle(String)
+   o Themes overhauled:
+     + Final markers removed
+     + Focus color scheme moved back to the 1.0.6 low contrast colors;
+       The 1.0.7 high contrast focus colors can be switched on
+       via a System property, or 
+       PlasticLookAndFeel.setHighContrastFocusEnabled(true)
+
+
+b27-20030420 (Apr-20-2003)
+
+   o Non-Commercial edition includes the JGoodies Windows l&f
+   o Fixed broken ClearLook activation in NetBeans environments
+   o Adapted NetBeans detection for NetBeans 3.5
+   o ClearLook rules overhauled
+   o Can mark content borders in Plastic, via the System property
+     -DmarkContentBorders=true
+   o PlasticTheme now subclasses DefaultMetalTheme
+   o Skeleton app and Looks Demo refreshed
+   o LookUtils#activateLazyValue deleted
+   o Fixed HTML rendering in menu items and Plastic toggle buttons
+
+
+b24-1.0.9 (Apr-03-2003)
+
+   o Windows XP l&f: MenuBar and ToolBar improved
+   o Plastic InternalFrame: title and bump area adjusted
+   o Plastic ComboBox Focus overhauled
+   o Crisper Plastic message icons 
+   o L&F TextField defaults applied to FormattedTextField too
+   o Fixed a NPE in PlasticButtonUI
+   o PlasticButtonUI and PlasticToggleButtonUI are non-final
+     #isToggleButton and #is3D are now protected
+   o Text icon gap in menus is changeable via
+     "MenuItem.textIconGap" and "Menu.textIconGap".
+     The default gap has been changed from 4 to 2.
+
+
+b21-1.0.8 (Mar-03-2003)
+
+   o Sample code uses Forms 0.9.5
+   o Plastic button border colors harmonized
+   o Plastic combo box font baselines aligned
+   o Obsolete Plastic submenu rollover listener removed
+   o Improved OptionPane minimum button widths
+   o New PlasticXP radio buttons and check boxes
+   o Skeleton panel building style refreshed
+   o New Plastic OptionPane icons
+   o Windows: improved ExtWindows XP style on 1.4.2 or later.
+   o PlasticTabbedPaneUI workaround for broken backward
+     compatibility in BasicTabbedPaneUI.TabSelectionHandler.
+   o Doesn't override ClassLoader property if in NetBeans.
+   o Windows tab in embedded style improved.
+   o Windows tabs without content border improved. 
+   o Tabs show icon if there's no title - even if icons are disabled.
+   o Removed obsolete fields and methods
+   o Fixed a paint bug in Plastic tabbed panes
+     that occurred with large tab icons in top position.
+   o looks-plastic.jar renamed to plastic.jar
+   o NOTE: Some of the Plastic focus colors that have been introduced 
+     in version 1.0.7 look less aesthetic on some Windows flavors. 
+     However, users complained about the visual closeness of 
+     focused and default buttons. We will likely go back to 
+     the aesthetic focus colors if the Plastic feel makes
+     the focused button the default, as in the Windows feel.
+     
+
+b15-1.0.7 (Jan-24-2003)
+
+   o Focus colors changed in several themes.
+   o Sample code refreshed
+   o Fixed focus bugs in non-editable Plastic combo boxes.
+   o Fixed runtime error in PlasticTabbedPaneUI in 1.3 environments
+   o Looks Demo and Skeleton Pro use Forms panel building.
+   o Overhauled TabbedPaneUIs in Plastic and Windows looks.
+   o Added options for embedded tab style, 
+     see Options.EMBEDDED_TAB_KEY
+   o Added option for removing a tabbed pane's content border,
+     see Options.NO_CONTENT_BORDER_KEY
+   o Corrected a method signature in ExtWindowsScrollPaneUI
+   o Added a preview of the PlasticXP l&F  
+   
+   
+b8-1.0.6 (Nov-16-2002)
+
+   o Skeleton JavaDocs added.
+   o Tiny example application added.
+   o Includes recent versions of the Looks Demo and Skeleton
+   o Improved rendering of tabs on the left and right side.
+   o Fixed repaint bug in menu bar when using heavy-weight menus.
+   o Corrected Windows look control font for non-standard fonts;
+     now uses the Label.font property instead of Button.font.
+   o Fixed typos in the 'Using a JGoodies Look' section of this file.
+   o Implementation: Moved common implementation classes from 
+     package com.jgoodies.plaf to com.jgoodies.plaf.common
+   o Implementation: Added type check in MenuItemRenderer#hideIcons
+   o Implementation: Visibility of PlasticBorders reduced
+

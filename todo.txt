@@ -1,0 +1,48 @@
+o Anpassungen des ExtWindows l&f für 1.4.2
+o Schriftwahl in Plastic-Themen überarbeiten
+  + andere Oberklasse
+  + Tahoma-Hard code raus
+o 1.3-Unterstützung raus
+
+o Bug in Plastic: Jay Gindin hat ScrollBar-Problem gefunden.
+o Bug: Tahoma ist schlechte Wahl in asiatischen Kulturräumen,
+       weil Tahoma zwar gefunden wird, aber viele Zeichen nicht darstellt.
+       
+
+o Disabled Windows ComboBox hat doofen weißen rechten Rand
+o ToolBarSeparator hat doofe Höhe; ist zu hoch
+
+
+Alle Looks:
+o Dokumentation zu den Einstellungen: 
+	+ NetBeans-Modus erklären
+	
+
+Plastic:
+o Schriftwahl und FontSizeHints aus den Farbthemen heraustrennen.
+o Anderer PopupMenu-Rahmen, wie bei BasicBorders?
+o OptionPane-Icons verbessern.
+o Thema, dass unter Windows die Windows-Farben erfragt.
+
+Kompatibilität zu 1.4:
+  + Klänge kommen nicht und erzeugen Laufzeitfehler
+
+
+Dark Star-Themen:
+o Inaktivfarbe von Textfeldern und Combobox, usw korrigieren.
+  + ProgressBar-Vordergrund ist zu dunkel
+  + Titelschriftfarbe zu dunkel
+  + Knopf-Hoch und -runter ist zu hell
+
+EIGENE THEMEN ERSTELLEN KÖNNEN
+
+
+Plastic:
+o Im Look-Preview eine Lupe anbieten.
+
+Extended Windows:
+o RollOver-Rahmen fehlen.
+o Hintergrund von selektierten, nicht armed RollOverButton-Rahmen aufhellen.
+
+ExtendedMotif:
+o Menüeintrag ohne Icon (File -> Export) hat schlechte Einrückung.
