@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>JGoodies Looks :: Other Options</title>
+        <link rel="stylesheet" type="text/css" href="../style.css" >
+	<meta name="description" content="The JGoodies Looks make your Swing apps and applets look better.">
+	<meta name="author"	 content="Karsten Lentzsch">
+	<meta name="keywords"	 content="JGoodies Looks Java Look Feel Swing UI Design Usability Lentzsch Kiel">
+	<meta name="robots"	 content="index, follow">
+	<meta name="date"	 content="2003-07-31">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0" bottommargin="0" >
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+    <td colspan="3" bgcolor="DDDCDC"><a href="../../README.html"><img 
+	src="../images/banner.gif" width="436" height="46" alt=":: JGOODIES Looks :: Professional Swing Look&amp;Feels" border="0"></a></td>
+</tr>
+<tr>
+    <td colspan="3" height="1" bgcolor="C9C8C8"></td>
+</tr>
+<tr>
+    <td width="160" height="500" valign="top" bgcolor="F4f3f3" class="nav" nowrap="nowrap">
+    <div style="margin-left: 17px; margin-top: 17px; margin-right: 10px; ; margin-bottom: 17px; line-height: 18px;">
+
+        <!-- ************ Anfang der Seitennavigation **************************** -->
+
+	<b>General</b>
+	<br>::&nbsp;<a class="nav" href="../../README.html">Readme</a>
+	<br>::&nbsp;<a class="nav" href="../../RELEASE-NOTES.txt">Release Notes</a>
+	<br>::&nbsp;<a class="nav" href="../../LICENSE.txt">License</a>
+	<br>::&nbsp;<a class="nav" href="../examples.html">Examples</a>
+	<br>::&nbsp;<a class="nav" href="../netbeans.html">NetBeans</a>
+	<br>::&nbsp;<a class="nav" href="../tips.html">Tips &amp; Tricks</a>
+	<p>
+	<b>User's&nbsp;Guide</b>
+	<br>::&nbsp;<a class="nav" href="../guide/index.html">Introduction</a>
+	<br>::&nbsp;<a class="nav" href="../guide/lookandtheme.html">Look and Theme</a>
+	<br>::&nbsp;<a class="nav" href="../guide/fonts.html">Font Settings</a>
+	<br>::&nbsp;<a class="nav" href="../guide/bars.html">Menu- &amp; Tool Bar</a>
+	<br>::&nbsp;<a class="nav" href="../guide/3d.html">Plastic 3D Effects</a>
+	<br>::&nbsp;<a class="nav" href="../guide/plastic.html">Plastic Options</a>
+	<br>::&nbsp;<a class="nav" href="../guide/other.html"><b>Other Options</b></a>
+	<br>::&nbsp;<a class="nav" href="../guide/clearlook.html">ClearLook</a>
+	<p>
+	<a class="nav" href="../api/index.html"><b>API Docs</b></a>
+	<p>
+	<b>Web Pages</b>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/">Project Home</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectDocumentList">Downloads</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectMailingListList">Mailing Lists</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracking</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">News</a>
+        
+         <!-- *********** Ende der Seitennavigation ******************************* -->
+
+    </div>
+    </td>
+    <td width="1" bgcolor="E7E5E5"><img src="/images/banner.gif" width="1" height="1" alt=""></td>
+    <td width="90%" valign="top" >
+	<div style="margin-left: 20px; margin-top: 17px; margin-bottom: 17px">
+
+        <!-- ************ Anfang des Inhalts ***************************************** -->
+	
+	<table width="530" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	  <td>
+	<h1>:: Other Options ::</h1>
+	
+	<h2>Narrow Button Margins</h2>
+
+	Sun's Java l&amp;l and Windows l&amp;l implementations
+	use a button margin of 14 pixels on each side. While this
+	will often lead to good minimum button widths, it can 
+	waste screen space if you use long labels, especially
+	in button grids. See the <i>Narrow Test</i> page in this demo.
+
+	<p>
+	The JGoodies l&amp;fs allow you to use narrow button margins,
+	which you can switch on for all buttons, or for individual buttons.
+	Using narrow margins globally may significantly change 
+	your panel layout, if your layout management doesn't care about 
+	minimum button sizes. Hence, it is switched off by default.
+
+	<p>
+	The following code demos the global and individual options
+	using the <tt>Options</tt> class and Strings:
+<pre>
+   Options.setUseNarrowButtons(true);
+   JButton button = new JButton("Remove All Entries");
+   button.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
+
+   UIManager.put("jgoodies.useNarrowButtons", Boolean.TRUE);
+   JButton button = new JButton("Remove All Entries");
+   button.putClientProperty("jgoodies.isNarrow", Boolean.TRUE);
+</pre>
+
+	<h2>Default Icon Size</h2>
+
+	The JGoodies l&amp;fs try to vertically align menu item labels. 
+	Therefore a default icon size is is used if no icon is set. 
+	You should set this default size using one of the following methods:
+<pre>     
+   Options.setDefaultIconSize(new Dimension(18, 18));
+
+   UIManager.put(
+      com.jgoodies.plaf.Options.DEFAULT_ICON_SIZE_KEY, 
+      new Dimension(18, 18));
+</pre>
+
+
+	<h2>No Icon in Menu</h2>
+
+	You can set a client property for JMenus to indicate
+	that no item in this menu has an icon. You can see this
+	effect in the File->New submenu and in the backward button
+	popup-menu of this help viewer.
+<pre>
+   JMenu menu = new JMenu();
+   menu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
+</pre>
+
+
+
+	<h2>Tabbed Panes without Content Border</h2>
+
+	You can set a hint to paint tabbed panes without content border:
+<pre>
+   JTabbedPane tabbedPane = new JTabbedPane();
+   tabbedPane.putClientProperty(Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
+</pre>
+
+
+	<h2>Tabbed Panes with Embbedded Tabs</h2>
+
+	You can set a hint to render tabbed pane tab in an embedded style:
+<pre>
+   JTabbedPane tabbedPane = new JTabbedPane();
+   tabbedPane.putClientProperty(Options.EMBEDDED_TABS_KEY, Boolean.TRUE);
+</pre>
+
+
+	<h2>Tab Icons</h2>
+
+	You can disable tab icons in the JGoodies looks:
+<pre>
+   Options.setTabIconsEnabled(false);
+</pre>
+
+
+	<h2>No Tree Lines</h2>
+	Since Looks 1.1 you can hide the lines in trees 
+		by setting a client property. The property key and values are a subset
+of the Metal lines style properties.
+<pre>
+   JTree tree = new JTree();
+   tree.putClientProperty(Options.TREE_LINE_STYLE_KEY, 
+                          Options.TREE_LINE_STYLE_NONE_VALUE);
+</pre>
+
+
+
+
+
+	     
+	</td>
+	</tr>
+	</table>
+
+
+        <!-- ************ Ende des Inhalts ************************************** -->
+	</div>
+    </td>
+</tr>
+
+<tr>
+    <td nowrap="nowrap" bgcolor="F4f3f3">
+      <div style="font-size: 10px; margin-left: 17px; margin-top: 20px; margin-right: 10px; margin-bottom: 4px;">
+      (c) 2003 JGoodies
+      </div>
+    </td>
+    <td width="1" bgcolor="E7E5E5"></td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td colspan="2" height="1" bgcolor="E7E5E5"></td>
+    <td></td>
+</tr>
+
+</table>
+
+</body>
+</html>

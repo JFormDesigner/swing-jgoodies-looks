@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+	<title>JGoodies Looks :: ClearLook</title>
+        <link rel="stylesheet" type="text/css" href="../style.css" >
+	<meta name="description" content="The JGoodies Looks make your Swing apps and applets look better.">
+	<meta name="author"	 content="Karsten Lentzsch">
+	<meta name="keywords"	 content="JGoodies Looks Java Look Feel Swing UI Design Usability Lentzsch Kiel">
+	<meta name="robots"	 content="index, follow">
+	<meta name="date"	 content="2003-07-31">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+<body bgcolor="#FFFFFF" leftmargin="0" marginheight="0" marginwidth="0" topmargin="0" bottommargin="0" >
+
+<table border="0" cellspacing="0" cellpadding="0" width="100%">
+<tr>
+    <td colspan="3" bgcolor="DDDCDC"><a href="../../README.html"><img 
+	src="../images/banner.gif" width="436" height="46" alt=":: JGOODIES Looks :: Professional Swing Look&amp;Feels" border="0"></a></td>
+</tr>
+<tr>
+    <td colspan="3" height="1" bgcolor="C9C8C8"></td>
+</tr>
+<tr>
+    <td width="160" height="500" valign="top" bgcolor="F4f3f3" class="nav" nowrap="nowrap">
+    <div style="margin-left: 17px; margin-top: 17px; margin-right: 10px; ; margin-bottom: 17px; line-height: 18px;">
+
+        <!-- ************ Anfang der Seitennavigation **************************** -->
+
+	<b>General</b>
+	<br>::&nbsp;<a class="nav" href="../../README.html">Readme</a>
+	<br>::&nbsp;<a class="nav" href="../../RELEASE-NOTES.txt">Release Notes</a>
+	<br>::&nbsp;<a class="nav" href="../../LICENSE.txt">License</a>
+	<br>::&nbsp;<a class="nav" href="../examples.html">Examples</a>
+	<br>::&nbsp;<a class="nav" href="../netbeans.html">NetBeans</a>
+	<br>::&nbsp;<a class="nav" href="../tips.html">Tips &amp; Tricks</a>
+	<p>
+	<b>User's&nbsp;Guide</b>
+	<br>::&nbsp;<a class="nav" href="../guide/index.html">Introduction</a>
+	<br>::&nbsp;<a class="nav" href="../guide/lookandtheme.html">Look and Theme</a>
+	<br>::&nbsp;<a class="nav" href="../guide/fonts.html">Font Settings</a>
+	<br>::&nbsp;<a class="nav" href="../guide/bars.html">Menu- &amp; Tool Bar</a>
+	<br>::&nbsp;<a class="nav" href="../guide/3d.html">Plastic 3D Effects</a>
+	<br>::&nbsp;<a class="nav" href="../guide/plastic.html">Plastic Options</a>
+	<br>::&nbsp;<a class="nav" href="../guide/other.html">Other Options</a>
+	<br>::&nbsp;<a class="nav" href="../guide/clearlook.html"><b>ClearLook</b></a>
+	<p>
+	<a class="nav" href="../api/index.html"><b>API Docs</b></a>
+	<p>
+	<b>Web Pages</b>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/">Project Home</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectDocumentList">Downloads</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectMailingListList">Mailing Lists</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracking</a>
+	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">News</a>
+        
+         <!-- *********** Ende der Seitennavigation ******************************* -->
+
+    </div>
+    </td>
+    <td width="1" bgcolor="E7E5E5"><img src="/images/banner.gif" width="1" height="1" alt=""></td>
+    <td width="90%" valign="top" >
+	<div style="margin-left: 20px; margin-top: 17px; margin-bottom: 17px">
+
+        <!-- ************ Anfang des Inhalts ***************************************** -->
+	
+	<table width="530" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+	  <td>
+	<h1>:: ClearLook ::</h1>
+	
+ClearLook is an add-on to the JGoodies l&amp;fs that ships with the Looks package. 
+It can automatically correct the most critical 
+and typical Swing misuse.
+<p>
+This is work in progress, and currently I don't advocate to use it
+in production systems. Nevertheless, it can improve finished products
+that you cannot easily overhaul.
+<p>
+Anyway, I recommend to switch on the debug
+mode and check whether ClearLook detects and marks any decorations.
+You should then remove visual clutter by hand so that your
+app will look clean, even without the JGoodies looks.
+
+
+<h2>Setting the ClearLook Mode</h2>
+
+Although ClearLook will typlically improve the
+appearance of your application, it may lead to
+incompatible layout, and so, it is switched off by default.
+<p>
+You can switch it <i>on</i>, enable a <i>verbose mode</i>,
+which will log reports about the performed
+modifications to the console or use the <i>debug mode</i>.
+In debug mode, ClearLook will mark decorations that
+it has identified as visual clutter using saturated colors.
+<pre>
+   ClearLookManager.setMode(ClearLookMode.DEBUG);
+</pre>
+
+
+<h2>Setting a ClearLook Policy</h2>
+
+ClearLook comes with a prebuilt policy, that is used by default 
+and that can detect several misuse situations.
+In addition ClearLook allows to use custom ClearLook policies,
+that implement the <tt>ClearLookPolicy</tt> interface,
+which you can set using an instance or class name:
+<pre>
+   ClearLookManager.setPolicy(new JoesClearLookPolicy());
+
+   ClearLookManager.setPolicy("com.joe.JoesClearLookPolicy");
+</pre>
+
+
+<h2>How ClearLook Works</h2>
+
+I have just started to identify a general set of rules for 
+finding and replacing obsolete borders, etc.,
+where each single rule defines when and how to remove
+or replace obsolete decorations and visual clutter, 
+for example nested beveled borders, and nested splitpane borders.
+<p>
+ClearLook works as follows: a UI delegate asks 
+the <tt>ClearLookManager</tt> to check for available
+modifications, which in turn asks the current ClearLook
+policy to do the job.
+An implementation of <tt>ClearLookPolicy</tt> 
+comprises a set of modification rules.
+Firstly, it checks whether one of these rules applies to the 
+component's context, i.&nbsp;e. the component state and component tree.
+If so, it looks up a replacement decoration for the choosen rule,
+and finally installs a replacement or modifies the component tree.
+
+<p>
+I have prebuilt the <tt>DefaultClearLookPolicy</tt> which 
+comprises a foundation of rules, behavior to identify 
+common component states, and a lookup mechanism, 
+that involves the current look&amp;feel to get modifications.
+One can extend or replace the default policy with a custom policy.
+For example, I have extended the default policy to add 
+a set of custom rules for the NetBeans IDE, which has become
+kind-of reference application for testing.
+I have tested it against different NetBeans versions -
+and I'm quite satisfied with the results. 
+
+
+	     
+	</td>
+	</tr>
+	</table>
+
+
+        <!-- ************ Ende des Inhalts ************************************** -->
+	</div>
+    </td>
+</tr>
+
+<tr>
+    <td nowrap="nowrap" bgcolor="F4f3f3">
+      <div style="font-size: 10px; margin-left: 17px; margin-top: 20px; margin-right: 10px; margin-bottom: 4px;">
+      (c) 2003 JGoodies
+      </div>
+    </td>
+    <td width="1" bgcolor="E7E5E5"></td>
+    <td>&nbsp;</td>
+</tr>
+<tr>
+    <td colspan="2" height="1" bgcolor="E7E5E5"></td>
+    <td></td>
+</tr>
+
+</table>
+
+</body>
+</html>
