@@ -32,15 +32,18 @@ CHANGES THAT AFFECT THE COMPATIBILITY
 
 KNOWN ISSUES
 
-    o This release still lacks an improved font management
-      for the Plastic l&f family on non-Windows platforms.
-      For a workaround see issue #10.
+    For all issues see http://looks.dev.java.net/servlets/ProjectIssues
 
+    This release still lacks an improved font management
+    for the Plastic l&f family on non-Windows platforms.
+    For a workaround see issue #10.
+      
 
 OTHER CHANGES
 
     o Docs:      Added FAQ entry regarding the use of the extension path
     o Docs:      Refreshed the JavaDocs and HTML docs for font size hints.
+    o Demo:      Improved file headers and JavaDocs; removed unused code.
     
     
 ---------------------------------------------------------------------------
