@@ -44,7 +44,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class MenuItemRenderer {
@@ -198,7 +198,7 @@ public final class MenuItemRenderer {
 
 		layoutMenuItem(fm, text, fmAccel, acceleratorText, 
 			//icon, checkIcon, 
-			null, wrappedIcon, 
+            wrappedIcon, wrappedIcon, 
 			wrappedArrowIcon, //arrowIcon,
 			b.getVerticalAlignment(), b.getHorizontalAlignment(),
 			b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
