@@ -42,9 +42,17 @@ import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
 
 /**
- * Builds the <code>JMenuBar</code> and pull-down menus in the simple Looks Demo.
+ * Builds the menu bar and pull-down menus in the Simple Looks Demo. 
+ * Demonstrates and tests different multi-platform issues.<p>
+ * 
+ * This class provides a couple of factory methods that create
+ * menu items, check box menu items, and radio button menu items.
+ * The full JGoodies Looks Demo overrides these methods to vend
+ * components from the JGoodies UI framework that better handle
+ * different platforms.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
  */
 
 public class MenuBuilder {

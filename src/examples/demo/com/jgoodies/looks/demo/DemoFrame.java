@@ -49,14 +49,20 @@ import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
 
 /** 
- * Demonstrates how to use the jGoodies Looks. Therefore, 
- * it provides several panels, that comprise a variety of 
- * Swing widgets in different configurations.<p>
- * 
+ * Builds the main frame in the Simple Looks Demo. 
+ * Demonstrates and tests different multi-platform issues by
+ * showing a variety of Swing widgets in different configurations.
  * Also, this frame contains examples for Swing misuse,
- * that can be automatically corrected by ClearLook.
+ * that can be automatically corrected by ClearLook.<p>
+ * 
+ * This class provides a couple of protected methods that create
+ * components or a build. 
+ * The full JGoodies Looks Demo overrides these methods to vend
+ * components or builders from the JGoodies UI framework that 
+ * better handle different platforms.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.7 $
  */
 public class DemoFrame extends JFrame {
 
