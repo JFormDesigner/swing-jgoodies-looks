@@ -1,9 +1,5 @@
 o Add a comment to the Release notes regarding the overall progress.
 
-o Schriftgröße im ExtWindows l&f in JFormattedTextField falsch;
-  auch in Plastic?
-o Separator in Window unter 1.4.2 falsch - nur in XP?
-o Anpassungen des ExtWindows l&f für 1.4.2
 o Schriftwahl in Plastic-Themen überarbeiten
   + andere Oberklasse
   + Tahoma-Hard code raus
@@ -19,7 +15,6 @@ o Bug: Tahoma ist schlechte Wahl in asiatischen Kulturräumen,
        weil Tahoma zwar gefunden wird, aber viele Zeichen nicht darstellt.
        
 
-o Disabled Windows ComboBox hat doofen weißen rechten Rand
 o ToolBarSeparator hat doofe Höhe; ist zu hoch
 
 
@@ -31,7 +26,6 @@ o Dokumentation zu den Einstellungen:
 Plastic:
 o Schriftwahl und FontSizeHints aus den Farbthemen heraustrennen.
 o Anderer PopupMenu-Rahmen, wie bei BasicBorders?
-o OptionPane-Icons verbessern.
 o Thema, dass unter Windows die Windows-Farben erfragt.
 
 Kompatibilität zu 1.4:

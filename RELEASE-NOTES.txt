@@ -1,7 +1,7 @@
 
 
 
-                JGoodies Looks, Version 1.2 Preview 1
+                    JGoodies Looks, Version 1.2.0
                             Release Notes
                         
 
@@ -10,11 +10,8 @@ INTRODUCTION
     This release requires Java 1.4 or later and fixes several bugs.
 
     Also, the included Simple Looks Demo now ships with the
-    JGoodies SimpleInternalFrame that provides an elegant means
-    to structure panels in a Swing Application.
-    
-    This preview release still lacks an improved font management
-    for the Plastic l&f family on non-Windows platforms.
+    JGoodies SimpleInternalFrame that provides an eclipse-like
+    appearance and an elegant means to structure panels.
     
     NOTE: Due to incompatible class changes it is strongly recommended 
     to not place the Looks jars in the Java extension directory!
@@ -32,6 +29,7 @@ VISUAL INCOMPATIBILITIES
     o Most Plastic and Plastic3D widget dimensions have been
       reduced by 1 or 2 pixels to use the same dimensions 
       as PlasticXP and the JGoodies Windows Look&Feel.
+    o PlasticXP favors the focus indication over the default border.
     
     
 BUGS FIXED
@@ -59,6 +57,13 @@ NEW FEATURES
     o All l&fs:  Honors UIDefaults setting "ComboBox.editorColumns" to set
                  the columns in the default combo box editor  
     o Demo:      Added JGoodies SimpleInternalFrame
+    
+    
+KNOWN ISSUES
+
+    o This release still lacks an improved font management
+      for the Plastic l&f family on non-Windows platforms.
+
 
 
 OTHER CHANGES
