@@ -22,6 +22,7 @@ BUGS FIXED
 
 NEW FEATURES
     o All l&fs:  Optional popup menu drop shadows, see class Options.  
+    o All l&fs:  New LookUtils#IS_OS_*: FreeBSD, Linux, OS/2, Solaris
 
 
 KNOWN ISSUES
@@ -34,6 +35,8 @@ KNOWN ISSUES
 OTHER CHANGES
 
     o ExtWin:    Reduced the number of updates to the UIDefaults.
+    o Docs:      Added a reference to the winlaf look&feel.
+    o Docs:      Added FAQ, Tips & Tricks, and Acknowledgements.
     
     
 ---------------------------------------------------------------------------

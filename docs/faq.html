@@ -116,16 +116,16 @@
 		<h2><a name="1.3">1.3 - Where do I get the latest version?</a></h2>
 
 		The latest version is available in the project's 
-		<a href="https://looks.dev.java.net/servlets/ProjectDocumentList">download</a>
+		<a href="https://looks.dev.java.net/servlets/ProjectDocumentList">download section</a>
 		section, where you can download the libraries, 
 		sources, tutorial, documentation and the Looks Demo.
 		
 
 		<h2><a name="1.4">1.4 - Where can I find a version for Java 1.3?</a></h2>
 
-		The Looks version 1.3.1 is available in a subfolder of the 
-		<a href="https://looks.dev.java.net/servlets/ProjectDocumentList">download</a>
-		section.
+		The Looks version 1.3.1 is available in a  
+		<a href="https://looks.dev.java.net/servlets/ProjectDocumentList">subfolder</a>
+		of the download section.
 		
 
 		<h2><a name="1.5">1.5 - Where do I get support?</a></h2>
@@ -172,8 +172,8 @@
 	    <a href="https://looks.dev.java.net/servlets/ProjectIssues">issue tracker</a>.
 	    Before you enter a defect, please make sure that the problem
 	    appears with the Looks only, not the underlying Java core look&amp;feels.
-	    Therefore try to reproduce Plastic defects with the Metal Look&amp;feel.
-	    And reproduce defects in the JGoodies Windows Look&amp;feel
+	    Try to reproduce Plastic defects with the Metal L&amp;f
+	    and defects in the JGoodies Windows L&amp;f
 	    with the default Windows L&amp;f.
 		
 				
@@ -231,6 +231,7 @@
 
 	 To make use of a Plastic color theme, you must set the theme
 	 <strong>before</strong> you set the Plastic look&amp;feel in the UIManager.
+	 <a href="guide/lookandtheme.html">More...</a>
 
 
 		<h2><a name="3.3">3.3 - Plastic doesn't display Chinese and Japanese.</a></h2>
@@ -241,22 +242,22 @@
 		
 		<p>
 		These themes use a hard coded Tahoma font, not a logical font. 
-		And in many non-western OS environments, Tahoma cannot display Chinese 
-		and other non-western fonts.
+		And Tahoma cannot display Chinese and other non-western fonts.
 
 		<p>
-		As a workaround you can use a Plastic theme that avoids to request the hard 
-		coded Tahoma font, for example <em>SkyBluer</em>.
+		If you want to display Chinese, Japanese or other non-western fonts,
+		create or use a Plastic theme that uses a logical font, for example <em>SkyBluer</em>.
 		<a href="https://looks.dev.java.net/issues/show_bug.cgi?id=10">Issue #10</a>
-		provides two attached themes that can display Chinese and other non-western fonts.
+		has attached two other themes that use logical fonts.
 
 		<p>
-		Anyway, this issue has the highest priority for the Looks version 1.3. 
-		I'm going to replace the hard coded font request by a font delegate 
+		Anyway, this issue has the highest priority for the Looks version 1.3
+		(<a href="https://looks.dev.java.net/issues/show_bug.cgi?id=10">Click here</a>
+		to see the progress on this issue).
+		
+		I plan to replace the hard coded font request by a font delegate 
 		that honors the platform and platform system fonts. 
 		
-		<p>
-		See also <a href="https://looks.dev.java.net/issues/show_bug.cgi?id=10">issue #10</a> in the issue tracker.
 		
 
 
