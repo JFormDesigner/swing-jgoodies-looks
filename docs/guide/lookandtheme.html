@@ -114,6 +114,15 @@ The class can be one of:
          Find predefined color themes in package <tt>com.jgoodies.plaf.plastic.theme</tt>.
 	     
 
+	<h2>Java Web Start</h2>
+	
+	If you use a third party l&amp;f in a network launchable environment
+	such as Java Web Start, you need to indicate where to find the l&amp;f classes.
+	Set the Swing class loader via:
+<pre>
+   UIManager.put("ClassLoader", LookUtils.class.getClassLoader());
+</pre>
+	
 
 	</td>
 	</tr>
