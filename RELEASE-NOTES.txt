@@ -13,11 +13,20 @@ INTRODUCTION
 DISTRIBUTION CHANGES
 
     o Removed JGoodies Motif Look&Feel
+    o Moved 1.4 sources to the associated directories
     
     
+BUGS FIXED
+
+    o Catches IllegalAccessExceptions in unsigned Web Start Applications 
+      and unsigned Applets when using the ExtWindowsLookAndFeel.
+
+
 OTHER CHANGES
 
-    o Code: ...
+    o Code: Removed 1.3 code
+    o Menu item layout: ensure a minimum arrow icon width
+    o Menu item layout: increased the gap between text and accelerator
     
     
 -------------------------------------------------------------------------------
