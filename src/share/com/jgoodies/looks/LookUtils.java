@@ -51,7 +51,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -220,6 +220,34 @@ public final class LookUtils {
             return defaultValue;
         }
     }
+    
+    /**
+     * Checks and answers if we shall use icons in JTabbedPanes.
+     * By default, tab icons are enabled. If the user has set a system property, 
+     * we log a message about the choosen style.
+     * 
+     * @return true if icons in tabbed panes are enabled, false if disabled
+     * @see #setTabIconsEnabled(boolean)
+     */
+    public static Boolean getBooleanSystemProperty(String key, String logMessage) {
+        String value = getSystemProperty(key, "");
+        Boolean result;
+        if (value.equalsIgnoreCase("false"))
+            result = Boolean.FALSE;
+        else if (value.equalsIgnoreCase("true"))
+            result = Boolean.TRUE;
+        else 
+            result = null;
+        if (result != null) {
+            LookUtils.log(
+                logMessage 
+                    + " have been "
+                    + (result.booleanValue() ? "en" : "dis")
+                    + "abled in the system properties.");
+        }
+        return result;
+    }
+    
 
     /**
      * Checks and answers whether the Windows XP style is enabled. 
@@ -278,15 +306,15 @@ public final class LookUtils {
     }
 
     /**
-     * Creates and answers the margin used by <code>JButton</code>
-     * and <code>JToggleButton</code>. Honors the screen resolution 
-     * and the global <code>isNarrowButtonsEnabled</code> property.<p>
+     * Creates and returns the margin used by JButton and JToggleButton. 
+     * Honors the screen resolution and the global property 
+     * <code>isNarrowButtonsEnabled</code>.<p>
      * 
      * Sun's L&F implementations use wide button margins.
-     * @see Options#getUseNarrowButtons()
      * 
      * @param narrow    true to create a narrow margin, false for a wide margin
      * @return an Insets object used to create a button margin
+     * @see Options#getUseNarrowButtons()
      */
     public static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
@@ -298,8 +326,8 @@ public final class LookUtils {
     // Color Modifications **************************************************
 
     /**
-     * Computes and answers a <code>Color</code> that is slightly brighter
-     * than the specified <code>Color</code>. Required for 1.3 only.
+     * Computes and returns a Color that is slightly brighter
+     * than the specified Color. 
      * 
      * @param color   the color used as basis for the brightened color
      * @return a slightly brighter color
@@ -309,8 +337,8 @@ public final class LookUtils {
     }
 
     /**
-     * Computes and answers a <code>Color</code> that is slightly brighter
-     * than the specified <code>Color</code>. Required for 1.3 only.
+     * Computes and returns a Color that is slightly brighter
+     * than the specified Color. 
      * 
      * @param color   the color used as basis for the brightened color
      * @param factor  the factor used to compute the brightness
@@ -330,6 +358,7 @@ public final class LookUtils {
         return Color.getHSBColor(hue, saturation, newBrightness);
     }
 
+    
     // Accessing Look, Theme, and Font Settings *****************************
 
     public static void setLookAndTheme(LookAndFeel laf, Object theme)
