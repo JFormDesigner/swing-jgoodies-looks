@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.14 2004-10-06 09:36:00 karsten Exp $
+   $Id: build.xml,v 1.15 2004-10-10 20:39:18 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -163,6 +163,7 @@
             version="true" 
             use="true" 
             link="${javadoc.link}"
+            overview="${javadoc.overview}"
             windowtitle="${Name} ${spec.version} API" 
             doctitle="${Name} ${spec.version} API"
             bottom="${copyright.message}" >
