@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -88,6 +88,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             
             // Uses a smooth icon
             "RadioButtonUI",   UI_CLASSNAME_PREFIX + "RadioButtonUI",
+            
+            // Changed buttons
+            "SpinnerUI",       UI_CLASSNAME_PREFIX + "SpinnerUI",
         };
 
         table.putDefaults(uiDefaults);
@@ -142,6 +145,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "PasswordField.margin",           textInsets,             
             "Spinner.border", 				  scrollPaneBorder,
             "Spinner.defaultEditorInsets",	  textInsets,
+            "Spinner.arrowButtonInsets",      null, 
             
             "ScrollPane.border",              scrollPaneBorder,
             "Table.scrollPaneBorder", 		  scrollPaneBorder,

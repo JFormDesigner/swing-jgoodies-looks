@@ -36,21 +36,20 @@ import java.awt.Rectangle;
 
 import javax.swing.ButtonModel;
 import javax.swing.UIManager;
-import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalScrollButton;
 
 /**
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 class PlasticArrowButton extends MetalScrollButton {
 	
 	private static Color shadowColor;
 	private static Color highlightColor;
 	
-	private boolean isFreeStanding;
+	protected boolean isFreeStanding;
 
 
 	public PlasticArrowButton(int direction, int width, boolean freeStanding) {
@@ -73,23 +72,25 @@ class PlasticArrowButton extends MetalScrollButton {
 		boolean isPressed   = getModel().isPressed();
 
 		Color arrowColor = isEnabled
-				? MetalLookAndFeel.getControlInfo()
-				: MetalLookAndFeel.getControlDisabled();
+				? PlasticLookAndFeel.getControlInfo()
+				: PlasticLookAndFeel.getControlDisabled();
 		int width  = getWidth();
 		int height = getHeight();
 		int w = width;
 		int h = height;
         int arrowHeight = calculateArrowHeight(height, width);
+        int arrowOffset = calculateArrowOffset();
+        boolean paintNorthBottom = isPaintingNorthBottom();
 
-		g.setColor(isPressed ? MetalLookAndFeel.getControlShadow() : getBackground());
+		g.setColor(isPressed ? PlasticLookAndFeel.getControlShadow() : getBackground());
 		g.fillRect(0, 0, width, height);
 
 		if (getDirection() == NORTH) {
 			paintNorth(g, leftToRight, isEnabled, arrowColor, isPressed,
-				width, height, w, h, arrowHeight);
+				width, height, w, h, arrowHeight, arrowOffset, paintNorthBottom);
 		} else if (getDirection() == SOUTH) {
 			paintSouth(g, leftToRight, isEnabled, arrowColor, isPressed,
-				width, height, w, h, arrowHeight);
+				width, height, w, h, arrowHeight, arrowOffset);
 		} else if (getDirection() == EAST) {
 			paintEast(g, isEnabled, arrowColor, isPressed,
 				width, height, w, h, arrowHeight);
@@ -111,6 +112,14 @@ class PlasticArrowButton extends MetalScrollButton {
      */
     protected int calculateArrowHeight(int height, int width) {
         return (height + 1) / 4;
+    }
+    
+    protected int calculateArrowOffset() {
+        return 0;
+    }
+    
+    protected boolean isPaintingNorthBottom() {
+        return false;
     }
     
 
@@ -205,9 +214,9 @@ class PlasticArrowButton extends MetalScrollButton {
 	}
 
 
-	private void paintSouth(Graphics g, boolean leftToRight, boolean isEnabled,
-		Color arrowColor, boolean isPressed, int width, int height, int w, int h,
-		int arrowHeight) {
+	protected void paintSouth(Graphics g, boolean leftToRight, boolean isEnabled,
+		Color arrowColor, boolean isPressed, 
+        int width, int height, int w, int h, int arrowHeight, int arrowOffset) {
 			
 		if (!isFreeStanding) {
 			height += 1;
@@ -222,17 +231,13 @@ class PlasticArrowButton extends MetalScrollButton {
 		// Draw the arrow
 		g.setColor(arrowColor);
 		
-		int startY = (((h + 1) - arrowHeight) / 2) + arrowHeight - 1;
-		int startX = (w / 2);
+		int startY = (((h + 0) - arrowHeight) / 2) + arrowHeight - 1; // KL was h + 1
+		int startX = w / 2;
 		
 		//	    System.out.println( "startX2 :" + startX + " startY2 :"+startY);
 		
 		for (int line = 0; line < arrowHeight; line++) {
-			g.drawLine(
-				startX - line,
-				startY - line,
-				startX + line + 1,
-				startY - line);
+            g.fillRect(startX - line - arrowOffset, startY - line, 2*(line + 1), 1);
 		}
 		
 		if (isEnabled) {
@@ -264,9 +269,10 @@ class PlasticArrowButton extends MetalScrollButton {
 	}
 
 
-	private void paintNorth(Graphics g, boolean leftToRight, boolean isEnabled, 
+	protected void paintNorth(Graphics g, boolean leftToRight, boolean isEnabled, 
 		Color arrowColor, boolean isPressed, 
-		int width, int height, int w, int h, int arrowHeight) {
+		int width, int height, int w, int h, int arrowHeight, int arrowOffset,
+        boolean paintBottom) {
 		if (!isFreeStanding) {
 			height += 1;
 			g.translate(0, -1);
@@ -280,15 +286,11 @@ class PlasticArrowButton extends MetalScrollButton {
 		
 		// Draw the arrow
 		g.setColor(arrowColor);
-		int startY = ((h + 1) - arrowHeight) / 2;
-		int startX = (w / 2);
+		int startY = ((h + 1) - arrowHeight) / 2;  // KL was (h + 1)
+		int startX = w / 2;
 		// System.out.println( "startX :" + startX + " startY :"+startY);
 		for (int line = 0; line < arrowHeight; line++) {
-			g.drawLine(
-				startX - line,
-				startY + line,
-				startX + line + 1,
-				startY + line);
+            g.fillRect(startX - line - arrowOffset, startY + line, 2*(line + 1), 1);
 		}
 		
 		if (isEnabled) {
@@ -304,9 +306,16 @@ class PlasticArrowButton extends MetalScrollButton {
 			g.setColor(shadowColor);
 			g.drawLine(0, 0, width - 2, 0);
 			g.drawLine(0, 0, 0, height - 1);
-			g.drawLine(width - 2, 2, width - 2, height - 1);
+			g.drawLine(width - 2, 1, width - 2, height - 1);
+            if (paintBottom) {
+                g.fillRect(0, height - 1, width - 1, 1);
+            }
 		} else {
 			PlasticUtils.drawDisabledBorder(g, 0, 0, width, height + 1);
+            if (paintBottom) {
+                g.setColor(PlasticLookAndFeel.getControlShadow());
+                g.fillRect(0, height - 1, width - 1, 1);
+            }
 		}
 		if (!isFreeStanding) {
 			height -= 1;

@@ -49,14 +49,14 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 
 /**
- * The JGoodies Plastic Look and Feel implementation of <code>SpinnerUI</code>.
+ * The JGoodies Plastic Look&amp;Feel implementation of <code>SpinnerUI</code>.
  * Configures the default editor to adjust font baselines and component
- * bounds.
+ * bounds. Also, changes the border of the buttons and the size of the arrows. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
-public final class PlasticSpinnerUI extends BasicSpinnerUI {
+public class PlasticSpinnerUI extends BasicSpinnerUI {
 	
 	private static final Border MARGIN_BORDER = 
 	    new BorderUIResource(new BasicBorders.MarginBorder());
@@ -213,8 +213,17 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
 
         protected int calculateArrowHeight(int height, int width) {
             int arrowHeight = Math.min((height - 4) / 3, (width - 4) / 3);
-            return Math.max(arrowHeight, 2);
+            return Math.max(arrowHeight, 3);
         }
-    }
+        
+        protected int calculateArrowOffset() {
+            return 1;
+        }
+        
+        protected boolean isPaintingNorthBottom() {
+            return true;
+        }
+        
+   }
 
 }
