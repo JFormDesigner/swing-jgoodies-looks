@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.12 2004-08-28 13:36:46 karsten Exp $
+   $Id: build.xml,v 1.13 2004-09-05 09:34:01 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -304,7 +304,8 @@
 		
 		<!-- Copy the libraries. -->
 		<copy todir="${dist.lib.dir}" >
-		    <fileset dir="${lib.dir}" />
+		    <fileset dir="${lib.dir}" 
+                     includes="forms-*.jar"      />
 		</copy>
 		
 		<!-- Copy the source directories. -->
