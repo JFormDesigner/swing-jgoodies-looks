@@ -45,10 +45,10 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
- * @see ShadowPopupBorder
- * @see ShadowPopupFactory
+ * @see com.jgoodies.looks.common.ShadowPopupBorder
+ * @see com.jgoodies.looks.common.ShadowPopupFactory
  */
 public final class ShadowPopup extends Popup {
 

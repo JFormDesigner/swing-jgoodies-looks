@@ -51,7 +51,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -172,6 +172,11 @@ public final class LookUtils {
      */
     public static final boolean IS_LAF_WINDOWS_XP_ENABLED = isWindowsXPLafEnabled();
     
+    /**
+     * True if if the screen resolution is smaller than 120 dpi.
+     * 
+     * @see Toolkit#getScreenResolution()
+     */
     public static final boolean IS_LOW_RESOLUTION = isLowResolution();
     
     private static boolean loggingEnabled = true;
@@ -222,12 +227,17 @@ public final class LookUtils {
     }
     
     /**
-     * Checks and answers if we shall use icons in JTabbedPanes.
-     * By default, tab icons are enabled. If the user has set a system property, 
-     * we log a message about the choosen style.
+     * Checks if a boolean system property has been set for the given key,
+     * and returns the associated Boolean, or <code>null</code> if no value
+     * has been set. The test for the property ignores case. 
+     * If a Boolean value has been set, a message is logged 
+     * with the given prefix. 
      * 
-     * @return true if icons in tabbed panes are enabled, false if disabled
-     * @see #setTabIconsEnabled(boolean)
+     * @param key          the key used to lookup the system property value
+     * @param logMessage   a prefix used when a message is logged 
+     * @return <code>Boolean.TRUE</code> if the system property has been set to 
+     * "true" (case ignored), <code>Boolean.FALSE</code> if it has been set to 
+     * "false", <code>null</code> otherwise
      */
     public static Boolean getBooleanSystemProperty(String key, String logMessage) {
         String value = getSystemProperty(key, "");
@@ -386,7 +396,7 @@ public final class LookUtils {
     // Minimal logging ******************************************************
 
     /**
-     * Enables or disables the logging.
+     * Enables or disables the Looks logging.
      * 
      * @param enabled   true to enable logging, false to disable it
      */
