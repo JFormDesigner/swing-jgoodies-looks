@@ -34,34 +34,32 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
 
-
 /**
- * The default editor for editable combo boxes in the JGoodies Plastic Look
- * and Feel.<p>
+ * The default editor for editable combo boxes in the 
+ * JGoodies Plastic Look&amp;Feel. <p>
  * 
- * It differs from <code>MetalComboBoxEdit</code> in that the border
- * is quite the same as for text fields: a compound border, with an inner
- * <code>MarginBorder</code>.
-  *
+ * It differs from {@link javax.swing.plaf.metal.MetalComboBoxEditor} in that 
+ * the border is quite the same as for text fields: 
+ * a compound border with an inner <code>MarginBorder</code>.
+ * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.4 $
  */
 class PlasticComboBoxEditor extends BasicComboBoxEditor {
 
-
-    public PlasticComboBoxEditor() {
+    PlasticComboBoxEditor() {
         editor = new JTextField("", UIManager.getInt("ComboBox.editorColumns"));
         editor.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
     }
-    
+
     /**
      * A subclass of BasicComboBoxEditor that implements UIResource.
      * BasicComboBoxEditor and PlasticComboBoxEditor don't implement UIResource
-     * directly so that applications can safely override the
-     * cellRenderer property with BasicListCellRenderer subclasses.
+     * directly so that applications can safely override the cellRenderer
+     * property with BasicListCellRenderer subclasses.
      */
-    public static final class UIResource extends PlasticComboBoxEditor
-    	implements javax.swing.plaf.UIResource {
+    static final class UIResource extends PlasticComboBoxEditor implements
+            javax.swing.plaf.UIResource {
         // Just an implementation of UIResource
     }
 }
-
