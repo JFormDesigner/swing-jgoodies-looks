@@ -43,7 +43,7 @@ import javax.swing.border.Border;
  * 
  * @author Stefan Matthias Aust
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupMenuUtils
  * @see java.awt.Robot
@@ -153,6 +153,9 @@ public final class ShadowPopupBorder implements Border {
 			vShadowBg = robot.createScreenCapture(new Rectangle(x + dim.width - 5, y,  5, dim.height - 5));
 		} catch (AWTException e) {
 			clearSnapshot();
+		} catch (SecurityException e) {
+		    clearSnapshot();
+		    setActive(false);
 		}
 	}
 
