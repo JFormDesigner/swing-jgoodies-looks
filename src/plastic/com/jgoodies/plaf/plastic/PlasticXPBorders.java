@@ -56,6 +56,7 @@ import com.jgoodies.plaf.LookUtils;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.8 $
  */
 
 final class PlasticXPBorders {
@@ -166,10 +167,10 @@ final class PlasticXPBorders {
 
             if (isPressed)
                 PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
-            else if (isDefault)
-                PlasticXPUtils.drawDefaultButtonBorder(g, x, y, w, h);
             else if (isFocused)
                 PlasticXPUtils.drawFocusedButtonBorder(g, x, y, w, h);
+            else if (isDefault)
+                PlasticXPUtils.drawDefaultButtonBorder(g, x, y, w, h);
             else
                 PlasticXPUtils.drawPlainButtonBorder(g, x, y, w, h);
         }
