@@ -47,7 +47,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.3 $
+* @version $Revision: 1.4 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -177,6 +177,34 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     protected LayoutManager createLayoutManager() {
         return new PlasticComboBoxLayoutManager();
     }
+
+    // Painting ***************************************************************
+
+    public void update(Graphics g, JComponent c) {
+        if (c.isOpaque()) {
+            g.setColor(c.getBackground());
+            g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            if (isToolBarComboBox(c)) {
+                c.setOpaque(false);
+            }        }
+        paint(g, c);
+    }
+    
+    /**
+     * Checks and answers if this is combo is in a tool bar.
+     * 
+     * @param b   the button to check
+     * @return true if in tool bar, false otherwise
+     */
+    protected boolean isToolBarComboBox(JComponent c) {
+        Container parent = c.getParent();
+        return parent != null
+            && (parent instanceof JToolBar
+                || parent.getParent() instanceof JToolBar);
+    }
+
+    
+    // Helper Classes *********************************************************
 
     /**
      * This layout manager handles the 'standard' layout of combo boxes.  
