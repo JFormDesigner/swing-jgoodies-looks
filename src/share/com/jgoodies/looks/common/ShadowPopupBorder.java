@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -40,16 +40,19 @@ import javax.swing.JComponent;
 import javax.swing.border.AbstractBorder;
 
 /**
- * A border with a nice looking drop shadow, intended to be used
- * as the outer border of popups. Can paint the screen background
- * if used with heavy-weight popup windows.
+ * A border with a drop shadow intended to be used as the outer border 
+ * of popups. Can paint the screen background if used with heavy-weight 
+ * popup windows.
  * 
  * @author Stefan Matthias Aust
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
+ * 
+ * @see ShadowPopup
+ * @see ShadowPopupFactory
  */
-public final class ShadowPopupBorder extends AbstractBorder {
+final class ShadowPopupBorder extends AbstractBorder {
     
     /**
      * The drop shadow needs 5 pixels at the bottom and the right hand side. 
@@ -67,6 +70,7 @@ public final class ShadowPopupBorder extends AbstractBorder {
 	private static Image shadow
 		= new ImageIcon(ShadowPopupBorder.class.getResource("shadow.png")).getImage();
 
+    
     // Instance Creation *****************************************************
     
 	/**
@@ -76,6 +80,7 @@ public final class ShadowPopupBorder extends AbstractBorder {
 		return instance;
 	}
     
+    
 	/**
 	 * Paints the border for the specified component with the specified 
      * position and size. 
@@ -83,11 +88,11 @@ public final class ShadowPopupBorder extends AbstractBorder {
 	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		// fake drop shadow effect in case of heavy weight popups
         JComponent popup = (JComponent) c;
-        Image hShadowBg = (Image) popup.getClientProperty(ExtPopupFactory.PROP_HORIZONTAL_BACKGROUND);
+        Image hShadowBg = (Image) popup.getClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND);
         if (hShadowBg != null) {
             g.drawImage(hShadowBg, x, y + height - 5, c);
         }
-        Image vShadowBg = (Image) popup.getClientProperty(ExtPopupFactory.PROP_VERTICAL_BACKGROUND);
+        Image vShadowBg = (Image) popup.getClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND);
         if (vShadowBg != null) {
             g.drawImage(vShadowBg, x + width - 5, y, c);
         }
@@ -100,12 +105,14 @@ public final class ShadowPopupBorder extends AbstractBorder {
 		g.drawImage(shadow, x + width - 5, y + height - 5, x + width, y + height, 6, 6, 11, 11, null, c);
 	}
 
+    
 	/**
 	 * Returns the insets of the border.
 	 */
 	public Insets getBorderInsets(Component c) {
 		return new Insets(0, 0, SHADOW_SIZE, SHADOW_SIZE);
 	}
+    
     
     /** 
      * Reinitializes the insets parameter with this Border's current Insets. 
@@ -118,4 +125,5 @@ public final class ShadowPopupBorder extends AbstractBorder {
         insets.right = insets.bottom = SHADOW_SIZE;
         return insets;
     }
+    
 }
