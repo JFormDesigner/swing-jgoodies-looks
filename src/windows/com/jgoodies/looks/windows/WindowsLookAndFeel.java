@@ -37,8 +37,6 @@ import java.lang.reflect.Method;
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
@@ -57,7 +55,7 @@ import com.jgoodies.looks.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -211,8 +209,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         if (!isXP) {
             initComponentDefaultsNoXP(table);
         }
-
-        initClearLookDefaults(table);
 
         Object marginBorder = new BasicBorders.MarginBorder();
         Object checkBoxMargin = new InsetsUIResource(2, 0, 2, 0);
@@ -421,26 +417,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
                 controlFont, menuFont, messageFont, toolTipFont, windowFont);
-    }
-
-    private void initClearLookDefaults(UIDefaults table) {
-        Object emptyBorder = new BorderUIResource(new EmptyBorder(0, 0, 0, 0));
-        Object statusCellBorder = new BorderUIResource.CompoundBorderUIResource(
-                new EmptyBorder(2, 0, 1, 3),
-                new WindowsBorders.ThinLoweredBorder());
-        Object thinLoweredBorder = new WindowsBorders.ThinLoweredBorder();
-        Object thinRaisedBorder  = new WindowsBorders.ThinRaisedBorder();
-
-        Object[] defaults = {
-            "ClearLook.ScrollPaneReplacementBorder",emptyBorder, 
-            "ClearLook.SplitPaneReplacementBorder", emptyBorder,
-            "ClearLook.ThinLoweredBorder",          thinLoweredBorder,
-            "ClearLook.ThinRaisedBorder",           thinRaisedBorder,
-            "ClearLook.NetBeansScrollPaneBorder",   emptyBorder,
-            "ClearLook.NetBeansSpecialPanelBorder", emptyBorder,
-            "ClearLook.NetBeansStatusCellBorder",   statusCellBorder,
-            "ClearLook.NetBeansTabbedPaneBorder",   emptyBorder,};
-        table.putDefaults(defaults);
     }
 
     // Getters for Proxy Access (Referred classes can stay package visible) ***
