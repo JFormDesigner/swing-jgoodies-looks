@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public final class Options {
@@ -338,7 +338,7 @@ public final class Options {
      */
     public static boolean isTabIconsEnabled() {
         return TAB_ICONS_ENABLED_SYSTEM_VALUE == null
-            ? Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY))
+            ? !Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY))
             : TAB_ICONS_ENABLED_SYSTEM_VALUE.booleanValue();
     }
 
