@@ -1,5 +1,45 @@
 
-                    JGoodies Looks, Version 1.3.0 
+                    JGoodies Looks, Version 1.3.1 
+                            Release Notes
+                        
+
+INTRODUCTION
+
+    This update fixes bug #38; it's worth to ship a new version.
+    All other known non-font related issues could be fixed too.
+
+
+BUGS FIXED
+
+    o #02: Plastic combo lacks 3D effect in 3D toolbar.
+    o #36: Plastic l&fs lack auditory cues.
+    o #37: Extra non-western themes don't work with Looks 1.3.
+    o #38: Options#isTabIconsEnabled broken.
+    o #39: Poor size for null values in combo box renderer.
+    
+
+OTHER CHANGES
+
+    o Core:  Added two Plastic color themes intended for non-western fonts,
+             see DesertBluerDefaultFont and ExperienceBlueDefaultFont.
+             These themes ship in source form, are part of the binary jar,
+             but are not installed as default themes. You can use these 
+             themes via PlasticLookAndFeel#setMyCurrentTheme(PlasticTheme).
+             Via PlasticLookAndFeel#installTheme(PlasticTheme) you can
+             include them in the list of known Plastic themes.
+    o Core:  PlasticXP spinner uses consistent button widths.
+    o Dist:  Startet a JUnit test suite.
+    o Docs:  Replaced older package names with the new names.
+    o Build: ANT build file can perform JUnit tests.
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
+                     JGoodies Looks, Version 1.3 
                             Release Notes
                         
 

@@ -25,9 +25,6 @@ o Schriftwahl und FontSizeHints aus den Farbthemen heraustrennen.
 o Anderer PopupMenu-Rahmen, wie bei BasicBorders?
 o Thema, dass unter Windows die Windows-Farben erfragt.
 
-Kompatibilität zu 1.4:
-  + Klänge kommen nicht und erzeugen Laufzeitfehler
-
 
 Dark Star-Themen:
 o Inaktivfarbe von Textfeldern und Combobox, usw korrigieren.
