@@ -207,8 +207,8 @@ public final class LookUtils {
     private static boolean isWindowsXPLafEnabled() {
         return IS_OS_WINDOWS_XP 
              && IS_JAVA_1_4_2_OR_LATER 
-             && ((Boolean) Toolkit.getDefaultToolkit().
-                     getDesktopProperty("win.xpstyle.themeActive")).booleanValue()
+             && Boolean.TRUE.equals(Toolkit.getDefaultToolkit().
+                     getDesktopProperty("win.xpstyle.themeActive"))
              && getSystemProperty("swing.noxp") == null;
     }
     
