@@ -67,6 +67,12 @@ public final class LookUtils {
     private static final String JAVA_VERSION = getSystemProperty("java.version");    // Properties for internal use only - may change without notice 
 
     /**
+     * True if this is Java 1.4.
+     */
+    public static final boolean IS_JAVA_1_4 = 
+        startsWith(JAVA_VERSION, "1.4"); 
+    
+    /**
      * True if this is Java 1.4.0 or 1.4.0_*.
      */
     static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
@@ -75,7 +81,7 @@ public final class LookUtils {
      * True if this is Java 1.4.2 or later.
      */
     public static final boolean IS_JAVA_1_4_2_OR_LATER = 
-    startsWith(JAVA_VERSION, "1.4.2") || startsWith(JAVA_VERSION, "1.5");
+        startsWith(JAVA_VERSION, "1.4.2") || startsWith(JAVA_VERSION, "1.5");
     
     /**
      * The <code>os.name</code> System Property. Operating system name.<p>
