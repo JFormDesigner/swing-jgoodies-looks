@@ -45,13 +45,13 @@ import javax.swing.Popup;
  * can shadow even parts of the screen outside the menu's window.  
  * Unfortunately this illusion isn't perfect.<p>
  * 
- * We need access to {@link javax.swing.Popup#getComponent()} and require
- * {@link java.lang.reflect.AccessibleObject#ACCESS_PERMISSION} to do so.
+ * We need access to <code>javax.swing.Popup#getComponent()</code> and require
+ * <code>java.lang.reflect.AccessibleObject#ACCESS_PERMISSION</code> to do so.
  * If this code is executed with some security manager set, it will fail
  * silently and drop shadow support is inactive.
  * 
  * @author Stefan Matthias Aust
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupBorder
  */
