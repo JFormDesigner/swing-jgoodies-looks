@@ -1,0 +1,2 @@
+# JGoodies Windows L&F
+com.jgoodies.plaf.windows.ExtWindowsLookAndFeel

@@ -1,0 +1,7 @@
+# JGoodies Plastic L&F- replacement for Metal
+com.jgoodies.plaf.plastic.PlasticLookAndFeel
+# JGoodies Plastic 3D L&F
+com.jgoodies.plaf.plastic.Plastic3DLookAndFeel
+# JGoodies Plastic XP L&F
+com.jgoodies.plaf.plastic.PlasticXPLookAndFeel
+
