@@ -13,7 +13,8 @@ INTRODUCTION
 
 DISTRIBUTION CHANGES
 
-    o Addes service descriptors to all library JARs
+    o Added service descriptors to all library JARs
+    o Removed class files from source zip
     
     
     
