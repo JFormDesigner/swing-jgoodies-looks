@@ -47,15 +47,16 @@ import com.jgoodies.looks.FontUtils;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
+import com.jgoodies.looks.common.ShadowPopupFactory;
 
 /**
  * The main class of the JGoodies Windows Look&amp;Feel.
  * This look provides several corrections and extensions to Sun's Windows L&F.
- * In addition it tries to provide a unified look for the J2SE 1.4.0x, 1.4.1x
- * and 1.4.2 environments.
+ * In addition it tries to provide a unified look for the J2SE 1.4.0x, 1.4.1x,
+ * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -83,16 +84,19 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     // Special Properties ***************************************************
 
     /**
-     * Answers the current <code>FontSizeHints</code>; look specific 
+     * Returns the current <code>FontSizeHints</code>; look specific 
      * settings shadow the global users defaults as stored under 
      * key <code>FontSizeHints.KEY</code>.
      * 
+     * @return the current FontSizeHints, either this L&amp;Fs local hints,
+     *     or the global hints if no local hints are available
      * @see Options#setGlobalFontSizeHints(FontSizeHints)
      * @see FontSizeHints
      */
     public static FontSizeHints getFontSizeHints() {
-        return fontSizeHints != null ? fontSizeHints : Options
-                .getGlobalFontSizeHints();
+        return fontSizeHints != null 
+            ? fontSizeHints 
+            : Options.getGlobalFontSizeHints();
     }
 
     /**
@@ -104,9 +108,34 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     public static void setFontSizeHints(FontSizeHints newHints) {
         fontSizeHints = newHints;
     }
+    
 
     // Overriding Superclass Behavior ***************************************
 
+    /**
+     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition 
+     * to the superclass behavior, we install the ShadowPopupFactory.
+     * 
+     * @see #uninitialize
+     */
+    public void initialize() {
+        super.initialize();
+        ShadowPopupFactory.install();
+    }
+    
+    
+    /**
+     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition 
+     * to the superclass behavior, we uninstall the ShadowPopupFactory.
+     * 
+     * @see #initialize
+     */
+    public void uninitialize() {
+        super.uninitialize();
+        ShadowPopupFactory.uninstall();
+    }
+    
+    
     /**
      * Initializes the class defaults, that is, overrides some UI delegates
      * with JGoodies Windows implementations.

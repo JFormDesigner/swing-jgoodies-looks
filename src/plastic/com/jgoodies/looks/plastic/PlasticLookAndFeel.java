@@ -51,6 +51,7 @@ import com.jgoodies.looks.FontSizeHints;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
+import com.jgoodies.looks.common.ShadowPopupFactory;
 import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
 
 /**
@@ -58,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -220,6 +221,30 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
 	// Overriding Superclass Behavior ***************************************
 	
+    /**
+     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition 
+     * to the superclass behavior, we install the ShadowPopupFactory.
+     * 
+     * @see #uninitialize
+     */
+    public void initialize() {
+        super.initialize();
+        ShadowPopupFactory.install();
+    }
+    
+    
+    /**
+     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition 
+     * to the superclass behavior, we uninstall the ShadowPopupFactory.
+     * 
+     * @see #initialize
+     */
+    public void uninitialize() {
+        super.uninitialize();
+        ShadowPopupFactory.uninstall();
+    }
+    
+    
 	/**
 	 * Initializes the class defaults, that is, overrides some UI delegates
 	 * with JGoodies Plastic implementations.
