@@ -66,6 +66,8 @@ public final class Settings {
 
     private boolean tabIconsEnabled;
     
+    private Boolean popupDropShadowEnabled;
+    
     private String plasticTabStyle;
     
     private boolean plasticHighContrastFocusEnabled;
@@ -177,6 +179,14 @@ public final class Settings {
 
     public void setMenuBarWindowsBorderStyle(BorderStyle menuBarWindowsBorderStyle) {
         this.menuBarWindowsBorderStyle = menuBarWindowsBorderStyle;
+    }
+
+    public Boolean isPopupDropShadowEnabled() {
+        return popupDropShadowEnabled;
+    }
+
+    public void setPopupDropShadowEnabled(Boolean popupDropShadowEnabled) {
+        this.popupDropShadowEnabled = popupDropShadowEnabled;
     }
 
     public boolean isPlasticHighContrastFocusEnabled() {

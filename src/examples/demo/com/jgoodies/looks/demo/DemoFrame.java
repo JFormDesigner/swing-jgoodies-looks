@@ -62,7 +62,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DemoFrame extends JFrame {
 
@@ -112,9 +112,13 @@ public class DemoFrame extends JFrame {
             settings.isUseSystemFonts());
         Options.setGlobalFontSizeHints(settings.getFontSizeHints());
         Options.setUseNarrowButtons(settings.isUseNarrowButtons());
+        
+        // Global options
         Options.setTabIconsEnabled(settings.isTabIconsEnabled());
         ClearLookManager.setMode(settings.getClearLookMode());
         ClearLookManager.setPolicy(settings.getClearLookPolicyName());
+        UIManager.put(Options.POPUP_DROP_SHADOW_ENABLED_KEY, 
+                settings.isPopupDropShadowEnabled());
 
         // Swing Settings
         LookAndFeel selectedLaf = settings.getSelectedLookAndFeel();
