@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -47,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -90,14 +90,9 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
-//    protected ListCellRenderer createRenderer() {
-//        ListCellRenderer renderer = super.createRenderer();
-//        if (renderer instanceof JLabel) {
-//             JLabel label = (JLabel) renderer;
-//             //label.setBorder(new EmptyBorder(2, 2, 2, 2));
-//        }
-//        return renderer;
-//    }
+    protected ListCellRenderer createRenderer() {
+        return new DefaultListCellRenderer.UIResource();
+    }
 
     /**
      * Creates a layout manager for managing the components which 
