@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -80,9 +80,16 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 
         String UI_CLASSNAME_PREFIX   = "com.jgoodies.looks.plastic.PlasticXP";
         Object[] uiDefaults = {
-            "CheckBoxUI",    UI_CLASSNAME_PREFIX + "CheckBoxUI",
-            "RadioButtonUI", UI_CLASSNAME_PREFIX + "RadioButtonUI",
+            // Uses a smooth icon
+            "CheckBoxUI",      UI_CLASSNAME_PREFIX + "CheckBoxUI",
+            
+            // Renders a circle, not the star ("*") character                       
+            "PasswordFieldUI", UI_CLASSNAME_PREFIX + "PasswordFieldUI",
+            
+            // Uses a smooth icon
+            "RadioButtonUI",   UI_CLASSNAME_PREFIX + "RadioButtonUI",
         };
+
         table.putDefaults(uiDefaults);
     }
     
