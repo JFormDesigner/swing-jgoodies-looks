@@ -40,9 +40,11 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
+import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.JTextComponent;
 
@@ -84,7 +86,7 @@ final class PlasticXPBorders {
      */
     static Border getComboBoxArrowButtonBorder() {
         if (comboBoxArrowButtonBorder == null) {
-            comboBoxArrowButtonBorder = new BorderUIResource.CompoundBorderUIResource(
+            comboBoxArrowButtonBorder = new CompoundBorder(  // No UIResource
                                     new XPComboBoxArrowButtonBorder(),
                                     new BasicBorders.MarginBorder());
         }
@@ -96,7 +98,7 @@ final class PlasticXPBorders {
      */
     static Border getComboBoxEditorBorder() {
         if (comboBoxEditorBorder == null) {
-            comboBoxEditorBorder = new BorderUIResource.CompoundBorderUIResource(
+            comboBoxEditorBorder = new CompoundBorder(  // No UIResource
                                     new XPComboBoxEditorBorder(),
                                     new BasicBorders.MarginBorder());
         }
@@ -108,7 +110,7 @@ final class PlasticXPBorders {
      */
     static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
-            scrollPaneBorder = new BorderUIResource(new XPScrollPaneBorder());
+            scrollPaneBorder = new XPScrollPaneBorder();
         }
         return scrollPaneBorder;
     }
@@ -267,15 +269,16 @@ final class PlasticXPBorders {
         }
 	}
 
-    /*
-     * A border for text fields.
+    /**
+     * Unlike Metal we paint a simple rectangle.
+     * Being a subclass of MetalBorders.ScrollPaneBorder ensures that
+     * the ScrollPaneUI will update the ScrollbarsFreeStanding property.
      */
-    private static class XPScrollPaneBorder extends AbstractBorder  {
+    private static class XPScrollPaneBorder extends MetalBorders.ScrollPaneBorder  {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-            
             g.setColor(c.isEnabled() 
                     ? PlasticLookAndFeel.getControlDarkShadow()
                     : MetalLookAndFeel.getControlShadow());
