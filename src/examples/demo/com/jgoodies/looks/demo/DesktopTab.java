@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2002-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,10 +46,11 @@ import com.jgoodies.plaf.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 final class DesktopTab {
     
-    private static final float SIZE_FACTOR = LookUtils.isLowRes ? 0.96f : 1.2f;
+    private static final float SIZE_FACTOR = LookUtils.isLowRes ? 1f : 1.175f;
 
     /**
      * Builds the panel.
@@ -62,26 +63,26 @@ final class DesktopTab {
     }
 
     private JComponent buildDesktopPane() {
-        int gap      = (int) (40 * SIZE_FACTOR);
+        int gap      = (int) (10 * SIZE_FACTOR);
         int originX1 = 10;
-        int extentX1 = (int) (166 * SIZE_FACTOR);
+        int extentX1 = (int) (193 * SIZE_FACTOR);
         int originX2 = originX1 + extentX1 + gap;
         int extentX2 = extentX1;
         int originX3 = originX2 + extentX2 + gap;
-        int extentX3 = (int) (116 * SIZE_FACTOR);
+        int extentX3 = (int) (150 * SIZE_FACTOR);
         
         JDesktopPane desktop = new JDesktopPane();
         JInternalFrame frame;
 
         frame = new JInternalFrame("Navigation", true, true, true, true);
         frame.setContentPane(buildFrame1ContentPane());
-        frame.setBounds(originX1, 10, extentX1, 280);
+        frame.setBounds(originX1, 10, extentX1, 320);
         desktop.add(frame);
         frame.setVisible(true);
 
         frame = new JInternalFrame("Properties", true, false, true, true);
         frame.setContentPane(buildFrame2ContentPane());
-        frame.setBounds(originX2, 10, extentX2, 280);
+        frame.setBounds(originX2, 10, extentX2, 320);
         desktop.add(frame);
         frame.setVisible(true);
 
@@ -91,7 +92,7 @@ final class DesktopTab {
             PlasticInternalFrameUI.IS_PALETTE,
             Boolean.TRUE);
         palette.setContentPane(buildPaletteContentPane());
-        palette.setBounds(originX3, 10, extentX3, 130);
+        palette.setBounds(originX3, 10, extentX3, 150);
         palette.setVisible(true);
         desktop.add(palette, JLayeredPane.PALETTE_LAYER);
 
@@ -100,7 +101,7 @@ final class DesktopTab {
             PlasticInternalFrameUI.IS_PALETTE,
             Boolean.TRUE);
         palette.setContentPane(buildBackgroundTestContentPane());
-        palette.setBounds(originX3, 160, extentX3, 130);
+        palette.setBounds(originX3, 170, extentX3, 160);
         palette.setVisible(true);
         desktop.add(palette, JLayeredPane.PALETTE_LAYER);
 
@@ -176,6 +177,10 @@ final class DesktopTab {
             { "Place of Birth", "Kiel"       }, 
             { "Profession",     "UI Designer"}, 
             { "Business",       "Freelancer" },
+            { "",               ""           },
+            { "",               ""           },
+            { "",               ""           },
+            { "",               ""           },
             { "",               ""           },
             { "",               ""           },
             { "",               ""           },
