@@ -90,7 +90,7 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
-        return LookUtils.HAS_XP_LAF
+        return LookUtils.IS_WINDOWS_XP_LAF
                     ? super.createLayoutManager()
                     : new ExtWindowsComboBoxLayoutManager();
     }
@@ -102,7 +102,7 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
 	 * Overridden to paint black triangles.
 	 */
     protected JButton createArrowButton() {
-        return LookUtils.HAS_XP_LAF
+        return LookUtils.IS_WINDOWS_XP_LAF
                     ? super.createArrowButton()
                     : new ExtWindowsArrowButton(SwingConstants.SOUTH);
     }

@@ -34,6 +34,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,15 +53,17 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author Karsten Lentzsch
+ * @version $revision: $
+ * @see com.jgoodies.plaf.FontUtils
  */
 
 public final class LookUtils {
 
     // Properties and Keys for Internal Use Only - May Change without Notice 
 
-    public static final boolean IS_140          = is140();
-    public static final boolean IS_142_OR_LATER = is142orLater();
-    public static final boolean HAS_XP_LAF      = IS_142_OR_LATER;
+    public static final boolean IS_140            = is140();
+    public static final boolean IS_142_OR_LATER   = is142orLater();
+    public static final boolean IS_WINDOWS_XP_LAF = isWindowsXPLafEnabled();
     public static final boolean IS_NETBEANS;
 
     public static boolean isLowRes = isLowResolution();
@@ -171,6 +174,38 @@ public final class LookUtils {
         String osVersion = System.getProperty("os.version");
         return osName.startsWith("Windows") && osVersion.startsWith("5.1");
     }
+    
+    /**
+     * Checks and answers wether the Windows XP style is enabled. 
+     * This method is intended to be called only if a Windows look&feel
+     * is about to be installed or already active in the UIManager.
+     * The XP style of the Windows look&amp;feel is enabled by default on
+     * Windows XP platforms since the J2SE 1.4.2; it can be disabled either 
+     * in the Windows desktop as well as in the Java runtime by setting
+     * a System property.<p>
+     * 
+     * This method first checks the platform, platform version and Java version.
+     * It then checks whether we can get an instance of the <code>XPStyle</code>
+     * class. The accessor that this class provides will in turn check the
+     * OS desktop settings and the Java system properties.
+     *
+     * @return true if the Windows XP style is enabled
+     */ 
+    public static boolean isWindowsXPLafEnabled() {
+        if (!isWindowsXP() || !is142orLater())
+            return false;
+        try {
+            Class xpStyleClass = Class.forName(
+                "com.sun.java.swing.plaf.windows.XPStyle");
+            Method getXPMethod = xpStyleClass.getDeclaredMethod("getXP", null);
+            Object xpStyleInstance = getXPMethod.invoke(null, null);
+            return xpStyleInstance != null;
+        } catch (Exception e) {
+            System.out.println(e);
+            return true; //false;
+        }
+    }
+    
 
     // Working with Button Margins ******************************************
 

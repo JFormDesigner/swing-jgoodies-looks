@@ -41,17 +41,23 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
+import com.sun.java.swing.plaf.windows.WindowsToolBarSeparatorUI;
+
 /**
  * A Windows tool bar separator that honors the tool bar's border.
  */
 public final class ExtWindowsToolBarSeparatorUI
-    extends BasicToolBarSeparatorUI {
+    extends WindowsToolBarSeparatorUI {
 
     public static ComponentUI createUI(JComponent c) {
         return new ExtWindowsToolBarSeparatorUI();
     }
 
     public void paint(Graphics g, JComponent c) {
+        if (3 < 4) {
+            super.paint(g, c);
+            return;
+        }
         Color temp = g.getColor();
 
         Color shadowColor    = UIManager.getColor("ToolBar.shadow");

@@ -55,11 +55,11 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
 /**
  * The main class of the JGoodies Windows Look and Feel.
  * This look provides several corrections and extensions to Sun's Windows L&F.
- * In addition it tries to provide a unified look for the J2SE 1.3x,
- * 1.4.0x, and 1.4.1 environments.
- * <p>
+ * In addition it tries to provide a unified look for the J2SE 1.4.0x, 1.4.1x
+ * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.4 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -116,7 +116,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
         String WINDOWS_PREFIX = "com.jgoodies.plaf.windows.ExtWindows";
-        String COMMON_PREFIX = "com.jgoodies.plaf.common.ExtBasic";
+        String COMMON_PREFIX  = "com.jgoodies.plaf.common.ExtBasic";
 
         String menuUIPrefix = LookUtils.IS_142_OR_LATER
                 ? WINDOWS_PREFIX
@@ -125,62 +125,64 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         // Overwrite some of the uiDefaults.
         Object[] uiDefaults = {
         // Can use narrow margins
-            "ButtonUI", WINDOWS_PREFIX + "ButtonUI", "ToggleButtonUI",
-            WINDOWS_PREFIX + "ToggleButtonUI", 
+            "ButtonUI",              WINDOWS_PREFIX + "ButtonUI", 
+			"ToggleButtonUI",        WINDOWS_PREFIX + "ToggleButtonUI", 
 
             // Modified size 
-            "ComboBoxUI", WINDOWS_PREFIX + "ComboBoxUI", 
+            "ComboBoxUI",            WINDOWS_PREFIX + "ComboBoxUI", 
 
             // Uses ClearLook.
-            "LabelUI", WINDOWS_PREFIX + "LabelUI", "PanelUI",
-            WINDOWS_PREFIX + "PanelUI", "ScrollPaneUI",
-            WINDOWS_PREFIX + "ScrollPaneUI", 
+            "LabelUI",               WINDOWS_PREFIX + "LabelUI", 
+			"PanelUI",               WINDOWS_PREFIX + "PanelUI", 
+			"ScrollPaneUI",          WINDOWS_PREFIX + "ScrollPaneUI", 
 
             // Optional style and optional special borders
-            "MenuBarUI", WINDOWS_PREFIX + "MenuBarUI", 
+            "MenuBarUI",             WINDOWS_PREFIX + "MenuBarUI", 
 
             // Aligned menu items
-            "MenuUI", menuUIPrefix + "MenuUI", "MenuItemUI",
-            COMMON_PREFIX + "MenuItemUI", "CheckBoxMenuItemUI",
-            COMMON_PREFIX + "CheckBoxMenuItemUI", "RadioButtonMenuItemUI",
-            COMMON_PREFIX + "RadioButtonMenuItemUI", 
+            "MenuUI",                menuUIPrefix + "MenuUI", 
+			"MenuItemUI",            COMMON_PREFIX + "MenuItemUI", 
+			"CheckBoxMenuItemUI",    COMMON_PREFIX + "CheckBoxMenuItemUI", 
+			"RadioButtonMenuItemUI", COMMON_PREFIX + "RadioButtonMenuItemUI", 
 
             // Has padding above and below the separator lines				
-            "PopupMenuSeparatorUI", COMMON_PREFIX + "PopupMenuSeparatorUI", 
+            "PopupMenuSeparatorUI",  COMMON_PREFIX + "PopupMenuSeparatorUI", 
 
             // Honors the screen resolution and uses a minimum button width             
-            "OptionPaneUI", WINDOWS_PREFIX + "OptionPaneUI", 
+            "OptionPaneUI",          WINDOWS_PREFIX + "OptionPaneUI", 
 
             // 1.4.1 has ugly one touch triangles
-            "SplitPaneUI", WINDOWS_PREFIX + "SplitPaneUI", 
+            "SplitPaneUI",           WINDOWS_PREFIX + "SplitPaneUI", 
 
             // Work in progress: Can have a flat presentation
-            "TabbedPaneUI", WINDOWS_PREFIX + "TabbedPaneUI", 
+            "TabbedPaneUI",          WINDOWS_PREFIX + "TabbedPaneUI", 
 
             // Corrected position of the tree button icon
-            "TreeUI", WINDOWS_PREFIX + "TreeUI",};
+            "TreeUI",                WINDOWS_PREFIX + "TreeUI",};
         table.putDefaults(uiDefaults);
 
         Object[] otherDefaults;
-        if (LookUtils.HAS_XP_LAF) {
-            otherDefaults = new Object[]{
-            // Optional style and optional special borders; 
+        if (LookUtils.IS_WINDOWS_XP_LAF) {
+            otherDefaults = new Object[] {
+                // Optional style and optional special borders; 
                 // rollover borders for compound buttons
-                "ToolBarUI", WINDOWS_PREFIX + "XPToolBarUI",};
+                "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI",
+            };
         } else {
             otherDefaults = new Object[]{
             // Optional style and optional special borders; 
                 // rollover borders corrected
-                "ToolBarUI", WINDOWS_PREFIX + "ToolBarUI", 
+                "ToolBarUI",          WINDOWS_PREFIX + "ToolBarUI", 
 
                 // Black arrows
-                "ScrollBarUI", WINDOWS_PREFIX + "ScrollBarUI", 
+                "ScrollBarUI",        WINDOWS_PREFIX + "ScrollBarUI", 
 
                 // Modified Border
-                "SpinnerUI", WINDOWS_PREFIX + "SpinnerUI", 
+                "SpinnerUI",          WINDOWS_PREFIX + "SpinnerUI", 
 
                 // Uses unmodified size specified by "ToolBar.separatorSize"
-                "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI",};
+                "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI",
+                };
         }
         table.putDefaults(otherDefaults);
     }
@@ -196,7 +198,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             initFontDefaults(table);
         }
 
-        if (!LookUtils.HAS_XP_LAF) {
+        if (!LookUtils.IS_WINDOWS_XP_LAF) {
             initComponentDefaultsBefore142(table);
         }
 
@@ -224,8 +226,9 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Object defaultButtonMargin = LookUtils.createButtonMargin(false);
         Object narrowButtonMargin = LookUtils.createButtonMargin(true);
 
-        Object toolBarSeparatorSize = new DimensionUIResource(6, Options
-                .getDefaultIconSize().height);
+        Object toolBarSeparatorSize = LookUtils.IS_142_OR_LATER
+            ? null
+            : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
         // Windows uses 1,3,3,3, but we try to adjust baselines of text and label.
         Object textInsets = LookUtils.isLowRes
@@ -239,7 +242,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 ? new InsetsUIResource(2, 3, 2, 3)
                 : new InsetsUIResource(2, 4, 2, 4);
 
-        int pad = LookUtils.isWindowsXP() ? 3 : 0;
+        int pad = LookUtils.IS_WINDOWS_XP_LAF ? 3 : 0;
         Object popupMenuSeparatorMargin = LookUtils.isLowRes
                 ? new InsetsUIResource(2, pad, 3, pad)
                 : new InsetsUIResource(3, pad, 4, pad);
@@ -263,59 +266,59 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 ? table.get("MenuItem.selectionForeground")
                 : table.get("Menu.foreground");
 
-        Object[] defaults = {"Button.border", buttonBorder, "Button.margin",
-            defaultButtonMargin, // 1.4.1 Bug
-            "Button.narrowMargin", narrowButtonMargin, // Added by JGoodies
+        Object[] defaults = {
+            "Button.border",              buttonBorder, 
+			"Button.margin",              defaultButtonMargin, // 1.4.1 Bug
+            "Button.narrowMargin",        narrowButtonMargin, // Added by JGoodies
 
             // Begin 1.3 und 1.4.0
-            "Menu.border", menuBorder, // Fixed in 1.4.1
-            "Menu.borderPainted", Boolean.TRUE, "Menu.background",
-            menuBarBackground, "Menu.selectionForeground",
-            menuSelectionForeground, "Menu.selectionBackground",
-            menuSelectionBackground, 
+            "Menu.border",                menuBorder, // Fixed in 1.4.1
+            "Menu.borderPainted",         Boolean.TRUE, 
+			"Menu.background",            menuBarBackground, 
+			"Menu.selectionForeground",   menuSelectionForeground, 
+			"Menu.selectionBackground",   menuSelectionBackground, 
             // End 1.3 und 1.4.0
 
             "Menu.margin", menuMargin, // 1.4.1 Bug
 
-            "MenuBar.background", menuBarBackground, "MenuBar.border",
-            menuBarSeparatorBorder, // 1.4.1 Separator wrong
-            "MenuBar.emptyBorder", menuBarEmptyBorder, // Added by JGoodies 
-            "MenuBar.separatorBorder", menuBarSeparatorBorder, // Added by JGoodies 
-            "MenuBar.etchedBorder", menuBarEtchedBorder, // Added by JGoodies
-            "MenuBar.headerBorder", menuBarHeaderBorder, // Added by JGoodies
+            "MenuBar.background",         menuBarBackground, 
+			"MenuBar.border",             menuBarSeparatorBorder, // 1.4.1 Separator wrong
+            "MenuBar.emptyBorder",        menuBarEmptyBorder, // Added by JGoodies 
+            "MenuBar.separatorBorder",    menuBarSeparatorBorder, // Added by JGoodies 
+            "MenuBar.etchedBorder",       menuBarEtchedBorder, // Added by JGoodies
+            "MenuBar.headerBorder",       menuBarHeaderBorder, // Added by JGoodies
 
-            "MenuItem.borderPainted", Boolean.TRUE, "MenuItem.checkIcon",
-            menuItemCheckIcon, // Aligns menu items
-            "MenuItem.margin", menuItemMargin, // 1.4.1 Bug
-            "CheckBoxMenuItem.margin", menuItemMargin, // 1.4.1 Bug
+            "MenuItem.borderPainted",     Boolean.TRUE, 
+			"MenuItem.checkIcon",         menuItemCheckIcon, // Aligns menu items
+            "MenuItem.margin",            menuItemMargin, // 1.4.1 Bug
+            "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
             "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
 
-            "OptionPane.errorIcon", makeIcon(superclass, "icons/Error.gif"),
-            "OptionPane.informationIcon",
-            makeIcon(superclass, "icons/Inform.gif"), "OptionPane.warningIcon",
-            makeIcon(superclass, "icons/Warn.gif"), "OptionPane.questionIcon",
-            makeIcon(superclass, "icons/Question.gif"),
-            "FormattedTextField.margin", textInsets, // 1.4.1 Bug
-            "PasswordField.margin", textInsets, // 1.4.1 Bug
-            "PopupMenuSeparator.margin", popupMenuSeparatorMargin, 
+            "OptionPane.errorIcon",       makeIcon(superclass, "icons/Error.gif"),
+            "OptionPane.informationIcon", makeIcon(superclass, "icons/Inform.gif"), 
+			"OptionPane.warningIcon",     makeIcon(superclass, "icons/Warn.gif"), 
+			"OptionPane.questionIcon",    makeIcon(superclass, "icons/Question.gif"),
+            "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
+            "PasswordField.margin",       textInsets, // 1.4.1 Bug
+            "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
-            "ScrollPane.etchedBorder", etchedBorder, // Added by JGoodies
-            "Table.gridColor", controlColor, // 1.4.1 Bug; active
-            "TextArea.margin", textInsets, // 1.4.1 Bug
-            "TextField.margin", textInsets, // 1.4.1 Bug
-            "ToggleButton.margin", defaultButtonMargin, // 1.4.1 Bug
-            "ToggleButton.narrowMargin", narrowButtonMargin, // Added by JGoodies
+            "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies
+            "Table.gridColor",            controlColor, // 1.4.1 Bug; active
+            "TextArea.margin",            textInsets, // 1.4.1 Bug
+            "TextField.margin",           textInsets, // 1.4.1 Bug
+            "ToggleButton.margin",        defaultButtonMargin, // 1.4.1 Bug
+            "ToggleButton.narrowMargin",  narrowButtonMargin, // Added by JGoodies
 
-            "ToolBar.border", toolBarEmptyBorder, "ToolBar.emptyBorder",
-            toolBarEmptyBorder, // Added by JGoodies
-            "ToolBar.separatorBorder", toolBarSeparatorBorder, // Added by JGoodies
-            "ToolBar.etchedBorder", toolBarEtchedBorder, // Added by JGoodies
-            "ToolBar.headerBorder", toolBarHeaderBorder, // Added by JGoodies
-            "ToolBar.separatorSize", toolBarSeparatorSize, "ToolBar.margin",
-            new InsetsUIResource(0, 10, 0, 0), 
+            "ToolBar.border",             toolBarEmptyBorder, 
+			"ToolBar.emptyBorder",        toolBarEmptyBorder, // Added by JGoodies
+            "ToolBar.separatorBorder",    toolBarSeparatorBorder, // Added by JGoodies
+            "ToolBar.etchedBorder",       toolBarEtchedBorder, // Added by JGoodies
+            "ToolBar.headerBorder",       toolBarHeaderBorder, // Added by JGoodies
+            "ToolBar.separatorSize",      toolBarSeparatorSize, 
+			"ToolBar.margin",             new InsetsUIResource(0, 10, 0, 0), 
 
-            "Tree.selectionBorderColor", controlColor, // 1.4.1 Bug; active
-            "Tree.rowHeight", rowHeight, // 1.4.1 Bug
+            "Tree.selectionBorderColor",  controlColor, // 1.4.1 Bug; active
+            "Tree.rowHeight",             rowHeight, // 1.4.1 Bug
         };
         table.putDefaults(defaults);
     }
@@ -350,17 +353,18 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Object[] defaults = {
         // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
             // alignment in the typical case that the border is not painted
-            "CheckBox.border", marginBorder, "CheckBox.margin", checkBoxMargin,
-            "CheckBox.checkColor", table.get("controlText"), // kind-of black
-            "CheckBox.icon", checkBoxIcon, 
-
-            "ComboBox.border", comboBoxBorder, 
+            "CheckBox.border",        marginBorder, 
+			"CheckBox.margin",        checkBoxMargin,
+            "CheckBox.checkColor",    table.get("controlText"), // kind-of black
+            "CheckBox.icon",          checkBoxIcon, 
+            "ComboBox.border",        comboBoxBorder, 
 
             // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
             // alignment in the typical case that the border is not painted
-            "RadioButton.border", marginBorder, "RadioButton.margin",
-            checkBoxMargin, "RadioButton.checkColor", table.get("controlText"), // kind-of black
-            "RadioButton.icon", radioButtonIcon, 
+            "RadioButton.border",     marginBorder, 
+			"RadioButton.margin",     checkBoxMargin, 
+			"RadioButton.checkColor", table.get("controlText"), // kind-of black
+            "RadioButton.icon",       radioButtonIcon, 
 
             "Table.scrollPaneBorder", winInsetBorder, // 1.4.1 Bug
 
@@ -402,14 +406,15 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Object thinLoweredBorder = new ExtWindowsBorders.ThinLoweredBorder();
         Object thinRaisedBorder = new ExtWindowsBorders.ThinRaisedBorder();
 
-        Object[] defaults = {"ClearLook.ScrollPaneReplacementBorder",
-            emptyBorder, "ClearLook.SplitPaneReplacementBorder", emptyBorder,
-            "ClearLook.ThinLoweredBorder", thinLoweredBorder,
-            "ClearLook.ThinRaisedBorder", thinRaisedBorder,
-            "ClearLook.NetBeansScrollPaneBorder", emptyBorder,
+        Object[] defaults = {
+            "ClearLook.ScrollPaneReplacementBorder",emptyBorder, 
+            "ClearLook.SplitPaneReplacementBorder", emptyBorder,
+            "ClearLook.ThinLoweredBorder",          thinLoweredBorder,
+            "ClearLook.ThinRaisedBorder",           thinRaisedBorder,
+            "ClearLook.NetBeansScrollPaneBorder",   emptyBorder,
             "ClearLook.NetBeansSpecialPanelBorder", emptyBorder,
-            "ClearLook.NetBeansStatusCellBorder", statusCellBorder,
-            "ClearLook.NetBeansTabbedPaneBorder", emptyBorder,};
+            "ClearLook.NetBeansStatusCellBorder",   statusCellBorder,
+            "ClearLook.NetBeansTabbedPaneBorder",   emptyBorder,};
         table.putDefaults(defaults);
     }
 
