@@ -42,7 +42,7 @@ import javax.swing.UIManager;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class Options {
@@ -287,9 +287,9 @@ public final class Options {
     }
 
     /**
-     * Detects and answers if we shall use icons in <code>JTabbedPanes</code>.
-     * If the user has set a system property, we log a message 
-     * about the choosen style.
+     * Checks and answers if we shall use icons in <code>JTabbedPanes</code>.
+     * By default, tab icons are enabled. If the user has set a system property, 
+     * we log a message about the choosen style.
      * 
      * @return true if icons in tabbed panes are enabled, false if disabled
      * @see #setTabIconsEnabled(boolean)
@@ -298,17 +298,17 @@ public final class Options {
         String userMode = LookUtils.getSystemProperty(TAB_ICONS_ENABLED_KEY, "");
         boolean overridden = userMode.length() > 0;
 
-        boolean result = overridden
-                ? userMode.equalsIgnoreCase("true")
-                : Boolean.TRUE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY));
+        boolean disabled = overridden
+                ? userMode.equalsIgnoreCase("false")
+                : Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY));
 
         if (overridden) {
             LookUtils.log(
                 "You have "
-                    + (result ? "en" : "dis")
+                    + (disabled ? "dis" : "en")
                     + "abled icons in tabbed panes.");
         }
-        return result;
+        return !disabled;
     }
 
     /**
