@@ -35,7 +35,6 @@ import java.awt.Font;
 import java.lang.reflect.Method;
 
 import javax.swing.Icon;
-import javax.swing.LookAndFeel;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -60,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -208,12 +207,14 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         }
 
         if (!isXP) {
-            initComponentDefaultsBefore142(table);
+            initComponentDefaultsNoXP(table);
         }
 
         initClearLookDefaults(table);
 
         Object marginBorder = new BasicBorders.MarginBorder();
+        Object checkBoxMargin = new InsetsUIResource(2, 0, 2, 0);
+
         Object etchedBorder = new UIDefaults.ProxyLazyValue(
                 "javax.swing.plaf.BorderUIResource",
                 "getEtchedBorderUIResource");
@@ -222,27 +223,24 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 "getButtonBorder");
         Object menuBorder = ExtWindowsBorders.getMenuBorder();
 
-        Object menuBarEmptyBorder = marginBorder;
+        Object menuBarEmptyBorder     = marginBorder;
         Object menuBarSeparatorBorder = ExtWindowsBorders.getSeparatorBorder();
-        Object menuBarEtchedBorder = ExtWindowsBorders.getEtchedBorder();
-        Object menuBarHeaderBorder = ExtWindowsBorders.getMenuBarHeaderBorder();
+        Object menuBarEtchedBorder    = ExtWindowsBorders.getEtchedBorder();
+        Object menuBarHeaderBorder    = ExtWindowsBorders.getMenuBarHeaderBorder();
 
-        Object toolBarEmptyBorder = marginBorder;
+        Object toolBarEmptyBorder     = marginBorder;
         Object toolBarSeparatorBorder = ExtWindowsBorders.getSeparatorBorder();
-        Object toolBarEtchedBorder = ExtWindowsBorders.getEtchedBorder();
-        Object toolBarHeaderBorder = ExtWindowsBorders.getToolBarHeaderBorder();
+        Object toolBarEtchedBorder    = ExtWindowsBorders.getEtchedBorder();
+        Object toolBarHeaderBorder    = ExtWindowsBorders.getToolBarHeaderBorder();
 
-        Object defaultButtonMargin = LookUtils.createButtonMargin(false);
-        Object narrowButtonMargin = LookUtils.createButtonMargin(true);
+        Object defaultButtonMargin    = LookUtils.createButtonMargin(false);
+        Object narrowButtonMargin     = LookUtils.createButtonMargin(true);
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        // Windows uses 1,3,3,3, but we try to adjust baselines of text and label.
-        Object textInsets = LookUtils.isLowRes
-                ? new InsetsUIResource(2, 3, 2, 2)
-                : new InsetsUIResource(2, 3, 2, 2);
+        Object textInsets = new InsetsUIResource(2, 2, 2, 2);
 
         Object menuItemMargin = LookUtils.isLowRes
                 ? new InsetsUIResource(3, 0, 3, 0)
@@ -280,6 +278,15 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 			"Button.margin",              defaultButtonMargin, // 1.4.1 Bug
             "Button.narrowMargin",        narrowButtonMargin, // Added by JGoodies
 
+            // 1.4.2 uses a 2 pixel non-standard border, that leads to bad
+            // alignment in the typical case that the border is not painted
+            "CheckBox.border",            marginBorder, 
+            "CheckBox.margin",            checkBoxMargin,
+            
+            "ComboBox.editorBorder",      marginBorder,
+            "ComboBox.editorColumns",     new Integer(5),
+            "ComboBox.rendererMargin",    textInsets, // Added by JGoodies
+            
             // Begin 1.3 und 1.4.0
             "Menu.border",                menuBorder, // Fixed in 1.4.1
             "Menu.borderPainted",         Boolean.TRUE, 
@@ -309,12 +316,19 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                                                : makeIcon(superclass, "icons/Inform.gif"), 
 			"OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
                                                : makeIcon(superclass, "icons/Warn.gif"), 
-			"OptionPane.questionIcon",    makeIcon(superclass, "icons/Question.gif"),
+			"OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
+                                               : makeIcon(superclass, "icons/Question.gif"),
             "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
             "PasswordField.margin",       textInsets, // 1.4.1 Bug
             "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
             "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies
+            
+            // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
+            // alignment in the typical case that the border is not painted
+            "RadioButton.border",         marginBorder, 
+            "RadioButton.margin",         checkBoxMargin, 
+            
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
             "TextArea.margin",            textInsets, // 1.4.1 Bug
             "TextField.margin",           textInsets, // 1.4.1 Bug
@@ -342,21 +356,12 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
     /**
      * Initializes component defaults required in 1.3 runtime environments only.
      */
-    private void initComponentDefaultsBefore142(UIDefaults table) {
-        Object marginBorder = new BasicBorders.MarginBorder();
-        Object checkBoxMargin = new InsetsUIResource(2, 0, 2, 0);
-
-        Object checkBoxIcon;
-        checkBoxIcon = new SimpleProxyLazyValue(
+    private void initComponentDefaultsNoXP(UIDefaults table) {
+        Object checkBoxIcon = new SimpleProxyLazyValue(
                 "com.jgoodies.plaf.windows.ExtWindowsLookAndFeel",
                 "getCheckBoxIcon");
 
-        Object comboBoxBorder = new SimpleProxyLazyValue(
-                "com.jgoodies.plaf.windows.ExtWindowsLookAndFeel",
-                "getComboBoxBorder");
-
-        Object radioButtonIcon;
-        radioButtonIcon = new SimpleProxyLazyValue(
+        Object radioButtonIcon = new SimpleProxyLazyValue(
                 "com.jgoodies.plaf.windows.ExtWindowsLookAndFeel",
                 "getRadioButtonIcon");
 
@@ -367,21 +372,10 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                         .getColor("controlLtHighlight"));
 
         Object[] defaults = {
-            // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
-            // alignment in the typical case that the border is not painted
-            "CheckBox.border",        marginBorder, 
-			"CheckBox.margin",        checkBoxMargin,
             "CheckBox.checkColor",    table.get("controlText"), // kind-of black
             "CheckBox.icon",          checkBoxIcon, 
-            "ComboBox.border",        comboBoxBorder, 
-
-            // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
-            // alignment in the typical case that the border is not painted
-            "RadioButton.border",     marginBorder, 
-			"RadioButton.margin",     checkBoxMargin, 
 			"RadioButton.checkColor", table.get("controlText"), // kind-of black
             "RadioButton.icon",       radioButtonIcon, 
-
             "Table.scrollPaneBorder", winInsetBorder, // 1.4.1 Bug
 
         };
@@ -408,7 +402,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
         messageFont = table.getFont("OptionPane.font");
         toolTipFont = table.getFont("ToolTip.font");
-        windowFont = table.getFont("InternalFrame.titleFont");
+        windowFont  = table.getFont("InternalFrame.titleFont");
 
         FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
                 controlFont, menuFont, messageFont, toolTipFont, windowFont);
@@ -420,7 +414,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 new EmptyBorder(2, 0, 1, 3),
                 new ExtWindowsBorders.ThinLoweredBorder());
         Object thinLoweredBorder = new ExtWindowsBorders.ThinLoweredBorder();
-        Object thinRaisedBorder = new ExtWindowsBorders.ThinRaisedBorder();
+        Object thinRaisedBorder  = new ExtWindowsBorders.ThinRaisedBorder();
 
         Object[] defaults = {
             "ClearLook.ScrollPaneReplacementBorder",emptyBorder, 
@@ -438,10 +432,6 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
     public static Border getButtonBorder() {
         return ExtWindowsBorders.getButtonBorder();
-    }
-
-    public static Border getComboBoxBorder() {
-        return ExtWindowsBorders.getComboBoxBorder();
     }
 
     public static Icon getCheckBoxIcon() {

@@ -43,7 +43,6 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -51,12 +50,12 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
  * Consists of static inner classes that define different 
- * <code>Borders</code> used in the JGoodies Windows look&feel.
+ * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author Karsten Lentzsch
  */
 final class ExtWindowsBorders {
-
+    
 	// Accessing and Creating Borders ***************************************************
 
     private static Border menuBorder;
@@ -65,7 +64,6 @@ final class ExtWindowsBorders {
     private static Border etchedBorder;
     private static Border menuBarHeaderBorder;
     private static Border toolBarHeaderBorder;
-    private static Border comboBoxBorder;
     private static Border rolloverButtonBorder;
 
 
@@ -156,22 +154,6 @@ final class ExtWindowsBorders {
 						   				new BasicBorders.MarginBorder());
 		}
 		return toolBarHeaderBorder;
-    }
-
-    /**
-     * Returns a border for a <code>JComboBox</code>.
-     */
-    static Border getComboBoxBorder() {
-		if (comboBoxBorder == null) { 
-//            Border emptyBorder = LookUtils.HAS_XP_LAF
-//                                    ? new EmptyBorder(1, 3, 1, 0)
-//                                    : ;
-//            comboBoxBorder = BasicBorders.getTextFieldBorder();
-	    	comboBoxBorder = new BorderUIResource.CompoundBorderUIResource(
-						   				BasicBorders.getTextFieldBorder(),
-                                        new EmptyBorder(0, 3, 0, 0));
-		}
-		return comboBoxBorder;
     }
 
     /**

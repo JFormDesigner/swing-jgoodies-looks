@@ -34,13 +34,10 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.awt.Rectangle;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
@@ -49,37 +46,65 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
 import com.jgoodies.plaf.LookUtils;
 
 /**
- * The JGoodies Windows Look and Feel implementation of
- * <code>ComboBoxUI</code>.<p>
+ * The JGoodies Windows Look&amp;Feel implementation of 
+ * {@link javax.swing.plaf.ComboBoxUI}.<p>
  * 
- * Has the same height as text fields - unless you change the renderer.
+ * Corrects the editor insets for editable combo boxes as well as
+ * the render insets for non-editable combos.
+ * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.5 $
  */
 
 public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
-	
-	/* 
-	 * Used to determine the minimum height of a text field, 
-	 * which in turn is used to answer the combobox's minimum height.
-	 */
-	private static final JTextField phantom = new JTextField("Phantom");
-	
+    
+    /* 
+     * Used to determine the minimum height of a text field, 
+     * which in turn is used to answer the combobox's minimum height.
+     */
+    private static final JTextField phantom = new JTextField("Phantom");
+    
 
-	public static ComponentUI createUI(JComponent b) {
-		return new ExtWindowsComboBoxUI();
-	}
-	
-	
-	/**
+    public static ComponentUI createUI(JComponent b) {
+        return new ExtWindowsComboBoxUI();
+    }
+    
+    /**
      * The minumum size is the size of the display area plus insets plus the button.
      */
     public Dimension getMinimumSize(JComponent c) {
-    	Dimension size = super.getMinimumSize(c);
-    	Dimension textFieldSize = phantom.getMinimumSize();
-    	return new Dimension(size.width, Math.max(textFieldSize.height, size.height));
+        Dimension size = super.getMinimumSize(c);
+        Dimension textFieldSize = phantom.getMinimumSize();
+        return new Dimension(size.width, Math.max(textFieldSize.height, size.height));
     }
 
+
+    /**
+     * Creates the editor that is to be used in editable combo boxes. 
+     * This method only gets called if a custom editor has not already 
+     * been installed in the JComboBox.
+     */
+    protected ComboBoxEditor createEditor() {
+        return new ExtWindowsComboBoxEditor.UIResource();
+    }
+
+    /**
+     * Creates the default renderer that will be used in a non-editiable combo 
+     * box. A default renderer will used only if a renderer has not been 
+     * explicitly set with <code>setRenderer</code>.
+     * 
+     * @return a <code>ListCellRender</code> used for the combo box
+     * @see javax.swing.JComboBox#setRenderer
+     */
+    protected ListCellRenderer createRenderer() {
+        ListCellRenderer renderer = super.createRenderer();
+        if (renderer instanceof JLabel) {
+             JLabel label = (JLabel) renderer;
+             label.setBorder(new EmptyBorder(2, 2, 2, 2));
+        }
+        return renderer;
+    }
 
     /**
      * Creates a layout manager for managing the components which 
@@ -90,24 +115,51 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
-        return LookUtils.IS_LAF_WINDOWS_XP
-                    ? super.createLayoutManager()
-                    : new ExtWindowsComboBoxLayoutManager();
+        return new ExtWindowsComboBoxLayoutManager();
     }
 
 
-	/**
-	 * Creates the arrow button that is to be used in the combo box.<p>
-	 * 
-	 * Overridden to paint black triangles.
-	 */
+    /**
+     * Creates the arrow button that is to be used in the combo box.<p>
+     * 
+     * Overridden to paint black triangles.
+     */
     protected JButton createArrowButton() {
         return LookUtils.IS_LAF_WINDOWS_XP
                     ? super.createArrowButton()
                     : new ExtWindowsArrowButton(SwingConstants.SOUTH);
     }
 
-	
+    
+    /**
+     * Returns the area that is reserved for drawing the currently selected item.
+     */
+    protected Rectangle rectangleForCurrentValue() {
+        if (comboBox.isEditable())
+            return super.rectangleForCurrentValue();
+        
+        int width  = comboBox.getWidth();
+        int height = comboBox.getHeight();
+        Insets insets = getInsets();
+        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
+        int buttonSize = height - (insets.top + insets.bottom);
+        if (arrowButton != null) {
+            buttonSize = arrowButton.getWidth();
+        }
+        if (comboBox.getComponentOrientation().isLeftToRight()) {
+            return new Rectangle(insets.left + rendererMargin.left, 
+                    insets.top + rendererMargin.top, width
+                    - (insets.left + + rendererMargin.left + insets.right + rendererMargin.right + buttonSize), height
+                    - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
+        } else {
+            return new Rectangle(insets.left + buttonSize, insets.top, width
+                    - (insets.left + insets.right + buttonSize), height
+                    - (insets.top + insets.bottom));
+        }
+    }
+
+
+
     /**
      * This layout manager handles the 'standard' layout of combo boxes.  
      * It puts the arrow button to the right and the editor to the left.
@@ -116,29 +168,29 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * Overriden to use a fixed arrow button width. 
      */
     private class ExtWindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
-    	
-		public void layoutContainer(Container parent) {
-			JComboBox cb = (JComboBox) parent;
-			int width  = cb.getWidth();
-			int height = cb.getHeight();
+        
+        public void layoutContainer(Container parent) {
+            JComboBox cb = (JComboBox) parent;
+            int width  = cb.getWidth();
+            int height = cb.getHeight();
 
-			Insets insets = getInsets();
-			int buttonWidth  = UIManager.getInt("ScrollBar.width");
-			int buttonHeight = height - (insets.top + insets.bottom);
+            Insets insets = getInsets();
+            int buttonWidth  = UIManager.getInt("ScrollBar.width");
+            int buttonHeight = height - (insets.top + insets.bottom);
 
-			if (arrowButton != null) {
-				if (cb.getComponentOrientation().isLeftToRight()) {
-					arrowButton.setBounds(width - (insets.right + buttonWidth),
-						insets.top, buttonWidth, buttonHeight);
-				} else {
-					arrowButton.setBounds(insets.left, insets.top, buttonWidth, buttonHeight);
-				}
-			}
-			if (editor != null) {
-				editor.setBounds(rectangleForCurrentValue());
-			}
-		}
+            if (arrowButton != null) {
+                if (cb.getComponentOrientation().isLeftToRight()) {
+                    arrowButton.setBounds(width - (insets.right + buttonWidth),
+                        insets.top, buttonWidth, buttonHeight);
+                } else {
+                    arrowButton.setBounds(insets.left, insets.top, buttonWidth, buttonHeight);
+                }
+            }
+            if (editor != null) {
+                editor.setBounds(rectangleForCurrentValue());
+            }
+        }
     
    }
-	
+    
 }
