@@ -83,6 +83,7 @@ final class PlasticComboBoxButton extends JButton {
         this.rendererPane = rendererPane;
         this.listBox = listBox;
         setEnabled(comboBox.isEnabled());
+        setFocusable(false);
         setRequestFocusEnabled(comboBox.isEnabled());
         setBorder(UIManager.getBorder("ComboBox.arrowButtonBorder"));
         setMargin(new Insets(0, LEFT_INSET, 0, RIGHT_INSET));
@@ -112,10 +113,6 @@ final class PlasticComboBoxButton extends JButton {
     
     public void setIconOnly(boolean b) {
         iconOnly = b;
-    }
-
-    public boolean isFocusTraversable() {
-        return false;
     }
 
     public void setEnabled(boolean enabled) {

@@ -208,13 +208,10 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
                 }
             }
 
-            // Don't want the button to participate in focus traversable.
-            public boolean isFocusTraversable() {
-                return false;
-            }
         };
         b.setFocusPainted(false);
         b.setBorderPainted(false);
+        b.setFocusable(false);
         return b;
     }
 
@@ -298,14 +295,10 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
                     }
                 }
             }
-
-            // Don't want the button to participate in focus traversable.
-            public boolean isFocusTraversable() {
-                return false;
-            }
         };
         b.setFocusPainted(false);
         b.setBorderPainted(false);
+        b.setFocusable(false);
         return b;
     }
 
