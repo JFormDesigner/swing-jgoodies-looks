@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -160,38 +160,41 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             "TabbedPaneUI",          WINDOWS_PREFIX + "TabbedPaneUI", 
 
             // Corrected position of the tree button icon
-            "TreeUI",                WINDOWS_PREFIX + "TreeUI",
+            "TreeUI",                WINDOWS_PREFIX + "TreeUI"};
 
+        if (LookUtils.IS_JAVA_1_4_2_OR_LATER) {
             // Modified Border
-            "SpinnerUI",          WINDOWS_PREFIX + "SpinnerUI", 
-        };
-        table.putDefaults(uiDefaults);
-
-        Object[] otherDefaults;
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
-            otherDefaults = new Object[] {
-                // Renders a circle, not the star ("*") character                       
-                "PasswordFieldUI",    WINDOWS_PREFIX + "XPPasswordFieldUI", 
-
-                // Optional style and optional special borders; 
-                // rollover borders for compound buttons
-                "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI",
-                
-            };
-        } else {
-            otherDefaults = new Object[]{
-            // Optional style and optional special borders; 
-                // rollover borders corrected
-                "ToolBarUI",          WINDOWS_PREFIX + "ToolBarUI", 
-
-                // Black arrows
-                "ScrollBarUI",        WINDOWS_PREFIX + "ScrollBarUI", 
-
-                // Uses unmodified size specified by "ToolBar.separatorSize"
-                "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI",
-                };
+            uiDefaults = append(uiDefaults, 
+            "SpinnerUI",             WINDOWS_PREFIX + "SpinnerUI"); 
         }
-        table.putDefaults(otherDefaults);
+        
+   
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+            // Renders a circle, not the star ("*") character                       
+            uiDefaults = append(uiDefaults, 
+                "PasswordFieldUI",    WINDOWS_PREFIX + "XPPasswordFieldUI"); 
+
+            // Optional style and optional special borders; 
+            // rollover borders for compound buttons
+            uiDefaults = append(uiDefaults, 
+                "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI");
+        } else {
+            // Optional style and optional special borders; 
+            // rollover borders corrected
+            uiDefaults = append(uiDefaults, 
+                "ToolBarUI",          WINDOWS_PREFIX + "ToolBarUI"); 
+
+            // Black arrows
+            uiDefaults = append(uiDefaults, 
+                "ScrollBarUI",        WINDOWS_PREFIX + "ScrollBarUI"); 
+
+            if (!LookUtils.IS_JAVA_1_4_2_OR_LATER) {
+                // Uses unmodified size specified by "ToolBar.separatorSize"
+                uiDefaults = append(uiDefaults, 
+                        "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI");
+            }
+        }
+        table.putDefaults(uiDefaults);
     }
 
     /**
@@ -435,7 +438,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         table.putDefaults(defaults);
     }
 
-    // Getters for Proxy Access (Referred classes can stay package visible) ************
+    // Getters for Proxy Access (Referred classes can stay package visible) ***
 
     public static Border getButtonBorder() {
         return ExtWindowsBorders.getButtonBorder();
@@ -448,8 +451,25 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
     public static Icon getRadioButtonIcon() {
         return ExtWindowsIconFactory.getRadioButtonIcon();
     }
+    
+    // Helper Code ************************************************************
+    
+    /**
+     * Appends the key and value to the given source array and returns
+     * a copy that has the two new elements at its end.
+     * 
+     * @return an array with the key and value appended
+     */
+    private static Object[] append(Object[] source, String key, Object value) {
+        int length = source.length;
+        Object[] destination = new Object[length + 2];
+        System.arraycopy(source, 0, destination, 0, length);
+        destination[length] = key;
+        destination[length + 1] = value;
+        return destination;
+    }
 
-    // Helper Class ********************************************************************	
+    // Helper Class ***********************************************************	
 
     /**
      * This class provides an implementation of <code>LazyValue</code> that
