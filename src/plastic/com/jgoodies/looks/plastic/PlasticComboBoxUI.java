@@ -47,7 +47,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.2 $
+* @version $Revision: 1.3 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -66,18 +66,6 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     }
     
 
-    /**
-     * Creates the default renderer that will be used in a non-editiable combo 
-     * box. A default renderer will used only if a renderer has not been 
-     * explicitly set with <code>setRenderer</code>.
-     * 
-     * @return a <code>ListCellRender</code> used for the combo box
-     * @see javax.swing.JComboBox#setRenderer
-     */
-    protected ListCellRenderer createRenderer() {
-        return new DefaultListCellRenderer.UIResource();
-    }
-    
     protected ComboPopup createPopup() {
         return new PlasticComboPopup(comboBox);
     }

@@ -47,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -82,17 +82,6 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource();
     }
 
-    /**
-     * Creates the default renderer that will be used in a non-editiable combo 
-     * box. A default renderer will used only if a renderer has not been 
-     * explicitly set with <code>setRenderer</code>.
-     * 
-     * @return a <code>ListCellRender</code> used for the combo box
-     * @see javax.swing.JComboBox#setRenderer
-     */
-    protected ListCellRenderer createRenderer() {
-        return new DefaultListCellRenderer.UIResource();
-    }
 
     /**
      * Creates a layout manager for managing the components which 
