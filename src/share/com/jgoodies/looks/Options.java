@@ -36,13 +36,15 @@ import java.util.Map;
 
 import javax.swing.UIManager;
 
+import com.jgoodies.looks.common.ShadowPopup;
+
 /**
  * Provides access to several optional properties for the 
  * JGoodies L&amp;Fs, either by a key to the <code>UIDefaults</code> table
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class Options {
@@ -58,14 +60,22 @@ public final class Options {
     public static final String PLASTICXP_NAME =
         "com.jgoodies.looks.plastic.PlasticXPLookAndFeel";
         
-    public static final String EXT_WINDOWS_NAME =
+    public static final String JGOODIES_WINDOWS_NAME =
         "com.jgoodies.looks.windows.WindowsLookAndFeel";
+        
+    /** 
+     * This outdated constant will be removed in the Looks version 1.4.
+     * 
+     * @deprecated Replaced by {@link #JGOODIES_WINDOWS_NAME}. 
+     */
+    public static final String EXT_WINDOWS_NAME =
+        JGOODIES_WINDOWS_NAME;
         
     public static final String DEFAULT_LOOK_NAME = 
         PLASTIC3D_NAME;
 
     /**
-     * Holds a <code>Map</code> that enables the look&amp;feel replacement
+     * Holds a Map that enables the look&amp;feel replacement
      * mechanism to replace one look by another. 
      * Maps the original class names to their replacement class names.
      */
@@ -132,45 +142,77 @@ public final class Options {
     public static final String NO_ICONS_KEY = "jgoodies.noIcons";
 
     /** 
-     * A client property key for <code>JTree</code>s.
+     * A client property key for JTrees.
      * Used with the angled and none style values.
      */
     public static final String TREE_LINE_STYLE_KEY = 
         "JTree.lineStyle";
 
     /** 
-     * A client property value for <code>JTree</code>s
+     * A client property value for JTrees
      * that indicates that lines shall be drawn.
      */
     public static final String TREE_LINE_STYLE_ANGLED_VALUE = 
         "Angled";
 
     /** 
-     * A client property value for <code>JTree</code>s
+     * A client property value for JTrees
      * that indicates that lines shall be hidden.
      */
     public static final String TREE_LINE_STYLE_NONE_VALUE   = 
         "None";
 
     /** 
-     * A client property key for <code>JTabbedPane</code>s that indicates 
+     * A client property key for JTabbedPanes that indicates 
      * that no content border shall be painted. 
-     * Supported by the Plastic look and feel family.
+     * Supported by the Plastic look&amp;feel family.
      * This effect will be achieved also if the EMBEDDED property is true.
      */
     public static final String NO_CONTENT_BORDER_KEY =
         "jgoodies.noContentBorder";
 
     /**
-     * A client property key for <code>JTabbedPane</code>s that indicates
+     * A client property key for JTabbedPanes that indicates
      * that tabs are painted with a special embedded appearance. 
-     * Supported by the Plastic look and feel family.
+     * Supported by the Plastic look&amp;feel family.
      * This effect will be achieved also if the EMBEDDED property is true.
      */
     public static final String EMBEDDED_TABS_KEY = 
         "jgoodies.embeddedTabs";
 
 
+    // System Settings ********************************************************
+    
+    /**
+     * Holds the Boolean system property value for the tab icon enablement, 
+     * or null, if it has not been set. If this property has been 
+     * set, we log a message about the choosen value.
+     * 
+     * @see #isTabIconsEnabled()
+     */
+    private static final Boolean TAB_ICONS_ENABLED_SYSTEM_VALUE = 
+        LookUtils.getBooleanSystemProperty(
+                TAB_ICONS_ENABLED_KEY, "Icons in tabbed panes");
+    
+
+    /**
+     * Holds the Boolean system property value for the popup drop shadow
+     * enablement, or null, if it has not been set. If this property has been 
+     * set, we log a message about the choosen value.<p>
+     * 
+     * This property just set the feature's enablement, not its actual 
+     * activation. For example, drop shadows are always inactive on 
+     * the Mac OS X, because this platform already provides shadows. 
+     * The activation is requested in <code>#isPopupDropShadowActive</code>.
+     * 
+     * @see #isPopupDropShadowEnabled()
+     * @see #isPopupDropShadowActive()
+     */
+    private static final Boolean POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE = 
+        LookUtils.getBooleanSystemProperty(
+                POPUP_DROP_SHADOW_ENABLED_KEY, "Popup drop shadows");
+    
+    
     // Private ****************************************************************
 
     private static final Dimension DEFAULT_ICON_SIZE = 
@@ -184,8 +226,8 @@ public final class Options {
     // Accessing Options ******************************************************
 
     /**
-     * Returns whether a hint is set in the <code>UIManager</code> 
-     * that indicates, that a look&amp;feel may use the native system fonts.
+     * Returns whether a hint is set in the UIManager that indicates, 
+     * that a look&amp;feel may use the native system fonts.
      * 
      * @return true if the UIManager indicates that system fonts shall be used
      * @see #setUseSystemFonts(boolean)
@@ -195,7 +237,7 @@ public final class Options {
     }
 
     /**
-     * Sets a value in the <code>UIManager</code> to indicate, 
+     * Sets a value in the UIManager to indicate, 
      * that a look&amp;feel may use the native system fonts.
      * 
      * @param useSystemFonts   true to enable system fonts in the UIManager
@@ -229,8 +271,8 @@ public final class Options {
     }
 
     /**
-     * Returns the global <code>FontSizeHints</code>, can be overriden 
-     * by look specific setting.
+     * Returns the global <code>FontSizeHints</code> 
+     * that can be overriden by a look-specific setting.
      * 
      * @return the gobally used FontSizeHints object
      * @see #setGlobalFontSizeHints(FontSizeHints)
@@ -260,7 +302,7 @@ public final class Options {
 
     /**
      * Checks and answers if we shall use narrow button margins of 4 pixels.
-     * Sun's L&F implementations use a much wider button margin of 14 pixels, 
+     * Sun's L&amp;F implementations use a much wider button margin of 14 pixels, 
      * which leads to good button minimum width in the typical case.<p>
      * 
      * Using narrow button margins can potentially cause compatibility issues, 
@@ -287,7 +329,7 @@ public final class Options {
     }
 
     /**
-     * Checks and answers if we shall use icons in <code>JTabbedPanes</code>.
+     * Checks and answers if we shall use icons in JTabbedPanes.
      * By default, tab icons are enabled. If the user has set a system property, 
      * we log a message about the choosen style.
      * 
@@ -295,24 +337,13 @@ public final class Options {
      * @see #setTabIconsEnabled(boolean)
      */
     public static boolean isTabIconsEnabled() {
-        String userMode = LookUtils.getSystemProperty(TAB_ICONS_ENABLED_KEY, "");
-        boolean overridden = userMode.length() > 0;
-
-        boolean disabled = overridden
-                ? userMode.equalsIgnoreCase("false")
-                : Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY));
-
-        if (overridden) {
-            LookUtils.log(
-                "You have "
-                    + (disabled ? "dis" : "en")
-                    + "abled icons in tabbed panes.");
-        }
-        return !disabled;
+        return TAB_ICONS_ENABLED_SYSTEM_VALUE == null
+            ? Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY))
+            : TAB_ICONS_ENABLED_SYSTEM_VALUE.booleanValue();
     }
 
     /**
-     * Enables or disables the use of icons in <code>JTabbedPane</code>s.
+     * Enables or disables the use of icons in JTabbedPanes.
      * 
      * @param b   true to enable icons in tabbed panes, false to disable them
      * @see #isTabIconsEnabled()
@@ -324,12 +355,14 @@ public final class Options {
     
     /**
      * Checks and answers whether popup drop shadows are active.
-     * This feature shall be inactive on platforms that provide 
-     * native drop shadows, such as the Mac OS X. Otherwise the feature's 
-     * enablement state is returned.<p>
+     * This feature shall be inactive with toolkits that use 
+     * native drop shadows, such as Aqua on the Mac OS X.
+     * It is also inactive if the ShadowPopup cannot snapshot
+     * the desktop background (due to security and AWT exceptions).
+     * Otherwise the feature's enablement state is returned.<p>
      * 
-     * Currently only the Mac OS X is detected as platform with
-     * native drop shadows. 
+     * Currently only the Mac OS X is detected as platform where
+     * the toolkit uses native drop shadows. 
      * 
      * @return true if drop shadows are active, false if inactive
      * 
@@ -337,23 +370,17 @@ public final class Options {
      * @see #setPopupDropShadowEnabled(boolean)
      */
     public static boolean isPopupDropShadowActive() {
-        boolean platformProvidesNativeDropShadows =
+        boolean toolkitUsesNativeDropShadows =
             LookUtils.IS_OS_MAC;
         
-        return !platformProvidesNativeDropShadows 
+        return !toolkitUsesNativeDropShadows 
+             && ShadowPopup.canSnapshot()
              && isPopupDropShadowEnabled(); 
     }
 
     /**
      * Checks and answers whether the optional drop shadows for 
-     * <code>PopupMenus</code> are enabled or disabled.
-     * If the user has set a system property, we log a message 
-     * about the choosen style.<p>
-     * 
-     * This property just set the feature's enablement, not its actual 
-     * activation. For example, drop shadows are always inactive on 
-     * the Mac OS X, because this platform already provides shadows. 
-     * The activation is requested in <code>#isPopupDropShadowActive</code>. 
+     * PopupMenus are enabled or disabled.
      * 
      * @return true if drop shadows are enabled, false if disabled
      * 
@@ -361,45 +388,24 @@ public final class Options {
      * @see #setPopupDropShadowEnabled(boolean)
      */
     public static boolean isPopupDropShadowEnabled() {
-        String userMode = LookUtils.getSystemProperty(POPUP_DROP_SHADOW_ENABLED_KEY, "");
-        boolean overridden = userMode.length() > 0;
+        if (POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE != null)
+            return POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE.booleanValue();
+
         Object value = UIManager.get(POPUP_DROP_SHADOW_ENABLED_KEY);
-
-        boolean result;
-        if (overridden) {
-            result = userMode.equalsIgnoreCase("true");
-        } else {
-            result = value == null
-                ? isPopupDropShadowEnabledDefault()
-                : Boolean.TRUE.equals(value);
-        }
-
-        if (overridden) {
-            LookUtils.log(
-                "You have "
-                    + (result ? "en" : "dis")
-                    + "abled drop shadows in popup menus.");
-        }
-        return result;
+        return value == null 
+            ? isPopupDropShadowEnabledDefault() 
+            : Boolean.TRUE.equals(value);
     }
 
     /**
-     * Enables or disables drop shadows in <code>PopupMenu</code>s.
-     * Note that drop shadows are always inactive on the Mac OS X.<p>
+     * Enables or disables drop shadows in PopupMenus. 
+     * Note that drop shadows are always inactive on platforms
+     * that provide native drop shadows such as the Mac OS X.<p>
      * 
-     * It is recommended to enable this feature only on platforms 
-     * that accelerate translucency and snapshots with the hardware.<p>
+     * It is recommended to enable this feature only on platforms that
+     * accelerate translucency and snapshots with the hardware.
      * 
-     * <strong>Note:</strong> The current implementation fails 
-     * to paint heavy-weight popup drop-shadows under some conditions. 
-     * Before you enable drop shadows, you should make sure that 
-     * your application won't get into these problems. 
-     * Heavy weight popups fail if you display cascaded popups 
-     * or pull-down menus. If you are using cascaded menus and
-     * the application won't be executed in full-screen mode,
-     * users may experience paint glitches.
-     * 
-     * @param b   true to enable drop shadows, false to disable them
+     * @param b  true to enable drop shadows, false to disable them
      * 
      * @see #isPopupDropShadowActive()
      * @see #isPopupDropShadowEnabled()
@@ -410,14 +416,13 @@ public final class Options {
     
     /**
      * Checks and answers whether popup drop shadows are enabled
-     * or disabled by default. Since the current implementation fails to
-     * paint properly in all cases, it is disabled by default.
+     * or disabled by default. True for modern Windows platforms:
+     * Windows 98/ME/2000/XP
      * 
      * @return false
      */
     private static boolean isPopupDropShadowEnabledDefault() {
-        return false;
-        // return LookUtils.IS_OS_WINDOWS_MODERN;
+        return LookUtils.IS_OS_WINDOWS_MODERN;
     }
 
 
@@ -465,7 +470,7 @@ public final class Options {
             PLASTIC3D_NAME);
         putLookAndFeelReplacement(
             "com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
-            EXT_WINDOWS_NAME);
+            JGOODIES_WINDOWS_NAME);
     }
 
     /**
@@ -502,7 +507,7 @@ public final class Options {
     public static String getSystemLookAndFeelClassName() {
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows"))
-            return Options.EXT_WINDOWS_NAME;
+            return Options.JGOODIES_WINDOWS_NAME;
         else if (osName.startsWith("Mac"))
             return UIManager.getSystemLookAndFeelClassName();
         else
