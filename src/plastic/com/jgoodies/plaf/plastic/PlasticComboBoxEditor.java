@@ -49,7 +49,7 @@ class PlasticComboBoxEditor extends BasicComboBoxEditor {
 
 
     public PlasticComboBoxEditor() {
-        editor = new JTextField("", 9);
+        editor = new JTextField("", UIManager.getInt("ComboBox.editorColumns"));
         editor.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
     }
     

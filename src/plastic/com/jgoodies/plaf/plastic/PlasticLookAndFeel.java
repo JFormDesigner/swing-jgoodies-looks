@@ -375,6 +375,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"ComboBox.selectionBackground",					getMenuSelectedBackground(),
         "ComboBox.arrowButtonBorder",                   PlasticBorders.getComboBoxArrowButtonBorder(),
         "ComboBox.editorBorder",                        PlasticBorders.getComboBoxEditorBorder(),
+        "ComboBox.editorColumns",                       new Integer(5),
 
         "InternalFrame.border", 						internalFrameBorder,
         "InternalFrame.paletteBorder", 					paletteBorder,
