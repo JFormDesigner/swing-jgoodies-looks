@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -62,7 +62,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class DemoFrame extends JFrame {
 
@@ -131,17 +131,17 @@ public class DemoFrame extends JFrame {
             MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
         }
         
-        // Workaround caching in MetalRadioButtonUI
+        // Work around caching in MetalRadioButtonUI
         JRadioButton radio = new JRadioButton();
         radio.getUI().uninstallUI(radio);
         JCheckBox checkBox = new JCheckBox();
         checkBox.getUI().uninstallUI(checkBox);
 
-        try {
-            UIManager.setLookAndFeel(selectedLaf);
-        } catch (Exception e) {
-            System.out.println("Can't change L&F: " + e);
-        }
+//        try {
+//            UIManager.setLookAndFeel(selectedLaf);
+//        } catch (Exception e) {
+//            System.out.println("Can't change L&F: " + e);
+//        }
 
     }
 
@@ -262,9 +262,6 @@ public class DemoFrame extends JFrame {
         return button;
     }
 
-    /** Defines the margin used in toolbar buttons. */
-    private static final Insets TOOLBAR_BUTTON_MARGIN = new Insets(1, 1, 1, 1);
-
     /**
      * Creates and returns a <code>JButton</code> 
      * configured for use in a JToolBar.<p>
@@ -275,8 +272,7 @@ public class DemoFrame extends JFrame {
      */
     protected AbstractButton createToolBarButton(String iconName) {
         JButton button = new JButton(readImageIcon(iconName));
-        button.setFocusPainted(false);
-        button.setMargin(TOOLBAR_BUTTON_MARGIN);
+        button.setFocusable(false);
         return button;
     }
 
@@ -290,8 +286,7 @@ public class DemoFrame extends JFrame {
      */
     protected AbstractButton createToolBarRadioButton(String iconName) {
         JToggleButton button = new JToggleButton(readImageIcon(iconName));
-        button.setFocusPainted(false);
-        button.setMargin(TOOLBAR_BUTTON_MARGIN);
+        button.setFocusable(false);
         return button;
     }
 
