@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -64,7 +64,9 @@ public final class LookUtils {
      * Defaults to <code>null</code> if the runtime does not have security 
      * access to read this property or the property does not exist.
      */
-    private static final String JAVA_VERSION = getSystemProperty("java.version");    // Properties for internal use only - may change without notice 
+    private static final String JAVA_VERSION = getSystemProperty("java.version");    
+    
+    // Properties for internal use only - may change without notice 
 
     /**
      * True if this is Java 1.4.
