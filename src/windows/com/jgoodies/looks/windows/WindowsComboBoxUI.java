@@ -30,11 +30,7 @@
 
 package com.jgoodies.looks.windows;
 
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Rectangle;
+import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
@@ -51,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -83,7 +79,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * been installed in the JComboBox.
      */
     protected ComboBoxEditor createEditor() {
-        return new WindowsComboBoxEditor.UIResource();
+        return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource();
     }
 
     /**
@@ -112,7 +108,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
-        return new ExtWindowsComboBoxLayoutManager();
+        return new WindowsComboBoxLayoutManager();
     }
 
 
@@ -174,7 +170,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * 
      * Overriden to use a fixed arrow button width. 
      */
-    private class ExtWindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
+    private class WindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
         
         public void layoutContainer(Container parent) {
             JComboBox cb = (JComboBox) parent;
@@ -199,5 +195,6 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         }
     
    }
+    
     
 }
