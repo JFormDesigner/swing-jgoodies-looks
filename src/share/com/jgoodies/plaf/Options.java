@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class Options {
@@ -414,7 +414,19 @@ public final class Options {
 
     /**
      * Enables or disables drop shadows in <code>PopupMenu</code>s.
-     * Note that drop shadows are always inactive on the Mac OS X.
+     * Note that drop shadows are always inactive on the Mac OS X.<p>
+     * 
+     * It is recommended to enable this feature only on platforms 
+     * that accelerate translucency and snapshots with the hardware.<p>
+     * 
+     * <strongNote:</strong> The current implementation fails 
+     * to paint heavy-weight popup drop-shadows under some conditions. 
+     * Before you enable drop shadows, you should make sure that 
+     * your application won't get into these problems. 
+     * Heavy weight popups fail if you display cascaded popups 
+     * or pull-down menus. If you are using cascaded menus and
+     * the application won't be executed in full-screen mode,
+     * users may experience paint glitches.
      * 
      * @param b   true to enable drop shadows, false to disable them
      * 
@@ -427,14 +439,14 @@ public final class Options {
     
     /**
      * Checks and answers whether popup drop shadows are enabled
-     * or disabled by default. It is recommended to enable this feature
-     * by default only on platform that are guaranteed to have good
-     * hardware acceleration for translucency and taking snapshots.
+     * or disabled by default. Since the current implementation fails to
+     * paint properly in all cases, it is disabled by default.
      * 
-     * @return true if the drop shadow feature is enabled by default
+     * @return false
      */
     private static boolean isPopupDropShadowEnabledDefault() {
-        return LookUtils.IS_OS_WINDOWS_MODERN;
+        return false;
+        // return LookUtils.IS_OS_WINDOWS_MODERN;
     }
 
 
