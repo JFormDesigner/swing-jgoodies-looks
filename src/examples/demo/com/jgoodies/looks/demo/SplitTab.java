@@ -20,6 +20,7 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.factories.Borders;
+import com.jgoodies.plaf.LookUtils;
 
 /** 
  * Contains nested split panels and demonstrates how ClearLook
@@ -130,6 +131,10 @@ final class SplitTab {
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
         table.getColumnModel().getColumn(1).setPreferredWidth(300);
         table.setRowSelectionInterval(2, 2);
+        int tableFontSize    = UIManager.getFont("Table.font").getSize();
+        int minimumRowHeight = tableFontSize + 6;
+        int defaultRowHeight = LookUtils.isLowRes ? 17 : 18;
+        table.setRowHeight(Math.max(minimumRowHeight, defaultRowHeight));
         return table;
     }
 
