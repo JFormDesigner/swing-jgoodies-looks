@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -48,6 +48,10 @@ import com.jgoodies.forms.layout.FormLayout;
  * Demos ClearLook removing or replacing obsolete decorations.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.5 $
+ * 
+ * @see com.jgoodies.clearlook.ClearLookManager
+ * @see com.jgoodies.clearlook.ClearLookMode
  */
 final class ClearLookTab {
 

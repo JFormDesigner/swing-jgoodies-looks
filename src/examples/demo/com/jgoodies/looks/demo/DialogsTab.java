@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,6 +46,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of buttons to open a bunch of standard dialogs.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 final class DialogsTab {
     
@@ -127,7 +128,7 @@ final class DialogsTab {
     }
 	
 	/**
-	 * Builds and answers the panel.
+	 * Builds and returns the panel.
 	 */
     JComponent build(Container aParent) {
         this.parent = aParent;
@@ -153,7 +154,7 @@ final class DialogsTab {
     }
 	
     /**
-     * Builds and answers the message dialog button bar.
+     * Builds and returns the message dialog button bar.
      * 
      * @return the message dialog button bar
      */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -47,6 +47,8 @@ import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
+ * @version $Revision: 1.4 $
+ * 
  * @see     com.jgoodies.plaf.BorderStyle
  * @see     com.jgoodies.plaf.FontSizeHints
  * @see     com.jgoodies.plaf.HeaderStyle

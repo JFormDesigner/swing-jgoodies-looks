@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -44,12 +44,12 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.plaf.Options;
 
 /** 
- * Demonstrates the jGoodies Looks <i>narrowMargin</i> option. 
+ * Demonstrates the JGoodies Looks <i>narrowMargin</i> option. 
  * Therefore it contains button rows that use different combinations
  * of layout managers and narrow hints. 
  * 
- * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
  */
 final class NarrowTab {
 

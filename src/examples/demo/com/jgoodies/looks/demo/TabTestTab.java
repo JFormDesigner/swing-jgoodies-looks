@@ -1,9 +1,31 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * This software is the proprietary information of JGoodies Karsten Lentzsch.
- * Use is subject to license terms.
- *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *  o Redistributions of source code must retain the above copyright notice, 
+ *    this list of conditions and the following disclaimer. 
+ *     
+ *  o Redistributions in binary form must reproduce the above copyright notice, 
+ *    this list of conditions and the following disclaimer in the documentation 
+ *    and/or other materials provided with the distribution. 
+ *     
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
+ *    its contributors may be used to endorse or promote products derived 
+ *    from this software without specific prior written permission. 
+ *     
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
 package com.jgoodies.looks.demo;
@@ -29,11 +51,12 @@ import com.jgoodies.uif_lite.panel.SimpleInternalFrame;
  * tabbed panes using two <code>SimpleInternalFrame</code>.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
  */
 final class TabTestTab {
 
     /**
-     * Builds and answers the panel.
+     * Builds and returns the panel.
      */
     JComponent build() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -41,9 +64,10 @@ final class TabTestTab {
         panel.add(buildHorizontalSplit());
         return panel;
     }
+    
 
     /**
-     * Builds and answers the main horizontal split using stripped split panes.<p>
+     * Builds and returns the horizontal split using stripped split panes.<p>
      * 
      * Nesting split panes often leads to duplicate borders. 
      * However, a look&feel should not remove borders completely
@@ -58,8 +82,9 @@ final class TabTestTab {
             0.2f);
     }
     
+    
     /**
-     * Builds and answers a panel that uses a tabbed pane with embedded tabs
+     * Builds and returns a panel that uses a tabbed pane with embedded tabs
      * enabled.
      */
     private JComponent buildNavigationPanel() {
@@ -73,9 +98,10 @@ final class TabTestTab {
         sif.add(tabbedPane);
         return sif;
     }
+    
 
     /**
-     * Builds and answers a sample tree.
+     * Builds and returns a sample tree.
      */
     private JTree buildTree() {
         JTree tree = new JTree(createSampleTreeModel());
@@ -87,13 +113,15 @@ final class TabTestTab {
         return tree;
     }
     
+    
     private JComponent buildHelp() {
         JTextArea area = new JTextArea("\n This tabbed pane uses\n embedded tabs.");
         return area;
     }
+    
 
     /**
-     * Builds and answers a tabbed pane with the no-content-border enabled.
+     * Builds and returns a tabbed pane with the no-content-border enabled.
      */
     private JComponent buildEditor() {
         JTabbedPane tabbedPane = new JTabbedPane();
@@ -107,8 +135,9 @@ final class TabTestTab {
         return sif;
     }
     
+    
     /**
-     * Builds the editor's overview tab.
+     * Builds and returns the editor's overview tab.
      */
     private JComponent buildOverviewTab() {
         FormLayout layout = new FormLayout(
@@ -148,8 +177,9 @@ final class TabTestTab {
         return builder.getPanel();
     }
     
+    
     /**
-     * Builds the pane.
+     * Builds and returns the addresses tab.
      */
     private JComponent buildAddressesTab() {
         FormLayout layout = new FormLayout(
@@ -186,11 +216,11 @@ final class TabTestTab {
         builder.add(new JTextField(),       cc.xy(4,  21));
 
         return builder.getPanel();
-
     }
+    
 
     /**
-     * Creates and answers a sample tree model.
+     * Creates and returns a sample tree model.
      */
     private TreeModel createSampleTreeModel() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Musicians");
