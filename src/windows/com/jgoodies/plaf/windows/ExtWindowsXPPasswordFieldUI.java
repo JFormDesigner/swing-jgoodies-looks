@@ -45,12 +45,12 @@ import javax.swing.text.View;
 import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
 
 /**
- * The JGoodies Windows Look&amp;Feel implementation of {@link PasswordFieldUI}.
- * Differs from its superclass in that it utilizes a password view that renders
- * a circle, not a star (&quot;*&quot;) character.
+ * The JGoodies Windows Look&amp;Feel implementation of a password field UI
+ * delegate. It differs from its superclass in that it utilizes a password 
+ * view that renders a circle, not a star (&quot;*&quot;) character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class ExtWindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -65,8 +65,7 @@ public final class ExtWindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
     }
 
     /**
-	 * Creates a view (<code>ExtWindowsXPPasswordView</code>) for an
-	 * element.
+	 * Creates a view (an <code>ExtWindowsXPPasswordView</code>) for an element.
 	 * 
 	 * @param elem the element
 	 * @return the view
@@ -94,8 +93,8 @@ public final class ExtWindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
             JPasswordField field = (JPasswordField) container;
             int charWidth = getFontMetrics().charWidth(field.getEchoChar());
-            int advance   = 2;
-            int diameter  = Math.max(charWidth - advance, 5);
+            int advance   = 3;
+            int diameter  = Math.max(charWidth - 1, 5);
 
             Graphics2D g2 = (Graphics2D) g;
             Object oldHints = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
