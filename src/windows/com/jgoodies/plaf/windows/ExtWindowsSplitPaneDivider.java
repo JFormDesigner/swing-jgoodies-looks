@@ -47,7 +47,7 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
     private static final int EXT_BLOCKSIZE        = 6;
 
     /**
-     * Used to layout a ExtWindowsSplitPaneDivider. Layout for the divider
+     * Used to lay out a ExtWindowsSplitPaneDivider. Layout for the divider
      * involves appropriately moving the left/right buttons around.
      * <p>
      * This inner class is marked &quot;public&quot; due to a compiler bug.

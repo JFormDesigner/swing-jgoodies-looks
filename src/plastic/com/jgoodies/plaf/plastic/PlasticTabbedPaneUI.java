@@ -209,7 +209,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Creates the renderer used to layout and paint the tabs.
+     * Creates the renderer used to lay out and paint the tabs.
      * @param tabPane               the UIs component
      * @return AbstractRenderer     the renderer that will be used to paint
      */
