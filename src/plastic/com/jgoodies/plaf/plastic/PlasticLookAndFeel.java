@@ -59,7 +59,7 @@ import com.jgoodies.plaf.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -533,7 +533,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return the default color theme for the current environemt
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
-		String defaultName = LookUtils.IS_OS_WINDOWS_XP 
+		String defaultName = LookUtils.IS_LAF_WINDOWS_XP_ENABLED
 								? "ExperienceBlue"
 								: (LookUtils.IS_OS_WINDOWS_MODERN ? "DesertBluer" : "SkyBlue");
 		// Don't use the default now, so we can detect that the users tried to set one.
