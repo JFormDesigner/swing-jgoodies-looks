@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public final class Options {
@@ -353,13 +353,20 @@ public final class Options {
     /**
      * Detects and answers if we shall drop shadows in <code>PopupMenus</code>.
      * If the user has set a system property, we log a message 
-     * about the choosen style.
+     * about the choosen style.<p>
      * 
-     * @return true if drop shadows are enabled, false if disabled
+     * Note that drop shadows are always disabled on the Mac OS X,
+     * because this platform already provides shadows. 
+     * 
+     * @return true if drop shadows are enabled, false if disabled;
+     *      always false on the Mac OS X
      * 
      * @see #setPopupDropShadowEnabled(boolean)
      */
     public static boolean isPopupDropShadowEnabled() {
+        if (LookUtils.IS_OS_MAC)
+            return false;
+        
         String userMode = LookUtils.getSystemProperty(POPUP_DROP_SHADOW_ENABLED_KEY, "");
         boolean overridden = userMode.length() > 0;
         Object value = UIManager.get(POPUP_DROP_SHADOW_ENABLED_KEY);
@@ -383,10 +390,11 @@ public final class Options {
     }
 
     /**
-     * Enables or disables the use of icons in <code>JTabbedPane</code>s.
+     * Enables or disables drop shadows in <code>PopupMenu</code>s.
+     * Note that drop shadows are always disabled on the Mac OS X.
      * 
-     * @param b   true to enable icons in tabbed panes, false to disable them
-     * @see #isTabIconsEnabled()
+     * @param b   true to enable drop shadows, false to disable them
+     * @see #isPopupDropShadowEnabled()
      */
     public static void setPopupDropShadowEnabled(boolean b) {
         UIManager.put(POPUP_DROP_SHADOW_ENABLED_KEY, new Boolean(b));
