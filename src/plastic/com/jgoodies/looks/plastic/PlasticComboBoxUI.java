@@ -47,7 +47,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.4 $
+* @version $Revision: 1.5 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -190,10 +190,11 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
         paint(g, c);
     }
     
+    
     /**
-     * Checks and answers if this is combo is in a tool bar.
+     * Checks and answers if this combo is in a tool bar.
      * 
-     * @param b   the button to check
+     * @param c   the component to check
      * @return true if in tool bar, false otherwise
      */
     protected boolean isToolBarComboBox(JComponent c) {
