@@ -283,12 +283,13 @@ public class DemoFrame extends JFrame {
     }
 
     protected void addTabs(JTabbedPane tabbedPane) {
+        tabbedPane.addTab("SplitPane", new SplitTab().build());
         tabbedPane.addTab("Desktop", new DesktopTab().build());
         tabbedPane.addTab("States", new StatesTab().build());
         tabbedPane.addTab("HTML", new HtmlTab().build());
         tabbedPane.addTab("Dialogs", new DialogsTab().build(tabbedPane));
-        tabbedPane.addTab("Narrow", new NarrowTab().build());
         tabbedPane.addTab("Alignment", new AlignmentTab().build());
+        tabbedPane.addTab("Narrow", new NarrowTab().build());
         tabbedPane.addTab("ClearLook", new ClearLookTab().build());
     }
     
