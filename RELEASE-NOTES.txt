@@ -18,15 +18,21 @@ DISTRIBUTION CHANGES
     
 BUGS FIXED
 
-    o Catches IllegalAccessExceptions in unsigned Web Start Applications 
-      and unsigned Applets when using the ExtWindowsLookAndFeel.
+    o ExtWin:  Catches IllegalAccessExceptions in untrusted environments.
+    o Plastic: Non-editable combo abbreviates longer label.
+    o Plastic: Editable combo too narrow; shall take arrow button into account
 
+
+NEW FEATURES
+    o Plastic:  Honors UIDefaults setting "ComboBox.editorColumns" to set
+                the columns in the default combo box editor.
 
 OTHER CHANGES
 
-    o Code: Removed 1.3 code
-    o Menu item layout: ensure a minimum arrow icon width
-    o Menu item layout: increased the gap between text and accelerator
+    o All code: Removed 1.3 code
+    o All l&fs: Menu item layout ensures a minimum arrow icon width
+    o All l&fs: Menu item layout uses larger gap between text and accelerator
+    o Plastic:  layout of editable combos improved - arrows aligned 
     
     
 -------------------------------------------------------------------------------
