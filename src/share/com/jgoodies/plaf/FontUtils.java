@@ -102,6 +102,7 @@ public final class FontUtils {
 				"ColorChooser.font",					controlFont,
 				"ComboBox.font",						controlFont,
 				"EditorPane.font",						controlFont,
+                "FormattedTextField.font",              controlFont,
 				"Label.font",							controlFont,
 				"List.font",							controlFont,
 				"Panel.font",							controlFont,
