@@ -48,7 +48,7 @@ import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
  * bounds. Also, changes the border of the buttons and the size of the arrows. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 	
@@ -115,7 +115,7 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 
         private SpinnerXPArrowButton(int direction,
                 ExtBasicArrowButtonHandler handler) {
-            super(direction, UIManager.getInt("ScrollBar.width"), false);
+            super(direction, UIManager.getInt("ScrollBar.width") - 2, false);
             addActionListener(handler);
             addMouseListener(handler);
         }
