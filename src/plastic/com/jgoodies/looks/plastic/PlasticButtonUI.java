@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * <code>jgoodies.isNarrow</code> property to choose an appropriate margin.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
@@ -103,8 +103,8 @@ public class PlasticButtonUI extends MetalButtonUI {
     // Painting ***************************************************************
 
     public void update(Graphics g, JComponent c) {
-        AbstractButton b = (AbstractButton) c;
         if (c.isOpaque()) {
+            AbstractButton b = (AbstractButton) c;
             if (isToolBarButton(b)) {
                 c.setOpaque(false);
             } else if (b.isContentAreaFilled()) {
