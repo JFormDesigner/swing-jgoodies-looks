@@ -59,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -517,6 +517,19 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "ProgressBar.selectionBackground",      getSystemTextColor()
 		};
 		table.putDefaults(defaults);
+        
+        // Set paths to sounds for auditory feedback
+        String soundPathPrefix = "/javax/swing/plaf/metal/";
+        Object[] auditoryCues = (Object[]) table.get("AuditoryCues.allAuditoryCues");
+        if (auditoryCues != null) {
+            Object[] audioDefaults = new String[auditoryCues.length * 2];
+            for (int i = 0; i < auditoryCues.length; i++) {
+                Object auditoryCue = auditoryCues[i];
+                audioDefaults[2*i]     = auditoryCue;
+                audioDefaults[2*i + 1] = soundPathPrefix + table.getString(auditoryCue);
+            }
+            table.putDefaults(audioDefaults);
+        }
 	}
 
 
