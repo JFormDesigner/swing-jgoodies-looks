@@ -44,6 +44,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+import javax.swing.text.View;
 
 import com.jgoodies.looks.Options;
 
@@ -54,7 +55,7 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -468,6 +469,13 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         Rectangle textRect,
         boolean isSelected) {
         textRect.x = textRect.y = iconRect.x = iconRect.y = 0;
+        
+        //fix of issue #4
+        View v = getTextViewForTab(tabIndex);
+        if (v != null) {
+            tabPane.putClientProperty("html", v);
+        }
+        
         int xNudge = getTabLabelShiftX(tabPlacement, tabIndex, isSelected);
         int yNudge = getTabLabelShiftY(tabPlacement, tabIndex, isSelected);
         if ((tabPlacement == RIGHT || tabPlacement == LEFT) && icon != null && title != null && !title.equals("")) {
@@ -502,6 +510,9 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                 textIconGap);
         }
 
+        //fix of issue #4
+        tabPane.putClientProperty("html", null);
+        
         iconRect.x += xNudge;
         iconRect.y += yNudge;
         textRect.x += xNudge;
