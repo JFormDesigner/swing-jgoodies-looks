@@ -193,11 +193,12 @@ public final class MenuItemRenderer {
 		resetRects();
 		
 		Icon wrappedIcon = getWrappedIcon(getIcon(menuItem, checkIcon));
+		Icon wrappedArrowIcon = getWrappedIcon(arrowIcon);
 
 		layoutMenuItem(fm, text, fmAccel, acceleratorText, 
 			//icon, checkIcon, 
 			null, wrappedIcon, 
-			arrowIcon,
+			wrappedArrowIcon, //arrowIcon,
 			b.getVerticalAlignment(), b.getHorizontalAlignment(),
 			b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
 			viewRect, iconRect, textRect, acceleratorRect, checkIconRect, arrowIconRect,
@@ -242,7 +243,7 @@ public final class MenuItemRenderer {
 
 			//Add on the widest accelerator 
 			r.width += maxAccValue;
-			r.width += defaultTextIconGap;
+			r.width += 10;
 		}
 
 		if (useCheckAndArrow()) {
@@ -325,12 +326,13 @@ public final class MenuItemRenderer {
 		}
 
 		Icon wrappedIcon = getWrappedIcon(getIcon(menuItem, checkIcon));
-
+		Icon wrappedArrowIcon = new MinimumSizedIcon(arrowIcon);
+		
 		// layout the text and icon
 		String text = layoutMenuItem(fm, b.getText(), fmAccel, acceleratorText,
 				// b.getIcon(), checkIcon,
 				null, wrappedIcon, 
-				arrowIcon, 
+				wrappedArrowIcon, //arrowIcon, 
 				b.getVerticalAlignment(), b.getHorizontalAlignment(), 
 				b.getVerticalTextPosition(), b.getHorizontalTextPosition(), 
 				viewRect, iconRect, textRect, acceleratorRect, checkIconRect, arrowIconRect,
@@ -410,7 +412,7 @@ public final class MenuItemRenderer {
 			if (model.isArmed() || (c instanceof JMenu && model.isSelected()))
 				g.setColor(foreground);
 			if (useCheckAndArrow())
-				arrowIcon.paintIcon(c, g, arrowIconRect.x, arrowIconRect.y);
+				wrappedArrowIcon.paintIcon(c, g, arrowIconRect.x, arrowIconRect.y);
 		}
 		g.setColor(holdc);
 		g.setFont(holdf);
@@ -449,7 +451,7 @@ public final class MenuItemRenderer {
 			acceleratorRectangle.width = acceleratorRectangle.height = 0;
 			acceleratorText = "";
 		} else {
-			acceleratorRectangle.width = SwingUtilities.computeStringWidth(fmAccel, acceleratorText);
+			acceleratorRectangle.width  = SwingUtilities.computeStringWidth(fmAccel, acceleratorText);
 			acceleratorRectangle.height = fmAccel.getHeight();
 		}
 		
@@ -511,7 +513,7 @@ public final class MenuItemRenderer {
 			}
 		}
 
-		// Align the accelertor text and the check and arrow icons vertically
+		// Align the accelerator text and the check and arrow icons vertically
 		// with the center of the label rect.  
 		acceleratorRectangle.y = labelRect.y + (labelRect.height / 2) - (acceleratorRectangle.height / 2);
 		if (useCheckAndArrow) {
