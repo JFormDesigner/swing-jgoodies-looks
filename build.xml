@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.17 2005-03-16 16:42:31 karsten Exp $
+   $Id: build.xml,v 1.18 2005-03-24 18:37:38 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -10,12 +10,16 @@
    with one of the following targets:
    
      clean          removes temporary files and directories
-     compile        compiles all looks
+     compile        compiles the l&fs, demo, and tests
      javadoc        creates the API documentation
+     test           compiles and runs the unit tests
      jar            creates all library jars
      package        builds a distribution tree: docs, sources, jars
      package-zip    builds a zipped distribution
      
+   To run the unit tests you MUST set the junit.jar property,
+   for example in your user build.properties file. 
+
 -->
 
 <project default="jar" basedir="." name="JGoodies Looks" >
@@ -34,6 +38,13 @@
     <!-- ***************************************************************** -->
     <path id="classpath.lib">
         <pathelement location="${build.main.dir}" 	/> 
+    </path>
+
+    <path id="classpath.tests">
+        <pathelement location="${build.main.dir}"   /> 
+        <pathelement location="${build.extras.dir}" /> 
+        <pathelement location="${build.test.dir}"   /> 
+        <pathelement location="${junit.jar}"        /> 
     </path>
 
     <path id="classpath.demo">
@@ -67,6 +78,15 @@
 		<mkdir dir="${build.main.dir}"	  />
 		<mkdir dir="${build.demo.dir}"    />
 		<mkdir dir="${build.tiny.dir}"    />
+
+        <available
+            property="junit.task.present"
+            classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask"
+        />
+        <available
+            property="junit.jar.present"
+            file="${junit.jar}"
+        />
 	</target>
 	
 	
@@ -74,8 +94,8 @@
     <!-- C O M P I L A T I O N                                             -->
     <!-- ***************************************************************** -->
 	<target name="compile" 
-			depends="compile-main, compile-demo, compile-tiny" 
-	        description="Compiles all sources." />
+			depends="compile-main, compile-demo, compile-tiny, compile-tests" 
+	        description="Compiles the l&amp;fs, demo, and tests." />
 	        
     <!-- ***************************************************************** -->
 	<target name="compile-main" depends="prepare"
@@ -145,7 +165,28 @@
 		    classpathref ="classpath.demo" />
 	</target>
 
-	
+    <!-- ***************************************************************** -->
+    <target name="compile-tests" depends="compile-main" if="junit.jar.present"
+            description="Compiles the unit tests." >
+        <mkdir dir="${build.test.dir}"/>
+        <javac 
+            srcdir       ="${src.test.dir}" 
+            destdir      ="${build.test.dir}"
+            encoding     ="${build.encoding}"
+            executable   ="${build.compile.executable}"
+            fork         ="${build.compile.fork}"
+            debug        ="${build.compile.debug}"
+            depend       ="${build.compile.depend}"
+            deprecation  ="${build.compile.deprecation}"
+            nowarn       ="${build.compile.nowarn}" 
+            optimize     ="${build.compile.optimize}"
+            target       ="${build.compile.target}"
+            verbose      ="${build.compile.verbose}"
+            bootclasspath="${build.boot.classpath}"
+            classpathref ="classpath.tests" />
+    </target>   
+    
+    	
 	
     <!-- ***************************************************************** -->
     <!-- J A V A D O C                                                     -->
@@ -170,6 +211,22 @@
          </javadoc>
     </target>
     
+    
+    <!-- ***************************************************************** -->
+    <!-- U N I T   T E S T S                                               -->
+    <!-- ***************************************************************** -->
+    <target name="test" depends="compile-tests" if="junit.task.present"
+            description="Compiles and runs the unit tests." >
+        <mkdir dir="${build.reports.dir}"/>
+        <junit printsummary="yes" haltonfailure="no" >
+            <classpath refid="classpath.tests"/>
+            <formatter type="plain" />
+            <batchtest fork="yes" todir="${build.reports.dir}">
+                <fileset dir="${src.test.dir}" includes="**/*Test.java" />
+            </batchtest>
+        </junit>
+    </target>
+        
     
     <!-- ***************************************************************** -->
     <!-- J A R                                       				       -->
@@ -283,7 +340,7 @@
     <!-- ***************************************************************** -->
     <!-- P A C K A G E                                                     -->
     <!-- ***************************************************************** -->
-	<target name="package" depends="clean, compile, javadoc, jar"
+	<target name="package" depends="clean, compile, javadoc, test, jar"
 	        description="Creates the distribution directory tree." >
 	
 		<mkdir dir="${dist.dir}" />
@@ -309,7 +366,9 @@
 		<!-- Copy the source directories. -->
 		<copy todir="${dist.src.dir}" >
 		    <fileset dir="${src.dir}" 
-		             includes="examples/**/*, photoshop/*" />
+		             includes="examples/**/*, 
+                               photoshop/*,
+                               test/**/*" />
 		</copy>
 		
 		<!-- Copy the distribution files. -->
