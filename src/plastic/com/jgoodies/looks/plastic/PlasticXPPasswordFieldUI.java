@@ -30,24 +30,23 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.Container;
-import java.awt.Graphics;
 
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.Element;
-import javax.swing.text.PasswordView;
 import javax.swing.text.View;
+
+import com.jgoodies.looks.common.ExtPasswordView;
 
 /**
  * The JGoodies PlasticXP Look&amp;Feel implementation of a password field UI
  * delegate. It differs from its superclass in that it utilizes a password 
- * view that renders a rectangle, not a star (&quot;*&quot;) character.
+ * view that renders a dot, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
 
@@ -62,43 +61,13 @@ public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
     }
 
     /**
-	 * Creates a view (an <code>PlasticXPPasswordView</code>) for an element.
+	 * Creates and returns a view (an <code>ExtPasswordView</code>) for an element.
 	 * 
 	 * @param elem the element
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new PlasticXPPasswordView(elem);
-    }
-
-    // Helper Class ***********************************************************
-
-    private static class PlasticXPPasswordView extends PasswordView {
-
-        private PlasticXPPasswordView(Element element) {
-            super(element);
-        }
-
-        /*
-         * Overrides the superclass behavior to paint a filled rectangle,
-         * not the star (&quot;*&quot;) character.
-         */
-        protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
-            Container container = getContainer();
-            if (!(container instanceof JPasswordField))
-                return super.drawEchoCharacter(g, x, y, c);
-
-            JPasswordField field = (JPasswordField) container;
-            int charWidth = getFontMetrics().charWidth(field.getEchoChar());
-            int advance  = 2;
-            int diameter = charWidth - advance;
-
-            // Try to vertically align the rectangle with the font base line.
-            g.fillRect(x, y - diameter + 1, diameter, diameter);
-
-            return x + diameter + advance;
-        }
-        
+        return new ExtPasswordView(elem);
     }
     
     

@@ -30,27 +30,23 @@
 
 package com.jgoodies.looks.windows;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.text.Element;
-import javax.swing.text.PasswordView;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.common.ExtPasswordView;
 import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of a password field UI
  * delegate. It differs from its superclass in that it utilizes a password 
- * view that renders a circle, not a star (&quot;*&quot;) character.
+ * view that renders a circle, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -65,49 +61,13 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
     }
 
     /**
-	 * Creates a view (a <code>WindowsXPPasswordView</code>) for an element.
+	 * Creates and returns a view (a <code>ExtPasswordView</code>) for an element.
 	 * 
 	 * @param elem the element
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new WindowsXPPasswordView(elem);
-    }
-
-    // Helper Class ***********************************************************
-
-    private static class WindowsXPPasswordView extends PasswordView {
-
-        private WindowsXPPasswordView(Element element) {
-            super(element);
-        }
-
-        /*
-         * Overrides the superclass behavior to paint a filled circle,
-         * not the star (&quot;*&quot;) character.
-         */
-        protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
-            Container container = getContainer();
-            if (!(container instanceof JPasswordField))
-                return super.drawEchoCharacter(g, x, y, c);
-
-            JPasswordField field = (JPasswordField) container;
-            int charWidth = getFontMetrics().charWidth(field.getEchoChar());
-            int advance  = 2;
-            int diameter = charWidth - advance;
-
-            Graphics2D g2 = (Graphics2D) g;
-            Object oldHints = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                    RenderingHints.VALUE_ANTIALIAS_ON);
-            
-            // Try to vertically align the circle with the font base line.
-            g.fillOval(x, y - diameter, diameter, diameter);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldHints);
-
-            return x + diameter + advance;
-        }
-        
+        return new ExtPasswordView(elem);
     }
     
     
