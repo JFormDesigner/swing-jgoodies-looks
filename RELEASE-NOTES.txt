@@ -7,7 +7,7 @@
 
 INTRODUCTION
 
-    This release supports Java 1.4 or later only. 
+    This release supports Java 1.4 or later only and fixes several bugs.
 
 
 DISTRIBUTION CHANGES
@@ -18,27 +18,34 @@ DISTRIBUTION CHANGES
     
 BUGS FIXED
 
-    o All l&fs: Inconsistent JFormattedTextField font.
-    o ExtWin:   IllegalAccessExceptions in untrusted environments.
-    o Plastic:  Non-editable combo abbreviates long label.
-    o Plastic:  Editable combo too narrow; doesn't take arrow button into account
+    o All l&fs:  Inconsistent JFormattedTextField font.
+    o All l&fs:  Menu item layout doesn't honor a minimum arrow icon width
+    o All l&fs:  Menu item layout uses small gap between text and accelerator
+    o Plastic:   Non-editable combo abbreviates long label.
+    o Plastic:   Editable combo too narrow; doesn't take arrow button into account
+    o Plastic:   Poor layout for editable combos
+    o Plastic:   Combo box arrow not aligned with combo popup arrow
+    o Plastic:   Spinner too small 
+    o PlasticXP: Inconsistent border for text field and scroll pane
+    o ExtWin:    IllegalAccessExceptions in untrusted environments.
+    o ExtWin:    Uses Windows XP style even if switched off in OS or System
+    o ExtWin:    Combo box uses wrong insets, shall be (2, 2, 2, 2)
+    o ExtWin:    Poor spinner size and rendering
+    o ExtWinXP:  Password field still paints '*' as echo char
+    o ExtWinXP:  Lacks Windows XP icons
 
 
 NEW FEATURES
-    o Plastic:  Honors UIDefaults setting "ComboBox.editorColumns" to set
-                the columns in the default combo box editor.
+    o All l&fs:  Honors UIDefaults setting "ComboBox.editorColumns" to set
+                 the columns in the default combo box editor.
+
 
 OTHER CHANGES
 
-    o All code: Removed 1.3 code
-    o All code: Reformatted sources
-    o All l&fs: Menu item layout ensures a minimum arrow icon width
-    o All l&fs: Menu item layout uses larger gap between text and accelerator
-    o Plastic:  layout of editable combos improved - arrows aligned 
-    o Shared:   Renamed constants in LookUtils to follow the naming conventions 
-                as used by the Jakarta Commons Lang SystemUtils class.
-    o ExtWin:   Improved detection of the Windows XP style on Windows XP
-    o ExtWin:   Added Windows XP icons for error, warning and info
+    o All code:  Removed 1.3 code
+    o All code:  Reformatted sources
+    o Shared:    Renamed constants in LookUtils to follow the naming conventions 
+                 as used by the Jakarta Commons Lang SystemUtils class.
     
     
 -------------------------------------------------------------------------------
