@@ -35,7 +35,12 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
+import javax.swing.JToggleButton;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -43,8 +48,6 @@ import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
-
-import com.jgoodies.plaf.LookUtils;
 
 /**
  * Consists of static inner classes that define different 
@@ -70,25 +73,18 @@ final class ExtWindowsBorders {
 	 * Returns a <code>Border</code> for a <code>JButton</code>.
 	 */
     public static Border getButtonBorder() {
-		UIDefaults table = UIManager.getLookAndFeelDefaults();
-		Border outerBorder = LookUtils.IS_BEFORE_14 
-								? new ButtonBorder( table.getColor("controlShadow"),
-                                           			table.getColor("controlDkShadow"),
-                                           			table.getColor("controlHighlight"),
-                                           			table.getColor("controlLtHighlight"),
-                                           			table.getColor("controlText"))
-                                : new ButtonBorder(
-					   					   table.getColor("Button.shadow"),
-                                           table.getColor("Button.darkShadow"),
-                                           table.getColor("Button.light"),
-                                           table.getColor("Button.highlight"),
-                                           table.getColor("controlText"));
+        UIDefaults table = UIManager.getLookAndFeelDefaults();
+        Border outerBorder = new ButtonBorder(table.getColor("Button.shadow"),
+                table.getColor("Button.darkShadow"), table
+                        .getColor("Button.light"), table
+                        .getColor("Button.highlight"), table
+                        .getColor("controlText"));
 
-		Border buttonBorder = new BorderUIResource.CompoundBorderUIResource(
-			   				  	outerBorder,
-			       				new BasicBorders.MarginBorder());
-		return buttonBorder;
+        Border buttonBorder = new BorderUIResource.CompoundBorderUIResource(
+                outerBorder, new BasicBorders.MarginBorder());
+        return buttonBorder;
     }
+
 
     /**
      * Returns a border instance for a <code>JMenu</code>.

@@ -36,23 +36,21 @@ import java.awt.Insets;
 import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
-import javax.swing.*;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-import com.jgoodies.clearlook.ClearLookManager;
-import com.jgoodies.plaf.LookUtils;
-import com.jgoodies.plaf.Options;
 import com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI;
+
+import com.jgoodies.clearlook.ClearLookManager;
+import com.jgoodies.plaf.Options;
 
 /**
  * The JGoodies Windows Look and Feel implementation of
@@ -266,31 +264,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
                 : super.getTabAreaInsets(tabPlacement);
     }
     
-    // Pending: obsolete in 1.4
-    private Rectangle calcRect = new Rectangle();
-
-    // [Pending:] Obsolete in 1.4
-    private Rectangle getMyTabBounds(int tabIndex, Rectangle dest) {
-        if (LookUtils.IS_BEFORE_14) {
-            dest.width  = rects[tabIndex].width;
-            dest.height = rects[tabIndex].height;
-            dest.x = rects[tabIndex].x;
-            dest.y = rects[tabIndex].y;
-            return dest;
-        }
-        try {
-            Method method = BasicTabbedPaneUI.class.getMethod("getTabBounds", new Class[] {Integer.TYPE, Rectangle.class});
-            return (Rectangle) method.invoke(this, new Object[]{new Integer(tabIndex), dest});
-        } catch (NoSuchMethodException e) {
-            // Likely we're not on 1.4; do nothing.
-        } catch (InvocationTargetException e) {
-            // Likely we're not on 1.4; do nothing.
-        } catch (IllegalAccessException e) {
-            // Likely we're not on 1.4; do nothing.
-        }
-        return dest;
-    }
-
     /**
      * Paints the top edge of the pane's content border 
      */
@@ -302,7 +275,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
         }
         Rectangle selRect = selectedIndex < 0
                             ? null 
-                            : getMyTabBounds(selectedIndex, calcRect);
+                            : getTabBounds(selectedIndex, calcRect);
         if (tabPlacement != TOP || selectedIndex < 0 || 
            (selRect.y + selRect.height + 1 < y) ||
            (selRect.x < x || selRect.x > x + w)) {
@@ -324,7 +297,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0? null :
-                           getMyTabBounds(selectedIndex, calcRect);
+                           getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != BOTTOM || selectedIndex < 0 ||
              (selRect.y - 1 > h + y) ||
          (selRect.x < x || selRect.x > x + w)) {
@@ -357,7 +330,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0? null :
-                           getMyTabBounds(selectedIndex, calcRect);
+                           getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != LEFT || selectedIndex < 0 ||
                 (selRect.x + selRect.width + 1 < x) ||
                 (selRect.y < y || selRect.y > y + h)) {
@@ -387,7 +360,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0? null :
-                           getMyTabBounds(selectedIndex, calcRect);
+                           getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != RIGHT || selectedIndex < 0 ||
                (selRect.x - 1 > x+w) ||
                (selRect.y < y || selRect.y > y + h)) {

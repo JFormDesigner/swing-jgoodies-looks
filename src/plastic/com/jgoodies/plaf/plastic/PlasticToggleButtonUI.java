@@ -33,7 +33,12 @@ package com.jgoodies.plaf.plastic;
 import java.awt.*;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonModel;
+import javax.swing.JComponent;
+import javax.swing.JToolBar;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicHTML;
@@ -195,8 +200,8 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
                 iconRect,
                 textRect,
                 b.getText() == null ? 0 : getDefaultTextIconGap(b));
-        // [Pending 1.4]: b.getIconTextGap());
-
+        // Pending: b.getIconTextGap());
+        
         g.setColor(b.getBackground());
 
         if (model.isArmed() && model.isPressed() || model.isSelected()) {

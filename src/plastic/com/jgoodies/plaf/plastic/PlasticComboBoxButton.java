@@ -36,8 +36,6 @@ import java.awt.Insets;
 
 import javax.swing.*;
 
-import com.jgoodies.plaf.LookUtils;
-
 /**
  * The default button for combo boxes in the JGoodies Plastic Look&amp;Feel.
  * <p>
@@ -117,8 +115,7 @@ final class PlasticComboBoxButton extends JButton {
     }
 
     public boolean isFocusTraversable() {
-        return LookUtils.IS_BEFORE_14 && 
-            (!comboBox.isEditable()) && comboBox.isEnabled();
+        return false;
     }
 
     public void setEnabled(boolean enabled) {
@@ -225,8 +222,7 @@ final class PlasticComboBoxButton extends JButton {
             // Fix for 4238829: should lay out the JPanel.
             boolean shouldValidate = c instanceof JPanel;
             int x = leftToRight ? left : left + iconWidth;
-            int myHeight = getHeight() - LEFT_INSET - RIGHT_INSET - 
-                    (LookUtils.IS_BEFORE_14 ? 2 : 1);
+            int myHeight = getHeight() - LEFT_INSET - RIGHT_INSET - 1;
 
             if (!is3D()) {
                 rendererPane.paintComponent(
@@ -271,9 +267,7 @@ final class PlasticComboBoxButton extends JButton {
         
         if (comboIcon != null) {
             // Paint the focus
-            boolean hasFocus = LookUtils.IS_BEFORE_14
-                                        ? hasFocus()
-                                        : comboBox.hasFocus();
+            boolean hasFocus = comboBox.hasFocus();
             if (!borderPaintsFocus && hasFocus) {
                 g.setColor(PlasticLookAndFeel.getFocusColor());
                 int x = LEFT_INSET;

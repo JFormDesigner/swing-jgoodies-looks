@@ -320,21 +320,15 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Color controlColor 				= table.getColor("control");
 		
 		Object checkBoxIcon				= PlasticIconFactory.getCheckBoxIcon();
-		Object checkBoxMargin			= LookUtils.IS_BEFORE_14
-												? new InsetsUIResource(3, 0, 3, 1)
-												: new InsetsUIResource(2, 0, 2, 1); // 1.4.1 uses 2,2,2,2
+		Object checkBoxMargin			= new InsetsUIResource(2, 0, 2, 1); // 1.4.1 uses 2,2,2,2
 		
 		Object defaultButtonMargin		= LookUtils.createButtonMargin(false);
 		Object narrowButtonMargin		= LookUtils.createButtonMargin(true);
 		
 		// Windows uses 1,3,3,3, but we try to adjust baselines of text and label.
-		Object textInsets   			= LookUtils.IS_BEFORE_14
-                                            ? (LookUtils.isLowRes
-                                                ? new InsetsUIResource(1, 0, 1, 0)
-                                                : new InsetsUIResource(2, 0, 2, 0))
-                                            : (LookUtils.isLowRes
+		Object textInsets   			= LookUtils.isLowRes
                                                 ? new InsetsUIResource(1, 2, 1, 2)
-                                                : new InsetsUIResource(2, 2, 2, 2));
+                                                : new InsetsUIResource(2, 2, 2, 2);
 		
 		Object menuItemMargin			= LookUtils.isLowRes
 											? new InsetsUIResource(3, 0, 3, 0)
@@ -487,6 +481,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"ScrollBar.is3DEnabled",						is3D,
 		"ToggleButton.is3DEnabled",						is3D,
 
+        // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
+        // alignment in the typical case that the border is not painted
+        "CheckBox.border",                      marginBorder,
+        "RadioButton.border",                   marginBorder,
+        
+                
 		// ClearLook Borders ************************************************
 		"ClearLook.ScrollPaneReplacementBorder", 		emptyBorder,
 		"ClearLook.SplitPaneReplacementBorder",			emptyBorder,
@@ -497,15 +497,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"ClearLook.NetBeansStatusCellBorder",			statusCellBorder,
 		};
 		table.putDefaults(defaults);
-        if (!LookUtils.IS_BEFORE_14) {
-            Object[] defaults14 = { 
-                // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
-                // alignment in the typical case that the border is not painted
-                "CheckBox.border",                      marginBorder,
-                "RadioButton.border",                   marginBorder,
-            };
-           table.putDefaults(defaults14);
-        }
 	}
 
 

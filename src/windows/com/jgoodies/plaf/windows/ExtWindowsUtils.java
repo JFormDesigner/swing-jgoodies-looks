@@ -31,6 +31,7 @@
 package com.jgoodies.plaf.windows;
 
 import java.awt.Graphics;
+
 import javax.swing.UIManager;
 
 /**

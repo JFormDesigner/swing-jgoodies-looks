@@ -155,12 +155,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     private static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.isLowRes
-            ? (LookUtils.IS_BEFORE_14
-                ? new InsetsUIResource(0, pad, 1, pad)
-                : new InsetsUIResource(1, pad, 1, pad))
-            : (LookUtils.IS_BEFORE_14
-                ? new InsetsUIResource(1, pad, 1, pad)
-                : new InsetsUIResource(2, pad, 2, pad));
+            ? new InsetsUIResource(1, pad, 1, pad)
+            : new InsetsUIResource(2, pad, 2, pad);
     }
 
 

@@ -46,8 +46,6 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.JTextComponent;
 
-import com.jgoodies.plaf.LookUtils;
-
 
 /**
  * This class consists of a set of <code>Border</code>s used 
@@ -187,9 +185,7 @@ final class PlasticXPBorders {
                 PlasticXPUtils.drawDisabledButtonBorder(g, x, y, w, h);
             } else {
                 boolean isPressed = model.isPressed() && model.isArmed();
-                boolean isFocused = LookUtils.IS_BEFORE_14
-                                        ? button.hasFocus()
-                                        : comboBox.hasFocus();
+                boolean isFocused = comboBox.hasFocus();
                 if (isPressed)
                     PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
                 else if (isFocused)

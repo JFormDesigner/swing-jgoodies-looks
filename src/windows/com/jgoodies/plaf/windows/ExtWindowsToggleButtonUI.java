@@ -36,10 +36,11 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
+import com.sun.java.swing.plaf.windows.WindowsToggleButtonUI;
+
 import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.common.ButtonMarginListener;
-import com.sun.java.swing.plaf.windows.WindowsToggleButtonUI;
 
 /**
  * Allows to use an optional narrow button margin.

@@ -32,8 +32,6 @@ package com.jgoodies.plaf.common;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
@@ -590,7 +588,7 @@ public final class MenuItemRenderer {
     public void paintText(Graphics g, JMenuItem aMenuItem, Rectangle textRectangle, String text) {
 		ButtonModel model = aMenuItem.getModel();
 		FontMetrics fm = g.getFontMetrics();
-		int mnemIndex = getDisplayedMnemonicIndex(aMenuItem);
+		int mnemIndex = aMenuItem.getDisplayedMnemonicIndex();
 	
 		if(!model.isEnabled()) {
 		    // *** paint the text disabled
@@ -653,56 +651,6 @@ public final class MenuItemRenderer {
     
     // Private Helper Code *************************************************************
     
-	// [Pending:] Obsolete in 1.4
-    private static int getDisplayedMnemonicIndex(JMenuItem menuItem) {
-		try {
-			Method method = AbstractButton.class.getMethod("getDisplayedMnemonicIndex", new Class[] {});
-			Integer result = (Integer) method.invoke(menuItem, new Object[]{});
-			return result.intValue();
-		} catch (NoSuchMethodException e) {
-            // Likely we're not on 1.4; do nothing.
-		} catch (InvocationTargetException e) {
-            // Likely we're not on 1.4; do nothing.
-		} catch (IllegalAccessException e) {
-            // Likely we're not on 1.4; do nothing.
-		}
-		Object value = menuItem.getClientProperty("displayedMnemonicIndex");
-		return (value != null && value instanceof Integer)
-			? ((Integer) value).intValue()
-			: findDisplayedMnemonicIndex(menuItem.getText(), menuItem.getMnemonic());	
-	}
-    
-     // Pending: Remove if 1.3 support is dropped
-     /**
-     * Returns index of the first occurrence of <code>mnemonic</code>
-     * within string <code>text</code>. Matching algorithm is not
-     * case-sensitive.
-     * <p>
-     *
-     * @param text The text to search through, may be null
-     * @param mnemonic The mnemonic to find the character for.
-     * @return index into the string if exists, otherwise -1
-     */
-    private static int findDisplayedMnemonicIndex(String text, int mnemonic) {
-        if (text == null || mnemonic == '\0') {
-            return -1;
-        }
-
-        char uc = Character.toUpperCase((char)mnemonic);
-        char lc = Character.toLowerCase((char)mnemonic);
-
-        int uci = text.indexOf(uc);
-        int lci = text.indexOf(lc);
-
-        if (uci == -1) {
-            return lci;
-        } else if(lci == -1) {
-            return uci;
-        } else {
-            return (lci < uci) ? lci : uci;
-        }
-    }
-
     /**
      * Checks and answers if the parent menu indicates that we should use no icons.
      */

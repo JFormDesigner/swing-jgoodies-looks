@@ -38,8 +38,9 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
-import com.jgoodies.clearlook.ClearLookManager;
 import com.sun.java.swing.plaf.windows.WindowsSplitPaneUI;
+
+import com.jgoodies.clearlook.ClearLookManager;
 
 
 /**

@@ -37,10 +37,11 @@ import javax.swing.JComponent;
 import javax.swing.LookAndFeel;
 import javax.swing.plaf.ComponentUI;
 
+import com.sun.java.swing.plaf.windows.WindowsMenuBarUI;
+
 import com.jgoodies.plaf.BorderStyle;
 import com.jgoodies.plaf.HeaderStyle;
 import com.jgoodies.plaf.Options;
-import com.sun.java.swing.plaf.windows.WindowsMenuBarUI;
 
 /**
  * The JGoodies Windows look and feel implemenation of <code>MenuBarUI</code>.<p>

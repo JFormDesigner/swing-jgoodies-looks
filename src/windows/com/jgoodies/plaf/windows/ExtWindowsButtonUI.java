@@ -36,10 +36,11 @@ import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
+import com.sun.java.swing.plaf.windows.WindowsButtonUI;
+
 import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.common.ButtonMarginListener;
-import com.sun.java.swing.plaf.windows.WindowsButtonUI;
 
 /**
  * The JGoodies Windows look&amp;feel implementation of <code>ButtonUI</code>.

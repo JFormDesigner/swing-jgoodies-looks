@@ -50,9 +50,6 @@ public final class Options {
 
     // Look & Feel Names ****************************************************
 
-    public static final String EXT_MOTIF_NAME =
-        "com.jgoodies.plaf.motif.ExtMotifLookAndFeel";
-        
     public static final String PLASTIC_NAME =
         "com.jgoodies.plaf.plastic.PlasticLookAndFeel";
         
@@ -295,9 +292,7 @@ public final class Options {
      * @see #setUseNarrowButtons(boolean)
      */
     public static boolean getUseNarrowButtons() {
-        Object value = UIManager.get(USE_NARROW_BUTTONS_KEY);
-        // TODO: 1.4 #getBoolean
-        return Boolean.TRUE.equals(value);
+        return UIManager.getBoolean(USE_NARROW_BUTTONS_KEY);
     }
 
     /**
@@ -400,9 +395,6 @@ public final class Options {
         putLookAndFeelReplacement(
             "com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
             EXT_WINDOWS_NAME);
-        putLookAndFeelReplacement(
-            "com.sun.java.swing.plaf.motif.MotifLookAndFeel",
-            EXT_MOTIF_NAME);
     }
 
     /**

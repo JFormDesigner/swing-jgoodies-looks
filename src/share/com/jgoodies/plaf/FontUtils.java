@@ -35,6 +35,7 @@ import java.awt.Font;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
+
 import sun.security.action.GetPropertyAction;
 
 /**
@@ -176,17 +177,13 @@ public final class FontUtils {
 			return Font.decode(fontDescription);
 		}
 		
-		Font menuFont;
-		if (LookUtils.IS_BEFORE_14) {
-			menuFont = guessFont(hints.menuFontSize());
-		} else {
-			menuFont = table.getFont("Menu.font");
-			if (menuFont.getName().equals("Tahoma")) {
-				float size		= menuFont.getSize() + hints.menuFontSizeDelta();
-				float minSize	= hints.menuFontSize();
-				menuFont		= menuFont.deriveFont(Math.max(minSize, size));
-			}
+		Font menuFont= table.getFont("Menu.font");
+		if (menuFont.getName().equals("Tahoma")) {
+			float size		= menuFont.getSize() + hints.menuFontSizeDelta();
+			float minSize	= hints.menuFontSize();
+			menuFont		= menuFont.deriveFont(Math.max(minSize, size));
 		}
+		
 		return new FontUIResource(menuFont);
 	}
 	
@@ -217,9 +214,6 @@ public final class FontUtils {
 		}
 		
 		Font controlFont;
-		if (LookUtils.IS_BEFORE_14) {
-			controlFont = guessFont(hints.controlFontSize());
-		} else {
 			//LookUtils.log("Label.font     =" + table.getFont("Label.font"));			
 			//LookUtils.log("Button.font    =" + table.getFont("Button.font"));	
 			//LookUtils.log("OptionPane.font=" + table.getFont("OptionPane.font"));	
@@ -232,28 +226,11 @@ public final class FontUtils {
 				float size = oldSize + hints.controlFontSizeDelta();
 				controlFont = controlFont.deriveFont(Math.max(minSize, size));
 			}
-		}
 		//System.out.println("Hints font size =" + hints.controlFontSize());
 		//System.out.println("Hints size delta =" + hints.controlFontSizeDelta());
 		//System.out.println("Control font size=" + controlFont.getSize());		
 		return new FontUIResource(controlFont);
 	}
 	
-	
-	/**
-	 * Makes a good guess for the platform's system font using the specified font size.
-	 * Tries to get the MS Tahoma font, that should be present on most Windows platforms; 
-	 * it comes with all recent Windows releases and with the MS Office.
-     * 
-     * @param size   the size of the font to be looked up
-     * @return a good guess of the system font 
-	 */
-	public static Font guessFont(int size) {
-		// Guess the system font name;
-		String fontName = LookUtils.isModernWindows() ? "Tahoma" : "dialog";
 		
-		// Get the font - may fail if the font is absent.
-		return new Font(fontName, Font.PLAIN, size);
-	}
-	
 }

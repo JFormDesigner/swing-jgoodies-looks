@@ -30,17 +30,11 @@
 
 package com.jgoodies.plaf.windows;
 
-import java.awt.Adjustable;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 
 import com.sun.java.swing.plaf.windows.WindowsScrollBarUI;
-
-import com.jgoodies.plaf.LookUtils;
 
 /**
  * The JGoodies Windows Look and Feel implementation of
@@ -48,8 +42,7 @@ import com.jgoodies.plaf.LookUtils;
  * 
  * It differs from Sun's Windows Look in that it paints black button triangles
  * and that it honors the <code>ScrollBar.width</code> property to determine
- * the preferred size. In 1.3 environments, this property is set honoring 
- * the screen resolution.
+ * the preferred size. 
  * 
  * @author Karsten Lentzsch
  */
@@ -69,21 +62,5 @@ public final class ExtWindowsScrollBarUI extends WindowsScrollBarUI {
 		return createDecreaseButton(orientation);
 	}
 	
-
-    /*
-     * Differs from superclass behavior in that it honors
-     * the screen resolution in 1.3 environments.
-     */
-    public Dimension getPreferredSize(JComponent c) {
-    	if (!LookUtils.IS_BEFORE_14)
-    		return super.getPreferredSize(c);
-    		
-    	int width  = UIManager.getInt("ScrollBar.width");
-    	int height = width * 3;
-		return (scrollbar.getOrientation() == Adjustable.VERTICAL)
-		    ? new Dimension(width,  height)
-	    	: new Dimension(height, width);
-    }
-
 	
 }

@@ -37,10 +37,10 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
+import com.sun.java.swing.plaf.windows.WindowsLabelUI;
+
 import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.clearlook.ClearLookUtils;
-
-import com.sun.java.swing.plaf.windows.WindowsLabelUI;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of <code>LabelUI</code>.

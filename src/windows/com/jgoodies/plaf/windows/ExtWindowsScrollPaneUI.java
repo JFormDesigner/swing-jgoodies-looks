@@ -43,10 +43,11 @@ import javax.swing.border.LineBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ComponentUI;
 
+import com.sun.java.swing.plaf.windows.WindowsScrollPaneUI;
+
 import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.clearlook.ClearLookMode;
 import com.jgoodies.plaf.Options;
-import com.sun.java.swing.plaf.windows.WindowsScrollPaneUI;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of

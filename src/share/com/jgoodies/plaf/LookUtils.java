@@ -58,7 +58,6 @@ public final class LookUtils {
 
     // Properties and Keys for Internal Use Only - May Change without Notice 
 
-    public static final boolean IS_BEFORE_14    = isBefore14();
     public static final boolean IS_140          = is140();
     public static final boolean IS_142_OR_LATER = is142orLater();
     public static final boolean HAS_XP_LAF      = IS_142_OR_LATER;
@@ -208,12 +207,8 @@ public final class LookUtils {
     public static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
         return isLowRes
-            ? (IS_BEFORE_14
-                ? new InsetsUIResource(0, pad, 1, pad)
-                : new InsetsUIResource(2, pad, 1, pad))
-            : (IS_BEFORE_14
-                ? new InsetsUIResource(2, pad, 2, pad)
-                : new InsetsUIResource(3, pad, 3, pad));
+            ? new InsetsUIResource(2, pad, 1, pad)
+            : new InsetsUIResource(3, pad, 3, pad);
     }
 
     // Color Modifications **************************************************
@@ -307,16 +302,6 @@ public final class LookUtils {
     }
 
     // Private Helper Methods ***********************************************
-
-    /**
-     * Checks and answers if we are on a 1.2 or 1.3 runtime environment.
-     * 
-     * @return true in 1.2 and 1.3 environments, false otherwise
-     */
-    private static boolean isBefore14() {
-        String version = System.getProperty("java.version");
-        return version.startsWith("1.2") || version.startsWith("1.3");
-    }
 
     /**
      * Checks and answers if we are on a J2SE 1.4.2 or later.

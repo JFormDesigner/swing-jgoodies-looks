@@ -42,13 +42,10 @@ import javax.swing.JComponent;
 import javax.swing.LookAndFeel;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.metal.MetalButtonUI;
-import javax.swing.plaf.metal.MetalToggleButtonUI;
 import javax.swing.plaf.metal.MetalToolBarUI;
 
 import com.jgoodies.plaf.BorderStyle;
 import com.jgoodies.plaf.HeaderStyle;
-import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.Options;
 
 /**
@@ -64,7 +61,6 @@ import com.jgoodies.plaf.Options;
 public final class PlasticToolBarUI extends MetalToolBarUI {
 
     private static final String PROPERTY_PREFIX = "ToolBar.";
-    private final Border myRolloverBorder = createRolloverBorder();
 
     private PropertyChangeListener listener;
 
@@ -79,32 +75,12 @@ public final class PlasticToolBarUI extends MetalToolBarUI {
     }
 
     protected void setBorderToRollover(Component c) {
-        if (LookUtils.IS_BEFORE_14) {
-            setBorderToRollover13(c);
-            return;
-        }
-
         if (c instanceof AbstractButton) {
             super.setBorderToRollover(c);
         } else if (c instanceof Container) {
             Container cont = (Container) c;
             for (int i = 0; i < cont.getComponentCount(); i++)
                 super.setBorderToRollover(cont.getComponent(i));
-        }
-    }
-
-    private void setBorderToRollover13(Component c) {
-        if (c instanceof AbstractButton) {
-            AbstractButton b = (AbstractButton) c;
-            Object ui = b.getUI();
-            if ((ui instanceof MetalButtonUI)
-                || (ui instanceof MetalToggleButtonUI))
-                b.setBorder(myRolloverBorder);
-            b.setRolloverEnabled(true);
-        } else if (c instanceof Container) {
-            Container cont = (Container) c;
-            for (int i = 0; i < cont.getComponentCount(); i++)
-                setBorderToRollover13(cont.getComponent(i));
         }
     }
 
