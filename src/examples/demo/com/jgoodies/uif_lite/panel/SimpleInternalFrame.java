@@ -57,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * be displayed as selected.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
@@ -74,7 +74,16 @@ public class SimpleInternalFrame extends JPanel {
     // Instance Creation ****************************************************
 
     /**
-     * Constructs a <code>SimpleInternalFrame</code> with the specified title.
+     * Constructs an empty SimpleInternalFrame that
+     * has neither an icon, nor a title, nor a toolbar.
+     */
+    public SimpleInternalFrame() {
+        this("");
+    }
+    
+    
+    /**
+     * Constructs a SimpleInternalFrame with the specified title.
      * 
      * @param title       the initial title
      */
@@ -84,7 +93,7 @@ public class SimpleInternalFrame extends JPanel {
     
     
     /**
-     * Constructs a <code>SimpleInternalFrame</code> with the specified 
+     * Constructs a SimpleInternalFrame with the specified 
      * icon, and title.
      * 
      * @param icon        the initial icon
@@ -96,7 +105,7 @@ public class SimpleInternalFrame extends JPanel {
 
     
     /**
-     * Constructs a <code>SimpleInternalFrame</code> with the specified 
+     * Constructs a SimpleInternalFrame with the specified 
      * title, tool bar, and content panel.
      * 
      * @param title       the initial title
@@ -109,7 +118,7 @@ public class SimpleInternalFrame extends JPanel {
     
 
     /**
-     * Constructs a <code>SimpleInternalFrame</code> with the specified 
+     * Constructs a SimpleInternalFrame with the specified 
      * icon, title, tool bar, and content panel.
      * 
      * @param icon        the initial icon
