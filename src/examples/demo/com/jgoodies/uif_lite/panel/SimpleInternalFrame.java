@@ -57,7 +57,7 @@ import com.jgoodies.plaf.LookUtils;
  * be displayed as selected.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
  */
@@ -372,6 +372,9 @@ public class SimpleInternalFrame extends JPanel {
             int x, int y, int w, int h) {
                 
             Color shadow        = UIManager.getColor("controlShadow");
+            if (shadow == null) {
+                shadow = Color.GRAY;
+            }
             Color lightShadow   = new Color(shadow.getRed(), 
                                             shadow.getGreen(), 
                                             shadow.getBlue(), 
