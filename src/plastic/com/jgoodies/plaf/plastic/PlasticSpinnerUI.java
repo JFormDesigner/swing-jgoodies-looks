@@ -31,6 +31,7 @@
 package com.jgoodies.plaf.plastic;
 
 import java.awt.Component;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 
 import javax.swing.JButton;
@@ -39,9 +40,9 @@ import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
 import com.jgoodies.plaf.common.ExtBasicArrowButtonHandler;
@@ -50,13 +51,16 @@ import com.jgoodies.plaf.common.ExtBasicSpinnerLayout;
 
 /**
  * The JGoodies Plastic Look and Feel implementation of <code>SpinnerUI</code>.
+ * Configures the default editor to adjust font baselines and component
+ * bounds.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
  */
 public final class PlasticSpinnerUI extends BasicSpinnerUI {
 	
-	private static final Border EMPTY_BORDER 
-									= new BorderUIResource(new EmptyBorder(2, 2, 2, 2));
+	private static final Border MARGIN_BORDER = 
+	    new BorderUIResource(new BasicBorders.MarginBorder());
 	
 	
 	public static ComponentUI createUI(JComponent b) {
@@ -197,7 +201,10 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
     private void configureEditor(JComponent editor) {
     	if ((editor instanceof JSpinner.DefaultEditor)) {
 	    	JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
-    		defaultEditor.getTextField().setBorder(EMPTY_BORDER); 
+	    	defaultEditor.getTextField().getUI();
+	    	defaultEditor.getTextField().setBorder(MARGIN_BORDER);
+	    	Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
+	    	defaultEditor.getTextField().setMargin(insets);
     	}
     }
     

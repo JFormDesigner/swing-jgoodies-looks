@@ -355,7 +355,7 @@ final class PlasticBorders {
 
 		protected static final Insets INSETS = LookUtils.isLowRes
             ? new Insets(2, 3, 3, 3)
-            : new Insets(2, 3, 2, 3);
+            : new Insets(1, 3, 1, 3);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;

@@ -326,12 +326,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Object narrowButtonMargin		= LookUtils.createButtonMargin(true);
 		
 		// Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
-		Object textInsets 			    = LookUtils.isLowRes  || LookUtils.IS_OS_WINDOWS_XP
-                                                ? new InsetsUIResource(1, 2, 1, 2)
-                                                : new InsetsUIResource(2, 2, 2, 2);
-        Object wrappedTextInsets		= LookUtils.isLowRes  || LookUtils.IS_OS_WINDOWS_XP
-                                                ? new InsetsUIResource(2, 3, 1, 2)
-                                                : new InsetsUIResource(3, 3, 2, 2);
+		Object textInsets 			    = new InsetsUIResource(1, 2, 1, 2);
+        Object wrappedTextInsets		= new InsetsUIResource(2, 3, 1, 2);
                                                 
 		Object menuItemMargin			= LookUtils.isLowRes
 											? new InsetsUIResource(3, 0, 3, 0)
@@ -451,6 +447,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"SimpleInternalFrame.activeTitleBackground",	getSimpleInternalFrameBackground(),
 		
 	    "Spinner.border", 								PlasticBorders.getFlush3DBorder(),
+	    "Spinner.defaultEditorInsets",				    textInsets,
 	    
 		"SplitPane.dividerSize",						new Integer(7),
 		"TabbedPane.focus",								getFocusColor(),

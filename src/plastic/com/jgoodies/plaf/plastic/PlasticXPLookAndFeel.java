@@ -133,6 +133,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "PasswordField.border",           textFieldBorder,
             "PasswordField.margin",           textInsets,             
             "Spinner.border", 				  scrollPaneBorder,
+            "Spinner.defaultEditorInsets",	  textInsets,
             
             "ScrollPane.border",              scrollPaneBorder,
             "Table.scrollPaneBorder", 		  scrollPaneBorder,
