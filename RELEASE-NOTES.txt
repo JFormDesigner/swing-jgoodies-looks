@@ -7,13 +7,31 @@
 
 INTRODUCTION
 
-    This release supports Java 1.4 or later only and fixes several bugs.
+    This release requires Java 1.4 or later and fixes several bugs.
+
+    Also, the included Simple Looks Demo now ships with the
+    JGoodies SimpleInternalFrame that provides an elegant means
+    to structure panels in a Swing Application.
+    
+    This preview release still lacks an improved font management
+    for the Plastic l&f family on non-Windows platforms.
+    
+    NOTE: Due to incompatible class changes it is strongly recommended 
+    to not place the Looks jars in the Java extension directory!
+    
 
 
 DISTRIBUTION CHANGES
 
     o Removed JGoodies Motif Look&Feel
     o Moved 1.4 sources to the associated directories
+    
+    
+VISUAL INCOMPATIBILITIES
+
+    o Most Plastic and Plastic3D widget dimensions have been
+      reduced by 1 or 2 pixels to use the same dimensions 
+      as PlasticXP and the JGoodies Windows Look&Feel.
     
     
 BUGS FIXED
@@ -34,11 +52,13 @@ BUGS FIXED
     o ExtWin:    Poor spinner size and rendering
     o ExtWinXP:  Password field still paints '*' as echo char
     o ExtWinXP:  Lacks Windows XP icons
+    o Demo:      Fails to read UIManager with the GTKLookAndFeel
 
 
 NEW FEATURES
     o All l&fs:  Honors UIDefaults setting "ComboBox.editorColumns" to set
-                 the columns in the default combo box editor.
+                 the columns in the default combo box editor  
+    o Demo:      Added JGoodies SimpleInternalFrame
 
 
 OTHER CHANGES
@@ -48,6 +68,7 @@ OTHER CHANGES
     o Shared:    Renamed constants in LookUtils to follow the naming conventions 
                  as used by the Jakarta Commons Lang SystemUtils class.
     o Plastic:   Increased left and right menu margins by 2px on each side
+    o Plastic:   Crisper option pane icons
     o Demo:      Moved split pane test from Looks Demo to simple Looks Demo
     
     
