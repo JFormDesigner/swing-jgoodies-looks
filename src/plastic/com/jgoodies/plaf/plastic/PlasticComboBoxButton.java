@@ -87,8 +87,7 @@ final class PlasticComboBoxButton extends JButton {
         setRequestFocusEnabled(comboBox.isEnabled());
         setBorder(UIManager.getBorder("ComboBox.arrowButtonBorder"));
         setMargin(new Insets(0, LEFT_INSET, 0, RIGHT_INSET));
-        borderPaintsFocus =
-            Boolean.TRUE.equals(UIManager.get("ComboBox.borderPaintsFocus"));
+        borderPaintsFocus = UIManager.getBoolean("ComboBox.borderPaintsFocus");
     }
 
     public JComboBox getComboBox() {
