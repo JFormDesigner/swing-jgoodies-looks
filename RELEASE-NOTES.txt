@@ -18,6 +18,13 @@ DISTRIBUTION CHANGES
     o Added an ANT build script
     o Added precompiled jars for Tiny and the simple Looks demo.
     o Renamed library JAR files
+    
+    
+    
+BUGS FIXED
+
+    o Catches IllegalAccessExceptions in unsigned Web Start Applications 
+      and unsigned Applets.
 
 
 CODE CLEANUP
