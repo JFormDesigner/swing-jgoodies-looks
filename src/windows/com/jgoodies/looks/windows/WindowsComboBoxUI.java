@@ -47,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -136,29 +136,27 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         Insets insets = getInsets();
         Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
         int buttonSize = height - (insets.top + insets.bottom);
+        //System.out.println("height=" + height + "; insets=" + insets + "; rendererMargin=" + rendererMargin);
         if (arrowButton != null) {
             buttonSize = arrowButton.getWidth();
         }
-                if (comboBox.getComponentOrientation().isLeftToRight()) {
+        if (comboBox.getComponentOrientation().isLeftToRight()) {
             return new Rectangle(
                     insets.left + rendererMargin.left,
                     insets.top + rendererMargin.top,
-                    width
-                            - (insets.left + rendererMargin.left + insets.right
-                                    + rendererMargin.right + buttonSize),
-                    height
-                            - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
+                    width  - (insets.left + rendererMargin.left  + insets.right
+                                          + rendererMargin.right + buttonSize),
+                    height - (insets.top  + rendererMargin.top + insets.bottom 
+                                          + rendererMargin.bottom));
         } else {
             return new Rectangle(
                     insets.left + rendererMargin.left + buttonSize,
                     insets.top + rendererMargin.top,
-                    width
-                            - (insets.left + rendererMargin.left + insets.right
-                                    + rendererMargin.right + buttonSize),
-                    height
-                            - (insets.top + rendererMargin.top + insets.bottom + rendererMargin.bottom));
+                    width  - (insets.left + rendererMargin.left + insets.right
+                                          + rendererMargin.right + buttonSize),
+                    height - (insets.top  + rendererMargin.top + insets.bottom 
+                                          + rendererMargin.bottom));
         }
-
     }
 
 
@@ -180,6 +178,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
             Insets insets = getInsets();
             int buttonWidth  = UIManager.getInt("ScrollBar.width");
             int buttonHeight = height - (insets.top + insets.bottom);
+            //System.out.println("ButtonHeight=" + buttonHeight);
 
             if (arrowButton != null) {
                 if (cb.getComponentOrientation().isLeftToRight()) {
