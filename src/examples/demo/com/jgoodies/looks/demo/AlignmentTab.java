@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 final class AlignmentTab {
     
@@ -121,10 +121,10 @@ final class AlignmentTab {
         builder.nextLine(2);
         
         builder.append(createCenteredLabel("Label"));
-        builder.append("Field");
-        builder.append("Combo");
-        builder.append("Spinner");
-        builder.append("Button");
+        builder.append(createCenteredLabel("Field"));
+        builder.append(createCenteredLabel("Combo"));
+        builder.append(createCenteredLabel("Spinner"));
+        builder.append(createCenteredLabel("Button"));
         builder.append(TEST_STR);
         builder.append(new JTextField(TEST_STR));
         builder.append(createComboBox(TEST_STR, true));
