@@ -3,12 +3,16 @@
                  JGoodies Looks(tm) Change History
                         
 
-1.1.2 (July-17-2003)
+20030719 (July-19-2003)
 
    o Distribution changed:
      + Demo removed 
      + Build overhauled 
    o Obsolete null-check in FontUtils removed
+   o Minor code clean-up: 
+     + Removed obsolete type casts
+     + Removed obsolete semicolons
+     + Direct static access
 
 
 1.1.1 (June-22-2003)
