@@ -48,6 +48,8 @@ import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.plaf.LookUtils;
+
 
 /**
  * This class consists of a set of <code>Border</code>s used 
@@ -144,7 +146,9 @@ final class PlasticXPBorders {
      */
     private static class XPButtonBorder extends AbstractBorder implements UIResource {
 
-        protected static final Insets INSETS = new Insets(2, 2, 2, 2);
+        protected static final Insets INSETS = LookUtils.isLowRes
+            ? new Insets(3, 2, 3, 2)
+            : new Insets(2, 2, 2, 2);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;

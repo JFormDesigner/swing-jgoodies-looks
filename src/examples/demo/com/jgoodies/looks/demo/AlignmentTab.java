@@ -33,7 +33,9 @@ package com.jgoodies.looks.demo;
 import javax.swing.*;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.FormFactory;
+import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.plaf.Options;
@@ -43,7 +45,7 @@ import com.jgoodies.plaf.Options;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class AlignmentTab {
     
@@ -57,16 +59,24 @@ final class AlignmentTab {
      */
     JComponent build() {
         FormLayout layout = new FormLayout(
-                "p, 2px, 35dlu, 2px, 35dlu, 2px, 35dlu, 2px, max(35dlu;p)");
+                "0:grow, center:pref, 0:grow", 
+                "pref, 21dlu, pref");
+        
+        PanelBuilder builder = new PanelBuilder(layout);
+        builder.setDefaultDialogBorder();
+        
+        builder.add(createHelpLabel(),         new CellConstraints(2, 1));
+        builder.add(buildAlignmentTestPanel(), new CellConstraints(2, 3));
+        
+        return builder.getPanel();
+    }
+    
+    private JComponent buildAlignmentTestPanel() {
+        FormLayout layout = new FormLayout(
+                "p, 2px, 36dlu, 2px, 36dlu, 2px, 36dlu, 2px, max(36dlu;p)");
         
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
-        builder.setDefaultDialogBorder();
         builder.setLineGapSize(Sizes.pixel(1));
-        
-        builder.append(createHelpLabel(), 9);
-
-        builder.appendRow(FormFactory.PARAGRAPH_GAP_ROWSPEC);
-        builder.nextLine(2);
         
         builder.append(createCenteredLabel("Label"));
         builder.append(createCenteredLabel("Field"));

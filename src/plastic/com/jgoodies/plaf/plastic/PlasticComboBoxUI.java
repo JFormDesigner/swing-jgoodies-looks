@@ -30,33 +30,24 @@
 
 package com.jgoodies.plaf.plastic;
 
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Insets;
-import java.awt.LayoutManager;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.ComboBoxEditor;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.plaf.metal.MetalScrollBarUI;
 
-import com.jgoodies.plaf.LookUtils;
 
 /**
  * The JGoodies Plastic Look and Feel implementation of <code>ComboBoxUI</code>.
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.3 $
+* @version $Revision: 1.4 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -131,7 +122,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
              * In case, a custom renderer is used, it may use a different height, 
              * and we can't help much.
              */
-            size.height += LookUtils.isLowRes ? 0 : 2;
+            size.height += 2;
             size.width  += insets.left + insets.right;
             size.width  += buttonInsets.left + buttonInsets.right;
             size.width  += buttonMargin.left + buttonMargin.right;
