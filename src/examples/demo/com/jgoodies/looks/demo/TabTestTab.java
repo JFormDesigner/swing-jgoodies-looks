@@ -34,14 +34,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.Borders;
-import com.jgoodies.forms.layout.CellConstraints;
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.looks.Options;
 import com.jgoodies.uif_lite.component.Factory;
 import com.jgoodies.uif_lite.panel.SimpleInternalFrame;
@@ -51,7 +49,7 @@ import com.jgoodies.uif_lite.panel.SimpleInternalFrame;
  * tabbed panes using two <code>SimpleInternalFrame</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class TabTestTab {
 
@@ -77,8 +75,8 @@ final class TabTestTab {
     private JComponent buildHorizontalSplit() {
         return Factory.createStrippedSplitPane(
             JSplitPane.HORIZONTAL_SPLIT,
-            buildNavigationPanel(),
-            buildEditor(),
+            buildMainLeftPanel(),
+            buildMainRightPanel(),
             0.2f);
     }
     
@@ -87,7 +85,7 @@ final class TabTestTab {
      * Builds and returns a panel that uses a tabbed pane with embedded tabs
      * enabled.
      */
-    private JComponent buildNavigationPanel() {
+    private JComponent buildMainLeftPanel() {
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.BOTTOM);
         tabbedPane.putClientProperty(Options.EMBEDDED_TABS_KEY, Boolean.TRUE);
         tabbedPane.addTab("Tree", Factory.createStrippedScrollPane(buildTree()));
@@ -123,11 +121,13 @@ final class TabTestTab {
     /**
      * Builds and returns a tabbed pane with the no-content-border enabled.
      */
-    private JComponent buildEditor() {
+    private JComponent buildMainRightPanel() {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.putClientProperty(Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
-        tabbedPane.addTab("Overview",  buildOverviewTab());
-        tabbedPane.addTab("Addresses", buildAddressesTab());
+        tabbedPane.addTab("Top",    buildSplittedTabs(JTabbedPane.TOP));
+        tabbedPane.addTab("Bottom", buildSplittedTabs(JTabbedPane.BOTTOM));
+        tabbedPane.addTab("Left",   buildSplittedTabs(JTabbedPane.LEFT));
+        tabbedPane.addTab("Right",  buildSplittedTabs(JTabbedPane.RIGHT));
 
         SimpleInternalFrame sif = new SimpleInternalFrame("Tabbed Pane without Content Border");
         sif.setPreferredSize(new Dimension(300, 100));
@@ -137,85 +137,51 @@ final class TabTestTab {
     
     
     /**
-     * Builds and returns the editor's overview tab.
+     * Builds and returns a split pane with tabs using different tab layouts
+     * on the left and right-hand side. The tab on the left-hand side uses
+     * the <code>WRAP_TAB_LAYOUT</code>, the tab on the right side uses
+     * the <code>SCROLL_TAB_LAYOUT</code>.
+     * The tabs are positioned using the specified orientation. 
+     * 
+     * @param tabPlacement the placement for the tabs relative to the content
+     * @throws IllegalArgumentException if tab placement is not
+     *            one of the supported values
      */
-    private JComponent buildOverviewTab() {
-        FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref), 4dlu, max(35dlu;min), 2dlu, min, 2dlu, min, 2dlu, min, ",
-                "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p");
-        layout.setColumnGroups(new int[][] { { 3, 5, 7, 9 } });
-
-        PanelBuilder builder = new PanelBuilder(layout);
-            
-        builder.setDefaultDialogBorder();
-        CellConstraints cc = new CellConstraints();
-
-        builder.addLabel("File number:",        cc.xy (1,  1));
-        builder.add(new JTextField(),           cc.xyw(3,  1, 7));
-        builder.addLabel("RFQ number:",         cc.xy (1,  3));
-        builder.add(new JTextField(),           cc.xyw(3,  3, 7));
-        builder.addLabel("Entry date:",         cc.xy (1,  5));
-        builder.add(new JTextField(),           cc.xy (3,  5));
-        builder.addLabel("Sales Person:",       cc.xy (1,  7));
-        builder.add(new JTextField(),           cc.xyw(3,  7, 7));
-        builder.addLabel("BL/MBL number:",      cc.xy (1,  9));
-        builder.add(new JTextField(),           cc.xy (3,  9));
-        builder.add(new JTextField(),           cc.xy (5,  9));
-        builder.addLabel("Shipper:",            cc.xy (1, 11));
-        builder.add(new JTextField(),           cc.xy (3, 11));
-        builder.add(new JTextField(),           cc.xyw(5, 11, 5));
-        builder.addLabel("Consignee:",          cc.xy (1, 13));
-        builder.add(new JTextField(),           cc.xy (3, 13));
-        builder.add(new JTextField(),           cc.xyw(5, 13, 5));
-        builder.addLabel("Port of loading:",    cc.xy (1, 15));
-        builder.add(new JTextField(),           cc.xy (3, 15));
-        builder.add(new JTextField(),           cc.xyw(5, 15, 5));
-        builder.addLabel("Final destination:",  cc.xy (1, 17));
-        builder.add(new JTextField(),           cc.xy (3, 17));
-        builder.add(new JTextField(),           cc.xyw(5, 17, 5));
-        
-        return builder.getPanel();
+    private JComponent buildSplittedTabs(int tabPlacement) {
+        int orientation = (tabPlacement == JTabbedPane.TOP 
+                        || tabPlacement == JTabbedPane.BOTTOM)
+                        ? JSplitPane.HORIZONTAL_SPLIT
+                        : JSplitPane.VERTICAL_SPLIT;
+        JComponent split = Factory.createStrippedSplitPane(
+                orientation,
+                buildTabPanel(tabPlacement, JTabbedPane.WRAP_TAB_LAYOUT),
+                buildTabPanel(tabPlacement, JTabbedPane.SCROLL_TAB_LAYOUT),
+                0.5f);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(split, BorderLayout.CENTER);
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        return panel;
     }
     
     
     /**
-     * Builds and returns the addresses tab.
+     * Builds and returns a sample tabbed pane with the specified orientation
+     * and tab layout style. 
+     * 
+     * @param tabPlacement the placement for the tabs relative to the content
+     * @param tabLayoutPolicy the policy for laying out tabs when all tabs will not fit on one run
+     * @throws IllegalArgumentException if tab placement or tab layout policy is not
+     *            one of the supported values
      */
-    private JComponent buildAddressesTab() {
-        FormLayout layout = new FormLayout(
-                "12dlu, max(85dlu;default), 25dlu, max(85dlu;default)",
-                "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 21dlu, "
-              + "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p");
-
-        PanelBuilder builder = new PanelBuilder(layout);
-        builder.setDefaultDialogBorder();
-        CellConstraints cc = new CellConstraints();
-
-        builder.addTitle("Customer",        cc.xy(2,  1));
-        builder.add(new JTextField(),       cc.xy(2,  3));
-        builder.add(new JTextField(),       cc.xy(2,  5));
-        builder.add(new JTextField(),       cc.xy(2,  7));
-        builder.add(new JTextField(),       cc.xy(2,  9));
-
-        builder.addTitle("Shipper",         cc.xy(4,  1));
-        builder.add(new JTextField(),       cc.xy(4,  3));
-        builder.add(new JTextField(),       cc.xy(4,  5));
-        builder.add(new JTextField(),       cc.xy(4,  7));
-        builder.add(new JTextField(),       cc.xy(4,  9));
-        
-        builder.addTitle("Consignee",       cc.xy(2, 13));
-        builder.add(new JTextField(),       cc.xy(2, 15));
-        builder.add(new JTextField(),       cc.xy(2, 17));
-        builder.add(new JTextField(),       cc.xy(2, 19));
-        builder.add(new JTextField(),       cc.xy(2, 21));
-
-        builder.addTitle("Notify",          cc.xy(4,  13));
-        builder.add(new JTextField(),       cc.xy(4,  15));
-        builder.add(new JTextField(),       cc.xy(4,  17));
-        builder.add(new JTextField(),       cc.xy(4,  19));
-        builder.add(new JTextField(),       cc.xy(4,  21));
-
-        return builder.getPanel();
+    private JComponent buildTabPanel(int tabPlacement, int tabLayoutPolicy) {
+        JTabbedPane tabbedPane = new JTabbedPane(tabPlacement, tabLayoutPolicy);
+        String[] colors = {
+                "Black", "White", "Red", "Green", "Blue", "Yellow" };
+        for (int i = 0; i < colors.length; i++) {
+            String color = colors[i];
+            tabbedPane.addTab(color, new JPanel());
+        }
+        return tabbedPane;
     }
     
 
