@@ -133,7 +133,7 @@ final class SplitTab {
         table.setRowSelectionInterval(2, 2);
         int tableFontSize    = table.getFont().getSize();
         int minimumRowHeight = tableFontSize + 6;
-        int defaultRowHeight = LookUtils.isLowRes ? 17 : 18;
+        int defaultRowHeight = LookUtils.IS_LOW_RESOLUTION ? 17 : 18;
         table.setRowHeight(Math.max(minimumRowHeight, defaultRowHeight));
         return table;
     }

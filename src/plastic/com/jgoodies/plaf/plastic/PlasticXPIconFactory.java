@@ -89,7 +89,7 @@ public final class PlasticXPIconFactory {
 
     private static class CheckBoxIcon implements Icon, UIResource, Serializable {
 
-        private static final int SIZE = LookUtils.isLowRes ? 13 : 15;
+        private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
 
         public int getIconWidth()  { return SIZE; }
         public int getIconHeight() { return SIZE; }
@@ -167,7 +167,7 @@ public final class PlasticXPIconFactory {
     // Paints the icon for a radio button.
     private static class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-        private static final int SIZE = LookUtils.isLowRes ? 13 : 15;
+        private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
         
         private static final Stroke FOCUS_STROKE = new BasicStroke(2);
 

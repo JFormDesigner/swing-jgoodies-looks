@@ -51,8 +51,9 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
 /**
  * Provides convenience behavior used by the JGoodies Looks.
  *
- * @author Karsten Lentzsch
+ * @author  Karsten Lentzsch
  * @version $revision: $
+ * 
  * @see com.jgoodies.plaf.FontUtils
  */
 
@@ -170,7 +171,7 @@ public final class LookUtils {
      */
     public static final boolean IS_NETBEANS;
 
-    public static boolean isLowRes = isLowResolution();
+    public static final boolean IS_LOW_RESOLUTION = isLowResolution();
     
     private static boolean loggingEnabled;
     
@@ -297,7 +298,7 @@ public final class LookUtils {
      */
     public static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
-        return isLowRes
+        return IS_LOW_RESOLUTION
             ? new InsetsUIResource(2, pad, 1, pad)
             : new InsetsUIResource(3, pad, 3, pad);
     }

@@ -43,7 +43,7 @@ package com.jgoodies.plaf;
  * In 1.3 environments, the font guess is Tahoma on modern Windows,
  * "dialog" otherwise. In 1.4 environments, the system fonts will be used.
  *
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * @author Karsten Lentzsch
  * @see	Options#setGlobalFontSizeHints(FontSizeHints)
  * @see	FontUtils
@@ -122,7 +122,7 @@ public final class FontSizeHints {
      * @return the size of the menu font in the current resolution
 	 */
 	public int menuFontSize() {
-		return LookUtils.isLowRes ? loResMenuFontSize : hiResMenuFontSize();
+		return LookUtils.IS_LOW_RESOLUTION ? loResMenuFontSize : hiResMenuFontSize();
 	}
 	
 	
@@ -132,7 +132,7 @@ public final class FontSizeHints {
      * @return the size of the control font in the current resolution
 	 */
 	public int controlFontSize() {
-		return LookUtils.isLowRes ? loResControlFontSize : hiResControlFontSize();
+		return LookUtils.IS_LOW_RESOLUTION ? loResControlFontSize : hiResControlFontSize();
 	}
 	
 	

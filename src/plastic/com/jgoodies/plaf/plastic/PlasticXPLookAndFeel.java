@@ -106,7 +106,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object defaultButtonMargin  = createButtonMargin(false);
         Object narrowButtonMargin   = createButtonMargin(true);
 
-        String radioCheckIconName   = LookUtils.isLowRes
+        String radioCheckIconName   = LookUtils.IS_LOW_RESOLUTION
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
                                             
@@ -170,7 +170,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
      */
     private static Insets createButtonMargin(boolean narrow) {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
-        return LookUtils.isLowRes
+        return LookUtils.IS_LOW_RESOLUTION
             ? new InsetsUIResource(1, pad, 1, pad)
             : new InsetsUIResource(2, pad, 2, pad);
     }

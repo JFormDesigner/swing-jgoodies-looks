@@ -46,11 +46,11 @@ import com.jgoodies.plaf.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class DesktopTab {
     
-    private static final float SIZE_FACTOR = LookUtils.isLowRes ? 1f : 1.175f;
+    private static final float SIZE_FACTOR = LookUtils.IS_LOW_RESOLUTION ? 1f : 1.175f;
 
     /**
      * Builds the panel.

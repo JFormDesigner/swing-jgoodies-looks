@@ -196,7 +196,7 @@ public final class ExtButtonAreaLayout
      * @return the minimum button width
      */
     private int getMinimumButtonWidth() {
-        return LookUtils.isLowRes ? 75 : 100;
+        return LookUtils.IS_LOW_RESOLUTION ? 75 : 100;
     }
 
 }

@@ -55,7 +55,7 @@ import com.jgoodies.plaf.common.ShadowPopupBorder;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 final class PlasticBorders {
@@ -371,7 +371,7 @@ final class PlasticBorders {
 	
 	private static class ButtonBorder extends AbstractBorder implements UIResource {
 
-		protected static final Insets INSETS = LookUtils.isLowRes
+		protected static final Insets INSETS = LookUtils.IS_LOW_RESOLUTION
             ? new Insets(2, 3, 3, 3)
             : new Insets(1, 3, 1, 3);
 

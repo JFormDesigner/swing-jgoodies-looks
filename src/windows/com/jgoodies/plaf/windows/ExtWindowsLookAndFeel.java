@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -252,15 +252,15 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         	? textInsets
         	: new InsetsUIResource(0, 0, 0, 0);
 
-        Object menuItemMargin = LookUtils.isLowRes
+        Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
                 : new InsetsUIResource(2, 0, 2, 0);
-        Object menuMargin = LookUtils.isLowRes
+        Object menuMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(2, 3, 2, 3)
                 : new InsetsUIResource(2, 4, 2, 4);
 
         int pad = isXP ? 3 : 0;
-        Object popupMenuSeparatorMargin = LookUtils.isLowRes
+        Object popupMenuSeparatorMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(2, pad, 3, pad)
                 : new InsetsUIResource(3, pad, 4, pad);
 

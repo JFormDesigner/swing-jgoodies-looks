@@ -59,7 +59,7 @@ import com.jgoodies.plaf.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -333,7 +333,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Object textInsets 			    = new InsetsUIResource(1, 2, 1, 2);
         Object wrappedTextInsets		= new InsetsUIResource(2, 3, 1, 2);
                                                 
-		Object menuItemMargin			= LookUtils.isLowRes
+		Object menuItemMargin			= LookUtils.IS_LOW_RESOLUTION
 											? new InsetsUIResource(3, 0, 3, 0)
 											: new InsetsUIResource(2, 0, 2, 0);
 		Object menuMargin				= new InsetsUIResource(2, 4, 2, 4);

@@ -56,7 +56,7 @@ import com.jgoodies.plaf.LookUtils;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 final class PlasticXPBorders {
@@ -147,7 +147,7 @@ final class PlasticXPBorders {
      */
     private static class XPButtonBorder extends AbstractBorder implements UIResource {
 
-        protected static final Insets INSETS = LookUtils.isLowRes
+        protected static final Insets INSETS = LookUtils.IS_LOW_RESOLUTION
             ? new Insets(3, 2, 3, 2)
             : new Insets(2, 2, 2, 2);
 
