@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
  * look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 
@@ -59,7 +59,7 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic 3D Look and Feel"
-            + " - \u00a9 2001-2004 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
 
     protected boolean is3DEnabled() {
