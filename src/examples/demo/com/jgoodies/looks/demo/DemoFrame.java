@@ -271,12 +271,14 @@ public class DemoFrame extends JFrame {
     }
 
     /**
-     * Creates and answers a <code>JToggleButton</code> 
+     * Creates and returns a <code>JToggleButton</code> 
      * configured for use in a JToolBar.<p>
      * 
-     * Superceded by ToolBarToggleButton from the jGoodies UI framework.
+     * This is a simplified method that is overriden by the Looks Demo.
+     * The full code uses the JGoodies UI framework's ToolBarButton
+     * that better handles platform differences.
      */
-    private AbstractButton createToolBarRadioButton(String iconName) {
+    protected AbstractButton createToolBarRadioButton(String iconName) {
         JToggleButton button = new JToggleButton(readImageIcon(iconName));
         button.setFocusPainted(false);
         button.setMargin(TOOLBAR_BUTTON_MARGIN);
