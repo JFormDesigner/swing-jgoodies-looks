@@ -26,6 +26,7 @@ BUGS FIXED
     o Plastic:   Poor layout for editable combos
     o Plastic:   Combo box arrow not aligned with combo popup arrow
     o Plastic:   Spinner too small 
+    o Plastic:   Inconsistent font baselines for text field and text area
     o PlasticXP: Inconsistent border for text field and scroll pane
     o ExtWin:    IllegalAccessExceptions in untrusted environments.
     o ExtWin:    Uses Windows XP style even if switched off in OS or System
@@ -46,6 +47,8 @@ OTHER CHANGES
     o All code:  Reformatted sources
     o Shared:    Renamed constants in LookUtils to follow the naming conventions 
                  as used by the Jakarta Commons Lang SystemUtils class.
+    o Plastic:   Increased left and right menu margins by 2px on each side
+    o Demo:      Moved split pane test from Looks Demo to simple Looks Demo
     
     
 -------------------------------------------------------------------------------
