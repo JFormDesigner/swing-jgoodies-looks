@@ -110,6 +110,12 @@ public final class LookUtils {
         startsWith(OS_NAME, "Mac");
 
     /**
+     * True if this is Windows.
+     */
+    public static final boolean IS_OS_WINDOWS = 
+        startsWith(OS_NAME, "Windows");
+
+    /**
      * True if this is Windows 98/ME/2000/XP.
      */
     public static final boolean IS_OS_WINDOWS_MODERN = 

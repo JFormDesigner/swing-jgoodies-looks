@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -44,6 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
+ * @version $Revision: 1.5 $
  */
 
 public final class Options {
@@ -105,6 +106,9 @@ public final class Options {
         
     public static final String TAB_ICONS_ENABLED_KEY =
         "jgoodies.tabIconsEnabled";
+        
+    public static final String POPUP_DROP_SHADOW_ENABLED_KEY =
+        "jgoodies.popupDropShadowEnabled";
         
 
     // ClearLook Properties *************************************************
@@ -322,14 +326,10 @@ public final class Options {
 
         String userMode = LookUtils.getSystemProperty(TAB_ICONS_ENABLED_KEY, "");
         boolean overridden = userMode.length() > 0;
-        Object value =
-            overridden ? userMode : UIManager.get(TAB_ICONS_ENABLED_KEY);
 
-        boolean result =
-            overridden
+        boolean result = overridden
                 ? userMode.equalsIgnoreCase("true")
-                : value instanceof Boolean
-                && Boolean.TRUE.equals(value);
+                : Boolean.TRUE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY));
 
         if (overridden) {
             LookUtils.log(
@@ -349,6 +349,54 @@ public final class Options {
     public static void setTabIconsEnabled(boolean b) {
         UIManager.put(TAB_ICONS_ENABLED_KEY, new Boolean(b));
     }
+
+    /**
+     * Detects and answers if we shall drop shadows in <code>PopupMenus</code>.
+     * If the user has set a system property, we log a message 
+     * about the choosen style.
+     * 
+     * @return true if drop shadows are enabled, false if disabled
+     * 
+     * @see #setPopupDropShadowEnabled(boolean)
+     */
+    public static boolean isPopupDropShadowEnabled() {
+        String userMode = LookUtils.getSystemProperty(POPUP_DROP_SHADOW_ENABLED_KEY, "");
+        boolean overridden = userMode.length() > 0;
+        Object value = UIManager.get(POPUP_DROP_SHADOW_ENABLED_KEY);
+
+        boolean result;
+        if (overridden) {
+            result = userMode.equalsIgnoreCase("true");
+        } else {
+            result = value == null
+                ? isPopupDropShadowEnabledDefault()
+                : Boolean.TRUE.equals(value);
+        }
+
+        if (overridden) {
+            LookUtils.log(
+                "You have "
+                    + (result ? "en" : "dis")
+                    + "abled drop shadows in popup menus.");
+        }
+        return result;
+    }
+
+    /**
+     * Enables or disables the use of icons in <code>JTabbedPane</code>s.
+     * 
+     * @param b   true to enable icons in tabbed panes, false to disable them
+     * @see #isTabIconsEnabled()
+     */
+    public static void setPopupDropShadowEnabled(boolean b) {
+        UIManager.put(POPUP_DROP_SHADOW_ENABLED_KEY, new Boolean(b));
+    }
+    
+    
+    private static boolean isPopupDropShadowEnabledDefault() {
+        return LookUtils.IS_OS_WINDOWS;
+    }
+
 
     // Look And Feel Replacements *******************************************
 

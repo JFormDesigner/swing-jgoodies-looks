@@ -1,7 +1,7 @@
 
 
 
-                    JGoodies Looks, Version 1.2.1 Snapshot
+                    JGoodies Looks, Version 1.2.1
                             Release Notes
                         
 
@@ -16,7 +16,12 @@ BUGS FIXED
     o ExtWin:    ToolBarSeperatorUI broken in 1.4.0 and 1.4.1
     o ExtWin:    Missing Java cup icon in 1.5
     o ExtWin:    LookUtils#isWindowsXPLafEnabled fails in IBM WSAD.
-                 Actually it seems it fails on non-XP Windows flavors.
+                 Actually it seems to fail on non-XP Windows flavors.
+    o ExtWin:    Wrong XP popup menu border in 1.4 environments.
+    
+
+NEW FEATURES
+    o All l&fs:  Optional popup menu drop shadows, see class Options.  
 
 
 KNOWN ISSUES

@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -147,6 +147,8 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 			"CheckBoxMenuItemUI",    COMMON_PREFIX + "CheckBoxMenuItemUI", 
 			"RadioButtonMenuItemUI", COMMON_PREFIX + "RadioButtonMenuItemUI", 
 
+            // Optional drop shadow
+            "PopupMenuUI",           WINDOWS_PREFIX + "PopupMenuUI",
             // Has padding above and below the separator lines				
             "PopupMenuSeparatorUI",  COMMON_PREFIX + "PopupMenuSeparatorUI", 
 
@@ -330,6 +332,9 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                                                : makeIcon(superclass, "icons/Question.gif"),
             "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
             "PasswordField.margin",       textInsets, // 1.4.1 Bug
+            
+            "PopupMenu.border",           ExtWindowsBorders.getPopupMenuBorder(),
+            "PopupMenu.dropShadowBorder", ExtWindowsBorders.getDropShadowPopupMenuBorder(),
             "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
             "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies

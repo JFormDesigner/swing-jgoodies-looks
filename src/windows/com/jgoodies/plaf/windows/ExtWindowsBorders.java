@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -48,6 +48,8 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
+import com.jgoodies.plaf.common.ShadowPopupBorder;
+
 /**
  * Consists of static inner classes that define different 
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
@@ -60,6 +62,8 @@ final class ExtWindowsBorders {
 
     private static Border menuBorder;
     private static Border menuItemBorder;
+    private static Border popupMenuBorder;
+    private static Border dropShadowPopupMenuBorder;
     private static Border separatorBorder;
     private static Border etchedBorder;
     private static Border menuBarHeaderBorder;
@@ -141,6 +145,32 @@ final class ExtWindowsBorders {
 						   				new BasicBorders.MarginBorder());
 		}
 		return menuBarHeaderBorder;
+    }
+
+    /**
+     * Returns a border instance for a <code>JPopupMenu</code>.
+     * 
+     * @return the lazily created popup menu border
+     */
+    static Border getPopupMenuBorder() {
+        if (popupMenuBorder == null) {
+            popupMenuBorder = new PopupMenuBorder();
+        }
+        return popupMenuBorder;
+    }
+
+    /**
+     * Returns a border instance with drop shadow for a <code>JPopupMenu</code>.
+     * 
+     * @return the lazily created popup menu border
+     */
+    static Border getDropShadowPopupMenuBorder() {
+        if (dropShadowPopupMenuBorder == null) {
+            dropShadowPopupMenuBorder = new BorderUIResource.CompoundBorderUIResource(
+                    ShadowPopupBorder.getInstance(),
+                    new PopupMenuBorder());
+        }
+        return dropShadowPopupMenuBorder;
     }
 
     /**
@@ -367,6 +397,23 @@ final class ExtWindowsBorders {
 	}
 	
 	
+    private static class PopupMenuBorder extends AbstractBorder implements UIResource {
+        private static final Insets INSETS = new Insets(3, 3, 3, 3);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            g.translate(x, y);
+            g.setColor(UIManager.getColor("controlShadow"));
+            g.drawRect(0, 0, w-1, h-1);
+            g.setColor(UIManager.getColor("MenuItem.background"));
+            g.drawRect(1, 1, w-3, h-3);
+            g.drawRect(2, 2, w-5, h-5);
+            g.translate(-x, -y);
+        }
+
+        public Insets getBorderInsets(Component c) { return INSETS; }
+    }
+    
+
 	/**
 	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,

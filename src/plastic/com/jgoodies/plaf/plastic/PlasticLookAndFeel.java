@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -59,6 +59,7 @@ import com.jgoodies.plaf.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.10 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -163,7 +164,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
-            + " - \u00a9 2003 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2004 JGoodies Karsten Lentzsch";
     }
     
 	// Special Properties ***************************************************
@@ -254,6 +255,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 				"CheckBoxMenuItemUI",		COMMON_PREFIX + "CheckBoxMenuItemUI",
 				"RadioButtonMenuItemUI",	COMMON_PREFIX + "RadioButtonMenuItemUI",
 
+                // Provides a drop shadow
+                "PopupMenuUI",             PLASTIC_PREFIX + "PopupMenuUI",
 				// Has padding above and below the separator lines				
 		        "PopupMenuSeparatorUI",		COMMON_PREFIX + "PopupMenuSeparatorUI",
 		       
@@ -291,7 +294,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder();
 
 		Object popupMenuBorder			= PlasticBorders.getPopupMenuBorder();
-		
+        Object dropShadowPopupMenuBorder= PlasticBorders.getDropShadowPopupMenuBorder();
+    	
 		Object scrollPaneBorder			= PlasticBorders.getScrollPaneBorder();
 		Object tableHeaderBorder		= new BorderUIResource(
 										   (Border) table.get("TableHeader.cellBorder"));
@@ -426,6 +430,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "PasswordField.margin",                         textInsets,             
 
 		"PopupMenu.border",								popupMenuBorder,
+        "PopupMenu.dropShadowBorder",                   dropShadowPopupMenuBorder,
 		"PopupMenuSeparator.margin",					new InsetsUIResource(3, 4, 3, 4),	
 
 		"RadioButton.margin",							checkBoxMargin,					

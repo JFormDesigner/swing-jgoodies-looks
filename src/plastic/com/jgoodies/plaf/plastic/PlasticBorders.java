@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,6 +46,7 @@ import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.text.JTextComponent;
 
 import com.jgoodies.plaf.LookUtils;
+import com.jgoodies.plaf.common.ShadowPopupBorder;
 
 
 /**
@@ -53,6 +54,7 @@ import com.jgoodies.plaf.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.7 $
  */
 
 final class PlasticBorders {
@@ -69,6 +71,7 @@ final class PlasticBorders {
     private static Border menuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
+    private static Border dropShadowPopupMenuBorder;
     private static Border rolloverButtonBorder;
     private static Border scrollPaneBorder;
     private static Border separatorBorder;
@@ -209,6 +212,20 @@ final class PlasticBorders {
             popupMenuBorder = new PopupMenuBorder();
         }
         return popupMenuBorder;
+    }
+
+    /**
+     * Returns a border instance with drop shadow for a <code>JPopupMenu</code>.
+     * 
+     * @return the lazily created popup menu border
+     */
+    static Border getDropShadowPopupMenuBorder() {
+        if (dropShadowPopupMenuBorder == null) {
+            dropShadowPopupMenuBorder = new BorderUIResource.CompoundBorderUIResource(
+                    ShadowPopupBorder.getInstance(),
+                    new PopupMenuBorder());
+        }
+        return dropShadowPopupMenuBorder;
     }
 
     /**
@@ -650,10 +667,8 @@ final class PlasticBorders {
 			g.translate(x, y);
 			g.setColor(PlasticLookAndFeel.getControlDarkShadow());
 			g.drawRect(0, 0, w-1, h-1);
-			g.setColor(PlasticLookAndFeel.getPrimaryControlHighlight());
-			g.drawLine(1, 1, w-2, 1);
-			g.drawLine(1, 1, 1, h-2);
-			g.setColor(PlasticLookAndFeel.getMenuItemBackground());
+            g.setColor(PlasticLookAndFeel.getMenuItemBackground());
+			g.drawRect(1, 1, w-3, h-3);
 			g.drawRect(2, 2, w-5, h-5);
 			g.translate(-x, -y);
 		}
