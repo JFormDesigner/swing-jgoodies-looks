@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2000-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -32,11 +32,10 @@ package com.jgoodies.uif_lite.component;
 
 import java.awt.Component;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JSplitPane;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.SplitPaneUI;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
@@ -48,7 +47,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * and conversely, others will never show a divider border.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see javax.swing.plaf.basic.BasicSplitPaneUI
  */
@@ -64,12 +63,6 @@ public final class UIFSplitPane extends JSplitPane {
      */
     public static final String PROPERTYNAME_DIVIDER_BORDER_VISIBLE = 
         "dividerBorderVisible";
-    
-    /**
-     * Holds an empty border that is reused for the split pane itself
-     * and the divider.
-     */
-    private static final Border EMPTY_BORDER = new EmptyBorder(0, 0, 0, 0);
     
     /**
      * Determines whether the divider border shall be removed when
@@ -199,7 +192,7 @@ public final class UIFSplitPane extends JSplitPane {
              Component leftComponent,
              Component rightComponent) {
         UIFSplitPane split = new UIFSplitPane(orientation, leftComponent, rightComponent);
-        split.setBorder(EMPTY_BORDER);
+        split.setBorder(BorderFactory.createEmptyBorder());
         split.setOneTouchExpandable(false);
         return split;
     }
@@ -262,7 +255,7 @@ public final class UIFSplitPane extends JSplitPane {
         SplitPaneUI splitPaneUI = getUI();
         if (splitPaneUI instanceof BasicSplitPaneUI) {
             BasicSplitPaneUI basicUI = (BasicSplitPaneUI) splitPaneUI;
-            basicUI.getDivider().setBorder(EMPTY_BORDER);
+            basicUI.getDivider().setBorder(BorderFactory.createEmptyBorder());
         }
     }
     
