@@ -127,20 +127,13 @@
 	<h2>Popup Menu Drop Shadow</h2>
 
 	You can enable or disable drop shadows for popup menus.
-	As of the Looks 1.2.1 this feature is disabled by default.
-	The current implementation fails to paint heavy-weight popup 
-	drop-shadows under some conditions. 
-	Before you enable drop shadows, you should make sure that 
-    your application won't get into these problems. 
-    Heavy weight popups fail if you display cascaded popups 
-    or pull-down menus. If you are using cascaded menus and
-    the application won't be executed in full-screen mode,
-    users may experience paint glitches.	
+	As of the Looks 1.3 this feature is enabled on modern 
+	Windows (98/ME/2000/XP) and disabled otherwise.
     
 	<p>
 	Note that this feature may be inactive even though it is enabled.
 	For example drop shadows are always inactive on the Mac OS X,
-	because this platform already provides drop shadows.
+	because this platform already uses native drop shadows.
 	See also Options#isPopupDropShadowActive().
 <pre>
    Options.setPopupDropShadowEnabled(true);
