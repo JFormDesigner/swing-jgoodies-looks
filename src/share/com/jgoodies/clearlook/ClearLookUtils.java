@@ -77,7 +77,7 @@ public final class ClearLookUtils {
     /**
      * Stores the given border in the client properties of the component.
      * If the border is <code>null</code> a marker object is stored,
-     * so we can determine, wether we have attempted to store a border.
+     * so we can determine whether we have attempted to store a border.
      * 
      * @param component   the component that holds the border
      * @param border      the border to be stored

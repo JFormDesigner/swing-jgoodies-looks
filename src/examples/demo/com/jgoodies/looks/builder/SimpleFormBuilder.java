@@ -67,7 +67,7 @@ public final class SimpleFormBuilder extends PanelBuilder {
     private int leadingColumnOffset = 0;
     
     /**
-     * Determines wether new data rows are being grouped or not. 
+     * Determines whether new data rows are being grouped or not. 
      */
     private boolean rowGroupingEnabled = true;
     
