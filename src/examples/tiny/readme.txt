@@ -4,23 +4,17 @@
                    JGoodies Tiny Version 1.0
 
 
-     The JGoodies Tiny application is a minimal Swing application 
-     that demos how to install and use a JGoodies look&feel.
+The JGoodies Tiny application is a minimal Swing application 
+that demos how to install and use a JGoodies look&feel.
      
-     Tiny requires the JGoodies looks libraries. Go to Tiny directory; 
-     if you have the looks libraries in your classpath you can use:
-         java Tiny
+Tiny requires the JGoodies looks libraries. Go to Tiny directory; 
+if you have the looks libraries in your classpath you can use:
+    java Tiny
          
-     If you don't have the looks libraries in your classpath use:
-         java -cp .;<looks-install-dir>/lib/looks-all.jar Tiny
+If you don't have the looks libraries in your classpath use:
+    java -cp .;<looks-install-dir>/lib/looks-all.jar Tiny
      
          
 
 
-------------------------------------------------------------------------
-Copyright (c) 2002 Karsten Lentzsch, Wilhelmshavener Str. 25, 24105 Kiel,
-Germany. All rights reserved.
-
-Java and all Java-based trademarks and logos are trademarks or 
-registered trademarks of Sun Microsystems, Inc. in the United States 
-and other countries. 
+Copyright (c) 2003 JGoodies Karsten Lentzsch. All rights reserved.
