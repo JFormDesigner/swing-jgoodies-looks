@@ -35,20 +35,20 @@ import java.awt.Component;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
-import com.jgoodies.looks.builder.*;
 
 /** 
  * Presents a larger set of Swing components in different states and 
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class StatesTab {
 
@@ -58,7 +58,7 @@ final class StatesTab {
     JComponent build() {
         FormLayout layout = new FormLayout(
                 "right:max(50dlu;pref), 6dlu, pref");
-        SimpleFormBuilder builder = new SimpleFormBuilder(layout);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
 
         builder.append("Standard:",        buildButtonRow(true, true));
@@ -71,6 +71,7 @@ final class StatesTab {
         builder.append("Formatted Field:", buildTextRow(JFormattedTextField.class, false));
         builder.append("Password:",        buildTextRow(JPasswordField.class, false));
         builder.append("Text Area:",       buildTextRow(JTextArea.class, true));
+        builder.append("Editor Pane:",     buildTextRow(JEditorPane.class, true));
         builder.append("Spinner:",         buildSpinnerRow());
         
         return builder.getPanel();
@@ -157,7 +158,7 @@ final class StatesTab {
                 // Won't happen in the context we're using this.
             }
         }
-        components[0].setText("Standard");
+        components[0].setText("Editable");
 
         components[1].setText("Uneditable");
         components[1].setEditable(false);
@@ -193,10 +194,10 @@ final class StatesTab {
 
     private JComponent buildComboBoxRow() {
         return buildGrid(
-            createComboBox("Standard", true, false),
-            createComboBox("Editable", true, true),
-            createComboBox("Disabled", false, false),
-            createComboBox("Editable", false, true));
+            createComboBox("Editable",   true, true),
+            createComboBox("Uneditable", true, false),
+            createComboBox("Disabled",   false, true),
+            createComboBox("Uneditable", false, false));
     }
 
     private JComboBox createComboBox(
@@ -207,7 +208,7 @@ final class StatesTab {
             new JComboBox(new String[] { text, "Two", "Three", "Four", "A Quite Long Label" });
         box.setEnabled(enabled);
         box.setEditable(editable);
-        box.setRenderer(new CustomComboBoxRenderer());
+        //box.setRenderer(new CustomComboBoxRenderer());
         //Dimension prefSize = box.getPreferredSize();
         //box.setPreferredSize(new Dimension(80, prefSize.height));
         return box;
@@ -229,35 +230,38 @@ final class StatesTab {
 
     // Custom ComboBox Editor ***********************************************
 
-    private static class CustomComboBoxRenderer implements ListCellRenderer {
-
-        private final JLabel label = new JLabel();
-
-        public Component getListCellRendererComponent(
-            JList list,
-            Object value,
-            int index,
-            boolean isSelected,
-            boolean cellHasFocus) {
-            label.setBackground(isSelected 
-                    ? list.getSelectionBackground()
-                    : list.getBackground());
-            label.setForeground(isSelected
-                    ? list.getSelectionForeground()
-                    : list.getForeground());
-
-            label.setFont(list.getFont());
-
-            if (value instanceof Icon) {
-                label.setIcon((Icon) value);
-            } else {
-                label.setText(value == null ? "" : value.toString());
-            }
-            label.setOpaque(true);
-            return label;
-        }
-
-    }
+//    private static class CustomComboBoxRenderer implements ListCellRenderer {
+//
+//        private static final Border EMPTY_BORDER = new EmptyBorder(1,1,1,1);
+//        
+//        private final JLabel label = new JLabel();
+//
+//        public Component getListCellRendererComponent(
+//            JList list,
+//            Object value,
+//            int index,
+//            boolean isSelected,
+//            boolean cellHasFocus) {
+//            label.setBackground(isSelected 
+//                    ? list.getSelectionBackground()
+//                    : list.getBackground());
+//            label.setForeground(isSelected
+//                    ? list.getSelectionForeground()
+//                    : list.getForeground());
+//
+//            label.setFont(list.getFont());
+//            label.setBorder(EMPTY_BORDER);
+//
+//            if (value instanceof Icon) {
+//                label.setIcon((Icon) value);
+//            } else {
+//                label.setText(value == null ? "" : value.toString());
+//            }
+//            label.setOpaque(true);
+//            return label;
+//        }
+//
+//    }
     
     
     // Helper Code **********************************************************
