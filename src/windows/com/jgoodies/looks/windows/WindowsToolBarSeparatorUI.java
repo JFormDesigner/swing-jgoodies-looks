@@ -41,15 +41,22 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
+import com.jgoodies.looks.LookUtils;
+
 /**
  * A Windows tool bar separator that honors the tool bar's border.
  * Used in in 1.4.0, 1.4.1 and 1.4.2 with XP turned off.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsToolBarSeparatorUI
     extends BasicToolBarSeparatorUI {
+
+    /** See bug #4773490 in Sun's bug database. */
+    private static final int VERTICAL = LookUtils.IS_JAVA_1_4_2_OR_LATER
+            ? SwingConstants.VERTICAL
+            : SwingConstants.HORIZONTAL;
 
     public static ComponentUI createUI(JComponent c) {
         return new WindowsToolBarSeparatorUI();
@@ -62,8 +69,9 @@ public final class WindowsToolBarSeparatorUI
         Color highlightColor = UIManager.getColor("ToolBar.highlight");
 
         Dimension size = c.getSize();
+        System.out.println(size);
 
-        if (((JSeparator) c).getOrientation() == SwingConstants.HORIZONTAL) {
+        if (((JSeparator) c).getOrientation() == VERTICAL) {
             int x = (size.width / 2) - 1;
             g.setColor(shadowColor);
             g.drawLine(x, 0, x, size.height - 1);
