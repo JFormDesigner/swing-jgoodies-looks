@@ -123,6 +123,26 @@
 </pre>
 
 
+	<h2>Popup Menu Drop Shadow</h2>
+
+	You can enable or disable drop shadows for popup menus.
+	The default setting depends on the platform; 
+	currently drop shadows are enabled on the Windows platform only
+	and disabled by default on all other platforms.
+	Note that the drop shadows are always disabled on the Mac OS X,
+	because this platform already provides drop shadows.
+<pre>
+   Options.setPopupDropShadowEnabled(false);
+   
+   UIManager.set("jgoodies.popupDropShadowEnabled", Boolean.TRUE);
+</pre>
+    Also, you can enable or disable this feature in the system properties.
+    This will override the UIManager setting.
+<pre>
+java -Djgoodies.popupDropShadowEnabled=true ...
+</pre>
+
+
 
 	<h2>Tabbed Panes without Content Border</h2>
 
