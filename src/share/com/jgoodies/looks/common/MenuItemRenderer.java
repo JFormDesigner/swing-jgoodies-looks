@@ -44,7 +44,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class MenuItemRenderer {
@@ -596,59 +596,29 @@ public final class MenuItemRenderer {
 		if(!model.isEnabled()) {
 		    // *** paint the text disabled
 		    if ( UIManager.get("MenuItem.disabledForeground") instanceof Color ) {
-			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );
-			drawStringUnderlineCharAt(g,text,mnemIndex,
-						      textRectangle.x, 
-						      textRectangle.y + fm.getAscent());
+    			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );
+    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex,
+    						      textRectangle.x, 
+    						      textRectangle.y + fm.getAscent());
 		    } else {
-			g.setColor(aMenuItem.getBackground().brighter());
-			drawStringUnderlineCharAt(g,text,mnemIndex, 
-						      textRectangle.x, 
-						      textRectangle.y + fm.getAscent());
-			g.setColor(aMenuItem.getBackground().darker());
-			drawStringUnderlineCharAt(g,text,mnemIndex, 
-						      textRectangle.x - 1, 
-						      textRectangle.y + fm.getAscent() - 1);
+    			g.setColor(aMenuItem.getBackground().brighter());
+    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex, 
+    						      textRectangle.x, 
+    						      textRectangle.y + fm.getAscent());
+    			g.setColor(aMenuItem.getBackground().darker());
+    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex, 
+    						      textRectangle.x - 1, 
+    						      textRectangle.y + fm.getAscent() - 1);
 		    }
 		} else {
 		    // *** paint the text normally
 		    if (model.isArmed()|| (aMenuItem instanceof JMenu && model.isSelected())) {
-			g.setColor(selectionForeground); // Uses protected field.
+		        g.setColor(selectionForeground); // Uses protected field.
 		    }
-		    drawStringUnderlineCharAt(g,text, mnemIndex, 
+		    BasicGraphicsUtils.drawStringUnderlineCharAt(g,text, mnemIndex, 
 						  textRectangle.x, 
 						  textRectangle.y + fm.getAscent());
 		}
-    }
-
-    /**
-     * Draws a string with the graphics <code>g</code> at location
-     * (<code>x</code>, <code>y</code>)
-     * just like <code>g.drawString</code> would.
-     * The character at index <code>underlinedIndex</code>
-     * in text will be underlined. If <code>index</code> is beyond the
-     * bounds of <code>text</code> (including < 0), nothing will be
-     * underlined.
-     * 
-     * @param g Graphics to draw with
-     * @param text String to draw
-     * @param underlinedIndex Index of character in text to underline
-     * @param x x coordinate to draw at
-     * @param y y coordinate to draw at
-     * @since 1.4
-     */
-    public static void drawStringUnderlineCharAt(Graphics g, String text,
-                           int underlinedIndex, int x,int y) {
-        g.drawString(text,x,y);
-        if (underlinedIndex >= 0 && underlinedIndex < text.length() ) {
-            FontMetrics fm = g.getFontMetrics();
-            int underlineRectX = x + fm.stringWidth(text.substring(0,underlinedIndex));
-            int underlineRectY = y;
-            int underlineRectWidth = fm.charWidth(text.charAt(underlinedIndex));
-            int underlineRectHeight = 1;
-            g.fillRect(underlineRectX, underlineRectY + fm.getDescent() - 1,
-                       underlineRectWidth, underlineRectHeight);
-        }
     }
     
     
