@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -35,12 +35,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 
 /**
- * Describes the header styles for <code>JMenuBar</code> and <code>JToolBar</code>.
+ * Describes the header styles for JMenuBar and JToolBar.
  * Header styles are look-independent and can be shadowed by a look-dependent 
  * <code>BorderStyle</code>.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see	BorderStyle
  */
@@ -59,7 +59,7 @@ public final class HeaderStyle {
 	
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
-     * from the <code>JToolBar</code.
+     * from the JToolBar.
      * 
      * @param menuBar   the menu bar to inspect
      * @return the menu bar's header style
@@ -71,7 +71,7 @@ public final class HeaderStyle {
    	
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
-     * from the <code>JToolBar</code.
+     * from the JToolBar.
      * 
      * @param toolBar   the tool bar to inspect
      * @return the tool bar's header style
@@ -83,7 +83,7 @@ public final class HeaderStyle {
    	
    	/**
    	 * Looks up the client property for the <code>HeaderStyle</code> 
-   	 * from the specified <code>JComponent</code>.
+   	 * from the specified JComponent.
      * 
      * @param c    the component to inspect
      * @return the header style for the given component
