@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -49,7 +49,7 @@ import javax.swing.plaf.ColorUIResource;
  * and <code>LIGHTEST</code>.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class Colors {
 	
@@ -85,17 +85,17 @@ final class Colors {
 
 	// Green Colors *********************************************************************
 
-	static final ColorUIResource GREEN_LOW_DARK		= new ColorUIResource( 75, 148,  75);
+	static final ColorUIResource GREEN_LOW_DARK		    = new ColorUIResource( 75, 148,  75);
 	static final ColorUIResource GREEN_LOW_MEDIUM		= new ColorUIResource(112, 190, 112);
-	static final ColorUIResource GREEN_LOW_LIGHTEST	= new ColorUIResource(200, 222, 200);
+	static final ColorUIResource GREEN_LOW_LIGHTEST	    = new ColorUIResource(200, 222, 200);
 
-    static final ColorUIResource GREEN_CHECK           = new ColorUIResource( 33, 161,  33);
+    static final ColorUIResource GREEN_CHECK            = new ColorUIResource( 33, 161,  33);
     
     
 	// Pink Colors **********************************************************************
 
-	static final ColorUIResource PINK_HIGH_DARK		= new ColorUIResource(128,   0, 128); //192,   0, 192);
-	static final ColorUIResource PINK_LOW_DARK		= new ColorUIResource(128,  70, 128); //192,   0, 192);
+	static final ColorUIResource PINK_HIGH_DARK		    = new ColorUIResource(128,   0, 128); //192,   0, 192);
+	static final ColorUIResource PINK_LOW_DARK		    = new ColorUIResource(128,  70, 128); //192,   0, 192);
 	static final ColorUIResource PINK_LOW_MEDIUM 		= new ColorUIResource(190, 150, 190); 
 	static final ColorUIResource PINK_LOW_LIGHTER		= new ColorUIResource(233, 207, 233);
 	
@@ -109,8 +109,8 @@ final class Colors {
 	
 	// Yellow Colors *******************************************************************
 
-	static final ColorUIResource YELLOW_LOW_MEDIUMDARK = new ColorUIResource(182, 149,  18);
-	static final ColorUIResource YELLOW_LOW_MEDIUM	= new ColorUIResource(244, 214,  96);
+	static final ColorUIResource YELLOW_LOW_MEDIUMDARK  = new ColorUIResource(182, 149,  18);
+	static final ColorUIResource YELLOW_LOW_MEDIUM	    = new ColorUIResource(244, 214,  96);
 	static final ColorUIResource YELLOW_LOW_LIGHTEST	= new ColorUIResource(249, 225, 131); 
 
 	// Focus Colors *********************************************************************
@@ -118,7 +118,7 @@ final class Colors {
 	static final ColorUIResource BLUE_FOCUS	= BLUE_MEDIUM_LIGHTEST; 
     static final ColorUIResource ORANGE_FOCUS  = new ColorUIResource(245, 165,  16); 
     static final ColorUIResource YELLOW_FOCUS  = new ColorUIResource(255, 223,  63); 
-    static final ColorUIResource GRAY_FOCUS    = new ColorUIResource(Color.lightGray);
+    static final ColorUIResource GRAY_FOCUS    = new ColorUIResource(Color.LIGHT_GRAY);
     
 
 	
