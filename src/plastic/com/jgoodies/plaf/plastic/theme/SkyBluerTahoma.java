@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
  * and use the MS Tahoma font.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public class SkyBluerTahoma extends SkyBluer {
@@ -61,8 +61,7 @@ public class SkyBluerTahoma extends SkyBluer {
         if (LookUtils.IS_OS_MAC)
             return super.getFont0();
         
-        Font font = new Font("Tahoma", Font.PLAIN, size);
-        return font != null ? font : new Font("Dialog", Font.PLAIN, size);
+        return new Font("Tahoma", Font.PLAIN, size);
     }
 
     public FontUIResource getSubTextFont() {
