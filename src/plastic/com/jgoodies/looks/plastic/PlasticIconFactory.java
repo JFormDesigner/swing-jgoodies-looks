@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -54,7 +54,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 final class PlasticIconFactory {
@@ -191,15 +191,15 @@ final class PlasticIconFactory {
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			Color backgroundColor = c.getBackground();
 
-			g.setColor(backgroundColor != null ? backgroundColor : Color.white);
+			g.setColor(backgroundColor != null ? backgroundColor : Color.WHITE);
 			g.fillRect(x, y, SIZE - 1, SIZE - 1);
-			g.setColor(Color.gray);
+			g.setColor(Color.GRAY);
 			g.drawRect(x, y, SIZE - 1, SIZE - 1);
-			g.setColor(Color.black);
+			g.setColor(Color.BLACK);
 			g.drawLine(x + 2, y + HALF_SIZE, x + (SIZE - 3), y + HALF_SIZE);
 		}
 		
-		public int getIconWidth()	{ return SIZE; }
+		public int getIconWidth()  { return SIZE; }
 		public int getIconHeight() { return SIZE; }
     }
     

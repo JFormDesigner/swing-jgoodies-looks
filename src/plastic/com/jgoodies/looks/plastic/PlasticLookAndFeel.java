@@ -58,7 +58,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -163,7 +163,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
-            + " - \u00a9 2001-2004 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
     
 	// Special Properties ***************************************************
@@ -345,7 +345,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Integer rowHeight				= new Integer(treeFontSize + 6);
         Object  treeExpandedIcon		= PlasticIconFactory.getExpandedTreeIcon();
         Object  treeCollapsedIcon		= PlasticIconFactory.getCollapsedTreeIcon();
-        ColorUIResource gray 			= new ColorUIResource(Color.gray);
+        ColorUIResource gray 			= new ColorUIResource(Color.GRAY);
 		
 		Boolean is3D					= Boolean.valueOf(is3DEnabled());
 		
