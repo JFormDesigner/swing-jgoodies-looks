@@ -58,13 +58,12 @@ public final class Tiny {
             LookUtils.isWindowsXP()
                 ? Options.getCrossPlatformLookAndFeelClassName()
                 : Options.getSystemLookAndFeelClassName();
-        ;
 
         try {
             UIManager.setLookAndFeel(lafName);
         } catch (Exception e) {
             System.err.println("Can't set look & feel:" + e);
-        };
+        }
     }
 
     /**
