@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -35,87 +35,91 @@ import javax.swing.JMenuBar;
 import javax.swing.JToolBar;
 
 /**
- * Describes the border styles for <code>JMenuBar</code> and <code>JToolBar</code>.
- * Border styles are look-dependent and shadow look-independent <code>HeaderStyle</code>.
+ * Describes the border styles for JMenuBar and JToolBar. Border styles are
+ * look-dependent and shadow look-independent <code>HeaderStyle</code>s.
  * 
- * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  * 
- * @see	HeaderStyle
+ * @see HeaderStyle
  */
 public final class BorderStyle {
-	
-	public static final BorderStyle EMPTY		= new BorderStyle("Empty");
-	public static final BorderStyle SEPARATOR = new BorderStyle("Separator");
-	public static final BorderStyle ETCHED	= new BorderStyle("Etched");
 
-	private final String name;
+    public static final BorderStyle EMPTY     = new BorderStyle("Empty");
+    public static final BorderStyle SEPARATOR = new BorderStyle("Separator");
+    public static final BorderStyle ETCHED    = new BorderStyle("Etched");
 
+    private final String name;
 
-	private BorderStyle(String name) { 
-		this.name = name; 
-	}
-	
-	
+    
+    // Instance Creation ******************************************************
+    
+    private BorderStyle(String name) {
+        this.name = name;
+    }
+    
+    
+    // ************************************************************************
+
     /**
-     * Looks up the client property for the header style from the 
-     * <code>JToolBar</code.
+     * Looks up the client property for the header style from the JToolBar.
      * 
      * @param toolBar  the tool bar to inspect
      * @param clientPropertyKey   the key used to lookup the property
      * @return the border style used to choose a border in the UI delegate
      */
-   	public static BorderStyle from(JToolBar toolBar, String clientPropertyKey) {
-   		return from0(toolBar, clientPropertyKey);
-   	}
-   	
+    public static BorderStyle from(JToolBar toolBar, String clientPropertyKey) {
+        return from0(toolBar, clientPropertyKey);
+    }
+
     /**
-     * Looks up the client property for the header style from the <code>JToolBar</code.
+     * Looks up the client property for the header style from the
+     * <code>JToolBar</code.
      * 
      * @param menuBar  the menu bar to inspect
      * @param clientPropertyKey   the key used to lookup the property
      * @return the border style used to choose a border in the UI delegate
      */
-   	public static BorderStyle from(JMenuBar menuBar, String clientPropertyKey) {
-   		return from0(menuBar, clientPropertyKey);
-   	}
-   	
-   	
-   	/**
-   	 * Looks up the client property for the header style from the specified
-   	 * <code>JComponent</code>.
-     * 
-     * @param c  the compoent to inspect
-     * @param clientPropertyKey   the key used to lookup the property
-     * @return the border style used to choose a border in the UI delegate
-   	 */
-   	private static BorderStyle from0(JComponent c, String clientPropertyKey) {
-   		Object value = c.getClientProperty(clientPropertyKey);
-   		if (value instanceof BorderStyle)
-   			return (BorderStyle) value;
-   		
-   		if (value instanceof String) {
-   			return BorderStyle.valueOf((String) value);
-   		} 
-   		
-   		return null;
-   	}
-   	
-   	
-	private static BorderStyle valueOf(String name) {
-		if (name.equalsIgnoreCase(EMPTY.name))
-			return EMPTY;
-		else if (name.equalsIgnoreCase(SEPARATOR.name))
-			return SEPARATOR;
-		else if (name.equalsIgnoreCase(ETCHED.name))
-			return ETCHED;
-		else
-			throw new IllegalArgumentException("Invalid BorderStyle name " + name);		
-	}
-	
+    public static BorderStyle from(JMenuBar menuBar, String clientPropertyKey) {
+        return from0(menuBar, clientPropertyKey);
+    }
 
-	public  String toString() { 
-		return name; 
-	}
-	
+    /**
+     * Looks up the client property for the header style from the specified
+     * <code>JComponent</code>.
+     * 
+     * @param c
+     *            the compoent to inspect
+     * @param clientPropertyKey
+     *            the key used to lookup the property
+     * @return the border style used to choose a border in the UI delegate
+     */
+    private static BorderStyle from0(JComponent c, String clientPropertyKey) {
+        Object value = c.getClientProperty(clientPropertyKey);
+        if (value instanceof BorderStyle)
+            return (BorderStyle) value;
+
+        if (value instanceof String) {
+            return BorderStyle.valueOf((String) value);
+        }
+
+        return null;
+    }
+
+    private static BorderStyle valueOf(String name) {
+        if (name.equalsIgnoreCase(EMPTY.name))
+            return EMPTY;
+        else if (name.equalsIgnoreCase(SEPARATOR.name))
+            return SEPARATOR;
+        else if (name.equalsIgnoreCase(ETCHED.name))
+            return ETCHED;
+        else
+            throw new IllegalArgumentException("Invalid BorderStyle name "
+                    + name);
+    }
+
+    public String toString() {
+        return name;
+    }
+
 }
