@@ -35,6 +35,7 @@ import java.awt.Font;
 import javax.swing.plaf.FontUIResource;
 
 import com.jgoodies.plaf.FontSizeHints;
+import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 
 /**
@@ -42,7 +43,7 @@ import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
  * and use the MS Tahoma font.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class SkyBluerTahoma extends SkyBluer {
@@ -57,6 +58,9 @@ public class SkyBluerTahoma extends SkyBluer {
     }
 
     protected Font getFont0(int size) {
+        if (LookUtils.IS_OS_MAC)
+            return super.getFont0();
+        
         Font font = new Font("Tahoma", Font.PLAIN, size);
         return font != null ? font : new Font("Dialog", Font.PLAIN, size);
     }
