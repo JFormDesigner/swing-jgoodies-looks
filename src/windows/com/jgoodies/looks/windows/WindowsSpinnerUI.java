@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -50,7 +50,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 

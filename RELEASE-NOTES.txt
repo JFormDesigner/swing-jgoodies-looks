@@ -17,12 +17,12 @@ BUGS FIXED
     o #17: WindowsToolBarSeparatorUI not same in 1.4.1 and 1.4.2.
     o #18: Height of menu items with a custom icon.
     o #23: Menu items not anti-aliased [in 1.5 with aa enabled].
-    o Broken painting with custom combo renderer in 1.5.
+    o #28: Broken painting with custom combo renderer in 1.5.
+    o #31: JToggleButton L&F not respecting icon text gap
     o Broken custom table header in Windows XP style.
     
-    
 
-CHANGES THAT AFFECT THE COMPATIBILITY
+CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
     o Package names changed from com.jgoodies.plaf to com.jgoodies.looks
     o ExtWindowsLookAndFeel -> WindowsLookAndFeel
@@ -30,6 +30,11 @@ CHANGES THAT AFFECT THE COMPATIBILITY
       These will show up as a LintLookAndFeel later.
       
       
+CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
+
+    o PlasticXP's password field paints a rectangle, not the star.
+
+
 KNOWN ISSUES
 
     For all issues see http://looks.dev.java.net/servlets/ProjectIssues

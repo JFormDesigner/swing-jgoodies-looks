@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * <code>jgoodies.isNarrow</code> property to choose an appropriate margin.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */

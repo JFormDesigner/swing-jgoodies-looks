@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -38,7 +38,7 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
  * A theme with metal blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public class SkyKrupp extends AbstractSkyTheme {
