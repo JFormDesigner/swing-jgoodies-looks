@@ -94,6 +94,20 @@ final class PlasticBorders {
     }
 
     /**
+     * Returns a border for a <code>JComboBox</code>'s button.
+     * 
+     * @return the lazily created combo box arrow button border
+     */
+    static Border getComboBoxArrowButtonBorder() {
+        if (comboBoxArrowButtonBorder == null) { 
+            comboBoxArrowButtonBorder = new CompoundBorder(  // No UIResource
+                    new ComboBoxArrowButtonBorder(),
+                    new BasicBorders.MarginBorder());
+        }
+        return comboBoxArrowButtonBorder;
+    }
+
+    /**
      * Returns a border for a <code>JComboBox</code>'s editor.
      * 
      * @return the lazily created combo box editor border
@@ -105,20 +119,6 @@ final class PlasticBorders {
                             new BasicBorders.MarginBorder());
         }
         return comboBoxEditorBorder;
-    }
-
-    /**
-     * Returns a border for a <code>JComboBox</code>'s button.
-     * 
-     * @return the lazily created combo box arrow button border
-     */
-    static Border getComboBoxArrowButtonBorder() {
-        if (comboBoxArrowButtonBorder == null) { 
-            comboBoxArrowButtonBorder = new CompoundBorder(  // No UIResource
-                            new ComboBoxArrowButtonBorder(),
-                            new BasicBorders.MarginBorder());
-        }
-        return comboBoxArrowButtonBorder;
     }
 
     /**
@@ -391,7 +391,31 @@ final class PlasticBorders {
 	}	
 	
 	
-    private static class ComboBoxEditorBorder extends AbstractBorder {
+	private static class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
+
+	    protected static final Insets INSETS = new Insets(2, 2, 2, 2);
+
+	    public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+	        AbstractButton button = (AbstractButton) c;
+	        ButtonModel model = button.getModel();
+
+	        if (model.isEnabled()) {
+	            boolean isPressed = model.isPressed() && model.isArmed();
+
+	            if (isPressed)
+	                PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
+	            else
+	                PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
+	        } else {
+	            PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
+	        }
+	    }
+
+	    public Insets getBorderInsets(Component c) { return INSETS; }
+	}	
+
+	
+	private static class ComboBoxEditorBorder extends AbstractBorder {
 
         private static final Insets INSETS  = new Insets(2, 2, 2, 0);
 
@@ -409,30 +433,6 @@ final class PlasticBorders {
     }
 
 
-	private static class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
-
-		protected static final Insets INSETS = new Insets(2, 2, 2, 2);
-
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			AbstractButton button = (AbstractButton) c;
-			ButtonModel model = button.getModel();
-
-			if (model.isEnabled()) {
-				boolean isPressed = model.isPressed() && model.isArmed();
-
-				if (isPressed)
-					PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
-				else
-					PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
-			} else {
-				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
-			}
-		}
-
-		public Insets getBorderInsets(Component c) { return INSETS; }
-	}	
-
-	
 	/**
 	 * A border used for <code>JInternalFrame</code>s.
 	 */
