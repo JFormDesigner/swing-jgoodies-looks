@@ -52,7 +52,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public class MenuBuilder {
@@ -284,13 +284,13 @@ public class MenuBuilder {
 		JMenu menu = createMenu("Help", 'H');
 		
 		JMenuItem item;
+        item = createMenuItem("Help Contents", readImageIcon("help.gif"), 'H');
         if (helpActionListener != null) {
-            item = createMenuItem("Help Contents", readImageIcon("help.gif"), 'H');
     		item.addActionListener(helpActionListener);
-    		menu.add(item);
-    		menu.addSeparator();
         }
+        menu.add(item);
         if (!isAboutInOSMenu()) {
+            menu.addSeparator();
             item = createMenuItem("About", 'a');
             item.addActionListener(aboutActionListener);
             menu.add(item);
