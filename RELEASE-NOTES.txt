@@ -1,5 +1,5 @@
 
-                    JGoodies Looks, Version 1.3 Beta1
+             JGoodies Looks, Version 1.3 Release Candidate
                             Release Notes
                         
 
@@ -20,11 +20,13 @@ BUGS FIXED
     o #05: Plastic Theme and Tab Layout Policy.
     o #17: WindowsToolBarSeparatorUI not same in 1.4.1 and 1.4.2.
     o #18: Height of menu items with a custom icon.
+    o #20: Popup drop shadow may be corrupted.
     o #23: Menu items not anti-aliased [in 1.5 with aa enabled].
+    o #24: Spinners drawn incorrectly.
     o #27: Plastic JTabbedPane scroll buttons unclear.
     o #28: Broken painting with custom combo renderer in 1.5.
     o #30: ShadowPopupBorder may throw a SecurityException.
-    o #31: JToggleButton L&F not respecting icon text gap
+    o #31: JToggleButton L&F not respecting icon text gap.
     
 
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
@@ -37,7 +39,7 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
-    o PlasticXP's password field paints a rectangle, not the star.
+    o PlasticXP's password field paints a dot, not the star.
 
 
 KNOWN ISSUES
@@ -54,10 +56,17 @@ OTHER CHANGES
     o Core:  Uses more shared UI instances.
     o Docs:  Added and fixed version tags.
     o Dist:  Fixed implementation title and vendor in the JAR manifest.
+    o Dist:  Fixed broken package information in the JAR manifest.
     o Demo:  Added test case for all tab placements in both layouts.
     o Build: Added project name tag to the ANT build file.
     o Build: Added overview page.
     
+    
+ACKNOWLEDGEMENTS
+
+    Andrej Golovnin has contributed a significant portion to this release.
+    He has checked, commented, and fixed most of the critical issues.
+   
     
 ---------------------------------------------------------------------------
 
