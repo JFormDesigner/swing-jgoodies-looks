@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -118,7 +118,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         String WINDOWS_PREFIX = "com.jgoodies.plaf.windows.ExtWindows";
         String COMMON_PREFIX  = "com.jgoodies.plaf.common.ExtBasic";
 
-        String menuUIPrefix = LookUtils.IS_142_OR_LATER
+        String menuUIPrefix = LookUtils.IS_JAVA_1_4_2_OR_LATER
                 ? WINDOWS_PREFIX
                 : COMMON_PREFIX;
 
@@ -162,7 +162,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         table.putDefaults(uiDefaults);
 
         Object[] otherDefaults;
-        if (LookUtils.IS_WINDOWS_XP_LAF) {
+        if (LookUtils.IS_LAF_WINDOWS_XP) {
             otherDefaults = new Object[] {
                 // Optional style and optional special borders; 
                 // rollover borders for compound buttons
@@ -198,7 +198,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             initFontDefaults(table);
         }
 
-        if (!LookUtils.IS_WINDOWS_XP_LAF) {
+        if (!LookUtils.IS_LAF_WINDOWS_XP) {
             initComponentDefaultsBefore142(table);
         }
 
@@ -226,7 +226,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Object defaultButtonMargin = LookUtils.createButtonMargin(false);
         Object narrowButtonMargin = LookUtils.createButtonMargin(true);
 
-        Object toolBarSeparatorSize = LookUtils.IS_142_OR_LATER
+        Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
@@ -242,7 +242,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                 ? new InsetsUIResource(2, 3, 2, 3)
                 : new InsetsUIResource(2, 4, 2, 4);
 
-        int pad = LookUtils.IS_WINDOWS_XP_LAF ? 3 : 0;
+        int pad = LookUtils.IS_LAF_WINDOWS_XP ? 3 : 0;
         Object popupMenuSeparatorMargin = LookUtils.isLowRes
                 ? new InsetsUIResource(2, pad, 3, pad)
                 : new InsetsUIResource(3, pad, 4, pad);
@@ -256,13 +256,13 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Class superclass = getClass().getSuperclass();
         Color controlColor = table.getColor("control");
 
-        Object menuBarBackground = LookUtils.isWindowsXP() ? table
-                .get("control") : table
-                .get("menu");
-        Object menuSelectionBackground = LookUtils.isWindowsXP()
+        Object menuBarBackground = LookUtils.IS_LAF_WINDOWS_XP 
+                ? table.get("control") 
+				: table.get("menu");
+        Object menuSelectionBackground = LookUtils.IS_LAF_WINDOWS_XP
                 ? table.get("MenuItem.selectionBackground")
                 : table.get("Menu.background");
-        Object menuSelectionForeground = LookUtils.isWindowsXP()
+        Object menuSelectionForeground = LookUtils.IS_LAF_WINDOWS_XP
                 ? table.get("MenuItem.selectionForeground")
                 : table.get("Menu.foreground");
 
@@ -279,7 +279,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 			"Menu.selectionBackground",   menuSelectionBackground, 
             // End 1.3 und 1.4.0
 
-            "Menu.margin", menuMargin, // 1.4.1 Bug
+            "Menu.margin",                menuMargin, // 1.4.1 Bug
 
             "MenuBar.background",         menuBarBackground, 
 			"MenuBar.border",             menuBarSeparatorBorder, // 1.4.1 Separator wrong
@@ -351,7 +351,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                         .getColor("controlLtHighlight"));
 
         Object[] defaults = {
-        // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
+            // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
             // alignment in the typical case that the border is not painted
             "CheckBox.border",        marginBorder, 
 			"CheckBox.margin",        checkBoxMargin,
