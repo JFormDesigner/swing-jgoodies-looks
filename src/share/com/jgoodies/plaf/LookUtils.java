@@ -73,15 +73,17 @@ public final class LookUtils {
         startsWith(JAVA_VERSION, "1.4"); 
     
     /**
-     * True if this is Java 1.4.0 or 1.4.0_*.
+     * True if this is Java 1.4.0_*.
      */
     static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
     
     /**
-     * True if this is Java 1.4.2 or later.
+     * True if this is Java 1.4.2 or later. Since we assume Java 1.4
+     * we just check for 1.4.0 and 1.4.1.
      */
     public static final boolean IS_JAVA_1_4_2_OR_LATER = 
-        startsWith(JAVA_VERSION, "1.4.2") || startsWith(JAVA_VERSION, "1.5");
+        !startsWith(JAVA_VERSION, "1.4.0") &&
+        !startsWith(JAVA_VERSION, "1.4.1");
     
     /**
      * The <code>os.name</code> System Property. Operating system name.<p>
@@ -114,7 +116,7 @@ public final class LookUtils {
     /**
      * True if the Windows XP Look&amp;Feel is enabled.
      */
-    public static final boolean IS_LAF_WINDOWS_XP = isWindowsXPLafEnabled();
+    public static final boolean IS_LAF_WINDOWS_XP_ENABLED = isWindowsXPLafEnabled();
     
     /**
      * True if this is a NetBeans environment.
@@ -202,6 +204,7 @@ public final class LookUtils {
              && getSystemProperty("swing.noxp") == null;
     }
     
+    
     /**
      * Checks and answers whether we have a true color system.
      * 
@@ -210,6 +213,17 @@ public final class LookUtils {
      */
     public static boolean isTrueColor(Component c) {
         return c.getToolkit().getColorModel().getPixelSize() >= 24;
+    }
+    
+    
+    /**
+     * Checks and answers whether the active look&amp;feel is the
+     * Mac OS X Aqua L&amp;F.
+     * 
+     * @return true if Aqua is active, false otherwise
+     */
+    public static boolean isLafAqua() {
+        return UIManager.getLookAndFeel().getName().startsWith("Mac OS X Aqua");
     }
     
     
