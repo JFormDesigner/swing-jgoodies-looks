@@ -34,7 +34,6 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 
-import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JSpinner;
 import javax.swing.SwingConstants;
@@ -55,7 +54,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticSpinnerUI extends BasicSpinnerUI {
 	
@@ -96,11 +95,7 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createNextButton
      */
     protected Component createPreviousButton() {
-		int width  = UIManager.getInt("ScrollBar.width");
-		JButton b = new PlasticArrowButton(SwingConstants.SOUTH, width, true);
-		b.addActionListener(previousButtonHandler);
-		b.addMouseListener(previousButtonHandler);
-		return b;
+        return new SpinnerArrowButton(SwingConstants.SOUTH, previousButtonHandler);
     }
 
 
@@ -118,11 +113,7 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createPreviousButton
      */
     protected Component createNextButton() {
-		int width  = UIManager.getInt("ScrollBar.width");
-		JButton b = new PlasticArrowButton(SwingConstants.NORTH, width, true);
-		b.addActionListener(nextButtonHandler);
-		b.addMouseListener(nextButtonHandler);
-		return b;
+        return new SpinnerArrowButton(SwingConstants.NORTH, nextButtonHandler);
     }
 
 
@@ -207,6 +198,23 @@ public final class PlasticSpinnerUI extends BasicSpinnerUI {
 	    	defaultEditor.getTextField().setMargin(insets);
     	}
     }
-    
-    
+
+    /**
+     * It differs from its superclass in that it uses the same formula as JDK
+     * to calculate the arrow height.
+     */
+    private static class SpinnerArrowButton extends PlasticArrowButton {
+        private SpinnerArrowButton(int direction,
+                ExtBasicArrowButtonHandler handler) {
+            super(direction, UIManager.getInt("ScrollBar.width"), true);
+            addActionListener(handler);
+            addMouseListener(handler);
+        }
+
+        protected int calculateArrowHeight(int height, int width) {
+            int arrowHeight = Math.min((height - 4) / 3, (width - 4) / 3);
+            return Math.max(arrowHeight, 2);
+        }
+    }
+
 }

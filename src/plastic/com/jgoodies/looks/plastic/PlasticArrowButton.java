@@ -43,9 +43,9 @@ import javax.swing.plaf.metal.MetalScrollButton;
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-final class PlasticArrowButton extends MetalScrollButton {
+class PlasticArrowButton extends MetalScrollButton {
 	
 	private static Color shadowColor;
 	private static Color highlightColor;
@@ -79,7 +79,7 @@ final class PlasticArrowButton extends MetalScrollButton {
 		int height = getHeight();
 		int w = width;
 		int h = height;
-		int arrowHeight = (height + 1) / 4;
+        int arrowHeight = calculateArrowHeight(height, width);
 
 		g.setColor(isPressed ? MetalLookAndFeel.getControlShadow() : getBackground());
 		g.fillRect(0, 0, width, height);
@@ -101,6 +101,18 @@ final class PlasticArrowButton extends MetalScrollButton {
 			paint3D(g);
 	}
 
+    /**
+     * Computes and returns the arrow height based on the specified 
+     * buttons height and width.
+     *  
+     * @param height the height of the button to be used for calculation.
+     * @param width the width of the button to be used for calculation.
+     * @return the height of the arrow
+     */
+    protected int calculateArrowHeight(int height, int width) {
+        return (height + 1) / 4;
+    }
+    
 
 	private void paintWest(Graphics g, boolean isEnabled, Color arrowColor,
 		boolean isPressed, int width, int height, int w, int h, int arrowHeight) {
