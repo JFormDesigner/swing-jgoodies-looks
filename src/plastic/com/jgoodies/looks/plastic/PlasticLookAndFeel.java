@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -58,7 +58,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -272,7 +272,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 				"TreeUI", 					PLASTIC_PREFIX + "TreeUI",
 				
 				// Just to use Plastic colors
-				"InternalFrameUI",			PLASTIC_PREFIX + "InternalFrameUI"
+				"InternalFrameUI",			PLASTIC_PREFIX + "InternalFrameUI",
+                
+                // Share the UI delegate instances
+                "SeparatorUI",              PLASTIC_PREFIX + "SeparatorUI",
+                "ToolBarSeparatorUI",       PLASTIC_PREFIX + "ToolBarSeparatorUI"
+
 			};
 		table.putDefaults(uiDefaults);
         if (!useMetalTabs) {
