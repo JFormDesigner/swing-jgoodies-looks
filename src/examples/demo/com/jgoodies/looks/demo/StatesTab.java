@@ -48,7 +48,7 @@ import com.jgoodies.forms.layout.Sizes;
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class StatesTab {
 
@@ -57,7 +57,7 @@ final class StatesTab {
      */
     JComponent build() {
         FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref), 6dlu, pref");
+                "right:max(50dlu;pref), 4dlu, pref");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
 
