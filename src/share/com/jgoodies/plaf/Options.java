@@ -36,15 +36,13 @@ import java.util.Map;
 
 import javax.swing.UIManager;
 
-import com.jgoodies.clearlook.ClearLookMode;
-
 /**
  * Provides access to several optional properties for the 
  * JGoodies L&amp;Fs, either by a key to the <code>UIDefaults</code> table
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 
 public final class Options {
@@ -110,27 +108,6 @@ public final class Options {
     public static final String POPUP_DROP_SHADOW_ENABLED_KEY =
         "jgoodies.popupDropShadowEnabled";
         
-
-    // ClearLook Properties *************************************************
-
-    public static final String CLEAR_LOOK_MODE_KEY = 
-        "ClearLook.mode";
-        
-    public static final String CLEAR_LOOK_POLICY_KEY = 
-        "ClearLook.policy";
-        
-    public static final String CLEAR_LOOK_OFF = 
-        ClearLookMode.OFF.getName();
-        
-    public static final String CLEAR_LOOK_ON = 
-        ClearLookMode.ON.getName();
-        
-    public static final String CLEAR_LOOK_VERBOSE =
-        ClearLookMode.VERBOSE.getName();
-        
-    public static final String CLEAR_LOOK_DEBUG = 
-        ClearLookMode.DEBUG.getName();
-
 
     // Optional Client Properties *******************************************
 
@@ -311,9 +288,6 @@ public final class Options {
 
     /**
      * Detects and answers if we shall use icons in <code>JTabbedPanes</code>.
-     * This has an effect only inside NetBeans, it will answer 'yes'
-     * if we are outside NetBeans.<p>
-     * 
      * If the user has set a system property, we log a message 
      * about the choosen style.
      * 
@@ -321,9 +295,6 @@ public final class Options {
      * @see #setTabIconsEnabled(boolean)
      */
     public static boolean isTabIconsEnabled() {
-        if (!LookUtils.IS_NETBEANS)
-            return true;
-
         String userMode = LookUtils.getSystemProperty(TAB_ICONS_ENABLED_KEY, "");
         boolean overridden = userMode.length() > 0;
 

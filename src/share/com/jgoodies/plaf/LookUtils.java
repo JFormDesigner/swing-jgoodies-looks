@@ -44,7 +44,6 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.UIResource;
 
-import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 import com.jgoodies.plaf.plastic.PlasticTheme;
 
@@ -166,23 +165,9 @@ public final class LookUtils {
      */
     public static final boolean IS_LAF_WINDOWS_XP_ENABLED = isWindowsXPLafEnabled();
     
-    /**
-     * True if this is a NetBeans environment.
-     */
-    public static final boolean IS_NETBEANS;
-
     public static final boolean IS_LOW_RESOLUTION = isLowResolution();
     
-    private static boolean loggingEnabled;
-    
-    static {
-        loggingEnabled = true;
-        IS_NETBEANS    = isNetBeans();
-        if (IS_NETBEANS) {
-            // Force the ClearLookManager to immediately log messages.
-            ClearLookManager.getMode();
-        }
-    }
+    private static boolean loggingEnabled = true;
     
 
     private LookUtils() {
@@ -405,22 +390,6 @@ public final class LookUtils {
         return Toolkit.getDefaultToolkit().getScreenResolution() < 120;
     }
 
-    /**
-     * Checks and answers whether we are in the Netbeans IDE
-     * by looking for a NetBeans buildnumber. 
-     * 
-     * @return true if NetBeans could be detected, false otherwise
-     */
-    private static boolean isNetBeans() {
-        String property = getSystemProperty("netbeans.buildnumber");
-        boolean hasNetBeansBuildNumber = 
-             property != null && property.length() > 0;
-        if (hasNetBeansBuildNumber) {
-            log("NetBeans detected - dobry den!");
-        }
-        return hasNetBeansBuildNumber;
-    }
-    
     private static boolean startsWith(String str, String prefix) {
         return str != null && str.startsWith(prefix);
     }

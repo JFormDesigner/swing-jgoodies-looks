@@ -32,8 +32,6 @@ package com.jgoodies.looks.demo;
 
 import javax.swing.LookAndFeel;
 
-import com.jgoodies.clearlook.ClearLookManager;
-import com.jgoodies.clearlook.ClearLookMode;
 import com.jgoodies.plaf.BorderStyle;
 import com.jgoodies.plaf.FontSizeHints;
 import com.jgoodies.plaf.HeaderStyle;
@@ -47,7 +45,7 @@ import com.jgoodies.plaf.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     com.jgoodies.plaf.BorderStyle
  * @see     com.jgoodies.plaf.FontSizeHints
@@ -90,10 +88,6 @@ public final class Settings {
 
     private Boolean toolBar3DHint;
 
-    private ClearLookMode clearLookMode;
-
-    private String clearLookPolicyName;
-    
     
     // Instance Creation ******************************************************
 
@@ -119,29 +113,11 @@ public final class Settings {
         settings.setToolBarPlasticBorderStyle(null);
         settings.setToolBarWindowsBorderStyle(null);
         settings.setToolBar3DHint(null);
-        settings.setClearLookMode(ClearLookMode.OFF);
-        settings.setClearLookPolicyName(ClearLookManager.getPolicy().getClass().getName());
         return settings;
     }
 
 
     // Accessors **************************************************************
-
-    public ClearLookMode getClearLookMode() {
-        return clearLookMode;
-    }
-
-    public void setClearLookMode(ClearLookMode clearLookMode) {
-        this.clearLookMode = clearLookMode;
-    }
-
-    public String getClearLookPolicyName() {
-        return clearLookPolicyName;
-    }
-
-    public void setClearLookPolicyName(String clearLookPolicyName) {
-        this.clearLookPolicyName = clearLookPolicyName;
-    }
 
     public FontSizeHints getFontSizeHints() {
         return fontSizeHints;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -40,11 +40,16 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 /**
  * Paints a single drag symbol instead of many bumps.
+ * 
+ * @author  Karsten Lentzsch
+ * @version $Revision: 1.2 $
+ * 
+ * @see PlasticSplitPaneUI
  */
-public final class PlasticSplitPaneDivider extends BasicSplitPaneDivider {
+final class PlasticSplitPaneDivider extends BasicSplitPaneDivider {
 	
 	
-	public PlasticSplitPaneDivider(BasicSplitPaneUI ui) {
+	PlasticSplitPaneDivider(BasicSplitPaneUI ui) {
 		super(ui);
 	}
 	

@@ -1,6 +1,48 @@
 
 
 
+                    JGoodies Looks, Version 1.3.0 preview
+                            Release Notes
+                        
+
+INTRODUCTION
+
+    This release ...
+
+
+
+BUGS FIXED
+
+    o Plastic internal frames use the outdated Java cup icon.   
+    
+
+CHANGES THAT AFFECT THE COMPATIBILITY
+
+    o All ClearLook classes have been removed from the Looks.
+      These will show up as a LintLookAndFeel later.
+
+
+KNOWN ISSUES
+
+    For all issues see http://looks.dev.java.net/servlets/ProjectIssues
+
+    This release still lacks an improved font management
+    for the Plastic l&f family on non-Windows platforms.
+    For a workaround see issue #10.
+      
+
+OTHER CHANGES
+
+    o Docs:      ...
+    o Demo:      ...
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
                     JGoodies Looks, Version 1.2.2
                             Release Notes
                         

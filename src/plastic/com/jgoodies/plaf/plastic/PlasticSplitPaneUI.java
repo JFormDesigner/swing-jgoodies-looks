@@ -30,35 +30,22 @@
 
 package com.jgoodies.plaf.plastic;
 
-import java.awt.Graphics;
-
 import javax.swing.JComponent;
-import javax.swing.JSplitPane;
-import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
-import com.jgoodies.clearlook.ClearLookManager;
-
 
 /**
- * The JGoodies Plastic Look and Feel implementation of
- * <code>SplitPaneUI</code>.<p>
- * 
- * It can replace obsolete <code>Border</code>s and uses a special divider,
- * that paints a single drag handle instead of many bumps.
+ * The JGoodies Plastic L&amp;F implementation of <code>SplitPaneUI</code>.
+ * Uses a special divider that paints modified one-touch buttons.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
+ * 
+ * @see PlasticSplitPaneDivider
  */
 public final class PlasticSplitPaneUI extends BasicSplitPaneUI {
-	
-	
-	// Stores the original border, in case we replace it.
-	private Border   storedBorder;
-
-	// Have we already checked the parent container?
-	private boolean hasCheckedBorderReplacement = false;
 	
 	
 	public static ComponentUI createUI(JComponent x) {
@@ -66,33 +53,12 @@ public final class PlasticSplitPaneUI extends BasicSplitPaneUI {
 	}
 
 
+    /**
+     * Creates and returns the modified default divider.
+     */
 	public BasicSplitPaneDivider createDefaultDivider() {
 		return new PlasticSplitPaneDivider(this);
 	}
 	
-
-	/**
-	 * Replaces the scrollpane's <code>Border</code> if appropriate,
-	 * then paints.
-	 */
-    public void paint(Graphics g, JComponent c) {
-    	if (!hasCheckedBorderReplacement) {
-    		storedBorder = ClearLookManager.replaceBorder((JSplitPane) c);
-    		hasCheckedBorderReplacement = true;
-    	}
-   		super.paint(g, c);
-    }
-    
-
-	/**
-	 * Restores the original <code>Border</code>, in case we replaced it.
-	 */
-    protected void uninstallDefaults() {
-    	if (storedBorder != null) {
-    		splitPane.setBorder(storedBorder);
-    	}
-    	super.uninstallDefaults();
-    }
-
 	
 }

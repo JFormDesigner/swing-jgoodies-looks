@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -39,27 +39,23 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
-import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
+import com.jgoodies.plaf.Options;
 import com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI;
 
-import com.jgoodies.clearlook.ClearLookManager;
-import com.jgoodies.plaf.Options;
-
 /**
- * The JGoodies Windows Look and Feel implementation of
- * <code>TabbedPaneUI</code>.<p>
+ * The JGoodies Windows L&amp;F implementation of <code>TabbedPaneUI</code>.<p>
  * 
  * The flat appearance is work in progress; currently it works only
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.5 $
  */
 public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
 
@@ -95,11 +91,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
     private Boolean embeddedTabs;
 
     /**
-     * Describes that ClearLook suggests to hide the content border.
-     */
-    private boolean clearLookSuggestsNoContentBorder = false;
-
-    /**
      * Creates and answers the <code>ExtWindowsTabbedPaneUI</code>.
      * 
      * @see javax.swing.plaf.ComponentUI#createUI(JComponent)
@@ -127,9 +118,7 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
      * Options.NO_CONTENT_BORDER or Options.EMBEDDED.
      */
     private boolean hasNoContentBorder() {
-        return hasEmbeddedTabs() || (noContentBorder == null
-                                        ? clearLookSuggestsNoContentBorder()
-                                        : noContentBorder.booleanValue());
+        return hasEmbeddedTabs() || Boolean.TRUE.equals(noContentBorder);
     }
 
     /**
@@ -139,25 +128,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
         return embeddedTabs == null
                 ? false
                 : embeddedTabs.booleanValue();
-    }
-
-    /**
-     * Checks and answers if ClearLook suggests to hide the content border.
-     */
-    private boolean clearLookSuggestsNoContentBorder() {
-        return clearLookSuggestsNoContentBorder;
-    }
-
-    /**
-     * Checks if ClearLook indicates that the current component context 
-     * uses a border that is considered as visual clutter. 
-     * In this case replaces the border.
-     * 
-     * @param tabbedPane    the tabbed pane component
-     */
-    private void checkBorderReplacement(JTabbedPane tabbedPane) {
-        Border newBorder = ClearLookManager.replaceBorder(tabbedPane);
-        clearLookSuggestsNoContentBorder = newBorder != null;
     }
 
     /**
@@ -552,9 +522,6 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
             String pName = e.getPropertyName();
             if (null == pName) {
                 return;
-            }
-            if (pName.equals("ancestor")) {
-               checkBorderReplacement(tabPane);
             }
             if (pName.equals(Options.EMBEDDED_TABS_KEY)) {
                embeddedTabsPropertyChanged((Boolean)e.getNewValue());

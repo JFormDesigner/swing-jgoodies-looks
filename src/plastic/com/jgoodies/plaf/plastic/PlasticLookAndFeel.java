@@ -59,7 +59,7 @@ import com.jgoodies.plaf.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -263,10 +263,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 // Honors the screen resolution and uses a minimum button width             
                 "OptionPaneUI",             PLASTIC_PREFIX + "OptionPaneUI",
                
-		        // Uses ClearLook.
-				"LabelUI", 					PLASTIC_PREFIX + "LabelUI",
-				"PanelUI", 					PLASTIC_PREFIX + "PanelUI",
+                // Can installs an optional etched border
 				"ScrollPaneUI",				PLASTIC_PREFIX + "ScrollPaneUI",
+                   
+                // Uses a modified split divider
 				"SplitPaneUI", 				PLASTIC_PREFIX + "SplitPaneUI",
 				
 				// Modified icons and lines

@@ -44,13 +44,12 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
-import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-
 import com.jgoodies.plaf.FontSizeHints;
 import com.jgoodies.plaf.FontUtils;
 import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.common.MinimumSizedIcon;
+import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 
 /**
  * The main class of the JGoodies Windows Look&amp;Feel.
@@ -59,7 +58,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -133,9 +132,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             // Modified size 
             "ComboBoxUI",            WINDOWS_PREFIX + "ComboBoxUI", 
 
-            // Uses ClearLook.
-            "LabelUI",               WINDOWS_PREFIX + "LabelUI", 
-			"PanelUI",               WINDOWS_PREFIX + "PanelUI", 
+            // Can installs an optional etched border
 			"ScrollPaneUI",          WINDOWS_PREFIX + "ScrollPaneUI", 
 
             // Optional style and optional special borders
@@ -298,6 +295,10 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             "ComboBox.rendererMargin",    comboRendererMargin, // Added by JGoodies
             
             "EditorPane.margin",		  textInsets,
+            
+            // InternalFrame
+            "InternalFrame.icon",         makeIcon(superclass, "icons/JavaCup.gif"),
+            
             
             // Begin 1.3 und 1.4.0
             "Menu.border",                menuBorder, // Fixed in 1.4.1

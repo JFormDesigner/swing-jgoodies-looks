@@ -42,7 +42,6 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
-import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.plaf.LookUtils;
 import com.jgoodies.plaf.Options;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
@@ -61,7 +60,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class DemoFrame extends JFrame {
 
@@ -114,8 +113,6 @@ public class DemoFrame extends JFrame {
         
         // Global options
         Options.setTabIconsEnabled(settings.isTabIconsEnabled());
-        ClearLookManager.setMode(settings.getClearLookMode());
-        ClearLookManager.setPolicy(settings.getClearLookPolicyName());
         UIManager.put(Options.POPUP_DROP_SHADOW_ENABLED_KEY, 
                 settings.isPopupDropShadowEnabled());
 

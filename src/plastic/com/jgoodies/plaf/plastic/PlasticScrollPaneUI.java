@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -30,114 +30,74 @@
 
 package com.jgoodies.plaf.plastic;
 
-import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.JComponent;
 import javax.swing.JScrollPane;
 import javax.swing.LookAndFeel;
-import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalScrollPaneUI;
 
-import com.jgoodies.clearlook.ClearLookManager;
 import com.jgoodies.plaf.Options;
 
-
 /**
- * The JGoodies Plastic Look&amp;Feel implementation of <code>ScrollPaneUI</code>.<p>
- * 
- * Can replace obsolete <code>Border</code>s.
+ * The JGoodies Plastic L&amp;Fl implementation of <code>ScrollPaneUI</code>.
+ * Installs an etched border if the client property 
+ * <code>Options.IS_ETCHED_KEY</code> is set.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.3 $
+ * 
+ * @see com.jgoodies.plaf.Options#IS_ETCHED_KEY
  */
 public final class PlasticScrollPaneUI extends MetalScrollPaneUI {
-	
-
-	// Stores the original border, in case we replace it.
-	private Border	  storedBorder;
-
-	// Have we already checked the parent container?
-	private boolean hasCheckedBorderReplacement = false;
-	
-	// Do we use an etchedBorder
-	private boolean hasEtchedBorder = false;
-
-	private PropertyChangeListener listener;
-
-	
-	public static ComponentUI createUI(JComponent b) {
-		return new PlasticScrollPaneUI();
-	}
-	
-	
-	protected void installDefaults(JScrollPane scrollPane) {
-	    super.installDefaults(scrollPane);
-	    installEtchedBorder(scrollPane);
-	}
-
-	/**
-	 * Restores the original <code>Border</code>, in case we replaced it.
-	 */
-	protected void uninstallDefaults(JScrollPane scrollPane) {
-	    if (storedBorder != null) {
-	        scrollPane.setBorder(storedBorder);
-	    }
-	    super.uninstallDefaults(scrollPane);
-	}
-
-	protected void installEtchedBorder(JScrollPane scrollPane) {
-	    Object value = scrollPane.getClientProperty(Options.IS_ETCHED_KEY);
-	    if (Boolean.TRUE.equals(value)) {
-	        LookAndFeel.installBorder(scrollPane, "ScrollPane.etchedBorder");
-	        hasEtchedBorder = true;
-	    }
-	}
-
-	// Managing the Etched Property *******************************************
-
-	public void installListeners(JScrollPane scrollPane) {
-	    super.installListeners(scrollPane);
-	    listener = createBorderStyleListener();
-	    scrollPane.addPropertyChangeListener(listener);
-	}
-
-	protected void uninstallListeners(JComponent c) {
-	    ((JScrollPane) c).removePropertyChangeListener(listener);
-	    super.uninstallListeners(c);
-	}
-
-	private PropertyChangeListener createBorderStyleListener() {
-	    return new PropertyChangeListener() {
-
-	        public void propertyChange(PropertyChangeEvent e) {
-	            String prop = e.getPropertyName();
-	            if (prop.equals(Options.IS_ETCHED_KEY)) {
-	                JScrollPane scrollPane = (JScrollPane) e.getSource();
-	                installEtchedBorder(scrollPane);
-	            }
-	        }
-
-	    };
-	}
-
 
     /**
-     * Replaces the scrollpane's <code>Border</code> if appropriate,
-     * then paints.
+     * Holds the listener that handles changes in the etched border property.
      */
-    public void paint(Graphics g, JComponent c) {
-        if (hasEtchedBorder) {
-            super.paint(g, c);
-            return;
-        }
+    private PropertyChangeListener borderStyleChangeHandler;
 
-        if (!hasCheckedBorderReplacement) {
-            storedBorder = ClearLookManager.replaceBorder(c);
-            hasCheckedBorderReplacement = true;
-        }
-        super.paint(g, c);
+    public static ComponentUI createUI(JComponent b) {
+        return new PlasticScrollPaneUI();
+    }
+
+    protected void installDefaults(JScrollPane scrollPane) {
+        super.installDefaults(scrollPane);
+        installEtchedBorder(scrollPane);
+    }
+
+
+    // Managing the Etched Property *******************************************
+
+    public void installListeners(JScrollPane scrollPane) {
+        super.installListeners(scrollPane);
+        borderStyleChangeHandler = new BorderStyleChangeHandler();
+        scrollPane.addPropertyChangeListener(Options.IS_ETCHED_KEY, borderStyleChangeHandler);
+    }
+
+    protected void uninstallListeners(JComponent c) {
+        ((JScrollPane) c).removePropertyChangeListener(Options.IS_ETCHED_KEY,
+                borderStyleChangeHandler);
+        super.uninstallListeners(c);
+    }
+
+    protected void installEtchedBorder(JScrollPane scrollPane) {
+        Object value = scrollPane.getClientProperty(Options.IS_ETCHED_KEY);
+        boolean hasEtchedBorder = Boolean.TRUE.equals(value);
+        LookAndFeel.installBorder(scrollPane, 
+                hasEtchedBorder 
+                    ? "ScrollPane.etchedBorder"
+                    : "ScrollPane.border");
     }
     
+    private class BorderStyleChangeHandler implements PropertyChangeListener {
+
+        public void propertyChange(PropertyChangeEvent evt) {
+            JScrollPane scrollPane = (JScrollPane) evt.getSource();
+            installEtchedBorder(scrollPane);
+        }
+
+    }
+
 }
