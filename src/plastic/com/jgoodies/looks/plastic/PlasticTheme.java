@@ -41,7 +41,7 @@ import javax.swing.plaf.metal.DefaultMetalTheme;
  * Unlike its superclass this theme class has relaxed access.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
@@ -170,6 +170,7 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     public FontUIResource getWindowTitleFont() {
         return getFont();
     }
+    
 
     // Helper Code **********************************************************
 
@@ -186,5 +187,32 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
             ? font.deriveFont(Font.PLAIN)
             : new Font("Dialog", Font.PLAIN, 12);
     }
+    
+    
+    // Custom Equals Implementation *****************************************
+
+    /**
+     * Plastic themes are equal if and only if their classes are the same.
+     * 
+     * @return true if this theme is equal to the given object 
+     */
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null)
+            return false;
+        return getClass().equals(o.getClass());
+    }
+
+    
+    /**
+     * Returns this theme's hash code, the classes' hash code.
+     * 
+     * @return this theme's hash code
+     */
+    public int hashCode() {
+        return getClass().hashCode();
+    }
+    
 
 }
