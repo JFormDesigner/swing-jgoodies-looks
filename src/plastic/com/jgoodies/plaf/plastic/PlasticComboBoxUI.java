@@ -53,10 +53,10 @@ import com.jgoodies.plaf.LookUtils;
 
 /**
  * The JGoodies Plastic Look and Feel implementation of <code>ComboBoxUI</code>.
- * <p>
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
+* @version $Revision: 1.2 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -79,6 +79,28 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     }
 
     /**
+     * Gets the insets from the JComboBox.
+     */
+    private Insets getEditorInsets() {
+        if (editor instanceof JComponent) {
+            return ((JComponent)editor).getInsets();
+        }
+        return new Insets(0, 0, 0, 0);
+    }
+    
+    /**
+     * Computes and returns the width of the arrow button in editable state.
+     * The perceived width shall be equal to the width of a scroll bar.
+     * Therefore we subtract a pixel that is perceived as part of the 
+     * arrow button but that is painted by the editor's border.
+     * 
+     * @return the width of the arrow button in editable state
+     */
+    private int getEditableButtonWidth() {
+        return UIManager.getInt("ScrollBar.width") - 1;
+    }
+    
+    /**
      * Overriden to correct the combobox height.
      */
     public Dimension getMinimumSize(JComponent c) {
@@ -95,33 +117,37 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             PlasticComboBoxButton button =
                 (PlasticComboBoxButton) arrowButton;
             Insets buttonInsets = button.getInsets();
+            Insets buttonMargin = button.getMargin();
             Insets insets = comboBox.getInsets();
-
             size = getDisplaySize();
-
+            
+            // System.out.println("button insets=" + buttonInsets);
+            // System.out.println("button margin=" + buttonMargin);
+            
             /*
              * The next line will lead to good results if used with standard renderers;
              * In case, a custom renderer is used, it may use a different height, 
              * and we can't help much.
              */
             size.height += LookUtils.isLowRes ? 0 : 2;
-
             size.width  += insets.left + insets.right;
-            size.width  += buttonInsets.left  + buttonInsets.right;
-            size.width  += buttonInsets.right + button.getComboIcon().getIconWidth();
+            size.width  += buttonInsets.left + buttonInsets.right;
+            size.width  += buttonMargin.left + buttonMargin.right;
+            size.width  += button.getComboIcon().getIconWidth();
             size.height += insets.top + insets.bottom;
             size.height += buttonInsets.top + buttonInsets.bottom;
-
         } else if (
             comboBox.isEditable() && arrowButton != null && editor != null) {
 
-            // Includes the text editor border and inner margin
+            // The display size does often not include the editor's insets
             size = getDisplaySize();
-
-            // Since the button is positioned besides the editor,
-            // do not add the buttons margin to the height.
-
             Insets insets = comboBox.getInsets();
+            Insets editorInsets = getEditorInsets();
+            int buttonWidth = getEditableButtonWidth();
+
+            size.width += insets.left + insets.right;
+            size.width += editorInsets.left + editorInsets.right -1;
+            size.width += buttonWidth;
             size.height += insets.top + insets.bottom;
         } else {
             size = super.getMinimumSize(c);
@@ -182,7 +208,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             int height = cb.getHeight();
 
             Insets insets = getInsets();
-            int buttonWidth = UIManager.getInt("ScrollBar.width");
+            int buttonWidth  = getEditableButtonWidth();
             int buttonHeight = height - (insets.top + insets.bottom);
 
             if (arrowButton != null) {
