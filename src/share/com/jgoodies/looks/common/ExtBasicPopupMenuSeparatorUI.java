@@ -42,10 +42,11 @@ import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
 
 /**
  * Renders the separator in popup and pull-down menus.
- * Unlike its superclass we use a setting for the insets.
+ * Unlike its superclass we use a setting for the insets and
+ * it uses a shared UI delegate.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorUI {
 
@@ -53,9 +54,14 @@ public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorU
 	
 	private Insets insets;
 			
+    /** Shared UI object. */
+    private static ComponentUI popupMenuSeparatorUI;
 	
-	public static ComponentUI createUI(JComponent b) { 
-		return new ExtBasicPopupMenuSeparatorUI(); 
+	public static ComponentUI createUI(JComponent b) {
+        if (popupMenuSeparatorUI == null) {
+            popupMenuSeparatorUI = new ExtBasicPopupMenuSeparatorUI();
+        }
+		return popupMenuSeparatorUI; 
 	}
 	
 	
