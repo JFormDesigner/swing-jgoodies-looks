@@ -62,12 +62,6 @@ OTHER CHANGES
     o Build: Added overview page.
     
     
-ACKNOWLEDGEMENTS
-
-    Andrej Golovnin has contributed a significant portion to this release.
-    He has checked, commented, and fixed most of the critical issues.
-   
-    
 ---------------------------------------------------------------------------
 
 Find below the change history for older releases.
