@@ -99,7 +99,7 @@ final class ClearLookTab {
         builder.addLabel("CompoundBorder in BevelBorder", cc.xy(5, 11, "c, c"));
 
 
-        builder.add(buildStatusBarWithBevelBorder(),    cc.xywh(1, 13, 5, 1));
+        builder.add(buildStatusBarWithBevelBorder(),      cc.xyw(1, 13, 5));
 
         return builder.getPanel();
     }

@@ -68,7 +68,7 @@ final class NarrowTab {
         CellConstraints cc = new CellConstraints();
         
         // BoxLayout
-        builder.addSeparator("Unmodified Button Widths (BoxLayout)", cc.xywh(1, 1, 5, 1));
+        builder.addSeparator("Unmodified Button Widths (BoxLayout)", cc.xyw(1, 1, 5));
 
         builder.addLabel("No Narrow Hint:",         cc.xy(2, 3));
         builder.add(buildButtonBoxNoNarrow(),       cc.xy(4, 3));
@@ -80,7 +80,7 @@ final class NarrowTab {
         builder.add(buildButtonBoxAllNarrow(),      cc.xy(4, 7));
 
         // DesignGridLayout
-        builder.addSeparator("Adjusted Button Widths (FormLayout)", cc.xywh(1, 9, 5, 1));
+        builder.addSeparator("Adjusted Button Widths (FormLayout)", cc.xyw(1, 9, 5));
 
         builder.addLabel("No Narrow Hint:",         cc.xy(2, 11));
         builder.add(buildButtonFormNoNarrow(),      cc.xy(4, 11));
@@ -92,7 +92,7 @@ final class NarrowTab {
         builder.add(buildButtonFormAllNarrow(),     cc.xy(4, 15));
 
         // GridLayout
-        builder.addSeparator("Equalized Button Widths (GridLayout)", cc.xywh(1, 17, 5, 1));
+        builder.addSeparator("Equalized Button Widths (GridLayout)", cc.xyw(1, 17, 5));
 
         builder.addLabel("No Narrow Hint:",         cc.xy(2, 19));
         builder.add(buildButtonGridNoNarrow(),      cc.xy(4, 19));
