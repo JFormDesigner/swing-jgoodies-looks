@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>JGoodies Looks :: NetBeans</title>
+	<title>JGoodies Looks :: Quick Start</title>
         <link rel="stylesheet" type="text/css" href="style.css" >
 	<meta name="description" content="The JGoodies Looks make your Swing apps and applets look better.">
 	<meta name="author"	 content="Karsten Lentzsch">
@@ -15,7 +15,7 @@
 <table border="0" cellspacing="0" cellpadding="0" width="100%">
 <tr>
     <td colspan="3" bgcolor="DDDCDC"><a href="../README.html"><img 
-	src="images/banner.gif" width="436" height="46" alt=":: JGOODIES Looks :: Professional Swing Look&amp;Feels" border="0"></a></td>
+	src="images/banner.gif" width="436" height="46" alt=":: JGOODIES :: Looks" border="0"></a></td>
 </tr>
 <tr>
     <td colspan="3" height="1" bgcolor="C9C8C8"></td>
@@ -31,8 +31,8 @@
 	<br>::&nbsp;<a class="nav" href="../RELEASE-NOTES.txt">Release Notes</a>
 	<br>::&nbsp;<a class="nav" href="../LICENSE.txt">License</a>
 	<br>::&nbsp;<a class="nav" href="examples.html">Examples</a>
-	<br>::&nbsp;<a class="nav" href="netbeans.html"><b>NetBeans</b></a>
-	<br>::&nbsp;<a class="nav" href="quickstart.html">Quick Start</a>
+	<br>::&nbsp;<a class="nav" href="netbeans.html">NetBeans</a>
+	<br>::&nbsp;<a class="nav" href="quickstart.html"><b>Quick Start</b></a>
 	<p>
 	<b>User's&nbsp;Guide</b>
 	<br>::&nbsp;<a class="nav" href="guide/index.html">Introduction</a>
@@ -54,6 +54,7 @@
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectIssues">Issue Tracking</a>
 	<br>::&nbsp;<a class="nav" href="http://looks.dev.java.net/servlets/ProjectNewsList">News</a>
 	<br>::&nbsp;<a class="nav" href="http://www.jgoodies.com/freeware/">More Examples</a>
+
         
          <!-- *********** Ende der Seitennavigation ******************************* -->
 
@@ -68,80 +69,77 @@
 	<table width="530" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	  <td>
-	<h1>:: JGoodies L&amp;F in NetBeans ::</h1>
+	<h1>:: Quick Start ::</h1>
 	
 
-	The NetBeans environment allows to use third party look&amp;feels. 
-	This document describes how to use a JGoodies l&amp;f in NetBeans.
+		<i>How to make your apps look better using the JGoodies Looks</i>
+
+     		<p>
+		The following describes how to start effectively with the JGoodies Looks.
+		For each step we have listed the estimated migration costs.
 
 
-	<h2>Preparation</h2>
+		<h2>1) Integrate the JGoodies L&amp;Fs (< 1 day)</h2> 
 
-	First make sure that NetBeans can find the JGoodies Looks library jar.
-	Copy file <tt>looks-1.1.2.jar</tt> to directory <tt>&lt;netbeans-dir&gt;\lib\ext</tt>
+     		This is a very effective step and easy to do with
+     		about 5 lines of code. Just choose 
+     		your preferred JGoodies look&amp;feel and set it in the <tt>UIManager</tt>,
+     		see <a href="guide/lookandtheme.html">here</a>. 
 
+		<P>  
+     		As a result of this step your application will look better.
 
-	<h2>Choosing a JGoodies Look&amp;Feel</h2>
+  
+		<h2>2) Use an Appropriate Icon Set (1-4 days)</h2>
 
-	Add <i>one of</i> the following lines to file <tt>&lt;netbeans-dir&gt;\bin\ide.cfg</tt>
-
-	<p><tt>
--ui com.jgoodies.plaf.plastic.PlasticXPLookAndFeel<br>
--ui com.jgoodies.plaf.plastic.PlasticLookAndFeel<br>
--ui com.jgoodies.plaf.plastic.Plastic3DLookAndFeel<br>
--ui com.jgoodies.plaf.windows.ExtWindowsLookAndFeel</tt>
-
-
-	<h2>Setting the Plastic Color Theme</h2>
-
-	To change the default Plastic color theme add the following line to the <tt>ide.cfg</tt> file:
-	<p><tt>-J-DPlastic.defaultTheme=ExperienceBlue</tt>
-
-
-	<h2>Other Options</h2>
-
-	You can change the Plastic tab style to make the selected tab easier to find:
-	<p><tt>-J-DPlastic.tabStyle=Metal</tt>
-
-	<p>
-	By default, the JGoodies l&amp;fs switch on ClearLook in NetBeans environments.
-	You can switch ClearLook off by adding:
-	<p><tt>-J-DClearLook.mode=OFF</tt>
-
-	<p>
-	To find visual clutter in NetBeans you can mark content borders of JTabbedPanes:
-	<p><tt>-J-DmarkContentBorders=true</tt>
+     		Icons have a significant effect on the function 
+     		and elegance of your applications. The choice of
+     		an appropriate icon set depends on many factors,
+     		among others: your platform support strategy.
+     
+		<p>
+     		If you aim to provide high-fidelity Windows support plus 
+     		good support on Linux, Solaris, and Mac, I recommend 
+     		to consider using the icon set from 
+     		<a href="http://www.eclipse.org/">eclipse.org</a>.
+     		This icon set won't alienate Windows users, is relatively 
+     		large and portable, and quite easy to extend by developers.
+     		If you require larger icons, the icon set by Dean S.
+     		Jones may be your choice. From my perspective, the icons
+     		provided by Sun's HIG group don't work well on Windows 
+     		and Mac and do conflict with many popular desktop colors.
 
 
-	<h2>Previewing Your Apps With a JGoodies L&amp;F</h2>
+		<h2>3) Remove Obsolete Decorations :: Use Less Ink (1-5 days)</h2>
 
-	<ol>
-	<li>Select your application within the NetBeans Explorer view.
-	<li>Select the <i>Execution</i> tab in the Properties view.
-	<li>Select <i>Internal Execution</i> as the executor.
-	</ol>
-	<center>
-	<img src="images/netbeans-internalexec.jpg" border="0"><br>
-	Internal Execution Selected
-	</center>
-	
-	
-	<h2>Screenshots</h2>
-	
-	<center>
-	<a href="images/netbeans-default.jpg"
-       target="secondary screen"><img 
-       src="images/netbeans-default_sm.jpg" border="0"><br>
-	NetBeans in Default Look</a>
+     		Remove obsolete and duplicate borders and separators.
+     		Check every line in your panels and ask yourself 
+     		whether it adds information or blurs your content.
+     		Very often you can replace a border or separator
+     		with white space.
+     
+		<p>
+     		The JGoodies Looks contain ClearLook, an add-on 
+     		that can help you find visual clutter.
+		The clutter often stems from wrapping multiple decorated components,
+		for example a JScrollPane in a JSplitPane.
+    		Switch on the ClearLook debug mode and look 
+     		what it has marked with colored decorations.
+     		You may consider these decorations as obsolete.
+     
+		<p>
+     		As a result users can more quickly and easily 
+     		comprehend your panels and find relevant information.
+     
+     
+		<h2>You're Done</h2>
+		
+		If you have completed these steps your application should look significantly better.
+     		Congratulations! If you want to further improve the appearance
+		and consistency of your applications check out the free
+		<a href="http://www.jgoodies.com/freeware/forms/">JGoodies Forms</a>.
 
-	<p>
-	<a href="images/netbeans-plastic.jpg"
-       target="secondary screen"><img 
-       src="images/netbeans-plastic_sm.jpg" border="0"><br>
-	NetBeans in Plastic Look</a>
-	</center>
-	
-	
+
 	</td>
 	</tr>
 	</table>
