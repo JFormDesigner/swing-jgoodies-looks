@@ -59,7 +59,7 @@ import com.jgoodies.plaf.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -351,7 +351,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object  treeCollapsedIcon		= PlasticIconFactory.getCollapsedTreeIcon();
         ColorUIResource gray 			= new ColorUIResource(Color.gray);
 		
-		Boolean is3D					= new Boolean(is3DEnabled());
+		Boolean is3D					= Boolean.valueOf(is3DEnabled());
 		
 		Object[] defaults = { 
 		"Button.border",								buttonBorder,

@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public final class Options {
@@ -225,7 +225,7 @@ public final class Options {
      * @see #getUseSystemFonts()
      */
     public static void setUseSystemFonts(boolean useSystemFonts) {
-        UIManager.put(USE_SYSTEM_FONTS_APP_KEY, new Boolean(useSystemFonts));
+        UIManager.put(USE_SYSTEM_FONTS_APP_KEY, Boolean.valueOf(useSystemFonts));
     }
 
     /**
@@ -306,7 +306,7 @@ public final class Options {
      * @see #getUseNarrowButtons()
      */
     public static void setUseNarrowButtons(boolean b) {
-        UIManager.put(USE_NARROW_BUTTONS_KEY, new Boolean(b));
+        UIManager.put(USE_NARROW_BUTTONS_KEY, Boolean.valueOf(b));
     }
 
     /**
@@ -347,7 +347,7 @@ public final class Options {
      * @see #isTabIconsEnabled()
      */
     public static void setTabIconsEnabled(boolean b) {
-        UIManager.put(TAB_ICONS_ENABLED_KEY, new Boolean(b));
+        UIManager.put(TAB_ICONS_ENABLED_KEY, Boolean.valueOf(b));
     }
     
     
@@ -434,7 +434,7 @@ public final class Options {
      * @see #isPopupDropShadowEnabled()
      */
     public static void setPopupDropShadowEnabled(boolean b) {
-        UIManager.put(POPUP_DROP_SHADOW_ENABLED_KEY, new Boolean(b));
+        UIManager.put(POPUP_DROP_SHADOW_ENABLED_KEY, Boolean.valueOf(b));
     }
     
     /**
