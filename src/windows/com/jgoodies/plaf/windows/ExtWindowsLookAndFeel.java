@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -160,7 +160,11 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             "TabbedPaneUI",          WINDOWS_PREFIX + "TabbedPaneUI", 
 
             // Corrected position of the tree button icon
-            "TreeUI",                WINDOWS_PREFIX + "TreeUI",};
+            "TreeUI",                WINDOWS_PREFIX + "TreeUI",
+
+            // Modified Border
+            "SpinnerUI",          WINDOWS_PREFIX + "SpinnerUI", 
+        };
         table.putDefaults(uiDefaults);
 
         Object[] otherDefaults;
@@ -182,9 +186,6 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
                 // Black arrows
                 "ScrollBarUI",        WINDOWS_PREFIX + "ScrollBarUI", 
-
-                // Modified Border
-                "SpinnerUI",          WINDOWS_PREFIX + "SpinnerUI", 
 
                 // Uses unmodified size specified by "ToolBar.separatorSize"
                 "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI",
@@ -316,7 +317,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
                                                : makeIcon(superclass, "icons/Inform.gif"), 
 			"OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
                                                : makeIcon(superclass, "icons/Warn.gif"), 
-			"OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
+			"OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
                                                : makeIcon(superclass, "icons/Question.gif"),
             "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
             "PasswordField.margin",       textInsets, // 1.4.1 Bug

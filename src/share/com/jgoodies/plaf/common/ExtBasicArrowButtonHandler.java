@@ -28,7 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.plaf;
+package com.jgoodies.plaf.common;
 
 import java.awt.AWTEvent;
 import java.awt.Component;

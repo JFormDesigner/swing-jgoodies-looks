@@ -54,7 +54,7 @@ import com.jgoodies.plaf.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
@@ -135,7 +135,7 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * Returns the area that is reserved for drawing the currently selected item.
      */
     protected Rectangle rectangleForCurrentValue() {
-        if (comboBox.isEditable())
+        if (comboBox.isEditable() || !comboBox.isEnabled())
             return super.rectangleForCurrentValue();
         
         int width  = comboBox.getWidth();

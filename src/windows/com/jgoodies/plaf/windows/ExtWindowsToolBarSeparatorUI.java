@@ -39,7 +39,6 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
 import com.sun.java.swing.plaf.windows.WindowsToolBarSeparatorUI;
 
