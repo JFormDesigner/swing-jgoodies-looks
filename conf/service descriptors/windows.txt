@@ -1,2 +1,0 @@
-# JGoodies Windows L&F
-com.jgoodies.looks.windows.WindowsLookAndFeel
