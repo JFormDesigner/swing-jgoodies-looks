@@ -36,8 +36,6 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
-import sun.security.action.GetPropertyAction;
-
 /**
  * Provides convenience behavior to set font defaults.
  * Used by the JGoodies look&amp;feel implementations.
@@ -54,27 +52,26 @@ public final class FontUtils {
 
 	/**
 	 * Checks and answers if we shall use system font settings.
-	 * In 1.3 environments we need to guess the system fonts.<p>
-	 * 
 	 * Using the fonts set by the user can potentially cause
-	 * performance and compatibility issues, so allow this feature
-	 * to be switched off either at runtime or programmatically
+	 * performance and compatibility issues, so we allow this feature
+	 * to be switched off either at runtime or programmatically.<p>
+	 * 
+	 * First checks whether system fonts have been explicitly turned
+	 * off in the system properties. Then checks whether a property
+	 * has been set in the UIManager. 
 	 *
      * @return true if system fonts shall be used
 	 */	
-	public static boolean useSystemFontSettings() {
-		String systemFonts = (String) java.security.AccessController.doPrivileged(
-            new GetPropertyAction(Options.USE_SYSTEM_FONTS_KEY));
-		boolean useSystemFontSettings = 
-			systemFonts == null || systemFonts.equals("true");
+    public static boolean useSystemFontSettings() {
+        String systemFonts = LookUtils
+                .getSystemProperty(Options.USE_SYSTEM_FONTS_KEY);
+        if ("false".equalsIgnoreCase(systemFonts))
+            return false;
 
-        if (useSystemFontSettings) {
-            Object value = UIManager.get(Options.USE_SYSTEM_FONTS_APP_KEY);
-            useSystemFontSettings = 
-            	value == null || Boolean.TRUE.equals(value);
-        }
-		return useSystemFontSettings;
-	}
+        Object value = UIManager.get(Options.USE_SYSTEM_FONTS_APP_KEY);
+        return !Boolean.FALSE.equals(value);
+    }
+
 	
 	
 	/**
