@@ -61,7 +61,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class DemoFrame extends JFrame {
 
@@ -359,7 +359,7 @@ public class DemoFrame extends JFrame {
                 JOptionPane.showMessageDialog(
                     DemoFrame.this,
                     "The simple Looks Demo Application\n"
-                        + "\n\u00a9 2003 JGoodies Karsten Lentzsch. All Rights Reserved.\n\n");
+                        + "\n\u00a9 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.\n\n");
             }
         };
     }
