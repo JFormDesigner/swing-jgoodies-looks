@@ -43,34 +43,44 @@ import com.jgoodies.plaf.common.ShadowPopupMenuUtils;
 
 /**
  * The JGoodies Windows l&amp;f implementation of <code>PopupMenuUI</code>. 
- * Adds support for a drop shadow.
+ * Adds support for a drop shadow. Intended to be used in conjunction with
+ * class {@link com.jgoodies.plaf.common.ShadowPopupBorder}.<p>
+ * 
+ * Overwrites <code>#getPopup</code> to either set light-weight popup menu
+ * and the popup's component to transparent, or to snapshot the 
+ * background in case of a heavy-weight menu. Must 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupBorder
  * @see com.jgoodies.plaf.common.ShadowPopupMenuUtils
  */
 public final class ExtWindowsPopupMenuUI extends WindowsPopupMenuUI {
     
-    private static boolean dropShadowEnabled;
+    /**
+     * Describes whether drop shadows are active or inactive.
+     * Set during the UI creation.
+     */
+    private static boolean dropShadowActive;
 
 	/**
 	 * Creates an instance of the ui delegate for the specified component. 
 	 */
 	public static ComponentUI createUI(JComponent x) {
-            dropShadowEnabled = Options.isPopupDropShadowEnabled();		
+            dropShadowActive = Options.isPopupDropShadowActive();		
             return new ExtWindowsPopupMenuUI();
 	}
 	
     /**
      * Unlike the superclass, we install a plain border or drop shadow border
      * depending on the current setting of the <code>UIManager</code> setting
-     * &quot;<code>PopupMenu.dropShadowEnabled</code>&quot;.
+     * &quot;<code>PopupMenu.dropShadowEnabled</code>&quot; and other conditions;
+     * for example, the feature is always inactive on the Mac OS X.
      */
     public void installDefaults() {
         super.installDefaults();
-        String borderKey = dropShadowEnabled
+        String borderKey = dropShadowActive
             ? "PopupMenu.dropShadowBorder"
             : "PopupMenu.border";
         LookAndFeel.installBorder(popupMenu, borderKey);
@@ -78,14 +88,16 @@ public final class ExtWindowsPopupMenuUI extends WindowsPopupMenuUI {
     
 	/**
 	 * Returns the Popup that will be responsible for displaying the JPopupMenu.
-	 * Overwritten to fix the opaqueness of the component in the case of light weight
-	 * menus and to make a background snapshot to simulate the shadows in the case of
-	 * heavy weight menus. 
+	 * Overwritten to make the popup component transparent (light-weight),
+     * or make a background snapshot to simulate the shadows (heavy-weight).<p>
+     * 
+     * The snapshot will be used by class 
+     * {@link com.jgoodies.plaf.common.ShadowPopupBorder}.
 	 */
 	public Popup getPopup(JPopupMenu aPopupMenu, int x, int y) {
-        return ShadowPopupMenuUtils.getPopupWithShadow(
-                    aPopupMenu, 
-                    super.getPopup(aPopupMenu, x, y));
+        Popup popup = super.getPopup(aPopupMenu, x, y);
+        ShadowPopupMenuUtils.setTransparent(aPopupMenu, popup);
+        return popup;
     }
     
     

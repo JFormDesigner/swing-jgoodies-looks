@@ -71,7 +71,7 @@
 	
 	<h2>Narrow Button Margins</h2>
 
-	Sun's Java l&amp;l and Windows l&amp;l implementations
+	Sun's Java l&amp;f and Windows l&amp;f implementations
 	use a button margin of 14 pixels on each side. While this
 	will often lead to good minimum button widths, it can 
 	waste screen space if you use long labels, especially
@@ -126,11 +126,12 @@
 	<h2>Popup Menu Drop Shadow</h2>
 
 	You can enable or disable drop shadows for popup menus.
-	The default setting depends on the platform; 
-	currently drop shadows are enabled on the Windows platform only
-	and disabled by default on all other platforms.
-	Note that the drop shadows are always disabled on the Mac OS X,
+	The default setting depends on the platform; currently drop shadows 
+	are automatically enabled on the Windows platform only.
+	Note that this feature may be inactive even though it is enabled.
+	For example drop shadows are always inactive on the Mac OS X,
 	because this platform already provides drop shadows.
+	See also Options#isPopupDropShadowActive().
 <pre>
    Options.setPopupDropShadowEnabled(false);
    

@@ -51,7 +51,7 @@ import javax.swing.Popup;
  * silently and drop shadow support is inactive.
  * 
  * @author Stefan Matthias Aust
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupBorder
  */
@@ -83,7 +83,7 @@ public final class ShadowPopupMenuUtils {
 	 * menus and to make a background snapshot to simulate the shadows in the case of
 	 * heavy weight menus. 
 	 */
-	public static Popup getPopupWithShadow(JPopupMenu popupMenu, Popup popup) {
+	public static void setTransparent(JPopupMenu popupMenu, Popup popup) {
 		if (getComponentMethod != null) {
 			try {
 				final Object component = getComponentMethod.invoke(popup, null);
@@ -103,7 +103,6 @@ public final class ShadowPopupMenuUtils {
 				getComponentMethod = null;
 			}
 		}
-		return popup;
 	}
     
 }

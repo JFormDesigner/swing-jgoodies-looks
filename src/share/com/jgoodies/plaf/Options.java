@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class Options {
@@ -349,24 +349,47 @@ public final class Options {
     public static void setTabIconsEnabled(boolean b) {
         UIManager.put(TAB_ICONS_ENABLED_KEY, new Boolean(b));
     }
+    
+    
+    /**
+     * Checks and answers whether popup drop shadows are active.
+     * This feature shall be inactive on platforms that provide 
+     * native drop shadows, such as the Mac OS X. Otherwise the feature's 
+     * enablement state is returned.<p>
+     * 
+     * Currently only the Mac OS X is detected as platform with
+     * native drop shadows. 
+     * 
+     * @return true if drop shadows are active, false if inactive
+     * 
+     * @see #isPopupDropShadowEnabled()
+     * @see #setPopupDropShadowEnabled(boolean)
+     */
+    public static boolean isPopupDropShadowActive() {
+        boolean platformProvidesNativeDropShadows =
+            LookUtils.IS_OS_MAC;
+        
+        return !platformProvidesNativeDropShadows 
+             && isPopupDropShadowEnabled(); 
+    }
 
     /**
-     * Detects and answers if we shall drop shadows in <code>PopupMenus</code>.
+     * Checks and answers whether the optional drop shadows for 
+     * <code>PopupMenus</code> are enabled or disabled.
      * If the user has set a system property, we log a message 
      * about the choosen style.<p>
      * 
-     * Note that drop shadows are always disabled on the Mac OS X,
-     * because this platform already provides shadows. 
+     * This property just set the feature's enablement, not its actual 
+     * activation. For example, drop shadows are always inactive on 
+     * the Mac OS X, because this platform already provides shadows. 
+     * The activation is requested in <code>#isPopupDropShadowActive</code>. 
      * 
-     * @return true if drop shadows are enabled, false if disabled;
-     *      always false on the Mac OS X
+     * @return true if drop shadows are enabled, false if disabled
      * 
+     * @see #isPopupDropShadowActive()
      * @see #setPopupDropShadowEnabled(boolean)
      */
     public static boolean isPopupDropShadowEnabled() {
-        if (LookUtils.IS_OS_MAC)
-            return false;
-        
         String userMode = LookUtils.getSystemProperty(POPUP_DROP_SHADOW_ENABLED_KEY, "");
         boolean overridden = userMode.length() > 0;
         Object value = UIManager.get(POPUP_DROP_SHADOW_ENABLED_KEY);
@@ -391,16 +414,25 @@ public final class Options {
 
     /**
      * Enables or disables drop shadows in <code>PopupMenu</code>s.
-     * Note that drop shadows are always disabled on the Mac OS X.
+     * Note that drop shadows are always inactive on the Mac OS X.
      * 
      * @param b   true to enable drop shadows, false to disable them
+     * 
+     * @see #isPopupDropShadowActive()
      * @see #isPopupDropShadowEnabled()
      */
     public static void setPopupDropShadowEnabled(boolean b) {
         UIManager.put(POPUP_DROP_SHADOW_ENABLED_KEY, new Boolean(b));
     }
     
-    
+    /**
+     * Checks and answers whether popup drop shadows are enabled
+     * or disabled by default. It is recommended to enable this feature
+     * by default only on platform that are guaranteed to have good
+     * hardware acceleration for translucency and taking snapshots.
+     * 
+     * @return true if the drop shadow feature is enabled by default
+     */
     private static boolean isPopupDropShadowEnabledDefault() {
         return LookUtils.IS_OS_WINDOWS;
     }
