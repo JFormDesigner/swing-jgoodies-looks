@@ -7,17 +7,27 @@
 
 INTRODUCTION
 
-    This maintenance release fixes a couple of bugs.
+    This maintenance release fixes a bug and cleans up some code.
 
+
+DISTRIBUTION CHANGES
+
+    o I have discontinued to ship the plastic-xxx.jar and looks-win-xxx.jar
+      that contain only the classes for Plastic and ExtWindows respectively.
+      These jars were optional and seemed to confuse several developers;
+      I've seen installations where all three jars were in the classpath.
+      The ANT build script still generates all three jar files. 
+      It's just that since 1.2.2 I ship only the looks-xxx.jar.
+      
 
 BUGS FIXED
 
     o Wide toolbar rollover button margins if no margin has been set.   
     
 
-NEW FEATURES
+CHANGES THAT AFFECT THE COMPATIBILITY
 
-    o All l&fs:  ...
+    o Renamed LookUtils#isLowRes to #IS_LOW_RESOLUTION.
 
 
 KNOWN ISSUES
@@ -30,7 +40,7 @@ KNOWN ISSUES
 OTHER CHANGES
 
     o Docs:      Added FAQ entry regarding the use of the extension path
-    o ExtWin:    ...
+    o Docs:      Refreshed the JavaDocs and HTML docs for font size hints.
     
     
 ---------------------------------------------------------------------------
