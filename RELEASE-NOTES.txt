@@ -7,9 +7,12 @@
 
 INTRODUCTION
 
-    This is a maintenance update that fixes minor bugs in the library 
-    and distribution. It also adds service descriptors to all JARs 
-    that can be used for an automatic look&feel detection. 
+    This maintenance update is primarily a code and documentation cleanup.
+    It fixes some errors in the distribution and only a minor code bug;
+    therefore this release is binary and visually compatible with 1.1.2.
+    Pending code and visual issues will be addressed by the next version.
+    This release also adds service descriptors to all JARs that can be 
+    used for an automatic look&feel detection. 
 
 
 DISTRIBUTION CHANGES
@@ -25,6 +28,7 @@ OTHER CHANGES
     o Docs: Added a note on how to set the class loader for 
             network launchable environments like Java Web Start.
     o Docs: Fixed typo in plastic.html
+    o Code: Extended and corrected JavaDocs.
     
     
     
