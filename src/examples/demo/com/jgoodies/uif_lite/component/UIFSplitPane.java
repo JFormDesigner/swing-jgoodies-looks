@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2003, 2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -48,13 +48,23 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * and conversely, others will never show a divider border.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see javax.swing.plaf.basic.BasicSplitPaneUI
  */
 
 public final class UIFSplitPane extends JSplitPane {
-
+    
+    /**
+     * Holds the name of the bound property that tries to show or hide
+     * the split pane's divider border.
+     * 
+     * @see #isDividerBorderVisible()
+     * @see #setDividerBorderVisible(boolean)
+     */
+    public static final String PROPERTYNAME_DIVIDER_BORDER_VISIBLE = 
+        "dividerBorderVisible";
+    
     /**
      * Holds an empty border that is reused for the split pane itself
      * and the divider.
@@ -224,7 +234,9 @@ public final class UIFSplitPane extends JSplitPane {
         if (oldVisibility == newVisibility)
             return;
         dividerBorderVisible = newVisibility;
-        firePropertyChange("dividerBorderVisible", oldVisibility, newVisibility);
+        firePropertyChange(PROPERTYNAME_DIVIDER_BORDER_VISIBLE, 
+                           oldVisibility, 
+                           newVisibility);
     }
     
 
