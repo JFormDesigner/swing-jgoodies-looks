@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -241,7 +241,11 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets = new InsetsUIResource(2, 2, 2, 2);
+        Object textInsets  = new InsetsUIResource(2, 2, 2, 2);
+        
+        Object comboRendererMargin = LookUtils.IS_JAVA_1_4
+        	? textInsets
+        	: new InsetsUIResource(0, 0, 0, 0);
 
         Object menuItemMargin = LookUtils.isLowRes
                 ? new InsetsUIResource(3, 0, 3, 0)
@@ -286,7 +290,7 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
             
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
-            "ComboBox.rendererMargin",    textInsets, // Added by JGoodies
+            "ComboBox.rendererMargin",    comboRendererMargin, // Added by JGoodies
             
             // Begin 1.3 und 1.4.0
             "Menu.border",                menuBorder, // Fixed in 1.4.1

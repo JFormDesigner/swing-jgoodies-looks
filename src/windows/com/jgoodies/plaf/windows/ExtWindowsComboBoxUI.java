@@ -37,7 +37,6 @@ import java.awt.LayoutManager;
 import java.awt.Rectangle;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
@@ -54,7 +53,7 @@ import com.jgoodies.plaf.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
@@ -97,14 +96,14 @@ public final class ExtWindowsComboBoxUI extends WindowsComboBoxUI {
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
-    protected ListCellRenderer createRenderer() {
-        ListCellRenderer renderer = super.createRenderer();
-        if (renderer instanceof JLabel) {
-             JLabel label = (JLabel) renderer;
-             label.setBorder(new EmptyBorder(2, 2, 2, 2));
-        }
-        return renderer;
-    }
+//    protected ListCellRenderer createRenderer() {
+//        ListCellRenderer renderer = super.createRenderer();
+//        if (renderer instanceof JLabel) {
+//             JLabel label = (JLabel) renderer;
+//             //label.setBorder(new EmptyBorder(2, 2, 2, 2));
+//        }
+//        return renderer;
+//    }
 
     /**
      * Creates a layout manager for managing the components which 
