@@ -149,7 +149,7 @@ public final class LookUtils {
         try {
             return System.getProperty(key);
         } catch (SecurityException e) {
-            log("Can't access the System property " + key + ".");
+            log("Can't read the System property " + key + ".");
             return null;
         }
     }
