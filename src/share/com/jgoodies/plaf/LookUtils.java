@@ -102,6 +102,12 @@ public final class LookUtils {
     private static final String OS_VERSION = getSystemProperty("os.version");
 
     /**
+     * True if this is the Mac OS X.
+     */
+    public static final boolean IS_OS_MAC = 
+        startsWith(OS_NAME, "Mac");
+
+    /**
      * True if this is Windows 98/ME/2000/XP.
      */
     public static final boolean IS_OS_WINDOWS_MODERN = 
@@ -213,17 +219,6 @@ public final class LookUtils {
      */
     public static boolean isTrueColor(Component c) {
         return c.getToolkit().getColorModel().getPixelSize() >= 24;
-    }
-    
-    
-    /**
-     * Checks and answers whether the active look&amp;feel is the
-     * Mac OS X Aqua L&amp;F.
-     * 
-     * @return true if Aqua is active, false otherwise
-     */
-    public static boolean isLafAqua() {
-        return UIManager.getLookAndFeel().getName().startsWith("Mac OS X Aqua");
     }
     
     
