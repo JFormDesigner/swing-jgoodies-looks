@@ -44,7 +44,7 @@ import com.jgoodies.clearlook.ClearLookMode;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 
 public final class Options {
@@ -419,7 +419,7 @@ public final class Options {
      * It is recommended to enable this feature only on platforms 
      * that accelerate translucency and snapshots with the hardware.<p>
      * 
-     * <strongNote:</strong> The current implementation fails 
+     * <strong>Note:</strong> The current implementation fails 
      * to paint heavy-weight popup drop-shadows under some conditions. 
      * Before you enable drop shadows, you should make sure that 
      * your application won't get into these problems. 
