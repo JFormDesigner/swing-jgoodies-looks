@@ -46,21 +46,21 @@ import com.jgoodies.plaf.common.ShadowPopupMenuUtils;
  * Adds support for a drop shadow.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.plaf.common.ShadowPopupBorder
  * @see com.jgoodies.plaf.common.ShadowPopupMenuUtils
  */
 public final class ExtWindowsPopupMenuUI extends WindowsPopupMenuUI {
     
-    private static boolean dropShadowEnabled = 
-        Options.isPopupDropShadowEnabled();
+    private static boolean dropShadowEnabled;
 
 	/**
 	 * Creates an instance of the ui delegate for the specified component. 
 	 */
 	public static ComponentUI createUI(JComponent x) {
-		return new ExtWindowsPopupMenuUI();
+            dropShadowEnabled = Options.isPopupDropShadowEnabled();		
+            return new ExtWindowsPopupMenuUI();
 	}
 	
     /**
