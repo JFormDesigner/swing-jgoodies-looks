@@ -59,7 +59,7 @@ import com.jgoodies.plaf.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
 
@@ -407,8 +407,8 @@ public final class ExtWindowsLookAndFeel extends WindowsLookAndFeel {
         Font toolTipFont;
         Font windowFont;
 
-        // Guess or get the menu font and control font.
-        Font menuFont = FontUtils.getMenuFont(table, getFontSizeHints());
+        // Look up the (modified) menu font and control font.
+        Font menuFont    = FontUtils.getMenuFont(table, getFontSizeHints());
         Font controlFont = FontUtils.getControlFont(table, getFontSizeHints());
 
         // Derive a bold version of the control font.
