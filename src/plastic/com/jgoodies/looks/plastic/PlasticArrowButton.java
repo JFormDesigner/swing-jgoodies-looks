@@ -42,7 +42,7 @@ import javax.swing.plaf.metal.MetalScrollButton;
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 class PlasticArrowButton extends MetalScrollButton {
 	
@@ -158,7 +158,7 @@ class PlasticArrowButton extends MetalScrollButton {
 			g.setColor(shadowColor);
 			g.drawLine(0, 0, width - 1, 0);
 			g.drawLine(0, 0, 0, height - 2);
-			g.drawLine(2, height - 2, width - 1, height - 2);
+			g.drawLine(1, height - 2, width - 1, height - 2);
 		} else {
 			PlasticUtils.drawDisabledBorder(g, 0, 0, width + 1, height);
 		}
