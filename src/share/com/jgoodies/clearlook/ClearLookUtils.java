@@ -45,8 +45,9 @@ public final class ClearLookUtils {
     
     private static final Object MARKER = "marker";
 
-    // Override default constructor, prevents INSTANTIATION;
-    private ClearLookUtils() {}
+    private ClearLookUtils() {
+        // Override default constructor; prevents instantiation.
+    }
 
 
     /**

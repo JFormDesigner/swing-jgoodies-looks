@@ -80,12 +80,6 @@ public class DefaultClearLookPolicy implements ClearLookPolicy {
         new LineBorder(Color.pink.brighter());
 
 
-    /**
-     * Constructs the <code>DefaultClearLookPolicy</code>.
-     */
-    public DefaultClearLookPolicy() {
-    }
-
     public String getName() {
         return "Default ClearLook(tm) policy";
     }

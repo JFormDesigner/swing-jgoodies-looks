@@ -93,28 +93,28 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 
 
 	public void actionPerformed(ActionEvent e) {
-		JSpinner spinner = this.spinner;
+		JSpinner aSpinner = this.spinner;
 
 		if (!(e.getSource() instanceof javax.swing.Timer)) {
 			// Most likely resulting from being in ActionMap.
-			spinner = eventToSpinner(e);
+			aSpinner = eventToSpinner(e);
 		}
-		if (spinner != null) {
+		if (aSpinner != null) {
 			try {
-				int calendarField = getCalendarField(spinner);
-				spinner.commitEdit();
+				int calendarField = getCalendarField(aSpinner);
+				aSpinner.commitEdit();
 				if (calendarField != -1) {
-					((SpinnerDateModel) spinner.getModel()).setCalendarField(calendarField);
+					((SpinnerDateModel) aSpinner.getModel()).setCalendarField(calendarField);
 				}
-				Object value = (isNext) ? spinner.getNextValue() : spinner.getPreviousValue();
+				Object value = (isNext) ? aSpinner.getNextValue() : aSpinner.getPreviousValue();
 				if (value != null) {
-					spinner.setValue(value);
-					select(spinner);
+					aSpinner.setValue(value);
+					select(aSpinner);
 				}
 			} catch (IllegalArgumentException iae) {
-				UIManager.getLookAndFeel().provideErrorFeedback(spinner);
+				UIManager.getLookAndFeel().provideErrorFeedback(aSpinner);
 			} catch (ParseException pe) {
-				UIManager.getLookAndFeel().provideErrorFeedback(spinner);
+				UIManager.getLookAndFeel().provideErrorFeedback(aSpinner);
 			}
 		}
 	}
@@ -124,8 +124,8 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 	 * If the spinner's editor is a DateEditor, this selects the field
 	 * associated with the value that is being incremented.
 	 */
-	private void select(JSpinner spinner) {
-		JComponent editor = spinner.getEditor();
+	private void select(JSpinner aSpinner) {
+		JComponent editor = aSpinner.getEditor();
 
 		if (editor instanceof JSpinner.DateEditor) {
 			JSpinner.DateEditor dateEditor = (JSpinner.DateEditor) editor;
@@ -133,7 +133,7 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 			Format format = dateEditor.getFormat();
 			Object value;
 
-			if (format != null && (value = spinner.getValue()) != null) {
+			if (format != null && (value = aSpinner.getValue()) != null) {
 				SpinnerDateModel model = dateEditor.getModel();
 				DateFormat.Field field = DateFormat.Field.ofCalendarField(model.getCalendarField());
 
@@ -144,7 +144,9 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 						if (!select(ftf, iterator, field) && field == DateFormat.Field.HOUR0) {
 							select(ftf, iterator, DateFormat.Field.HOUR1);
 						}
-					} catch (IllegalArgumentException iae) {}
+					} catch (IllegalArgumentException iae) {
+                        // Should not happen
+                    }
 				}
 			}
 		}
@@ -183,8 +185,8 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 	 * -1 if there is no valid calendar field under the selection (or
 	 * the spinner isn't editing dates.
 	 */
-	private int getCalendarField(JSpinner spinner) {
-		JComponent editor = spinner.getEditor();
+	private int getCalendarField(JSpinner aSpinner) {
+		JComponent editor = aSpinner.getEditor();
 
 		if (editor instanceof JSpinner.DateEditor) {
 			JSpinner.DateEditor dateEditor = (JSpinner.DateEditor) editor;
@@ -227,9 +229,17 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 		spinner = null;
 	}
 
-	public void mouseClicked(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
-	public void mouseExited (MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+        // Do nothing
+    }
+    
+	public void mouseEntered(MouseEvent e) {
+        // Do nothing
+    }
+    
+	public void mouseExited (MouseEvent e) {
+        // Do nothing
+    }
 
 
 	/**

@@ -46,8 +46,9 @@ import sun.security.action.GetPropertyAction;
  
 public final class FontUtils {
 	
-	// Override default constructor;
-	private FontUtils() {}
+	private FontUtils() {
+        // Override default constructor; prevents instantiation.
+    }
 	
 
 	/**

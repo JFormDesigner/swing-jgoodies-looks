@@ -608,8 +608,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		    Class cl = Class.forName(className);
             return (PlasticTheme) (cl.newInstance());
         } catch (ClassNotFoundException e) {
+            // Ignore the exception here and log below.
         } catch (IllegalAccessException e) {
+            // Ignore the exception here and log below.
 	    } catch (InstantiationException e) {
+            // Ignore the exception here and log below.
 	    }
 	    LookUtils.log("Can't create theme " + className);
 	    return null;

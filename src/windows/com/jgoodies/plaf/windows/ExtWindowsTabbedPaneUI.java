@@ -283,8 +283,11 @@ public final class ExtWindowsTabbedPaneUI extends WindowsTabbedPaneUI {
             Method method = BasicTabbedPaneUI.class.getMethod("getTabBounds", new Class[] {Integer.TYPE, Rectangle.class});
             return (Rectangle) method.invoke(this, new Object[]{new Integer(tabIndex), dest});
         } catch (NoSuchMethodException e) {
+            // Likely we're not on 1.4; do nothing.
         } catch (InvocationTargetException e) {
+            // Likely we're not on 1.4; do nothing.
         } catch (IllegalAccessException e) {
+            // Likely we're not on 1.4; do nothing.
         }
         return dest;
     }

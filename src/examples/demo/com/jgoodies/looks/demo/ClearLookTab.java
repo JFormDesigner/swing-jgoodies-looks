@@ -178,6 +178,7 @@ final class ClearLookTab {
             frame.setSelected(true);
             frame.setMaximum(true);
         } catch (PropertyVetoException e) {
+            // Ignore the veto
         }
         return desktop;
     }

@@ -77,15 +77,6 @@ public final class NetBeansClearLookPolicy extends DefaultClearLookPolicy {
     private static final String NB_STATUS_CELL      = NB + "editor.StatusBar$Cell";
 
 
-    // Instance Creation ******************************************************
-
-    /**
-     * Constructs a <code>NetBeansClearLookPolicy</code>.
-     */
-    public NetBeansClearLookPolicy() {
-    }
-    
-    
     public String getName() {
         return "ClearLook(tm) policy for NetBeans";
     }

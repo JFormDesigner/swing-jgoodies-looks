@@ -198,8 +198,8 @@ public final class Options {
     private static final Dimension DEFAULT_ICON_SIZE = 
         new Dimension(20, 20);
 
-    // Override default constructor;
     private Options() {
+        // Override default constructor; prevents instantiation.
     }
 
 

@@ -55,12 +55,13 @@ class PlasticComboBoxEditor extends BasicComboBoxEditor {
     
     /**
      * A subclass of BasicComboBoxEditor that implements UIResource.
-     * BasicComboBoxEditor doesn't implement UIResource
+     * BasicComboBoxEditor and PlasticComboBoxEditor don't implement UIResource
      * directly so that applications can safely override the
      * cellRenderer property with BasicListCellRenderer subclasses.
      */
     public static final class UIResource extends PlasticComboBoxEditor
     	implements javax.swing.plaf.UIResource {
+        // Just an implementation of UIResource
     }
 }
 

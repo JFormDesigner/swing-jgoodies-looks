@@ -132,8 +132,11 @@ public final class PlasticInternalFrameUI extends BasicInternalFrameUI {
     }
     
     
-	protected void installKeyboardActions()	{}
-	protected void uninstallKeyboardActions()	{}
+	protected void installKeyboardActions()	{
+    }
+    
+	protected void uninstallKeyboardActions()	{
+    }
 	
 	
 	private void stripContentBorder(Object c) {

@@ -660,8 +660,11 @@ public final class MenuItemRenderer {
 			Integer result = (Integer) method.invoke(menuItem, new Object[]{});
 			return result.intValue();
 		} catch (NoSuchMethodException e) {
+            // Likely we're not on 1.4; do nothing.
 		} catch (InvocationTargetException e) {
+            // Likely we're not on 1.4; do nothing.
 		} catch (IllegalAccessException e) {
+            // Likely we're not on 1.4; do nothing.
 		}
 		Object value = menuItem.getClientProperty("displayedMnemonicIndex");
 		return (value != null && value instanceof Integer)
@@ -723,7 +726,9 @@ public final class MenuItemRenderer {
     private static class NullIcon implements Icon {
     	public int getIconWidth()	{ return 0; }
     	public int getIconHeight() { return 0; }
-    	public void paintIcon(Component c, Graphics g, int x, int y) {}
+    	public void paintIcon(Component c, Graphics g, int x, int y) {
+            // The NullIcon doesn't paint anything.
+        }
     }
     
 	

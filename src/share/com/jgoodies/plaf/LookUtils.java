@@ -78,8 +78,9 @@ public final class LookUtils {
     }
     
 
-    // Override default constructor;
-    private LookUtils() {}
+    private LookUtils() {
+        // Override default constructor; prevents instantiation.
+    }
 
     /**
      * Checks and answers whether we have a true color system.

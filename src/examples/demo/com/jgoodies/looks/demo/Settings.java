@@ -93,8 +93,9 @@ public final class Settings {
     
     // Instance Creation ******************************************************
 
-    // Override default constructor; prevents instantiability.
-    private Settings() {}
+    private Settings() {
+        // Override default constructor; prevents instantiability.
+    }
 
     public static Settings createDefault() {
         Settings settings = new Settings();

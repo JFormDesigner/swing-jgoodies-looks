@@ -157,7 +157,9 @@ final class StatesTab {
                 components[i] =
                     (JTextComponent) textComponentClass.newInstance();
             } catch (InstantiationException e) {
+                // Won't happen in the context we're using this.
             } catch (IllegalAccessException e) {
+                // Won't happen in the context we're using this.
             }
         }
         components[0].setText("Standard");

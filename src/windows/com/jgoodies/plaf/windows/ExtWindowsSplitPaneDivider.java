@@ -110,8 +110,10 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
             return new Dimension(0, 0);
         }
         public void removeLayoutComponent(Component c) {
+            // Unused method; implements LayoutManager.
         }
         public void addLayoutComponent(String string, Component c) {
+            // Unused method; implements LayoutManager.
         }
     }
 
@@ -135,6 +137,7 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
             };
 
             public void setBorder(Border border) {
+                // Ignore borders
             }
 
             public void paint(Graphics g) {
@@ -225,6 +228,7 @@ final class ExtWindowsSplitPaneDivider extends WindowsSplitPaneDivider {
             };
 
             public void setBorder(Border border) {
+                // Ignore borders
             }
 
             public void paint(Graphics g) {

@@ -1150,7 +1150,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle iconRect,
             Rectangle textRect,
             boolean isSelected) {
-            }
+            // Embedded tabs paint no focus.
+        }
 
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
@@ -1380,7 +1381,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle iconRect,
             Rectangle textRect,
             boolean isSelected) {
-            }
+            // Embedded tabs paint no focus.
+        }
 
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
             g.setColor(selectColor);
@@ -1601,7 +1603,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle iconRect,
             Rectangle textRect,
             boolean isSelected) {
-            }
+            // Embedded tabs paint no focus.
+        }
 
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
@@ -1805,7 +1808,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle iconRect,
             Rectangle textRect,
             boolean isSelected) {
-            }
+            // Embedded tabs paint no focus.
+        }
 
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
@@ -1834,7 +1838,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     g.fillRect(right - 1, 0, 1, 1);
                     //right
                     g.fillRect(right, 1, 1, bottom);
-                } else {}
+                } 
             } else {
                 if (isSelected) {
                     g.setColor(selectHighlight);

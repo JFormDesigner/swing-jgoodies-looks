@@ -88,8 +88,8 @@ public final class ClearLookManager {
         installDefaultPolicy();
     }
 
-    // Override default constructor; prevents instantiation.
     private ClearLookManager() {
+        // Override default constructor; prevents instantiation.
     }
 
     // Delegating the Border Replacement ************************************
