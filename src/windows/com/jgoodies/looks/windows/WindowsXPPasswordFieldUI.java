@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -50,7 +50,7 @@ import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
  * view that renders a circle, not a star (&quot;*&quot;) character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -65,7 +65,7 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
     }
 
     /**
-	 * Creates a view (an <code>ExtWindowsXPPasswordView</code>) for an element.
+	 * Creates a view (a <code>WindowsXPPasswordView</code>) for an element.
 	 * 
 	 * @param elem the element
 	 * @return the view
