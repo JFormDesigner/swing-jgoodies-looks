@@ -16,7 +16,8 @@ BUGS FIXED
     o Inactive drop shadows still try to snapshot via the Robot.
     o Broken position calculation in Windows password field.
     o Broken custom table header in Windows XP style.
-    o #04: Blroken Windows JTabbedPane HTML word wrap.
+    o #04: Broken Windows JTabbedPane HTML word wrap.
+    o #05: Plastic Theme and Tab Layout Policy.
     o #17: WindowsToolBarSeparatorUI not same in 1.4.1 and 1.4.2.
     o #18: Height of menu items with a custom icon.
     o #23: Menu items not anti-aliased [in 1.5 with aa enabled].
