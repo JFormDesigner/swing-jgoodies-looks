@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * choose an appropriate margin.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
@@ -197,8 +197,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
                 viewRect,
                 iconRect,
                 textRect,
-                b.getText() == null ? 0 : getDefaultTextIconGap(b));
-        // Pending: b.getIconTextGap());
+                b.getText() == null ? 0 : b.getIconTextGap());
         
         g.setColor(b.getBackground());
 
@@ -248,8 +247,8 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     protected boolean isToolBarButton(AbstractButton b) {
         Container parent = b.getParent();
         return parent != null
-            && (parent instanceof JToolBar
-                || parent.getParent() instanceof JToolBar);
+            && (parent             instanceof JToolBar
+             || parent.getParent() instanceof JToolBar);
     }
 
     /**
