@@ -50,7 +50,7 @@ import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
  * view that renders a circle, not a star (&quot;*&quot;) character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -71,14 +71,14 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new ExtWindowsXPPasswordView(elem);
+        return new WindowsXPPasswordView(elem);
     }
 
     // Helper Class ***********************************************************
 
-    private static class ExtWindowsXPPasswordView extends PasswordView {
+    private static class WindowsXPPasswordView extends PasswordView {
 
-        private ExtWindowsXPPasswordView(Element element) {
+        private WindowsXPPasswordView(Element element) {
             super(element);
         }
 
@@ -93,8 +93,8 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
             JPasswordField field = (JPasswordField) container;
             int charWidth = getFontMetrics().charWidth(field.getEchoChar());
-            int advance   = 2; // want 3
-            int diameter  = Math.max(charWidth - 2, 5); // want - 1
+            int advance  = 2;
+            int diameter = charWidth - advance;
 
             Graphics2D g2 = (Graphics2D) g;
             Object oldHints = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
@@ -108,23 +108,7 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
             return x + diameter + advance;
         }
         
-//        public float getPreferredSpan(int axis) {
-//            switch (axis) {
-//            case View.X_AXIS:
-//                Container c = getContainer();
-//                if (c instanceof JPasswordField) {
-//                    JPasswordField f = (JPasswordField) c;
-//                    if (f.echoCharIsSet()) {
-//                        int charWidth = getFontMetrics().charWidth(f.getEchoChar());
-//                        int advance   = 3;
-//                        int diameter  = Math.max(charWidth - 1, 5);
-//                        return (diameter + advance) * getDocument().getLength();
-//                    }
-//                }
-//            }
-//            return super.getPreferredSpan(axis);
-//        }
-//        
     }
-
+    
+    
 }
