@@ -31,6 +31,7 @@
 package com.jgoodies.looks.demo;
 
 import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.FileDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -46,7 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of buttons to open a bunch of standard dialogs.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class DialogsTab {
     
@@ -114,8 +115,10 @@ final class DialogsTab {
         chooseFileNativeButton = new JButton("Open...");
         chooseFileNativeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FileDialog(getParentFrame(), "Open File (Native)")
-                    .show();
+                Dialog dialog = new FileDialog(
+                        getParentFrame(), "Open File (Native)");
+                dialog.setResizable(true);
+                dialog.setVisible(true);
             }
         });
         chooseFileSwingButton = new JButton("Open...");
