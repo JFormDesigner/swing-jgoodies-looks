@@ -52,7 +52,7 @@ import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public class MenuBuilder {
@@ -290,9 +290,11 @@ public class MenuBuilder {
     		menu.add(item);
     		menu.addSeparator();
         }
-		item = createMenuItem("About", 'a');
-		item.addActionListener(aboutActionListener);
-		menu.add(item);
+        if (!isAboutInOSMenu()) {
+            item = createMenuItem("About", 'a');
+            item.addActionListener(aboutActionListener);
+            menu.add(item);
+        }
 		
 		return menu;
 	}
