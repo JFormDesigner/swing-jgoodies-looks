@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -31,20 +31,20 @@
 package com.jgoodies.plaf;
 
 /**
- * Describes font size hints used by the JGoodies Windows look&amp;feel; future
- * implementations of the Plastic l&amp;f will use the same hints. In 1.3
- * environments the sizes are used as absolute font sizes, in 1.4 environments
- * size deltas are used between SYSTEM and the specified sizes.<p>
+ * Describes font size hints used by the JGoodies Windows look&amp;feel; 
+ * future implementations of the Plastic l&amp;f may use the same hints.<p>
+ * 
+ * These hints are only applied if the dialog font is <em>Tahoma</em>,
+ * which is the default font on the majority of Windows desktops.
+ * The hints apply a size delta to increase or decrease the given
+ * system font size.<p> 
  * 
  * NOTE: This is work in progress and will probably change in the
- * next release, to better reflect the font choice in the J2SE 1.4.1.
- * Currently, the size delta is used only for the Tahoma font!<p>
- * 
- * In 1.3 environments, the font guess is Tahoma on modern Windows,
- * "dialog" otherwise. In 1.4 environments, the system fonts will be used.
+ * next release, to better reflect the font choice in the J2SE 1.4.1.<p>
  *
- * @version $Revision: 1.3 $
  * @author Karsten Lentzsch
+ * @version $Revision: 1.4 $
+ * 
  * @see	Options#setGlobalFontSizeHints(FontSizeHints)
  * @see	FontUtils
  */

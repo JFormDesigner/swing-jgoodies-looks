@@ -93,17 +93,16 @@
 
 	<h2>Setting Font Size Hints</h2>
 
-	You can improve the choosen font sizes, especially in 1.3 environments
-	by setting optional JGoodies font size hints, which can be overriden
-	by look-specific settings:
+	In Microsoft environments that use Tahoma as dialog font,
+	you can tweak the choosen font sizes by setting optional JGoodies font size hints.
+	The global hints can be overriden by look-specific hints:
 <pre>
    Options.setGlobalFontSizeHints(FontSizeHints.MIXED);
    PlasticLookAndFeel.setFontSizeHints(FontSizeHints.SYSTEM);
 </pre>
 
 	<p>
-	The <i>System</i> hint is the default; it provides a good guess in 1.3
-	environments and doesn't modify the sizes in 1.4. 
+	The <i>System</i> hint is the default. It doesn't modify the sizes in 1.4. 
 	All JGoodies applications use the <i>Mixed</i> style.
 
 
@@ -140,20 +139,8 @@ and <tt>com.jgoodies.plaf.FontUtils</tt>.
 
 	<h2>Background Information</h2>
 
-	There are a couple of problems when choosing appropriate
-	font sizes:
-	<br>1) The J2SE 1.3 doesn't read system fonts,
-	and so, will use non-standard fonts on the majority of
-	default desktop settings, especially on Microsoft platforms.
-	2) The font size should honor the screen resolution,
-	low vs. high resolution, for example 96dpi vs. 120dpi.
-	3) Microsoft applications often use different 
-	font sizes for frames and dialogs and most noticably 
-	the Microsoft Office applications do not use the general 
-	system font size in dialogs. 
-
-
-
+	Microsoft uses different font sizes in primary and secondary windows.
+	The mixed style aims to mimic this behavior if the dialog font is Tahoma.
 
 
 	     
