@@ -48,7 +48,7 @@ import javax.swing.*;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -243,9 +243,20 @@ final class PlasticComboBoxButton extends JButton {
                     shouldValidate);
                 //LookUtils.log("Custom renderer detected: " + c);				
                 //LookUtils.log("Custom renderer superclass: " + c.getClass().getSuperclass().getName());				
+            } else if (!c.isOpaque()) {
+                rendererPane.paintComponent(
+                    g,
+                    c,
+                    this,
+                    x,
+                    top + 2,
+                    cWidth,
+                    myHeight,
+                    shouldValidate);
             } else {
-                // In case, we are in 3D mode _and_ have a JComponent renderer,
-                // store the opaque state, set it to transparent, paint, then restore.
+                // In case, we are in 3D mode _and_ have a non-transparent
+                // JComponent renderer, store the opaque state, set it
+                // to transparent, paint, then restore.
                 JComponent component = (JComponent) c;
                 boolean hasBeenOpaque = component.isOpaque();
                 component.setOpaque(false);
