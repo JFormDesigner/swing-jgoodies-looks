@@ -41,6 +41,7 @@ import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
  * in Windows XP environments.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class Silver extends ExperienceBlue {
 

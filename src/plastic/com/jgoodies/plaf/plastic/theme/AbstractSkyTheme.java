@@ -36,9 +36,11 @@ import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
 
 /**
- * A theme with low saturated blue primary colors and a light gray background.
+ * A theme with low saturated blue primary colors and a light gray 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractSkyTheme extends SkyBluerTahoma {
 

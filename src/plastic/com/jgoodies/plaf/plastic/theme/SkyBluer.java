@@ -38,9 +38,10 @@ import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
 import com.jgoodies.plaf.plastic.PlasticTheme;
 
 /**
- * A theme with medium blue primary colors and a light gray background.
+ * A theme with medium blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class SkyBluer extends PlasticTheme {
 

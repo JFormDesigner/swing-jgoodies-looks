@@ -35,9 +35,10 @@ import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 
 /**
- * A theme with metal blue primary colors and a light gray background.
+ * A theme with metal blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 
 public class SkyKrupp extends AbstractSkyTheme {

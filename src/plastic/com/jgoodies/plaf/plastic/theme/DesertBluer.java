@@ -35,9 +35,11 @@ import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 
 /**
- * A theme with medium saturated blue primary colors and a light brown background.
+ * A theme with medium saturated blue primary colors and a light brown 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class DesertBluer extends SkyBluerTahoma {
 	

@@ -36,8 +36,8 @@ import javax.swing.plaf.ColorUIResource;
 
 
 /**
- * Consists of base colors useful for building new color themes.<p>
- * 
+ * Consists of base colors useful for building new color themes.
+ * <p>
  * The field names use the following naming convention:
  * &lt;color name&gt;_&lt;saturation&gt;_&lt;brightness&gt;,
  * for example: <code>BLUE_HIGH_LIGHT</code> and <code>GREEN_MEDIUM_LIGHTER</code>.<p>
@@ -49,6 +49,7 @@ import javax.swing.plaf.ColorUIResource;
  * and <code>LIGHTEST</code>.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 final class Colors {
 	

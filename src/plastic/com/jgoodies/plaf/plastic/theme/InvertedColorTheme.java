@@ -43,9 +43,10 @@ import com.jgoodies.plaf.plastic.PlasticTheme;
 
 /**
  * The abstract superclass of all inverted Plastic themes, 
- * that have light foreground and dark background colors.
+ * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 

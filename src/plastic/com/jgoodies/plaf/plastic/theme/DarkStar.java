@@ -34,9 +34,11 @@ import javax.swing.plaf.ColorUIResource;
 
 
 /**
- * An inverted theme with light foreground colors and a black background.
+ * An inverted theme with light foreground colors and a black 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 
 public class DarkStar extends InvertedColorTheme {

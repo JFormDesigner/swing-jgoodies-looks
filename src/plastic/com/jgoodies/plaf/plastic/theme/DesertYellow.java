@@ -36,9 +36,11 @@ import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
 
 /**
- * A theme with low saturated yellow primary colors and a light brown background.
+ * A theme with low saturated yellow primary colors and a light brown 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class DesertYellow extends DesertBlue {
 

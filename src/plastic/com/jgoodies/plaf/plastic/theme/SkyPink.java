@@ -36,9 +36,10 @@ import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
 
 /**
- * A theme with pink foreground and light gray background colors.
+ * A theme with pink foreground and a light gray window background color.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class SkyPink extends AbstractSkyTheme {
 

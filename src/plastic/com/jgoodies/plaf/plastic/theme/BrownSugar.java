@@ -33,9 +33,11 @@ package com.jgoodies.plaf.plastic.theme;
 import javax.swing.plaf.ColorUIResource;
 
 /**
- * An inverted theme with light foreground colors and a dark brown background.
+ * An inverted theme with light foreground colors and a dark brown 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class BrownSugar extends InvertedColorTheme {
 	

@@ -33,9 +33,11 @@ package com.jgoodies.plaf.plastic.theme;
 import javax.swing.plaf.ColorUIResource;
 
 /**
- * A theme with low saturated red primary colors and a light brown background.
+ * A theme with low saturated red primary colors and a light brown 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class DesertRed extends DesertBlue {
 

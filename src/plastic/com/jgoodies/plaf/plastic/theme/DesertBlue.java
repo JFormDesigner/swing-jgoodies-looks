@@ -38,9 +38,11 @@ import com.jgoodies.plaf.plastic.PlasticScrollBarUI;
 
 
 /**
- * A theme with low saturated blue primary colors and a light brown background.
+ * A theme with low saturated blue primary colors and a light brown 
+ * window background.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class DesertBlue extends DesertBluer {
 	

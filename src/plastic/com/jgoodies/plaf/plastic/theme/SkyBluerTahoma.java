@@ -38,10 +38,11 @@ import com.jgoodies.plaf.FontSizeHints;
 import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 
 /**
- * Unlike its superclass <code>SkyBluer</code>, this theme
- * tries to use the MS Tahoma font.
+ * Unlike its superclass <code>SkyBluer</code>, this theme tries to lookup
+ * and use the MS Tahoma font.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 
 public class SkyBluerTahoma extends SkyBluer {

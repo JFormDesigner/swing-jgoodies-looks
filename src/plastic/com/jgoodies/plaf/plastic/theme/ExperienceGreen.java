@@ -33,10 +33,12 @@ package com.jgoodies.plaf.plastic.theme;
 import javax.swing.plaf.ColorUIResource;
 
 /**
- * A theme with low saturated green primary colors and a light brown background;
- * has been optimized to work with Windows XP default desktop settings.
+ * A theme with low saturated green primary colors and a light brown 
+ * window background. It has been optimized to work with Windows XP 
+ * default desktop settings.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class ExperienceGreen extends ExperienceBlue {
 
