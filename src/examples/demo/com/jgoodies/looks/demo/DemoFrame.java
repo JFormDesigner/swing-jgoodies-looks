@@ -142,11 +142,24 @@ public class DemoFrame extends JFrame {
         setContentPane(buildContentPane());
         setTitle(getWindowTitle());
         setJMenuBar(
-            new MenuBuilder().buildMenuBar(
+            createMenuBuilder().buildMenuBar(
                 settings,
                 createHelpActionListener(),
                 createAboutActionListener()));
         setIconImage(readImageIcon("eye_16x16.gif").getImage());
+    }
+    
+    
+    /** 
+     * Creates and returns a builder that builds the menu.
+     * This method is overriden by the full JGoodies Looks Demo to use
+     * a more sophisticated menu builder that uses the JGoodies
+     * UI Framework.
+     * 
+     * @return the builder that builds the menu bar
+     */
+    protected MenuBuilder createMenuBuilder() {
+        return new MenuBuilder();
     }
 
     /**
@@ -162,8 +175,9 @@ public class DemoFrame extends JFrame {
     // Tool Bar *************************************************************
 
     /**
-     * Builds, configures, and answers the toolbar. Requests
-     * HeaderStyle, look-specific BorderStyles, and Plastic 3D Hint from Launcher.
+     * Builds, configures and returns the toolbar. Requests
+     * HeaderStyle, look-specific BorderStyles, and Plastic 3D Hint 
+     * from Launcher.
      */
     private Component buildToolBar() {
         JToolBar toolBar = new JToolBar();
@@ -242,12 +256,14 @@ public class DemoFrame extends JFrame {
     private static final Insets TOOLBAR_BUTTON_MARGIN = new Insets(1, 1, 1, 1);
 
     /**
-     * Creates and answers a <code>JButton</code> 
+     * Creates and returns a <code>JButton</code> 
      * configured for use in a JToolBar.<p>
      * 
-     * Superceded by ToolBarButton from the jGoodies UI framework.
+     * This is a simplified method that is overriden by the Looks Demo.
+     * The full code uses the JGoodies UI framework's ToolBarButton
+     * that better handles platform differences.
      */
-    private AbstractButton createToolBarButton(String iconName) {
+    protected AbstractButton createToolBarButton(String iconName) {
         JButton button = new JButton(readImageIcon(iconName));
         button.setFocusPainted(false);
         button.setMargin(TOOLBAR_BUTTON_MARGIN);
@@ -283,12 +299,12 @@ public class DemoFrame extends JFrame {
     }
 
     private void addTabs(JTabbedPane tabbedPane) {
-        tabbedPane.addTab("States",    new StatesTab().build());
-        tabbedPane.addTab("Alignment", new AlignmentTab().build());
-        tabbedPane.addTab("TabbedPane", new TabTestTab().build());
-        tabbedPane.addTab("SplitPane", new SplitTab().build());
+        tabbedPane.addTab("State",     new StatesTab().build());
+        tabbedPane.addTab("Align",     new AlignmentTab().build());
+        tabbedPane.addTab("Tab",       new TabTestTab().build());
+        tabbedPane.addTab("Split",     new SplitTab().build());
         tabbedPane.addTab("HTML",      new HtmlTab().build());
-        tabbedPane.addTab("Dialogs",   new DialogsTab().build(tabbedPane));
+        tabbedPane.addTab("Dialog",    new DialogsTab().build(tabbedPane));
         tabbedPane.addTab("Desktop",   new DesktopTab().build());
         tabbedPane.addTab("Narrow",    new NarrowTab().build());
         tabbedPane.addTab("ClearLook", new ClearLookTab().build());
@@ -304,7 +320,7 @@ public class DemoFrame extends JFrame {
     /*
      * Looks up and answers an icon for the specified filename suffix.<p>
      */
-    private static ImageIcon readImageIcon(String filename) {
+    protected static ImageIcon readImageIcon(String filename) {
         URL url =
             DemoFrame.class.getClassLoader().getResource("images/" + filename);
         return new ImageIcon(url);

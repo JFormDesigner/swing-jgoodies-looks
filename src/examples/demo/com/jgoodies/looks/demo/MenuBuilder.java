@@ -42,12 +42,12 @@ import com.jgoodies.plaf.plastic.PlasticLookAndFeel;
 import com.jgoodies.plaf.windows.ExtWindowsLookAndFeel;
 
 /**
- * Builds the <code>JMenuBar</code> and pull-down menus in the Looks Demo.
+ * Builds the <code>JMenuBar</code> and pull-down menus in the simple Looks Demo.
  *
  * @author Karsten Lentzsch
  */
 
-final class MenuBuilder {
+public class MenuBuilder {
     
     private static final String HTML_TEXT = 
         "<html><b>Bold</b>, <i>Italics</i>, <tt>Typewriter</tt></html>";
@@ -87,53 +87,48 @@ final class MenuBuilder {
 	private JMenu buildFileMenu() {
 		JMenuItem item;
 		
-		JMenu menu = new JMenu("File");
-		menu.setMnemonic('F');
+		JMenu menu = createMenu("File", 'F');
 		
 		// Build a submenu that has the noIcons hint set.
-		JMenu submenu = new JMenu("New");
-        submenu.setMnemonic('N');
+		JMenu submenu = createMenu("New", 'N');
 		submenu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
-		submenu.add(new JMenuItem("Project...", 'P'));
-		submenu.add(new JMenuItem("Folder...", 'F'));
-		submenu.add(new JMenuItem("Document...", 'D'));
+		submenu.add(createMenuItem("Project...", 'P'));
+		submenu.add(createMenuItem("Folder...", 'F'));
+		submenu.add(createMenuItem("Document...", 'D'));
 		submenu.addSeparator();
-		submenu.add(new JMenuItem("No icon hint set"));
+		submenu.add(createMenuItem("No icon hint set"));
 		
 		menu.add(submenu);
 		menu.addSeparator();
-		item = new JMenuItem("Close", 'C');
-		item.setAccelerator(KeyStroke.getKeyStroke("ctrl F4"));
+		item = createMenuItem("Close", 'C', KeyStroke.getKeyStroke("ctrl F4"));
 		menu.add(item);
-		item = new JMenuItem("Close All", 'o');
-		item.setAccelerator(KeyStroke.getKeyStroke("ctrl shift F4"));
+		item = createMenuItem("Close All", 'o', KeyStroke.getKeyStroke("ctrl shift F4"));
 		menu.add(item);
 		menu.addSeparator();
-		item = new JMenuItem("Save description.txt",		 readImageIcon("save_edit.gif"));
-        item.setMnemonic('d');
-		item.setAccelerator(KeyStroke.getKeyStroke("ctrl S"));
+		item = createMenuItem("Save description.txt", 
+                              readImageIcon("save_edit.gif"),
+                              'd',
+                              KeyStroke.getKeyStroke("ctrl S"));
 		item.setEnabled(false);
 		menu.add(item);
-		item = new JMenuItem("Save description.txt As...", readImageIcon("saveas_edit.gif"));
-        item.setMnemonic('e');
+		item = createMenuItem("Save description.txt As...", 
+                readImageIcon("saveas_edit.gif"),
+                'e');
         menu.add(item);
-		item = new JMenuItem("Save All");
-        item.setMnemonic('A');
-		item.setAccelerator(KeyStroke.getKeyStroke("ctrl shift S"));
+		item = createMenuItem("Save All", 'A', KeyStroke.getKeyStroke("ctrl shift S"));
 		item.setEnabled(false);
 		menu.add(item);
 		menu.addSeparator();
-		item = new JMenuItem("Print", readImageIcon("print.gif"));
-        item.setMnemonic('P');
-		item.setAccelerator(KeyStroke.getKeyStroke("ctrl P"));
+		item = createMenuItem("Print", readImageIcon("print.gif"), 'P', 
+                KeyStroke.getKeyStroke("ctrl P"));
 		menu.add(item);
 		menu.addSeparator();
-		menu.add(new JMenuItem("1 WinXPMenuItemUI.java",  '1'));
-		menu.add(new JMenuItem("2 WinXPUtils.java",       '2'));
-		menu.add(new JMenuItem("3 WinXPBorders.java",     '3'));
-		menu.add(new JMenuItem("4 WinXPLookAndFeel.java", '4'));
+		menu.add(createMenuItem("1 WinXPMenuItemUI.java",  '1'));
+		menu.add(createMenuItem("2 WinXPUtils.java",       '2'));
+		menu.add(createMenuItem("3 WinXPBorders.java",     '3'));
+		menu.add(createMenuItem("4 WinXPLookAndFeel.java", '4'));
 		menu.addSeparator();
-		menu.add(new JMenuItem("Exit", 'E'));
+		menu.add(createMenuItem("Exit", 'E'));
 		return menu;
 	}
     
@@ -144,8 +139,7 @@ final class MenuBuilder {
 	private JMenu buildRadioMenu() {
 		JRadioButtonMenuItem item;
 		
-		JMenu menu = new JMenu("Radio");
-		menu.setMnemonic('R');
+		JMenu menu = createMenu("Radio", 'R');
 		
 		// Default icon
 		ButtonGroup group1 = new ButtonGroup();
@@ -197,8 +191,7 @@ final class MenuBuilder {
 	private JMenu buildCheckMenu() {
 		JCheckBoxMenuItem item;
 		
-		JMenu menu = new JMenu("Check");
-		menu.setMnemonic('C');
+		JMenu menu = createMenu("Check", 'C');
 		
 		// Default icon
 		menu.add(createCheckItem(true, false));
@@ -239,11 +232,10 @@ final class MenuBuilder {
      * Builds and answers a menu with items that use a HTML text.
      */
     private JMenu buildHtmlMenu() {
-        JMenu menu = new JMenu("Styled");
-        menu.setMnemonic('S');
+        JMenu menu = createMenu("Styled", 'S');
 
         menu.add(createSubmenu(HTML_TEXT));
-        menu.add(new JMenuItem(HTML_TEXT));
+        menu.add(createMenuItem(HTML_TEXT));
         menu.addSeparator();
         menu.add(new JRadioButtonMenuItem(HTML_TEXT, false));
         menu.add(new JRadioButtonMenuItem(HTML_TEXT, true));
@@ -257,11 +249,10 @@ final class MenuBuilder {
      * Builds and answers a menu with items that use a HTML text.
      */
     private JMenu buildAlignmentTestMenu() {
-        JMenu menu = new JMenu("Alignment");
-        menu.setMnemonic('A');
+        JMenu menu = createMenu("Alignment", 'A');
         
-        menu.add(new JMenuItem("Menu item"));
-        menu.add(new JMenuItem("Menu item with icon", readImageIcon("refresh.gif")));
+        menu.add(createMenuItem("Menu item"));
+        menu.add(createMenuItem("Menu item with icon", readImageIcon("refresh.gif")));
         menu.addSeparator();
         JMenu submenu = createSubmenu("Submenu");
         menu.add(submenu);
@@ -280,32 +271,76 @@ final class MenuBuilder {
         ActionListener helpActionListener, 
         ActionListener aboutActionListener) {
 
-		JMenu menu = new JMenu("Help");
-		menu.setMnemonic('H');
+		JMenu menu = createMenu("Help", 'H');
 		
 		JMenuItem item;
         if (helpActionListener != null) {
-            item = new JMenuItem("Help Contents", readImageIcon("help.gif"));
-            item.setMnemonic('H');
+            item = createMenuItem("Help Contents", readImageIcon("help.gif"), 'H');
     		item.addActionListener(helpActionListener);
     		menu.add(item);
     		menu.addSeparator();
         }
-		item = new JMenuItem("About");
-		item.setMnemonic('a');
+		item = createMenuItem("About", 'a');
 		item.addActionListener(aboutActionListener);
 		menu.add(item);
 		
 		return menu;
 	}
+    
+    // Factory Methods ********************************************************
+
+    protected JMenu createMenu(String text, char mnemonic) {
+        JMenu menu = new JMenu(text);
+        menu.setMnemonic(mnemonic);
+        return menu;
+    }
+        
+    protected JMenuItem createMenuItem(String text) {
+        return new JMenuItem(text);
+    }
+    
+    protected JMenuItem createMenuItem(String text, char mnemonic) {
+        return new JMenuItem(text, mnemonic);
+    }
+    
+    protected JMenuItem createMenuItem(String text, char mnemonic, KeyStroke key) {
+        JMenuItem menuItem = new JMenuItem(text, mnemonic);
+        menuItem.setAccelerator(key);
+        return menuItem;
+    }
+    
+    protected JMenuItem createMenuItem(String text, Icon icon) {
+        return new JMenuItem(text, icon);
+    }
 	
-		
+    protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic) {
+        JMenuItem menuItem = new JMenuItem(text, icon);
+        menuItem.setMnemonic(mnemonic);
+        return menuItem;
+    }
+    
+    protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic, KeyStroke key) {
+        JMenuItem menuItem = createMenuItem(text, icon, mnemonic);
+        menuItem.setAccelerator(key);
+        return menuItem;
+    }
+    
+    protected JRadioButtonMenuItem createRadioButtonMenuItem(String text, boolean selected) {
+        return new JRadioButtonMenuItem(text, selected);
+    }
+    
+    protected JCheckBoxMenuItem createCheckBoxMenuItem(String text, boolean selected) {
+        return new JCheckBoxMenuItem(text, selected);
+    }
+    
+    // Higher Level Factory Methods *****************************************
+    
 	/**
 	 * Creates and answers a <code>JRadioButtonMenuItem</code>
 	 * with the given enablement and selection state.
 	 */
 	private JRadioButtonMenuItem createRadioItem(boolean enabled, boolean selected) {
-		JRadioButtonMenuItem item = new JRadioButtonMenuItem(
+		JRadioButtonMenuItem item = createRadioButtonMenuItem(
 			getToggleLabel(enabled, selected),
 			selected);
 		item.setEnabled(enabled);
@@ -324,7 +359,7 @@ final class MenuBuilder {
 	 * with the given enablement and selection state.
 	 */
 	private JCheckBoxMenuItem createCheckItem(boolean enabled, boolean selected) {
-		JCheckBoxMenuItem item = new JCheckBoxMenuItem(
+		JCheckBoxMenuItem item = createCheckBoxMenuItem(
 			getToggleLabel(enabled, selected),
 			selected);
 		item.setEnabled(enabled);
@@ -341,7 +376,7 @@ final class MenuBuilder {
 	/**
 	 *  Answers an appropriate label for the given enablement and selection state.
 	 */
-	private String getToggleLabel(boolean enabled, boolean selected) {
+	protected String getToggleLabel(boolean enabled, boolean selected) {
 		String prefix = enabled  ? "Enabled" : "Disabled";
 		String suffix = selected ? "Selected" : "Deselected";
 		return prefix + " and " + suffix;
