@@ -55,7 +55,7 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -139,12 +139,18 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         return new MyPropertyChangeHandler();
     }
 
+    private void doLayout() {
+        tabPane.revalidate();
+        tabPane.repaint();
+    }
+    
     /**
      * Updates the embedded tabs property. This message is sent by
      * my PropertyChangeHandler whenever the embedded tabs property changes.
      */
     private void embeddedTabsPropertyChanged(Boolean newValue) {
         embeddedTabs = newValue;
+        doLayout();
     }
 
      /**
@@ -154,6 +160,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
       */
      private void noContentBorderPropertyChanged(Boolean newValue) {
          noContentBorder = newValue;
+         doLayout();
      }
 
 
