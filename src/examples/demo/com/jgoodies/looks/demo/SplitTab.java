@@ -1,37 +1,61 @@
 /*
- * Copyright (c) 2003 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2004 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * This software is the proprietary information of JGoodies Karsten Lentzsch.
- * Use is subject to license terms.
- *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *  o Redistributions of source code must retain the above copyright notice, 
+ *    this list of conditions and the following disclaimer. 
+ *     
+ *  o Redistributions in binary form must reproduce the above copyright notice, 
+ *    this list of conditions and the following disclaimer in the documentation 
+ *    and/or other materials provided with the distribution. 
+ *     
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
+ *    its contributors may be used to endorse or promote products derived 
+ *    from this software without specific prior written permission. 
+ *     
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
 package com.jgoodies.looks.demo;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.*;
-import javax.swing.plaf.SplitPaneUI;
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.plaf.LookUtils;
+import com.jgoodies.uif_lite.component.UIFSplitPane;
 
 /** 
  * Contains nested split panels and demonstrates how ClearLook
  * removes obsolete decorations.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.5 $
+ * 
+ * @see UIFSplitPane
  */
 final class SplitTab {
+    
 
     /**
-     * Builds and answers the panel.
+     * Builds and returns the panel.
      */
     JComponent build() {
         JPanel panel = new JPanel(new BorderLayout());
@@ -39,9 +63,10 @@ final class SplitTab {
         panel.add(buildHorizontalSplit());
         return panel;
     }
+    
 
     /**
-     * Builds and answers the main horizontal split using stripped split panes.<p>
+     * Builds and returns the horizontal split using stripped split panes.<p>
      * 
      * Nesting split panes often leads to duplicate borders. 
      * However, a look&feel should not remove borders completely
@@ -58,47 +83,19 @@ final class SplitTab {
         JComponent lowerRight = new JScrollPane(buildTable());
         lowerRight.setPreferredSize(new Dimension(100, 100));
 
-        JSplitPane verticalSplit =createStrippedSplitPane(
+        JSplitPane verticalSplit = UIFSplitPane.createStrippedSplitPane(
                     JSplitPane.VERTICAL_SPLIT, 
                     upperRight, 
                     lowerRight);
-        return createStrippedSplitPane(
+        return UIFSplitPane.createStrippedSplitPane(
             JSplitPane.HORIZONTAL_SPLIT,
             left,
             verticalSplit);
     }
+    
 
     /**
-     * Creates and returns a <code>JSplitPane</code> that has empty borders.
-     * Useful to avoid duplicate decorations, for example if the split pane
-     * is contained by other components that already provide a border.<p>
-     * 
-     * The divider border will likely be restored if the look&amp;feel changes.
-     * Therefore the JGoodies UI framework utilizes the class
-     * <code>BorderlessSplitPane</code> that removes the divider border
-     * everytime the l&amp;f changes. In this application the split pane
-     * will be rebuilt and so we're fine with this limited implementation.
-     * 
-     * @param orientation    the split pane's orientation: horizontal or vertical
-     * @param comp1          the top/left component
-     * @param comp2          the bottom/right component
-     * @return a split panes that has an empty border
-     */
-    private JSplitPane createStrippedSplitPane(int orientation,
-                                                     Component comp1, Component comp2) {
-        JSplitPane split = new JSplitPane(orientation, comp1, comp2);
-        split.setOneTouchExpandable(false);
-        split.setBorder(BorderFactory.createEmptyBorder());
-        SplitPaneUI ui = split.getUI();
-        if (ui instanceof BasicSplitPaneUI) {
-            BasicSplitPaneUI basicUI = (BasicSplitPaneUI) ui;
-            basicUI.getDivider().setBorder(BorderFactory.createEmptyBorder());
-        }
-        return split;
-    }
-
-    /**
-     * Builds and answers a sample tree.
+     * Builds and returns a sample tree.
      */
     private JTree buildTree() {
         JTree tree = new JTree(createSampleTreeModel());
@@ -108,8 +105,9 @@ final class SplitTab {
         return tree;
     }
 
+    
     /**
-     * Builds and answers a sample text area.
+     * Builds and returns a sample text area.
      */
     private JTextArea buildTextArea() {
         JTextArea area = new JTextArea();
@@ -117,9 +115,10 @@ final class SplitTab {
             "May\nI\nKindly\nRemind you that a\nMargin\nImproves a text's readability.");
         return area;
     }
+    
 
     /**
-     * Builds and answers a sample table.
+     * Builds and returns a sample table.
      */
     private JTable buildTable() {
         JTable table =
@@ -138,8 +137,9 @@ final class SplitTab {
         return table;
     }
 
+    
     /**
-     * Creates and answers a sample tree model.
+     * Creates and returns a sample tree model.
      */
     private TreeModel createSampleTreeModel() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("Musicians");
@@ -172,8 +172,9 @@ final class SplitTab {
         return new DefaultTreeModel(root);
     }
 
+    
     /**
-     * Creates and answers sample table data.
+     * Creates and returns sample table data.
      */
     private String[][] createSampleTableData() {
         return new String[][] { 
@@ -184,15 +185,15 @@ final class SplitTab {
             { "Miles Davis",    "In a Silent Way"           }, 
             { "Pharoa Sanders", "Karma"                     }, 
             { "Wayne Shorter",  "Juju"                      },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
+            { "",               ""                          },
         };
     }
 
