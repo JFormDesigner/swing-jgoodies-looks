@@ -23,8 +23,8 @@ CHANGES THAT AFFECT THE COMPATIBILITY
     o ExtWindowsLookAndFeel -> WindowsLookAndFeel
     o All ClearLook classes have been removed from the Looks.
       These will show up as a LintLookAndFeel later.
-
-
+      
+      
 KNOWN ISSUES
 
     For all issues see http://looks.dev.java.net/servlets/ProjectIssues
