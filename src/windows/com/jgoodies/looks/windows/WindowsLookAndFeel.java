@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.MinimumSizedIcon;
  * and 1.4.2 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -177,6 +177,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             // rollover borders for compound buttons
             uiDefaults = append(uiDefaults, 
                 "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI");
+            
+            // Honors XP table header style for custom user renderers. 
+            uiDefaults = append(uiDefaults,
+                "TableHeaderUI",      WINDOWS_PREFIX + "XPTableHeaderUI");            
         } else {
             // Optional style and optional special borders; 
             // rollover borders corrected
