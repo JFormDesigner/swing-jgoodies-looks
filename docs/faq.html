@@ -80,6 +80,7 @@
 		<br>&nbsp;<a href="#1.4">1.4 - Where can I find a version for Java 1.3?</a>
 		<br>&nbsp;<a href="#1.5">1.5 - Where do I get support?</a>
 		<br>&nbsp;<a href="#1.6">1.6 - How to report a problem?</a>
+		<br>&nbsp;<a href="#1.7">1.7 - Why not put the Looks JAR into the extension directory?</a>
 
 
 	<h2>2. Working With the Look&amp;Feels</h2>
@@ -176,8 +177,46 @@
 	    and defects in the JGoodies Windows L&amp;f
 	    with the default Windows L&amp;f.
 		
-				
+		
+		<h2><a name="1.7">1.7 - Why not put the Looks JAR into the extension directory?</a></h2>
+		
+		First off, this issue is not specific to the JGoodies Looks,
+		it affects all Java libraries.
 
+		<p>
+		If you have full control over the applications running 
+		in a Java environment, you can put a single library version 
+		per library into the extension path.
+		If you have no control over the applications running
+		in your Java environment, use the user classpath only!
+		   Many runtime environments out there are shared by
+		multiple applications, and so one has no control over
+		the classes loaded or required by these applications.
+		In this case, do not put a library version into
+		the extension classpath. 
+		
+		<p>
+		Here's the problem:
+		let's say you have a library class <tt>C</tt> with method <tt>C#m1</tt>.
+		In a second version of the same class (<tt>C</tt>') you add <tt>#m2</tt>.
+		If you put C into the extension path,
+		and have an application that includes <tt>C</tt>' in its JAR,
+		the app will load <tt>C</tt>, not <tt>C</tt>'. And the application may fail
+		with a <tt>NoSuchMethodException</tt> or other exception.
+		    If the implementation of <tt>#m1</tt> differs in <tt>C</tt> and <tt>C</tt>',
+		the application will load C and execute <tt>C#m1</tt> and
+		won't benefit from changes to <tt>#m1</tt>.
+		
+		<p>
+		Even if you <em>can</em> use the extension directory,
+		you may consider extending the user classpath,
+		for example by referencing all required libraries
+		in a main JAR's manifest. Using the user classpath
+		makes it simpler to move an application to other
+		Java environments that you don't control, for example
+		to provide a Web start version. 				
+		
+		
 
 	<p>&nbsp;<br>
 	
@@ -259,8 +298,7 @@
 		that honors the platform and platform system fonts. 
 		
 		
-
-
+	
 
 	</td>
 	</tr>
