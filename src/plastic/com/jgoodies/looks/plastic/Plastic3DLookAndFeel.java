@@ -37,6 +37,7 @@ import javax.swing.UIDefaults;
  * look&amp;feel.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 

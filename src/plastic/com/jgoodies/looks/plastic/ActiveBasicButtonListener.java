@@ -41,6 +41,7 @@ import javax.swing.plaf.basic.BasicButtonListener;
  * if the button is pressed.
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 
 final class ActiveBasicButtonListener extends BasicButtonListener {

@@ -40,9 +40,10 @@ import java.util.Vector;
 import javax.swing.Icon;
 
 /**
- * The bumps used in the JGoodies Plastic Look and Feel.
+ * The bumps used in the JGoodies Plastic Look&amp;Feel.
  *
  * @author Sun
+ * @version $Revision: 1.2 $
  */
 final class PlasticBumps implements Icon {
 
