@@ -45,11 +45,11 @@ import com.jgoodies.plaf.Options;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of <code>TreeUI</code>.
- * Corrects the position of the tree button icon.
- * <p>
+ * Corrects the position of the tree button icon.<p>
+ * 
  * It provides two line styles: angled dashed lines, or no lines at all.
- * By default, lines are drawn. 
- * <p>
+ * By default, lines are drawn.<p>
+ * 
  * You can change the line style by setting a client property.
  * The property key and values are a subset of the values used
  * by the Metal L&amp;F tree. To hide lines use one of the following:
@@ -73,6 +73,7 @@ import com.jgoodies.plaf.Options;
  * </pre>
  * 
  * @author Karsten Lentzsch
+ * @version $Revision: 1.2 $
  */
 
 public final class ExtWindowsTreeUI extends WindowsTreeUI {
