@@ -53,7 +53,7 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
  * specified in the XP style.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 
@@ -163,10 +163,12 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
         }
 
         JTable table = header.getTable();
+        Component background = xpRenderer.getTableCellRendererComponent(table,
+                null, false, false, -1, columnIndex);
         Component c = renderer.getTableCellRendererComponent(table,
                 aColumn.getHeaderValue(), false, false, -1, columnIndex);
 
-        if (renderer != xpRenderer) {
+        if (c != background) {
             // The DefaultTableCellRenderer is used in the most cases as
             // the base class for all header renderers. And due to
             // the optimizations in its #isOpaque method, we have to add
@@ -175,9 +177,6 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
             rendererPane.add(c);
             boolean nonOpaque = !c.isOpaque();
             if (nonOpaque) {
-                Component background = xpRenderer
-                        .getTableCellRendererComponent(table, null, false,
-                                false, -1, columnIndex);
                 rendererPane.paintComponent(g, background, header, cellRect.x,
                         cellRect.y, cellRect.width, cellRect.height, true);
 
