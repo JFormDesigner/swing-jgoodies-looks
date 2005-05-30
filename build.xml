@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.18 2005-03-24 18:37:38 karsten Exp $
+   $Id: build.xml,v 1.19 2005-05-30 12:57:16 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -349,9 +349,7 @@
 		<copy todir="${dist.docs.dir}" >
 			<fileset dir="${docs.dir}"       />
 		</copy>
-		<move todir="${dist.docs.dir}" >
-		    <fileset dir="${build.docs.dir}" />
-		</move>
+        <move todir="${dist.docs.dir}" file="${build.javadocs.dir}" />
 		
 		<!-- Copy the examples. -->
 		<copy todir="${dist.examples.dir}" file="${build.demo.jar}" />
