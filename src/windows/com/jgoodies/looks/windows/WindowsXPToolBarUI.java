@@ -52,7 +52,7 @@ import com.jgoodies.looks.Options;
  * Adds behavior for handling different types of borders.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
@@ -102,10 +102,10 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
     /**
      * Installs a special border, if either a look-dependent
      * <code>BorderStyle</code> or a look-independent <code>HeaderStyle</code>
-     * has been specified. A look specific <code>BorderStyle<code> shadows 
-     * a <code>HeaderStyle</code>.<p>
+     * has been specified. A look specific BorderStyle shadows 
+     * a HeaderStyle.<p>
      * 
-     * Specifying a <code>HeaderStyle</code> is recommend.
+     * Specifying a HeaderStyle is recommend.
      */
     private void installSpecialBorder() {
         String suffix;

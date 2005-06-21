@@ -47,7 +47,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.5 $
+* @version $Revision: 1.6 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -286,8 +286,10 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
         }
     }
 
-    // Differs from the MetalComboPopup in that it uses the standard popmenu border.
-    private class PlasticComboPopup extends MetalComboPopup {
+    /**
+     * Differs from the MetalComboPopup in that it uses the standard popmenu border.
+     */
+    private final class PlasticComboPopup extends MetalComboPopup {
 
         private PlasticComboPopup(JComboBox combo) {
             super(combo);

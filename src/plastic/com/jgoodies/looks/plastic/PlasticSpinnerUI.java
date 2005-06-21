@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 	
@@ -203,7 +203,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * It differs from its superclass in that it uses the same formula as JDK
      * to calculate the arrow height.
      */
-    private static class SpinnerArrowButton extends PlasticArrowButton {
+    private static final class SpinnerArrowButton extends PlasticArrowButton {
         private SpinnerArrowButton(int direction,
                 ExtBasicArrowButtonHandler handler) {
             super(direction, UIManager.getInt("ScrollBar.width"), true);

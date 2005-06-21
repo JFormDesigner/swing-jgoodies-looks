@@ -55,7 +55,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticXPIconFactory {
 
@@ -63,8 +63,13 @@ public final class PlasticXPIconFactory {
     private static RadioButtonIcon radioButtonIcon;
 
 
+    private PlasticXPIconFactory() {
+        // Overrides default constructor; prevents instantiation.
+    }
+    
+    
     /**
-     * Lazily creates and answers the check box icon.
+     * Lazily creates and returns the check box icon.
      * 
      * @return the check box icon
      */
@@ -76,7 +81,7 @@ public final class PlasticXPIconFactory {
     }
 
     /**
-     * Lazily creates and answers the radio button icon.
+     * Lazily creates and returns the radio button icon.
      * 
      * @return the check box icon
      */

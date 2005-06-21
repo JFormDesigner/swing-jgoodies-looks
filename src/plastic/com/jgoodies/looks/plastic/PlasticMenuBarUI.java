@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticMenuBarUI extends BasicMenuBarUI {
 	
@@ -103,7 +103,7 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 	/**
 	 * Installs a special border, if either a look-dependent <code>BorderStyle</code> 
 	 * or a look-independent <code>HeaderStyle</code> has been specified.
-	 * A look specific <code>BorderStyle<code> shadows a <code>HeaderStyle</code>.<p>
+	 * A look specific <code>BorderStyle</code> shadows a <code>HeaderStyle</code>.<p>
 	 * 
 	 * We recommend to specify a <code>HeaderStyle</code>.
 	 */	

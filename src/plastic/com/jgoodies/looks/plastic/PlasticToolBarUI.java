@@ -56,7 +56,7 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class PlasticToolBarUI extends MetalToolBarUI {
@@ -124,7 +124,7 @@ public final class PlasticToolBarUI extends MetalToolBarUI {
      * Installs a special border, if either a look-dependent 
      * <code>BorderStyle</code> or a look-independent 
      * <code>HeaderStyle</code> has been specified.
-     * A look specific <code>BorderStyle<code> shadows 
+     * A look specific <code>BorderStyle</code> shadows 
      * a <code>HeaderStyle</code>.<p>
      * 
      * Specifying a <code>HeaderStyle</code> is recommend.

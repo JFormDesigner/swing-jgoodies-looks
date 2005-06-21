@@ -60,14 +60,14 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class DemoFrame extends JFrame {
 
     protected static final Dimension PREFERRED_SIZE =
         LookUtils.IS_LOW_RESOLUTION ? new Dimension(650, 510) : new Dimension(730, 560);
 
-    /** Describes optional settings of the JGoodies Looks */
+    /** Describes optional settings of the JGoodies Looks. */
     private final Settings settings;
 
     /**

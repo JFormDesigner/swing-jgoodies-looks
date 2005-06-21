@@ -44,7 +44,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class MenuItemRenderer {
@@ -278,7 +278,7 @@ public final class MenuItemRenderer {
 		// if the height is even, bump it up one. This is critical
 		// for the text to center properly
 		// JGoodies: An even height is critical to center icons properly
-		if(r.height % 2 == 1) {
+		if (r.height % 2 == 1) {
 		    r.height++;
 		}
 		return r.getSize();
@@ -596,7 +596,7 @@ public final class MenuItemRenderer {
 		FontMetrics fm = g.getFontMetrics();
 		int mnemIndex = aMenuItem.getDisplayedMnemonicIndex();
 	
-		if(!model.isEnabled()) {
+		if (!model.isEnabled()) {
 		    // *** paint the text disabled
 		    if ( UIManager.get("MenuItem.disabledForeground") instanceof Color ) {
     			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );

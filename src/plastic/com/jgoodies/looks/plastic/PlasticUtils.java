@@ -39,11 +39,16 @@ import javax.swing.UIManager;
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class PlasticUtils {
 
+    private PlasticUtils() {
+        // Overrides default constructor; prevents instantiation.
+    }
+    
+    
 	static void drawDark3DBorder(Graphics g, int x, int y, int w, int h) {
 		drawFlush3DBorder(g, x, y, w, h);
 		g.setColor(PlasticLookAndFeel.getControl());

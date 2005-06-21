@@ -53,7 +53,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * that in turn uses <code>PlasticTheme</code> colors.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
@@ -179,7 +179,7 @@ public final class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	}
 	
 	
-	private static class PaletteListener implements PropertyChangeListener {
+	private static final class PaletteListener implements PropertyChangeListener {
 
 		private final PlasticInternalFrameUI ui;
 		
@@ -198,7 +198,7 @@ public final class PlasticInternalFrameUI extends BasicInternalFrameUI {
 		}
 	}
 	
-	private static class ContentPaneListener implements PropertyChangeListener {
+	private static final class ContentPaneListener implements PropertyChangeListener {
 		
 		private final PlasticInternalFrameUI ui;
 		

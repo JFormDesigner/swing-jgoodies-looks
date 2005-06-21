@@ -55,7 +55,7 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -242,7 +242,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
     
     /**
-     * Paints the top edge of the pane's content border 
+     * Paints the top edge of the pane's content border. 
      */
     protected void paintContentBorderTopEdge(Graphics g, int tabPlacement,
                                          int selectedIndex, 
@@ -273,7 +273,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                                          int selectedIndex, 
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
-            Rectangle selRect = selectedIndex < 0? null :
+            Rectangle selRect = selectedIndex < 0 ? null :
                            getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != BOTTOM || selectedIndex < 0 ||
              (selRect.y - 1 > h + y) ||
@@ -463,7 +463,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
 
     /**
      * Copied here from super(super)class to avoid labels being centered on 
-     * vertical tab runs if they consist of icon and text
+     * vertical tab runs if they consist of icon and text.
      */
     protected void layoutLabel(
         int tabPlacement,

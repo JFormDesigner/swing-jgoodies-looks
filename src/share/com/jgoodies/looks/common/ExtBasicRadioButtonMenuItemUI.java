@@ -44,7 +44,7 @@ import javax.swing.plaf.ComponentUI;
  * Renders aligned <code>JRadioButtonMenuItem</code>s.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 	
@@ -61,7 +61,7 @@ public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 
 
 	public void processMouseEvent(JMenuItem item, MouseEvent e, 
-								   MenuElement path[], MenuSelectionManager manager) {
+								   MenuElement[] path, MenuSelectionManager manager) {
 		Point p = e.getPoint();
 		if (p.x >= 0 && p.x < item.getWidth() && 
 		    p.y >= 0 && p.y < item.getHeight()) {

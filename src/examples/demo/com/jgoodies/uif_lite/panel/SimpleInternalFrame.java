@@ -57,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * be displayed as selected.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
@@ -437,8 +437,11 @@ public class SimpleInternalFrame extends JPanel {
         }
     }
 
-    // A panel with a horizontal gradient background.
-    private static class GradientPanel extends JPanel {
+    
+    /**
+     * A panel with a horizontal gradient background.
+     */
+    private static final class GradientPanel extends JPanel {
         
         private GradientPanel(LayoutManager lm, Color background) {
             super(lm);

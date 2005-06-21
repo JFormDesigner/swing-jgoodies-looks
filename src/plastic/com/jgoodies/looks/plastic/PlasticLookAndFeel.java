@@ -59,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -142,7 +142,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	private static boolean	 is3DEnabled = false;
 	
 	
-	/** The look dependent <code>FontSizeHints</code> */
+	/** The look dependent <code>FontSizeHints</code>. */
 	private static FontSizeHints fontSizeHints;
 
 	

@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * choose an appropriate margin.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
@@ -252,7 +252,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     }
 
     /**
-     * Checks and answers if this button shall use a pseudo 3D effect
+     * Checks and answers if this button shall use a pseudo 3D effect.
      * 
      * @param b  the button to check
      * @return true indicates a 3D effect, false flat

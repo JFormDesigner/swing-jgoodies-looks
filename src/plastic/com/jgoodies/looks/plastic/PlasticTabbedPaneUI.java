@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     Options
  */
@@ -140,7 +140,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     private AbstractRenderer renderer;
 
 
-    /** For use when tabLayoutPolicy = SCROLL_TAB_LAYOUT */
+    /** For use when tabLayoutPolicy == SCROLL_TAB_LAYOUT. */
     private ScrollableTabSupport tabScroller;
     
     /**
@@ -443,9 +443,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
       * LEFT or RIGHT, the bottom torn edge is created by subtracting xCropLen[i]
       * from (tab.y + tab.height) and adding yCropLen[i] to (tab.x).
       */
-     private int xCropLen[] = { 1, 1, 0, 0, 1, 1, 2, 2 };
+     private int[] xCropLen = { 1, 1, 0, 0, 1, 1, 2, 2 };
 
-     private int yCropLen[] = { 0, 3, 3, 6, 6, 9, 9, 12 };
+     private int[] yCropLen = { 0, 3, 3, 6, 6, 9, 9, 12 };
 
      private static final int CROP_SEGMENT = 12;
 
@@ -477,8 +477,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
              rcnt++;
          }
          int npts = 2 + (rcnt * 8);
-         int xp[] = new int[npts];
-         int yp[] = new int[npts];
+         int[] xp = new int[npts];
+         int[] yp = new int[npts];
          int pcnt = 0;
 
          xp[pcnt] = ostart;
@@ -658,8 +658,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         // Paint tabRuns of tabs from back to front
         for (int i = runCount - 1; i >= 0; i--) {
             int start = tabRuns[i];
-            int next = tabRuns[(i == runCount - 1)? 0 : i + 1];
-            int end = (next != 0? next - 1: tabCount - 1);
+            int next = tabRuns[(i == runCount - 1) ? 0 : i + 1];
+            int end = (next != 0 ? next - 1: tabCount - 1);
             for (int j = end; j >= start; j--) {
                 if (j != selectedIndex && rects[j].intersects(clipRect)) {
                     paintTab(g, tabPlacement, rects, j, iconRect, textRect);
@@ -1960,7 +1960,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * This is the abstract superclass for all TabbedPane renderers.
      * Those will be defined in the rest of this file
      */
-    private static abstract class AbstractRenderer {
+    private abstract static class AbstractRenderer {
 
         protected static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
         protected static final Insets NORTH_INSETS = new Insets(1, 0, 0, 0);
@@ -2042,21 +2042,21 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Returns the amount by which the label should be shifted horizontally
+         * Returns the amount by which the label should be shifted horizontally.
          */
         protected int getTabLabelShiftX(int tabIndex, boolean isSelected) {
             return 0;
         }
 
         /**
-         * Returns the amount by which the label should be shifted vertically
+         * Returns the amount by which the label should be shifted vertically.
          */
         protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
             return 0;
         }
 
         /**
-         * Returns the amount of overlap for two Runs
+         * Returns the amount of overlap for two Runs.
          */
         protected int getTabRunOverlay(int tabRunOverlay) {
             return tabRunOverlay;
@@ -2064,7 +2064,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
         /**
          * Returns if a run should be padded with empty space
-         * to take up as much room as the others
+         * to take up as much room as the others.
          */
         protected boolean shouldPadTabRun(int run, boolean aPriori) {
             return aPriori;
@@ -2082,12 +2082,12 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * Returns the insets for the given tab.
          */
-        abstract protected Insets getTabInsets(int tabIndex, Insets tabInsets);
+        protected abstract Insets getTabInsets(int tabIndex, Insets tabInsets);
 
         /**
-         * Draws the rectancle around the Tab label which indicates keyboard focus
+         * Draws the rectancle around the Tab label which indicates keyboard focus.
          */
-        abstract protected void paintFocusIndicator(
+        protected abstract void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
             int tabIndex,
@@ -2099,12 +2099,12 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          * Fills the background of the given tab to make sure overlap of 
          * tabs is handled correctly.
          */
-        abstract protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected);
+        protected abstract void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected);
 
         /**
-         * Paints the border around the given tab
+         * Paints the border around the given tab.
          */
-        abstract protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected);
+        protected abstract void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected);
 
         /**
          * Returns additional the insets for the selected tab. This allows to "raise"
@@ -2115,9 +2115,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Draws the top edge of the border around the content area
+         * Draws the top edge of the border around the content area.
          * Draw unbroken line for tabs are not on TOP
-         * override where appropriate
+         * override where appropriate.
          */
         protected void paintContentBorderTopEdge(
             Graphics g,
@@ -2135,9 +2135,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Draws the bottom edge of the Border around the content area
+         * Draws the bottom edge of the Border around the content area.
          * Draw broken line if selected tab is visible and adjacent to content
-         * and TabPlacement is same as painted edge
+         * and TabPlacement is same as painted edge.
          */
         protected void paintContentBorderBottomEdge(
             Graphics g,
@@ -2206,7 +2206,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * The renderer for the case where tabs are displayed below the contents
      * and with minimal decoration.
      */
-    private static class BottomEmbeddedRenderer extends AbstractRenderer {
+    private static final class BottomEmbeddedRenderer extends AbstractRenderer {
 
         private BottomEmbeddedRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2432,7 +2432,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * The renderer for tabs on the left with minimal decoration
      */
-    private static class LeftEmbeddedRenderer extends AbstractRenderer {
+    private static final class LeftEmbeddedRenderer extends AbstractRenderer {
 
         private LeftEmbeddedRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2540,9 +2540,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Renderer for tabs on the left with normal decoration
+     * Renderer for tabs on the left with normal decoration.
      */
-    private static class LeftRenderer extends AbstractRenderer {
+    private static final class LeftRenderer extends AbstractRenderer {
 
         private LeftRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2648,9 +2648,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * The renderer for tabs on the right with minimal decoration
+     * The renderer for tabs on the right with minimal decoration.
      */
-    private static class RightEmbeddedRenderer extends AbstractRenderer {
+    private static final class RightEmbeddedRenderer extends AbstractRenderer {
 
         private RightEmbeddedRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2765,7 +2765,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * renderer for tabs on the right with normal decoration
      */
-    private static class RightRenderer extends AbstractRenderer {
+    private static final class RightRenderer extends AbstractRenderer {
 
         private RightRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2867,7 +2867,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Renderer for tabs on top with minimal decoration
      */
-    private static class TopEmbeddedRenderer extends AbstractRenderer {
+    private static final class TopEmbeddedRenderer extends AbstractRenderer {
 
         private TopEmbeddedRenderer(JTabbedPane tabPane) {
             super(tabPane);
@@ -2974,7 +2974,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * the renderer for tabs on top with normal decoration
      */
-    private static class TopRenderer extends AbstractRenderer {
+    private static final class TopRenderer extends AbstractRenderer {
 
         private TopRenderer(JTabbedPane tabPane) {
             super(tabPane);

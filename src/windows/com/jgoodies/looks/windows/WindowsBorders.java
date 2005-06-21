@@ -54,9 +54,13 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class WindowsBorders {
+    
+    private WindowsBorders() {
+        // Overrides default constructor; prevents instantiation.
+    }
     
 	// Accessing and Creating Borders ***************************************************
 
@@ -240,7 +244,7 @@ final class WindowsBorders {
 	/**
 	 * An abstract superclass for borders.
 	 */
-	private static abstract class AbstractButtonBorder extends AbstractBorder implements UIResource {
+	private abstract static class AbstractButtonBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
@@ -299,7 +303,7 @@ final class WindowsBorders {
      * A border which is like a Margin border but it will only honor the margin
      * if the margin has been explicitly set by the developer.
      */
-    private static class RolloverMarginBorder extends EmptyBorder {
+    private static final class RolloverMarginBorder extends EmptyBorder {
 
         private RolloverMarginBorder() {
             super(1, 1, 1, 1); 

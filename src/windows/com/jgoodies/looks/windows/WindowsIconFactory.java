@@ -45,11 +45,14 @@ import javax.swing.plaf.UIResource;
  * Factory class that vends <code>Icon</code>s used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class WindowsIconFactory {
 
-
+    private WindowsIconFactory() {
+        // Overrides default constructor; prevents instantiation.
+    }
+    
 	// Accessing and Creating Icons *****************************************************
 
     private static Icon checkBoxIcon;

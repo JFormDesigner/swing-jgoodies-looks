@@ -54,12 +54,17 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 final class PlasticIconFactory {
 
 
+    private PlasticIconFactory() {
+        // Overrides default constructor; prevents instantiation.
+    }
+    
+    
 	// Helper method utilized by the CheckBoxIcon and the CheckBoxMenuItemIcon.
 	private static void drawCheck(Graphics g, int x, int y) {
 		g.translate(x, y);
@@ -181,7 +186,7 @@ final class PlasticIconFactory {
     
 
     /**
-     * The minus sign button icon used in trees
+     * Paints the minus sign button icon used in trees.
      */
     private static class ExpandedTreeIcon implements Icon, Serializable {
     	

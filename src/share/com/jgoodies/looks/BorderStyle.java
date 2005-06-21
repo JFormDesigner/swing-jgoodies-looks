@@ -39,7 +39,7 @@ import javax.swing.JToolBar;
  * look-dependent and shadow look-independent <code>HeaderStyle</code>s.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see HeaderStyle
  */
@@ -73,8 +73,7 @@ public final class BorderStyle {
     }
 
     /**
-     * Looks up the client property for the header style from the
-     * <code>JToolBar</code.
+     * Looks up the client property for the header style from the JMenuBar.
      * 
      * @param menuBar  the menu bar to inspect
      * @param clientPropertyKey   the key used to lookup the property
@@ -86,10 +85,9 @@ public final class BorderStyle {
 
     /**
      * Looks up the client property for the header style from the specified
-     * <code>JComponent</code>.
+     * JComponent.
      * 
-     * @param c
-     *            the compoent to inspect
+     * @param c    the compoent to inspect
      * @param clientPropertyKey
      *            the key used to lookup the property
      * @return the border style used to choose a border in the UI delegate

@@ -46,10 +46,14 @@ import javax.swing.JSplitPane;
  * It consists only of static methods to create frequently used components.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class Factory {
+    
+    private Factory() {
+        // Overrides default constructor; prevents instantiation.
+    }
 
     /** Defines the margin used in toolbar buttons. */
     private static final Insets TOOLBAR_BUTTON_MARGIN = new Insets(1, 1, 1, 1);
