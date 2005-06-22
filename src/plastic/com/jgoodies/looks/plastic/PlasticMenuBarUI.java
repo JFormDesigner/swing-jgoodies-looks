@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class PlasticMenuBarUI extends BasicMenuBarUI {
 	
@@ -90,8 +90,8 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 			
 			public void propertyChange(PropertyChangeEvent e) {
 				String prop = e.getPropertyName();
-				if(prop.equals(Options.HEADER_STYLE_KEY) || 
-				   prop.equals(PlasticLookAndFeel.BORDER_STYLE_KEY)) {
+				if (prop.equals(Options.HEADER_STYLE_KEY) || 
+				    prop.equals(PlasticLookAndFeel.BORDER_STYLE_KEY)) {
 				   PlasticMenuBarUI.this.installSpecialBorder();
 				}
 			}

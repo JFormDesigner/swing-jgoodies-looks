@@ -67,7 +67,7 @@ import javax.swing.text.InternationalFormatter;
  * 
  * Copied from javax.swing.BasicSpinnerUI
  * 
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see javax.swing.plaf.basic.BasicSpinnerUI
  */
@@ -241,7 +241,7 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
         // Do nothing
     }
     
-	public void mouseExited (MouseEvent e) {
+	public void mouseExited(MouseEvent e) {
         // Do nothing
     }
 

@@ -48,7 +48,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.WindowsMenuBarUI {
 	
@@ -86,8 +86,8 @@ public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.Wind
 			
 			public void propertyChange(PropertyChangeEvent e) {
 				String prop = e.getPropertyName();
-				if(prop.equals(Options.HEADER_STYLE_KEY) || 
-				   prop.equals(WindowsLookAndFeel.BORDER_STYLE_KEY)) {
+				if (prop.equals(Options.HEADER_STYLE_KEY) || 
+				    prop.equals(WindowsLookAndFeel.BORDER_STYLE_KEY)) {
 				   WindowsMenuBarUI.this.installSpecialBorder();
 				}
 			}

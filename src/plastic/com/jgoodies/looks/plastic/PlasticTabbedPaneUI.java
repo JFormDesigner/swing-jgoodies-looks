@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     Options
  */
@@ -659,7 +659,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         for (int i = runCount - 1; i >= 0; i--) {
             int start = tabRuns[i];
             int next = tabRuns[(i == runCount - 1) ? 0 : i + 1];
-            int end = (next != 0 ? next - 1: tabCount - 1);
+            int end = (next != 0 ? next - 1 : tabCount - 1);
             for (int j = end; j >= start; j--) {
                 if (j != selectedIndex && rects[j].intersects(clipRect)) {
                     paintTab(g, tabPlacement, rects, j, iconRect, textRect);
@@ -700,7 +700,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         	Insets calcInsets = getSelectedTabPadInsets(tabPlacement);
         	calcRectangle.x += calcInsets.left;
         	calcRectangle.y += calcInsets.top;
-        	calcRectangle.width -= calcInsets.left + calcInsets.right ;
+        	calcRectangle.width  -= calcInsets.left + calcInsets.right;
         	calcRectangle.height -= calcInsets.bottom + calcInsets.top;
         }
 		int xNudge = getTabLabelShiftX(tabPlacement, tabIndex, isSelected);
@@ -2155,7 +2155,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Draws the left edge of the Border around the content area
+         * Draws the left edge of the Border around the content area.
          * Draw broken line if selected tab is visible and adjacent to content
          * and TabPlacement is same as painted edge
          */
@@ -2175,7 +2175,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Draws the right edge of the Border around the content area
+         * Draws the right edge of the Border around the content area.
          * Draw broken line if selected tab is visible and adjacent to content
          * and TabPlacement is same as painted edge
          */
@@ -2195,7 +2195,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
         
         /**
-         * Returns the amount of overlap for two tabs
+         * Returns the amount of overlap for two tabs.
          */
         protected int getTabsOverlay() {
             return 0;
@@ -2227,8 +2227,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left, tabInsets.bottom, tabInsets.right);
         }
+        
         /**
-         * minimal decoration is really minimal: noFocus
+         * Paints no focus: minimal decoration is really minimal.
          */
         protected void paintFocusIndicator(
             Graphics g,
@@ -2310,7 +2311,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     /**
      * The renderer for the case where Tabs are below the content and
-     * decoration is standard
+     * decoration is standard.
      */
     private static final class BottomRenderer extends AbstractRenderer {
         
@@ -2323,7 +2324,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
 		protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
-			return isSelected? 0 : -1;
+			return isSelected ? 0 : -1;
 		}
 
         protected int getTabRunOverlay(int tabRunOverlay) {
@@ -2430,7 +2431,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * The renderer for tabs on the left with minimal decoration
+     * The renderer for tabs on the left with minimal decoration.
      */
     private static final class LeftEmbeddedRenderer extends AbstractRenderer {
 
@@ -2463,7 +2464,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * minimal decoration is really minimal: no focus
+         * minimal decoration is really minimal: no focus.
          */
         protected void paintFocusIndicator(
             Graphics g,
@@ -2685,7 +2686,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * minmal decoration : no focus
+         * Minimal decoration: no focus.
          */
         protected void paintFocusIndicator(
             Graphics g,
@@ -2763,7 +2764,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * renderer for tabs on the right with normal decoration
+     * Renderer for tabs on the right with normal decoration.
      */
     private static final class RightRenderer extends AbstractRenderer {
 
@@ -2865,7 +2866,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Renderer for tabs on top with minimal decoration
+     * Renderer for tabs on top with minimal decoration.
      */
     private static final class TopEmbeddedRenderer extends AbstractRenderer {
 
@@ -2890,7 +2891,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Minimal decoration: no focus
+         * Minimal decoration: no focus.
          */
         protected void paintFocusIndicator(
             Graphics g,
@@ -2972,7 +2973,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * the renderer for tabs on top with normal decoration
+     * Renderer for tabs on top with normal decoration.
      */
     private static final class TopRenderer extends AbstractRenderer {
 
@@ -2985,10 +2986,10 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
 		protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
-			return isSelected? -1 : 0;
+			return isSelected ? -1 : 0;
 		}
 
-         protected int getTabRunOverlay(int tabRunOverlay) {
+        protected int getTabRunOverlay(int tabRunOverlay) {
             return tabRunOverlay - 2;
         }
 

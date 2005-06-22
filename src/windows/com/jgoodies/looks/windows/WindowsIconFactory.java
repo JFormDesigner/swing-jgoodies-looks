@@ -45,7 +45,7 @@ import javax.swing.plaf.UIResource;
  * Factory class that vends <code>Icon</code>s used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class WindowsIconFactory {
 
@@ -93,27 +93,26 @@ final class WindowsIconFactory {
 		    ButtonModel model = cb.getModel();
 	
 		    // outer bevel
-		    if(!cb.isBorderPaintedFlat()) {
-	                // Outer top/left
-	                g.setColor(UIManager.getColor("CheckBox.shadow"));
-	                g.drawLine(x, y, x+11, y);
-	                g.drawLine(x, y+1, x, y+11);
-	                
-	                // Outer bottom/right
-	                g.setColor(UIManager.getColor("CheckBox.highlight"));
-	                g.drawLine(x+12, y, x+12, y+12);
-	                g.drawLine(x, y+12, x+11, y+12);
-	                
-	                // Inner top.left
-	                g.setColor(UIManager.getColor("CheckBox.darkShadow"));
-	                g.drawLine(x+1, y+1, x+10, y+1);
-	                g.drawLine(x+1, y+2, x+1, y+10);
-	                
-	                // Inner bottom/right
-	                g.setColor(UIManager.getColor("CheckBox.light"));
-	                g.drawLine(x+1, y+11, x+11, y+11);
-	                g.drawLine(x+11, y+1, x+11, y+10);
-	
+		    if (!cb.isBorderPaintedFlat()) {
+                // Outer top/left
+                g.setColor(UIManager.getColor("CheckBox.shadow"));
+                g.drawLine(x, y, x+11, y);
+                g.drawLine(x, y+1, x, y+11);
+                
+                // Outer bottom/right
+                g.setColor(UIManager.getColor("CheckBox.highlight"));
+                g.drawLine(x+12, y, x+12, y+12);
+                g.drawLine(x, y+12, x+11, y+12);
+                
+                // Inner top.left
+                g.setColor(UIManager.getColor("CheckBox.darkShadow"));
+                g.drawLine(x+1, y+1, x+10, y+1);
+                g.drawLine(x+1, y+2, x+1, y+10);
+                
+                // Inner bottom/right
+                g.setColor(UIManager.getColor("CheckBox.light"));
+                g.drawLine(x+1, y+11, x+11, y+11);
+                g.drawLine(x+11, y+1, x+11, y+10);
 		    } else {
 				g.setColor(UIManager.getColor("CheckBox.shadow"));
 				g.drawRect(x+1, y+1, SIZE-3, SIZE-3);

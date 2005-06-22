@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -78,7 +78,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
 
-        String UI_CLASSNAME_PREFIX   = "com.jgoodies.looks.plastic.PlasticXP";
+        final String UI_CLASSNAME_PREFIX   = "com.jgoodies.looks.plastic.PlasticXP";
         Object[] uiDefaults = {
             // Uses a smooth icon
             "CheckBoxUI",      UI_CLASSNAME_PREFIX + "CheckBoxUI",

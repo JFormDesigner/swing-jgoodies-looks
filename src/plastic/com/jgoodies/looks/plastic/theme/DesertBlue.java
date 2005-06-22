@@ -42,7 +42,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class DesertBlue extends DesertBluer {
 	
@@ -54,13 +54,13 @@ public class DesertBlue extends DesertBluer {
 
 	
 
-	protected ColorUIResource getPrimary1()		{ return Colors.GRAY_DARK; }
-	protected ColorUIResource getPrimary2()		{ return Colors.BLUE_LOW_MEDIUM; }
-	protected ColorUIResource getPrimary3()		{ return Colors.BLUE_LOW_LIGHTEST; }
+	protected ColorUIResource getPrimary1()		    { return Colors.GRAY_DARK;         }
+	protected ColorUIResource getPrimary2()		    { return Colors.BLUE_LOW_MEDIUM;   }
+	protected ColorUIResource getPrimary3()		    { return Colors.BLUE_LOW_LIGHTEST; }
 
-	protected ColorUIResource getSecondary1()		{ return Colors.GRAY_MEDIUM;}
-	protected ColorUIResource getSecondary2()		{ return secondary2; }
-	protected ColorUIResource getSecondary3()		{ return secondary3; }
+	protected ColorUIResource getSecondary1()	    { return Colors.GRAY_MEDIUM; }
+	protected ColorUIResource getSecondary2()	    { return secondary2;         }
+	protected ColorUIResource getSecondary3()	    { return secondary3;         }
 	
 	public    ColorUIResource getTitleTextColor()	{ return Colors.BLUE_MEDIUM_DARKEST;}
 	
