@@ -1,4 +1,36 @@
 
+                    JGoodies Looks, Version 1.3.2 
+                            Release Notes
+                        
+
+INTRODUCTION
+
+    This update fixes a couple of bugs in the L&fs.
+    Also the source code style has been slightly improved.
+    improved sour #38; it's worth to ship a new version.
+    All other known non-font related issues could be fixed too.
+
+
+BUGS FIXED
+
+    o #xx: ...
+    
+
+OTHER CHANGES
+
+    o Core:  ...
+    o Dist:  ...
+    o Docs:  ...
+    o Build: Set 'build.compile.source' and 'build.compile.target' to '1.4'
+             in the default.properties; build.xml honors these settings.
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
                     JGoodies Looks, Version 1.3.1 
                             Release Notes
                         
