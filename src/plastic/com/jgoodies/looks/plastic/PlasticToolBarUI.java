@@ -39,7 +39,9 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
+import javax.swing.JToolBar;
 import javax.swing.LookAndFeel;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalToolBarUI;
@@ -56,7 +58,7 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class PlasticToolBarUI extends MetalToolBarUI {
@@ -162,7 +164,9 @@ public final class PlasticToolBarUI extends MetalToolBarUI {
         if (is3D()) {
             Rectangle bounds =
                 new Rectangle(0, 0, c.getWidth(), c.getHeight());
-            PlasticUtils.addLight3DEffekt(g, bounds, true);
+            boolean isHorizontal =
+                ((JToolBar) c).getOrientation() == SwingConstants.HORIZONTAL;
+            PlasticUtils.addLight3DEffekt(g, bounds, isHorizontal);
         }
         paint(g, c);
     }
