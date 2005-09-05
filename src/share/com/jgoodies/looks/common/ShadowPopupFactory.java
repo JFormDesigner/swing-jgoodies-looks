@@ -36,6 +36,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 
@@ -59,7 +60,7 @@ import com.jgoodies.looks.Options;
  * 
  * @author Andrej Golovnin
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see java.awt.AWTPermission
  * @see java.awt.Robot
@@ -106,6 +107,10 @@ public final class ShadowPopupFactory extends PopupFactory {
      * @see #uninstall
      */
     public static void install() {
+        if (LookUtils.IS_OS_MAC) {
+            return;
+        }
+
         PopupFactory factory = PopupFactory.getSharedInstance();
         if (factory instanceof ShadowPopupFactory) 
             return;
@@ -132,7 +137,7 @@ public final class ShadowPopupFactory extends PopupFactory {
     /** {@inheritDoc} */
     public Popup getPopup(Component owner, Component contents, int x, int y)
             throws IllegalArgumentException {
-        Popup popup = storedFactory.getPopup(owner, contents, x, y);
+        Popup popup = super.getPopup(owner, contents, x, y);
         return Options.isPopupDropShadowActive()
             ? ShadowPopup.getInstance(owner, contents, x, y, popup)
             : popup;

@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -199,23 +199,11 @@ public final class ShadowPopup extends Popup {
         if (owner instanceof JComboBox) {
             return;
         }
-        Container mediumWeightContainer = null;
         for(Container p = contents.getParent(); p != null; p = p.getParent()) {
-            if (p instanceof JWindow) {
+            if ((p instanceof JWindow) || (p instanceof Panel)) {
                 // Workaround for the gray rect problem.
                 p.setBackground(contents.getBackground());
                 heavyWeightContainer = p;
-                break;
-            } else if (p instanceof Panel) {
-                // It is medium weight. Setting background
-                // to a transparent color makes it transparent and
-                // we don't need to capture the screen background.
-                Color bg = p.getBackground();
-                int rgba = contents.getBackground().getRGB() & 0x00ffffff;
-                if ((bg == null) || (bg.getRGB() != rgba)) {
-                    p.setBackground(new Color(rgba, true));
-                }
-                mediumWeightContainer = p;
                 break;
             }
         }
@@ -225,9 +213,9 @@ public final class ShadowPopup extends Popup {
         parent.setOpaque(false);
         parent.setBorder(SHADOW_BORDER);
         // Pack it because we have changed the border.
-        if (mediumWeightContainer != null) {
-            mediumWeightContainer.setSize(
-                    mediumWeightContainer.getPreferredSize());
+        if (heavyWeightContainer != null) {
+            heavyWeightContainer.setSize(
+                    heavyWeightContainer.getPreferredSize());
         } else {
             parent.setSize(parent.getPreferredSize());
         }
@@ -275,7 +263,7 @@ public final class ShadowPopup extends Popup {
             parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, hShadowBg);
             parent.putClientProperty(ShadowPopupFactory.PROP_VERTICAL_BACKGROUND, vShadowBg);
 
-            JComponent layeredPane = getLayeredPane();
+            Container layeredPane = getLayeredPane();
             if (layeredPane == null) {
                 // This could happen if owner is null.
                 return;
@@ -304,10 +292,15 @@ public final class ShadowPopup extends Popup {
                 Graphics g = hShadowBg.createGraphics();
                 g.translate(-rect.x, -rect.y);
                 g.setClip(rect);
-                boolean doubleBuffered = layeredPane.isDoubleBuffered();
-                layeredPane.setDoubleBuffered(false);
-                layeredPane.paint(g);
-                layeredPane.setDoubleBuffered(doubleBuffered);
+                if (layeredPane instanceof JComponent) {
+                    JComponent c = (JComponent) layeredPane;
+                    boolean doubleBuffered = c.isDoubleBuffered();
+                    c.setDoubleBuffered(false);
+                    c.paintAll(g);
+                    c.setDoubleBuffered(doubleBuffered);
+                } else {
+                    layeredPane.paintAll(g);
+                }
                 g.dispose();
             }
 
@@ -327,10 +320,15 @@ public final class ShadowPopup extends Popup {
                 Graphics g = vShadowBg.createGraphics();
                 g.translate(-rect.x, -rect.y);
                 g.setClip(rect);
-                boolean doubleBuffered = layeredPane.isDoubleBuffered();
-                layeredPane.setDoubleBuffered(false);
-                layeredPane.paint(g);
-                layeredPane.setDoubleBuffered(doubleBuffered);
+                if (layeredPane instanceof JComponent) {
+                    JComponent c = (JComponent) layeredPane;
+                    boolean doubleBuffered = c.isDoubleBuffered();
+                    c.setDoubleBuffered(false);
+                    c.paintAll(g);
+                    c.setDoubleBuffered(doubleBuffered);
+                } else {
+                    layeredPane.paintAll(g);
+                }
                 g.dispose();
             }
         } catch (AWTException e) {
@@ -343,7 +341,7 @@ public final class ShadowPopup extends Popup {
     /**
      * @return the top level layered pane which contains the owner.
      */
-    private JComponent getLayeredPane() {
+    private Container getLayeredPane() {
         // The code below is copied from PopupFactory#LightWeightPopup#show()
         Container parent = null;
         if (owner != null) {
@@ -372,7 +370,7 @@ public final class ShadowPopup extends Popup {
                 break;
             }
         }
-        return (JComponent) parent;
+        return parent;
     }
 
 }
