@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class Options {
@@ -362,10 +362,7 @@ public final class Options {
      * Otherwise the feature's enablement state is returned.<p>
      * 
      * Currently only the Mac OS X is detected as platform where
-     * the toolkit uses native drop shadows.<p>
-     * 
-     * TODO: Consider delegating the check for native drop shadows
-     * to <code>LookUtils#getToolkitUsesNativeDropShadows()</code>.
+     * the toolkit uses native drop shadows.
      * 
      * @return true if drop shadows are active, false if inactive
      * 
@@ -373,10 +370,7 @@ public final class Options {
      * @see #setPopupDropShadowEnabled(boolean)
      */
     public static boolean isPopupDropShadowActive() {
-        boolean toolkitUsesNativeDropShadows =
-            LookUtils.IS_OS_MAC;
-        
-        return !toolkitUsesNativeDropShadows 
+        return !LookUtils.getToolkitUsesNativeDropShadows() 
              && ShadowPopup.canSnapshot()
              && isPopupDropShadowEnabled(); 
     }

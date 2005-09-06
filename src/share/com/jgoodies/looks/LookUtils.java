@@ -51,7 +51,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -291,6 +291,21 @@ public final class LookUtils {
      */
     public static boolean isTrueColor(Component c) {
         return c.getToolkit().getColorModel().getPixelSize() >= 24;
+    }
+    
+    
+    /**
+     * Checks and answers whether this toolkit provides native drop shadows
+     * for popups such as the Mac OS X. Currently this is used to
+     * determine if the Looks' popup drop shadow feature is active or not
+     * - even if it's enabled.  
+     * 
+     * @return true if the toolkit provides native drop shadows
+     * 
+     * @see Options#isPopupDropShadowActive()
+     */
+    public static boolean getToolkitUsesNativeDropShadows() {
+        return IS_OS_MAC;
     }
     
     
