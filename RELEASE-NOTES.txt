@@ -5,24 +5,28 @@
 
 INTRODUCTION
 
-    This update fixes a couple of bugs in the L&fs.
-    Also the source code style has been slightly improved.
-    improved sour #38; it's worth to ship a new version.
-    All other known non-font related issues could be fixed too.
+    This update fixes a couple of bugs, most noticably in the drop shadow 
+    feature. Also the source code style has been slightly improved.
 
 
 BUGS FIXED
 
-    o #xx: ...
+    #43: ShadowPopupFactory doesn't respect the lightweight property.
+    #45: NPE in ShadowPopup.hide().
+    #47: JavaCup.gif reported missing in Windows L&f.
+    #50: ToolBarUI doesn't take the orientation into account.
+    #53: ClassCastException in ShadowPopup.
+    #56: NPE in ShadowPopupFactory on OS X 10.4.
     
 
 OTHER CHANGES
 
-    o Core:  ...
-    o Dist:  ...
-    o Docs:  ...
-    o Build: Set 'build.compile.source' and 'build.compile.target' to '1.4'
+    o Set 'build.compile.source' and 'build.compile.target' to '1.4'
              in the default.properties; build.xml honors these settings.
+    o Improved the style of the Java sources:
+      + removed some tab characters,
+      + ensured consistent modifier order,
+      + fixed JavaDoc tags.
     
     
 ---------------------------------------------------------------------------
