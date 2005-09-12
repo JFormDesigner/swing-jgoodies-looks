@@ -45,7 +45,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
  * @see     com.jgoodies.looks.FontSizeHints
@@ -66,12 +66,12 @@ public final class Settings {
 
     private boolean tabIconsEnabled;
     
-    private Boolean popupDropShadowEnabled;
-    
     private String plasticTabStyle;
     
     private boolean plasticHighContrastFocusEnabled;
 
+    private Boolean popupDropShadowEnabled;
+    
     private HeaderStyle menuBarHeaderStyle;
 
     private BorderStyle menuBarPlasticBorderStyle;
@@ -105,6 +105,7 @@ public final class Settings {
         settings.setTabIconsEnabled(true);
         settings.setPlasticTabStyle(PlasticLookAndFeel.TAB_STYLE_DEFAULT_VALUE);
         settings.setPlasticHighContrastFocusEnabled(false);
+        settings.setPopupDropShadowEnabled(null);
         settings.setMenuBarHeaderStyle(null);
         settings.setMenuBarPlasticBorderStyle(null);
         settings.setMenuBarWindowsBorderStyle(null);
