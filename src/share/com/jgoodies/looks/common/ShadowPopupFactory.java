@@ -60,7 +60,7 @@ import com.jgoodies.looks.Options;
  * 
  * @author Andrej Golovnin
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see java.awt.AWTPermission
  * @see java.awt.Robot
@@ -100,11 +100,18 @@ public final class ShadowPopupFactory extends PopupFactory {
     // API ********************************************************************
 
     /**
-     * Installs the ShadowPopupFactory as the shared popup factory. 
-     * Also stores the previously set factory in the replacement,
-     * so that it can be restored in <code>#uninstall</code>.
+     * Installs the ShadowPopupFactory as the shared popup factory
+     * on non-Mac platforms. Also stores the previously set factory,
+     * so that it can be restored in <code>#uninstall</code>.<p>
      * 
-     * @see #uninstall
+     * In some Mac Java environments the popup factory throws 
+     * a NullPointerException when we call <code>#getPopup</code>.<p>
+     * 
+     * TODO: The Mac case shows that we may have problems replacing
+     * non PopupFactory instances. Therefore we should consider 
+     * replacing only instances of PopupFactory.
+     * 
+     * @see #uninstall()
      */
     public static void install() {
         if (LookUtils.IS_OS_MAC) {
@@ -122,7 +129,7 @@ public final class ShadowPopupFactory extends PopupFactory {
      * Uninstalls the ShadowPopupFactory and restores the original 
      * popup factory as the new shared popup factory.
      * 
-     * @see #install
+     * @see #install()
      */
     public static void uninstall() {
         PopupFactory factory = PopupFactory.getSharedInstance();
@@ -134,7 +141,35 @@ public final class ShadowPopupFactory extends PopupFactory {
     }
     
 
-    /** {@inheritDoc} */
+    /**
+     * Creates a <code>Popup</code> for the Component <code>owner</code>
+     * containing the Component <code>contents</code>. In addition to
+     * the superclass behavior, we try to return a Popup that has a drop shadow,
+     * if popup drop shadows are active - as returned by 
+     * <code>Options#isPopupDropShadowActive</code>.<p>
+     * 
+     * <code>owner</code> is used to determine which <code>Window</code> the new
+     * <code>Popup</code> will parent the <code>Component</code> the
+     * <code>Popup</code> creates to. A null <code>owner</code> implies there
+     * is no valid parent. <code>x</code> and
+     * <code>y</code> specify the preferred initial location to place
+     * the <code>Popup</code> at. Based on screen size, or other paramaters,
+     * the <code>Popup</code> may not display at <code>x</code> and
+     * <code>y</code>.<p>
+     * 
+     * We invoke the super <code>#getPopup</code>, not the one in the
+     * stored factory, because the popup type is set in this instance,
+     * not in the stored one.
+     *
+     * @param owner    Component mouse coordinates are relative to, may be null
+     * @param contents Contents of the Popup
+     * @param x        Initial x screen coordinate
+     * @param y        Initial y screen coordinate
+     * @return Popup containing Contents
+     * @throws IllegalArgumentException if contents is null
+     * 
+     * @see Options#isPopupDropShadowActive()
+     */
     public Popup getPopup(Component owner, Component contents, int x, int y)
             throws IllegalArgumentException {
         Popup popup = super.getPopup(owner, contents, x, y);

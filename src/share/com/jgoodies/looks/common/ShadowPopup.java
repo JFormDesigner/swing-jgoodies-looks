@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -149,7 +149,17 @@ public final class ShadowPopup extends Popup {
         return canSnapshot;
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Hides and disposes of the <code>Popup</code>. Once a <code>Popup</code>
+     * has been disposed you should no longer invoke methods on it. A
+     * <code>dispose</code>d <code>Popup</code> may be reclaimed and later used
+     * based on the <code>PopupFactory</code>. As such, if you invoke methods
+     * on a <code>disposed</code> <code>Popup</code>, indeterminate
+     * behavior will result.<p>
+     * 
+     * In addition to the superclass behavior, we reset the stored
+     * horizontal and vertical drop shadows - if any.
+     */
     public void hide() {
         if (contents == null)
             return;
@@ -172,7 +182,11 @@ public final class ShadowPopup extends Popup {
         recycle(this);
     }
 
-    /** {@inheritDoc} */
+    /**
+     * Makes the <code>Popup</code> visible. If the popup has a 
+     * heavy-weight container, we try to snapshot the background.
+     * If the <code>Popup</code> is currently visible, it remains visible.
+     */
     public void show() {
         if (heavyWeightContainer != null) {
             snapshot();
