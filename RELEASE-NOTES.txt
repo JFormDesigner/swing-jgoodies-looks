@@ -22,7 +22,7 @@ BUGS FIXED
 OTHER CHANGES
 
     o Set 'build.compile.source' and 'build.compile.target' to '1.4'
-             in the default.properties; build.xml honors these settings.
+      in the default.properties; build.xml honors these settings.
     o Improved the style of the Java sources:
       + removed some tab characters,
       + ensured consistent modifier order,
