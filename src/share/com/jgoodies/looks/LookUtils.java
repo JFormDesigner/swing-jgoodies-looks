@@ -51,7 +51,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -107,11 +107,32 @@ public final class LookUtils {
         !startsWith(JAVA_VERSION, "1.4.1");
 
     /**
-     * True if this is Java 5.x. Java 5 still used the old version numbers,
-     * and so we check for a prefix of 1.5.
+     * True if this is Java 5.x. We check for a prefix of 1.5.
      */
     public static final boolean IS_JAVA_5 = 
         startsWith(JAVA_VERSION, "1.5");
+
+    /**
+     * True if this is Java 5.x or later. Since we don't support Java 1.3,
+     * we can check that it's not 1.4.
+     */
+    public static final boolean IS_JAVA_5_OR_LATER = 
+        !IS_JAVA_1_4;
+
+    /**
+     * True if this is Java 6. We check for a prefix of 1.6.
+     */
+    public static final boolean IS_JAVA_6 = 
+        startsWith(JAVA_VERSION, "1.6");
+
+    /**
+     * True if this is Java 6.x or later. Since we don't support Java 1.3,
+     * we can check that it's neither 1.4 nor 1.5.
+     */
+    public static final boolean IS_JAVA_6_OR_LATER = 
+        !IS_JAVA_1_4 &&
+        !IS_JAVA_5;
+
 
 
     // Requesting the Operating System Name ***********************************
