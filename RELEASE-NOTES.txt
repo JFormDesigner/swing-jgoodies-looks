@@ -1,4 +1,29 @@
 
+                    JGoodies Looks, Version 1.3.3 
+                            Release Notes
+                        
+
+INTRODUCTION
+
+    This update ...
+
+
+BUGS FIXED
+
+    #XX: ...
+    
+
+OTHER CHANGES
+
+    o 
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
                     JGoodies Looks, Version 1.3.2 
                             Release Notes
                         
