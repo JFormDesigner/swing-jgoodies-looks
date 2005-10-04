@@ -47,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -74,6 +74,13 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
                 + rendererMargin.right, Math.max(textFieldSize.height, size.height));
     }
 
+    /**
+     * Delegates to #getMinimumSize(Component).
+     * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
+     */
+    public Dimension getPreferredSize(JComponent c) {
+        return getMinimumSize(c);
+    }
 
     /**
      * Creates the editor that is to be used in editable combo boxes. 
