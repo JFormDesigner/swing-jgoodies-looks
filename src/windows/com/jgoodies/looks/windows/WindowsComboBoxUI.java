@@ -47,7 +47,7 @@ import com.jgoodies.looks.LookUtils;
  * Also, it has the same height as text fields - unless you change the renderer.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
@@ -69,7 +69,9 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     public Dimension getMinimumSize(JComponent c) {
         Dimension size = super.getMinimumSize(c);
         Dimension textFieldSize = phantom.getMinimumSize();
-        return new Dimension(size.width, Math.max(textFieldSize.height, size.height));
+        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
+        return new Dimension(size.width + rendererMargin.left
+                + rendererMargin.right, Math.max(textFieldSize.height, size.height));
     }
 
 
