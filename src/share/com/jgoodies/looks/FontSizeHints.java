@@ -43,7 +43,7 @@ package com.jgoodies.looks;
  * next release, to better reflect the font choice in the J2SE 1.4.".
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see	Options#setGlobalFontSizeHints(FontSizeHints)
  * @see	FontUtils
@@ -174,6 +174,8 @@ public final class FontSizeHints {
 			return SYSTEM;
 		else if (name.equalsIgnoreCase("MIXED"))
 			return MIXED;
+        else if (name.equalsIgnoreCase("MIXED2"))
+            return MIXED2;
 		else if (name.equalsIgnoreCase("SMALL"))
 			return SMALL;
 		else if (name.equalsIgnoreCase("FIXED"))
