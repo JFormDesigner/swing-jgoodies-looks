@@ -32,17 +32,13 @@ package com.jgoodies.looks;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Insets;
 import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
 
-import javax.swing.AbstractButton;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.plaf.InsetsUIResource;
-import javax.swing.plaf.UIResource;
 
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
@@ -51,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -330,45 +326,6 @@ public final class LookUtils {
     }
     
     
-    // Working with Button Margins ******************************************
-
-    /**
-     * Installs a narrow margin, if property <code>isNarrow</code> has been set.
-     * 
-     * @param b    the button that shall get a narrow margin
-     * @param propertyPrefix   the component type prefeix for the UIDefaults
-     */
-    public static void installNarrowMargin(
-        AbstractButton b,
-        String propertyPrefix) {
-        Object value = b.getClientProperty(Options.IS_NARROW_KEY);
-        boolean isNarrow = Boolean.TRUE.equals(value);
-        String defaultsKey =
-            propertyPrefix + (isNarrow ? "narrowMargin" : "margin");
-        Insets insets = b.getMargin();
-        if (insets == null || insets instanceof UIResource) {
-            b.setMargin(UIManager.getInsets(defaultsKey));
-        }
-    }
-
-    /**
-     * Creates and returns the margin used by JButton and JToggleButton. 
-     * Honors the screen resolution and the global property 
-     * <code>isNarrowButtonsEnabled</code>.<p>
-     * 
-     * Sun's L&F implementations use wide button margins.
-     * 
-     * @param narrow    true to create a narrow margin, false for a wide margin
-     * @return an Insets object used to create a button margin
-     * @see Options#getUseNarrowButtons()
-     */
-    public static Insets createButtonMargin(boolean narrow) {
-        int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
-        return IS_LOW_RESOLUTION
-            ? new InsetsUIResource(2, pad, 1, pad)
-            : new InsetsUIResource(2, pad, 2, pad);
-    }
-
     // Color Modifications **************************************************
 
     /**

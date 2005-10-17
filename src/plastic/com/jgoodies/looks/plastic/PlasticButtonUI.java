@@ -33,21 +33,11 @@ package com.jgoodies.looks.plastic;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.Rectangle;
-import java.beans.PropertyChangeListener;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JToolBar;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalButtonUI;
-
-import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.Options;
-import com.jgoodies.looks.common.ButtonMarginListener;
 
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>ButtonUI</code>.
@@ -56,7 +46,7 @@ import com.jgoodies.looks.common.ButtonMarginListener;
  * <code>jgoodies.isNarrow</code> property to choose an appropriate margin.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see com.jgoodies.looks.Options#IS_NARROW_KEY
  */
@@ -65,7 +55,6 @@ public class PlasticButtonUI extends MetalButtonUI {
     private static final PlasticButtonUI INSTANCE = new PlasticButtonUI();
 
     private boolean borderPaintsFocus;
-    private PropertyChangeListener buttonMarginListener;
 
     public static ComponentUI createUI(JComponent b) {
         return INSTANCE;
@@ -76,29 +65,10 @@ public class PlasticButtonUI extends MetalButtonUI {
      */
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
-        LookUtils.installNarrowMargin(b, getPropertyPrefix());
         borderPaintsFocus =
             Boolean.TRUE.equals(UIManager.get("Button.borderPaintsFocus"));
     }
 
-    /**
-     * Installs an extra listener for a change of the isNarrow property.
-     */
-    public void installListeners(AbstractButton b) {
-        super.installListeners(b);
-        if (buttonMarginListener == null) {
-            buttonMarginListener = new ButtonMarginListener(getPropertyPrefix());
-        }
-        b.addPropertyChangeListener(Options.IS_NARROW_KEY, buttonMarginListener);
-    }
-
-    /**
-     * Uninstalls the extra listener for a change of the isNarrow property.
-     */
-    public void uninstallListeners(AbstractButton b) {
-        super.uninstallListeners(b);
-        b.removePropertyChangeListener(buttonMarginListener);
-    }
 
     // Painting ***************************************************************
 
