@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public final class Options {
@@ -302,20 +302,39 @@ public final class Options {
 
     /**
      * Checks and answers if we shall use narrow button margins of 4 pixels.
-     * Sun's L&amp;F implementations use a much wider button margin of 14 pixels, 
-     * which leads to good button minimum width in the typical case.<p>
+     * As of the Looks version 1.4 the default value is <code>true</code>
+     * (narrow) for the JGoodies Windows L&amp;F and the JGoodies Plastic 
+     * L&amp;F family. The native Windows L&amp;F used narrow margins too.<p>
      * 
-     * Using narrow button margins can potentially cause compatibility issues, 
-     * so this feature must be switched on programmatically.<p>
+     * Narrow buttons margins make it easier to give buttons in a button bar
+     * the same width, even if some button labels are long. And narrow margins
+     * are useful for embedded command buttons that just have an icon, 
+     * or an ellipsis (...). Many style guides recommend to use a minimum
+     * button width in command button bars, for example 50 dialog units on 
+     * Windows. Such a minimum width makes it easier to click a button,
+     * just because the button area has a reasonable minimum size.<p>
      * 
-     * If you use narrow margin, you should take care of minimum button width,
-     * either by the layout management or appropriate ButtonUI minimum widths.
+     * <strong>Note:</strong> Using narrow button margins can potentially cause 
+     * compatibility issues, if you don't take care that command buttons with
+     * short labels (OK) get a reasonable minimum width. Therefore you can
+     * get back to wide button margins using <code>#setUseNarrowButtons</code>.
+     * Sun's L&amp;F implementations use a wider button margin of 14 pixels.<p> 
      * 
-     * @return true if all buttons shall use narrow margins
+     * To ensure a reasonable button minimum width, you may configure a
+     * LayoutManager, use a special panel for command button bars, or
+     * a factory that vends command button bars.<p>
+     * 
+     * The JGoodies FormLayout can layout button bars that comply with both the 
+     * MS Windows Layout Guidelines and the Mac Aqua Human Interface Guidelines.
+     * The JGoodies Forms contains a ButtonBarBuilder to build command button 
+     * bars, and a ButtonBarFactory that vends frequently used button bars.
+     * 
+     * @return <code>true</code> (default) if all buttons shall use narrow 
+     *     margins, <code>false</code> for wider margins
      * @see #setUseNarrowButtons(boolean)
      */
     public static boolean getUseNarrowButtons() {
-        return UIManager.getBoolean(USE_NARROW_BUTTONS_KEY);
+        return !Boolean.FALSE.equals(UIManager.get(USE_NARROW_BUTTONS_KEY));
     }
 
     /**
