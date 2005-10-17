@@ -51,7 +51,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -366,7 +366,7 @@ public final class LookUtils {
         int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
         return IS_LOW_RESOLUTION
             ? new InsetsUIResource(2, pad, 1, pad)
-            : new InsetsUIResource(3, pad, 3, pad);
+            : new InsetsUIResource(2, pad, 2, pad);
     }
 
     // Color Modifications **************************************************
