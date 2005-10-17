@@ -38,12 +38,9 @@ import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
-import com.jgoodies.looks.FontSizeHints;
-import com.jgoodies.looks.FontUtils;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -56,7 +53,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -64,9 +61,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * Client property key to set a border style - shadows the header style. 
      * */
     public static final String BORDER_STYLE_KEY = "jgoodies.windows.borderStyle";
-
-    // The look dependent fontSizeHints
-    private static FontSizeHints fontSizeHints = null;
 
     public String getID() {
         return "JGoodies Windows";
@@ -80,35 +74,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         return "The JGoodies Windows Look and Feel"
                 + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
-
-    // Special Properties ***************************************************
-
-    /**
-     * Returns the current <code>FontSizeHints</code>; look specific 
-     * settings shadow the global users defaults as stored under 
-     * key <code>FontSizeHints.KEY</code>.
-     * 
-     * @return the current FontSizeHints, either this L&amp;Fs local hints,
-     *     or the global hints if no local hints are available
-     * @see Options#setGlobalFontSizeHints(FontSizeHints)
-     * @see FontSizeHints
-     */
-    public static FontSizeHints getFontSizeHints() {
-        return fontSizeHints != null 
-            ? fontSizeHints 
-            : Options.getGlobalFontSizeHints();
-    }
-
-    /**
-     * Sets <code>FontSizeHints</code> that shadow the global font size hints.
-     * 
-     * @see Options#setGlobalFontSizeHints(FontSizeHints)
-     * @see FontSizeHints
-     */
-    public static void setFontSizeHints(FontSizeHints newHints) {
-        fontSizeHints = newHints;
-    }
-    
 
     // Overriding Superclass Behavior ***************************************
 
@@ -235,10 +200,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
         final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
 
-        // Override font settings if and only if we are allowed to.
-        if (FontUtils.useSystemFontSettings()) {
-            initFontDefaults(table);
-        }
+        initFontDefaults(table);
 
         if (!isXP) {
             initComponentDefaultsNoXP(table);
@@ -272,7 +234,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets  = new InsetsUIResource(2, 2, 2, 2);
+        Object textInsets  = new InsetsUIResource(2, 2, 3, 2);
         
         Object comboRendererMargin = LookUtils.IS_JAVA_1_4
         	? textInsets
@@ -433,24 +395,27 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * as control font and overrides the TextArea font with control font.
      */
     private void initFontDefaults(UIDefaults table) {
-        Font messageFont;
-        Font toolTipFont;
-        Font windowFont;
-
-        // Look up the (modified) menu font and control font.
-        Font menuFont    = FontUtils.getMenuFont(table, getFontSizeHints());
-        Font controlFont = FontUtils.getControlFont(table, getFontSizeHints());
-
+        Font controlFont = table.getFont("Button.font");
+        
+        Object[] defaults = {
+                "PasswordField.font", controlFont,
+                "Spinner.font",       controlFont,
+                "TextArea.font",      controlFont
+        };
+        table.putDefaults(defaults);
+        
+        
         // Derive a bold version of the control font.
-        Font controlBoldFont = new FontUIResource(controlFont
-                .deriveFont(Font.BOLD));
-
-        messageFont = table.getFont("OptionPane.font");
-        toolTipFont = table.getFont("ToolTip.font");
-        windowFont  = table.getFont("InternalFrame.titleFont");
-
-        FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
-                controlFont, menuFont, messageFont, toolTipFont, windowFont);
+//        Font controlBoldFont = new FontUIResource(controlFont
+//                .deriveFont(Font.BOLD));
+//
+//        Font menuFont    = table.getFont("Menu.font");
+//        Font messageFont = table.getFont("OptionPane.font");
+//        Font toolTipFont = table.getFont("ToolTip.font");
+//        Font windowFont  = table.getFont("InternalFrame.titleFont");
+//
+//        FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
+//                controlFont, menuFont, messageFont, toolTipFont, windowFont);
     }
 
     // Getters for Proxy Access (Referred classes can stay package visible) ***
