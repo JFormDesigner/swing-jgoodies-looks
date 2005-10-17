@@ -1,11 +1,23 @@
 
-                    JGoodies Looks, Version 1.3.3 
+                    JGoodies Looks, Version 1.4 Alpha 
                             Release Notes
                         
 
 INTRODUCTION
 
     This update ...
+
+
+CHANGES THAT AFFECT THE BINARY COMPATIBILITY
+
+    o Removed WindowsLookAndFeel#getFontSizeHints
+    o Removed WindowsLookAndFeel#setFontSizeHints
+      
+      
+CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
+
+    o Options#getUseNarrowButtons returns true by default.
+      You can disable this feature using #setUseNarrowButtons(false).
 
 
 BUGS FIXED
