@@ -60,7 +60,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -348,8 +348,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object buttonMargin = createButtonMargin();
 		
 		// Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
-		Object textInsets 			    = new InsetsUIResource(1, 2, 2, 2);
-        Object wrappedTextInsets		= new InsetsUIResource(2, 2, 2, 2);
+		Object textInsets 			    = LookUtils.IS_LOW_RESOLUTION
+                                            ? new InsetsUIResource(1, 2, 2, 2)
+                                            : new InsetsUIResource(2, 2, 2, 2);
+        Object wrappedTextInsets		= LookUtils.IS_LOW_RESOLUTION
+                                            ? new InsetsUIResource(2, 2, 2, 2)
+                                            : new InsetsUIResource(3, 2, 2, 2);
                                                 
 		Object menuItemMargin			= LookUtils.IS_LOW_RESOLUTION
 											? new InsetsUIResource(3, 0, 3, 0)
@@ -545,7 +549,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_LOW_RESOLUTION
             ? new InsetsUIResource(1, pad, 1, pad)
-            : new InsetsUIResource(2, pad, 2, pad);
+            : new InsetsUIResource(3, pad, 3, pad);
     }
 
 
