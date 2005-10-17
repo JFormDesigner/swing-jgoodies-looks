@@ -31,6 +31,7 @@
 package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
+import java.awt.Insets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -59,7 +60,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -344,12 +345,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Object checkBoxIcon				= PlasticIconFactory.getCheckBoxIcon();
 		Object checkBoxMargin			= new InsetsUIResource(2, 0, 2, 1); // 1.4.1 uses 2,2,2,2
 		
-		Object defaultButtonMargin		= LookUtils.createButtonMargin(false);
-		Object narrowButtonMargin		= LookUtils.createButtonMargin(true);
+        Object buttonMargin = createButtonMargin();
 		
 		// Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
-		Object textInsets 			    = new InsetsUIResource(1, 2, 1, 2);
-        Object wrappedTextInsets		= new InsetsUIResource(2, 3, 1, 2);
+		Object textInsets 			    = new InsetsUIResource(1, 2, 2, 2);
+        Object wrappedTextInsets		= new InsetsUIResource(2, 2, 2, 2);
                                                 
 		Object menuItemMargin			= LookUtils.IS_LOW_RESOLUTION
 											? new InsetsUIResource(3, 0, 3, 0)
@@ -373,8 +373,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
 		Object[] defaults = { 
 		"Button.border",								buttonBorder,
-		"Button.margin",								defaultButtonMargin,
-		"Button.narrowMargin",							narrowButtonMargin,
+		"Button.margin",								buttonMargin,
 
 		"CheckBox.margin", 								checkBoxMargin,
 
@@ -484,8 +483,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"TitledBorder.font",							getTitleTextFont(),
 		"TitledBorder.titleColor",						getTitleTextColor(),
 		"ToggleButton.border",							toggleButtonBorder,
-		"ToggleButton.margin",							defaultButtonMargin,
-		"ToggleButton.narrowMargin",					narrowButtonMargin,
+		"ToggleButton.margin",							buttonMargin,
 
 		"ToolBar.emptyBorder", 							toolBarEmptyBorder,		// Added by JGoodies
 		"ToolBar.separatorBorder", 						toolBarSeparatorBorder,	// Added by JGoodies
@@ -531,6 +529,24 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             table.putDefaults(audioDefaults);
         }
 	}
+
+
+    /**
+     * Creates and returns the margin used by <code>JButton</code>
+     * and <code>JToggleButton</code>. Honors the screen resolution
+     * and the global <code>Options.getUseNarrowButtons()</code> property.<p>
+     *
+     * Sun's L&F implementations use wide button margins.
+     * 
+     * @return an Insets object that describes the button margin
+     * @see Options#getUseNarrowButtons()
+     */
+    protected Insets createButtonMargin() {
+        int pad = Options.getUseNarrowButtons() ? 4 : 14;
+        return LookUtils.IS_LOW_RESOLUTION
+            ? new InsetsUIResource(1, pad, 1, pad)
+            : new InsetsUIResource(2, pad, 2, pad);
+    }
 
 
 	/**

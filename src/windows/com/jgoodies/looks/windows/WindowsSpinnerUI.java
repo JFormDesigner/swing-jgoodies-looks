@@ -50,12 +50,12 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
     private static final Border EMPTY_BORDER = new BorderUIResource(
-                                                     new EmptyBorder(2, 2, 2, 2));
+                                                     new EmptyBorder(2, 2, 3, 2));
 
 
     public static ComponentUI createUI(JComponent b) {

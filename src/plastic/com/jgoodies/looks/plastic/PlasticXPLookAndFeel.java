@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -114,20 +114,14 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
         Object toggleButtonBorder   = PlasticXPBorders.getToggleButtonBorder();
 
-        Object defaultButtonMargin  = createButtonMargin(false);
-        Object narrowButtonMargin   = createButtonMargin(true);
-
         String radioCheckIconName   = LookUtils.IS_LOW_RESOLUTION
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
                                             
-        // Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
-        Object textInsets 		    = new InsetsUIResource(2, 3, 2, 2);
+        Object textInsets 		    = new InsetsUIResource(2, 2, 3, 2);
                                             
 		Object[] defaults = {
             "Button.border",                  buttonBorder,
-            "Button.margin",                  defaultButtonMargin,
-            "Button.narrowMargin",            narrowButtonMargin,
             "Button.borderPaintsFocus",       Boolean.TRUE,
             
             "CheckBox.icon",                  checkBoxIcon,
@@ -160,8 +154,6 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "TextField.margin", 			  textInsets,
             
             "ToggleButton.border",            toggleButtonBorder,
-            "ToggleButton.margin",            defaultButtonMargin,
-            "ToggleButton.narrowMargin",      narrowButtonMargin,
             "ToggleButton.borderPaintsFocus", Boolean.TRUE,
 		};
 		table.putDefaults(defaults);
@@ -170,20 +162,19 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     protected static void installDefaultThemes() {}   
     
     /**
-     * Creates and answers the margin used by <code>JButton</code>
+     * Creates and returns the margin used by <code>JButton</code>
      * and <code>JToggleButton</code>. Honors the screen resolution
-     * and the global <code>isNarrowButtonsEnabled</code> property.<p>
+     * and the global <code>Options.getUseNarrowButtons()</code> property.<p>
      *
      * Sun's L&F implementations use wide button margins.
      * 
-     * @param narrow   true indicates a narrow margin, false a wide margin
      * @return an Insets object that describes the button margin
      * @see Options#getUseNarrowButtons()
      */
-    private static Insets createButtonMargin(boolean narrow) {
-        int pad = narrow || Options.getUseNarrowButtons() ? 4 : 14;
+    protected Insets createButtonMargin() {
+        int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_LOW_RESOLUTION
-            ? new InsetsUIResource(1, pad, 1, pad)
+            ? new InsetsUIResource(1, pad, 0, pad)
             : new InsetsUIResource(2, pad, 2, pad);
     }
 

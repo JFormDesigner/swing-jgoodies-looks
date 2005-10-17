@@ -53,7 +53,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -116,10 +116,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         // Overwrite some of the uiDefaults.
         Object[] uiDefaults = {
-        // Can use narrow margins
-            "ButtonUI",              WINDOWS_PREFIX + "ButtonUI", 
-			"ToggleButtonUI",        WINDOWS_PREFIX + "ToggleButtonUI", 
-
             // Modified size 
             "ComboBoxUI",            WINDOWS_PREFIX + "ComboBoxUI", 
 
@@ -227,8 +223,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object toolBarEtchedBorder    = WindowsBorders.getEtchedBorder();
         Object toolBarHeaderBorder    = WindowsBorders.getToolBarHeaderBorder();
 
-        Object defaultButtonMargin    = LookUtils.createButtonMargin(false);
-        Object narrowButtonMargin     = LookUtils.createButtonMargin(true);
+        int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
+        Object buttonMargin = LookUtils.IS_LOW_RESOLUTION
+            ? new InsetsUIResource(3, buttonPad, 2, buttonPad)
+            : new InsetsUIResource(2, buttonPad, 2, buttonPad);
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
@@ -273,8 +271,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
         Object[] defaults = {
             "Button.border",              buttonBorder, 
-			"Button.margin",              defaultButtonMargin, // 1.4.1 Bug
-            "Button.narrowMargin",        narrowButtonMargin, // Added by JGoodies
+			"Button.margin",              buttonMargin, // Sun's 14px margin is too wide
 
             // 1.4.2 uses a 2 pixel non-standard border, that leads to bad
             // alignment in the typical case that the border is not painted
@@ -334,8 +331,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
             "TextArea.margin",            textInsets, // 1.4.1 Bug
             "TextField.margin",           textInsets, // 1.4.1 Bug
-            "ToggleButton.margin",        defaultButtonMargin, // 1.4.1 Bug
-            "ToggleButton.narrowMargin",  narrowButtonMargin, // Added by JGoodies
+            "ToggleButton.margin",        buttonMargin, // Sun's 14px margin is too wide
 
             "ToolBar.border",             toolBarEmptyBorder, 
 			"ToolBar.emptyBorder",        toolBarEmptyBorder, // Added by JGoodies
@@ -398,9 +394,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Font controlFont = table.getFont("Button.font");
         
         Object[] defaults = {
-                "PasswordField.font", controlFont,
-                "Spinner.font",       controlFont,
-                "TextArea.font",      controlFont
+                "FormattedTextField.font",  controlFont,
+                "PasswordField.font",       controlFont,
+                "Spinner.font",             controlFont,
+                "TextArea.font",            controlFont
         };
         table.putDefaults(defaults);
         

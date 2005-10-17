@@ -47,7 +47,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.6 $
+* @version $Revision: 1.7 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -122,7 +122,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
              * In case, a custom renderer is used, it may use a different height, 
              * and we can't help much.
              */
-            size.height += 2;
+            size.height += 3;
             size.width  += insets.left + insets.right;
             size.width  += buttonInsets.left + buttonInsets.right;
             size.width  += buttonMargin.left + buttonMargin.right;
