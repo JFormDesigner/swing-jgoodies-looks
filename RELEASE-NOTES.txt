@@ -10,10 +10,14 @@ INTRODUCTION
 
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
-    o Removed LookUtils#createButtonMargin(boolean)
-    o Removed LookUtils#installNarrowMargin
+    o Removed Options#getGlobalFontSizeHints
+    o Removed Options#setGlobalFontSizeHints
     o Removed WindowsLookAndFeel#getFontSizeHints
     o Removed WindowsLookAndFeel#setFontSizeHints
+    o Removed FontSizeHints.MIXED
+    o Removed FontSizeHints.MIXED2
+    o Removed LookUtils#createButtonMargin(boolean)
+    o Removed LookUtils#installNarrowMargin
     o Removed WindowsButtonUI
     o Removed WindowsToggleButtonUI
       
