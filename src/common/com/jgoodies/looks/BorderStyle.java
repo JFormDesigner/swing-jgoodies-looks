@@ -39,7 +39,7 @@ import javax.swing.JToolBar;
  * look-dependent and shadow look-independent <code>HeaderStyle</code>s.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  * 
  * @see HeaderStyle
  */

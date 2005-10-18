@@ -44,7 +44,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.1 $
  */
 
 public final class MenuItemRenderer {

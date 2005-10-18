@@ -67,7 +67,7 @@ import javax.swing.text.InternationalFormatter;
  * 
  * Copied from javax.swing.BasicSpinnerUI
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  * 
  * @see javax.swing.plaf.basic.BasicSpinnerUI
  */

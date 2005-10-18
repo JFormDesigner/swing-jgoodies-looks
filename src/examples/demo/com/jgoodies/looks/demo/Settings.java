@@ -33,8 +33,8 @@ package com.jgoodies.looks.demo;
 import javax.swing.LookAndFeel;
 
 import com.jgoodies.looks.BorderStyle;
-import com.jgoodies.looks.FontSizeHints;
 import com.jgoodies.looks.HeaderStyle;
+import com.jgoodies.looks.plastic.FontSizeHints;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
@@ -45,10 +45,10 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
- * @see     com.jgoodies.looks.FontSizeHints
+ * @see     com.jgoodies.looks.plastic.FontSizeHints
  * @see     com.jgoodies.looks.HeaderStyle
  * @see     com.jgoodies.looks.Options
  */

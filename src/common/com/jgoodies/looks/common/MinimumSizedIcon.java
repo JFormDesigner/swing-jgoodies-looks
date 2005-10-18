@@ -30,70 +30,54 @@
 
 package com.jgoodies.looks.common;
 
-import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 
-import javax.swing.ButtonModel;
 import javax.swing.Icon;
-import javax.swing.JMenuItem;
-import javax.swing.UIManager;
+
+import com.jgoodies.looks.Options;
 
 /**
- * An implementation of the <code>Icon</code> interface that has a minimum size 
- * and active border. The minimum size is read from the <code>UIManager</code> 
- * <code>defaultIconSize</code> key.
+ * An <code>Icon</code> with a minimum size that is read from the 
+ * <code>UIManager</code> <code>defaultIconSize</code> key.
  *
- * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
- * 
- * @see	MinimumSizedIcon
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.1 $
  */
 
-public final class MinimumSizedCheckIcon extends MinimumSizedIcon {
+public class MinimumSizedIcon implements Icon {
 	
-	private final JMenuItem menuItem;
+	private final Icon icon;
+	private final int  width;
+	private final int  height;
+	private final int  xOffset;
+	private final int  yOffset;
 	
-	public MinimumSizedCheckIcon(Icon icon, JMenuItem menuItem) {
-		super(icon);
-		this.menuItem = menuItem;
+	
+	public MinimumSizedIcon() { 
+		this(null); 
 	}
+	
+	public MinimumSizedIcon(Icon icon) {
+		Dimension minimumSize = Options.getDefaultIconSize();
+		this.icon      = icon;
+		int iconWidth  = icon == null ? 0 : icon.getIconWidth();
+		int iconHeight = icon == null ? 0 : icon.getIconHeight();
+		width   = Math.max(iconWidth,  Math.max(20, minimumSize.width));
+		height  = Math.max(iconHeight, Math.max(20, minimumSize.height));
+		xOffset = Math.max(0, (width  - iconWidth)  / 2);
+		yOffset = Math.max(0, (height - iconHeight) / 2);
+	}
+	
+	
+	public int getIconHeight() {  return height;	}
+	public int getIconWidth()	{  return width;	}
 	
 	
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		paintState(g, x, y);
-		super.paintIcon(c, g, x, y);
-	}
-	
-	private void paintState(Graphics g, int x, int y) {
-		ButtonModel model = menuItem.getModel();
-		//if (!model.isEnabled()) return;
-		
-		int w = getIconWidth();
-		int h = getIconHeight();
-		
-		g.translate(x, y);
-		if (model.isSelected() || model.isArmed() /* && model.isPressed()*/) {
-			Color background = model.isArmed() 
-								? UIManager.getColor("MenuItem.background") 
-								: UIManager.getColor("ScrollBar.track");
-			Color upColor	 = UIManager.getColor("controlLtHighlight");
-			Color downColor	 = UIManager.getColor("controlDkShadow");
-			
-			// Background
-			g.setColor(background);
-			g.fillRect(0, 0, w, h);
-			// Top and left border
-			g.setColor(model.isSelected() ? downColor : upColor);
-			g.drawLine(0, 0, w-2, 0);
-			g.drawLine(0, 0, 0, h-2);
-			// Bottom and right border
-			g.setColor(model.isSelected() ? upColor: downColor);
-			g.drawLine(0, h-1, w-1, h-1);
-			g.drawLine(w-1, 0, w-1, h-1);
-		}
-		g.translate(-x, -y);
-		g.setColor(UIManager.getColor("textText"));
+		if (icon != null)
+			icon.paintIcon(c, g, x + xOffset, y + yOffset);
 	}
 	
 	

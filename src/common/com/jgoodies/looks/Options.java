@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.1 $
  */
 
 public final class Options {

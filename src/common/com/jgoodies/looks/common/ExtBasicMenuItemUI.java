@@ -48,7 +48,7 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
  * in the UI defaults.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  */
 
 public class ExtBasicMenuItemUI extends BasicMenuItemUI {

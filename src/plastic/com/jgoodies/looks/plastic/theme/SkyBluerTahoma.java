@@ -34,8 +34,8 @@ import java.awt.Font;
 
 import javax.swing.plaf.FontUIResource;
 
-import com.jgoodies.looks.FontSizeHints;
 import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.plastic.FontSizeHints;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 
 /**
@@ -43,7 +43,7 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
  * and use the MS Tahoma font.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class SkyBluerTahoma extends SkyBluer {

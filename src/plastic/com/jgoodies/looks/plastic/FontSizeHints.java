@@ -28,7 +28,10 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.looks;
+package com.jgoodies.looks.plastic;
+
+import com.jgoodies.looks.FontUtils;
+import com.jgoodies.looks.LookUtils;
 
 /**
  * Describes font size hints used by the JGoodies Windows look&amp;feel; 
@@ -43,9 +46,9 @@ package com.jgoodies.looks;
  * next release, to better reflect the font choice in the J2SE 1.4.".
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  * 
- * @see	Options#setGlobalFontSizeHints(FontSizeHints)
+ * @see	PlasticLookAndFeel#setFontSizeHints(FontSizeHints)
  * @see	FontUtils
  */
 public final class FontSizeHints {

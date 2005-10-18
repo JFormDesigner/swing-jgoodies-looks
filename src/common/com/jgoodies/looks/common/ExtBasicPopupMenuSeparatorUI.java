@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
  * it uses a shared UI delegate.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  */
 public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorUI {
 

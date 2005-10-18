@@ -60,7 +60,7 @@ import com.jgoodies.looks.Options;
  * 
  * @author Andrej Golovnin
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  * 
  * @see java.awt.AWTPermission
  * @see java.awt.Robot

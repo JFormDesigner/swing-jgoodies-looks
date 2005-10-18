@@ -48,7 +48,6 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
-import com.jgoodies.looks.FontSizeHints;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -60,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	

@@ -47,7 +47,7 @@ import javax.swing.border.AbstractBorder;
  * @author Stefan Matthias Aust
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.1 $
  * 
  * @see ShadowPopup
  * @see ShadowPopupFactory

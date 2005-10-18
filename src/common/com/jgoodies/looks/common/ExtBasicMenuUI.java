@@ -52,7 +52,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {

@@ -45,7 +45,7 @@ import javax.swing.UIManager;
  * the components are arranged.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  */
 public final class ExtBasicSpinnerLayout implements LayoutManager {
     

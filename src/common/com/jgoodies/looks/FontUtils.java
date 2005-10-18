@@ -37,12 +37,14 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
+import com.jgoodies.looks.plastic.FontSizeHints;
+
 /**
  * Provides convenience behavior to set font defaults.
  * Used by the JGoodies look&amp;feel implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  * 
  * @see FontSizeHints
  */

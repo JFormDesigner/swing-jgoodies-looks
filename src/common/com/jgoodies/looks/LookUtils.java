@@ -47,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.1 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */

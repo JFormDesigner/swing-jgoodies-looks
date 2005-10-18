@@ -44,7 +44,7 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  */
 
 public final class ExtButtonAreaLayout

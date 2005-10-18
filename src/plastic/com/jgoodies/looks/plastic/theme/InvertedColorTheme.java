@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 
-import com.jgoodies.looks.FontSizeHints;
+import com.jgoodies.looks.plastic.FontSizeHints;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 
@@ -46,7 +46,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 
