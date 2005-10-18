@@ -31,6 +31,7 @@
 package com.jgoodies.looks;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
@@ -41,7 +42,7 @@ import javax.swing.plaf.FontUIResource;
  * Used by the JGoodies look&amp;feel implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see FontSizeHints
  */
@@ -234,6 +235,14 @@ public final class FontUtils {
 		//System.out.println("Control font size=" + controlFont.getSize());		
 		return new FontUIResource(controlFont);
 	}
+    
+    public static final Font getWindowsControlFontJava1_4() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
+        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
+        Font controlFont = iconFont.deriveFont(Font.PLAIN, defaultGUIFont.getSize());
+        return controlFont;
+    }
 	
 		
 }
