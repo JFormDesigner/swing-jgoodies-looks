@@ -38,9 +38,11 @@ import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
+import com.jgoodies.looks.FontUtils;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -53,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -224,15 +226,21 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object toolBarHeaderBorder    = WindowsBorders.getToolBarHeaderBorder();
 
         int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
-        Object buttonMargin = LookUtils.IS_LOW_RESOLUTION
-            ? new InsetsUIResource(3, buttonPad, 2, buttonPad)
-            : new InsetsUIResource(2, buttonPad, 2, buttonPad);
+        Object buttonMargin = isXP
+            ? (LookUtils.IS_LOW_RESOLUTION
+                ? new InsetsUIResource(3, buttonPad, 2, buttonPad)
+                : new InsetsUIResource(2, buttonPad, 2, buttonPad))
+            : (LookUtils.IS_LOW_RESOLUTION
+                ? new InsetsUIResource(2, buttonPad, 1, buttonPad)
+                : new InsetsUIResource(1, buttonPad, 1, buttonPad));
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets  = new InsetsUIResource(2, 2, 3, 2);
+        Object textInsets  = isXP
+            ? new InsetsUIResource(2, 2, 3, 2)
+            : new InsetsUIResource(1, 2, 2, 2);
         
         Object comboRendererMargin = LookUtils.IS_JAVA_1_4
         	? textInsets
@@ -391,8 +399,25 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * as control font and overrides the TextArea font with control font.
      */
     private void initFontDefaults(UIDefaults table) {
+        if (LookUtils.IS_JAVA_6_OR_LATER) {
+            // Hopefully we can remove this case in the future
+            initFontDefaultsJava5(table);
+        } else if (LookUtils.IS_JAVA_5) {
+            initFontDefaultsJava5(table);
+        } else {
+            initFontDefaultsJava1_4(table);
+        }
+    }
+    
+    /**
+     * Just sets the control font for a few more components.
+     * The Java 5 Sun's Windows L&amp;f set a non-control font
+     * for the formatted text field, password field, spinner and text area.
+     *  
+     * @param table  the UIDefaults table to put the new defaults in
+     */
+    private void initFontDefaultsJava5(UIDefaults table) {
         Font controlFont = table.getFont("Button.font");
-        
         Object[] defaults = {
                 "FormattedTextField.font",  controlFont,
                 "PasswordField.font",       controlFont,
@@ -400,19 +425,26 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                 "TextArea.font",            controlFont
         };
         table.putDefaults(defaults);
-        
+    }
+    
+    /**
+     * Looks up the correct control font and sets it for all controls.
+     *  
+     * @param table  the UIDefaults table to put the new defaults in
+     */
+    private void initFontDefaultsJava1_4(UIDefaults table) {
+        Font controlFont = new FontUIResource(FontUtils.getWindowsControlFontJava1_4());
         
         // Derive a bold version of the control font.
-//        Font controlBoldFont = new FontUIResource(controlFont
-//                .deriveFont(Font.BOLD));
-//
-//        Font menuFont    = table.getFont("Menu.font");
-//        Font messageFont = table.getFont("OptionPane.font");
-//        Font toolTipFont = table.getFont("ToolTip.font");
-//        Font windowFont  = table.getFont("InternalFrame.titleFont");
-//
-//        FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
-//                controlFont, menuFont, messageFont, toolTipFont, windowFont);
+        Font controlBoldFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
+
+        Font menuFont    = table.getFont("Menu.font");
+        Font messageFont = table.getFont("OptionPane.font");
+        Font toolTipFont = table.getFont("ToolTip.font");
+        Font windowFont  = table.getFont("InternalFrame.titleFont");
+
+        FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
+                controlFont, menuFont, messageFont, toolTipFont, windowFont);
     }
 
     // Getters for Proxy Access (Referred classes can stay package visible) ***
