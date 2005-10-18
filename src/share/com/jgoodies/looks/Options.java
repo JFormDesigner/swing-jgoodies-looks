@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class Options {
@@ -226,14 +226,14 @@ public final class Options {
     // Accessing Options ******************************************************
 
     /**
-     * Returns whether a hint is set in the UIManager that indicates, 
-     * that a look&amp;feel may use the native system fonts.
+     * Returns whether native system fonts shall be used, <code>true</code>
+     * by default unless disabled in the UIManager.
      * 
      * @return true if the UIManager indicates that system fonts shall be used
      * @see #setUseSystemFonts(boolean)
      */
     public static boolean getUseSystemFonts() {
-        return UIManager.get(USE_SYSTEM_FONTS_APP_KEY).equals(Boolean.TRUE);
+        return !Boolean.FALSE.equals(UIManager.get(USE_SYSTEM_FONTS_APP_KEY));
     }
 
     /**
@@ -268,36 +268,6 @@ public final class Options {
      */
     public static void setDefaultIconSize(Dimension defaultIconSize) {
         UIManager.put(DEFAULT_ICON_SIZE_KEY, defaultIconSize);
-    }
-
-    /**
-     * Returns the global <code>FontSizeHints</code> 
-     * that can be overriden by a look-specific setting.
-     * 
-     * @return the gobally used FontSizeHints object
-     * @see #setGlobalFontSizeHints(FontSizeHints)
-     */
-    public static FontSizeHints getGlobalFontSizeHints() {
-        Object value = UIManager.get(FONT_SIZE_HINTS_KEY);
-        if (value != null)
-            return (FontSizeHints) value;
-
-        String name = LookUtils.getSystemProperty(FONT_SIZE_HINTS_KEY, "");
-        try {
-            return FontSizeHints.valueOf(name);
-        } catch (IllegalArgumentException e) {
-            return FontSizeHints.DEFAULT;
-        }
-    }
-
-    /**
-     * Sets the global <code>FontSizeHints</code>.
-     * 
-     * @param hints   the FontSizeHints object to be used globally
-     * @see #getGlobalFontSizeHints()
-     */
-    public static void setGlobalFontSizeHints(FontSizeHints hints) {
-        UIManager.put(FONT_SIZE_HINTS_KEY, hints);
     }
 
     /**
