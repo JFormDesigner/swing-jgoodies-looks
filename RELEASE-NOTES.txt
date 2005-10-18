@@ -10,14 +10,19 @@ INTRODUCTION
 
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
+    o Removed LookUtils#createButtonMargin(boolean)
+    o Removed LookUtils#installNarrowMargin
     o Removed WindowsLookAndFeel#getFontSizeHints
     o Removed WindowsLookAndFeel#setFontSizeHints
+    o Removed WindowsButtonUI
+    o Removed WindowsToggleButtonUI
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
     o Options#getUseNarrowButtons returns true by default.
       You can disable this feature using #setUseNarrowButtons(false).
+    o The component heights have been adjusted to be 
 
 
 BUGS FIXED
