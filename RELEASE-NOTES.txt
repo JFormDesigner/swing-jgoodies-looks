@@ -5,8 +5,26 @@
 
 INTRODUCTION
 
-    This update ...
+    This is a preview for the JGoodies Looks 1.4 series.
+    
+    NOTE: THE CODE IS MUCH MORE "RAW2 THAN OTHER RELEASES
+    THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
 
+	It is an engineering build that has seen minimal testing; 
+	it may lack some important functions and may contain serious 
+	known bugs in some areas. 
+        
+    This build comes with an overhauled Windows L&f that uses 
+    a new font lookup mechanism. Also component dimensions have
+    been changed to better comply with the MS layout guidelines. 
+    
+    The component dimensions of the Plastic L&f family
+    have been adjusted to the new Windows L&f dimensions,
+    but the font lookup is currently inconsistent.  
+    
+    THE DOCUMENTATION HAS NOT BEEN UPDATED.  
+    
+	
 
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
@@ -20,9 +38,22 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Removed LookUtils#installNarrowMargin
     o Removed WindowsButtonUI
     o Removed WindowsToggleButtonUI
+    o Moved FontSizeHints to com.jgoodies.looks.Plastic
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
+
+    Basically, the Windows L&f is now follows the Microsoft
+    layout specifications and guidelines even closer than
+    the JGoodies Windows L&f in the JGoodies Looks 1.3.
+    Components that are arranged in a row have perceived bounds 
+    of 14 dialog units (dlu). Since Windows XP command buttons
+    (in the default styles) have two transparent lines in 
+    the top and bottom, the concrete command button bounds
+    are 2 pixels larger than for the textfield, combo, etc.
+    However, if you arrange them in a row and center them
+    vertically in your layout, the perceived or visual bounds
+    will be aligned.
 
     o Options#getUseNarrowButtons returns true by default.
       You can disable this feature using #setUseNarrowButtons(false).
@@ -34,6 +65,12 @@ BUGS FIXED
     #XX: ...
     
 
+DISTRIBUTION CHANGES
+
+    o The sources no longer ship in a source Zip archive.
+      They now come in the directory structure used by the CVS.      
+    
+    
 OTHER CHANGES
 
     o 
