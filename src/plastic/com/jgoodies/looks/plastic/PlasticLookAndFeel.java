@@ -60,7 +60,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -171,25 +171,25 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	// Special Properties ***************************************************
 	
     /**
-     * Returns the current <code>FontSizeHints</code>, 
-     * where look specific settings shadow the global users defaults 
-     * as stored under key <code>FontSizeHints.KEY</code>.
+     * Returns the current Plastic <code>FontSizeHints</code>, 
+     * or <code>FontSizeHints.DEFAULT</code> if no custom hints are set.
      * 
-     * @return the current FontSizeHints
-     * @see Options#setGlobalFontSizeHints(FontSizeHints)
+     * @return the current Plastic font size hints or 
+     *     <code>FontSizeHints.DEFAULT</code> if no custom hints are set.
+     * @see #setFontSizeHints(FontSizeHints)
      * @see FontSizeHints
      */
     public static FontSizeHints getFontSizeHints() {
         return fontSizeHints != null
             ? fontSizeHints
-            : Options.getGlobalFontSizeHints();
+            : FontSizeHints.DEFAULT;
     }
 
     /**
-     * Sets <code>FontSizeHints</code> that shadow the global font size hints.
+     * Sets the Plastic <code>FontSizeHints</code>.
      * 
      * @param newHints   the font size hints to be set
-     * @see Options#setGlobalFontSizeHints(FontSizeHints)
+     * @see #getFontSizeHints()
      * @see FontSizeHints
      */
     public static void setFontSizeHints(FontSizeHints newHints) {
