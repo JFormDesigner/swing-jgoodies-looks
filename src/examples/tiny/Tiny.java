@@ -36,19 +36,19 @@ import java.awt.Frame;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import com.jgoodies.looks.FontSizeHints;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 
 /**
  * The main class of the JGoodies Tiny application. 
- * It configures the UI, builds the main frame and opens it.
- * <p>
+ * It configures the UI, builds the main frame and opens it.<p>
+ * 
  * The JGoodies Looks Professional comes with Skeleton, a much better sample
  * application that separates concerns and uses a scalable architecture.
  *
  * @author Karsten Lentzsch
+ * @version $Revision: 1.7 $
  */
 public final class Tiny {
 
@@ -73,7 +73,6 @@ public final class Tiny {
      */
     private void configureUI() {
         UIManager.put(Options.USE_SYSTEM_FONTS_APP_KEY, Boolean.TRUE);
-        Options.setGlobalFontSizeHints(FontSizeHints.MIXED);
         Options.setDefaultIconSize(new Dimension(18, 18));
 
         String lafName =

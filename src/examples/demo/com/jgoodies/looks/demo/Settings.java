@@ -45,7 +45,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
  * @see     com.jgoodies.looks.FontSizeHints
@@ -60,7 +60,7 @@ public final class Settings {
 
     private Boolean useSystemFonts;
     
-    private FontSizeHints fontSizeHints;
+    private FontSizeHints plasticFontSizeHints;
 
     private boolean useNarrowButtons;
 
@@ -99,10 +99,10 @@ public final class Settings {
         Settings settings = new Settings();
         settings.setSelectedLookAndFeel(new PlasticXPLookAndFeel());
         settings.setSelectedTheme(PlasticLookAndFeel.createMyDefaultTheme());
+        settings.setUseNarrowButtons(true);
         settings.setUseSystemFonts(Boolean.TRUE);
-        settings.setFontSizeHints(FontSizeHints.MIXED);
-        settings.setUseNarrowButtons(false);
         settings.setTabIconsEnabled(true);
+        settings.setPlasticFontSizeHints(FontSizeHints.DEFAULT);
         settings.setPlasticTabStyle(PlasticLookAndFeel.TAB_STYLE_DEFAULT_VALUE);
         settings.setPlasticHighContrastFocusEnabled(false);
         settings.setPopupDropShadowEnabled(null);
@@ -120,12 +120,12 @@ public final class Settings {
 
     // Accessors **************************************************************
 
-    public FontSizeHints getFontSizeHints() {
-        return fontSizeHints;
+    public FontSizeHints getPlasticFontSizeHints() {
+        return plasticFontSizeHints;
     }
 
-    public void setFontSizeHints(FontSizeHints fontSizeHints) {
-        this.fontSizeHints = fontSizeHints;
+    public void setPlasticFontSizeHints(FontSizeHints fontSizeHints) {
+        this.plasticFontSizeHints = fontSizeHints;
     }
 
     public Boolean getMenuBar3DHint() {
