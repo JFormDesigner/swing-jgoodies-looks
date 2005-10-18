@@ -43,19 +43,17 @@ package com.jgoodies.looks;
  * next release, to better reflect the font choice in the J2SE 1.4.".
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see	Options#setGlobalFontSizeHints(FontSizeHints)
  * @see	FontUtils
  */
 public final class FontSizeHints {
 	
-	public static final FontSizeHints LARGE	= new FontSizeHints(12, 12, 14, 14);
-	public static final FontSizeHints SYSTEM	= new FontSizeHints(11, 11, 14, 14);
-    public static final FontSizeHints MIXED2  = new FontSizeHints(11, 11, 14, 13);
-	public static final FontSizeHints MIXED	= new FontSizeHints(11, 11, 14, 12);
-	public static final FontSizeHints SMALL	= new FontSizeHints(11, 11, 12, 12);
-	public static final FontSizeHints FIXED	= new FontSizeHints(12, 12, 12, 12);
+	public static final FontSizeHints LARGE	 = new FontSizeHints(12, 12, 14, 14);
+	public static final FontSizeHints SYSTEM = new FontSizeHints(11, 11, 14, 13);
+	public static final FontSizeHints SMALL	 = new FontSizeHints(11, 11, 12, 12);
+	public static final FontSizeHints FIXED	 = new FontSizeHints(12, 12, 12, 12);
 	
 	public static final FontSizeHints DEFAULT = SYSTEM;
 	
@@ -162,7 +160,7 @@ public final class FontSizeHints {
 	
 	
 	/**
-	 * Looksup and returns the <code>FontSizeHints</code> for the specified name.
+	 * Looks up and returns the <code>FontSizeHints</code> for the specified name.
      * 
      * @param name   the name of the FontSizeHints object
      * @return the associated FontSizeHints object
@@ -172,10 +170,6 @@ public final class FontSizeHints {
 			return LARGE;
 		else if (name.equalsIgnoreCase("SYSTEM"))
 			return SYSTEM;
-		else if (name.equalsIgnoreCase("MIXED"))
-			return MIXED;
-        else if (name.equalsIgnoreCase("MIXED2"))
-            return MIXED2;
 		else if (name.equalsIgnoreCase("SMALL"))
 			return SMALL;
 		else if (name.equalsIgnoreCase("FIXED"))
