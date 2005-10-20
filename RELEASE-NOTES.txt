@@ -7,12 +7,11 @@ INTRODUCTION
 
     This is a preview for the JGoodies Looks 1.4 series.
     
-    NOTE: THE CODE IS MUCH MORE "RAW2 THAN OTHER RELEASES
+    NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
     THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
-
-	It is an engineering build that has seen minimal testing; 
-	it may lack some important functions and may contain serious 
-	known bugs in some areas. 
+    It is an engineering build that has seen minimal testing; 
+    it may lack some important functions and may contain serious 
+    known bugs in some areas. 
         
     This build comes with an overhauled Windows L&f that uses 
     a new font lookup mechanism. Also component dimensions have
@@ -25,7 +24,6 @@ INTRODUCTION
     THE DOCUMENTATION HAS NOT BEEN UPDATED.  
     
 	
-
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
     o Removed Options#getGlobalFontSizeHints
@@ -51,9 +49,8 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
     (in the default styles) have two transparent lines in 
     the top and bottom, the concrete command button bounds
     are 2 pixels larger than for the textfield, combo, etc.
-    However, if you arrange them in a row and center them
-    vertically in your layout, the perceived or visual bounds
-    will be aligned.
+    If you lay out them in a row and center them vertically 
+    the perceived (aka visual) bounds will be aligned.
 
     o Options#getUseNarrowButtons returns true by default.
       You can disable this feature using #setUseNarrowButtons(false).
@@ -62,7 +59,8 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
 BUGS FIXED
 
-    #XX: ...
+    #51: Windows combobox with custom render is too narrow.
+    #60: Wrong combobox height in Java 5 and Java 6.
     
 
 DISTRIBUTION CHANGES
