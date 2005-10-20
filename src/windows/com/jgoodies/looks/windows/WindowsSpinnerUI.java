@@ -33,10 +33,7 @@ package com.jgoodies.looks.windows;
 import java.awt.Component;
 import java.awt.LayoutManager;
 
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JSpinner;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
@@ -50,7 +47,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
@@ -151,7 +148,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      */
     protected JComponent createEditor() {
         JComponent editor = spinner.getEditor();
-        configureEditor(editor);
+        configureEditorBorder(editor);
         return editor;
     }
 
@@ -193,18 +190,24 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      */
     protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
         spinner.remove(oldEditor);
-        configureEditor(newEditor);
+        configureEditorBorder(newEditor);
         spinner.add(newEditor, "Editor");
     }
 
 
     /**
-     * Removes an obsolete Border from Default editors.
+     * Sets an empty border with consistent insets.
      */
-    private void configureEditor(JComponent editor) {
+    private void configureEditorBorder(JComponent editor) {
         if ((editor instanceof JSpinner.DefaultEditor)) {
             JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
-            defaultEditor.getTextField().setBorder(EMPTY_BORDER);
+            JTextField editorField = defaultEditor.getTextField();
+            editorField.setBorder(EMPTY_BORDER);
+        } else if (   (editor instanceof JPanel) 
+                && (editor.getBorder() == null)
+                && (editor.getComponentCount() > 0)) {
+            JComponent editorField = (JComponent) editor.getComponent(0);
+            editorField.setBorder(EMPTY_BORDER);
         }
     }
 
