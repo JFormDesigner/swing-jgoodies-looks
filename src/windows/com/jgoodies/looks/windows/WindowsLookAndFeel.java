@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -228,7 +228,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
         Object buttonMargin = isXP
             ? (LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(3, buttonPad, 2, buttonPad)
+                ? new InsetsUIResource(2, buttonPad, 3, buttonPad)
                 : new InsetsUIResource(2, buttonPad, 2, buttonPad))
             : (LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(1, buttonPad, 1, buttonPad)
