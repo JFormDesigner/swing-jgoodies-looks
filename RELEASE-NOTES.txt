@@ -26,6 +26,7 @@ INTRODUCTION
 	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
+    o Removed Options.FONT_SIZE_HINTS_KEY
     o Removed Options#getGlobalFontSizeHints
     o Removed Options#setGlobalFontSizeHints
     o Removed WindowsLookAndFeel#getFontSizeHints
@@ -37,6 +38,8 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Removed WindowsButtonUI
     o Removed WindowsToggleButtonUI
     o Moved FontSizeHints to com.jgoodies.looks.Plastic
+    o Removed Options.EXT_WINDOWS_NAME;
+    o Options#initializeDefaultReplacements now private
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
@@ -55,6 +58,9 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
     o Options#getUseNarrowButtons returns true by default.
       You can disable this feature using #setUseNarrowButtons(false).
     o The component heights have been adjusted to be 
+    o Options.DEFAULT_LOOK_NAME is now PLASTICXP_NAME.
+    o Options.getCrossPlatformLookAndFeelClassName returns
+      the PLASTICXP_NAME.
 
 
 BUGS FIXED
@@ -62,6 +68,11 @@ BUGS FIXED
     #51: Windows combobox with custom render is too narrow.
     #60: Wrong combobox height in Java 5 and Java 6.
     
+
+NEW FEATURES
+    
+    o Narrow buttons can be disabled in the sytem properties.
+
 
 DISTRIBUTION CHANGES
 
