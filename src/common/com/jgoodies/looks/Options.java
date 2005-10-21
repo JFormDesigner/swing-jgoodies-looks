@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class Options {
@@ -63,21 +63,17 @@ public final class Options {
     public static final String JGOODIES_WINDOWS_NAME =
         "com.jgoodies.looks.windows.WindowsLookAndFeel";
         
-    /** 
-     * This outdated constant will be removed in the Looks version 1.4.
-     * 
-     * @deprecated Replaced by {@link #JGOODIES_WINDOWS_NAME}. 
-     */
-    public static final String EXT_WINDOWS_NAME =
-        JGOODIES_WINDOWS_NAME;
-        
     public static final String DEFAULT_LOOK_NAME = 
-        PLASTIC3D_NAME;
+        PLASTICXP_NAME;
 
     /**
      * Holds a Map that enables the look&amp;feel replacement
      * mechanism to replace one look by another. 
      * Maps the original class names to their replacement class names.
+     * 
+     * @see #getReplacementClassNameFor(String)
+     * @see #putLookAndFeelReplacement(String, String)
+     * @see #removeLookAndFeelReplacement(String)
      */
     private static final Map LAF_REPLACEMENTS;
     static {
@@ -93,9 +89,6 @@ public final class Options {
         
     public static final String CONTROL_FONT_KEY = 
         "jgoodies.controlFont";
-        
-    public static final String FONT_SIZE_HINTS_KEY = 
-        "jgoodies.fontSizeHints";
         
     public static final String USE_SYSTEM_FONTS_KEY =
         "swing.useSystemFontSettings";
@@ -184,6 +177,30 @@ public final class Options {
     // System Settings ********************************************************
     
     /**
+     * Holds the Boolean system property value for the use of system fonts, 
+     * or null, if it has not been set. If this property has been 
+     * set, we log a message about the choosen value.
+     * 
+     * @see #getUseSystemFonts()
+     */
+    private static final Boolean USE_SYSTEM_FONTS_SYSTEM_VALUE = 
+        LookUtils.getBooleanSystemProperty(
+                USE_SYSTEM_FONTS_KEY, "Use system fonts");
+    
+
+    /**
+     * Holds the Boolean system property value for the use of narrow buttons
+     * or null, if it has not been set. If this property has been 
+     * set, we log a message about the choosen value.
+     * 
+     * @see #getUseNarrowButtons()
+     */
+    private static final Boolean USE_NARROW_BUTTONS_SYSTEM_VALUE = 
+        LookUtils.getBooleanSystemProperty(
+                USE_NARROW_BUTTONS_KEY, "Use narrow buttons");
+    
+
+    /**
      * Holds the Boolean system property value for the tab icon enablement, 
      * or null, if it has not been set. If this property has been 
      * set, we log a message about the choosen value.
@@ -227,13 +244,15 @@ public final class Options {
 
     /**
      * Returns whether native system fonts shall be used, <code>true</code>
-     * by default unless disabled in the UIManager.
+     * by default unless disabled in the system properties or UIManager.
      * 
-     * @return true if the UIManager indicates that system fonts shall be used
+     * @return true unless disabled in the system properties or UIManager 
      * @see #setUseSystemFonts(boolean)
      */
     public static boolean getUseSystemFonts() {
-        return !Boolean.FALSE.equals(UIManager.get(USE_SYSTEM_FONTS_APP_KEY));
+        return USE_SYSTEM_FONTS_SYSTEM_VALUE != null
+            ? USE_SYSTEM_FONTS_SYSTEM_VALUE.booleanValue()
+            : !Boolean.FALSE.equals(UIManager.get(USE_SYSTEM_FONTS_APP_KEY));
     }
 
     /**
@@ -274,7 +293,8 @@ public final class Options {
      * Checks and answers if we shall use narrow button margins of 4 pixels.
      * As of the Looks version 1.4 the default value is <code>true</code>
      * (narrow) for the JGoodies Windows L&amp;F and the JGoodies Plastic 
-     * L&amp;F family. The native Windows L&amp;F used narrow margins too.<p>
+     * L&amp;F family. The native Windows L&amp;F used narrow margins too.
+     * The default can be disabled in the system properties or UIManager.<p>
      * 
      * Narrow buttons margins make it easier to give buttons in a button bar
      * the same width, even if some button labels are long. And narrow margins
@@ -304,7 +324,9 @@ public final class Options {
      * @see #setUseNarrowButtons(boolean)
      */
     public static boolean getUseNarrowButtons() {
-        return !Boolean.FALSE.equals(UIManager.get(USE_NARROW_BUTTONS_KEY));
+        return USE_NARROW_BUTTONS_SYSTEM_VALUE != null
+            ? USE_NARROW_BUTTONS_SYSTEM_VALUE.booleanValue()
+            : !Boolean.FALSE.equals(UIManager.get(USE_NARROW_BUTTONS_KEY));
     }
 
     /**
@@ -326,9 +348,9 @@ public final class Options {
      * @see #setTabIconsEnabled(boolean)
      */
     public static boolean isTabIconsEnabled() {
-        return TAB_ICONS_ENABLED_SYSTEM_VALUE == null
-            ? !Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY))
-            : TAB_ICONS_ENABLED_SYSTEM_VALUE.booleanValue();
+        return TAB_ICONS_ENABLED_SYSTEM_VALUE != null
+            ? TAB_ICONS_ENABLED_SYSTEM_VALUE.booleanValue()
+            : !Boolean.FALSE.equals(UIManager.get(TAB_ICONS_ENABLED_KEY));
     }
 
     /**
@@ -457,7 +479,7 @@ public final class Options {
      * @see #removeLookAndFeelReplacement(String)
      * @see #getReplacementClassNameFor(String)
      */
-    public static void initializeDefaultReplacements() {
+    private static void initializeDefaultReplacements() {
         putLookAndFeelReplacement(
             "javax.swing.plaf.metal.MetalLookAndFeel",
             PLASTIC3D_NAME);
@@ -488,7 +510,7 @@ public final class Options {
      * @see #getSystemLookAndFeelClassName()
      */
     public static String getCrossPlatformLookAndFeelClassName() {
-        return PLASTIC3D_NAME;
+        return PLASTICXP_NAME;
     }
 
     /**
