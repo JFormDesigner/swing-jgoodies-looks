@@ -42,7 +42,6 @@ import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
-import com.jgoodies.looks.FontUtils;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -55,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -433,7 +432,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * @param table  the UIDefaults table to put the new defaults in
      */
     private void initFontDefaultsJava1_4(UIDefaults table) {
-        Font controlFont = new FontUIResource(FontUtils.getWindowsControlFontJava1_4());
+        Font controlFont = new FontUIResource(LookUtils.getWindowsControlFont());
         
         // Derive a bold version of the control font.
         Font controlBoldFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
@@ -443,10 +442,81 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Font toolTipFont = table.getFont("ToolTip.font");
         Font windowFont  = table.getFont("InternalFrame.titleFont");
 
-        FontUtils.initFontDefaults(table, controlFont, controlBoldFont,
+        initFontDefaultsJava1_4(table, controlFont, controlBoldFont,
                 controlFont, menuFont, messageFont, toolTipFont, windowFont);
     }
 
+    /**
+	 * Sets different fonts to all known widget defaults.
+	 * If the specified <code>menuFont</code> is null,
+	 * the given defaults won't be overriden.
+     * 
+     * @param table   the UIDefaults table used to set fonts
+     * @param controlFont       the control font to be set
+     * @param controlBoldFont   a bold version of the control font
+     * @param fixedControlFont  a fixed size control font
+     * @param menuFont          the font used for menus
+     * @param messageFont       the font used in message
+     * @param toolTipFont       the font used in tool tips
+     * @param windowFont        the general dialog font
+	 */
+	private void initFontDefaultsJava1_4(UIDefaults table, 
+		Object controlFont, Object controlBoldFont, Object fixedControlFont, 
+		Object menuFont, Object messageFont, Object toolTipFont, Object windowFont) {
+			
+//		LookUtils.log("Menu font   =" + menuFont);			
+//		LookUtils.log("Control font=" + controlFont);	
+//		LookUtils.log("Message font=" + messageFont);	
+		
+		Object[] defaults = {
+				"Button.font",							controlFont,
+				"CheckBox.font",						controlFont,
+				"ColorChooser.font",					controlFont,
+				"ComboBox.font",						controlFont,
+				"EditorPane.font",						controlFont,
+                "FormattedTextField.font",              controlFont,
+				"Label.font",							controlFont,
+				"List.font",							controlFont,
+				"Panel.font",							controlFont,
+				"PasswordField.font",					controlFont,
+				"ProgressBar.font",						controlFont,
+				"RadioButton.font",						controlFont,
+				"ScrollPane.font",						controlFont,
+				"Spinner.font",							controlFont,
+				"TabbedPane.font",						controlFont,
+				"Table.font",							controlFont,
+				"TableHeader.font",						controlFont,
+				"TextField.font",						controlFont,
+				"TextPane.font",						controlFont,
+				"ToolBar.font",							controlFont,
+				"ToggleButton.font",					controlFont,
+				"Tree.font",							controlFont,
+				"Viewport.font", 						controlFont,
+
+            	"InternalFrame.titleFont", 				windowFont, // controlBold
+	    		"OptionPane.font", 						messageFont,
+	    		"OptionPane.messageFont", 				messageFont,
+	    		"OptionPane.buttonFont", 				messageFont,
+				"Spinner.font",							fixedControlFont,
+				"TextArea.font",						fixedControlFont,  
+				"TitledBorder.font",					controlBoldFont,
+				"ToolTip.font",							toolTipFont,
+
+                "CheckBoxMenuItem.font",                menuFont,
+                "CheckBoxMenuItem.acceleratorFont",     menuFont,  // 1.3 only ?
+                "Menu.font",                            menuFont,
+                "Menu.acceleratorFont",                 menuFont,
+                "MenuBar.font",                         menuFont,
+                "MenuItem.font",                        menuFont,
+                "MenuItem.acceleratorFont",             menuFont,
+                "PopupMenu.font",                       menuFont,
+                "RadioButtonMenuItem.font",             menuFont,
+                "RadioButtonMenuItem.acceleratorFont",  menuFont,   // 1.3 only ?
+            };
+        table.putDefaults(defaults);
+	}
+
+    
     // Getters for Proxy Access (Referred classes can stay package visible) ***
 
     public static Border getButtonBorder() {
