@@ -30,7 +30,6 @@
 
 package com.jgoodies.looks.plastic;
 
-import com.jgoodies.looks.FontUtils;
 import com.jgoodies.looks.LookUtils;
 
 /**
@@ -46,7 +45,7 @@ import com.jgoodies.looks.LookUtils;
  * next release, to better reflect the font choice in the J2SE 1.4.".
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see	PlasticLookAndFeel#setFontSizeHints(FontSizeHints)
  * @see	FontUtils
