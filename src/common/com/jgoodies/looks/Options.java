@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class Options {
@@ -494,9 +494,9 @@ public final class Options {
      * 
      * @param className   the name of the look-and-feel class
      * @return the name of the suggested replacement class
+     * 
      * @see #putLookAndFeelReplacement(String, String)
      * @see #removeLookAndFeelReplacement(String)
-     * @see #initializeDefaultReplacements()
      */
     public static String getReplacementClassNameFor(String className) {
         String replacement = (String) LAF_REPLACEMENTS.get(className);
