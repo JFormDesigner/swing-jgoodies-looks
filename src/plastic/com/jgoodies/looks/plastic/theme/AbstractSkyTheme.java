@@ -40,9 +40,9 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-public abstract class AbstractSkyTheme extends SkyBluerTahoma {
+public abstract class AbstractSkyTheme extends SkyBluer {
 
     private static final ColorUIResource secondary2 =
         new ColorUIResource(164, 164, 164);

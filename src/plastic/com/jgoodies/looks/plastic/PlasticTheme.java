@@ -31,39 +31,40 @@
 package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
+import com.jgoodies.looks.plastic.theme.PlasticFontDelegate;
+import com.jgoodies.looks.plastic.theme.PlasticTahomaFontDelegate;
+import com.jgoodies.looks.plastic.theme.PlasticWindowsFontDelegate;
+
 /**
  * Unlike its superclass this theme class has relaxed access.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
     // Default 3D Effect Colors *********************************************
 
-    public static final Color DARKEN_START = new Color(0, 0, 0, 0);
-    public static final Color DARKEN_STOP = new Color(0, 0, 0, 64);
-    public static final Color LT_DARKEN_STOP = new Color(0, 0, 0, 32);
-    public static final Color BRIGHTEN_START = new Color(255, 255, 255, 0);
-    public static final Color BRIGHTEN_STOP = new Color(255, 255, 255, 128);
-    public static final Color LT_BRIGHTEN_STOP = new Color(255, 255, 255, 64);
+    public static final Color DARKEN_START     = new Color(  0,   0,   0,   0);
+    public static final Color DARKEN_STOP      = new Color(  0,   0,   0,  64);
+    public static final Color LT_DARKEN_STOP   = new Color(  0,   0,   0,  32);
+    public static final Color BRIGHTEN_START   = new Color(255, 255, 255,   0);
+    public static final Color BRIGHTEN_STOP    = new Color(255, 255, 255, 128);
+    public static final Color LT_BRIGHTEN_STOP = new Color(255, 255, 255,  64);
 
     protected static final ColorUIResource WHITE =
         new ColorUIResource(255, 255, 255);
 
     protected static final ColorUIResource BLACK = new ColorUIResource(0, 0, 0);
 
-    protected FontUIResource titleFont;
-    protected FontUIResource controlFont;
-    protected FontUIResource systemFont;
-    protected FontUIResource userFont;
-    protected FontUIResource smallFont;
+    private PlasticFontDelegate fontDelegate;
 
     // Accessing Colors *****************************************************
 
@@ -114,81 +115,55 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     // Accessing Fonts ******************************************************
 
     public FontUIResource getTitleTextFont() {
-//        return getControlTextFont();
-        
-        if (titleFont == null) {
-            titleFont =
-                new FontUIResource(
-                    Font.getFont(
-                        "swing.plaf.metal.controlFont",
-                        new Font("Dialog", Font.BOLD, 12)));
-        }
-        return titleFont;
+        return getFontDelegate().getTitleTextFont();
     }
 
     public FontUIResource getControlTextFont() {
-        return getFont();
+        return getFontDelegate().getControlTextFont();
     }
     
     public FontUIResource getMenuTextFont() {
-        return getFont();
+        return getFontDelegate().getMenuTextFont();
     }
     
     public FontUIResource getSubTextFont() {
-        if (smallFont == null) {
-            smallFont =
-                new FontUIResource(
-                    Font.getFont(
-                        "swing.plaf.metal.smallFont",
-                        new Font("Dialog", Font.PLAIN, 10)));
-        }
-        return smallFont;
+        return getFontDelegate().getSubTextFont();
     }
 
     public FontUIResource getSystemTextFont() {
-        if (systemFont == null) {
-            systemFont =
-                new FontUIResource(
-                    Font.getFont(
-                        "swing.plaf.metal.systemFont",
-                        new Font("Dialog", Font.PLAIN, 12)));
-        }
-        return systemFont;
+        return getFontDelegate().getSystemTextFont();
     }
 
     public FontUIResource getUserTextFont() {
-        if (userFont == null) {
-            userFont =
-                new FontUIResource(
-                    Font.getFont(
-                        "swing.plaf.metal.userFont",
-                        new Font("Dialog", Font.PLAIN, 12)));
-        }
-        return userFont;
+        return getFontDelegate().getUserTextFont();
     }
 
     public FontUIResource getWindowTitleFont() {
-        return getFont();
+        return getFontDelegate().getWindowTitleFont();
+    }
+    
+    private PlasticFontDelegate getFontDelegate() {
+        if (fontDelegate == null) {
+            fontDelegate = createFontDelegate();
+        }
+        return fontDelegate;
+    }
+    
+    protected boolean getForceTahomaOnNonWindows() {
+        return false;
+    }
+    
+    protected PlasticFontDelegate createFontDelegate() {
+        if (LookUtils.IS_OS_WINDOWS && Options.getUseSystemFonts()) {
+            return new PlasticWindowsFontDelegate();
+        } else if (getForceTahomaOnNonWindows()) {
+            return new PlasticTahomaFontDelegate();
+        } else {
+            return new PlasticFontDelegate();
+        }
     }
     
 
-    // Helper Code **********************************************************
-
-    protected FontUIResource getFont() {
-        if (null == controlFont)
-            controlFont = new FontUIResource(getFont0());
-
-        return controlFont;
-    }
-
-    protected Font getFont0() {
-        Font font = Font.getFont("swing.plaf.metal.controlFont");
-        return font != null
-            ? font.deriveFont(Font.PLAIN)
-            : new Font("Dialog", Font.PLAIN, 12);
-    }
-    
-    
     // Custom Equals Implementation *****************************************
 
     /**

@@ -32,37 +32,50 @@ package com.jgoodies.looks.plastic.theme;
 
 import java.awt.Font;
 
+import javax.swing.plaf.FontUIResource;
+
 import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.plastic.FontSizeHints;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 
 /**
- * A theme with low saturated blue primary colors and a light brown background;
- * it has been optimized to work with Windows XP default desktop settings.<p>
+ * Looks up and returns Tahoma fonts required for a PlasticTheme.
  * 
- * Unlike its superclass, ExperienceBlue, this class uses a font appropriate 
- * for displaying Chinese, Korean, Japanese and other non-western characters.
- *
- * @author Karsten Lentzsch
+ * @author  Karsten Lentzsch
  * @version $Revision: 1.1 $
- * 
- * @see Font
  */
-public final class ExperienceBlueDefaultFont extends ExperienceBlue {
-	
-	
-	public String getName() { return "Experience Blue - Default Font"; }
-	
+public class PlasticTahomaFontDelegate extends PlasticFontDelegate {
 
-    /**
-     * Looks up and returns the logical default font "dialog".
-     * This is appropriate for Chinese, Korean, Japanese and other
-     * non-western characters. 
-     * Overrides the superclass' "Tahoma" choice.
-     * 
-     * @see SkyBluerTahoma#getFont0(int)
-     */
-    protected Font getFont0(int size) {
-        int defaultSize = LookUtils.IS_LOW_RESOLUTION ? 13 : 16;
-        return new Font("dialog", Font.PLAIN, defaultSize);
+
+    // Tahoma Code
+    
+    protected Font getFont0() {
+        FontSizeHints sizeHints = PlasticLookAndFeel.getFontSizeHints();
+        return getFont0(sizeHints.controlFontSize());
     }
 
+    protected Font getFont0(int size) {
+        if (LookUtils.IS_OS_MAC)
+            return super.getFont0();
+        
+        return new Font("Tahoma", Font.PLAIN, size);
+    }
+
+    public FontUIResource getSubTextFont() {
+        if (null == smallFont) {
+            smallFont = new FontUIResource(getFont0(10));
+        }
+        return smallFont;
+    }
+
+    public FontUIResource getSystemTextFont() {
+        return getFont();
+    }
+    
+    public FontUIResource getUserTextFont() {
+        return getFont();
+    }
+    
+    
+    
 }

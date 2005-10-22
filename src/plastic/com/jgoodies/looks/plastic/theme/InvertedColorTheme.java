@@ -31,14 +31,10 @@
 package com.jgoodies.looks.plastic.theme;
 
 import java.awt.Color;
-import java.awt.Font;
 
 import javax.swing.UIDefaults;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.FontUIResource;
 
-import com.jgoodies.looks.plastic.FontSizeHints;
-import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 
 /**
@@ -46,7 +42,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 
@@ -90,29 +86,6 @@ public abstract class InvertedColorTheme extends PlasticTheme {
                 new Color(255, 255, 255, 16),
                 };
         table.putDefaults(uiDefaults);
-    }
-
-    protected FontUIResource getFont() {
-        if (null == controlFont)
-            controlFont = new FontUIResource(getFont0());
-
-        return controlFont;
-    }
-
-    protected Font getFont0() {
-        FontSizeHints sizeHints = PlasticLookAndFeel.getFontSizeHints();
-        return getFont0(sizeHints.controlFontSize());
-    }
-
-    protected Font getFont0(int size) {
-        return new Font("Tahoma", Font.PLAIN, size);
-    }
-
-    public FontUIResource getSubTextFont() {
-        if (null == smallFont) {
-            smallFont = new FontUIResource(getFont0(10));
-        }
-        return smallFont;
     }
 
     public ColorUIResource getControlDisabled() {

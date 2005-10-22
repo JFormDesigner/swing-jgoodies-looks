@@ -39,9 +39,9 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-public class DesertBluer extends SkyBluerTahoma {
+public class DesertBluer extends SkyBluer {
 	
 	private final ColorUIResource primary1	= new ColorUIResource( 10,  36, 106);
 	private final ColorUIResource primary2	= new ColorUIResource( 85, 115, 170);
