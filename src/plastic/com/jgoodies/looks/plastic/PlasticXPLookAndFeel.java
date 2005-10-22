@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -118,9 +118,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
                                             
-        Object textInsets 		    = LookUtils.IS_LOW_RESOLUTION
-                                            ? new InsetsUIResource(2, 2, 3, 2)
-                                            : new InsetsUIResource(2, 2, 3, 2);
+        Object textInsets 		    = new InsetsUIResource(2, 2, 3, 2);
                                             
 		Object[] defaults = {
             "Button.border",                  buttonBorder,
@@ -176,7 +174,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     protected Insets createButtonMargin() {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_LOW_RESOLUTION
-            ? new InsetsUIResource(1, pad, 0, pad)
+            ? new InsetsUIResource(0, pad, 1, pad)
             : new InsetsUIResource(1, pad, 2, pad);
     }
 
