@@ -32,6 +32,7 @@ package com.jgoodies.looks;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
@@ -47,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.looks.FontUtils
  */
@@ -92,7 +93,7 @@ public final class LookUtils {
     /**
      * True if this is Java 1.4.0_*.
      */
-    static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
+    public static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
     
     /**
      * True if this is Java 1.4.2 or later. Since we assume Java 1.4
@@ -326,6 +327,23 @@ public final class LookUtils {
     }
     
     
+    /**
+     * Returns the Windows default control font.
+     *  
+     * @return the Windows default control font
+     */
+    public static Font getWindowsControlFont() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
+        if (IS_JAVA_5_OR_LATER) {
+            return defaultGUIFont;
+        }
+        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
+        Font controlFont = iconFont.deriveFont(Font.PLAIN, defaultGUIFont.getSize());
+        return controlFont;
+    }
+    
+        
     // Color Modifications **************************************************
 
     /**
@@ -386,6 +404,7 @@ public final class LookUtils {
             : Collections.EMPTY_LIST;
     }
 
+    
     // Minimal logging ******************************************************
 
     /**
@@ -436,5 +455,6 @@ public final class LookUtils {
     private static boolean startsWithIgnoreCase(String str, String prefix) {
         return str != null && str.toUpperCase().startsWith(prefix.toUpperCase());
     }
-    
+
+
 }
