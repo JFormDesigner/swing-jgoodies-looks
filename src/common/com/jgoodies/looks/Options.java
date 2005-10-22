@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class Options {
@@ -84,11 +84,8 @@ public final class Options {
 
     // Keys for Overriding Font Settings ************************************
 
-    public static final String MENU_FONT_KEY = 
-        "jgoodies.menuFont";
-        
-    public static final String CONTROL_FONT_KEY = 
-        "jgoodies.controlFont";
+    public static final String PLASTIC_CONTROL_FONT_KEY = 
+        "plastic.controlFont";
         
     public static final String USE_SYSTEM_FONTS_KEY =
         "swing.useSystemFontSettings";
