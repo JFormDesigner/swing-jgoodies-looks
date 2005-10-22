@@ -34,13 +34,13 @@ import java.awt.Font;
 
 import javax.swing.plaf.FontUIResource;
 
-import com.jgoodies.looks.FontUtils;
+import com.jgoodies.looks.LookUtils;
 
 /**
  * Looks up and returns the fonts required for a PlasticTheme.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticWindowsFontDelegate extends PlasticFontDelegate {
 
@@ -100,7 +100,7 @@ public final class PlasticWindowsFontDelegate extends PlasticFontDelegate {
     }
 
     protected Font getFont0() {
-        return FontUtils.getWindowsControlFontJava1_4();
+        return LookUtils.getWindowsControlFont();
     }
     
     

@@ -32,13 +32,18 @@ package com.jgoodies.looks.plastic.theme;
 
 import java.awt.Font;
 
+import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
+
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
+import com.jgoodies.looks.plastic.FontSizeHints;
 
 /**
  * Looks up and returns the fonts required for a PlasticTheme.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PlasticFontDelegate {
 
@@ -125,6 +130,51 @@ public class PlasticFontDelegate {
             ? font.deriveFont(Font.PLAIN)
             : new Font("Dialog", Font.PLAIN, 12);
     }
-    
-    
+
+    /**
+     * Computes and answers the control font using the specified
+     * <code>UIDefaults</code> and <code>FontSizeHints</code>.<p>
+     * 
+     * The defaults can be overriden using the system property "jgoodies.controlFont".
+     * You can set this property either by setting VM runtime arguments, e.g.
+     * <pre>
+     *   -Dplastic.controlFont=Tahoma-PLAIN-14
+     * </pre>
+     * or by setting them during the application startup process, e.g.
+     * <pre>
+     *   System.setProperty(Options.PLASTIC_CONTROL_FONT_KEY, "Arial-ITALIC-12");
+     * </pre>
+     * 
+     * @param table   the UIDefaults table to work with
+     * @param hints   the FontSizeHints used to determine the control font
+     * @return the control font for the given defaults and hints
+     */
+    protected final Font getControlFont(UIDefaults table, FontSizeHints hints) {
+    	// Check whether a concrete font has been specified in the system properties.
+    	String fontDescription = LookUtils.getSystemProperty(Options.PLASTIC_CONTROL_FONT_KEY);
+    	if (fontDescription != null) {
+    		return Font.decode(fontDescription);
+    	}
+    	
+    	Font controlFont;
+    		//LookUtils.log("Label.font     =" + table.getFont("Label.font"));			
+    		//LookUtils.log("Button.font    =" + table.getFont("Button.font"));	
+    		//LookUtils.log("OptionPane.font=" + table.getFont("OptionPane.font"));	
+    	
+    		String fontKey = LookUtils.IS_JAVA_1_4_0 
+                ? "Label.font" 
+                : "OptionPane.font";
+    		controlFont		= table.getFont(fontKey);
+    		if (controlFont.getName().equals("Tahoma")) {
+    			float oldSize	= controlFont.getSize();
+    			float minSize	= hints.controlFontSize();
+    			float size = oldSize + hints.controlFontSizeDelta();
+    			controlFont = controlFont.deriveFont(Math.max(minSize, size));
+    		}
+    	//System.out.println("Hints font size =" + hints.controlFontSize());
+    	//System.out.println("Hints size delta =" + hints.controlFontSizeDelta());
+    	//System.out.println("Control font size=" + controlFont.getSize());		
+    	return new FontUIResource(controlFont);
+    }
+
 }
