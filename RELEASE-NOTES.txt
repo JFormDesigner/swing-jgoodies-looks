@@ -10,22 +10,26 @@ INTRODUCTION
     NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
     THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
     It is an engineering build that has seen minimal testing; 
-    it may lack some important functions and may contain serious 
-    known bugs in some areas. 
+    it may lack functions and may contain known bugs in some areas. 
         
     This build comes with an overhauled Windows L&f that uses 
     a new font lookup mechanism. Also component dimensions have
     been changed to better comply with the MS layout guidelines. 
     
     The component dimensions of the Plastic L&f family
-    have been adjusted to the new Windows L&f dimensions,
-    but the font lookup is currently inconsistent.  
+    have been adjusted to the new Windows L&f dimensions.
+    The Plastic font lookup now uses a delegate; the current
+    implementation should be fine on Windows but needs improvements
+    for other platforms. 
     
     THE DOCUMENTATION HAS NOT BEEN UPDATED.  
     
 	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
+    All font options have been removed from the Windows L&f;
+    it shall be as close to the native original as possible.
+    
     o Removed Options.FONT_SIZE_HINTS_KEY
     o Removed Options#getGlobalFontSizeHints
     o Removed Options#setGlobalFontSizeHints
@@ -39,13 +43,16 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Removed WindowsToggleButtonUI
     o Moved FontSizeHints to com.jgoodies.looks.Plastic
     o Removed Options.EXT_WINDOWS_NAME;
+    o Removed FontUtils#useSystemFontSettings
     o Options#initializeDefaultReplacements now private
+    o Removed obsolete Plastic themes: SkyBluerTahoma, 
+      ExperienceBlueDefaultFont, DesertBluerDefautFont
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
-    Basically, the Windows L&f is now follows the Microsoft
-    layout specifications and guidelines even closer than
+    Basically, the Windows L&f now follows the "Microsoft
+    Layout Specifications and Guidelines" even closer than
     the JGoodies Windows L&f in the JGoodies Looks 1.3.
     Components that are arranged in a row have perceived bounds 
     of 14 dialog units (dlu). Since Windows XP command buttons
