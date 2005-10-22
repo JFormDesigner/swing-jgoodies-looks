@@ -49,7 +49,7 @@ import com.jgoodies.looks.LookUtils;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.8 $
+* @version $Revision: 1.9 $
  */
 
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
@@ -124,7 +124,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
              * In case, a custom renderer is used, it may use a different height, 
              * and we can't help much.
              */
-            size.height += LookUtils.IS_LOW_RESOLUTION ? 3 : 4;
+            size.height += LookUtils.IS_LOW_RESOLUTION ? 3 : 3;
             size.width  += insets.left + insets.right;
             size.width  += buttonInsets.left + buttonInsets.right;
             size.width  += buttonMargin.left + buttonMargin.right;

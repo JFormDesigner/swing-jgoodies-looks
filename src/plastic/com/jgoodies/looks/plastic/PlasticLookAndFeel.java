@@ -52,14 +52,14 @@ import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.ShadowPopupFactory;
-import com.jgoodies.looks.plastic.theme.SkyBluerTahoma;
+import com.jgoodies.looks.plastic.theme.SkyBluer;
 
 /**
  * Initializes class and component defaults for the 
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -349,10 +349,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		// Windows uses 2,2,2,2, but we try to adjust baselines of text and label.
 		Object textInsets 			    = LookUtils.IS_LOW_RESOLUTION
                                             ? new InsetsUIResource(1, 2, 2, 2)
-                                            : new InsetsUIResource(2, 2, 2, 2);
+                                            : new InsetsUIResource(1, 2, 2, 2);
         Object wrappedTextInsets		= LookUtils.IS_LOW_RESOLUTION
                                             ? new InsetsUIResource(2, 2, 2, 2)
-                                            : new InsetsUIResource(3, 2, 2, 2);
+                                            : new InsetsUIResource(2, 2, 2, 2);
                                                 
 		Object menuItemMargin			= LookUtils.IS_LOW_RESOLUTION
 											? new InsetsUIResource(3, 0, 3, 0)
@@ -548,7 +548,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_LOW_RESOLUTION
             ? new InsetsUIResource(1, pad, 1, pad)
-            : new InsetsUIResource(3, pad, 3, pad);
+            : new InsetsUIResource(2, pad, 3, pad);
     }
 
 
@@ -584,7 +584,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		boolean overridden = userName.length() > 0;
 		String   themeName = overridden ? userName : defaultName;
 		PlasticTheme theme = createTheme(themeName);
-		PlasticTheme result = theme != null ? theme : new SkyBluerTahoma(); 
+		PlasticTheme result = theme != null ? theme : new SkyBluer(); 
 		
 		// In case the user tried to set a theme, log a message.
 		if (overridden) {
@@ -642,7 +642,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 			"Silver",
 		    "SkyBlue",
 		    "SkyBluer",		
-		    "SkyBluerTahoma", 
 		    "SkyGreen",
 		    "SkyKrupp",
 		    "SkyPink",
