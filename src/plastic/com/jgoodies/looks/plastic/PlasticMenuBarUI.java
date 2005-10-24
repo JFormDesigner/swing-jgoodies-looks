@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticMenuBarUI extends BasicMenuBarUI {
 	
@@ -137,9 +137,12 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 		if (c.isOpaque()) {
 			g.setColor(c.getBackground());
 			g.fillRect(0, 0, c.getWidth(), c.getHeight());
+            if (is3D()) {
+                Rectangle bounds =
+                    new Rectangle(0, 0, c.getWidth(), c.getHeight());
+                PlasticUtils.addLight3DEffekt(g, bounds, true);
+            }
         }
-		if (is3D()) 
-			PlasticUtils.addLight3DEffekt(g, new Rectangle(0, 0, c.getWidth(), c.getHeight()), true);
 
 		paint(g, c);
 	}

@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class PlasticToolBarUI extends MetalToolBarUI {
@@ -160,13 +160,13 @@ public final class PlasticToolBarUI extends MetalToolBarUI {
         if (c.isOpaque()) {
             g.setColor(c.getBackground());
             g.fillRect(0, 0, c.getWidth(), c.getHeight());
-        }
-        if (is3D()) {
-            Rectangle bounds =
-                new Rectangle(0, 0, c.getWidth(), c.getHeight());
-            boolean isHorizontal =
-                ((JToolBar) c).getOrientation() == SwingConstants.HORIZONTAL;
-            PlasticUtils.addLight3DEffekt(g, bounds, isHorizontal);
+            if (is3D()) {
+                Rectangle bounds =
+                    new Rectangle(0, 0, c.getWidth(), c.getHeight());
+                boolean isHorizontal =
+                    ((JToolBar) c).getOrientation() == SwingConstants.HORIZONTAL;
+                PlasticUtils.addLight3DEffekt(g, bounds, isHorizontal);
+            }
         }
         paint(g, c);
     }
