@@ -57,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 final class PlasticBorders {
@@ -673,7 +673,7 @@ final class PlasticBorders {
 			g.translate(x, y);
 			g.setColor(PlasticLookAndFeel.getControlDarkShadow());
 			g.drawRect(0, 0, w-1, h-1);
-            g.setColor(Color.RED); //PlasticLookAndFeel.getMenuItemBackground());
+            g.setColor(PlasticLookAndFeel.getMenuItemBackground());
 			g.drawRect(1, 1, w-3, h-3);
 			g.drawRect(2, 2, w-5, h-5);
 			g.translate(-x, -y);
