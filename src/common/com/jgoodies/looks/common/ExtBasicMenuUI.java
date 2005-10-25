@@ -37,12 +37,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.AbstractButton;
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuUI;
@@ -52,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -91,6 +86,9 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         Integer gap =
             (Integer) UIManager.get(getPropertyPrefix() + ".textIconGap");
         defaultTextIconGap = gap != null ? gap.intValue() : 2;
+        if (4 < 6 /*getUseNarrowBorder()*/) {
+            LookAndFeel.installBorder(menuItem, getPropertyPrefix() + ".narrowBorder");
+        }
     }
 
     protected void uninstallDefaults() {
@@ -171,7 +169,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
 
     protected void installListeners() {
         super.installListeners();
-        mouseListener = createRolloverListener();
+        mouseListener = new RolloverHandler();
         menuItem.addMouseListener(mouseListener);
     }
 
@@ -187,24 +185,24 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         }
     }
 
-    protected MouseListener createRolloverListener() {
-        return new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                AbstractButton b = (AbstractButton) e.getSource();
-                b.getModel().setRollover(true);
-            }
-            public void mouseExited(MouseEvent e) {
-                AbstractButton b = (AbstractButton) e.getSource();
-                b.getModel().setRollover(false);
-            }
-        };
-    }
-
-
+    
     // Helper Code **********************************************************
 
     private boolean isSubMenu(JMenuItem aMenuItem) {
         return !((JMenu) aMenuItem).isTopLevelMenu();
     }
+    
+    
+    private final class RolloverHandler extends MouseAdapter {
+        public void mouseEntered(MouseEvent e) {
+            AbstractButton b = (AbstractButton) e.getSource();
+            b.getModel().setRollover(true);
+        }
+        public void mouseExited(MouseEvent e) {
+            AbstractButton b = (AbstractButton) e.getSource();
+            b.getModel().setRollover(false);
+        }
+    }
+    
 
 }
