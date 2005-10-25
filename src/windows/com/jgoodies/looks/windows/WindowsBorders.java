@@ -54,7 +54,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class WindowsBorders {
     
@@ -67,6 +67,7 @@ final class WindowsBorders {
     private static Border menuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
+    private static Border noMarginPopupMenuBorder;
     private static Border separatorBorder;
     private static Border etchedBorder;
     private static Border menuBarHeaderBorder;
@@ -160,6 +161,18 @@ final class WindowsBorders {
             popupMenuBorder = new PopupMenuBorder();
         }
         return popupMenuBorder;
+    }
+
+    /**
+     * Returns a no-margin border instance for a <code>JPopupMenu</code>.
+     * 
+     * @return the lazily created no-margin popup menu border
+     */
+    static Border getNoMarginPopupMenuBorder() {
+        if (noMarginPopupMenuBorder == null) {
+            noMarginPopupMenuBorder = new NoMarginPopupMenuBorder();
+        }
+        return noMarginPopupMenuBorder;
     }
 
     /**
@@ -442,6 +455,21 @@ final class WindowsBorders {
     }
     
 
+    private static class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            g.translate(x, y);
+            g.setColor(UIManager.getColor("controlShadow"));
+            g.drawRect(0, 0, w-1, h-1);
+//            g.setColor(UIManager.getColor("MenuItem.background"));
+//            g.drawRect(1, 1, 0, h-3);
+            g.translate(-x, -y);
+        }
+
+        public Insets getBorderInsets(Component c) { return INSETS; }
+    }
+    
 	/**
 	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,

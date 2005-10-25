@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -132,6 +132,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 			"CheckBoxMenuItemUI",    COMMON_PREFIX + "CheckBoxMenuItemUI", 
 			"RadioButtonMenuItemUI", COMMON_PREFIX + "RadioButtonMenuItemUI", 
 
+            // Provides an option for a no margin border              
+            "PopupMenuUI",           WINDOWS_PREFIX + "PopupMenuUI",
+           
             // Has padding above and below the separator lines				
             "PopupMenuSeparatorUI",  COMMON_PREFIX + "PopupMenuSeparatorUI", 
 
@@ -326,6 +329,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "PasswordField.margin",       textInsets, // 1.4.1 Bug
             
             "PopupMenu.border",           WindowsBorders.getPopupMenuBorder(),
+            "PopupMenu.noMarginBorder",   WindowsBorders.getNoMarginPopupMenuBorder(),
             "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
             "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies

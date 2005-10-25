@@ -42,10 +42,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JToggleButton;
 import javax.swing.UIManager;
-import javax.swing.border.AbstractBorder;
-import javax.swing.border.Border;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.*;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -60,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 final class PlasticBorders {
@@ -81,6 +78,7 @@ final class PlasticBorders {
     private static Border menuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
+    private static Border noMarginPopupMenuBorder;
     private static Border rolloverButtonBorder;
     private static Border scrollPaneBorder;
     private static Border separatorBorder;
@@ -221,6 +219,19 @@ final class PlasticBorders {
             popupMenuBorder = new PopupMenuBorder();
         }
         return popupMenuBorder;
+    }
+
+    /**
+     * Returns a border instance for a <code>JPopupMenu</code> that 
+     * has no (extra) margin.
+     * 
+     * @return the lazily created no-margin popup menu border
+     */
+    static Border getNoMarginPopupMenuBorder() {
+        if (noMarginPopupMenuBorder == null) {
+            noMarginPopupMenuBorder = new NoMarginPopupMenuBorder();
+        }
+        return noMarginPopupMenuBorder;
     }
 
     /**
@@ -662,7 +673,7 @@ final class PlasticBorders {
 			g.translate(x, y);
 			g.setColor(PlasticLookAndFeel.getControlDarkShadow());
 			g.drawRect(0, 0, w-1, h-1);
-            g.setColor(PlasticLookAndFeel.getMenuItemBackground());
+            g.setColor(Color.RED); //PlasticLookAndFeel.getMenuItemBackground());
 			g.drawRect(1, 1, w-3, h-3);
 			g.drawRect(2, 2, w-5, h-5);
 			g.translate(-x, -y);
@@ -671,6 +682,20 @@ final class PlasticBorders {
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 	
+
+    private static class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            g.translate(x, y);
+            g.setColor(PlasticLookAndFeel.getControlDarkShadow());
+            g.drawRect(0, 0, w-1, h-1);
+            g.translate(-x, -y);
+        }
+
+        public Insets getBorderInsets(Component c) { return INSETS; }
+    }
+    
 
 	private static class RolloverButtonBorder extends ButtonBorder {
 		private static final Insets INSETS_3 = new Insets(3, 3, 3, 3);

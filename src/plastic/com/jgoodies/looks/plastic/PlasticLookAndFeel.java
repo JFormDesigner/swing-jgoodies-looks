@@ -59,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -279,6 +279,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 				"CheckBoxMenuItemUI",		COMMON_PREFIX + "CheckBoxMenuItemUI",
 				"RadioButtonMenuItemUI",	COMMON_PREFIX + "RadioButtonMenuItemUI",
 
+                // Provides an option for a no margin border              
+                "PopupMenuUI",              PLASTIC_PREFIX + "PopupMenuUI",
+               
 				// Has padding above and below the separator lines				
 		        "PopupMenuSeparatorUI",		COMMON_PREFIX + "PopupMenuSeparatorUI",
 		       
@@ -320,8 +323,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object textFieldBorder			= PlasticBorders.getTextFieldBorder();
         Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder();
 
-		Object popupMenuBorder			= PlasticBorders.getPopupMenuBorder();
-    	
 		Object scrollPaneBorder			= PlasticBorders.getScrollPaneBorder();
 		Object tableHeaderBorder		= new BorderUIResource(
 										   (Border) table.get("TableHeader.cellBorder"));
@@ -442,7 +443,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"PasswordField.border",							textFieldBorder,			
         "PasswordField.margin",                         textInsets,             
 
-		"PopupMenu.border",								popupMenuBorder,
+		"PopupMenu.border",								PlasticBorders.getPopupMenuBorder(),
+        "PopupMenu.noMarginBorder",                     PlasticBorders.getNoMarginPopupMenuBorder(),
 		"PopupMenuSeparator.margin",					new InsetsUIResource(3, 4, 3, 4),	
 
 		"RadioButton.margin",							checkBoxMargin,					
