@@ -48,11 +48,8 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
- * 
- * @see com.jgoodies.looks.FontUtils
+ * @version $Revision: 1.3 $
  */
-
 public final class LookUtils {
     
     // Basics System Properties **********************************************
