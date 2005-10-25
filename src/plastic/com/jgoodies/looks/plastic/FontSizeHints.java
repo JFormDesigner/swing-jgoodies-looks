@@ -41,14 +41,13 @@ import com.jgoodies.looks.LookUtils;
  * The hints apply a size delta to increase or decrease the given
  * system font size.<p> 
  * 
- * NOTE: This is work in progress and will probably change in the
- * next release, to better reflect the font choice in the J2SE 1.4.".
+ * NOTE: This class is work in progress and will likely be changed or
+ * removed or replaced for the JGoodies Looks 1.4 Beta.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see	PlasticLookAndFeel#setFontSizeHints(FontSizeHints)
- * @see	FontUtils
  */
 public final class FontSizeHints {
 	
