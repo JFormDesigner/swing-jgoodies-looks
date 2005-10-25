@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * or via a method or both.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public final class Options {
@@ -132,10 +132,11 @@ public final class Options {
     public static final String NO_ICONS_KEY = "jgoodies.noIcons";
 
     /** 
-     * Hint that a popup menu shall use no margin, for example 
-     * in the special case where the popup contains only a scrollpane.
+     * An option client property for JPopupMenus that use a border
+     * without margin. This is useful if the popup menu contains 
+     * a single component, for example a scrollpane.
      */
-    public static final String NO_MARGIN_KEY = "jgoodies.noMargin";
+    public static final String NO_MARGIN_KEY = "JPopupMenu.noMargin";
 
     /** 
      * A client property key for JTrees.
