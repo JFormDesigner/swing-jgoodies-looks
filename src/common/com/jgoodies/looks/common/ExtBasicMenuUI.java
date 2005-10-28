@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -86,9 +86,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         Integer gap =
             (Integer) UIManager.get(getPropertyPrefix() + ".textIconGap");
         defaultTextIconGap = gap != null ? gap.intValue() : 2;
-        if (4 < 6 /*getUseNarrowBorder()*/) {
-            LookAndFeel.installBorder(menuItem, getPropertyPrefix() + ".narrowBorder");
-        }
+        LookAndFeel.installBorder(menuItem, getPropertyPrefix() + ".border");
     }
 
     protected void uninstallDefaults() {
