@@ -37,11 +37,13 @@ import java.beans.PropertyChangeListener;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.plaf.metal.MetalScrollBarUI;
 
 import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
 
 
 /**
@@ -49,13 +51,26 @@ import com.jgoodies.looks.LookUtils;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.9 $
+* @version $Revision: 1.10 $
  */
-
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
     public static ComponentUI createUI(JComponent b) {
         return new PlasticComboBoxUI();
+    }
+
+    /**
+     * Creates and answers the arrow button that is to be used in the combo box.<p>  
+     * 
+     * Overridden to use a button that can have a pseudo 3D effect.
+     */
+    protected JButton createArrowButton() {
+        return new PlasticComboBoxButton(
+            comboBox,
+            PlasticIconFactory.getComboBoxButtonIcon(),
+            comboBox.isEditable(),
+            currentValuePane,
+            listBox);
     }
 
     /**
@@ -65,11 +80,6 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
      */
     protected ComboBoxEditor createEditor() {
         return new PlasticComboBoxEditor.UIResource();
-    }
-    
-
-    protected ComboPopup createPopup() {
-        return new PlasticComboPopup(comboBox);
     }
     
 
@@ -155,20 +165,6 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     }
 
     /**
-     * Creates and answers the arrow button that is to be used in the combo box.<p>  
-     * 
-     * Overridden to use a button that can have a pseudo 3D effect.
-     */
-    protected JButton createArrowButton() {
-        return new PlasticComboBoxButton(
-            comboBox,
-            PlasticIconFactory.getComboBoxButtonIcon(),
-            comboBox.isEditable(),
-            currentValuePane,
-            listBox);
-    }
-
-    /**
      * Creates a layout manager for managing the components which 
      * make up the combo box.<p>
      * 
@@ -179,6 +175,12 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     protected LayoutManager createLayoutManager() {
         return new PlasticComboBoxLayoutManager();
     }
+
+    
+    protected ComboPopup createPopup() {
+        return new PlasticComboPopup(comboBox);
+    }
+    
 
     // Painting ***************************************************************
 
@@ -216,7 +218,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
      * 
      * Overriden to use a fixed arrow button width. 
      */
-    private class PlasticComboBoxLayoutManager
+    private final class PlasticComboBoxLayoutManager
         extends MetalComboBoxUI.MetalComboBoxLayoutManager {
 
         public void layoutContainer(Container parent) {
@@ -261,9 +263,11 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
         return new PlasticPropertyChangeListener();
     }
 
-    // Overriden to use PlasticComboBoxButton instead of a MetalComboBoxButton.
-    // Required if we have a combobox button that does not extend MetalComboBoxButton
-    private class PlasticPropertyChangeListener
+    /**
+     * Overriden to use PlasticComboBoxButton instead of a MetalComboBoxButton.
+     * Required if we have a combobox button that does not extend MetalComboBoxButton
+     */
+    private final class PlasticPropertyChangeListener
         extends BasicComboBoxUI.PropertyChangeHandler {
 
         public void propertyChange(PropertyChangeEvent e) {
@@ -289,9 +293,10 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     }
 
     /**
-     * Differs from the MetalComboPopup in that it uses the standard popmenu border.
+     * Differs from the BasicComboPopup in that it uses the standard 
+     * popmenu border and honors an optional popup prototype display value.
      */
-    private final class PlasticComboPopup extends MetalComboPopup {
+    private static final class PlasticComboPopup extends BasicComboPopup {
 
         private PlasticComboPopup(JComboBox combo) {
             super(combo);
@@ -314,6 +319,38 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             scroller.getVerticalScrollBar().putClientProperty(
                 MetalScrollBarUI.FREE_STANDING_PROP,
                 Boolean.FALSE);
+        }
+        
+        /**
+         * Calculates the placement and size of the popup portion 
+         * of the combo box based on the combo box location and 
+         * the enclosing screen bounds. If no transformations are required,
+         * then the returned rectangle will have the same values 
+         * as the parameters.<p>
+         * 
+         * In addition to the superclass behavior, this class uses the combo's 
+         * popup prototype display value to compute the popup menu width. 
+         * This is an optional feature of the JGoodies Plastic L&amp;f
+         * implemented via a client property key.
+         * 
+         * @param px starting x location
+         * @param py starting y location
+         * @param pw starting width
+         * @param ph starting height
+         * @return a rectangle which represents the placement and size of the popup
+         * 
+         * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
+         */
+        protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
+            Object popupPrototypeDisplayValue = comboBox.getClientProperty(
+                    Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
+            if (popupPrototypeDisplayValue != null) {
+                ListCellRenderer renderer = list.getCellRenderer();
+                Component c = renderer.getListCellRendererComponent(list, popupPrototypeDisplayValue,
+                        -1, true, true);
+                pw = c.getPreferredSize().width;
+            }
+            return super.computePopupBounds(px, py, pw, ph); 
         }
 
     }

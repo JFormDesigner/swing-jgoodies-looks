@@ -35,24 +35,27 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
 
 import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of 
- * {@link javax.swing.plaf.ComboBoxUI}.<p>
- * 
- * Corrects the editor insets for editable combo boxes as well as
- * the render insets for non-editable combos.
- * Also, it has the same height as text fields - unless you change the renderer.
+ * {@link javax.swing.plaf.ComboBoxUI}.
+ * Corrects the editor insets for editable combo boxes 
+ * as well as the render insets for non-editable combos. And it has 
+ * the same height as text fields - unless you change the renderer.
+ * Also, it honors an optional popup prototype display value
+ * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
-
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
-    /* 
+    /** 
      * Used to determine the minimum height of a text field, 
      * which in turn is used to answer the combobox's minimum height.
      */
@@ -104,6 +107,15 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         return new WindowsComboBoxLayoutManager();
     }
 
+
+    /**
+     * Creates a ComboPopup that honors the optional combo popup display value
+     * that is used to compute the popup menu width. 
+     */
+    protected ComboPopup createPopup() {
+        return new WindowsComboPopup(comboBox);
+    }
+    
 
     /**
      * Creates the arrow button that is to be used in the combo box.<p>
@@ -161,7 +173,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * 
      * Overriden to use a fixed arrow button width. 
      */
-    private class WindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
+    private final class WindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
         
         public void layoutContainer(Container parent) {
             JComboBox cb = (JComboBox) parent;
@@ -187,6 +199,51 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         }
     
    }
+    
+    
+    /**
+     * Differs from the BasicComboPopup in that it uses the standard 
+     * popmenu border and honors an optional popup prototype display value.
+     */
+    private static final class WindowsComboPopup extends BasicComboPopup {
+
+        private WindowsComboPopup(JComboBox combo) {
+            super(combo);
+        }
+
+        /**
+         * Calculates the placement and size of the popup portion 
+         * of the combo box based on the combo box location and 
+         * the enclosing screen bounds. If no transformations are required,
+         * then the returned rectangle will have the same values 
+         * as the parameters.<p>
+         * 
+         * In addition to the superclass behavior, this class uses the combo's 
+         * popup prototype display value to compute the popup menu width. 
+         * This is an optional feature of the JGoodies Plastic L&amp;f
+         * implemented via a client property key.
+         * 
+         * @param px starting x location
+         * @param py starting y location
+         * @param pw starting width
+         * @param ph starting height
+         * @return a rectangle which represents the placement and size of the popup
+         * 
+         * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
+         */
+        protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
+            Object popupPrototypeDisplayValue = comboBox.getClientProperty(
+                    Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
+            if (popupPrototypeDisplayValue != null) {
+                ListCellRenderer renderer = list.getCellRenderer();
+                Component c = renderer.getListCellRendererComponent(list, popupPrototypeDisplayValue,
+                        -1, true, true);
+                pw = c.getPreferredSize().width;
+            }
+            return super.computePopupBounds(px, py, pw, ph); 
+        }
+
+    }    
     
     
 }
