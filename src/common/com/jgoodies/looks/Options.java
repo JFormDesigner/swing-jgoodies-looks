@@ -39,30 +39,49 @@ import javax.swing.UIManager;
 import com.jgoodies.looks.common.ShadowPopup;
 
 /**
- * Provides access to several optional properties for the 
- * JGoodies L&amp;Fs, either by a key to the <code>UIDefaults</code> table
- * or via a method or both.
+ * Provides access to optional features of the JGoodies L&amp;Fs 
+ * via a key to the system properties, via a key for the <code>UIDefaults</code> table
+ * via a method or all of them.<p>
+ * 
+ * API users can use this class' constants or their values to configure
+ * the JGoodies L&amP;f. Using the constants requires the Looks library
+ * classes in the class path of the using application/applet. Where using
+ * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
-
 public final class Options {
 
     // Look & Feel Names ****************************************************
 
+    /**
+     * The class name of the JGoodies Plastic L&amp;f.
+     */
     public static final String PLASTIC_NAME =
         "com.jgoodies.looks.plastic.PlasticLookAndFeel";
         
+    /**
+     * The class name of the JGoodies Plastic3D L&amp;f.
+     */
     public static final String PLASTIC3D_NAME =
         "com.jgoodies.looks.plastic.Plastic3DLookAndFeel";
         
+    /**
+     * The class name of the JGoodies PlasticXP L&amp;f.
+     */
     public static final String PLASTICXP_NAME =
         "com.jgoodies.looks.plastic.PlasticXPLookAndFeel";
         
+    /**
+     * The class name of the JGoodies Windows L&amp;f.
+     */
     public static final String JGOODIES_WINDOWS_NAME =
         "com.jgoodies.looks.windows.WindowsLookAndFeel";
         
+    /**
+     * The class name of the default JGoodies L&amp;f, PlasticXP.
+     */
     public static final String DEFAULT_LOOK_NAME = 
         PLASTICXP_NAME;
 
@@ -84,12 +103,30 @@ public final class Options {
 
     // Keys for Overriding Font Settings ************************************
 
+    /**
+     * A key for setting the default control font in Plastic L&amp;fs.
+     * Used for both the system properties and the UIDefaults table.
+     */
     public static final String PLASTIC_CONTROL_FONT_KEY = 
         "plastic.controlFont";
         
+    /**
+     * A convenience constant for the standard Swing system property key 
+     * that configures the use of system fonts.
+     * 
+     * @see #getUseSystemFonts()
+     * @see #setUseSystemFonts(boolean)
+     */
     public static final String USE_SYSTEM_FONTS_KEY =
         "swing.useSystemFontSettings";
         
+    /**
+     * A convenience constant for the standard Swing UIDefaults key 
+     * that configures the use of system fonts.
+     * 
+     * @see #getUseSystemFonts()
+     * @see #setUseSystemFonts(boolean)
+     */
     public static final String USE_SYSTEM_FONTS_APP_KEY =
         "Application.useSystemFontSettings";
 
@@ -112,70 +149,100 @@ public final class Options {
     // Optional Client Properties *******************************************
 
     /** 
-     * Hint that the button margin should be narrow.                   
+     * A JButton client property key for a hint 
+     * that the button margin should be narrow.   
+     * 
+     * @deprecated As of the Looks 1.4 the narrow button property
+     * is enabled or disabled only globally via 
+     * {@link #USE_NARROW_BUTTONS_KEY} or 
+     * {@link #setUseNarrowButtons(boolean)}.
      */
     public static final String IS_NARROW_KEY = "jgoodies.isNarrow";
 
     /** 
-     * Hint that the scroll pane border should be etched.				
+     * A JScrollPane client property key for a hint 
+     * that the scroll pane border should be etched.				
      */
     public static final String IS_ETCHED_KEY = "jgoodies.isEtched";
 
     /** 
-     * Hint for the style: Single or Both, see <code>HeaderStyle</code>.
+     * A client property key for JMenuBar and JToolBar style hints.
+     * Available styles are: <code>HeaderStyle.Single</code> and
+     * <code>HeaderStyle.Both</code>.
+     * 
+     * @see HeaderStyle
+     * @see BorderStyle
      */
     public static final String HEADER_STYLE_KEY = "jgoodies.headerStyle";
 
     /** 
-     * Hint that the menu items in the menu have no icons.				
+     * A JMenu client property key for a hint 
+     * that the menu items in the menu have no icons.				
      */
     public static final String NO_ICONS_KEY = "jgoodies.noIcons";
 
     /** 
-     * An option client property for JPopupMenus that use a border
-     * without margin. This is useful if the popup menu contains 
-     * a single component, for example a scrollpane.
+     * A JPopupMenu client property key for a hint that the border
+     * shall have no extra margin. This is useful if the popup menu 
+     * contains only a single component, for example a scrollpane.
      */
     public static final String NO_MARGIN_KEY = "JPopupMenu.noMargin";
 
     /** 
-     * A client property key for JTrees.
-     * Used with the angled and none style values.
+     * A JTree client property key for a tree line style hint.
+     * 
+     * @see #TREE_LINE_STYLE_ANGLED_VALUE
+     * @see #TREE_LINE_STYLE_NONE_VALUE
      */
     public static final String TREE_LINE_STYLE_KEY = 
         "JTree.lineStyle";
 
     /** 
-     * A client property value for JTrees
-     * that indicates that lines shall be drawn.
+     * A JTree client property value that indicates that lines shall be drawn.
+     * 
+     * @see #TREE_LINE_STYLE_KEY
      */
     public static final String TREE_LINE_STYLE_ANGLED_VALUE = 
         "Angled";
 
     /** 
-     * A client property value for JTrees
-     * that indicates that lines shall be hidden.
+     * A JTree client property value that indicates that lines shall be hidden.
+     * 
+     * @see #TREE_LINE_STYLE_KEY
      */
     public static final String TREE_LINE_STYLE_NONE_VALUE   = 
         "None";
 
     /** 
-     * A client property key for JTabbedPanes that indicates 
+     * A JTabbedPane client property key that indicates 
      * that no content border shall be painted. 
-     * Supported by the Plastic look&amp;feel family.
+     * Supported by the JGoodies Windows L&amp;f and the 
+     * JGoodies Plastic look&amp;feel family.
      * This effect will be achieved also if the EMBEDDED property is true.
      */
     public static final String NO_CONTENT_BORDER_KEY =
         "jgoodies.noContentBorder";
 
     /**
-     * A client property key for JTabbedPanes that indicates
+     * A JTabbedPane client property key that indicates
      * that tabs are painted with a special embedded appearance. 
-     * Supported by the Plastic look&amp;feel family.
-     * This effect will be achieved also if the EMBEDDED property is true.
+     * Supported by the JGoodies Windows L&amp;f and the 
+     * JGoodies Plastic look&amp;feel family.
+     * As a side effect of the embedded appearance, 
+     * supporting L&amp;fs won't paint the content border.
      */
     public static final String EMBEDDED_TABS_KEY = 
         "jgoodies.embeddedTabs";
+    
+    /**
+     * A JComboBox client property key for the combo's 
+     * popup menu prototype display value. If this key is set,
+     * the value will be used to compute the combo popup width.
+     * This optional feature is supported by the JGoodies Windows L&amp;f
+     * as well as the JGoodies Plastic L&amp;fs.
+     */
+    public static final String COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY =
+        "ComboBox.popupPrototypeDisplayValue";
 
 
     // System Settings ********************************************************
@@ -251,7 +318,10 @@ public final class Options {
      * by default unless disabled in the system properties or UIManager.
      * 
      * @return true unless disabled in the system properties or UIManager 
+     * 
      * @see #setUseSystemFonts(boolean)
+     * @see #USE_SYSTEM_FONTS_KEY
+     * @see #USE_SYSTEM_FONTS_APP_KEY
      */
     public static boolean getUseSystemFonts() {
         return USE_SYSTEM_FONTS_SYSTEM_VALUE != null
@@ -264,7 +334,10 @@ public final class Options {
      * that a look&amp;feel may use the native system fonts.
      * 
      * @param useSystemFonts   true to enable system fonts in the UIManager
+     * 
      * @see #getUseSystemFonts()
+     * @see #USE_SYSTEM_FONTS_KEY
+     * @see #USE_SYSTEM_FONTS_APP_KEY
      */
     public static void setUseSystemFonts(boolean useSystemFonts) {
         UIManager.put(USE_SYSTEM_FONTS_APP_KEY, Boolean.valueOf(useSystemFonts));
@@ -276,6 +349,7 @@ public final class Options {
      * icon dimensions.
      * 
      * @return the dimension of the default icon
+     * 
      * @see #setDefaultIconSize(Dimension)
      */
     public static Dimension getDefaultIconSize() {
@@ -287,6 +361,7 @@ public final class Options {
      * Sets the default icon size.
      * 
      * @param defaultIconSize   the default icon size to set
+     * 
      * @see #getDefaultIconSize()
      */
     public static void setDefaultIconSize(Dimension defaultIconSize) {
@@ -297,16 +372,8 @@ public final class Options {
      * Checks and answers if we shall use narrow button margins of 4 pixels.
      * As of the Looks version 1.4 the default value is <code>true</code>
      * (narrow) for the JGoodies Windows L&amp;F and the JGoodies Plastic 
-     * L&amp;F family. The native Windows L&amp;F used narrow margins too.
+     * L&amp;F family. The native Windows L&amp;F uses narrow margins too.
      * The default can be disabled in the system properties or UIManager.<p>
-     * 
-     * Narrow buttons margins make it easier to give buttons in a button bar
-     * the same width, even if some button labels are long. And narrow margins
-     * are useful for embedded command buttons that just have an icon, 
-     * or an ellipsis (...). Many style guides recommend to use a minimum
-     * button width in command button bars, for example 50 dialog units on 
-     * Windows. Such a minimum width makes it easier to click a button,
-     * just because the button area has a reasonable minimum size.<p>
      * 
      * <strong>Note:</strong> Using narrow button margins can potentially cause 
      * compatibility issues, if you don't take care that command buttons with
@@ -314,6 +381,13 @@ public final class Options {
      * get back to wide button margins using <code>#setUseNarrowButtons</code>.
      * Sun's L&amp;F implementations use a wider button margin of 14 pixels.<p> 
      * 
+     * Narrow button margins make it easier to give buttons in a button bar
+     * the same width, even if some button labels are long. And narrow margins
+     * are useful for embedded command buttons that just have an icon, 
+     * or an ellipsis (...). Many style guides recommend to use a minimum
+     * button width in command button bars, for example 50 dialog units on 
+     * Windows. Such a minimum width makes it easier to click a button,
+     * just because the button area has a reasonable minimum size.
      * To ensure a reasonable button minimum width, you may configure a
      * LayoutManager, use a special panel for command button bars, or
      * a factory that vends command button bars.<p>
@@ -325,7 +399,9 @@ public final class Options {
      * 
      * @return <code>true</code> (default) if all buttons shall use narrow 
      *     margins, <code>false</code> for wider margins
+     *     
      * @see #setUseNarrowButtons(boolean)
+     * @see #USE_NARROW_BUTTONS_KEY
      */
     public static boolean getUseNarrowButtons() {
         return USE_NARROW_BUTTONS_SYSTEM_VALUE != null
@@ -334,10 +410,16 @@ public final class Options {
     }
 
     /**
-     * Sets if we use narrow or standard button margins.
+     * Globally sets the use narrow or standard button margins.<p>
+     * 
+     * In previous versions of the JGoodies Looks this setting was supported
+     * also for individual buttons - primarily to offer visual backward
+     * compatibility with Sun L&amp;Fs.
      * 
      * @param b   true to use narrow button margins globally
+     * 
      * @see #getUseNarrowButtons()
+     * @see #USE_NARROW_BUTTONS_KEY
      */
     public static void setUseNarrowButtons(boolean b) {
         UIManager.put(USE_NARROW_BUTTONS_KEY, Boolean.valueOf(b));
@@ -361,6 +443,7 @@ public final class Options {
      * Enables or disables the use of icons in JTabbedPanes.
      * 
      * @param b   true to enable icons in tabbed panes, false to disable them
+     * 
      * @see #isTabIconsEnabled()
      */
     public static void setTabIconsEnabled(boolean b) {
@@ -398,6 +481,7 @@ public final class Options {
      * 
      * @see #isPopupDropShadowActive()
      * @see #setPopupDropShadowEnabled(boolean)
+     * @see #POPUP_DROP_SHADOW_ENABLED_KEY
      */
     public static boolean isPopupDropShadowEnabled() {
         if (POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE != null)
