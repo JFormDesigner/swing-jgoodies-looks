@@ -42,13 +42,14 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
+import com.jgoodies.looks.Options;
 
 /** 
  * Presents a larger set of Swing components in different states and 
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 final class StatesTab {
 
@@ -208,9 +209,9 @@ final class StatesTab {
             new JComboBox(new String[] { text, "Two", "Three", "Four", "A Quite Long Label" });
         box.setEnabled(enabled);
         box.setEditable(editable);
-        //box.setRenderer(new CustomComboBoxRenderer());
-        //Dimension prefSize = box.getPreferredSize();
-        //box.setPreferredSize(new Dimension(80, prefSize.height));
+        box.putClientProperty(
+                Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY, 
+                "A Quite Long Label");
         return box;
     }
 
