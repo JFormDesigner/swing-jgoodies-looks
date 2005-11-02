@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class LookUtils {
     
@@ -162,7 +162,7 @@ public final class LookUtils {
         startsWith(OS_NAME, "Windows");
 
     /**
-     * True if this is Windows 98/ME/2000/XP.
+     * True if this is Windows 98/ME/2000/XP/VISTA.
      */
     public static final boolean IS_OS_WINDOWS_MODERN = 
         startsWith(OS_NAME, "Windows") && !startsWith(OS_VERSION, "4.0");
@@ -172,6 +172,12 @@ public final class LookUtils {
      */
     public static final boolean IS_OS_WINDOWS_XP =
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.1");
+    
+    /**
+     * True if this is Windows Vista.
+     */
+    public static final boolean IS_OS_WINDOWS_VISTA =
+        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.0");
     
     /**
      * True if this is Solaris.
@@ -290,7 +296,7 @@ public final class LookUtils {
      * @return true if the Windows XP style is enabled
      */ 
     private static boolean isWindowsXPLafEnabled() {
-        return IS_OS_WINDOWS_XP 
+        return (IS_OS_WINDOWS_XP || IS_OS_WINDOWS_VISTA) 
              && IS_JAVA_1_4_2_OR_LATER 
              && Boolean.TRUE.equals(Toolkit.getDefaultToolkit().
                      getDesktopProperty("win.xpstyle.themeActive"))
@@ -332,10 +338,19 @@ public final class LookUtils {
     public static Font getWindowsControlFont() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
-        if (IS_JAVA_5_OR_LATER) {
+        if (IS_JAVA_5) {
             return defaultGUIFont;
         }
         Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
+        if (IS_JAVA_6_OR_LATER) {
+            // Either a workaround, or the thing we should do for all Java versions:
+            // return the icon font that scales with the desktop setting: normal,
+            // large, extra large. This is definitely fine for 96dpi, but on 120dpi
+            // and Windows XP, the icon font is Tahoma 14pt, where the default GUI font
+            // is Tahoma 13pt.
+            // TODO: Consider adding a switch, so the scaling can be forced.
+            return iconFont;
+        }
         Font controlFont = iconFont.deriveFont(Font.PLAIN, defaultGUIFont.getSize());
         return controlFont;
     }
