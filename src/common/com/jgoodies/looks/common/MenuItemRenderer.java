@@ -32,19 +32,22 @@ package com.jgoodies.looks.common;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 /**
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class MenuItemRenderer {
@@ -564,7 +567,7 @@ public final class MenuItemRenderer {
      * @param bgColor selection background color
      * @since 1.4
      */
-    public void paintBackground(Graphics g, JMenuItem aMenuItem, Color bgColor) {
+    private void paintBackground(Graphics g, JMenuItem aMenuItem, Color bgColor) {
 		ButtonModel model = aMenuItem.getModel();
 		
 		if (aMenuItem.isOpaque()) {
@@ -591,7 +594,7 @@ public final class MenuItemRenderer {
      * @param text string to render
      * @since 1.4
      */
-    public void paintText(Graphics g, JMenuItem aMenuItem, Rectangle textRectangle, String text) {
+    private void paintText(Graphics g, JMenuItem aMenuItem, Rectangle textRectangle, String text) {
 		ButtonModel model = aMenuItem.getModel();
 		FontMetrics fm = g.getFontMetrics();
 		int mnemIndex = aMenuItem.getDisplayedMnemonicIndex();
@@ -600,16 +603,16 @@ public final class MenuItemRenderer {
 		    // *** paint the text disabled
 		    if ( UIManager.get("MenuItem.disabledForeground") instanceof Color ) {
     			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );
-    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex,
+                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
     						      textRectangle.x, 
     						      textRectangle.y + fm.getAscent());
 		    } else {
     			g.setColor(aMenuItem.getBackground().brighter());
-    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex, 
+                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
     						      textRectangle.x, 
     						      textRectangle.y + fm.getAscent());
     			g.setColor(aMenuItem.getBackground().darker());
-    			BasicGraphicsUtils.drawStringUnderlineCharAt(g,text,mnemIndex, 
+                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
     						      textRectangle.x - 1, 
     						      textRectangle.y + fm.getAscent() - 1);
 		    }
@@ -618,7 +621,7 @@ public final class MenuItemRenderer {
 		    if (model.isArmed()|| (aMenuItem instanceof JMenu && model.isSelected())) {
 		        g.setColor(selectionForeground); // Uses protected field.
 		    }
-		    BasicGraphicsUtils.drawStringUnderlineCharAt(g,text, mnemIndex, 
+            drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
 						  textRectangle.x, 
 						  textRectangle.y + fm.getAscent());
 		}
@@ -626,6 +629,66 @@ public final class MenuItemRenderer {
     
     
     // Private Helper Code *************************************************************
+    
+    /**
+     * Draws the string at the specified location underlining the specified
+     * character.
+     *
+     * @param c JComponent that will display the string, may be null
+     * @param g Graphics to draw the text to
+     * @param text String to display
+     * @param underlinedIndex Index of a character in the string to underline
+     * @param x X coordinate to draw the text at
+     * @param y Y coordinate to draw the text at
+     */
+    private static void drawStringUnderlineCharAt(JComponent c,Graphics g,
+                           String text, int underlinedIndex, int x,int y) {
+        if (LookUtils.IS_JAVA_5_OR_LATER) {
+            if (drawStringMethod == null && canGetDrawStringMethod) {
+                drawStringMethod = getDrawStringMethod();
+            }
+            if (drawStringMethod != null) {
+                try {
+                    drawStringMethod.invoke(null, new Object[]{c, g, text, new Integer(underlinedIndex), new Integer(x), new Integer(y)});
+                    return;
+                } catch (IllegalArgumentException e) {
+                    // Use the BasicGraphicsUtils as fallback
+                } catch (IllegalAccessException e) {
+                    // Use the BasicGraphicsUtils as fallback
+                } catch (InvocationTargetException e) {
+                    // Use the BasicGraphicsUtils as fallback
+                }
+            }
+        }
+        BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, underlinedIndex, x, y);
+    }
+    
+    /**
+     * In Java 6 or later, this field holds the the lazily created method 
+     * <code>SwingUtilities#drawStringUnderlinedAt</code> that has been added
+     * for Java 6. 
+     */
+    private static Method drawStringMethod = null;
+    private static boolean canGetDrawStringMethod = true;
+
+    private static Method getDrawStringMethod() {
+        try {
+            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
+            return clazz.getMethod(
+                    "drawStringUnderlineCharAt",
+                    new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE}
+                    );
+        } catch (ClassNotFoundException e) {
+            // returns null
+        } catch (SecurityException e) {
+            // returns null
+        } catch (NoSuchMethodException e) {
+            // returns null
+        }
+        canGetDrawStringMethod = false;
+        return null;
+    }
+    
     
     /**
      * Checks and answers if the parent menu indicates that we should use no icons.
@@ -646,7 +709,9 @@ public final class MenuItemRenderer {
     }
     
     
-	// Used as a placeholder if icons are disabled	
+	/**
+     * Used as a placeholder if icons are disabled.
+     */	
     private static class NullIcon implements Icon {
     	public int getIconWidth()	{ return 0; }
     	public int getIconHeight() { return 0; }
