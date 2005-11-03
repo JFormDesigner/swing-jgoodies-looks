@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -402,13 +402,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * as control font and overrides the TextArea font with control font.
      */
     private void initFontDefaults(UIDefaults table) {
-        if (LookUtils.IS_JAVA_6_OR_LATER) {
-            // Hopefully we can remove this case in the future
-            initFontDefaultsJava5(table);
-        } else if (LookUtils.IS_JAVA_5) {
-            initFontDefaultsJava5(table);
+        if (LookUtils.IS_JAVA_1_4 || LookUtils.IS_OS_WINDOWS_VISTA) {
+            initFontDefaultsJava1_4OrVista(table);
         } else {
-            initFontDefaultsJava1_4(table);
+            initFontDefaultsJava5And6OnNonVista(table);
         }
     }
     
@@ -419,8 +416,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      *  
      * @param table  the UIDefaults table to put the new defaults in
      */
-    private void initFontDefaultsJava5(UIDefaults table) {
+    private void initFontDefaultsJava5And6OnNonVista(UIDefaults table) {
         Font controlFont = table.getFont("Button.font");
+        //System.out.println("control font=" + controlFont); 
         Object[] defaults = {
                 "FormattedTextField.font",  controlFont,
                 "PasswordField.font",       controlFont,
@@ -435,7 +433,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      *  
      * @param table  the UIDefaults table to put the new defaults in
      */
-    private void initFontDefaultsJava1_4(UIDefaults table) {
+    private void initFontDefaultsJava1_4OrVista(UIDefaults table) {
         Font controlFont = new FontUIResource(LookUtils.getWindowsControlFont());
         
         // Derive a bold version of the control font.
@@ -446,7 +444,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Font toolTipFont = table.getFont("ToolTip.font");
         Font windowFont  = table.getFont("InternalFrame.titleFont");
 
-        initFontDefaultsJava1_4(table, controlFont, controlBoldFont,
+        initFontDefaults(table, controlFont, controlBoldFont,
                 controlFont, menuFont, messageFont, toolTipFont, windowFont);
     }
 
@@ -464,7 +462,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * @param toolTipFont       the font used in tool tips
      * @param windowFont        the general dialog font
 	 */
-	private void initFontDefaultsJava1_4(UIDefaults table, 
+	private void initFontDefaults(UIDefaults table, 
 		Object controlFont, Object controlBoldFont, Object fixedControlFont, 
 		Object menuFont, Object messageFont, Object toolTipFont, Object windowFont) {
 			

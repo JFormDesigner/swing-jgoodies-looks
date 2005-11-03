@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class LookUtils {
     
@@ -338,11 +338,13 @@ public final class LookUtils {
     public static Font getWindowsControlFont() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
-        if (IS_JAVA_5) {
+        if (IS_JAVA_5 || (IS_JAVA_1_4 && IS_OS_WINDOWS_VISTA)) {
+            // Java 5 can't render Segoe UI well. Therefore we use the 
+            // outdated MS Sans Serif on Windows Vista.
             return defaultGUIFont;
         }
         Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
-        if (IS_JAVA_6_OR_LATER) {
+        if (IS_JAVA_6_OR_LATER || IS_OS_WINDOWS_VISTA) {
             // Either a workaround, or the thing we should do for all Java versions:
             // return the icon font that scales with the desktop setting: normal,
             // large, extra large. This is definitely fine for 96dpi, but on 120dpi
