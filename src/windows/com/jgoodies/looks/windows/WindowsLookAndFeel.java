@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -199,11 +199,13 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         super.initComponentDefaults(table);
         
         final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+        final boolean isClassic = !isXP;
+        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
 
         initFontDefaults(table);
 
-        if (!isXP) {
-            initComponentDefaultsNoXP(table);
+        if (isClassic) {
+            initComponentDefaultsClassic(table);
         }
 
         Object marginBorder = new BasicBorders.MarginBorder();
@@ -228,21 +230,27 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object toolBarHeaderBorder    = WindowsBorders.getToolBarHeaderBorder();
 
         int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
-        Object buttonMargin = isXP
-            ? (LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(2, buttonPad, 3, buttonPad)
-                : new InsetsUIResource(2, buttonPad, 2, buttonPad))
-            : (LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(1, buttonPad, 1, buttonPad)
-                : new InsetsUIResource(1, buttonPad, 1, buttonPad));
+        Object buttonMargin;
+        if (isClassic) {
+            buttonMargin = new InsetsUIResource(1, buttonPad, 1, buttonPad);
+        } else if (isVista || !LookUtils.IS_LOW_RESOLUTION) {
+            buttonMargin = new InsetsUIResource(2, buttonPad, 2, buttonPad);
+        } else {
+            buttonMargin = new InsetsUIResource(2, buttonPad, 3, buttonPad);
+        }
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets  = isXP
-            ? new InsetsUIResource(2, 2, 3, 2)
-            : new InsetsUIResource(1, 2, 2, 2);
+        Object textInsets;
+        if (isClassic) {
+            textInsets = new InsetsUIResource(1, 2, 2, 2);
+        } else if (isVista) {
+            textInsets = new InsetsUIResource(2, 2, 2, 2);
+        } else {
+            textInsets = new InsetsUIResource(2, 2, 3, 2);
+        }
         
         Object comboRendererMargin = LookUtils.IS_JAVA_1_4
         	? textInsets
@@ -370,7 +378,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     /**
      * Initializes component defaults required in 1.3 runtime environments only.
      */
-    private void initComponentDefaultsNoXP(UIDefaults table) {
+    private void initComponentDefaultsClassic(UIDefaults table) {
         Object checkBoxIcon = new SimpleProxyLazyValue(
                 "com.jgoodies.looks.windows.WindowsLookAndFeel",
                 "getCheckBoxIcon");
