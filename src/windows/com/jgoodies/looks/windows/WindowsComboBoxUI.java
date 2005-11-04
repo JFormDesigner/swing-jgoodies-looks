@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -73,8 +73,10 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         Dimension size = super.getMinimumSize(c);
         Dimension textFieldSize = phantom.getMinimumSize();
         Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
-        return new Dimension(size.width + rendererMargin.left
-                + rendererMargin.right, Math.max(textFieldSize.height, size.height));
+        int height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
+             ? textFieldSize.height
+             : Math.max(textFieldSize.height, size.height);
+        return new Dimension(size.width + rendererMargin.left + rendererMargin.right, height);
     }
 
     /**
