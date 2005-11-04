@@ -46,7 +46,7 @@ import com.jgoodies.looks.LookUtils;
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class ExtPasswordView extends PasswordView {
 
@@ -66,9 +66,9 @@ public final class ExtPasswordView extends PasswordView {
         JPasswordField field = (JPasswordField) container;
         int charWidth = getFontMetrics().charWidth(field.getEchoChar());
         int advance  = 2;
-        int diameter = charWidth - advance;
+        int diameter = 1 + charWidth - advance;
         if (LookUtils.IS_OS_WINDOWS_VISTA) {
-            diameter += 2;
+            diameter += 1;
         }
 
         // Painting the dot with anti-alias enabled.
