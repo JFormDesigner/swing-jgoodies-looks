@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class LookUtils {
     
@@ -331,30 +331,20 @@ public final class LookUtils {
     
     
     /**
-     * Returns the Windows default control font.
+     * Returns the Windows control font. This should be the icon title font 
+     * that scales with both the resolution (96dpi, 101dpi, 120dpi, etc) 
+     * and the desktop font size settings (normal, large, extra large).
+     * However, since Java 1.4 and Java 5 render the Windows Vista default font
+     * Segoe UI poorly, we return the "defaultGUIFont" in these environments.
      *  
-     * @return the Windows default control font
+     * @return the Windows scalable control font
      */
     public static Font getWindowsControlFont() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
-        if (IS_JAVA_5 || (IS_JAVA_1_4 && IS_OS_WINDOWS_VISTA)) {
-            // Java 5 can't render Segoe UI well. Therefore we use the 
-            // outdated MS Sans Serif on Windows Vista.
-            return defaultGUIFont;
-        }
-        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
-        if (IS_JAVA_6_OR_LATER || IS_OS_WINDOWS_VISTA) {
-            // Either a workaround, or the thing we should do for all Java versions:
-            // return the icon font that scales with the desktop setting: normal,
-            // large, extra large. This is definitely fine for 96dpi, but on 120dpi
-            // and Windows XP, the icon font is Tahoma 14pt, where the default GUI font
-            // is Tahoma 13pt.
-            // TODO: Consider adding a switch, so the scaling can be forced.
-            return iconFont;
-        }
-        Font controlFont = iconFont.deriveFont(Font.PLAIN, defaultGUIFont.getSize());
-        return controlFont;
+        String fontName = ((IS_JAVA_5 || IS_JAVA_1_4) && IS_OS_WINDOWS_VISTA)
+            ? "win.defaultGUI.font"
+            : "win.icon.font";
+        return (Font) toolkit.getDesktopProperty(fontName);
     }
     
         
