@@ -46,7 +46,7 @@ import com.jgoodies.looks.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class DesktopTab {
     
@@ -57,6 +57,7 @@ final class DesktopTab {
      */
     JComponent build() {
         JPanel panel = new JPanel(new BorderLayout());
+        panel.setOpaque(false);
         panel.setBorder(Borders.DIALOG_BORDER);
         panel.add(new JScrollPane(buildDesktopPane()));
         return panel;

@@ -34,13 +34,12 @@ import javax.swing.*;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.looks.Options;
 
 /** 
  * Contains a bunch of components with HTML labels.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class HtmlTab {
     
@@ -60,12 +59,12 @@ final class HtmlTab {
      */
     private void initComponents() {
         button = new JButton(HTML_TEXT);
-        button.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
         toggleButton = new JToggleButton(HTML_TEXT);
-        toggleButton.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
         radioButton = new JRadioButton(HTML_TEXT);
+        radioButton.setContentAreaFilled(false);
         label = new JLabel(HTML_TEXT);
         checkBox = new JCheckBox(HTML_TEXT);
+        checkBox.setContentAreaFilled(false);
         comboBox = new JComboBox(new String[] { HTML_TEXT, "Two", "Three" });
     }
 
@@ -80,6 +79,7 @@ final class HtmlTab {
                 "");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
+        builder.getPanel().setOpaque(false);
         
         builder.append("Button:",        button);
         builder.append("Toggle Button:", toggleButton);

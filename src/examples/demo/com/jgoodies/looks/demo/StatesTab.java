@@ -49,7 +49,7 @@ import com.jgoodies.looks.Options;
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 final class StatesTab {
 
@@ -61,6 +61,7 @@ final class StatesTab {
                 "right:max(50dlu;pref), 4dlu, pref");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
+        builder.getPanel().setOpaque(false);
 
         builder.append("Standard:",        buildButtonRow(true, true));
         builder.append("No Content:",      buildButtonRow(true, false));
@@ -216,10 +217,14 @@ final class StatesTab {
     }
 
     private JComponent buildSpinnerRow() {
+        JPanel filler1 = new JPanel(null);
+        filler1.setOpaque(false);
+        JPanel filler2 = new JPanel(null);
+        filler2.setOpaque(false);
         return buildGrid(createSpinner(true),
-                         new JPanel(null),
+                         filler1,
                          createSpinner(false),
-                         new JPanel(null));
+                         filler2);
     }
 
     private JComponent createSpinner(boolean enabled) {
@@ -290,6 +295,7 @@ final class StatesTab {
             layout.appendColumn(FormFactory.RELATED_GAP_COLSPEC);
         }
         PanelBuilder builder = new PanelBuilder(layout);
+        builder.getPanel().setOpaque(false);
         CellConstraints cc = new CellConstraints();
         builder.add(c1, cc.xy(1, 1));
         builder.add(c2, cc.xy(3, 1));

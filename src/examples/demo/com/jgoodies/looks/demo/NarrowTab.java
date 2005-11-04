@@ -38,6 +38,7 @@ import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 
+import com.jgoodies.forms.builder.ButtonBarBuilder;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -48,7 +49,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class NarrowTab {
 
@@ -56,13 +57,14 @@ final class NarrowTab {
      * Builds the panel.
      */
     JComponent build() {
-        FormLayout fl = new FormLayout(
+        FormLayout layout = new FormLayout(
                 "7dlu, left:pref, 0:grow",
                 "pref, 2dlu, pref, 11dlu, "
               + "pref, 2dlu, pref, 11dlu, "
               + "pref, 2dlu, pref, 0:grow");
-        PanelBuilder builder = new PanelBuilder(fl);
+        PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
+        builder.getPanel().setOpaque(false);
 
         CellConstraints cc = new CellConstraints();
         
@@ -95,19 +97,15 @@ final class NarrowTab {
     // Button DesignGrids ***************************************************
 
     private Component buildButtonFormNoNarrow() {
-        return buildButtonForm(createButtons());
-    }
-
-    private Component buildButtonForm(JButton[] buttons) {
-        FormLayout layout = new FormLayout(
-                "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref", 
-                "pref");
-        layout.setColumnGroups(new int[][]{{1, 3, 5, 7}});
-        JPanel panel = new JPanel(layout);
-        for (int i = 0; i < buttons.length; i++) {
-            panel.add(buttons[i], new CellConstraints(i * 2 + 1, 1));
+        JButton[] buttons = createButtons();
+        ButtonBarBuilder builder = new ButtonBarBuilder();
+        builder.getPanel().setOpaque(false);
+        for (int i = 0; i < buttons.length - 1; i++) {
+            builder.addGridded(buttons[i]);
+            builder.addRelatedGap();
         }
-        return panel;
+        builder.addFixed(buttons[buttons.length - 1]);
+        return builder.getPanel();
     }
 
     
@@ -119,6 +117,7 @@ final class NarrowTab {
 
     private Component buildButtonGrid(JButton[] buttons) {
         JPanel grid = new JPanel(new GridLayout(1, 4, 6, 0));
+        grid.setOpaque(false);
         for (int i = 0; i < buttons.length; i++) {
             grid.add(buttons[i]);
         }
