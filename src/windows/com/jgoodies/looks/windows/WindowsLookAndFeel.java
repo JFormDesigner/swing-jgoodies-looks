@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -119,6 +119,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object[] uiDefaults = {
             // Modified size 
             "ComboBoxUI",            WINDOWS_PREFIX + "ComboBoxUI", 
+
+            // Modified preferred height: can be even or odd 
+            "ButtonUI",              WINDOWS_PREFIX + "ButtonUI", 
 
             // Can installs an optional etched border
 			"ScrollPaneUI",          WINDOWS_PREFIX + "ScrollPaneUI", 
@@ -230,27 +233,25 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object toolBarHeaderBorder    = WindowsBorders.getToolBarHeaderBorder();
 
         int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
-        Object buttonMargin;
-        if (isClassic) {
-            buttonMargin = new InsetsUIResource(1, buttonPad, 1, buttonPad);
-        } else if (isVista || !LookUtils.IS_LOW_RESOLUTION) {
-            buttonMargin = new InsetsUIResource(2, buttonPad, 2, buttonPad);
-        } else {
-            buttonMargin = new InsetsUIResource(2, buttonPad, 3, buttonPad);
-        }
+        Object buttonMargin = isVista 
+            ? (isClassic
+                    ? new InsetsUIResource(0, buttonPad, 1, buttonPad)
+                    : new InsetsUIResource(2, buttonPad, 2, buttonPad))
+            : (isClassic
+                    ? new InsetsUIResource(1, buttonPad, 2, buttonPad)
+                    : new InsetsUIResource(2, buttonPad, 3, buttonPad));
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets;
-        if (isClassic) {
-            textInsets = new InsetsUIResource(1, 2, 2, 2);
-        } else if (isVista) {
-            textInsets = new InsetsUIResource(2, 2, 2, 2);
-        } else {
-            textInsets = new InsetsUIResource(2, 2, 3, 2);
-        }
+        Object textInsets = isVista 
+            ? (isClassic
+                    ? new InsetsUIResource(1, 2, 1, 2)
+                    : new InsetsUIResource(2, 2, 2, 2))
+            : (isClassic
+                    ? new InsetsUIResource(1, 2, 2, 2)
+                    : new InsetsUIResource(2, 2, 3, 2));
         
         Object comboRendererMargin = LookUtils.IS_JAVA_1_4
         	? textInsets
@@ -291,7 +292,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "Button.border",              buttonBorder, 
 			"Button.margin",              buttonMargin, // Sun's 14px margin is too wide
 
-            // 1.4.2 uses a 2 pixel non-standard border, that leads to bad
+            // 1.4.2 uses a 2 pixel non-standard border that leads to bad
             // alignment in the typical case that the border is not painted
             "CheckBox.border",            marginBorder, 
             "CheckBox.margin",            checkBoxMargin,
@@ -405,43 +406,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     }
 
     /**
-     * Initializes the font defaults.
-     * Uses the superclass' menu font (often Tahoma) in a smaller size
-     * as control font and overrides the TextArea font with control font.
+     * Looks up the correct control font and sets it for all controls.
      */
     private void initFontDefaults(UIDefaults table) {
-        if (LookUtils.IS_JAVA_1_4 || LookUtils.IS_OS_WINDOWS_VISTA) {
-            initFontDefaultsJava1_4OrVista(table);
-        } else {
-            initFontDefaultsJava5And6OnNonVista(table);
-        }
-    }
-    
-    /**
-     * Just sets the control font for a few more components.
-     * The Java 5 Sun's Windows L&amp;f set a non-control font
-     * for the formatted text field, password field, spinner and text area.
-     *  
-     * @param table  the UIDefaults table to put the new defaults in
-     */
-    private void initFontDefaultsJava5And6OnNonVista(UIDefaults table) {
-        Font controlFont = table.getFont("Button.font");
-        //System.out.println("control font=" + controlFont); 
-        Object[] defaults = {
-                "FormattedTextField.font",  controlFont,
-                "PasswordField.font",       controlFont,
-                "Spinner.font",             controlFont,
-                "TextArea.font",            controlFont
-        };
-        table.putDefaults(defaults);
-    }
-    
-    /**
-     * Looks up the correct control font and sets it for all controls.
-     *  
-     * @param table  the UIDefaults table to put the new defaults in
-     */
-    private void initFontDefaultsJava1_4OrVista(UIDefaults table) {
         Font controlFont = new FontUIResource(LookUtils.getWindowsControlFont());
         
         // Derive a bold version of the control font.
