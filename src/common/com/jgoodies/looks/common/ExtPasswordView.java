@@ -32,26 +32,44 @@ package com.jgoodies.looks.common;
 
 import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.Shape;
 
 import javax.swing.JPasswordField;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
+import javax.swing.text.Position;
 
 /**
- * Differs from its superclass in that it renders a circle, 
+ * Differs from its superclass in that it uses a dot (\u2022), 
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class ExtPasswordView extends PasswordView {
+    
+    private static final char DOT_CHAR = '\u2022';
 
     public ExtPasswordView(Element element) {
         super(element);
     }
 
+    public float getPreferredSpan(int axis) {
+        overrideEchoChar();
+        return super.getPreferredSpan(axis);
+    }
+    
+    public Shape modelToView(int pos, Shape a, Position.Bias b) throws BadLocationException {
+        overrideEchoChar();
+        return super.modelToView(pos, a, b);
+    }
+    
+    public int viewToModel(float fx, float fy, Shape a, Position.Bias[] bias) {
+        overrideEchoChar();
+        return super.viewToModel(fx, fy, a, bias);
+    }
+    
     /*
      * Overrides the superclass behavior to paint a filled circle,
      * not the star (&quot;*&quot;) character.
@@ -60,30 +78,17 @@ public final class ExtPasswordView extends PasswordView {
         Container container = getContainer();
         if (!(container instanceof JPasswordField))
             return super.drawEchoCharacter(g, x, y, c);
-
-        JPasswordField field = (JPasswordField) container;
-        int charWidth = getFontMetrics().charWidth(field.getEchoChar());
-        int advance  = 2;
-        int diameter = 1 + charWidth - advance;
-//        if (LookUtils.IS_OS_WINDOWS_VISTA) {
-//            diameter += 1;
-//        }
-
-        // Painting the dot with anti-alias enabled.
-        Graphics2D g2 = (Graphics2D) g;
-        Object oldHints = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-        
-        // Try to vertically align the circle with the font base line.
-        g.fillOval(x, y - diameter, diameter, diameter);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldHints);
-        // End of painting the dot
-        
-        // The following line would paint a square, not a dot.
-        // g.fillRect(x, y - diameter + 1, diameter, diameter);
-
-        return x + charWidth;
+        return super.drawEchoCharacter(g, x, y, DOT_CHAR);
+    }
+    
+    private void overrideEchoChar() {
+        Container container = getContainer();
+        if (container instanceof JPasswordField) {
+            JPasswordField field = (JPasswordField) container;
+            if (field.echoCharIsSet()) {
+                field.setEchoChar(DOT_CHAR);
+            }
+        }
     }
     
     
