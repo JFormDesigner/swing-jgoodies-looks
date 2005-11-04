@@ -46,7 +46,7 @@ import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
  * view that renders a circle, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -60,6 +60,19 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
         return new WindowsXPPasswordFieldUI();
     }
 
+    /*
+     * We'd like to just set the dot as echo character.
+     * But the JPasswordField installs the UI in a superclass
+     * and then sets the echo character. The latter overrides
+     * our call to #setEchoChar.
+     */
+//    protected void installDefaults() {
+//        super.installDefaults();
+//        JPasswordField field = (JPasswordField) getComponent();
+//        field.setEchoChar('\u2022');
+//    }
+    
+    
     /**
 	 * Creates and returns a view (a <code>ExtPasswordView</code>) for an element.
 	 * 
