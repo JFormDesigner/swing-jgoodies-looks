@@ -59,7 +59,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -316,7 +316,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		
-		Object marginBorder				= new BasicBorders.MarginBorder();
+        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+
+        Object marginBorder				= new BasicBorders.MarginBorder();
 		
         Object buttonBorder				= PlasticBorders.getButtonBorder();
 		Object menuItemBorder			= PlasticBorders.getMenuItemBorder();
@@ -347,8 +349,13 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
         Object buttonMargin = createButtonMargin();
 		
-		Object textInsets 			    = new InsetsUIResource(1, 2, 2, 2);
-        Object wrappedTextInsets		= new InsetsUIResource(2, 2, 2, 2);
+		Object textInsets = isVista
+            ? new InsetsUIResource(1, 1, 1, 1)
+            : new InsetsUIResource(1, 1, 2, 1);
+            
+        Object wrappedTextInsets = isVista
+            ? new InsetsUIResource(1, 1, 2, 1)
+            : new InsetsUIResource(2, 1, 2, 1);
                                                 
 		Object menuItemMargin			= new InsetsUIResource(3, 0, 3, 0);
 		Object menuMargin				= new InsetsUIResource(2, 4, 2, 4);
@@ -541,9 +548,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      */
     protected Insets createButtonMargin() {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
-        return LookUtils.IS_LOW_RESOLUTION
-            ? new InsetsUIResource(1, pad, 1, pad)
-            : new InsetsUIResource(2, pad, 3, pad);
+        return LookUtils.IS_OS_WINDOWS_VISTA
+            ? new InsetsUIResource(0, pad, 1, pad)
+            : (LookUtils.IS_LOW_RESOLUTION
+                ? new InsetsUIResource(1, pad, 1, pad)
+                : new InsetsUIResource(2, pad, 3, pad));
     }
 
 

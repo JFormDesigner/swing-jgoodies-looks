@@ -42,13 +42,10 @@ import javax.swing.plaf.metal.MetalButtonUI;
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>ButtonUI</code>.
  * It differs from the superclass <code>MetalButtonUI</code> in that 
- * it can add a pseudo 3D effect, and that it listens to the 
- * <code>jgoodies.isNarrow</code> property to choose an appropriate margin.
+ * it can add a pseudo 3D effect.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
- * 
- * @see com.jgoodies.looks.Options#IS_NARROW_KEY
+ * @version $Revision: 1.7 $
  */
 public class PlasticButtonUI extends MetalButtonUI {
 
@@ -61,7 +58,7 @@ public class PlasticButtonUI extends MetalButtonUI {
     }
 
     /**
-     * Installs defaults and honors the client property <code>isNarrow</code>.
+     * Installs defaults.
      */
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);

@@ -48,7 +48,7 @@ import javax.swing.*;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -147,7 +147,7 @@ final class PlasticComboBoxButton extends JButton {
         boolean leftToRight = PlasticUtils.isLeftToRight(comboBox);
 
         Insets insets = getInsets();
-
+        
         int width  = getWidth()  - (insets.left + insets.right);
         int height = getHeight() - (insets.top  + insets.bottom);
 
