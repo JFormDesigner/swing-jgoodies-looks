@@ -39,14 +39,12 @@ import javax.swing.JPasswordField;
 import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
 
-import com.jgoodies.looks.LookUtils;
-
 /**
  * Differs from its superclass in that it renders a circle, 
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class ExtPasswordView extends PasswordView {
 
@@ -67,9 +65,9 @@ public final class ExtPasswordView extends PasswordView {
         int charWidth = getFontMetrics().charWidth(field.getEchoChar());
         int advance  = 2;
         int diameter = 1 + charWidth - advance;
-        if (LookUtils.IS_OS_WINDOWS_VISTA) {
-            diameter += 1;
-        }
+//        if (LookUtils.IS_OS_WINDOWS_VISTA) {
+//            diameter += 1;
+//        }
 
         // Painting the dot with anti-alias enabled.
         Graphics2D g2 = (Graphics2D) g;
@@ -85,7 +83,7 @@ public final class ExtPasswordView extends PasswordView {
         // The following line would paint a square, not a dot.
         // g.fillRect(x, y - diameter + 1, diameter, diameter);
 
-        return x + diameter + advance;
+        return x + charWidth;
     }
     
     
