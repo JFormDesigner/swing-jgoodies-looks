@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -238,7 +238,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                     ? new InsetsUIResource(0, buttonPad, 1, buttonPad)
                     : new InsetsUIResource(2, buttonPad, 2, buttonPad))
             : (isClassic
-                    ? new InsetsUIResource(1, buttonPad, 2, buttonPad)
+                    ? new InsetsUIResource(1, buttonPad, 1, buttonPad)
                     : new InsetsUIResource(2, buttonPad, 3, buttonPad));
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
