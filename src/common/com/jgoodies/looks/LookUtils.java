@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class LookUtils {
     
@@ -331,13 +331,13 @@ public final class LookUtils {
     
     
     /**
-     * Returns the Windows control font. This should be the icon title font 
-     * that scales with both the resolution (96dpi, 101dpi, 120dpi, etc) 
+     * Returns the Windows icon font - unless Java can't render it well. The 
+     * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
      * and the desktop font size settings (normal, large, extra large).
-     * However, since Java 1.4 and Java 5 render the Windows Vista default font
-     * Segoe UI poorly, we return the "defaultGUIFont" in these environments.
+     * Since Java 1.4 and Java 5 render the Windows Vista icon font
+     * Segoe UI poorly, we return the default GUI font in these environments.
      *  
-     * @return the Windows scalable control font
+     * @return the Windows scalable control font - unless Java can't render it well
      */
     public static Font getWindowsControlFont() {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
