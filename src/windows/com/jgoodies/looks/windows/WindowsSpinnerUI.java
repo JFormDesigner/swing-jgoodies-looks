@@ -36,7 +36,6 @@ import java.awt.LayoutManager;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ComponentUI;
 
 import com.jgoodies.looks.LookUtils;
@@ -47,20 +46,23 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
     private static final Border EMPTY_BORDER;
     
     static {
-        if (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
-            EMPTY_BORDER = new EmptyBorder(1, 2, 2, 2);
-        } else if (LookUtils.IS_OS_WINDOWS_VISTA || !LookUtils.IS_LOW_RESOLUTION) {
-            EMPTY_BORDER = new EmptyBorder(2, 2, 2, 2);
-        } else {
-            EMPTY_BORDER = new EmptyBorder(2, 2, 3, 2);
-        }
+        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+        final boolean isClassic = !isXP;
+        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+        EMPTY_BORDER = isVista 
+            ? (isClassic
+                    ? new EmptyBorder(1, 2, 1, 2)
+                    : new EmptyBorder(2, 2, 2, 2))
+            : (isClassic
+                    ? new EmptyBorder(1, 2, 2, 2)
+                    : new EmptyBorder(2, 2, 3, 2));
     }
 
 
