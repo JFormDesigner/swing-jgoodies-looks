@@ -41,7 +41,6 @@ import javax.swing.JPanel;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.looks.Options;
 
 /** 
  * Demonstrates the JGoodies Looks <i>narrowMargin</i> option. 
@@ -49,7 +48,7 @@ import com.jgoodies.looks.Options;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class NarrowTab {
 
@@ -58,50 +57,22 @@ final class NarrowTab {
      */
     JComponent build() {
         FormLayout fl = new FormLayout(
-                "7dlu, right:max(50dlu;pref), 4dlu, left:pref, 0:grow",
-                "pref, 2dlu, pref, 4dlu, pref, 4dlu, pref, 11dlu, "
-              + "pref, 2dlu, pref, 4dlu, pref, 4dlu, pref, 11dlu, "
-              + "pref, 2dlu, pref, 4dlu, pref, 4dlu, pref, 0:grow");
+                "7dlu, left:pref, 0:grow",
+                "pref, 2dlu, pref, 11dlu, "
+              + "pref, 2dlu, pref, 11dlu, "
+              + "pref, 2dlu, pref, 0:grow");
         PanelBuilder builder = new PanelBuilder(fl);
         builder.setDefaultDialogBorder();
 
         CellConstraints cc = new CellConstraints();
         
         // BoxLayout
-        builder.addSeparator("Unmodified Button Widths (BoxLayout)", cc.xyw(1, 1, 5));
-
-        builder.addLabel("No Narrow Hint:",         cc.xy(2, 3));
-        builder.add(buildButtonBoxNoNarrow(),       cc.xy(4, 3));
-
-        builder.addLabel("One Narrow Hint:",        cc.xy(2, 5));
-        builder.add(buildButtonBoxOneNarrow(),      cc.xy(4, 5));
-
-        builder.addLabel("All Narrow Hints:",       cc.xy(2, 7));
-        builder.add(buildButtonBoxAllNarrow(),      cc.xy(4, 7));
-
-        // DesignGridLayout
-        builder.addSeparator("Adjusted Button Widths (FormLayout)", cc.xyw(1, 9, 5));
-
-        builder.addLabel("No Narrow Hint:",         cc.xy(2, 11));
-        builder.add(buildButtonFormNoNarrow(),      cc.xy(4, 11));
-
-        builder.addLabel("One Narrow Hint:",        cc.xy(2, 13));
-        builder.add(buildButtonFormOneNarrow(),     cc.xy(4, 13));
-
-        builder.addLabel("All Narrow Hints:",       cc.xy(2, 15));
-        builder.add(buildButtonFormAllNarrow(),     cc.xy(4, 15));
-
-        // GridLayout
-        builder.addSeparator("Equalized Button Widths (GridLayout)", cc.xyw(1, 17, 5));
-
-        builder.addLabel("No Narrow Hint:",         cc.xy(2, 19));
-        builder.add(buildButtonGridNoNarrow(),      cc.xy(4, 19));
-
-        builder.addLabel("One Narrow Hint:",        cc.xy(2, 21));
-        builder.add(buildButtonGridOneNarrow(),     cc.xy(4, 21));
-
-        builder.addLabel("All Narrow Hints:",       cc.xy(2, 23));
-        builder.add(buildButtonGridAllNarrow(),     cc.xy(4, 23));
+        builder.addSeparator("Raw Button Widths (BoxLayout)",        cc.xyw(1,  1, 3));
+        builder.add(buildButtonBoxNoNarrow(),                        cc.xy (2,  3));
+        builder.addSeparator("Adjusted Button Widths (FormLayout)",  cc.xyw(1,  5, 3));
+        builder.add(buildButtonFormNoNarrow(),                       cc.xy (2,  7));
+        builder.addSeparator("Equalized Button Widths (GridLayout)", cc.xyw(1,  9, 3));
+        builder.add(buildButtonGridNoNarrow(),                       cc.xy (2, 11));
 
         return builder.getPanel();
     }
@@ -110,14 +81,6 @@ final class NarrowTab {
 
     private Component buildButtonBoxNoNarrow() {
         return buildButtonBox(createButtons());
-    }
-
-    private Component buildButtonBoxOneNarrow() {
-        return buildButtonBox(createButtonsWithOneNarrowHint());
-    }
-
-    private Component buildButtonBoxAllNarrow() {
-        return buildButtonBox(createNarrowHintedButtons());
     }
 
     private Component buildButtonBox(JButton[] buttons) {
@@ -135,38 +98,23 @@ final class NarrowTab {
         return buildButtonForm(createButtons());
     }
 
-    private Component buildButtonFormOneNarrow() {
-        return buildButtonForm(createButtonsWithOneNarrowHint());
-    }
-
-    private Component buildButtonFormAllNarrow() {
-        return buildButtonForm(createNarrowHintedButtons());
-    }
-
     private Component buildButtonForm(JButton[] buttons) {
-        FormLayout fl = new FormLayout(
+        FormLayout layout = new FormLayout(
                 "pref, 4dlu, pref, 4dlu, pref, 4dlu, pref, 4dlu, pref", 
                 "pref");
-        fl.setColumnGroups(new int[][]{{1, 3, 5, 7}});
-        JPanel panel = new JPanel(fl);
+        layout.setColumnGroups(new int[][]{{1, 3, 5, 7}});
+        JPanel panel = new JPanel(layout);
         for (int i = 0; i < buttons.length; i++) {
             panel.add(buttons[i], new CellConstraints(i * 2 + 1, 1));
         }
         return panel;
     }
 
+    
     // Button Grids *********************************************************
 
     private Component buildButtonGridNoNarrow() {
         return buildButtonGrid(createButtons());
-    }
-
-    private Component buildButtonGridOneNarrow() {
-        return buildButtonGrid(createButtonsWithOneNarrowHint());
-    }
-
-    private Component buildButtonGridAllNarrow() {
-        return buildButtonGrid(createNarrowHintedButtons());
     }
 
     private Component buildButtonGrid(JButton[] buttons) {
@@ -180,48 +128,15 @@ final class NarrowTab {
     // Helper Code **********************************************************
 
     /**
-     * Creates and returns a <code>JButton</code> with a narrow hint set.
-     */
-    private JButton createNarrowButton(String text) {
-        JButton button = new JButton(text);
-        button.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
-        return button;
-    }
-
-    /**
-     * Creates and answers an array of buttons that have no narrow hints set.
+     * Creates and returns an array of buttons that have no narrow hints set.
      */
     private JButton[] createButtons() {
         return new JButton[] {
-            new JButton("Add..."),
+            new JButton("Add\u2026"),
             new JButton("Remove"),
             new JButton("Up"),
             new JButton("Down"),
-            new JButton("A Long Label")};
-    }
-
-    /**
-     * Creates and answers an array of buttons, where only the last should be narrow.
-     */
-    private JButton[] createButtonsWithOneNarrowHint() {
-        return new JButton[] {
-            new JButton("Add..."),
-            new JButton("Remove"),
-            new JButton("Up"),
-            new JButton("Down"),
-            createNarrowButton("A Long Label")};
-    }
-
-    /**
-     * Creates and answers an array of buttons that have no narrow hints set.
-     */
-    private JButton[] createNarrowHintedButtons() {
-        return new JButton[] {
-            createNarrowButton("Add..."),
-            createNarrowButton("Remove"),
-            createNarrowButton("Up"),
-            createNarrowButton("Down"),
-            createNarrowButton("A Long Label")};
+            new JButton("Copy to Clipboard")};
     }
 
 
