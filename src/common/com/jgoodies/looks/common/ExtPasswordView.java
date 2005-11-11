@@ -41,15 +41,15 @@ import javax.swing.text.PasswordView;
 import javax.swing.text.Position;
 
 /**
- * Differs from its superclass in that it uses a dot (\u2022), 
+ * Differs from its superclass in that it uses a dot (\u25CF), 
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class ExtPasswordView extends PasswordView {
     
-    private static final char DOT_CHAR = '\u2022';
+    private static final char DOT_CHAR = '\u25CF'; 
 
     public ExtPasswordView(Element element) {
         super(element);
