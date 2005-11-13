@@ -38,14 +38,13 @@ import com.jgoodies.forms.factories.FormFactory;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
-import com.jgoodies.looks.Options;
 
 /** 
  * Consists of rows of centered components to check alignment
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 final class AlignmentTab {
     
@@ -89,7 +88,7 @@ final class AlignmentTab {
         builder.append(new JTextField(TEST_STR));
         builder.append(createComboBox(TEST_STR, true));
         builder.append(createComboBox(TEST_STR, false));
-        builder.append(createNarrowButton(TEST_STR));
+        builder.append(new JButton(TEST_STR));
         
         builder.appendRow(FormFactory.PARAGRAPH_GAP_ROWSPEC);
         builder.nextLine(2);
@@ -103,7 +102,7 @@ final class AlignmentTab {
         builder.append(new JTextField(TEST_STR));
         builder.append(createComboBox(TEST_STR, true));
         builder.append(createSpinner(TEST_STR));
-        builder.append(createNarrowButton(TEST_STR));
+        builder.append(new JButton(TEST_STR));
 
         builder.appendRow(FormFactory.PARAGRAPH_GAP_ROWSPEC);
         builder.nextLine(2);
@@ -117,7 +116,7 @@ final class AlignmentTab {
         builder.append(new JTextField(TEST_STR));
         builder.append(new JFormattedTextField(TEST_STR));
         builder.append(new JPasswordField(TEST_STR));
-        builder.append(createNarrowButton(TEST_STR));
+        builder.append(new JButton(TEST_STR));
         
         builder.appendRow(FormFactory.PARAGRAPH_GAP_ROWSPEC);
         builder.nextLine(2);
@@ -131,7 +130,7 @@ final class AlignmentTab {
         builder.append(new JTextField(TEST_STR));
         builder.append(createWrappedTextArea(TEST_STR));
         builder.append(createWrappedEditorPane(TEST_STR));
-        builder.append(createNarrowButton(TEST_STR));
+        builder.append(new JButton(TEST_STR));
         
         return builder.getPanel();
     }
@@ -152,12 +151,6 @@ final class AlignmentTab {
             selectedText, "1", "2", "3", "4", "5", "Two", "Three", "Four", /* "This is a quite long label"*/ });
         box.setEditable(editable);
         return box;
-    }
-    
-    private JButton createNarrowButton(String text) {
-        JButton button = new JButton(text);
-        button.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
-        return button;
     }
     
     private JComponent createWrappedTextArea(String text) {
