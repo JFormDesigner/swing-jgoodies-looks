@@ -42,13 +42,10 @@ import javax.swing.text.View;
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>ToggleButtonUI</code>.
  * It differs from its superclass in that it can add a pseudo 3D effect, 
- * and that it listens to the <code>jgoodies.isNarrow</code> property to
- * choose an appropriate margin.
+ * and that the border can paint the focus.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
- * 
- * @see com.jgoodies.looks.Options#IS_NARROW_KEY
+ * @version $Revision: 1.6 $
  */
 public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 
@@ -70,7 +67,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     }
 
     /**
-     * Installs defaults and honors the client property <code>isNarrow</code>.
+     * In addition to the superclass we check if the border paints the focus.
      */
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
