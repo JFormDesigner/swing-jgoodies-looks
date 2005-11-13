@@ -30,22 +30,23 @@
  
 package com.jgoodies.looks.common;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.*;
 
+import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
 import javax.swing.text.Position;
 
+import com.jgoodies.looks.RenderingUtils;
+
 /**
  * Differs from its superclass in that it uses a dot (\u25CF), 
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class ExtPasswordView extends PasswordView {
     
@@ -76,19 +77,62 @@ public final class ExtPasswordView extends PasswordView {
      */
     protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
         Container container = getContainer();
-        if (!(container instanceof JPasswordField))
+        if (!(container instanceof JPasswordField)) {
             return super.drawEchoCharacter(g, x, y, c);
-        return super.drawEchoCharacter(g, x, y, DOT_CHAR);
+        }
+        JPasswordField field = (JPasswordField) container;
+        if (canOverrideEchoChar(field)) {
+            c = DOT_CHAR;
+        }
+        Graphics2D g2 = (Graphics2D) g;
+        Object newAAHint = getAntiAliasingHint(field);
+        Object oldAAHint = g2.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
+        if (newAAHint != oldAAHint) {
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, newAAHint);
+        } else {
+            oldAAHint = null;
+        }
+        int newX = super.drawEchoCharacter(g, x, y, c);
+        if (oldAAHint != null) {
+            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, oldAAHint);
+        }
+        return newX;
     }
+    
     
     private void overrideEchoChar() {
         Container container = getContainer();
-        if (container instanceof JPasswordField) {
-            JPasswordField field = (JPasswordField) container;
-            if (field.echoCharIsSet()) {
-                field.setEchoChar(DOT_CHAR);
-            }
+        if (!(container instanceof JPasswordField)) {
+            return;
         }
+        JPasswordField field = (JPasswordField) container;
+        if (canOverrideEchoChar(field)) {
+            field.setEchoChar(DOT_CHAR);
+        }
+    }
+    
+    private boolean canOverrideEchoChar(JPasswordField field) {
+        return field.echoCharIsSet() && field.getEchoChar() == '*';
+    }
+    
+    
+    // Getting an AA Hint *****************************************************
+
+    /**
+     * Returns the anti-aliasing (AA) hint to be used for rendering the echo 
+     * character. Returns <code>RenderingHints.VALUE_TEXT_ANTIALIAS_ON</code>
+     * or a better rendering hint - if available for the given component.
+     * The latter may be the case in Java 6 or later, where the component's
+     * AA hint may be a subpixel AA hint.
+     * 
+     * @param c the component to render on
+     * @return the anti-aliasing hint for rendering the echo char
+     */
+    private Object getAntiAliasingHint(JComponent c) {
+        Object aaHint = RenderingUtils.getTextAntialiasingHint(c);
+        return aaHint != null
+            ? aaHint
+            : RenderingHints.VALUE_TEXT_ANTIALIAS_ON;
     }
     
     
