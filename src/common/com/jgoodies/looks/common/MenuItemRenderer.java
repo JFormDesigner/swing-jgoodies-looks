@@ -32,22 +32,19 @@ package com.jgoodies.looks.common;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
-import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
+import com.jgoodies.looks.RenderingUtils;
 
 /**
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class MenuItemRenderer {
@@ -388,16 +385,16 @@ public final class MenuItemRenderer {
 				// *** paint the acceleratorText disabled
 				if (disabledForeground != null) {
 					g.setColor(disabledForeground);
-					drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawString(c, g, acceleratorText, 0,
 						acceleratorRect.x - accOffset,
 						acceleratorRect.y + fmAccel.getAscent());
 				} else {
 					g.setColor(b.getBackground().brighter());
-                    drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawString(c, g, acceleratorText, 0,
 						acceleratorRect.x - accOffset,
 						acceleratorRect.y + fmAccel.getAscent());
 					g.setColor(b.getBackground().darker());
-                    drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawString(c, g, acceleratorText, 0,
 						acceleratorRect.x - accOffset - 1,
 						acceleratorRect.y + fmAccel.getAscent() - 1);
 				}
@@ -408,7 +405,7 @@ public final class MenuItemRenderer {
 				} else {
 					g.setColor(acceleratorForeground);
 				}
-				drawString(c, g, acceleratorText, 0,
+                RenderingUtils.drawString(c, g, acceleratorText, 0,
 					acceleratorRect.x - accOffset,
 					acceleratorRect.y + fmAccel.getAscent());
 			}
@@ -603,16 +600,16 @@ public final class MenuItemRenderer {
 		    // *** paint the text disabled
 		    if ( UIManager.get("MenuItem.disabledForeground") instanceof Color ) {
     			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );
-                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
+                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
     						      textRectangle.x, 
     						      textRectangle.y + fm.getAscent());
 		    } else {
     			g.setColor(aMenuItem.getBackground().brighter());
-                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
+                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
     						      textRectangle.x, 
     						      textRectangle.y + fm.getAscent());
     			g.setColor(aMenuItem.getBackground().darker());
-                drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
+                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
     						      textRectangle.x - 1, 
     						      textRectangle.y + fm.getAscent() - 1);
 		    }
@@ -621,143 +618,10 @@ public final class MenuItemRenderer {
 		    if (model.isArmed()|| (aMenuItem instanceof JMenu && model.isSelected())) {
 		        g.setColor(selectionForeground); // Uses protected field.
 		    }
-            drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
+            RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
 						  textRectangle.x, 
 						  textRectangle.y + fm.getAscent());
 		}
-    }
-    
-    
-    // Private Helper Code *************************************************************
-    
-    /**
-     * In Java 5 or later, this field holds the the lazily created method 
-     * <code>SwingUtilities#drawString</code> that has been added
-     * for Java 5. 
-     */
-    private static Method drawStringMethod = null;
-    
-    /**
-     * In Java 5 or later, this field holds the the lazily created method 
-     * <code>SwingUtilities#drawStringUnderlinedAt</code> that has been added
-     * for Java 5. 
-     */
-    private static Method drawStringUnderlineCharAtMethod = null;
-    
-    /**
-     * In Java 5 or later, this field describes if reflections returns the 
-     * method <code>SwingUtilities#drawString</code>.
-     */
-    private static boolean canGetDrawStringMethod = true;
-
-    /**
-     * In Java 5 or later, this field describes if reflections returns the 
-     * method <code>SwingUtilities#drawStringUnderlinedAt</code>.
-     */
-    private static boolean canGetDrawStringUnderlineCharAtMethod = true;
-
-    
-    /**
-     * Draws the string at the specified location underlining the specified
-     * character.
-     *
-     * @param c JComponent that will display the string, may be null
-     * @param g Graphics to draw the text to
-     * @param text String to display
-     * @parem underlinedChar the char to be underlined
-     * @param x X coordinate to draw the text at
-     * @param y Y coordinate to draw the text at
-     */
-    private static void drawString(JComponent c, Graphics g, String text, 
-            int underlinedChar, int x, int y) {
-        if (LookUtils.IS_JAVA_5_OR_LATER) {
-            if (drawStringMethod == null && canGetDrawStringMethod) {
-                drawStringMethod = getDrawStringMethod();
-            }
-            if (drawStringMethod != null) {
-                try {
-                    drawStringMethod.invoke(null, new Object[]{c, g, text, new Integer(x), new Integer(y)});
-                    return;
-                } catch (IllegalArgumentException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (IllegalAccessException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (InvocationTargetException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                }
-            }
-        }
-        BasicGraphicsUtils.drawString(g, text, underlinedChar, x, y);
-    }
-    
-
-    /**
-     * Draws the string at the specified location underlining the specified
-     * character.
-     *
-     * @param c JComponent that will display the string, may be null
-     * @param g Graphics to draw the text to
-     * @param text String to display
-     * @param underlinedIndex Index of a character in the string to underline
-     * @param x X coordinate to draw the text at
-     * @param y Y coordinate to draw the text at
-     */
-    private static void drawStringUnderlineCharAt(JComponent c,Graphics g,
-                           String text, int underlinedIndex, int x,int y) {
-        if (LookUtils.IS_JAVA_5_OR_LATER) {
-            if (drawStringUnderlineCharAtMethod == null && canGetDrawStringUnderlineCharAtMethod) {
-                drawStringUnderlineCharAtMethod = getDrawStringUnderlineCharAtMethod();
-            }
-            if (drawStringUnderlineCharAtMethod != null) {
-                try {
-                    drawStringUnderlineCharAtMethod.invoke(null, new Object[]{c, g, text, new Integer(underlinedIndex), new Integer(x), new Integer(y)});
-                    return;
-                } catch (IllegalArgumentException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (IllegalAccessException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (InvocationTargetException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                }
-            }
-        }
-        BasicGraphicsUtils.drawStringUnderlineCharAt(g, text, underlinedIndex, x, y);
-    }
-    
-    private static Method getDrawStringMethod() {
-        try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
-            return clazz.getMethod(
-                    "drawString",
-                    new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE}
-                    );
-        } catch (ClassNotFoundException e) {
-            // returns null
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        canGetDrawStringMethod = false;
-        return null;
-    }
-    
-    private static Method getDrawStringUnderlineCharAtMethod() {
-        try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
-            return clazz.getMethod(
-                    "drawStringUnderlineCharAt",
-                    new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE}
-                    );
-        } catch (ClassNotFoundException e) {
-            // returns null
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        canGetDrawStringUnderlineCharAtMethod = false;
-        return null;
     }
     
     
