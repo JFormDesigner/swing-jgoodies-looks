@@ -1,11 +1,11 @@
 
-                    JGoodies Looks, Version 1.4 Alpha 
+                    JGoodies Looks, Version 2.0 Preview 1 
                             Release Notes
                         
 
 INTRODUCTION
 
-    This is a preview for the JGoodies Looks 1.4 series.
+    This is a preview for the JGoodies Looks 2.0 series.
     
     NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
     THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
@@ -15,6 +15,8 @@ INTRODUCTION
     The font lookup mechanism in the Windows L&f has been overhauled.
     And text component insets have been adjusted to better comply 
     with the Microsoft Layout Specification and Guidelines.
+    Also, Windows Vista is now support; bounds, insets and font
+    baselines positions are consistent.
     
     The text component insets of the Plastic L&f family
     have been adjusted to the new Windows L&f dimensions.
@@ -77,11 +79,15 @@ BUGS FIXED
     #50: ToolBar 3D effect ignores the orientation.
     #51: Windows combobox with custom render is too narrow.
     #60: Wrong combobox height in Java 5 and Java 6.
+    #69: Broken menu item anti-aliasing in Java 5 or later.
+    #70: Inconsistent bounds, insets and baselines on Windows Vista.
+    #71: Password echo character too small on Windows Vista.
+    #73: Windows L&f ignores the desktop control font size setting.
     
 
 NEW FEATURES
     
-    #50: Add option to make combo popups wider than the combo.
+    #55: Add option to make combo popups wider than the combo.
     o Narrow buttons can be disabled in the system properties.
     o Added a JPopupMenu client property for no-margin borders,
       see Options#NO_MARGIN_KEY. This is useful if a JPopupMenu 
@@ -91,12 +97,17 @@ NEW FEATURES
 DISTRIBUTION CHANGES
 
     o The sources no longer ship in a source Zip archive.
-      They now come in the directory structure used by the CVS.      
+      They now come in the directory structure used by the CVS. 
+      This makes it easier to build the distribution using ANT.     
     
     
 OTHER CHANGES
 
-    o 
+    o The Windows and Plastic L&fs have been tweaked for Windows Vista.
+    o Improved appearance of the Looks demo tabs on Windows.
+    o Password field antialiasing honors the field's aa hint
+      and uses subpixel aa if available.
+    
     
     
 ---------------------------------------------------------------------------
