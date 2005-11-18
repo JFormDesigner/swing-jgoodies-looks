@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class Options {
 
@@ -111,6 +111,13 @@ public final class Options {
         "plastic.controlFont";
         
     /**
+     * A key for setting the default menu font in Plastic L&amp;fs.
+     * Used for both the system properties and the UIDefaults table.
+     */
+    public static final String PLASTIC_MENU_FONT_KEY = 
+        "plastic.menuFont";
+        
+    /**
      * A convenience constant for the standard Swing system property key 
      * that configures the use of system fonts.
      * 
@@ -152,10 +159,10 @@ public final class Options {
      * A JButton client property key for a hint 
      * that the button margin should be narrow.   
      * 
-     * @deprecated As of the Looks 1.4 the narrow button property
-     * is enabled or disabled only globally via 
-     * {@link #USE_NARROW_BUTTONS_KEY} or 
-     * {@link #setUseNarrowButtons(boolean)}.
+     * @deprecated As of the Looks 2.0 the narrow button property
+     *     is enabled or disabled only globally via 
+     *     {@link #USE_NARROW_BUTTONS_KEY} or 
+     *     {@link #setUseNarrowButtons(boolean)}.
      */
     public static final String IS_NARROW_KEY = "jgoodies.isNarrow";
 
