@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.21 2005-10-18 20:45:13 karsten Exp $
+   $Id: build.xml,v 1.22 2005-11-23 19:25:28 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -37,18 +37,17 @@
     <!-- P A T H S                                                         -->
     <!-- ***************************************************************** -->
     <path id="classpath.lib">
-        <pathelement location="${build.main.dir}" 	/> 
+        <pathelement location="${build.core.dir}" 	/> 
     </path>
 
     <path id="classpath.tests">
-        <pathelement location="${build.main.dir}"   /> 
-        <pathelement location="${build.extras.dir}" /> 
+        <pathelement location="${build.core.dir}"   /> 
         <pathelement location="${build.test.dir}"   /> 
         <pathelement location="${junit.jar}"        /> 
     </path>
 
     <path id="classpath.demo">
-        <pathelement location="${build.main.dir}" 	/> 
+        <pathelement location="${build.core.dir}" 	/> 
         <pathelement location="${lib.forms.jar}" 	/> 
     </path>
     
@@ -75,9 +74,8 @@
            <format property="DATE" pattern="yyyy-MM-dd hh:mm:ss" />
         </tstamp>
         
-		<mkdir dir="${build.main.dir}"	  />
+		<mkdir dir="${build.core.dir}"	  />
 		<mkdir dir="${build.demo.dir}"    />
-		<mkdir dir="${build.tiny.dir}"    />
 
         <available
             property="junit.task.present"
@@ -94,15 +92,15 @@
     <!-- C O M P I L A T I O N                                             -->
     <!-- ***************************************************************** -->
 	<target name="compile" 
-			depends="compile-main, compile-demo, compile-tiny, compile-tests" 
+			depends="compile-core, compile-demo, compile-tests" 
 	        description="Compiles the l&amp;fs, demo, and tests." />
 	        
     <!-- ***************************************************************** -->
-	<target name="compile-main" depends="prepare"
+	<target name="compile-core" depends="prepare"
 	        description="Compiles all library sources." >
 		<javac 
-			srcdir       ="${src.common.dir};${src.plastic.dir};${src.windows.dir}"
-			destdir      ="${build.main.dir}"
+			srcdir       ="${src.core.dir}"
+			destdir      ="${build.core.dir}"
         	encoding     ="${build.encoding}"
         	executable   ="${build.compile.executable}"
         	fork         ="${build.compile.fork}"
@@ -116,18 +114,16 @@
 			verbose      ="${build.compile.verbose}"
 			bootclasspath="${build.boot.classpath}" />
 
-		<copy toDir="${build.main.dir}" >
-			<fileset dir="${src.common.dir}" 
-					 includes="com/jgoodies/looks/common/shadow.png" />
-			<fileset dir="${src.plastic.dir}" 
-					 includes="com/jgoodies/looks/plastic/icons/**/*" />
-			<fileset dir="${src.windows.dir}" 
-					 includes="com/jgoodies/looks/windows/icons/**/*" />
+		<copy toDir="${build.core.dir}" >
+			<fileset dir="${src.core.dir}" 
+					 includes="com/jgoodies/looks/common/shadow.png,
+					           com/jgoodies/looks/plastic/icons/**/*,
+					           com/jgoodies/looks/windows/icons/**/*" />
 		</copy>
 	</target>
 	
     <!-- ***************************************************************** -->
-	<target name="compile-demo" depends="compile-main"
+	<target name="compile-demo" depends="compile-core"
 	        description="Compiles the demo sources." >
 		<javac 
 			srcdir       ="${src.demo.dir}" 
@@ -148,28 +144,7 @@
 	</target>
 
     <!-- ***************************************************************** -->
-	<target name="compile-tiny" depends="compile-demo"
-	        description="Compiles the tiny sources." >
-		<javac 
-			srcdir       ="${src.tiny.dir}" 
-			destdir      ="${build.tiny.dir}"
-        	encoding     ="${build.encoding}"
-        	executable   ="${build.compile.executable}"
-        	fork         ="${build.compile.fork}"
-			debug        ="${build.compile.debug}"
-			depend       ="${build.compile.depend}"
-			deprecation  ="${build.compile.deprecation}"
-			nowarn       ="${build.compile.nowarn}" 
-			optimize     ="${build.compile.optimize}"
-            source       ="${build.compile.source}"
-			target       ="${build.compile.target}"
-			verbose      ="${build.compile.verbose}"
-			bootclasspath="${build.boot.classpath}" 
-		    classpathref ="classpath.demo" />
-	</target>
-
-    <!-- ***************************************************************** -->
-    <target name="compile-tests" depends="compile-main" if="junit.jar.present"
+    <target name="compile-tests" depends="compile-core" if="junit.jar.present"
             description="Compiles the unit tests." >
         <mkdir dir="${build.test.dir}"/>
         <javac 
@@ -199,7 +174,7 @@
             description="Creates the API documentation using JavaDoc." >
 		<mkdir dir="${build.javadocs.dir}"	/>
         <javadoc 
-        	sourcepath="${src.common.dir}:${src.plastic.dir}:${src.windows.dir}"
+        	sourcepath="${src.core.dir}"
             packagenames="${javadoc.packages}"
         	destdir="${build.javadocs.dir}"
         	encoding="${build.encoding}"
@@ -268,7 +243,7 @@
 		<jar 
 			destfile="${build.all.jar}" 
 			manifest="${build.manifest}" >
-			<fileset dir="${build.main.dir}" />
+			<fileset dir="${build.core.dir}" />
 			<zipfileset dir="${descriptors.dir}"
 					    includes="all.txt"
 			            fullpath="META-INF/services/javax.swing.LookAndFeel" />
@@ -282,7 +257,7 @@
 		<jar 
 			destfile="${build.plastic.jar}" 
 			manifest="${build.manifest}" >
-			<fileset dir="${build.main.dir}" 
+			<fileset dir="${build.core.dir}" 
 			         excludes="com/jgoodies/looks/windows/**/*"  />
 			<zipfileset dir="${descriptors.dir}"
 					    includes="plastic.txt"
@@ -296,7 +271,7 @@
 		<jar 
 			destfile="${build.windows.jar}" 
 			manifest="${build.manifest}" >
-			<fileset dir="${build.main.dir}" 
+			<fileset dir="${build.core.dir}" 
 			         excludes="com/jgoodies/looks/plastic/**/*"  />
 			<zipfileset dir="${descriptors.dir}"
 					    includes="windows.txt"
@@ -309,7 +284,8 @@
 	        description="Creates the demo jar." >
 		<jar 
 			destfile="${build.demo.jar}" >
-			<fileset    dir="${build.demo.dir}"    />
+			<fileset    dir="${build.demo.dir}"    
+                        excludes="Tiny.*"          />
 			<fileset    dir="${src.demo.dir}" 
 			            includes="images/**/*"     />
 			<manifest>
@@ -318,7 +294,7 @@
                 <attribute name ="Main-Class" 
                            value="com.jgoodies.looks.demo.DemoFrame"/>
                 <attribute name ="Class-Path" 
-                           value="lib/${lib.forms.name} ../${dist.all.name}"/>
+                           value="../lib/${lib.forms.name} ../${dist.all.name}"/>
             </manifest>		
         </jar>
 	</target>
@@ -328,7 +304,8 @@
 	        description="Creates the tiny jar." >
 		<jar 
 			destfile="${build.tiny.jar}" >
-			<fileset    dir="${build.tiny.dir}" />
+            <fileset    dir="${build.demo.dir}"    
+                        includes="Tiny.*"          />
 			<manifest>
                 <attribute name ="Built-By" 
                            value="${user.name}"/>
@@ -356,8 +333,8 @@
         <move todir="${dist.docs.dir}" file="${build.javadocs.dir}" />
 		
 		<!-- Copy the examples. -->
-		<copy todir="${dist.examples.dir}" file="${build.demo.jar}" />
-		<copy todir="${dist.examples.dir}" file="${build.tiny.jar}" />
+		<copy todir="${dist.demo.dir}" file="${build.demo.jar}" />
+		<copy todir="${dist.demo.dir}" file="${build.tiny.jar}" />
 		
 		<!-- Copy the libraries. -->
 		<copy todir="${dist.lib.dir}" >
@@ -367,13 +344,7 @@
 		
 		<!-- Copy the source directories. -->
 		<copy todir="${dist.src.dir}" >
-		    <fileset dir="${src.dir}" 
-		             includes="common/**/*,
-                               plastic/**/*, 
-                               windows/**/*, 
-                               examples/**/*, 
-                               photoshop/*,
-                               test/**/*" />
+		    <fileset dir="${src.dir}" />
 		</copy>
 		
 		<!-- Copy the distribution files. -->

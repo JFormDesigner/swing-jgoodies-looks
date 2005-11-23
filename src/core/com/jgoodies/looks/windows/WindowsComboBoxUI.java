@@ -1,0 +1,251 @@
+/*
+ * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without 
+ * modification, are permitted provided that the following conditions are met:
+ * 
+ *  o Redistributions of source code must retain the above copyright notice, 
+ *    this list of conditions and the following disclaimer. 
+ *     
+ *  o Redistributions in binary form must reproduce the above copyright notice, 
+ *    this list of conditions and the following disclaimer in the documentation 
+ *    and/or other materials provided with the distribution. 
+ *     
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
+ *    its contributors may be used to endorse or promote products derived 
+ *    from this software without specific prior written permission. 
+ *     
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ */
+
+package com.jgoodies.looks.windows;
+
+import java.awt.*;
+
+import javax.swing.*;
+import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboBoxUI;
+import javax.swing.plaf.basic.BasicComboPopup;
+import javax.swing.plaf.basic.ComboPopup;
+
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.Options;
+
+/**
+ * The JGoodies Windows Look&amp;Feel implementation of 
+ * {@link javax.swing.plaf.ComboBoxUI}.
+ * Corrects the editor insets for editable combo boxes 
+ * as well as the render insets for non-editable combos. And it has 
+ * the same height as text fields - unless you change the renderer.
+ * Also, it honors an optional popup prototype display value
+ * that is used to compute the combo's popup menu width.
+ *
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.1 $
+ */
+public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
+    
+    /** 
+     * Used to determine the minimum height of a text field, 
+     * which in turn is used to answer the combobox's minimum height.
+     */
+    private static final JTextField phantom = new JTextField("Phantom");
+    
+
+    public static ComponentUI createUI(JComponent b) {
+        return new WindowsComboBoxUI();
+    }
+    
+    /**
+     * The minumum size is the size of the display area plus insets plus the button.
+     */
+    public Dimension getMinimumSize(JComponent c) {
+        Dimension size = super.getMinimumSize(c);
+        Dimension textFieldSize = phantom.getMinimumSize();
+        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
+        int height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
+             ? textFieldSize.height
+             : Math.max(textFieldSize.height, size.height);
+        return new Dimension(size.width + rendererMargin.left + rendererMargin.right, height);
+    }
+
+    /**
+     * Delegates to #getMinimumSize(Component).
+     * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
+     */
+    public Dimension getPreferredSize(JComponent c) {
+        return getMinimumSize(c);
+    }
+
+    /**
+     * Creates the editor that is to be used in editable combo boxes. 
+     * This method only gets called if a custom editor has not already 
+     * been installed in the JComboBox.
+     */
+    protected ComboBoxEditor createEditor() {
+        return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource();
+    }
+
+
+    /**
+     * Creates a layout manager for managing the components which 
+     * make up the combo box.<p>
+     * 
+     * Overriden to use a layout that has a fixed width arrow button.
+     * 
+     * @return an instance of a layout manager
+     */
+    protected LayoutManager createLayoutManager() {
+        return new WindowsComboBoxLayoutManager();
+    }
+
+
+    /**
+     * Creates a ComboPopup that honors the optional combo popup display value
+     * that is used to compute the popup menu width. 
+     */
+    protected ComboPopup createPopup() {
+        return new WindowsComboPopup(comboBox);
+    }
+    
+
+    /**
+     * Creates the arrow button that is to be used in the combo box.<p>
+     * 
+     * Overridden to paint black triangles.
+     */
+    protected JButton createArrowButton() {
+        return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+                    ? super.createArrowButton()
+                    : new WindowsArrowButton(SwingConstants.SOUTH);
+    }
+
+    
+    /**
+     * Returns the area that is reserved for drawing the currently selected item.
+     */
+    protected Rectangle rectangleForCurrentValue() {
+        if (comboBox.isEditable() || !comboBox.isEnabled())
+            return super.rectangleForCurrentValue();
+        
+        int width  = comboBox.getWidth();
+        int height = comboBox.getHeight();
+        Insets insets = getInsets();
+        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
+        int buttonSize = height - (insets.top + insets.bottom);
+        //System.out.println("height=" + height + "; insets=" + insets + "; rendererMargin=" + rendererMargin);
+        if (arrowButton != null) {
+            buttonSize = arrowButton.getWidth();
+        }
+        if (comboBox.getComponentOrientation().isLeftToRight()) {
+            return new Rectangle(
+                    insets.left + rendererMargin.left,
+                    insets.top + rendererMargin.top,
+                    width  - (insets.left + rendererMargin.left  + insets.right
+                                          + rendererMargin.right + buttonSize),
+                    height - (insets.top  + rendererMargin.top + insets.bottom 
+                                          + rendererMargin.bottom));
+        } else {
+            return new Rectangle(
+                    insets.left + rendererMargin.left + buttonSize,
+                    insets.top + rendererMargin.top,
+                    width  - (insets.left + rendererMargin.left + insets.right
+                                          + rendererMargin.right + buttonSize),
+                    height - (insets.top  + rendererMargin.top + insets.bottom 
+                                          + rendererMargin.bottom));
+        }
+    }
+
+
+
+    /**
+     * This layout manager handles the 'standard' layout of combo boxes.  
+     * It puts the arrow button to the right and the editor to the left.
+     * If there is no editor it still keeps the arrow button to the right.
+     * 
+     * Overriden to use a fixed arrow button width. 
+     */
+    private final class WindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
+        
+        public void layoutContainer(Container parent) {
+            JComboBox cb = (JComboBox) parent;
+            int width  = cb.getWidth();
+            int height = cb.getHeight();
+
+            Insets insets = getInsets();
+            int buttonWidth  = UIManager.getInt("ScrollBar.width");
+            int buttonHeight = height - (insets.top + insets.bottom);
+            //System.out.println("ButtonHeight=" + buttonHeight);
+
+            if (arrowButton != null) {
+                if (cb.getComponentOrientation().isLeftToRight()) {
+                    arrowButton.setBounds(width - (insets.right + buttonWidth),
+                        insets.top, buttonWidth, buttonHeight);
+                } else {
+                    arrowButton.setBounds(insets.left, insets.top, buttonWidth, buttonHeight);
+                }
+            }
+            if (editor != null) {
+                editor.setBounds(rectangleForCurrentValue());
+            }
+        }
+    
+   }
+    
+    
+    /**
+     * Differs from the BasicComboPopup in that it uses the standard 
+     * popmenu border and honors an optional popup prototype display value.
+     */
+    private static final class WindowsComboPopup extends BasicComboPopup {
+
+        private WindowsComboPopup(JComboBox combo) {
+            super(combo);
+        }
+
+        /**
+         * Calculates the placement and size of the popup portion 
+         * of the combo box based on the combo box location and 
+         * the enclosing screen bounds. If no transformations are required,
+         * then the returned rectangle will have the same values 
+         * as the parameters.<p>
+         * 
+         * In addition to the superclass behavior, this class uses the combo's 
+         * popup prototype display value to compute the popup menu width. 
+         * This is an optional feature of the JGoodies Plastic L&amp;f
+         * implemented via a client property key.
+         * 
+         * @param px starting x location
+         * @param py starting y location
+         * @param pw starting width
+         * @param ph starting height
+         * @return a rectangle which represents the placement and size of the popup
+         * 
+         * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
+         */
+        protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
+            Object popupPrototypeDisplayValue = comboBox.getClientProperty(
+                    Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
+            if (popupPrototypeDisplayValue != null) {
+                ListCellRenderer renderer = list.getCellRenderer();
+                Component c = renderer.getListCellRendererComponent(list, popupPrototypeDisplayValue,
+                        -1, true, true);
+                pw = c.getPreferredSize().width;
+            }
+            return super.computePopupBounds(px, py, pw, ph); 
+        }
+
+    }    
+    
+    
+}

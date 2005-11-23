@@ -96,9 +96,13 @@ NEW FEATURES
 
 DISTRIBUTION CHANGES
 
-    o The sources no longer ship in a source Zip archive.
+    o Merged the source folders 'src/common', 'src/plastic'
+      and 'src/windows' to 'src/core'.
+    o The sources no longer ship as a source Zip archive.
       They now come in the directory structure used by the CVS. 
       This makes it easier to build the distribution using ANT.     
+      If you want to attach the library sources in an IDE, 
+      point to folder 'src/core'.
     
     
 OTHER CHANGES
