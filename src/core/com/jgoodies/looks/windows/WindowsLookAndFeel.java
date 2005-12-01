@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -256,7 +256,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object comboRendererMargin = LookUtils.IS_JAVA_1_4
         	? textInsets
         	: new InsetsUIResource(0, 0, 0, 0);
-
+        
         Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
                 : new InsetsUIResource(2, 0, 2, 0);
@@ -342,6 +342,8 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "PopupMenuSeparator.margin",  popupMenuSeparatorMargin, 
 
             "ScrollPane.etchedBorder",    etchedBorder, // Added by JGoodies
+            
+            "Spinner.defaultEditorInsets", textInsets, // Added by JGoodies
             
             // 1.4.1 uses a 2 pixel non-standard border, that leads to bad
             // alignment in the typical case that the border is not painted

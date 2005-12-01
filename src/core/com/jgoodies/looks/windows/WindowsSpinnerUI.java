@@ -31,10 +31,10 @@
 package com.jgoodies.looks.windows;
 
 import java.awt.Component;
+import java.awt.Insets;
 import java.awt.LayoutManager;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 
@@ -44,26 +44,13 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 /**
  * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
+ * Configures the default editor to adjust font baselines and component
+ * bounds, by setting an empty border with the default text insets.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
-
-    private static final Border EMPTY_BORDER;
-    
-    static {
-        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-        final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
-        EMPTY_BORDER = isVista 
-            ? (isClassic
-                    ? new EmptyBorder(1, 2, 1, 2)
-                    : new EmptyBorder(2, 2, 2, 2))
-            : (isClassic
-                    ? new EmptyBorder(1, 2, 2, 2)
-                    : new EmptyBorder(2, 2, 3, 2));
-    }
 
 
     public static ComponentUI createUI(JComponent b) {
@@ -210,12 +197,14 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
         if ((editor instanceof JSpinner.DefaultEditor)) {
             JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
             JTextField editorField = defaultEditor.getTextField();
-            editorField.setBorder(EMPTY_BORDER);
+            Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
+            editorField.setBorder(new EmptyBorder(insets));
         } else if (   (editor instanceof JPanel) 
                 && (editor.getBorder() == null)
                 && (editor.getComponentCount() > 0)) {
             JComponent editorField = (JComponent) editor.getComponent(0);
-            editorField.setBorder(EMPTY_BORDER);
+            Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
+            editorField.setBorder(new EmptyBorder(insets));
         }
     }
 
