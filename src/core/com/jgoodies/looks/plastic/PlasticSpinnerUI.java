@@ -34,14 +34,9 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 
-import javax.swing.JComponent;
-import javax.swing.JSpinner;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.plaf.BorderUIResource;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
 import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
@@ -54,12 +49,9 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
-	
-	private static final Border MARGIN_BORDER = 
-	    new BorderUIResource(new BasicBorders.MarginBorder());
 	
 	
 	public static ComponentUI createUI(JComponent b) {
@@ -160,7 +152,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      */
     protected JComponent createEditor() {
 		JComponent editor = spinner.getEditor();
-		configureEditor(editor);
+		configureEditorBorder(editor);
 		return editor;
     }
     
@@ -181,22 +173,27 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      */
     protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
 		spinner.remove(oldEditor);
-		configureEditor(newEditor);
+		configureEditorBorder(newEditor);
 		spinner.add(newEditor, "Editor");
     }
     
     
     /**
-     * Removes an obsolete Border from Default editors.
+     * Sets an empty border with the default text insets.
      */
-    private void configureEditor(JComponent editor) {
-    	if ((editor instanceof JSpinner.DefaultEditor)) {
-	    	JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
-	    	defaultEditor.getTextField().getUI();
-	    	defaultEditor.getTextField().setBorder(MARGIN_BORDER);
-	    	Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
-	    	defaultEditor.getTextField().setMargin(insets);
-    	}
+    private void configureEditorBorder(JComponent editor) {
+        if ((editor instanceof JSpinner.DefaultEditor)) {
+            JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
+            JTextField editorField = defaultEditor.getTextField();
+            Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
+            editorField.setBorder(new EmptyBorder(insets));
+        } else if (   (editor instanceof JPanel) 
+                && (editor.getBorder() == null)
+                && (editor.getComponentCount() > 0)) {
+            JComponent editorField = (JComponent) editor.getComponent(0);
+            Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
+            editorField.setBorder(new EmptyBorder(insets));
+        }
     }
 
     /**
