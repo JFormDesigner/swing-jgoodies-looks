@@ -33,7 +33,10 @@ package com.jgoodies.looks.windows;
 import java.awt.*;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
@@ -51,7 +54,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -59,9 +62,13 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * Used to determine the minimum height of a text field, 
      * which in turn is used to answer the combobox's minimum height.
      */
-    private static final JTextField phantom = new JTextField("Phantom");
+    private static final JTextField PHANTOM = new JTextField("Phantom");
     
-
+    private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+    
+    private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
+    
+    
     public static ComponentUI createUI(JComponent b) {
         return new WindowsComboBoxUI();
     }
@@ -70,13 +77,27 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * The minumum size is the size of the display area plus insets plus the button.
      */
     public Dimension getMinimumSize(JComponent c) {
-        Dimension size = super.getMinimumSize(c);
-        Dimension textFieldSize = phantom.getMinimumSize();
-        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
+        if (!isMinimumSizeDirty) {
+            return new Dimension(cachedMinimumSize);
+        }
+        Dimension size = getDisplaySize();
+        Insets insets = getInsets();
+        size.height += insets.top + insets.bottom;
+        int buttonWidth = UIManager.getInt("ScrollBar.width");
+        size.width +=  insets.left + insets.right + buttonWidth;
+        // The combo editor benefits from extra space for the caret.
+        // To make editable and non-editable equally wide, 
+        // we always add 1 pixel.
+        size.width += 1;
+        Dimension textFieldSize = PHANTOM.getMinimumSize();
         int height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
-             ? textFieldSize.height
-             : Math.max(textFieldSize.height, size.height);
-        return new Dimension(size.width + rendererMargin.left + rendererMargin.right, height);
+           ? textFieldSize.height
+           : Math.max(textFieldSize.height, size.height);
+
+        cachedMinimumSize.setSize(size.width, height); 
+        isMinimumSizeDirty = false;
+
+        return new Dimension(size);
     }
 
     /**
@@ -118,6 +139,24 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         return new WindowsComboPopup(comboBox);
     }
     
+    /**
+     * Creates the default renderer that will be used in a non-editiable combo 
+     * box. A default renderer will used only if a renderer has not been 
+     * explicitly set with <code>setRenderer</code>.<p>
+     * 
+     * This method differs from the superclass implementation in that 
+     * it uses an empty border with the default left and right text insets,
+     * the same as used by a combo box editor. 
+     * 
+     * @return a <code>ListCellRender</code> used for the combo box
+     * @see javax.swing.JComboBox#setRenderer
+     */
+    protected ListCellRenderer createRenderer() {
+        BasicComboBoxRenderer renderer = new BasicComboBoxRenderer.UIResource();
+        renderer.setBorder(UIManager.getBorder("ComboBox.rendererBorder"));
+        return renderer;
+    }
+
 
     /**
      * Creates the arrow button that is to be used in the combo box.<p>
@@ -129,44 +168,104 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
                     ? super.createArrowButton()
                     : new WindowsArrowButton(SwingConstants.SOUTH);
     }
-
+    
     
     /**
      * Returns the area that is reserved for drawing the currently selected item.
      */
     protected Rectangle rectangleForCurrentValue() {
-        if (comboBox.isEditable() || !comboBox.isEnabled())
-            return super.rectangleForCurrentValue();
-        
         int width  = comboBox.getWidth();
         int height = comboBox.getHeight();
         Insets insets = getInsets();
-        Insets rendererMargin = UIManager.getInsets("ComboBox.rendererMargin");
-        int buttonSize = height - (insets.top + insets.bottom);
-        //System.out.println("height=" + height + "; insets=" + insets + "; rendererMargin=" + rendererMargin);
+        int buttonWidth = UIManager.getInt("ScrollBar.width");
         if (arrowButton != null) {
-            buttonSize = arrowButton.getWidth();
+            buttonWidth = arrowButton.getWidth();
         }
         if (comboBox.getComponentOrientation().isLeftToRight()) {
             return new Rectangle(
-                    insets.left + rendererMargin.left,
-                    insets.top + rendererMargin.top,
-                    width  - (insets.left + rendererMargin.left  + insets.right
-                                          + rendererMargin.right + buttonSize),
-                    height - (insets.top  + rendererMargin.top + insets.bottom 
-                                          + rendererMargin.bottom));
+                    insets.left,
+                    insets.top,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
         } else {
             return new Rectangle(
-                    insets.left + rendererMargin.left + buttonSize,
-                    insets.top + rendererMargin.top,
-                    width  - (insets.left + rendererMargin.left + insets.right
-                                          + rendererMargin.right + buttonSize),
-                    height - (insets.top  + rendererMargin.top + insets.bottom 
-                                          + rendererMargin.bottom));
+                    insets.left + buttonWidth,
+                    insets.top ,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
         }
     }
 
+    /**
+     * Paints the currently selected item.
+     */
+    public void paintCurrentValue(Graphics g,Rectangle bounds,boolean hasFocus) {
+        ListCellRenderer renderer = comboBox.getRenderer();
+        Component c;
 
+        if ( hasFocus && !isPopupVisible(comboBox) ) {
+            c = renderer.getListCellRendererComponent( listBox,
+                                                       comboBox.getSelectedItem(),
+                                                       -1,
+                                                       true,
+                                                       false );
+        }
+        else {
+            c = renderer.getListCellRendererComponent( listBox,
+                                                       comboBox.getSelectedItem(),
+                                                       -1,
+                                                       false,
+                                                       false );
+            c.setBackground(UIManager.getColor("ComboBox.background"));
+        }
+        Border oldBorder = null;
+        if (c instanceof JComponent) {
+            JComponent component = (JComponent) c;
+            if (c instanceof BasicComboBoxRenderer.UIResource) {
+                oldBorder = component.getBorder();
+                component.setBorder(EMPTY_BORDER);
+            }
+            Insets rendererInsets = component.getInsets();
+            Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
+            bounds.x += editorInsets.left - rendererInsets.left;
+            bounds.y += editorInsets.top  - rendererInsets.top;
+            bounds.width  -= editorInsets.left + editorInsets.right -1
+                            - (rendererInsets.left + rendererInsets.right);
+            bounds.height -= editorInsets.top + editorInsets.bottom
+                            - (rendererInsets.top + rendererInsets.bottom);
+        }
+        
+        c.setFont(comboBox.getFont());
+        if ( hasFocus && !isPopupVisible(comboBox) ) {
+            c.setForeground(listBox.getSelectionForeground());
+            c.setBackground(listBox.getSelectionBackground());
+        }
+        else {
+            if ( comboBox.isEnabled() ) {
+                c.setForeground(comboBox.getForeground());
+                c.setBackground(comboBox.getBackground());
+            }
+            else {
+                c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
+                c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
+            }
+        }
+
+        // Fix for 4238829: should lay out the JPanel.
+        boolean shouldValidate = false;
+        if (c instanceof JPanel)  {
+            shouldValidate = true;
+        }
+
+        currentValuePane.paintComponent(g,c,comboBox,bounds.x,bounds.y,
+                                        bounds.width,bounds.height, shouldValidate);
+        if (oldBorder != null) {
+            ((JComponent) c).setBorder(oldBorder);
+        }
+    }
+    
+
+    // Collaborator Classes ***************************************************
 
     /**
      * This layout manager handles the 'standard' layout of combo boxes.  
@@ -185,7 +284,6 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
             Insets insets = getInsets();
             int buttonWidth  = UIManager.getInt("ScrollBar.width");
             int buttonHeight = height - (insets.top + insets.bottom);
-            //System.out.println("ButtonHeight=" + buttonHeight);
 
             if (arrowButton != null) {
                 if (cb.getComponentOrientation().isLeftToRight()) {

@@ -32,11 +32,13 @@ package com.jgoodies.looks.windows;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Insets;
 import java.lang.reflect.Method;
 
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
@@ -54,7 +56,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -245,7 +247,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Object textInsets = isVista 
+        Insets textInsets = isVista 
             ? (isClassic
                     ? new InsetsUIResource(1, 2, 1, 2)
                     : new InsetsUIResource(2, 2, 2, 2))
@@ -253,9 +255,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                     ? new InsetsUIResource(1, 2, 2, 2)
                     : new InsetsUIResource(2, 2, 3, 2));
         
-        Object comboRendererMargin = LookUtils.IS_JAVA_1_4
-        	? textInsets
-        	: new InsetsUIResource(0, 0, 0, 0);
+        Object comboRendererBorder = new EmptyBorder(1, textInsets.left, 1, textInsets.right);
         
         Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
@@ -299,7 +299,8 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
-            "ComboBox.rendererMargin",    comboRendererMargin, // Added by JGoodies
+            "ComboBox.editorInsets",      textInsets,          // Added by JGoodies
+            "ComboBox.rendererBorder",    comboRendererBorder, // Added by JGoodies
             
             "EditorPane.margin",		  textInsets,
             
