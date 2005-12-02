@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -268,7 +268,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                 : new InsetsUIResource(2, 0, 2, 0);
         Object menuMargin = isXP
                 ? (LookUtils.IS_LOW_RESOLUTION
-                        ? new InsetsUIResource(2, 4, 2, 4)
+                        ? new InsetsUIResource(2, 3, 2, 4)
                         : new InsetsUIResource(2, 5, 2, 6))
                 : (LookUtils.IS_LOW_RESOLUTION
                         ? new InsetsUIResource(2, 3, 2, 3)
