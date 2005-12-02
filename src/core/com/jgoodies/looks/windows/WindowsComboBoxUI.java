@@ -54,7 +54,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -227,12 +227,14 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
             }
             Insets rendererInsets = component.getInsets();
             Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
-            bounds.x += editorInsets.left - rendererInsets.left;
-            bounds.y += editorInsets.top  - rendererInsets.top;
-            bounds.width  -= editorInsets.left + editorInsets.right -1
-                            - (rendererInsets.left + rendererInsets.right);
-            bounds.height -= editorInsets.top + editorInsets.bottom
-                            - (rendererInsets.top + rendererInsets.bottom);
+            int offsetLeft   = Math.max(0, editorInsets.left - rendererInsets.left);
+            int offsetRight  = Math.max(0, editorInsets.right - rendererInsets.right);
+            int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
+            int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
+            bounds.x += offsetLeft;
+            bounds.y += offsetTop;
+            bounds.width  -= offsetLeft + offsetRight - 1;
+            bounds.height -= offsetTop + offsetBottom;
         }
         
         c.setFont(comboBox.getFont());
