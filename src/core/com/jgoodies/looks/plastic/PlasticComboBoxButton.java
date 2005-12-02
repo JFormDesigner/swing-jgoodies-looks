@@ -48,7 +48,7 @@ import javax.swing.*;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -125,6 +125,17 @@ final class PlasticComboBoxButton extends JButton {
             setBackground(UIManager.getColor("ComboBox.disabledBackground"));
             setForeground(UIManager.getColor("ComboBox.disabledForeground"));
         }
+    }
+
+    /**
+     * The combo's arrow button should be excluded from the focus traversal.
+     * Since Java 6 the arrow button is configured as being focusable
+     * in <code>BasicComboBoxUI#configureArrowButton</code>.
+     * Therefore it doesn't help to call <code>setFocusable(false)</code>
+     * in the constructor; instead we override this method.
+     */
+    public boolean isFocusTraversable() {
+        return false;
     }
 
     /**
