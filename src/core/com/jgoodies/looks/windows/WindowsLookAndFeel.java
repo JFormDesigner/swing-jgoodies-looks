@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -222,7 +222,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object buttonBorder = new SimpleProxyLazyValue(
                 "com.jgoodies.looks.windows.WindowsLookAndFeel",
                 "getButtonBorder");
-        Object menuBorder = WindowsBorders.getMenuBorder();
+        
+        Object menuBorder = isXP
+            ? WindowsBorders.getXPMenuBorder()
+            : WindowsBorders.getMenuBorder();
 
         Object menuBarEmptyBorder     = marginBorder;
         Object menuBarSeparatorBorder = WindowsBorders.getSeparatorBorder();
@@ -263,9 +266,13 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
                 : new InsetsUIResource(2, 0, 2, 0);
-        Object menuMargin = LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(2, 3, 2, 3)
-                : new InsetsUIResource(2, 4, 2, 4);
+        Object menuMargin = isXP
+                ? (LookUtils.IS_LOW_RESOLUTION
+                        ? new InsetsUIResource(2, 4, 2, 4)
+                        : new InsetsUIResource(2, 5, 2, 6))
+                : (LookUtils.IS_LOW_RESOLUTION
+                        ? new InsetsUIResource(2, 3, 2, 3)
+                        : new InsetsUIResource(2, 4, 2, 4));
 
         int pad = isXP ? 3 : 0;
         Object popupMenuSeparatorMargin = LookUtils.IS_LOW_RESOLUTION

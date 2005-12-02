@@ -54,7 +54,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class WindowsBorders {
     
@@ -65,6 +65,7 @@ final class WindowsBorders {
 	// Accessing and Creating Borders ***************************************************
 
     private static Border menuBorder;
+    private static Border xpMenuBorder;
     private static Border menuItemBorder;
     private static Border popupMenuBorder;
     private static Border noMarginPopupMenuBorder;
@@ -93,7 +94,7 @@ final class WindowsBorders {
 
 
     /**
-     * Returns a border instance for a <code>JMenu</code>.
+     * Returns a Border for a JMenu in classic mode.
      */
     static Border getMenuBorder() {
 		if (menuBorder == null) {
@@ -102,6 +103,16 @@ final class WindowsBorders {
 						   	new BasicBorders.MarginBorder());
 		}
 		return menuBorder;
+    }
+
+    /**
+     * Returns a Border for a JMenu in XP mode.
+     */
+    static Border getXPMenuBorder() {
+        if (xpMenuBorder == null) {
+            xpMenuBorder = new BasicBorders.MarginBorder();
+        }
+        return xpMenuBorder;
     }
 
     /**
