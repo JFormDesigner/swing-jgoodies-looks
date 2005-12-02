@@ -56,7 +56,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -255,7 +255,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                     ? new InsetsUIResource(1, 2, 2, 2)
                     : new InsetsUIResource(2, 2, 3, 2));
         
-        Object comboRendererBorder = new EmptyBorder(1, textInsets.left, 1, textInsets.right);
+        int comboBorderSize  = isClassic ? 2 : 1;
+        int comboPopupBorderSize = 1;
+        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         
         Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
