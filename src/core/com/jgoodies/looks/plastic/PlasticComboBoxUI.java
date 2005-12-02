@@ -35,7 +35,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
@@ -51,10 +54,15 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.1 $
+* @version $Revision: 1.2 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
+    private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+    
+    private static final Border RENDERER_BORDER = new EmptyBorder(1, 2, 1, 2);
+    
+    
     public static ComponentUI createUI(JComponent b) {
         return new PlasticComboBoxUI();
     }
@@ -84,13 +92,32 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     
 
     /**
+     * Creates the default renderer that will be used in a non-editiable combo 
+     * box. A default renderer will used only if a renderer has not been 
+     * explicitly set with <code>setRenderer</code>.<p>
+     * 
+     * This method differs from the superclass implementation 
+     * in that it uses an empty border with wider left and right margins
+     * of 2 pixels instead of 1.
+     * 
+     * @return a <code>ListCellRender</code> used for the combo box
+     * @see javax.swing.JComboBox#setRenderer
+     */
+    protected ListCellRenderer createRenderer() {
+        BasicComboBoxRenderer renderer = new BasicComboBoxRenderer.UIResource();
+        renderer.setBorder(RENDERER_BORDER);
+        return renderer;
+    }
+
+
+    /**
      * Gets the insets from the JComboBox.
      */
     private Insets getEditorInsets() {
         if (editor instanceof JComponent) {
             return ((JComponent)editor).getInsets();
         }
-        return new Insets(0, 0, 0, 0);
+        return EMPTY_INSETS;
     }
     
     /**
