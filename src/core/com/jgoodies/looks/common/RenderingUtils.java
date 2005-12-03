@@ -28,7 +28,7 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.looks;
+package com.jgoodies.looks.common;
 
 import java.awt.Graphics;
 import java.lang.reflect.Field;
@@ -38,13 +38,22 @@ import java.lang.reflect.Method;
 import javax.swing.JComponent;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
+import com.jgoodies.looks.LookUtils;
+
 /**
  * Provides convenience behavior used by the JGoodies Looks.<p>
+ * 
+ * <strong>Note:</strong> This class is not part of the public Looks API.
+ * It should be treated as library internal and should not be used by
+ * API users. It may be removed or changed with the Looks version
+ * without further notice.
  * 
  * TODO: Remove the drawing methods if we require Java 5.
  *
  * @author  Karsten Lentzsch
  * @version $Revision: 1.1 $
+ * 
+ * @since 2.0
  */
 public final class RenderingUtils {
     
@@ -240,7 +249,7 @@ public final class RenderingUtils {
     
     private static Method getMethodDrawString() {
         try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
+            Class clazz = Class.forName("sun.swing.SwingUtilities2");
             return clazz.getMethod(
                     "drawString",
                     new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE}
@@ -252,12 +261,13 @@ public final class RenderingUtils {
         } catch (NoSuchMethodException e) {
             // returns null
         }
+        System.out.println("Couldn't find drawString");
         return null;
     }
     
     private static Method getMethodDrawStringUnderlineCharAt() {
         try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
+            Class clazz = Class.forName("sun.swing.SwingUtilities2");
             return clazz.getMethod(
                     "drawStringUnderlineCharAt",
                     new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE, Integer.TYPE}
@@ -269,13 +279,14 @@ public final class RenderingUtils {
         } catch (NoSuchMethodException e) {
             // returns null
         }
+        System.out.println("Couldn't find drawStringUnderlineCharAt");
         return null;
     }
     
     
     private static Method getMethodDrawTextAntialiasedJava5() {
         try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
+            Class clazz = Class.forName("sun.swing.SwingUtilities2");
             Method method = clazz.getMethod(
                     "drawTextAntialiased",
                     new Class[] {JComponent.class}
@@ -295,7 +306,7 @@ public final class RenderingUtils {
    
     private static Method getMethodDrawTextAntialiasedJava6() {
         try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2");
+            Class clazz = Class.forName("sun.swing.SwingUtilities2");
             return clazz.getMethod(
                     "drawTextAntialiased",
                     new Class[] {JComponent.class}

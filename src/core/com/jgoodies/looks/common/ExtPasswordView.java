@@ -39,14 +39,13 @@ import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
 import javax.swing.text.Position;
 
-import com.jgoodies.looks.RenderingUtils;
 
 /**
  * Differs from its superclass in that it uses a dot (\u25CF), 
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class ExtPasswordView extends PasswordView {
     

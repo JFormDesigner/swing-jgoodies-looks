@@ -38,13 +38,12 @@ import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
 import com.jgoodies.looks.Options;
-import com.jgoodies.looks.RenderingUtils;
 
 /**
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class MenuItemRenderer {
