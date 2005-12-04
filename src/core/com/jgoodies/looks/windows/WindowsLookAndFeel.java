@@ -37,15 +37,14 @@ import java.lang.reflect.Method;
 
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.DimensionUIResource;
-import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
-import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.Options;
+import com.jgoodies.looks.*;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.ShadowPopupFactory;
 
@@ -56,27 +55,78 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
     /** 
-     * Client property key to set a border style - shadows the header style. 
-     * */
+     * An optional client property key for JMenu and JToolBar
+     * to set a border style - shadows the header style. 
+     */
     public static final String BORDER_STYLE_KEY = "jgoodies.windows.borderStyle";
+    
+    
+    /**
+     * A UIManager key used to store and retrieve 
+     * the FontChoicePolicy for this Look&amp;Feel.
+     * 
+     * @see #getFontChoicePolicy()
+     * @see #setFontChoicePolicy(FontChoicePolicy)
+     */
+    private static final String FONT_CHOICE_POLICY_KEY = "Windows.fontChoicePolicy";
 
+    
     public String getID() {
         return "JGoodies Windows";
     }
 
+    
     public String getName() {
         return "JGoodies Windows";
     }
 
+    
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
                 + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
+    
+    
+    // Optional Settings ******************************************************
+    
+    /**
+     * Looks up and retrieves the FontChoicePolicy used
+     * by the JGoodies Windows Look&amp;Feel.
+     * If none is set a default policy is used.
+     * 
+     * @return the FontChoicePolicy set for this Look&amp;feel,
+     *     or a default policy if none has been set.
+     * 
+     * @see #setFontChoicePolicy
+     */
+    public static FontChoicePolicy getFontChoicePolicy() {
+        FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
+        return policy != null
+            ? policy
+            : FontChoicePolicies.getDefaultPolicy();
+    }
+    
+    
+    /**
+     * Sets the FontChoicePolicy to be used with the JGoodies Windows L&amp;F.
+     * If the specified policy is <code>null</code>, the policy is used
+     * to the default.
+     * 
+     * @param fontChoicePolicy   the FontChoicePolicy to be used with 
+     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
+     *     to the default
+     *     
+     * @see #getFontChoicePolicy()
+     */
+    public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
+        UIManager.put(FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
+    }
+    
 
     // Overriding Superclass Behavior ***************************************
 
@@ -422,42 +472,27 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * Looks up the correct control font and sets it for all controls.
      */
     private void initFontDefaults(UIDefaults table) {
-        Font controlFont = new FontUIResource(LookUtils.getWindowsControlFont());
-        
-        // Derive a bold version of the control font.
-        Font controlBoldFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
-
-        Font menuFont    = table.getFont("Menu.font");
-        Font messageFont = table.getFont("OptionPane.font");
-        Font toolTipFont = table.getFont("ToolTip.font");
-        Font windowFont  = table.getFont("InternalFrame.titleFont");
-
-        initFontDefaults(table, controlFont, controlBoldFont,
-                controlFont, menuFont, messageFont, toolTipFont, windowFont);
+        FontChoicePolicy fontChoicePolicy = getFontChoicePolicy();
+        FontSet fontSet = fontChoicePolicy.getFontSet(table);
+        initFontDefaults(table, fontSet);
     }
 
+    
     /**
-	 * Sets different fonts to all known widget defaults.
-	 * If the specified <code>menuFont</code> is null,
-	 * the given defaults won't be overriden.
+	 * Sets Fonts in the given FontSet as defaults for all known 
+     * component types in the given UIDefaults table.
      * 
-     * @param table   the UIDefaults table used to set fonts
-     * @param controlFont       the control font to be set
-     * @param controlBoldFont   a bold version of the control font
-     * @param fixedControlFont  a fixed size control font
-     * @param menuFont          the font used for menus
-     * @param messageFont       the font used in message
-     * @param toolTipFont       the font used in tool tips
-     * @param windowFont        the general dialog font
+     * @param table       the UIDefaults table used to set fonts
+     * @param fontSet     describes the set of Fonts to be installed
 	 */
-	private void initFontDefaults(UIDefaults table, 
-		Object controlFont, Object controlBoldFont, Object fixedControlFont, 
-		Object menuFont, Object messageFont, Object toolTipFont, Object windowFont) {
-			
-//		LookUtils.log("Menu font   =" + menuFont);			
-//		LookUtils.log("Control font=" + controlFont);	
-//		LookUtils.log("Message font=" + messageFont);	
-		
+	private static void initFontDefaults(UIDefaults table, FontSet fontSet) {
+        Font controlFont = fontSet.getControlFont();
+        Font menuFont    = fontSet.getMenuFont();
+        Font messageFont = fontSet.getMessageFont();
+        Font toolTipFont = fontSet.getSmallFont();
+        Font titleFont   = fontSet.getTitleFont();
+        Font windowFont  = fontSet.getWindowTitleFont();
+        
 		Object[] defaults = {
 				"Button.font",							controlFont,
 				"CheckBox.font",						controlFont,
@@ -476,6 +511,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 				"TabbedPane.font",						controlFont,
 				"Table.font",							controlFont,
 				"TableHeader.font",						controlFont,
+                "TextArea.font",                        controlFont,  
 				"TextField.font",						controlFont,
 				"TextPane.font",						controlFont,
 				"ToolBar.font",							controlFont,
@@ -487,9 +523,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 	    		"OptionPane.font", 						messageFont,
 	    		"OptionPane.messageFont", 				messageFont,
 	    		"OptionPane.buttonFont", 				messageFont,
-				"Spinner.font",							fixedControlFont,
-				"TextArea.font",						fixedControlFont,  
-				"TitledBorder.font",					controlBoldFont,
+				"TitledBorder.font",					titleFont,
 				"ToolTip.font",							toolTipFont,
 
                 "CheckBoxMenuItem.font",                menuFont,

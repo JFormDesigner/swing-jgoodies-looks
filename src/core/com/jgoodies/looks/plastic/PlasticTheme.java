@@ -36,17 +36,14 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 
-import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.Options;
-import com.jgoodies.looks.plastic.theme.PlasticFontDelegate;
-import com.jgoodies.looks.plastic.theme.PlasticTahomaFontDelegate;
-import com.jgoodies.looks.plastic.theme.PlasticWindowsFontDelegate;
+import com.jgoodies.looks.FontChoicePolicy;
+import com.jgoodies.looks.FontSet;
 
 /**
  * Unlike its superclass this theme class has relaxed access.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
@@ -64,8 +61,20 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
 
     protected static final ColorUIResource BLACK = new ColorUIResource(0, 0, 0);
 
-    private PlasticFontDelegate fontDelegate;
+    
+    // Instance Fields ********************************************************
+    
+    /**
+     * Holds the set of fonts used by this theme.
+     * It is lazily initialized using the shared FontChoicePolicy
+     * provided by the PlasticLookAndFeel.
+     * 
+     * @see #getFontSet()
+     * @see PlasticLookAndFeel#getFontChoicePolicy()
+     */
+    private FontSet fontSet;
 
+    
     // Accessing Colors *****************************************************
 
     protected ColorUIResource getBlack() {
@@ -115,55 +124,42 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     // Accessing Fonts ******************************************************
 
     public FontUIResource getTitleTextFont() {
-        return getFontDelegate().getTitleTextFont();
+        return getFontSet().getTitleFont();
     }
 
     public FontUIResource getControlTextFont() {
-        return getFontDelegate().getControlTextFont();
+        return getFontSet().getControlFont();
     }
     
     public FontUIResource getMenuTextFont() {
-        return getFontDelegate().getMenuTextFont();
+        return getFontSet().getMenuFont();
     }
     
     public FontUIResource getSubTextFont() {
-        return getFontDelegate().getSubTextFont();
+        return getFontSet().getSmallFont();
     }
 
     public FontUIResource getSystemTextFont() {
-        return getFontDelegate().getSystemTextFont();
+        return getFontSet().getControlFont();
     }
 
     public FontUIResource getUserTextFont() {
-        return getFontDelegate().getUserTextFont();
+        return getFontSet().getControlFont();
     }
 
     public FontUIResource getWindowTitleFont() {
-        return getFontDelegate().getWindowTitleFont();
+        return getFontSet().getWindowTitleFont();
     }
     
-    private PlasticFontDelegate getFontDelegate() {
-        if (fontDelegate == null) {
-            fontDelegate = createFontDelegate();
+    protected FontSet getFontSet() {
+        if (fontSet == null) {
+            FontChoicePolicy policy = PlasticLookAndFeel.getFontChoicePolicy();
+            fontSet = policy.getFontSet(null);
         }
-        return fontDelegate;
+        return fontSet;
     }
     
-    protected boolean getForceTahomaOnNonWindows() {
-        return false;
-    }
     
-    protected PlasticFontDelegate createFontDelegate() {
-        if (LookUtils.IS_OS_WINDOWS && Options.getUseSystemFonts()) {
-            return new PlasticWindowsFontDelegate();
-        } else if (getForceTahomaOnNonWindows()) {
-            return new PlasticTahomaFontDelegate();
-        } else {
-            return new PlasticFontDelegate();
-        }
-    }
-    
-
     // Custom Equals Implementation *****************************************
 
     /**

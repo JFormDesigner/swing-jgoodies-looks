@@ -39,6 +39,7 @@ import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
@@ -48,6 +49,8 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
+import com.jgoodies.looks.FontChoicePolicies;
+import com.jgoodies.looks.FontChoicePolicy;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -59,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -114,6 +117,25 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "metal";
 
         
+    /**
+     * A UIManager key used to store and retrieve 
+     * the FontChoicePolicy for this Look&amp;Feel.
+     * 
+     * @see #getFontChoicePolicy()
+     * @see #setFontChoicePolicy(FontChoicePolicy)
+     */
+    private static final String FONT_CHOICE_POLICY_KEY = "Plastic.fontChoicePolicy";
+
+    
+    /**
+     * A UIManager key used to store and retrieve the PlasticTheme.
+     * 
+     * @see #getPlasticTheme()
+     * @see #setPlasticTheme(PlasticTheme)
+     */
+    private static final String THEME_KEY = "Plastic.theme";
+    
+    
     // State *****************************************************************
         
     /** 
@@ -142,10 +164,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	private static boolean	 is3DEnabled = false;
 	
 	
-	/** The look dependent <code>FontSizeHints</code>. */
-	private static FontSizeHints fontSizeHints;
-
-	
     /**
      * Constructs the <code>PlasticLookAndFeel</code>.
      */
@@ -167,33 +185,42 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
     }
     
-	// Special Properties ***************************************************
-	
+    
+    // Optional Settings ******************************************************
+    
     /**
-     * Returns the current Plastic <code>FontSizeHints</code>, 
-     * or <code>FontSizeHints.DEFAULT</code> if no custom hints are set.
+     * Looks up and retrieves the FontChoicePolicy used
+     * by the JGoodies Windows Look&amp;Feel.
+     * If none is set a default policy is used.
      * 
-     * @return the current Plastic font size hints or 
-     *     <code>FontSizeHints.DEFAULT</code> if no custom hints are set.
-     * @see #setFontSizeHints(FontSizeHints)
-     * @see FontSizeHints
+     * @return the FontChoicePolicy set for this Look&amp;feel,
+     *     or a default policy if none has been set.
+     * 
+     * @see #setFontChoicePolicy
      */
-    public static FontSizeHints getFontSizeHints() {
-        return fontSizeHints != null
-            ? fontSizeHints
-            : FontSizeHints.DEFAULT;
+    public static FontChoicePolicy getFontChoicePolicy() {
+        FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
+        return policy != null
+            ? policy
+            : FontChoicePolicies.getDefaultPolicy();
     }
-
+    
+    
     /**
-     * Sets the Plastic <code>FontSizeHints</code>.
+     * Sets the FontChoicePolicy to be used with the JGoodies Windows L&amp;F.
+     * If the specified policy is <code>null</code>, the policy is used
+     * to the default.
      * 
-     * @param newHints   the font size hints to be set
-     * @see #getFontSizeHints()
-     * @see FontSizeHints
+     * @param fontChoicePolicy   the FontChoicePolicy to be used with 
+     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
+     *     to the default
+     *     
+     * @see #getFontChoicePolicy()
      */
-    public static void setFontSizeHints(FontSizeHints newHints) {
-        fontSizeHints = newHints;
+    public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
+        UIManager.put(FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
     }
+    
 
     protected boolean is3DEnabled() {
         return is3DEnabled;
@@ -690,15 +717,38 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 			installDefaultThemes();
 		installedThemes.add(theme);
 	}
-
-
-	/**
-	 * Gets the current <code>PlasticTheme</code>.
+    
+    
+    /**
+     * Looks up and returns the PlasticTheme stored in the UIManager.
      * 
      * @return the current PlasticTheme
+     */
+    public static PlasticTheme getPlasticTheme() {
+        return (PlasticTheme) UIManager.get(THEME_KEY);
+    }
+
+
+    /**
+     * Sets a PlasticTheme for colors and fonts in the UIManager
+     * and the superclass.
+     * 
+     * @param theme    the PlasticTheme to be set
+     */
+    public static void setPlasticTheme(PlasticTheme theme) {
+        UIManager.put(THEME_KEY, theme);
+        setCurrentTheme(theme);
+    }
+    
+	/**
+     * Looks up and returns the PlasticTheme stored in the UIManager.
+     * 
+     * @return the current PlasticTheme
+     * 
+     * @deprecated Replaced by {@link #getPlasticTheme()}.
 	 */
 	public static PlasticTheme getMyCurrentTheme() {
-		return myCurrentTheme;
+		return getPlasticTheme();
 	}
 	
 	
@@ -706,10 +756,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Sets a new <code>PlasticTheme</code> for colors and fonts.
      * 
      * @param theme    the PlasticTheme to be set
+     * 
+     * @deprecated Replaced by {@link #setPlasticTheme(PlasticTheme)}.
 	 */
 	public static void setMyCurrentTheme(PlasticTheme theme) {
-		myCurrentTheme = theme;
-		setCurrentTheme(theme);
+		setPlasticTheme(theme);
 	}
 	
 	
@@ -729,83 +780,83 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 
 	 
 	public static ColorUIResource getPrimaryControlDarkShadow() {
-		return getMyCurrentTheme().getPrimaryControlDarkShadow();
+		return getPlasticTheme().getPrimaryControlDarkShadow();
 	}
 	
 	public static ColorUIResource getPrimaryControlHighlight() {
-		return getMyCurrentTheme().getPrimaryControlHighlight();
+		return getPlasticTheme().getPrimaryControlHighlight();
 	}
 	
 	public static ColorUIResource getPrimaryControlInfo() {
-		return getMyCurrentTheme().getPrimaryControlInfo();
+		return getPlasticTheme().getPrimaryControlInfo();
 	}
 	
 	public static ColorUIResource getPrimaryControlShadow() {
-		return getMyCurrentTheme().getPrimaryControlShadow();
+		return getPlasticTheme().getPrimaryControlShadow();
 	}
 	
 	public static ColorUIResource getPrimaryControl() {
-		return getMyCurrentTheme().getPrimaryControl();
+		return getPlasticTheme().getPrimaryControl();
 	}
 	
 	public static ColorUIResource getControlHighlight() {
-		return getMyCurrentTheme().getControlHighlight();
+		return getPlasticTheme().getControlHighlight();
 	}
 	
 	public static ColorUIResource getControlDarkShadow() {
-		return getMyCurrentTheme().getControlDarkShadow();
+		return getPlasticTheme().getControlDarkShadow();
 	}
 	
 	public static ColorUIResource getControl() {
-		return getMyCurrentTheme().getControl();
+		return getPlasticTheme().getControl();
 	}
 	
 	public static ColorUIResource getFocusColor() {
-		return getMyCurrentTheme().getFocusColor();
+		return getPlasticTheme().getFocusColor();
 	}
 	
 	public static ColorUIResource getMenuItemBackground() {
-		return getMyCurrentTheme().getMenuItemBackground();
+		return getPlasticTheme().getMenuItemBackground();
 	}
 	
 	public static ColorUIResource getMenuItemSelectedBackground() {
-		return getMyCurrentTheme().getMenuItemSelectedBackground();
+		return getPlasticTheme().getMenuItemSelectedBackground();
 	}
 	
 	public static ColorUIResource getMenuItemSelectedForeground() {
-		return getMyCurrentTheme().getMenuItemSelectedForeground();
+		return getPlasticTheme().getMenuItemSelectedForeground();
 	}
 	
 	public static ColorUIResource getWindowTitleBackground() {
-		return getMyCurrentTheme().getWindowTitleBackground();
+		return getPlasticTheme().getWindowTitleBackground();
 	}
 	
 	public static ColorUIResource getWindowTitleForeground() {
-		return getMyCurrentTheme().getWindowTitleForeground();
+		return getPlasticTheme().getWindowTitleForeground();
 	}
 	
 	public static ColorUIResource getWindowTitleInactiveBackground() {
-		return getMyCurrentTheme().getWindowTitleInactiveBackground();
+		return getPlasticTheme().getWindowTitleInactiveBackground();
 	}
 	
 	public static ColorUIResource getWindowTitleInactiveForeground() {
-		return getMyCurrentTheme().getWindowTitleInactiveForeground();
+		return getPlasticTheme().getWindowTitleInactiveForeground();
 	}
 	
 	public static ColorUIResource getSimpleInternalFrameForeground() {
-		return getMyCurrentTheme().getSimpleInternalFrameForeground();
+		return getPlasticTheme().getSimpleInternalFrameForeground();
 	}
 	
 	public static ColorUIResource getSimpleInternalFrameBackground() {
-		return getMyCurrentTheme().getSimpleInternalFrameBackground();
+		return getPlasticTheme().getSimpleInternalFrameBackground();
 	}
 	
 	public static ColorUIResource getTitleTextColor() {
-		return getMyCurrentTheme().getTitleTextColor();
+		return getPlasticTheme().getTitleTextColor();
 	}
 
 	public static FontUIResource getTitleTextFont() {
-		return getMyCurrentTheme().getTitleTextFont();
+		return getPlasticTheme().getTitleTextFont();
 	}
 
 }

@@ -1,3 +1,15 @@
+o Provide the following FontChoicePolicies:
+  - Native Windows
+  - Fixed font with font name constructor
+  - Logical fonts
+  - Resolution-scaling fonts
+  - Desktop-setting fonts
+  - Constants for (western) Windows 2000/XP/Vista on 96dpi/101dpi/120dpi
+    with normal/large/extra large fonts. Return "MS Sans Serif", Tahoma
+    and Segoe UI in the associated font sizes.
+    This is useful to preview a layout for another platform.
+
+
 o Check problem with wide toolbar buttons in ExtWindows (classic mode)
 
 o Add a comment to the Release notes regarding the overall progress.

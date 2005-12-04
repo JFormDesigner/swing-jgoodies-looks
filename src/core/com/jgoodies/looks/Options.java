@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class Options {
 
@@ -104,18 +104,46 @@ public final class Options {
     // Keys for Overriding Font Settings ************************************
 
     /**
+     * A key for setting a custom FontChoicePolicy for the Plastic L&amp;fs.
+     * Used for both the system properties and the UIDefaults table.
+     */
+    public static final String PLASTIC_FONT_CHOICE_POLICY_KEY = 
+        "Plastic.fontChoicePolicy";
+        
+    /**
      * A key for setting the default control font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      */
     public static final String PLASTIC_CONTROL_FONT_KEY = 
-        "plastic.controlFont";
+        "Plastic.controlFont";
         
     /**
      * A key for setting the default menu font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      */
     public static final String PLASTIC_MENU_FONT_KEY = 
-        "plastic.menuFont";
+        "Plastic.menuFont";
+        
+    /**
+     * A key for setting a custom FontChoicePolicy for the Windows L&amp;fs.
+     * Used for both the system properties and the UIDefaults table.
+     */
+    public static final String WINDOWS_FONT_CHOICE_POLICY_KEY = 
+        "Windows.fontChoicePolicy";
+        
+    /**
+     * A key for setting the default control font in the Windows L&amp;f.
+     * Used for both the system properties and the UIDefaults table.
+     */
+    public static final String WINDOWS_CONTROL_FONT_KEY = 
+        "Windows.controlFont";
+        
+    /**
+     * A key for setting the default menu font in the Windows L&amp;f.
+     * Used for both the system properties and the UIDefaults table.
+     */
+    public static final String WINDOWS_MENU_FONT_KEY = 
+        "Windows.menuFont";
         
     /**
      * A convenience constant for the standard Swing system property key 

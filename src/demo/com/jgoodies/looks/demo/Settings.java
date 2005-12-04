@@ -34,7 +34,6 @@ import javax.swing.LookAndFeel;
 
 import com.jgoodies.looks.BorderStyle;
 import com.jgoodies.looks.HeaderStyle;
-import com.jgoodies.looks.plastic.FontSizeHints;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
@@ -45,7 +44,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
  * @see     com.jgoodies.looks.plastic.FontSizeHints
@@ -60,8 +59,6 @@ public final class Settings {
 
     private Boolean useSystemFonts;
     
-    private FontSizeHints plasticFontSizeHints;
-
     private boolean useNarrowButtons;
 
     private boolean tabIconsEnabled;
@@ -102,7 +99,6 @@ public final class Settings {
         settings.setUseNarrowButtons(true);
         settings.setUseSystemFonts(Boolean.TRUE);
         settings.setTabIconsEnabled(true);
-        settings.setPlasticFontSizeHints(FontSizeHints.DEFAULT);
         settings.setPlasticTabStyle(PlasticLookAndFeel.TAB_STYLE_DEFAULT_VALUE);
         settings.setPlasticHighContrastFocusEnabled(false);
         settings.setPopupDropShadowEnabled(null);
@@ -119,14 +115,6 @@ public final class Settings {
 
 
     // Accessors **************************************************************
-
-    public FontSizeHints getPlasticFontSizeHints() {
-        return plasticFontSizeHints;
-    }
-
-    public void setPlasticFontSizeHints(FontSizeHints fontSizeHints) {
-        this.plasticFontSizeHints = fontSizeHints;
-    }
 
     public Boolean getMenuBar3DHint() {
         return menuBar3DHint;
