@@ -36,14 +36,27 @@ import java.awt.Toolkit;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
 
+import com.jgoodies.looks.FontSets.DefaultFontSet;
 import com.jgoodies.looks.FontSets.LogicalFontSet;
 
 
 /**
- * Provides or creates predefined FontChoicePolicy implementations.
+ * Provides predefined FontChoicePolicy implementations.<p>
+ * 
+ * <strong>Note:</strong> The available policies work well on Windows.
+ * On other platforms the font specified by the runtime environment
+ * are chosen. I plan to provide more logic or options for other platforms,
+ * for example that a Linux system checks for a Tahoma or Segoe UI.<p>
+ * 
+ * TODO: Add a check for a custom font choice policy set in the
+ * System properties.<p>
+ * 
+ * TODO: Add policies that emulate different Windows setups:
+ * default XP on 96dpi with normal fonts ("XP-normal-96"),
+ * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     FontChoicePolicy
  * 
@@ -59,15 +72,44 @@ public final class FontChoicePolicies {
     
     // Getting a FontChoicePolicy *********************************************
     
+    /**
+     * Returns the default font choice policy. It checks for a custom
+     * font choice policy and custom fonts first. Otherwise it returns
+     * a platform specific default policy.<p>
+     * 
+     * A custom FontChoicePolicy or a custom FontSet can be set 
+     * by name in the System properties, or as object in the UIManager.
+     * 
+     * @return the default font choice policy.
+     */
     public static FontChoicePolicy getDefaultPolicy() {
-        FontChoicePolicy customPolicy = getCustomPolicy();
-        if (customPolicy != null) {
-            return customPolicy;
-        }
-        FontSet customFontSet = getCustomFontSet();
-        if (customFontSet != null) {
-            return new FixedFontSetPolicy(customFontSet);
-        }
+        return getCustomSettingsPolicy(getPlatformSpecificDefaultPolicy());
+    }
+    
+    
+    /**
+     * Returns a font choice policy that checks for a custom FontChoicePolicy
+     * and a custom FontSet specified in the System settings or UIManager.
+     * If no custom settings are available, the given default policy will
+     * be used to look up the FontSet. 
+     * 
+     * @param defaultPolicy   the policy used if there are no custom settings  
+     * @return a FontChoicePolicy that checks for custom settings
+     *     before the default policy is returned.
+     */
+    public static FontChoicePolicy getCustomSettingsPolicy(FontChoicePolicy defaultPolicy) {
+        return new CustomSettingsPolicy(defaultPolicy);
+    }
+    
+    
+    /**
+     * Returns a platform specific default font choice policy.
+     * On Windows, it returns the default Windows font choice policy,
+     * etc.
+     * 
+     * @return a platform specific default font choice policy.
+     */
+    public static FontChoicePolicy getPlatformSpecificDefaultPolicy() {
         if (LookUtils.IS_OS_WINDOWS) {
             return getDefaultWindowsPolicy();
         } else {
@@ -76,35 +118,96 @@ public final class FontChoicePolicies {
     }
     
     
+    /**
+     * Returns the default font choice policy for the Windows platform.
+     * It aims to return a FontSet that is close to the native guidelines
+     * and useful for the current Java environment.<p>
+     * 
+     * The control font scales with the platform screen resolution 
+     * (96dpi/101dpi/120dpi/144dpi/...) and honors the desktop font settings
+     * (normal/large/extra large).
+     * 
+     * @return the default font choice policy for the Windows platform.
+     */
     public static FontChoicePolicy getDefaultWindowsPolicy() {
         return new DefaultWindowsPolicy();
     }
     
     
+    /**
+     * Returns the default platform independent font choice policy.<p>
+     * 
+     * The current implementation just returns the logical fonts.
+     * A future version shall check for available good fonts
+     * and shall use them before it falls back to the logical fonts.
+     * 
+     * @return the default platform independent font choice policy.
+     */
     public static FontChoicePolicy getDefaultCrossPlatformPolicy() {
         return new DefaultCrossPlatformPolicy();
     }
     
     
+    /**
+     * Returns a font choice policy that in turn 
+     * always chooses the logical fonts.
+     * 
+     * @return a font choice policy that returns logical fonts.
+     */
     public static FontChoicePolicy getLogicalFontsPolicy() {
-        return new FixedFontSetPolicy(new FontSets.LogicalFontSet());
+        return new FixedFontSetPolicy(new LogicalFontSet());
     }
     
-    public static FontChoicePolicy getCustomFontSettingsPolicy(String keySuffix) {
-        return null;
+    
+    /**
+     * Returns a font choice policy that returns the specified FontSet.
+     * 
+     * @param fontSet   the FontSet to be return by this policy
+     * @return a font choice policy that returns the specified FontSet.
+     */
+    public static FontChoicePolicy getFixedFontSetPolicy(FontSet fontSet) {
+        return new FixedFontSetPolicy(fontSet);
     }
     
     
     // Utility Methods ********************************************************
     
-    
-    private static FontChoicePolicy getCustomPolicy() {
+    /**
+     * Looks up and returns a custom FontChoicePolicy for the given 
+     * Look&amp;Feel name, or <code>null</code> if no custom policy has been 
+     * defined for this Look&amp;Feel.
+     * 
+     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
+     *     <code>"Windows"</code>
+     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     */
+    private static FontChoicePolicy getCustomPolicy(String lafName) {
+        // TODO: Look up predefined font choice policies
         return null;
     }
     
     
-    private static FontSet getCustomFontSet() {
-        return null;
+    /**
+     * Looks up and returns a custom FontSet for the given 
+     * Look&amp;Feel name, or <code>null</code> if no custom font set 
+     * has been defined for this Look&amp;Feel.
+     * 
+     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
+     *     <code>"Windows"</code>
+     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     */
+    private static FontSet getCustomFontSet(String lafName) {
+        String controlFontKey = lafName + ".controlFont";
+        String menuFontKey    = lafName + ".menuFont";
+        String decodedControlFont = LookUtils.getSystemProperty(controlFontKey);
+        if (decodedControlFont == null) 
+            return null;
+        FontUIResource controlFont = new FontUIResource(Font.decode(decodedControlFont));
+        String decodedMenuFont = LookUtils.getSystemProperty(menuFontKey);
+        FontUIResource menuFont = decodedMenuFont == null
+            ? null 
+            : new FontUIResource(Font.decode(decodedMenuFont));
+        return new DefaultFontSet(controlFont, menuFont);
     }
 	
 	
@@ -136,7 +239,7 @@ public final class FontChoicePolicies {
             this.fontSet = fontSet;
         }
         
-        public FontSet getFontSet(UIDefaults table) {
+        public FontSet getFontSet(String lafName, UIDefaults table) {
             return fontSet;
         }
     }
@@ -144,7 +247,7 @@ public final class FontChoicePolicies {
 
     private static final class DefaultWindowsPolicy implements FontChoicePolicy {
         
-        public FontSet getFontSet(UIDefaults table) {
+        public FontSet getFontSet(String lafName, UIDefaults table) {
             FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
             
             // Derive a bold version of the control font.
@@ -175,11 +278,33 @@ public final class FontChoicePolicies {
 
     private static final class DefaultCrossPlatformPolicy implements FontChoicePolicy {
         
-        public FontSet getFontSet(UIDefaults table) {
-            // If Tahoma or Segoe UI is available, return them
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            // TODO: If Tahoma or Segoe UI is available, return them
             // in a size appropriate for the screen resolution.
             // Otherwise return the logical font set.
             return new LogicalFontSet();
+        }
+    }
+    
+    
+    private static final class CustomSettingsPolicy implements FontChoicePolicy {
+        
+        private final FontChoicePolicy wrappedPolicy;
+        
+        CustomSettingsPolicy(FontChoicePolicy wrappedPolicy) {
+            this.wrappedPolicy = wrappedPolicy;
+        }
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            FontChoicePolicy customPolicy = getCustomPolicy(lafName);
+            if (customPolicy != null) {
+                return customPolicy.getFontSet(null, table);
+            }
+            FontSet customFontSet = getCustomFontSet(lafName);
+            if (customFontSet != null) {
+                return customFontSet;
+            }
+            return wrappedPolicy.getFontSet(null, table);
         }
     }
     

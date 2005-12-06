@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -477,7 +477,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      */
     private void initFontDefaults(UIDefaults table) {
         FontChoicePolicy fontChoicePolicy = getFontChoicePolicy();
-        FontSet fontSet = fontChoicePolicy.getFontSet(table);
+        FontSet fontSet = fontChoicePolicy.getFontSet("Windows", table);
         initFontDefaults(table, fontSet);
     }
 

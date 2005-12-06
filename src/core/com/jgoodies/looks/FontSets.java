@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     FontSet
  * 
@@ -120,11 +120,21 @@ public final class FontSets {
                 FontUIResource smallFont, 
                 FontUIResource windowTitleFont) {
             this.controlFont = controlFont;
-            this.menuFont = menuFont;
-            this.titleFont = titleFont;
-            this.messageFont = messageFont;
-            this.smallFont = smallFont;
-            this.windowTitleFont = windowTitleFont;
+            this.menuFont = menuFont == null
+                ? controlFont 
+                : menuFont;
+            this.titleFont = titleFont == null
+                ? new FontUIResource(controlFont.deriveFont(Font.BOLD))
+                : titleFont;
+            this.messageFont = messageFont == null
+                ? controlFont
+                : messageFont;
+            this.smallFont = smallFont == null
+                ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
+                : smallFont;
+            this.windowTitleFont = windowTitleFont == null
+                ? controlFont
+                : windowTitleFont;
         }
         
         
@@ -168,15 +178,6 @@ public final class FontSets {
         private FontUIResource smallFont;
 
 
-        public FontUIResource getTitleFont() {
-            if (titleFont == null) {
-                titleFont =
-                    new FontUIResource(
-                        getControlFont().deriveFont(Font.BOLD));
-            }
-            return titleFont;
-        }
-
         public FontUIResource getControlFont() {
             if (controlFont == null) {
                 controlFont = new FontUIResource(
@@ -192,6 +193,15 @@ public final class FontSets {
             return getControlFont();
         }
         
+        public FontUIResource getTitleFont() {
+            if (titleFont == null) {
+                titleFont =
+                    new FontUIResource(
+                        getControlFont().deriveFont(Font.BOLD));
+            }
+            return titleFont;
+        }
+
         public FontUIResource getSmallFont() {
             if (smallFont == null) {
                 smallFont =

@@ -43,7 +43,7 @@ import com.jgoodies.looks.FontSet;
  * Unlike its superclass this theme class has relaxed access.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
@@ -154,7 +154,7 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     protected FontSet getFontSet() {
         if (fontSet == null) {
             FontChoicePolicy policy = PlasticLookAndFeel.getFontChoicePolicy();
-            fontSet = policy.getFontSet(null);
+            fontSet = policy.getFontSet("Plastic", null);
         }
         return fontSet;
     }

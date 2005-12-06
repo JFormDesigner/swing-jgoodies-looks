@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
  * Looks up and returns a FontSet.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see FontSet
  * @see FontChoicePolicies
@@ -57,11 +57,12 @@ public interface FontChoicePolicy {
      * For example the JGoodies Windows L&amp;F could use the
      * defaults set by the super L&amp;F, the Sun Windows L&amp;F.
      * 
+     * @param lafName the name of the Look&amp;Feel that requests the fonts 
      * @param table   the UIDefaults table that can be used
      *     to look up fonts of a super L&amp;F
      * 
      * @return a set of fonts used as default for the component.
      */
-    FontSet getFontSet(UIDefaults table);
+    FontSet getFontSet(String lafName, UIDefaults table);
 
 }
