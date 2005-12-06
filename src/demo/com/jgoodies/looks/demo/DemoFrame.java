@@ -30,15 +30,15 @@
 
 package com.jgoodies.looks.demo;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
@@ -60,7 +60,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class DemoFrame extends JFrame {
 
@@ -170,8 +170,8 @@ public class DemoFrame extends JFrame {
      * 
      * @return the builder that builds the menu bar
      */
-    protected MenuBuilder createMenuBuilder() {
-        return new MenuBuilder();
+    protected MenuBarView createMenuBuilder() {
+        return new MenuBarView();
     }
 
     /**
@@ -244,12 +244,6 @@ public class DemoFrame extends JFrame {
         button.addActionListener(createHelpActionListener());
         toolBar.add(button);
 
-        toolBar.add(Box.createGlue());
-
-        button = new RolloverCheckButton();
-        button.setToolTipText("Shall show border when mouse is over");
-        button.setMargin(new Insets(0, 0, 0, 0));
-        toolBar.add(button);
         return toolBar;
     }
 
@@ -366,45 +360,5 @@ public class DemoFrame extends JFrame {
         };
     }
 
-    // Checks that all tool bar buttons have a UIResource border
-    private static class RolloverCheckButton extends JButton {
-
-        private boolean checked = false;
-
-        public void paint(Graphics g) {
-            if (!checked) {
-                checkAndSetResult();
-            }
-            super.paint(g);
-        }
-
-        private void checkAndSetResult() {
-            Icon passedIcon = readImageIcon("passed.gif");
-            Icon failedIcon = readImageIcon("failed.gif");
-
-            boolean passed = allButtonBordersAreUIResources();
-            setIcon(passed ? passedIcon : failedIcon);
-            setText(passed ? "Can Swap L&F" : "Can't Swap L&F");
-
-            checked = true;
-        }
-
-        /**
-         * Checks and answers whether all button borders implement UIResource.
-         */
-        private boolean allButtonBordersAreUIResources() {
-            JToolBar bar = (JToolBar) getParent();
-            for (int i = bar.getComponentCount() - 1; i >= 0; i--) {
-                Component child = bar.getComponent(i);
-                if (child instanceof JButton) {
-                    Border b = ((JButton) child).getBorder();
-                    if (!(b instanceof UIResource))
-                        return false;
-                }
-            }
-            return true;
-        }
-
-    }
 
 }
