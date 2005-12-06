@@ -6,23 +6,25 @@
 INTRODUCTION
 
     This is a preview for the JGoodies Looks 2.0 series.
+    The major changes are better support for Windows Vista,
+    Java 6, and an overhauled font lookup in all L&fs.
     
     NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
     THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
     It is an engineering build that has seen minimal testing; 
     it may lack functions and may contain known bugs in some areas. 
         
-    The font lookup mechanism in the Windows L&f has been overhauled.
-    And text component insets have been adjusted to better comply 
+    The font lookup in the Windows L&f has been overhauled.
+    Text component insets have been adjusted to better comply 
     with the Microsoft Layout Specification and Guidelines.
     Also, Windows Vista is now supported; bounds, insets and 
-    font baseline positions are consistent.
+    font baseline positions are consistent on the Vista betas.
     
     The text component insets of the Plastic L&f family
     have been adjusted to the new Windows L&f dimensions.
-    The Plastic font lookup now uses a delegate; the current
-    implementation should be fine on Windows but needs improvements
-    for other platforms. 
+    The Plastic font lookup has been completely overhauled; 
+    the current implementation is fine on Windows but needs 
+    improvements on other platforms. 
     
     THE DOCUMENTATION HAS NOT BEEN UPDATED.  
     
@@ -73,7 +75,6 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
     o Options#getUseNarrowButtons returns true by default.
       You can disable this feature using #setUseNarrowButtons(false).
-    o The component heights have been adjusted to be 
     o Options.DEFAULT_LOOK_NAME is now PLASTICXP_NAME.
     o Options.getCrossPlatformLookAndFeelClassName returns
       the PLASTICXP_NAME.
@@ -91,6 +92,7 @@ BUGS FIXED
     #73: Windows L&f ignores the desktop control font size setting.
     #79: Windows combobox too narrow.
     #80: Plastic combo arrow button is focusable in Java 6.
+    #81: Wrong icon for "OptionPane.questionIcon" property.
     
 
 NEW FEATURES

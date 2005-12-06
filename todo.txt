@@ -20,8 +20,6 @@ o Schriftwahl in Plastic-Themen überarbeiten
 
 
 o Bug in Plastic: Jay Gindin hat ScrollBar-Problem gefunden.
-o Bug: Tahoma ist schlechte Wahl in asiatischen Kulturräumen,
-       weil Tahoma zwar gefunden wird, aber viele Zeichen nicht darstellt.
        
 
 o ToolBarSeparator hat doofe Höhe; ist zu hoch
@@ -33,7 +31,6 @@ o Dokumentation zu den Einstellungen:
 	
 
 Plastic:
-o Schriftwahl und FontSizeHints aus den Farbthemen heraustrennen.
 o Anderer PopupMenu-Rahmen, wie bei BasicBorders?
 o Thema, dass unter Windows die Windows-Farben erfragt.
 
@@ -53,6 +50,3 @@ o Im Look-Preview eine Lupe anbieten.
 Extended Windows:
 o RollOver-Rahmen fehlen.
 o Hintergrund von selektierten, nicht armed RollOverButton-Rahmen aufhellen.
-
-ExtendedMotif:
-o Menüeintrag ohne Icon (File -> Export) hat schlechte Einrückung.
