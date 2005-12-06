@@ -55,10 +55,11 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * @version $Revision: 1.1 $
  */
 
-public class MenuBuilder {
+public class MenuBarView {
     
     private static final String HTML_TEXT = 
         "<html><b>Bold</b>, <i>Italics</i>, <tt>Typewriter</tt></html>";
+    
     
 	/**
 	 * Builds, configures, and answers the menubar. Requests HeaderStyle, 
