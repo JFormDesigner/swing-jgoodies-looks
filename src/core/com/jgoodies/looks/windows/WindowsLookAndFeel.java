@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -387,16 +387,8 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
             "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
 
-            "OptionPane.errorIcon",       isXP ? makeIcon(getClass(), "icons/xp/Error.png")
-                                               : makeIcon(superclass, "icons/Error.gif"),
-            "OptionPane.informationIcon", isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
-                                               : makeIcon(superclass, "icons/Inform.gif"), 
-			"OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
-                                               : makeIcon(superclass, "icons/Warn.gif"), 
-			"OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
-                                               : makeIcon(superclass, "icons/Question.gif"),
-            "FormattedTextField.margin",  textInsets, // 1.4.1 Bug
-            "PasswordField.margin",       textInsets, // 1.4.1 Bug
+            "FormattedTextField.margin",  textInsets, // Poor in 1.6
+            "PasswordField.margin",       textInsets, // Poor in 1.6
             
             "PopupMenu.border",           WindowsBorders.getPopupMenuBorder(),
             "PopupMenu.noMarginBorder",   WindowsBorders.getNoMarginPopupMenuBorder(),
@@ -426,15 +418,27 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
             "Tree.selectionBorderColor",  controlColor, // 1.4.1 Bug; active
             "Tree.rowHeight",             rowHeight, // 1.4.1 Bug
+        };
+        if (LookUtils.IS_JAVA_1_4) {
+            defaults = append(defaults, new Object[] {
+            "InternalFrame.icon",         makeIcon(superclass, "icons/JavaCup.gif"),
+            "OptionPane.errorIcon",       isXP ? makeIcon(getClass(), "icons/xp/Error.png")
+                                               : makeIcon(superclass, "icons/Error.gif"),
+            "OptionPane.informationIcon", isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
+                                               : makeIcon(superclass, "icons/Inform.gif"), 
+            "OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
+                                               : makeIcon(superclass, "icons/Warn.gif"), 
+            "OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
+                                               : makeIcon(superclass, "icons/Question.gif")
+            });
+        }
+        if (LookUtils.IS_JAVA_1_4 || LookUtils.IS_JAVA_5) {
+            defaults = append(defaults, new Object[] {
             "Tree.openIcon",              isXP ? makeIcon(getClass(), "icons/xp/TreeOpen.png")
                                                : makeIcon(getClass(), "icons/TreeOpen.gif"),
             "Tree.closedIcon",            isXP ? makeIcon(getClass(), "icons/xp/TreeClosed.png")
-                                               : makeIcon(getClass(), "icons/TreeClosed.gif"),
-        };
-        if (LookUtils.IS_JAVA_1_4) {
-            // InternalFrame
-            defaults = append(defaults, "InternalFrame.icon",
-                    makeIcon(superclass, "icons/JavaCup.gif"));
+                                               : makeIcon(getClass(), "icons/TreeClosed.gif")
+            });
         }
         table.putDefaults(defaults);
     }
@@ -569,6 +573,23 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         System.arraycopy(source, 0, destination, 0, length);
         destination[length] = key;
         destination[length + 1] = value;
+        return destination;
+    }
+
+
+    /**
+     * Appends the key and value to the given source array and returns
+     * a copy that has the two new elements at its end.
+     * 
+     * @return an array with the key and value appended
+     */
+    private static Object[] append(Object[] source, Object[] keysAndValues) {
+        int length = source.length;
+        Object[] destination = new Object[length + keysAndValues.length];
+        System.arraycopy(source, 0, destination, 0, length);
+        for (int i = 0; i < keysAndValues.length; i++) {
+            destination[length + i] = keysAndValues[i];
+        }
         return destination;
     }
 
