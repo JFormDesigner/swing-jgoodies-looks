@@ -32,7 +32,6 @@ package com.jgoodies.looks;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
@@ -48,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class LookUtils {
     
@@ -330,26 +329,6 @@ public final class LookUtils {
     }
     
     
-    /**
-     * Returns the Windows icon font - unless Java can't render it well. The 
-     * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
-     * and the desktop font size settings (normal, large, extra large).
-     * Since Java 1.4 and Java 5 render the Windows Vista icon font
-     * Segoe UI poorly, we return the default GUI font in these environments.
-     *  
-     * @return the Windows scalable control font - unless Java can't render it well
-     */
-    public static Font getWindowsControlFont() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        String fontName = ((IS_JAVA_5 || IS_JAVA_1_4) && IS_OS_WINDOWS_VISTA)
-            ? "win.defaultGUI.font"
-            : "win.icon.font";
-        return (Font) toolkit.getDesktopProperty(fontName);
-    }
-    
-        
-    // Color Modifications **************************************************
-
     /**
      * Computes and returns a Color that is slightly brighter
      * than the specified Color. 

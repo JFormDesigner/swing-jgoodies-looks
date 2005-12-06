@@ -31,6 +31,7 @@
 package com.jgoodies.looks;
 
 import java.awt.Font;
+import java.awt.Toolkit;
 
 import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
@@ -42,7 +43,7 @@ import com.jgoodies.looks.FontSets.LogicalFontSet;
  * Provides or creates predefined FontChoicePolicy implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see     FontChoicePolicy
  * 
@@ -107,6 +108,24 @@ public final class FontChoicePolicies {
     }
 	
 	
+    /**
+     * Returns the Windows icon font - unless Java can't render it well. The 
+     * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
+     * and the desktop font size settings (normal, large, extra large).
+     * Since Java 1.4 and Java 5 render the Windows Vista icon font
+     * Segoe UI poorly, we return the default GUI font in these environments.
+     *  
+     * @return the Windows scalable control font - unless Java can't render it well
+     */
+    private static Font getWindowsControlFont() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        String fontName = ((LookUtils.IS_JAVA_5 || LookUtils.IS_JAVA_1_4) && LookUtils.IS_OS_WINDOWS_VISTA)
+            ? "win.defaultGUI.font"
+            : "win.icon.font";
+        return (Font) toolkit.getDesktopProperty(fontName);
+    }
+
+
     // FontChoicePolicy Implementations ***************************************       
 
     private static final class FixedFontSetPolicy implements FontChoicePolicy {
@@ -126,7 +145,7 @@ public final class FontChoicePolicies {
     private static final class DefaultWindowsPolicy implements FontChoicePolicy {
         
         public FontSet getFontSet(UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(LookUtils.getWindowsControlFont());
+            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
             
             // Derive a bold version of the control font.
             FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
@@ -137,7 +156,7 @@ public final class FontChoicePolicies {
             FontUIResource messageFont = table == null
                 ? controlFont 
                 : (FontUIResource) table.getFont("OptionPane.font");
-            FontUIResource toolTipFont = table == null
+            FontUIResource smallFont = table == null
                 ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
                 : (FontUIResource) table.getFont("ToolTip.font");
             FontUIResource windowTitleFont  = table == null
@@ -148,7 +167,7 @@ public final class FontChoicePolicies {
                     menuFont,
                     titleFont, 
                     messageFont, 
-                    toolTipFont, 
+                    smallFont, 
                     windowTitleFont);
         }
     }
