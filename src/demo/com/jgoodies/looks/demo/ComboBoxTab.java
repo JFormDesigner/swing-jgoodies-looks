@@ -37,6 +37,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
+import javax.swing.table.TableColumn;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.builder.PanelBuilder;
@@ -53,7 +54,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * TODO: Add a section for combo boxes as cell editors.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class ComboBoxTab {
     
@@ -87,18 +88,24 @@ final class ComboBoxTab {
         
         FormLayout layout = new FormLayout(
                 "0:grow, center:pref, 0:grow", 
-                "pref, 21dlu, pref");
+                "pref, 21dlu, pref, 21dlu, 50dlu");
         
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
         builder.getPanel().setOpaque(false);
+        CellConstraints cc = new CellConstraints();
         
-        builder.add(createHelpLabel(),         new CellConstraints(2, 1));
-        builder.add(buildTestPanel(), new CellConstraints(2, 3));
+        builder.add(buildHelpPanel(), cc.xy(2, 1));
+        builder.add(buildTestPanel(), cc.xy(2, 3));
+        builder.add(buildTable(),     cc.xy(2, 5));
         
         return builder.getPanel();
     }
     
+    
+    private JComponent buildHelpPanel() {
+        return new JLabel("Font baselines shall be aligned and the visible value shall not be cropped.");
+    }
     
     private JComponent buildTestPanel() {
         FormLayout layout = new FormLayout(
@@ -134,13 +141,32 @@ final class ComboBoxTab {
 
         return builder.getPanel();
     }
+    
+    
+    private JComponent buildTable() {
+        String[] columnNames = {"Text", "Editable", "Non-Editable"};
+
+        Object[][] data = {
+                {TEST_STR, TEST_STR, TEST_STR },
+                {TEST_STR, TEST_STR, TEST_STR },
+                {TEST_STR, TEST_STR, TEST_STR},
+                {TEST_STR, TEST_STR, TEST_STR},
+                {TEST_STR, TEST_STR, TEST_STR}};
+        JTable table = new JTable(data, columnNames);
+        
+        TableColumn editableColumn = table.getColumnModel().getColumn(1);
+        JComboBox editableCombo = createComboBox(TEST_STR, true, null);
+        editableColumn.setCellEditor(new DefaultCellEditor(editableCombo));
+        
+        TableColumn nonEditableColumn = table.getColumnModel().getColumn(2);
+        JComboBox nonEditableCombo = createComboBox(TEST_STR, false, null);
+        nonEditableColumn.setCellEditor(new DefaultCellEditor(nonEditableCombo));
+
+        return new JScrollPane(table);
+    }
 
 
     // Helper Code **********************************************************
-    
-    private JComponent createHelpLabel() {
-        return new JLabel("Font baselines shall be aligned and the visible value shall not be cropped.");
-    }
     
     private JLabel createCenteredLabel(String text) {
         return new JLabel(text, JLabel.CENTER);
