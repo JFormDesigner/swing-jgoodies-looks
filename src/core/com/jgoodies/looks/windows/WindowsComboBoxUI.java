@@ -54,7 +54,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -89,6 +89,22 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         // To make editable and non-editable equally wide, 
         // we always add 1 pixel.
         size.width += 1;
+        
+        // Honor corrections made in #paintCurrentValue
+        ListCellRenderer renderer = comboBox.getRenderer();
+        if (renderer instanceof JComponent) {
+            JComponent component = (JComponent) renderer;
+            Insets rendererInsets = component.getInsets();
+            Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
+            int offsetLeft   = Math.max(0, editorInsets.left - rendererInsets.left);
+            int offsetRight  = Math.max(0, editorInsets.right - rendererInsets.right);
+            // int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
+            // int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
+            size.width += offsetLeft + offsetRight;
+            //size.height += offsetTop + offsetBottom;
+        }
+        
+        // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
         int height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
            ? textFieldSize.height
