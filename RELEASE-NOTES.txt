@@ -1,6 +1,6 @@
 
-                    JGoodies Looks, Version 2.0 Preview 1 
-                            Release Notes
+               JGoodies Looks, Version 2.0 Preview 2 
+                          Release Notes
                         
 
 INTRODUCTION
@@ -93,6 +93,8 @@ BUGS FIXED
     #79: Windows combobox too narrow.
     #80: Plastic combo arrow button is focusable in Java 6.
     #81: Wrong icon for "OptionPane.questionIcon" property.
+    #84: Windows L&F combo margin too wide in table.
+    #86: Windows combobox too narrow if the renderer has zero insets.
     
 
 NEW FEATURES
