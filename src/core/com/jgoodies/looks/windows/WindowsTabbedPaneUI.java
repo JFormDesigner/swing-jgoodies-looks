@@ -46,6 +46,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 /**
@@ -55,15 +56,19 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
+    private static final boolean IS_XP_LAF_5_OR_LATER =
+        LookUtils.IS_JAVA_5_OR_LATER && LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
-    private static final Insets NORTH_INSETS = new Insets(1, 0, 0, 0);
-    private static final Insets WEST_INSETS  = new Insets(0, 1, 0, 0);
-    private static final Insets SOUTH_INSETS = new Insets(0, 0, 1, 0);
-    private static final Insets EAST_INSETS  = new Insets(0, 0, 0, 1);
+    private static final int INSET = IS_XP_LAF_5_OR_LATER ? -1 : 1; 
+    private static final Insets NORTH_INSETS = new Insets(INSET, 0, 0, 0);
+    private static final Insets WEST_INSETS  = new Insets(0, INSET, 0, 0);
+    private static final Insets SOUTH_INSETS = new Insets(0, 0, INSET, 0);
+    private static final Insets EAST_INSETS  = new Insets(0, 0, 0, INSET);
 
 
     /**
@@ -219,11 +224,12 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         if (hasEmbeddedTabs()) {
             return EMPTY_INSETS;
         } else if (hasNoContentBorder()) {
+            int inset = IS_XP_LAF_5_OR_LATER ? 1 : 0;
             switch (tabPlacement) {
-                case LEFT:   return new Insets(1,2,1,0);
-                case RIGHT:  return new Insets(1,0,1,2);
-                case TOP:    return new Insets(2,2,0,2);
-                case BOTTOM: return new Insets(0,2,2,2);
+                case LEFT:   return new Insets(1, 2, 1, inset);
+                case RIGHT:  return new Insets(1, inset, 1, 2);
+                case TOP:    return new Insets(2, 2, inset, 2);
+                case BOTTOM: return new Insets(inset, 2, 2, 2);
                 default: return EMPTY_INSETS;
             }
         } else {
