@@ -42,12 +42,16 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
  * a compound border with an inner <code>MarginBorder</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 class WindowsComboBoxEditor extends BasicComboBoxEditor {
 
-    WindowsComboBoxEditor() {
+    WindowsComboBoxEditor(boolean isTableCellEditor) {
         editor = new JTextField("", UIManager.getInt("ComboBox.editorColumns"));
+        // Use special insets for tables, the text field defaults otherwise
+        if (isTableCellEditor) {
+            editor.setMargin(UIManager.getInsets("ComboBox.tableEditorInsets"));
+        }
         editor.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
     }
 
@@ -64,6 +68,9 @@ class WindowsComboBoxEditor extends BasicComboBoxEditor {
      */
     static final class UIResource extends WindowsComboBoxEditor implements
             javax.swing.plaf.UIResource {
-        // Just an implementation of UIResource
+        
+        UIResource(boolean isTableCellEditor) {
+            super(isTableCellEditor);
+        }
     }
 }

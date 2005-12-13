@@ -31,11 +31,14 @@
 package com.jgoodies.looks.windows;
 
 import java.awt.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -54,9 +57,11 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
+    
+    private static final String CELL_EDITOR_KEY = "JComboBox.isTableCellEditor";
     
     /** 
      * Used to determine the minimum height of a text field, 
@@ -69,9 +74,36 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
     
     
+    private boolean tableCellEditor;
+    private PropertyChangeListener propertyChangeListener;
+    
+    
+    // ************************************************************************
+    
     public static ComponentUI createUI(JComponent b) {
         return new WindowsComboBoxUI();
     }
+    
+    
+    // ************************************************************************
+    
+    public void installUI( JComponent c ) {
+        super.installUI(c);
+        tableCellEditor = isTableCellEditor();
+    }   
+    
+    protected void installListeners() {
+        super.installListeners();
+        propertyChangeListener = new TableCellEditorPropertyChangeHandler();
+        comboBox.addPropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
+    }
+    
+    protected void uninstallListeners() {
+        super.uninstallListeners();
+        comboBox.removePropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
+        propertyChangeListener = null;
+    }
+    
     
     /**
      * The minumum size is the size of the display area plus insets plus the button.
@@ -130,7 +162,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * been installed in the JComboBox.
      */
     protected ComboBoxEditor createEditor() {
-        return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource();
+        return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource(tableCellEditor);
     }
 
 
@@ -155,6 +187,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         return new WindowsComboPopup(comboBox);
     }
     
+    
     /**
      * Creates the default renderer that will be used in a non-editiable combo 
      * box. A default renderer will used only if a renderer has not been 
@@ -168,6 +201,9 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
      * @see javax.swing.JComboBox#setRenderer
      */
     protected ListCellRenderer createRenderer() {
+        if (tableCellEditor) {
+            return super.createRenderer();
+        }
         BasicComboBoxRenderer renderer = new BasicComboBoxRenderer.UIResource();
         renderer.setBorder(UIManager.getBorder("ComboBox.rendererBorder"));
         return renderer;
@@ -211,6 +247,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
                     height - (insets.top  + insets.bottom));
         }
     }
+    
 
     /**
      * Paints the currently selected item.
@@ -235,7 +272,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
             c.setBackground(UIManager.getColor("ComboBox.background"));
         }
         Border oldBorder = null;
-        if (c instanceof JComponent) {
+        if ((c instanceof JComponent) && !tableCellEditor) {
             JComponent component = (JComponent) c;
             if (c instanceof BasicComboBoxRenderer.UIResource) {
                 oldBorder = component.getBorder();
@@ -280,6 +317,20 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         if (oldBorder != null) {
             ((JComponent) c).setBorder(oldBorder);
         }
+    }
+    
+    
+    // Helper Code ************************************************************
+    
+    /**
+     * Checks and answers if this UI's combo has a client property
+     * that indicates that the combo is used as a table cell editor.
+     * 
+     * @return <code>true</code> if the table cell editor client property
+     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     */
+    private boolean isTableCellEditor() {
+        return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
     }
     
 
@@ -362,6 +413,26 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         }
 
     }    
+    
+    
+    // Handling Combo Changes *************************************************
+    
+    /**
+     * Listens to changes in the table cell editor client property
+     * and updates the default editor - if any - to use the correct
+     * insets for this case.
+     */
+    private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
+        public void propertyChange(PropertyChangeEvent evt) {
+            tableCellEditor = isTableCellEditor();
+            if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
+                comboBox.setRenderer(createRenderer());
+            }
+            if (comboBox.getEditor() == null || comboBox.getEditor() instanceof UIResource) {
+                comboBox.setEditor(createEditor());
+            }
+        }
+    }
     
     
 }
