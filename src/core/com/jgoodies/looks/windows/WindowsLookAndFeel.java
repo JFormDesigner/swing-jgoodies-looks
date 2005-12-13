@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -312,6 +312,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         int comboPopupBorderSize = 1;
         int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
+        Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
         
         Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(3, 0, 3, 0)
@@ -360,6 +361,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
             "ComboBox.editorInsets",      textInsets,          // Added by JGoodies
+            "ComboBox.tableEditorInsets", comboTableEditorInsets,            
             "ComboBox.rendererBorder",    comboRendererBorder, // Added by JGoodies
             
             "EditorPane.margin",		  textInsets,
