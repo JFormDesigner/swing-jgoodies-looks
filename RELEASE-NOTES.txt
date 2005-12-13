@@ -93,6 +93,8 @@ BUGS FIXED
     #79: Windows combobox too narrow.
     #80: Plastic combo arrow button is focusable in Java 6.
     #81: Wrong icon for "OptionPane.questionIcon" property.
+    #83: Windows tabbed pane has line under selected tab
+         in Java 5 or later if the content border is disabled.
     #84: Windows L&F combo margin too wide in table.
     #86: Windows combobox too narrow if the renderer has zero insets.
     
