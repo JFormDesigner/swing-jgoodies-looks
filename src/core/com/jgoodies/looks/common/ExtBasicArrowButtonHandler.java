@@ -36,6 +36,8 @@ import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.AttributedCharacterIterator;
@@ -67,16 +69,18 @@ import javax.swing.text.InternationalFormatter;
  * 
  * Copied from javax.swing.BasicSpinnerUI
  * 
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see javax.swing.plaf.basic.BasicSpinnerUI
  */
-public final class ExtBasicArrowButtonHandler extends AbstractAction implements MouseListener {
+public final class ExtBasicArrowButtonHandler extends AbstractAction
+    implements MouseListener, FocusListener {
 
 	private final javax.swing.Timer autoRepeatTimer;
 	private final boolean isNext;
 	
-	private JSpinner spinner = null;
+	private JSpinner spinner;
+    private JButton arrowButton;
 
 
 	public ExtBasicArrowButtonHandler(String name, boolean isNext) {
@@ -97,30 +101,42 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 
 
 	public void actionPerformed(ActionEvent e) {
-		JSpinner aSpinner = this.spinner;
+        JSpinner spinner = this.spinner;
 
-		if (!(e.getSource() instanceof javax.swing.Timer)) {
-			// Most likely resulting from being in ActionMap.
-			aSpinner = eventToSpinner(e);
-		}
-		if (aSpinner != null) {
-			try {
-				int calendarField = getCalendarField(aSpinner);
-				aSpinner.commitEdit();
-				if (calendarField != -1) {
-					((SpinnerDateModel) aSpinner.getModel()).setCalendarField(calendarField);
-				}
-				Object value = (isNext) ? aSpinner.getNextValue() : aSpinner.getPreviousValue();
-				if (value != null) {
-					aSpinner.setValue(value);
-					select(aSpinner);
-				}
-			} catch (IllegalArgumentException iae) {
-				UIManager.getLookAndFeel().provideErrorFeedback(aSpinner);
-			} catch (ParseException pe) {
-				UIManager.getLookAndFeel().provideErrorFeedback(aSpinner);
-			}
-		}
+        if (!(e.getSource() instanceof javax.swing.Timer)) {
+            // Most likely resulting from being in ActionMap.
+            spinner = eventToSpinner(e);
+            if (e.getSource() instanceof JButton) {
+                arrowButton = (JButton) e.getSource();
+            }
+        } else {
+            if (arrowButton != null && !arrowButton.getModel().isPressed()
+                    && autoRepeatTimer.isRunning()) {
+                autoRepeatTimer.stop();
+                spinner = null;
+                arrowButton = null;
+            }
+        }
+        if (spinner != null) {
+            try {
+                int calendarField = getCalendarField(spinner);
+                spinner.commitEdit();
+                if (calendarField != -1) {
+                    ((SpinnerDateModel) spinner.getModel())
+                            .setCalendarField(calendarField);
+                }
+                Object value = (isNext) ? spinner.getNextValue() : spinner
+                        .getPreviousValue();
+                if (value != null) {
+                    spinner.setValue(value);
+                    select(spinner);
+                }
+            } catch (IllegalArgumentException iae) {
+                UIManager.getLookAndFeel().provideErrorFeedback(spinner);
+            } catch (ParseException pe) {
+                UIManager.getLookAndFeel().provideErrorFeedback(spinner);
+            }
+        }
 	}
 
 
@@ -231,6 +247,7 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 	public void mouseReleased(MouseEvent e) {
 		autoRepeatTimer.stop();
 		spinner = null;
+        arrowButton = null;
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -238,11 +255,15 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
     }
     
 	public void mouseEntered(MouseEvent e) {
-        // Do nothing
+        if (spinner != null && !autoRepeatTimer.isRunning()) {
+            autoRepeatTimer.start();        
+        }
     }
     
 	public void mouseExited(MouseEvent e) {
-        // Do nothing
+        if (autoRepeatTimer.isRunning()) {
+            autoRepeatTimer.stop();     
+        }
     }
 
 
@@ -269,5 +290,22 @@ public final class ExtBasicArrowButtonHandler extends AbstractAction implements 
 			}
 		}
 	}
+
+    public void focusGained(FocusEvent e) {
+        // Do nothing
+    }
+
+    public void focusLost(FocusEvent e) {
+        if (autoRepeatTimer.isRunning()) {
+            autoRepeatTimer.stop();     
+        }       
+        spinner = null;
+        if (arrowButton != null) {
+            ButtonModel model = arrowButton.getModel();
+            model.setPressed(false);
+            model.setArmed(false);
+            arrowButton = null;
+        }
+    }
 
 }
