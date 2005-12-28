@@ -5,14 +5,14 @@
 
 INTRODUCTION
 
-    This is a preview for the JGoodies Looks 2.0 series.
+    This is a stable preview for the JGoodies Looks 2.0.
     The major changes are better support for Windows Vista,
     Java 6, and an overhauled font lookup in all L&fs.
     
-    NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
-    THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
-    It is an engineering build that has seen minimal testing; 
-    it may lack functions and may contain known bugs in some areas. 
+    NOTE: THE CODE IS MORE "RAW" THAN OTHER RELEASES THAT 
+    YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
+    It is an engineering build that may contain known bugs 
+    in some areas. 
         
     The font lookup in the Windows L&f has been overhauled.
     Text component insets have been adjusted to better comply 
@@ -97,6 +97,7 @@ BUGS FIXED
          in Java 5 or later if the content border is disabled.
     #84: Windows L&F combo margin too wide in table.
     #86: Windows combobox too narrow if the renderer has zero insets.
+    #90: Spinner does not stop the timer when loosing focus.
     
 
 NEW FEATURES
