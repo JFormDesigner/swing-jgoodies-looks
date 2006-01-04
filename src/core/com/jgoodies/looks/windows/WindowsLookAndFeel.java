@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -88,7 +88,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
-                + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
+                + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
     }
     
     
@@ -160,88 +160,88 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      */
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
-        String WINDOWS_PREFIX = "com.jgoodies.looks.windows.Windows";
-        String COMMON_PREFIX  = "com.jgoodies.looks.common.ExtBasic";
+        final String windowsPrefix = "com.jgoodies.looks.windows.Windows";
+        final String commonPrefix  = "com.jgoodies.looks.common.ExtBasic";
 
         String menuUIPrefix = LookUtils.IS_LAF_WINDOWS_XP_ENABLED
-                ? WINDOWS_PREFIX
-                : COMMON_PREFIX;
+                ? windowsPrefix
+                : commonPrefix;
 
         // Overwrite some of the uiDefaults.
         Object[] uiDefaults = {
             // Modified size 
-            "ComboBoxUI",            WINDOWS_PREFIX + "ComboBoxUI", 
+            "ComboBoxUI",            windowsPrefix + "ComboBoxUI", 
 
             // Modified preferred height: can be even or odd 
-            "ButtonUI",              WINDOWS_PREFIX + "ButtonUI", 
+            "ButtonUI",              windowsPrefix + "ButtonUI", 
 
             // Can installs an optional etched border
-			"ScrollPaneUI",          WINDOWS_PREFIX + "ScrollPaneUI", 
+			"ScrollPaneUI",          windowsPrefix + "ScrollPaneUI", 
 
             // Optional style and optional special borders
-            "MenuBarUI",             WINDOWS_PREFIX + "MenuBarUI", 
+            "MenuBarUI",             windowsPrefix + "MenuBarUI", 
 
             // Aligned menu items
             "MenuUI",                menuUIPrefix + "MenuUI", 
-			"MenuItemUI",            COMMON_PREFIX + "MenuItemUI", 
-			"CheckBoxMenuItemUI",    COMMON_PREFIX + "CheckBoxMenuItemUI", 
-			"RadioButtonMenuItemUI", COMMON_PREFIX + "RadioButtonMenuItemUI", 
+			"MenuItemUI",            commonPrefix + "MenuItemUI", 
+			"CheckBoxMenuItemUI",    commonPrefix + "CheckBoxMenuItemUI", 
+			"RadioButtonMenuItemUI", commonPrefix + "RadioButtonMenuItemUI", 
 
             // Provides an option for a no margin border              
-            "PopupMenuUI",           WINDOWS_PREFIX + "PopupMenuUI",
+            "PopupMenuUI",           windowsPrefix + "PopupMenuUI",
            
             // Has padding above and below the separator lines				
-            "PopupMenuSeparatorUI",  COMMON_PREFIX + "PopupMenuSeparatorUI", 
+            "PopupMenuSeparatorUI",  commonPrefix + "PopupMenuSeparatorUI", 
 
             // Honors the screen resolution and uses a minimum button width             
-            "OptionPaneUI",          WINDOWS_PREFIX + "OptionPaneUI", 
+            "OptionPaneUI",          windowsPrefix + "OptionPaneUI", 
 
             // 1.4.1 has ugly one touch triangles
-            "SplitPaneUI",           WINDOWS_PREFIX + "SplitPaneUI", 
+            "SplitPaneUI",           windowsPrefix + "SplitPaneUI", 
 
             // Work in progress: Can have a flat presentation
-            "TabbedPaneUI",          WINDOWS_PREFIX + "TabbedPaneUI", 
+            "TabbedPaneUI",          windowsPrefix + "TabbedPaneUI", 
 
             // Corrected position of the tree button icon
-            "TreeUI",                WINDOWS_PREFIX + "TreeUI",
+            "TreeUI",                windowsPrefix + "TreeUI",
             
             // Just to use shared UI delegate
-            "SeparatorUI",           WINDOWS_PREFIX + "SeparatorUI"};
+            "SeparatorUI",           windowsPrefix + "SeparatorUI"};
 
         if (LookUtils.IS_JAVA_1_4_2_OR_LATER) {
             // Modified Border
             uiDefaults = append(uiDefaults, 
-            "SpinnerUI",             WINDOWS_PREFIX + "SpinnerUI"); 
+            "SpinnerUI",             windowsPrefix + "SpinnerUI"); 
         }
         
    
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Renders a circle, not the star ("*") character                       
             uiDefaults = append(uiDefaults, 
-                "PasswordFieldUI",    WINDOWS_PREFIX + "XPPasswordFieldUI"); 
+                "PasswordFieldUI",    windowsPrefix + "XPPasswordFieldUI"); 
 
             // Optional style and optional special borders; 
             // rollover borders for compound buttons
             uiDefaults = append(uiDefaults, 
-                "ToolBarUI",          WINDOWS_PREFIX + "XPToolBarUI");
+                "ToolBarUI",          windowsPrefix + "XPToolBarUI");
             
             // Honors XP table header style for custom user renderers. 
             uiDefaults = append(uiDefaults,
-                "TableHeaderUI",      WINDOWS_PREFIX + "XPTableHeaderUI");            
+                "TableHeaderUI",      windowsPrefix + "XPTableHeaderUI");            
         } else {
             // Optional style and optional special borders; 
             // rollover borders corrected
             uiDefaults = append(uiDefaults, 
-                "ToolBarUI",          WINDOWS_PREFIX + "ToolBarUI"); 
+                "ToolBarUI",          windowsPrefix + "ToolBarUI"); 
 
             // Black arrows
             uiDefaults = append(uiDefaults, 
-                "ScrollBarUI",        WINDOWS_PREFIX + "ScrollBarUI"); 
+                "ScrollBarUI",        windowsPrefix + "ScrollBarUI"); 
 
             if (!LookUtils.IS_JAVA_1_4_2_OR_LATER) {
                 // Uses unmodified size specified by "ToolBar.separatorSize"
                 uiDefaults = append(uiDefaults, 
-                        "ToolBarSeparatorUI", WINDOWS_PREFIX + "ToolBarSeparatorUI");
+                        "ToolBarSeparatorUI", windowsPrefix + "ToolBarSeparatorUI");
             }
         }
         table.putDefaults(uiDefaults);

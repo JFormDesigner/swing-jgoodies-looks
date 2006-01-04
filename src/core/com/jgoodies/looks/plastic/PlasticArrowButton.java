@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -42,7 +42,7 @@ import javax.swing.plaf.metal.MetalScrollButton;
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 class PlasticArrowButton extends MetalScrollButton {
 	
@@ -237,7 +237,7 @@ class PlasticArrowButton extends MetalScrollButton {
 		//	    System.out.println( "startX2 :" + startX + " startY2 :"+startY);
 		
 		for (int line = 0; line < arrowHeight; line++) {
-            g.fillRect(startX - line - arrowOffset, startY - line, 2*(line + 1), 1);
+            g.fillRect(startX - line - arrowOffset, startY - line, 2 * (line + 1), 1);
 		}
 		
 		if (isEnabled) {

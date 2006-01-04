@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
  * a compound border with an inner <code>MarginBorder</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 class PlasticComboBoxEditor extends BasicComboBoxEditor {
 

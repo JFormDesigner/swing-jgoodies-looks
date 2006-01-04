@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -48,7 +48,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * <tt>ScrollBar.maxBumpsWidth</tt> to limit the with of the scroll bar bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class PlasticScrollBarUI extends MetalScrollBarUI {
@@ -254,9 +254,9 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 			bumps.setBumpArea(width, height);
 			bumps.paintIcon(c, g, x, y);
 		} else {
-			int MAX_WIDTH= UIManager.getInt(MAX_BUMPS_WIDTH_KEY);
-	    	int myWidth  = Math.min(MAX_WIDTH, width);
-    		int myHeight = Math.min(MAX_WIDTH, height);
+			int maxWidth = UIManager.getInt(MAX_BUMPS_WIDTH_KEY);
+	    	int myWidth  = Math.min(maxWidth, width);
+    		int myHeight = Math.min(maxWidth, height);
     		int myX      = x + (width  - myWidth) / 2;
 	    	int myY      = y + (height - myHeight) / 2;
 			bumps.setBumpArea(myWidth, myHeight);

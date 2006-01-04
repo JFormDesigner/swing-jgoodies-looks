@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class MenuItemRenderer {
@@ -57,13 +57,13 @@ public final class MenuItemRenderer {
     protected static final String HTML_KEY = BasicHTML.propertyKey;
 
     /* Client Property keys for text and accelerator text widths */
-	private static final String MAX_TEXT_WIDTH = "maxTextWidth";
-	private static final String MAX_ACC_WIDTH	 = "maxAccWidth";
+    private static final String MAX_TEXT_WIDTH = "maxTextWidth";
+	private static final String MAX_ACC_WIDTH  = "maxAccWidth";
 
-	private static final Icon	  NO_ICON		 = new NullIcon();		
-	
-	
-    static Rectangle zeroRect		= new Rectangle(0,0,0,0);
+	private static final Icon   NO_ICON        = new NullIcon();
+
+
+    static Rectangle zeroRect		= new Rectangle(0, 0, 0, 0);
     static Rectangle iconRect		= new Rectangle();
     static Rectangle textRect		= new Rectangle();
     static Rectangle acceleratorRect= new Rectangle();
@@ -81,7 +81,7 @@ public final class MenuItemRenderer {
 	private final Color		acceleratorForeground;
 	private final Color		acceleratorSelectionForeground;
 	
-	private final String		acceleratorDelimiter;
+	private final String	acceleratorDelimiter;
 	private final Icon	  	fillerIcon;
 	
 	

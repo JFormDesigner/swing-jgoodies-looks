@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
  * it uses a shared UI delegate.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorUI {
 
@@ -71,7 +71,7 @@ public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorU
 	}
 	
 
-    public void paint(Graphics g, JComponent c ) {
+    public void paint(Graphics g, JComponent c) {
         Dimension s = c.getSize();
         
         int topInset   = insets.top;
@@ -94,7 +94,7 @@ public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorU
 		g.drawLine(leftInset, 0, s.width - rightInset, 0);
 
 		g.setColor(c.getBackground());
-		g.drawLine(leftInset, 1, s.width -rightInset, 1);
+		g.drawLine(leftInset, 1, s.width - rightInset, 1);
 		g.translate(0, -topInset);
     }
     

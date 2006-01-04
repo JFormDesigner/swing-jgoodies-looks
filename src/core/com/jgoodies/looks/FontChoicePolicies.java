@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -56,16 +56,16 @@ import com.jgoodies.looks.FontSets.LogicalFontSet;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     FontChoicePolicy
  * 
  * @since 2.0
  */ 
 public final class FontChoicePolicies {
-	
 
-	private FontChoicePolicies() {
+
+    private FontChoicePolicies() {
         // Override default constructor; prevents instantation.
     }
     
@@ -209,8 +209,8 @@ public final class FontChoicePolicies {
             : new FontUIResource(Font.decode(decodedMenuFont));
         return new DefaultFontSet(controlFont, menuFont);
     }
-	
-	
+
+
     /**
      * Returns the Windows icon font - unless Java can't render it well. The 
      * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 

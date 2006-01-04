@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -40,23 +40,23 @@ import javax.swing.JToolBar;
  * <code>BorderStyle</code>.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see	BorderStyle
  */
 public final class HeaderStyle {
-	
-	public static final HeaderStyle SINGLE = new HeaderStyle("Single");
-	public static final HeaderStyle BOTH   = new HeaderStyle("Both");
 
-	private final String name;
+    public static final HeaderStyle SINGLE = new HeaderStyle("Single");
+    public static final HeaderStyle BOTH   = new HeaderStyle("Both");
+
+    private final String name;
 
 
-	private HeaderStyle(String name) { 
-		this.name = name; 
-	}
-	
-	
+    private HeaderStyle(String name) {
+        this.name = name;
+    }
+
+
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
      * from the JToolBar.
@@ -64,11 +64,11 @@ public final class HeaderStyle {
      * @param menuBar   the menu bar to inspect
      * @return the menu bar's header style
      */
-   	public static HeaderStyle from(JMenuBar menuBar) {
-   		return from0(menuBar);
-   	}
-   	
-   	
+    public static HeaderStyle from(JMenuBar menuBar) {
+        return from0(menuBar);
+    }
+   
+   
     /**
      * Looks up the client property for the <code>HeaderStyle</code>
      * from the JToolBar.
@@ -76,49 +76,50 @@ public final class HeaderStyle {
      * @param toolBar   the tool bar to inspect
      * @return the tool bar's header style
      */
-   	public static HeaderStyle from(JToolBar toolBar) {
-   		return from0(toolBar);
-   	}
+    public static HeaderStyle from(JToolBar toolBar) {
+        return from0(toolBar);
+    }
 
-   	
-   	/**
-   	 * Looks up the client property for the <code>HeaderStyle</code> 
-   	 * from the specified JComponent.
+   
+    /**
+     * Looks up the client property for the <code>HeaderStyle</code> 
+     * from the specified JComponent.
      * 
      * @param c    the component to inspect
      * @return the header style for the given component
-   	 */
-   	private static HeaderStyle from0(JComponent c) {
-   		Object value = c.getClientProperty(Options.HEADER_STYLE_KEY);
-   		if (value instanceof HeaderStyle)
-   			return (HeaderStyle) value;
-   		
-   		if (value instanceof String) {
-   			return HeaderStyle.valueOf((String) value);
-   		} 
-   		
-   		return null;
-   	}
-   	
-   	
-   	/**
-   	 * Looks up and answers the <code>HeaderStyle</code> with the specified name.
+     */
+    private static HeaderStyle from0(JComponent c) {
+        Object value = c.getClientProperty(Options.HEADER_STYLE_KEY);
+        if (value instanceof HeaderStyle) 
+            return (HeaderStyle) value;
+
+        if (value instanceof String) { 
+            return HeaderStyle.valueOf((String) value); 
+        }
+
+        return null;
+    }
+   
+   
+    /**
+     * Looks up and answers the <code>HeaderStyle</code> with the specified name.
      * 
      * @param name    the name of the HeaderStyle object to lookup
      * @return the associated HeaderStyle
-   	 */
-	private static HeaderStyle valueOf(String name) {
-		if (name.equalsIgnoreCase(SINGLE.name))
-			return SINGLE;
-		else if (name.equalsIgnoreCase(BOTH.name))
-			return BOTH;
-		else
-			throw new IllegalArgumentException("Invalid HeaderStyle name " + name);		
-	}
-	
+     */
+    private static HeaderStyle valueOf(String name) {
+        if (name.equalsIgnoreCase(SINGLE.name))
+            return SINGLE;
+        else if (name.equalsIgnoreCase(BOTH.name))
+            return BOTH;
+        else
+            throw new IllegalArgumentException("Invalid HeaderStyle name "
+                    + name);
+    }
 
-	public  String toString() { 
-		return name; 
-	}
-	
+
+    public String toString() {
+        return name;
+    }
+
 }

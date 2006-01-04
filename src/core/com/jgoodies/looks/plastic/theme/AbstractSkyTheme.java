@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -40,14 +40,14 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public abstract class AbstractSkyTheme extends SkyBluer {
 
-    private static final ColorUIResource secondary2 =
+    private static final ColorUIResource SECONDARY2 =
         new ColorUIResource(164, 164, 164);
         
-    private static final ColorUIResource secondary3 =
+    private static final ColorUIResource SECONDARY3 =
         new ColorUIResource(225, 225, 225);
 
     protected ColorUIResource getPrimary1() {
@@ -66,11 +66,11 @@ public abstract class AbstractSkyTheme extends SkyBluer {
         return Colors.GRAY_MEDIUM;
     }
     protected ColorUIResource getSecondary2() {
-        return secondary2;
+        return SECONDARY2;
     }
     
     protected ColorUIResource getSecondary3() {
-        return secondary3;
+        return SECONDARY3;
     }
 
     // Background

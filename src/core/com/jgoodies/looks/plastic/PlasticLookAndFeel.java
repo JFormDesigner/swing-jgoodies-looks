@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -62,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -182,7 +182,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
-            + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
     }
     
     
@@ -282,60 +282,60 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
 
-		String PLASTIC_PREFIX = "com.jgoodies.looks.plastic.Plastic";
-        String COMMON_PREFIX  = "com.jgoodies.looks.common.ExtBasic";
+		final String plasticPrefix = "com.jgoodies.looks.plastic.Plastic";
+        final String commonPrefix  = "com.jgoodies.looks.common.ExtBasic";
         
 		// Overwrite some of the uiDefaults.
 		Object[] uiDefaults = {
 				// 3D effect; optional narrow margins
-				"ButtonUI",					PLASTIC_PREFIX + "ButtonUI",
-				"ToggleButtonUI",			PLASTIC_PREFIX + "ToggleButtonUI",
+				"ButtonUI",					plasticPrefix + "ButtonUI",
+				"ToggleButtonUI",			plasticPrefix + "ToggleButtonUI",
 
 				// 3D effect
-				"ComboBoxUI", 	 			PLASTIC_PREFIX + "ComboBoxUI",
-				"ScrollBarUI", 				PLASTIC_PREFIX + "ScrollBarUI",
-				"SpinnerUI",				PLASTIC_PREFIX + "SpinnerUI",
+				"ComboBoxUI", 	 			plasticPrefix + "ComboBoxUI",
+				"ScrollBarUI", 				plasticPrefix + "ScrollBarUI",
+				"SpinnerUI",				plasticPrefix + "SpinnerUI",
 				
 				// Special borders defined by border style or header style, see LookUtils
-				"MenuBarUI",				PLASTIC_PREFIX + "MenuBarUI",
-				"ToolBarUI",				PLASTIC_PREFIX + "ToolBarUI",
+				"MenuBarUI",				plasticPrefix + "MenuBarUI",
+				"ToolBarUI",				plasticPrefix + "ToolBarUI",
 				
 				// Aligns menu icons
-                "MenuUI",                   PLASTIC_PREFIX + "MenuUI",
-				"MenuItemUI",				COMMON_PREFIX + "MenuItemUI",
-				"CheckBoxMenuItemUI",		COMMON_PREFIX + "CheckBoxMenuItemUI",
-				"RadioButtonMenuItemUI",	COMMON_PREFIX + "RadioButtonMenuItemUI",
+                "MenuUI",                   plasticPrefix + "MenuUI",
+				"MenuItemUI",				commonPrefix + "MenuItemUI",
+				"CheckBoxMenuItemUI",		commonPrefix + "CheckBoxMenuItemUI",
+				"RadioButtonMenuItemUI",	commonPrefix + "RadioButtonMenuItemUI",
 
                 // Provides an option for a no margin border              
-                "PopupMenuUI",              PLASTIC_PREFIX + "PopupMenuUI",
+                "PopupMenuUI",              plasticPrefix + "PopupMenuUI",
                
 				// Has padding above and below the separator lines				
-		        "PopupMenuSeparatorUI",		COMMON_PREFIX + "PopupMenuSeparatorUI",
+		        "PopupMenuSeparatorUI",		commonPrefix + "PopupMenuSeparatorUI",
 		       
                 // Honors the screen resolution and uses a minimum button width             
-                "OptionPaneUI",             PLASTIC_PREFIX + "OptionPaneUI",
+                "OptionPaneUI",             plasticPrefix + "OptionPaneUI",
                
                 // Can installs an optional etched border
-				"ScrollPaneUI",				PLASTIC_PREFIX + "ScrollPaneUI",
+				"ScrollPaneUI",				plasticPrefix + "ScrollPaneUI",
                    
                 // Uses a modified split divider
-				"SplitPaneUI", 				PLASTIC_PREFIX + "SplitPaneUI",
+				"SplitPaneUI", 				plasticPrefix + "SplitPaneUI",
 				
 				// Modified icons and lines
-				"TreeUI", 					PLASTIC_PREFIX + "TreeUI",
+				"TreeUI", 					plasticPrefix + "TreeUI",
 				
 				// Just to use Plastic colors
-				"InternalFrameUI",			PLASTIC_PREFIX + "InternalFrameUI",
+				"InternalFrameUI",			plasticPrefix + "InternalFrameUI",
                 
                 // Share the UI delegate instances
-                "SeparatorUI",              PLASTIC_PREFIX + "SeparatorUI",
-                "ToolBarSeparatorUI",       PLASTIC_PREFIX + "ToolBarSeparatorUI"
+                "SeparatorUI",              plasticPrefix + "SeparatorUI",
+                "ToolBarSeparatorUI",       plasticPrefix + "ToolBarSeparatorUI"
 
 			};
 		table.putDefaults(uiDefaults);
         if (!useMetalTabs) {
             // Modified tabs and ability use a version with reduced borders.
-            table.put("TabbedPaneUI", PLASTIC_PREFIX + "TabbedPaneUI");
+            table.put("TabbedPaneUI", plasticPrefix + "TabbedPaneUI");
         }
 	}
 
@@ -678,7 +678,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		    "SkyPink",
 		    "SkyRed",
 		    "SkyYellow"};
-		for (int i=themeNames.length - 1; i >= 0; i--) 
+		for (int i = themeNames.length - 1; i >= 0; i--) 
 			installTheme(createTheme(themeNames[i]));
 	}
 	

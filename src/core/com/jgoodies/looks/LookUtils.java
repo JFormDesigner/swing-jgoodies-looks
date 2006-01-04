@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -47,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class LookUtils {
     
@@ -96,8 +96,8 @@ public final class LookUtils {
      * we just check for 1.4.0 and 1.4.1.
      */
     public static final boolean IS_JAVA_1_4_2_OR_LATER = 
-        !startsWith(JAVA_VERSION, "1.4.0") &&
-        !startsWith(JAVA_VERSION, "1.4.1");
+           !startsWith(JAVA_VERSION, "1.4.0") 
+        && !startsWith(JAVA_VERSION, "1.4.1");
 
     /**
      * True if this is Java 5.x. We check for a prefix of 1.5.
@@ -123,8 +123,8 @@ public final class LookUtils {
      * we can check that it's neither 1.4 nor 1.5.
      */
     public static final boolean IS_JAVA_6_OR_LATER = 
-        !IS_JAVA_1_4 &&
-        !IS_JAVA_5;
+           !IS_JAVA_1_4 
+        && !IS_JAVA_5;
 
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -241,8 +241,8 @@ public final class ShadowPopup extends Popup {
      * 
      * @see #snapshot()
      */
-    private static final Point point = new Point();
-    private static final Rectangle rect = new Rectangle();
+    private static final Point     POINT = new Point();
+    private static final Rectangle RECT  = new Rectangle();
 
     /**
      * Snapshots the background. The snapshots are stored as client
@@ -266,12 +266,12 @@ public final class ShadowPopup extends Popup {
             int width = size.width;
             int height = size.height;
 
-            rect.setBounds(x, y + height - SHADOW_SIZE, width, SHADOW_SIZE);
-            BufferedImage hShadowBg = robot.createScreenCapture(rect);
+            RECT.setBounds(x, y + height - SHADOW_SIZE, width, SHADOW_SIZE);
+            BufferedImage hShadowBg = robot.createScreenCapture(RECT);
 
-            rect.setBounds(x + width - SHADOW_SIZE, y, SHADOW_SIZE,
+            RECT.setBounds(x + width - SHADOW_SIZE, y, SHADOW_SIZE,
                     height - SHADOW_SIZE);
-            BufferedImage vShadowBg = robot.createScreenCapture(rect);
+            BufferedImage vShadowBg = robot.createScreenCapture(RECT);
 
             JComponent parent = (JComponent) contents.getParent();
             parent.putClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND, hShadowBg);
@@ -286,26 +286,26 @@ public final class ShadowPopup extends Popup {
             int layeredPaneWidth = layeredPane.getWidth();
             int layeredPaneHeight = layeredPane.getHeight();
 
-            point.x = x;
-            point.y = y;
-            SwingUtilities.convertPointFromScreen(point, layeredPane);
+            POINT.x = x;
+            POINT.y = y;
+            SwingUtilities.convertPointFromScreen(POINT, layeredPane);
 
             // If needed paint dirty region of the horizontal snapshot.
-            rect.x = point.x;
-            rect.y = point.y + height - SHADOW_SIZE;
-            rect.width = width;
-            rect.height = SHADOW_SIZE;
+            RECT.x = POINT.x;
+            RECT.y = POINT.y + height - SHADOW_SIZE;
+            RECT.width = width;
+            RECT.height = SHADOW_SIZE;
 
-            if ((rect.x + rect.width) > layeredPaneWidth) {
-                rect.width = layeredPaneWidth - rect.x;
+            if ((RECT.x + RECT.width) > layeredPaneWidth) {
+                RECT.width = layeredPaneWidth - RECT.x;
             }
-            if ((rect.y + rect.height) > layeredPaneHeight) {
-                rect.height = layeredPaneHeight - rect.y;
+            if ((RECT.y + RECT.height) > layeredPaneHeight) {
+                RECT.height = layeredPaneHeight - RECT.y;
             }
-            if (!rect.isEmpty()) {
+            if (!RECT.isEmpty()) {
                 Graphics g = hShadowBg.createGraphics();
-                g.translate(-rect.x, -rect.y);
-                g.setClip(rect);
+                g.translate(-RECT.x, -RECT.y);
+                g.setClip(RECT);
                 if (layeredPane instanceof JComponent) {
                     JComponent c = (JComponent) layeredPane;
                     boolean doubleBuffered = c.isDoubleBuffered();
@@ -319,21 +319,21 @@ public final class ShadowPopup extends Popup {
             }
 
             // If needed paint dirty region of the vertical snapshot.
-            rect.x = point.x + width - SHADOW_SIZE;
-            rect.y = point.y;
-            rect.width = SHADOW_SIZE;
-            rect.height = height - SHADOW_SIZE;
+            RECT.x = POINT.x + width - SHADOW_SIZE;
+            RECT.y = POINT.y;
+            RECT.width = SHADOW_SIZE;
+            RECT.height = height - SHADOW_SIZE;
 
-            if ((rect.x + rect.width) > layeredPaneWidth) {
-                rect.width = layeredPaneWidth - rect.x;
+            if ((RECT.x + RECT.width) > layeredPaneWidth) {
+                RECT.width = layeredPaneWidth - RECT.x;
             }
-            if ((rect.y + rect.height) > layeredPaneHeight) {
-                rect.height = layeredPaneHeight - rect.y;
+            if ((RECT.y + RECT.height) > layeredPaneHeight) {
+                RECT.height = layeredPaneHeight - RECT.y;
             }
-            if (!rect.isEmpty()) {
+            if (!RECT.isEmpty()) {
                 Graphics g = vShadowBg.createGraphics();
-                g.translate(-rect.x, -rect.y);
-                g.setClip(rect);
+                g.translate(-RECT.x, -RECT.y);
+                g.setClip(RECT);
                 if (layeredPane instanceof JComponent) {
                     JComponent c = (JComponent) layeredPane;
                     boolean doubleBuffered = c.isDoubleBuffered();
@@ -369,10 +369,10 @@ public final class ShadowPopup extends Popup {
                 if (p.getParent() instanceof JInternalFrame) {
                     continue;
                 }
-                parent = ((JRootPane)p).getLayeredPane();
+                parent = ((JRootPane) p).getLayeredPane();
                 // Continue, so that if there is a higher JRootPane, we'll
                 // pick it up.
-            } else if(p instanceof Window) {
+            } else if (p instanceof Window) {
                 if (parent == null) {
                     parent = p;
                 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see     Options
  */
@@ -734,7 +734,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 iconRect,
                 textRect,
                 textIconGap);
-                iconRect.y += calcRectangle.height %2;
+                iconRect.y += calcRectangle.height % 2;
         }
 
         //fix of issue #4
@@ -834,35 +834,35 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     // appropriate renderer
     //
     /** 
-     * Returns the insets (i.e. the width) of the content Border
+     * Returns the insets (i.e. the width) of the content Border.
      */
     protected Insets getContentBorderInsets(int tabPlacement) {
         return renderer.getContentBorderInsets(super.getContentBorderInsets(tabPlacement));
     }
 
     /**
-     * Returns the amount by which the Tab Area is inset 
+     * Returns the amount by which the Tab Area is inset. 
      */
     protected Insets getTabAreaInsets(int tabPlacement) {
         return renderer.getTabAreaInsets(super.getTabAreaInsets(tabPlacement));
     }
 
     /**
-     * Returns the amount by which the label should be shifted horizontally
+     * Returns the amount by which the label should be shifted horizontally.
      */
     protected int getTabLabelShiftX(int tabPlacement, int tabIndex, boolean isSelected) {
         return renderer.getTabLabelShiftX(tabIndex, isSelected);
     }
 
     /**
-     * Returns the amount by which the label should be shifted vertically
+     * Returns the amount by which the label should be shifted vertically.
      */
     protected int getTabLabelShiftY(int tabPlacement, int tabIndex, boolean isSelected) {
         return renderer.getTabLabelShiftY(tabIndex, isSelected);
     }
 
     /**
-     * Returns the amount (in pixels) by which two runs should overlap
+     * Returns the amount (in pixels) by which two runs should overlap.
      */
     protected int getTabRunOverlay(int tabPlacement) {
         return renderer.getTabRunOverlay(tabRunOverlay);
@@ -870,7 +870,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     /**
      * This boolean controls wheather the given run should be padded to 
-     * use up as much space as the others (with more tabs in them)
+     * use up as much space as the others (with more tabs in them).
      */
     protected boolean shouldPadTabRun(int tabPlacement, int run) {
         return renderer.shouldPadTabRun(run, super.shouldPadTabRun(tabPlacement, run));
@@ -900,7 +900,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Draws the rectancle around the Tab label which indicates keyboard focus
+     * Draws the rectancle around the Tab label which indicates keyboard focus.
      */
     protected void paintFocusIndicator(
         Graphics g,
@@ -945,7 +945,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         private Rectangle rect = new Rectangle();
         
         public void stateChanged(ChangeEvent e) {
-            JTabbedPane tabPane = (JTabbedPane)e.getSource();
+            JTabbedPane tabPane = (JTabbedPane) e.getSource();
             tabPane.revalidate();
             tabPane.repaint();
 
@@ -1383,11 +1383,11 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                     - contentInsets.top - contentInsets.bottom;
                     }
 
-                    for (int i=0; i < numChildren; i++) {
+                    for (int i = 0; i < numChildren; i++) {
                         Component child = tabPane.getComponent(i);
 
                         if (tabScroller != null && child == tabScroller.viewport) {
-                            JViewport viewport = (JViewport)child;
+                            JViewport viewport = (JViewport) child;
                             Rectangle viewRect = viewport.getViewRect();
                             int vw = tw;
                             int vh = th;

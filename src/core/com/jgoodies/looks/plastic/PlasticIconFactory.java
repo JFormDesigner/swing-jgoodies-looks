@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -54,7 +54,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 final class PlasticIconFactory {
@@ -165,7 +165,7 @@ final class PlasticIconFactory {
 		    JMenuItem b = (JMenuItem) c;
 	
 		    g.translate( x, y );
-	        if( PlasticUtils.isLeftToRight(b) ) {
+	        if (PlasticUtils.isLeftToRight(b) ) {
 	            g.drawLine( 0, 0, 0, 7 );
 	            g.drawLine( 1, 1, 1, 6 );
 	            g.drawLine( 2, 2, 2, 5 );
@@ -226,7 +226,7 @@ final class PlasticIconFactory {
     private static class ComboBoxButtonIcon implements Icon, Serializable {
 
 	    public void paintIcon(Component c, Graphics g, int x, int y) {
-	        JComponent component = (JComponent)c;
+	        JComponent component = (JComponent) c;
 			int iconWidth = getIconWidth();
 		
 			g.translate(x, y);

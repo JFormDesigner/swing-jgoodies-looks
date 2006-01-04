@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class Options {
 
@@ -196,7 +196,7 @@ public final class Options {
 
     /** 
      * A JScrollPane client property key for a hint 
-     * that the scroll pane border should be etched.				
+     * that the scroll pane border should be etched.
      */
     public static final String IS_ETCHED_KEY = "jgoodies.isEtched";
 
@@ -212,7 +212,7 @@ public final class Options {
 
     /** 
      * A JMenu client property key for a hint 
-     * that the menu items in the menu have no icons.				
+     * that the menu items in the menu have no icons.
      */
     public static final String NO_ICONS_KEY = "jgoodies.noIcons";
 

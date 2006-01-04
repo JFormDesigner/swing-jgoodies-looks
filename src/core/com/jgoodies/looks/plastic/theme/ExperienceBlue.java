@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -41,7 +41,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * default desktop settings.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class ExperienceBlue extends DesertBluer {
 
@@ -49,13 +49,13 @@ public class ExperienceBlue extends DesertBluer {
         return "Experience Blue";
     }
 
-    private static final ColorUIResource secondary1 =
+    private static final ColorUIResource SECONDARY1 =
         new ColorUIResource(128, 128, 128);
         
-    private static final ColorUIResource secondary2 =
+    private static final ColorUIResource SECONDARY2 =
         new ColorUIResource(189, 190, 176);
         
-    private static final ColorUIResource secondary3 =
+    private static final ColorUIResource SECONDARY3 =
         new ColorUIResource(236, 233, 216);
 
     protected ColorUIResource getPrimary1() {
@@ -71,15 +71,15 @@ public class ExperienceBlue extends DesertBluer {
     }
 
     protected ColorUIResource getSecondary1() {
-        return secondary1;
+        return SECONDARY1;
     }
     
     protected ColorUIResource getSecondary2() {
-        return secondary2;
+        return SECONDARY2;
     }
     
     protected ColorUIResource getSecondary3() {
-        return secondary3;
+        return SECONDARY3;
     }
 
     public ColorUIResource getFocusColor() {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -66,7 +66,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic XP Look and Feel"
-            + " - \u00a9 2001-2005 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
     }
     
     /**
@@ -78,19 +78,19 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
 
-        final String UI_CLASSNAME_PREFIX   = "com.jgoodies.looks.plastic.PlasticXP";
+        final String uiClassnamePrefix   = "com.jgoodies.looks.plastic.PlasticXP";
         Object[] uiDefaults = {
             // Uses a smooth icon
-            "CheckBoxUI",      UI_CLASSNAME_PREFIX + "CheckBoxUI",
+            "CheckBoxUI",      uiClassnamePrefix + "CheckBoxUI",
             
             // Renders a circle, not the star ("*") character                       
-            "PasswordFieldUI", UI_CLASSNAME_PREFIX + "PasswordFieldUI",
+            "PasswordFieldUI", uiClassnamePrefix + "PasswordFieldUI",
             
             // Uses a smooth icon
-            "RadioButtonUI",   UI_CLASSNAME_PREFIX + "RadioButtonUI",
+            "RadioButtonUI",   uiClassnamePrefix + "RadioButtonUI",
             
             // Changed buttons
-            "SpinnerUI",       UI_CLASSNAME_PREFIX + "SpinnerUI",
+            "SpinnerUI",       uiClassnamePrefix + "SpinnerUI",
         };
 
         table.putDefaults(uiDefaults);

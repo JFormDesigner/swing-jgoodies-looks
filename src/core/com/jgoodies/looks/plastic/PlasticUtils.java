@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -39,7 +39,7 @@ import javax.swing.UIManager;
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 
 public final class PlasticUtils {
@@ -220,7 +220,7 @@ public final class PlasticUtils {
 
 	// Painting 3D Effects *************************************************************
 	
-	private static float FRACTION_3D = 0.5f;
+	private static final float FRACTION_3D = 0.5f;
 	
 
 	private static void add3DEffekt(Graphics g, Rectangle r, boolean isHorizontal,

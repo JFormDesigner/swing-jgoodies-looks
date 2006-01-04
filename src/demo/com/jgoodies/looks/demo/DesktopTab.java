@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import com.jgoodies.looks.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class DesktopTab {
     
@@ -122,7 +122,7 @@ final class DesktopTab {
     }
 
     private JComponent buildPaletteContentPane() {
-        Border CARD_DIALOG_BORDER = new EmptyBorder(10, 6, 7, 6);
+        final Border cardDialogBorder = new EmptyBorder(10, 6, 7, 6);
         Box box = Box.createVerticalBox();
         box.add(new JCheckBox("be consistent", true));
         box.add(Box.createVerticalStrut(6));
@@ -130,7 +130,7 @@ final class DesktopTab {
 
         JPanel generalTab = new JPanel(new BorderLayout());
         generalTab.add(box);
-        generalTab.setBorder(CARD_DIALOG_BORDER);
+        generalTab.setBorder(cardDialogBorder);
 
         JTabbedPane tabbedPane = new JTabbedPane(SwingConstants.BOTTOM);
         tabbedPane.add(generalTab, "General");
@@ -172,25 +172,25 @@ final class DesktopTab {
      */
     private String[][] createSampleTableData() {
         return new String[][] { 
-            { "Name",           "Karsten"    }, 
-            { "Sex",            "Male"       }, 
-            { "Date of Birth",  "5-Dec-1967" }, 
-            { "Place of Birth", "Kiel"       }, 
-            { "Profession",     "UI Designer"}, 
-            { "Business",       "Freelancer" },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
-            { "",               ""           },
+            {"Name",           "Karsten"    }, 
+            {"Sex",            "Male"       }, 
+            {"Date of Birth",  "5-Dec-1967" }, 
+            {"Place of Birth", "Kiel"       }, 
+            {"Profession",     "UI Designer"}, 
+            {"Business",       "Freelancer" },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
+            {"",               ""           },
         };
     }
 

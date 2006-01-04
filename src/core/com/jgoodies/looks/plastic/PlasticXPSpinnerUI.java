@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -48,7 +48,7 @@ import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
  * bounds. Also, changes the border of the buttons and the size of the arrows. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 	
@@ -65,9 +65,9 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
      * @see #createNextButton
      * @see #createPreviousButton
      */
-    private static final ExtBasicArrowButtonHandler nextButtonHandler     
+    private static final ExtBasicArrowButtonHandler NEXT_BUTTON_HANDLER     
     							= new ExtBasicArrowButtonHandler("increment", true);
-    private static final ExtBasicArrowButtonHandler previousButtonHandler 
+    private static final ExtBasicArrowButtonHandler PREVIOUS_BUTTON_HANDLER 
     							= new ExtBasicArrowButtonHandler("decrement", false);
 
 
@@ -85,7 +85,7 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
      * @see #createNextButton
      */
     protected Component createPreviousButton() {
-        return new SpinnerXPArrowButton(SwingConstants.SOUTH, previousButtonHandler);
+        return new SpinnerXPArrowButton(SwingConstants.SOUTH, PREVIOUS_BUTTON_HANDLER);
     }
 
 
@@ -103,7 +103,7 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
      * @see #createPreviousButton
      */
     protected Component createNextButton() {
-        return new SpinnerXPArrowButton(SwingConstants.NORTH, nextButtonHandler);
+        return new SpinnerXPArrowButton(SwingConstants.NORTH, NEXT_BUTTON_HANDLER);
     }
 
 

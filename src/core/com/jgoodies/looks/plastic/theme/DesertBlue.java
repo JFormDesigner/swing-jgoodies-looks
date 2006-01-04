@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2005 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -42,15 +42,15 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public class DesertBlue extends DesertBluer {
 	
 	public String getName() { return "Desert Blue"; }
 
 
-	private static final ColorUIResource secondary2	= new ColorUIResource(148, 144, 140);
-	private static final ColorUIResource secondary3	= new ColorUIResource(211, 210, 204); 
+	private static final ColorUIResource SECONDARY2	= new ColorUIResource(148, 144, 140);
+	private static final ColorUIResource SECONDARY3	= new ColorUIResource(211, 210, 204); 
 
 	
 
@@ -59,8 +59,8 @@ public class DesertBlue extends DesertBluer {
 	protected ColorUIResource getPrimary3()		    { return Colors.BLUE_LOW_LIGHTEST; }
 
 	protected ColorUIResource getSecondary1()	    { return Colors.GRAY_MEDIUM; }
-	protected ColorUIResource getSecondary2()	    { return secondary2;         }
-	protected ColorUIResource getSecondary3()	    { return secondary3;         }
+	protected ColorUIResource getSecondary2()	    { return SECONDARY2;         }
+	protected ColorUIResource getSecondary3()	    { return SECONDARY3;         }
 	
 	public    ColorUIResource getTitleTextColor()	{ return Colors.BLUE_MEDIUM_DARKEST;}
 	
