@@ -41,16 +41,19 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * in Windows XP environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class Silver extends ExperienceBlue {
+    
+    private static final ColorUIResource GRAY_LIGHT_LIGHTER =
+        new ColorUIResource(190, 190, 190);
 
     public String getName() {
         return "Silver";
     }
 
     protected ColorUIResource getPrimary1() {
-        return Colors.GRAY_MEDIUM;
+        return Colors.GRAY_MEDIUMDARK;
     }
     
     protected ColorUIResource getPrimary2() {
@@ -58,11 +61,11 @@ public class Silver extends ExperienceBlue {
     }
     
     protected ColorUIResource getPrimary3() {
-        return Colors.GRAY_LIGHTER2;
+        return GRAY_LIGHT_LIGHTER;
     }
 
     protected ColorUIResource getSecondary1() {
-        return getPrimary1();
+        return Colors.GRAY_MEDIUM;
     }
     
     protected ColorUIResource getSecondary2() {
@@ -70,7 +73,7 @@ public class Silver extends ExperienceBlue {
     }
     
     protected ColorUIResource getSecondary3() {
-        return getPrimary3();
+        return Colors.GRAY_LIGHTER2;
     }
 
     public ColorUIResource getFocusColor() {
