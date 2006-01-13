@@ -98,6 +98,7 @@ BUGS FIXED
     #84: Windows L&F combo margin too wide in table.
     #86: Windows combobox too narrow if the renderer has zero insets.
     #90: Spinner does not stop the timer when loosing focus.
+    #91: Progress invisible in Plastic Silver theme.
     
 
 NEW FEATURES
