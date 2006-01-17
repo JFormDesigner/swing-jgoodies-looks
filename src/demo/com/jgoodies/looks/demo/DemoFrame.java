@@ -60,7 +60,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class DemoFrame extends JFrame {
 
@@ -89,13 +89,31 @@ public class DemoFrame extends JFrame {
     }
     
     public static void main(String[] args) {
-        DemoFrame instance = new DemoFrame(createSettings());
+        Settings settings = createDefaultSettings();
+        if (args.length > 0) {
+            String lafShortName = args[0];
+            String lafClassName;
+            if ("Windows".equalsIgnoreCase(lafShortName)) {
+                lafClassName = Options.JGOODIES_WINDOWS_NAME;
+            } else if ("Plastic".equalsIgnoreCase(lafShortName)) {
+                lafClassName = Options.PLASTIC_NAME;
+            } else if ("Plastic3D".equalsIgnoreCase(lafShortName)) {
+                lafClassName = Options.PLASTIC3D_NAME;
+            } else if ("PlasticXP".equalsIgnoreCase(lafShortName)) {
+                lafClassName = Options.PLASTICXP_NAME;
+            } else {
+                lafClassName = lafShortName;
+            }
+            System.out.println("L&f chosen: " + lafClassName);
+            settings.setSelectedLookAndFeel(lafClassName);
+        }
+        DemoFrame instance = new DemoFrame(settings);
         instance.setSize(PREFERRED_SIZE);
         instance.locateOnScreen(instance);
         instance.setVisible(true);
     }
     
-    private static Settings createSettings() {
+    private static Settings createDefaultSettings() {
         Settings settings = Settings.createDefault();
         
         // Configure the settings here.

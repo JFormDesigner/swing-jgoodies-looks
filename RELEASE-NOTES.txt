@@ -128,6 +128,8 @@ OTHER CHANGES
     o Improved appearance of the Looks demo tabs on Windows.
     o Password field antialiasing honors the field's aa hint
       and uses subpixel aa if available.
+    o The demo's DemoFrame class accepts a parameter for the L&f: 
+      "Windows", "Plastic", "Plastic3D", "PlasticXP".
     
     
     

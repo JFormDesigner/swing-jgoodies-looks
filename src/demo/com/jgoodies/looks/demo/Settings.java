@@ -44,7 +44,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
  * @see     com.jgoodies.looks.plastic.FontSizeHints
@@ -178,6 +178,16 @@ public final class Settings {
 
     public void setSelectedLookAndFeel(LookAndFeel selectedLookAndFeel) {
         this.selectedLookAndFeel = selectedLookAndFeel;
+    }
+    
+    public void setSelectedLookAndFeel(String selectedLookAndFeelClassName) {
+        try {
+            Class theClass = Class.forName(selectedLookAndFeelClassName);
+            setSelectedLookAndFeel((LookAndFeel) theClass.newInstance());
+        } catch (Exception e) {
+            System.out.println("Can't instantiate " + selectedLookAndFeelClassName);
+            e.printStackTrace();
+        }
     }
 
     public PlasticTheme getSelectedTheme() {
