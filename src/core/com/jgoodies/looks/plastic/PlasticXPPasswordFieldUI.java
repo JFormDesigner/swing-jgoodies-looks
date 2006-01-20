@@ -38,7 +38,6 @@ import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
-import com.jgoodies.looks.common.ExtPasswordView;
 
 /**
  * The JGoodies PlasticXP Look&amp;Feel implementation of a password field UI
@@ -46,7 +45,7 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * view that renders a dot, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
 
@@ -67,7 +66,7 @@ public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new ExtPasswordView(elem);
+        return new PlasticPasswordView(elem);
     }
     
     
