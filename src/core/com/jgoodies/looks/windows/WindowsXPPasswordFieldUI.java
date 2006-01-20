@@ -37,7 +37,6 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
-import com.jgoodies.looks.common.ExtPasswordView;
 import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
 
 /**
@@ -46,7 +45,7 @@ import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
  * view that renders a circle, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 
@@ -80,7 +79,7 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new ExtPasswordView(elem);
+        return new WindowsPasswordView(elem);
     }
     
     
