@@ -32,27 +32,24 @@ package com.jgoodies.looks.windows;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.Graphics;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
-import javax.swing.JToolBar;
 import javax.swing.LookAndFeel;
 import javax.swing.plaf.ComponentUI;
-
-import com.sun.java.swing.plaf.windows.WindowsToolBarUI;
 
 import com.jgoodies.looks.BorderStyle;
 import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
+import com.sun.java.swing.plaf.windows.WindowsToolBarUI;
 
 /**
  * Adds behavior for handling different types of borders.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
@@ -120,13 +117,8 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
         else if (HeaderStyle.from(toolBar) == HeaderStyle.BOTH)
             suffix = "headerBorder";
         else
-            return;
+            suffix = "border";
         LookAndFeel.installBorder(toolBar, "ToolBar." + suffix);
-    }
-
-    
-    protected DockingListener createDockingListener(JToolBar toolbar) {
-        return new DockingListener(toolbar);
     }
 
     
@@ -142,10 +134,5 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
         }
     }
     
-
-    // Painting *************************************************************
-
-    public void paint(Graphics g, JComponent c) {
-    }
 
 }
