@@ -60,7 +60,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DemoFrame extends JFrame {
 
@@ -211,7 +211,7 @@ public class DemoFrame extends JFrame {
      */
     private Component buildToolBar() {
         JToolBar toolBar = new JToolBar();
-        toolBar.setFloatable(false);
+        toolBar.setFloatable(true);
         toolBar.putClientProperty("JToolBar.isRollover", Boolean.TRUE);
         // Swing
         toolBar.putClientProperty(
