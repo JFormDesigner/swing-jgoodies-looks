@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -216,7 +216,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
    
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
-            // Renders a circle, not the star ("*") character                       
+            // Renders a dot, not the star ("*") character                       
             uiDefaults = append(uiDefaults, 
                 "PasswordFieldUI",    windowsPrefix + "XPPasswordFieldUI"); 
 
@@ -410,7 +410,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "TextField.margin",           textInsets, // 1.4.1 Bug
             "ToggleButton.margin",        buttonMargin, // Sun's 14px margin is too wide
 
-            "ToolBar.border",             toolBarEmptyBorder, 
 			"ToolBar.emptyBorder",        toolBarEmptyBorder, // Added by JGoodies
             "ToolBar.separatorBorder",    toolBarSeparatorBorder, // Added by JGoodies
             "ToolBar.etchedBorder",       toolBarEtchedBorder, // Added by JGoodies
