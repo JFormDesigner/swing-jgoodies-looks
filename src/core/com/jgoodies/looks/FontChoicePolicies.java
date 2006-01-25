@@ -56,7 +56,7 @@ import com.jgoodies.looks.FontSets.LogicalFontSet;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see     FontChoicePolicy
  * 
@@ -314,13 +314,15 @@ public final class FontChoicePolicies {
 
             FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
             FontUIResource smallFont = new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
+            FontUIResource messageFont = controlFont;
+            FontUIResource windowTitleFont = titleFont;
             return new FontSets.DefaultFontSet(
                     controlFont, 
                     menuFont,
                     titleFont, 
-                    controlFont,   // messageFont
+                    messageFont,
                     smallFont, 
-                    controlFont);  // window title
+                    windowTitleFont);  
         }
     }
     
