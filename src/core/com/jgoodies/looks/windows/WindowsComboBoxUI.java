@@ -57,7 +57,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -138,13 +138,13 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         
         // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
-        int height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
+        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
            ? textFieldSize.height
            : Math.max(textFieldSize.height, size.height);
 
-        cachedMinimumSize.setSize(size.width, height); 
+        cachedMinimumSize.setSize(size.width, size.height); 
         isMinimumSizeDirty = false;
-
+        
         return new Dimension(size);
     }
 
@@ -252,23 +252,22 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     /**
      * Paints the currently selected item.
      */
-    public void paintCurrentValue(Graphics g,Rectangle bounds,boolean hasFocus) {
+    public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
         ListCellRenderer renderer = comboBox.getRenderer();
         Component c;
 
-        if ( hasFocus && !isPopupVisible(comboBox) ) {
-            c = renderer.getListCellRendererComponent( listBox,
-                                                       comboBox.getSelectedItem(),
-                                                       -1,
-                                                       true,
-                                                       false );
-        }
-        else {
-            c = renderer.getListCellRendererComponent( listBox,
-                                                       comboBox.getSelectedItem(),
-                                                       -1,
-                                                       false,
-                                                       false );
+        if (hasFocus && !isPopupVisible(comboBox)) {
+            c = renderer.getListCellRendererComponent(listBox,
+                                                      comboBox.getSelectedItem(),
+                                                      -1,
+                                                      true,
+                                                      false);
+        } else {
+            c = renderer.getListCellRendererComponent(listBox,
+                                                      comboBox.getSelectedItem(),
+                                                      -1,
+                                                      false,
+                                                      false );
             c.setBackground(UIManager.getColor("ComboBox.background"));
         }
         Border oldBorder = null;
@@ -291,29 +290,24 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
         }
         
         c.setFont(comboBox.getFont());
-        if ( hasFocus && !isPopupVisible(comboBox) ) {
+        if (hasFocus && !isPopupVisible(comboBox)) {
             c.setForeground(listBox.getSelectionForeground());
             c.setBackground(listBox.getSelectionBackground());
-        }
-        else {
-            if ( comboBox.isEnabled() ) {
+        } else {
+            if (comboBox.isEnabled()) {
                 c.setForeground(comboBox.getForeground());
                 c.setBackground(comboBox.getBackground());
-            }
-            else {
+            } else {
                 c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
                 c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
             }
         }
 
         // Fix for 4238829: should lay out the JPanel.
-        boolean shouldValidate = false;
-        if (c instanceof JPanel)  {
-            shouldValidate = true;
-        }
+        boolean shouldValidate = c instanceof JPanel;
 
-        currentValuePane.paintComponent(g,c,comboBox,bounds.x,bounds.y,
-                                        bounds.width,bounds.height, shouldValidate);
+        currentValuePane.paintComponent(g, c, comboBox, bounds.x, bounds.y,
+                                        bounds.width, bounds.height, shouldValidate);
         if (oldBorder != null) {
             ((JComponent) c).setBorder(oldBorder);
         }
