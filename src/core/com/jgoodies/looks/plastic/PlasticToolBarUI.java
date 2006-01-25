@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class PlasticToolBarUI extends MetalToolBarUI {
@@ -148,9 +148,9 @@ public final class PlasticToolBarUI extends MetalToolBarUI {
             else if (headerStyle == HeaderStyle.SINGLE && is3D())
                 suffix = "etchedBorder";
             else
-                return;
+                suffix = "border";
         }
-
+System.out.println("Plastic toolbar suffix=" + suffix);
         LookAndFeel.installBorder(toolBar, PROPERTY_PREFIX + suffix);
     }
 
