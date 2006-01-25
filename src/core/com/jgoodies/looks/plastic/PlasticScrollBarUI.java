@@ -48,7 +48,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * <tt>ScrollBar.maxBumpsWidth</tt> to limit the with of the scroll bar bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class PlasticScrollBarUI extends MetalScrollBarUI {
@@ -56,15 +56,14 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 	private static final String PROPERTY_PREFIX	  = "ScrollBar.";
 	public  static final String MAX_BUMPS_WIDTH_KEY = PROPERTY_PREFIX + "maxBumpsWidth";
 	
-    private static Color shadowColor;
-    private static Color highlightColor;
-    private static Color darkShadowColor;
-    private static Color thumbColor;
-    private static Color thumbShadow;
-    private static Color thumbHighlightColor; 
+    private Color shadowColor;
+    private Color highlightColor;
+    private Color darkShadowColor;
+    private Color thumbColor;
+    private Color thumbShadow;
+    private Color thumbHighlightColor; 
 
     private PlasticBumps bumps;
-
 
 	public static ComponentUI createUI(JComponent b) {
 		return new PlasticScrollBarUI();

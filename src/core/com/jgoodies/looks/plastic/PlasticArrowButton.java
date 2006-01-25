@@ -42,12 +42,12 @@ import javax.swing.plaf.metal.MetalScrollButton;
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 class PlasticArrowButton extends MetalScrollButton {
 	
-	private static Color shadowColor;
-	private static Color highlightColor;
+	private Color shadowColor;
+	private Color highlightColor;
 	
 	protected boolean isFreeStanding;
 
