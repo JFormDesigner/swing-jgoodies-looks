@@ -37,9 +37,9 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
-import javax.swing.JToolBar;
 import javax.swing.LookAndFeel;
 import javax.swing.border.Border;
+import javax.swing.event.MouseInputListener;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalToolBarUI;
 
@@ -52,7 +52,7 @@ import com.jgoodies.looks.Options;
  * and adds behavior for handling different types of borders.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsToolBarUI extends MetalToolBarUI {
 
@@ -119,10 +119,18 @@ public final class WindowsToolBarUI extends MetalToolBarUI {
         LookAndFeel.installBorder(toolBar, "ToolBar." + suffix);
     }
 
-    protected DockingListener createDockingListener(JToolBar toolbar) {
-        return new DockingListener(toolbar);
-    }
 
+    // Misc *****************************************************************
+    
+    /**
+     * Unlike the superclass MetalToolBarUI, 
+     * this class uses the docking listener from the BasicToolBarUI.
+     */
+    protected MouseInputListener createDockingListener( ) {
+        return new DockingListener(toolBar);
+    }
+    
+        
     // Handling Rollover Borders ********************************************
 
     protected Border createRolloverBorder() {
