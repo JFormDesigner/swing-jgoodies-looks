@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     FontSet
  * 
@@ -106,7 +106,7 @@ public final class FontSets {
          * 
          * @param controlFont      used for all controls
          * @param menuFont         used for the menu bar and menu items
-         * @param titleFont        used for TitledBorder and titled separators
+         * @param titleFont        used for TitledBorder, titles and titled separators
          * @param messageFont      used for OptionPanes
          * @param smallFont        used for tool tips and similar components 
          * @param windowTitleFont  used for internal frame window titles
@@ -124,7 +124,7 @@ public final class FontSets {
                 ? controlFont 
                 : menuFont;
             this.titleFont = titleFont == null
-                ? new FontUIResource(controlFont.deriveFont(Font.BOLD))
+                ? controlFont //new FontUIResource(controlFont.deriveFont(Font.BOLD))
                 : titleFont;
             this.messageFont = messageFont == null
                 ? controlFont
