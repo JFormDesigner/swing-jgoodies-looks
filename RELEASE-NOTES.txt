@@ -1,5 +1,6 @@
 
-               JGoodies Looks, Version 2.0 Preview 2 
+                         JGoodies Looks
+                       Version 2.0 Preview 2
                           Release Notes
                         
 
@@ -11,8 +12,7 @@ INTRODUCTION
     
     NOTE: THE CODE IS MORE "RAW" THAN OTHER RELEASES THAT 
     YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
-    It is an engineering build that may contain known bugs 
-    in some areas. 
+    It that may contain known bugs in some areas. 
         
     The font lookup in the Windows L&f has been overhauled.
     Text component insets have been adjusted to better comply 
@@ -26,7 +26,7 @@ INTRODUCTION
     the current implementation is fine on Windows but needs 
     improvements on other platforms. 
     
-    THE DOCUMENTATION HAS NOT BEEN UPDATED.  
+    THE DOCUMENTATION IS INCONSISTENT WITH THE CODE.  
     
 	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
@@ -90,6 +90,7 @@ BUGS FIXED
     #70: Inconsistent bounds, insets and baselines on Windows Vista.
     #71: Password echo character too small on Windows Vista.
     #73: Windows L&f ignores the desktop control font size setting.
+    #74: Color theme lost on Applet refresh.
     #79: Windows combobox too narrow.
     #80: Plastic combo arrow button is focusable in Java 6.
     #81: Wrong icon for "OptionPane.questionIcon" property.
@@ -99,6 +100,8 @@ BUGS FIXED
     #86: Windows combobox too narrow if the renderer has zero insets.
     #90: Spinner does not stop the timer when loosing focus.
     #91: Progress invisible in Plastic Silver theme.
+    #94: Windows default title font shall be plain not bold.
+    #95: Display Windows toolbar drag handles.
     
 
 NEW FEATURES
@@ -129,8 +132,10 @@ OTHER CHANGES
     o Password field antialiasing honors the field's aa hint
       and uses subpixel aa if available.
     o The demo's DemoFrame class accepts a parameter for the L&f: 
-      "Windows", "Plastic", "Plastic3D", "PlasticXP".
-    
+      "Windows", "Plastic", "Plastic3D", "PlasticXP",
+      or a full class name like:
+      "com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
+      "javax.swing.plaf.metal.MetalLookAndFeel".
     
     
 ---------------------------------------------------------------------------
