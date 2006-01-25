@@ -45,16 +45,13 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 /** 
- * Demonstrates JComboBoxes in editable and non-editable mode
- * with different renderer margins, renderer types, and different
- * list content. 
+ * Demonstrates JComboBoxes in editable and non-editable mode with 
+ * different renderer margins, renderer types, and different list content. 
  * This tab makes it easier to check the alignment of font baselines,
- * and proper preferred size computations.<p>
- * 
- * TODO: Add a section for combo boxes as cell editors.
+ * and proper preferred size computations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class ComboBoxTab {
     
