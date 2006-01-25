@@ -56,7 +56,7 @@ import com.jgoodies.looks.FontSets.LogicalFontSet;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     FontChoicePolicy
  * 
@@ -75,6 +75,21 @@ public final class FontChoicePolicies {
     /**
      * Returns the default font choice policy. It checks for a custom
      * font choice policy and custom fonts first. Otherwise it returns
+     * the default policy for Windows.<p>
+     * 
+     * A custom FontChoicePolicy or a custom FontSet can be set 
+     * by name in the System properties, or as object in the UIManager.
+     * 
+     * @return the default font choice policy.
+     */
+    public static FontChoicePolicy getCustomizableWindowsPolicy() {
+        return getCustomSettingsPolicy(getDefaultWindowsPolicy());
+    }
+    
+    
+    /**
+     * Returns the default font choice policy. It checks for a custom
+     * font choice policy and custom fonts first. Otherwise it returns
      * a platform specific default policy.<p>
      * 
      * A custom FontChoicePolicy or a custom FontSet can be set 
@@ -82,7 +97,7 @@ public final class FontChoicePolicies {
      * 
      * @return the default font choice policy.
      */
-    public static FontChoicePolicy getDefaultPolicy() {
+    public static FontChoicePolicy getCustomizablePlatformSpecificPolicy() {
         return getCustomSettingsPolicy(getPlatformSpecificDefaultPolicy());
     }
     
@@ -111,7 +126,7 @@ public final class FontChoicePolicies {
      */
     public static FontChoicePolicy getPlatformSpecificDefaultPolicy() {
         if (LookUtils.IS_OS_WINDOWS) {
-            return getDefaultWindowsPolicy();
+            return getDefaultPlasticOnWindowsPolicy();
         } else {
             return getDefaultCrossPlatformPolicy();
         }
@@ -131,6 +146,18 @@ public final class FontChoicePolicies {
      */
     public static FontChoicePolicy getDefaultWindowsPolicy() {
         return new DefaultWindowsPolicy();
+    }
+    
+    
+    /**
+     * Returns the default font choice policy for Plastic on the Windows platform.
+     * It differs from the default Windows policy in that it uses a bold font
+     * for TitledBorders, titles, and titled separators.
+     * 
+     * @return the default font choice policy for Plastic on the Windows platform.
+     */
+    public static FontChoicePolicy getDefaultPlasticOnWindowsPolicy() {
+        return new DefaultPlasticOnWindowsPolicy();
     }
     
     
@@ -250,12 +277,12 @@ public final class FontChoicePolicies {
         public FontSet getFontSet(String lafName, UIDefaults table) {
             FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
             
-            // Derive a bold version of the control font.
-            FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
-            
             FontUIResource menuFont = table == null
                 ? controlFont
                 : (FontUIResource) table.getFont("Menu.font");
+
+            FontUIResource titleFont = controlFont; 
+            
             FontUIResource messageFont = table == null
                 ? controlFont 
                 : (FontUIResource) table.getFont("OptionPane.font");
@@ -272,6 +299,28 @@ public final class FontChoicePolicies {
                     messageFont, 
                     smallFont, 
                     windowTitleFont);
+        }
+    }
+    
+
+    private static final class DefaultPlasticOnWindowsPolicy implements FontChoicePolicy {
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
+            
+            FontUIResource menuFont = table == null
+                ? controlFont
+                : (FontUIResource) table.getFont("Menu.font");
+
+            FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
+            FontUIResource smallFont = new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
+            return new FontSets.DefaultFontSet(
+                    controlFont, 
+                    menuFont,
+                    titleFont, 
+                    controlFont,   // messageFont
+                    smallFont, 
+                    controlFont);  // window title
         }
     }
     

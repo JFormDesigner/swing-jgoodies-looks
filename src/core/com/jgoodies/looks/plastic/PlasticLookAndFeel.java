@@ -62,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * JGoodies Plastic look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -202,7 +202,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
         return policy != null
             ? policy
-            : FontChoicePolicies.getDefaultPolicy();
+            : FontChoicePolicies.getCustomizablePlatformSpecificPolicy();
     }
     
     
