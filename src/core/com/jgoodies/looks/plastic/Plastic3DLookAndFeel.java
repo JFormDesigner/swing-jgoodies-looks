@@ -37,16 +37,14 @@ import javax.swing.UIDefaults;
  * look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 
     /**
-     * Constructs the JGoodies Plastic3D look&feel.
+     * Constructs the JGoodies Plastic3D look&amp;feel.
      */
     public Plastic3DLookAndFeel() {
-        if (null == getMyCurrentTheme())
-            setMyCurrentTheme(createMyDefaultTheme());
     }
 
     public String getID() {

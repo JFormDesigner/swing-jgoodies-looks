@@ -32,6 +32,7 @@ package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
 import java.awt.Insets;
+import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,8 +47,12 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
+import javax.swing.plaf.metal.*;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
+
+import sun.awt.AppContext;
+import sun.security.action.GetPropertyAction;
 
 import com.jgoodies.looks.FontChoicePolicies;
 import com.jgoodies.looks.FontChoicePolicy;
@@ -59,10 +64,14 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
 
 /**
  * Initializes class and component defaults for the 
- * JGoodies Plastic look&amp;feel.
+ * JGoodies Plastic look&amp;feel.<p>
+ * 
+ * TODO: A version that requires Java 5 could implement
+ * the theme access using the MetalLookAndFeel #getCurrentTheme
+ * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -137,7 +146,21 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     
     // State *****************************************************************
-        
+    
+    /**
+     * Used to check if the current application context is the same that 
+     * we've used before. If so, we can use the static variables below as-is,
+     * otherwise, we update this cached app context and need to re-read the
+     * static variables from the application context.<p>
+     * 
+     * The current implementation uses the context for the Plastic theme only.
+     * 
+     * @see #getPlasticTheme()
+     * @see #setPlasticTheme(PlasticTheme)
+     */
+    private static AppContext cachedAppContext;
+
+    
     /** 
      * Holds whether Plastic uses Metal or Plastic tabbed panes.
      */
@@ -152,26 +175,30 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         LookUtils.getSystemProperty(HIGH_CONTRAST_FOCUS_ENABLED_KEY) != null;
                 
 	/** 
-     * The <code>List</code> of installed color themes.
+     * The List of installed Plastic themes.
      */
-	private static List		 installedThemes;
+	private static List	installedThemes;
 
-	/** The current color theme. */	
-	private static PlasticTheme myCurrentTheme;
+	/** The current Plastic color and font theme. */	
+	private static PlasticTheme plasticTheme;
 	
 	
-	/** The look-global state for the 3D enabledment. */
-	private static boolean	 is3DEnabled = false;
+	/** The look-global state for the 3D enablement. */
+	private static boolean is3DEnabled = false;
 	
+    
+    // Instance Creation ******************************************************
 	
     /**
-     * Constructs the <code>PlasticLookAndFeel</code>.
+     * Constructs the PlasticLookAndFeel, creates the default theme
+     * and sets it as current Plastic theme.
      */
     public PlasticLookAndFeel() {
-        if (null == myCurrentTheme)
-            setMyCurrentTheme(createMyDefaultTheme());
     }
 
+    
+    // L&f Description ********************************************************
+    
     public String getID() {
         return "JGoodies Plastic";
     }
@@ -245,6 +272,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     public static void setHighContrastFocusColorsEnabled(boolean b) {
         useHighContrastFocusColors = b;
     }
+    
     
 	// Overriding Superclass Behavior ***************************************
 	
@@ -725,18 +753,49 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return the current PlasticTheme
      */
     public static PlasticTheme getPlasticTheme() {
-        return (PlasticTheme) UIManager.get(THEME_KEY);
+        AppContext context = AppContext.getAppContext();
+
+        if (cachedAppContext != context) {
+            plasticTheme = (PlasticTheme)context.get(THEME_KEY);
+                if (plasticTheme == null) {
+                    // This will happen in two cases:
+                    // . When PlasticLookAndFeel is first being initialized.
+                    // . When a new AppContext has been created that hasn't
+                    //   triggered UIManager to load a LAF. Rather than invoke
+                    //   a method on the UIManager, which would trigger the loading
+                    //   of a potentially different LAF, we directly set the
+                    //   Theme here.
+                    setPlasticTheme(createMyDefaultTheme());
+                }
+            cachedAppContext = context;
+        }
+        return plasticTheme;
     }
 
 
     /**
-     * Sets a PlasticTheme for colors and fonts in the UIManager
-     * and the superclass.
+     * Sets the theme for colors and fonts used by the Plastic L&amp;F.<p>
+     * 
+     * After setting the theme, you need to re-install the Look&amp;Feel,
+     * as well as update the UI's of any previously created components
+     * - just as if you'd change the Look&amp;Feel.
      * 
      * @param theme    the PlasticTheme to be set
+     * 
+     * @throws NullPointerException   if the theme is null.
+     * 
+     * @see #getPlasticTheme()
      */
     public static void setPlasticTheme(PlasticTheme theme) {
+        if (theme == null)
+            throw new NullPointerException("The theme must not be null.");
+        
         UIManager.put(THEME_KEY, theme);
+        plasticTheme = theme;
+        cachedAppContext = AppContext.getAppContext();
+        cachedAppContext.put(THEME_KEY, theme);
+        
+        // Also set the theme in the superclass.
         setCurrentTheme(theme);
     }
     
