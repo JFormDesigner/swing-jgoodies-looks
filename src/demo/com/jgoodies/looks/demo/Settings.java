@@ -44,10 +44,9 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
- * @see     com.jgoodies.looks.plastic.FontSizeHints
  * @see     com.jgoodies.looks.HeaderStyle
  * @see     com.jgoodies.looks.Options
  */
