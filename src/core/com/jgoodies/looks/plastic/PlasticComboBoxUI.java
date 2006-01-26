@@ -35,9 +35,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
@@ -45,7 +44,6 @@ import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.plaf.metal.MetalScrollBarUI;
 
-import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 
@@ -54,19 +52,52 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.3 $
+* @version $Revision: 1.4 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
-    private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+    static final String CELL_EDITOR_KEY = "JComboBox.isTableCellEditor";
     
-    private static final Border RENDERER_BORDER = new EmptyBorder(1, 2, 1, 2);
+    /** 
+     * Used to determine the minimum height of a text field, 
+     * which in turn is used to answer the combobox's minimum height.
+     */
+    private static final JTextField PHANTOM = new JTextField("Phantom");
     
+    
+    private boolean tableCellEditor;
+    private PropertyChangeListener propertyChangeListener;
+    
+    
+    // ************************************************************************
     
     public static ComponentUI createUI(JComponent b) {
         return new PlasticComboBoxUI();
     }
 
+
+    // ************************************************************************
+    
+    public void installUI( JComponent c ) {
+        super.installUI(c);
+        tableCellEditor = isTableCellEditor();
+    }   
+    
+    protected void installListeners() {
+        super.installListeners();
+        propertyChangeListener = new TableCellEditorPropertyChangeHandler();
+        comboBox.addPropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
+    }
+    
+    protected void uninstallListeners() {
+        super.uninstallListeners();
+        comboBox.removePropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
+        propertyChangeListener = null;
+    }
+    
+    
+    // Overridden Superclass Configuration ************************************
+    
     /**
      * Creates and answers the arrow button that is to be used in the combo box.<p>  
      * 
@@ -87,109 +118,9 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
      * been installed in the JComboBox.
      */
     protected ComboBoxEditor createEditor() {
-        return new PlasticComboBoxEditor.UIResource();
+        return new PlasticComboBoxEditor.UIResource(tableCellEditor);
     }
     
-
-    /**
-     * Creates the default renderer that will be used in a non-editiable combo 
-     * box. A default renderer will used only if a renderer has not been 
-     * explicitly set with <code>setRenderer</code>.<p>
-     * 
-     * This method differs from the superclass implementation 
-     * in that it uses an empty border with wider left and right margins
-     * of 2 pixels instead of 1.
-     * 
-     * @return a <code>ListCellRender</code> used for the combo box
-     * @see javax.swing.JComboBox#setRenderer
-     */
-    protected ListCellRenderer createRenderer() {
-        BasicComboBoxRenderer renderer = new BasicComboBoxRenderer.UIResource();
-        renderer.setBorder(RENDERER_BORDER);
-        return renderer;
-    }
-
-
-    /**
-     * Gets the insets from the JComboBox.
-     */
-    private Insets getEditorInsets() {
-        if (editor instanceof JComponent) {
-            return ((JComponent) editor).getInsets();
-        }
-        return EMPTY_INSETS;
-    }
-    
-    /**
-     * Computes and returns the width of the arrow button in editable state.
-     * The perceived width shall be equal to the width of a scroll bar.
-     * Therefore we subtract a pixel that is perceived as part of the 
-     * arrow button but that is painted by the editor's border.
-     * 
-     * @return the width of the arrow button in editable state
-     */
-    private int getEditableButtonWidth() {
-        return UIManager.getInt("ScrollBar.width") - 1;
-    }
-    
-    /**
-     * Overriden to correct the combobox height.
-     */
-    public Dimension getMinimumSize(JComponent c) {
-        if (!isMinimumSizeDirty) {
-            return new Dimension(cachedMinimumSize);
-        }
-
-        Dimension size = null;
-        
-        if (!comboBox.isEditable()
-            && arrowButton != null
-            && arrowButton instanceof PlasticComboBoxButton) {
-
-            PlasticComboBoxButton button =
-                (PlasticComboBoxButton) arrowButton;
-            Insets buttonInsets = button.getInsets();
-            Insets buttonMargin = button.getMargin();
-            Insets insets = comboBox.getInsets();
-            size = getDisplaySize();
-            
-            // System.out.println("button insets=" + buttonInsets);
-            // System.out.println("button margin=" + buttonMargin);
-            
-            /*
-             * The next line will lead to good results if used with standard renderers;
-             * In case, a custom renderer is used, it may use a different height, 
-             * and we can't help much.
-             */
-            size.height += LookUtils.IS_OS_WINDOWS_VISTA ? 2 : 3;
-            size.width  += insets.left + insets.right;
-            size.width  += buttonInsets.left + buttonInsets.right;
-            size.width  += buttonMargin.left + buttonMargin.right;
-            size.width  += button.getComboIcon().getIconWidth();
-            size.height += insets.top + insets.bottom;
-            size.height += buttonInsets.top + buttonInsets.bottom;
-        } else if (
-            comboBox.isEditable() && arrowButton != null && editor != null) {
-
-            // The display size does often not include the editor's insets
-            size = getDisplaySize();
-            Insets insets = comboBox.getInsets();
-            Insets editorInsets = getEditorInsets();
-            int buttonWidth = getEditableButtonWidth();
-
-            size.width += insets.left + insets.right;
-            size.width += editorInsets.left + editorInsets.right -1;
-            size.width += buttonWidth;
-            size.height += insets.top + insets.bottom;
-        } else {
-            size = super.getMinimumSize(c);
-        }
-
-        cachedMinimumSize.setSize(size.width, size.height);
-        isMinimumSizeDirty = false;
-
-        return new Dimension(cachedMinimumSize);
-    }
 
     /**
      * Creates a layout manager for managing the components which 
@@ -206,6 +137,115 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     
     protected ComboPopup createPopup() {
         return new PlasticComboPopup(comboBox);
+    }
+    
+
+    /**
+     * Creates the default renderer that will be used in a non-editiable combo 
+     * box. A default renderer will used only if a renderer has not been 
+     * explicitly set with <code>setRenderer</code>.<p>
+     * 
+     * This method differs from the superclass implementation 
+     * in that it uses an empty border with wider left and right margins
+     * of 2 pixels instead of 1.
+     * 
+     * @return a <code>ListCellRender</code> used for the combo box
+     * @see javax.swing.JComboBox#setRenderer
+     */
+    protected ListCellRenderer createRenderer() {
+        if (tableCellEditor) {
+            return super.createRenderer();
+        }
+        BasicComboBoxRenderer renderer = new BasicComboBoxRenderer.UIResource();
+        renderer.setBorder(UIManager.getBorder("ComboBox.rendererBorder"));
+        return renderer;
+    }
+
+
+    /**
+     * The minumum size is the size of the display area plus insets plus the button.
+     */
+    public Dimension getMinimumSize(JComponent c) {
+        if (!isMinimumSizeDirty) {
+            return new Dimension(cachedMinimumSize);
+        }
+        Dimension size = getDisplaySize();
+        System.out.println();
+        Insets insets = getInsets();
+        size.height += insets.top + insets.bottom;
+        if (comboBox.isEditable()) {
+            Insets editorBorderInsets = UIManager.getInsets("ComboBox.editorBorderInsets");
+            size.width += editorBorderInsets.left + editorBorderInsets.right;
+            //size.height += editorBorderInsets.top + editorBorderInsets.bottom;
+            // The combo editor benefits from extra space for the caret.
+            // To make editable and non-editable equally wide, 
+            // we always add 1 pixel.
+            size.width += 1;
+        } else {
+            Insets arrowButtonInsets = arrowButton.getInsets();
+            size.width += arrowButtonInsets.left;
+        }
+        int buttonWidth = getEditableButtonWidth();
+        size.width +=  insets.left + insets.right + buttonWidth;
+        
+        // Honor corrections made in #paintCurrentValue
+        ListCellRenderer renderer = comboBox.getRenderer();
+        if (renderer instanceof JComponent) {
+            JComponent component = (JComponent) renderer;
+            Insets rendererInsets = component.getInsets();
+            Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
+            int offsetLeft   = Math.max(0, editorInsets.left - rendererInsets.left);
+            int offsetRight  = Math.max(0, editorInsets.right - rendererInsets.right);
+            // int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
+            // int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
+            size.width += offsetLeft + offsetRight;
+            //size.height += offsetTop + offsetBottom;
+        }
+        
+        // The height is oriented on the JTextField height
+        Dimension textFieldSize = PHANTOM.getMinimumSize();
+        size.height = Math.max(textFieldSize.height, size.height);
+
+        cachedMinimumSize.setSize(size.width, size.height); 
+        isMinimumSizeDirty = false;
+        
+        return new Dimension(size);
+    }
+
+    
+    /**
+     * Delegates to #getMinimumSize(Component).
+     * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
+     */
+    public Dimension getPreferredSize(JComponent c) {
+        return getMinimumSize(c);
+    }
+
+    
+    /**
+     * Returns the area that is reserved for drawing the currently selected item.
+     */
+    protected Rectangle rectangleForCurrentValue() {
+        int width  = comboBox.getWidth();
+        int height = comboBox.getHeight();
+        Insets insets = getInsets();
+        int buttonWidth = getEditableButtonWidth();
+        if (arrowButton != null) {
+            buttonWidth = arrowButton.getWidth();
+        }
+        if (comboBox.getComponentOrientation().isLeftToRight()) {
+            return new Rectangle(
+                    insets.left,
+                    insets.top,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
+        } else {
+            return new Rectangle(
+                    insets.left + buttonWidth,
+                    insets.top ,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
+        }
     }
     
 
@@ -236,6 +276,33 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     }
 
     
+    // Helper Code ************************************************************
+    
+    /**
+     * Computes and returns the width of the arrow button in editable state.
+     * The perceived width shall be equal to the width of a scroll bar.
+     * Therefore we subtract a pixel that is perceived as part of the 
+     * arrow button but that is painted by the editor's border.
+     * 
+     * @return the width of the arrow button in editable state
+     */
+    static int getEditableButtonWidth() {
+        return UIManager.getInt("ScrollBar.width") - 1;
+    }
+
+    
+    /**
+     * Checks and answers if this UI's combo has a client property
+     * that indicates that the combo is used as a table cell editor.
+     * 
+     * @return <code>true</code> if the table cell editor client property
+     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     */
+    private boolean isTableCellEditor() {
+        return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
+    }
+    
+
     // Helper Classes *********************************************************
 
     /**
@@ -267,7 +334,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             if (arrowButton != null) {
                 if (cb.getComponentOrientation().isLeftToRight()) {
                     arrowButton.setBounds(
-                        width - (insets.right + buttonWidth),
+                        width - (insets.left + insets.right + buttonWidth),
                         insets.top,
                         buttonWidth,
                         buttonHeight);
@@ -382,4 +449,25 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
     }
 
+    
+    // Handling Combo Changes *************************************************
+    
+    /**
+     * Listens to changes in the table cell editor client property
+     * and updates the default editor - if any - to use the correct
+     * insets for this case.
+     */
+    private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
+        public void propertyChange(PropertyChangeEvent evt) {
+            tableCellEditor = isTableCellEditor();
+            if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
+                comboBox.setRenderer(createRenderer());
+            }
+            if (comboBox.getEditor() == null || comboBox.getEditor() instanceof UIResource) {
+                comboBox.setEditor(createEditor());
+            }
+        }
+    }
+    
+    
 }

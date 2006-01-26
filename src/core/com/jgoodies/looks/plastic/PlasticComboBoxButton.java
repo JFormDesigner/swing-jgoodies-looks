@@ -35,6 +35,9 @@ import java.awt.Graphics;
 import java.awt.Insets;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 
 /**
  * The default button for combo boxes in the JGoodies Plastic Look&amp;Feel.
@@ -48,30 +51,32 @@ import javax.swing.*;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class PlasticComboBoxButton extends JButton {
 
-    private static final int LEFT_INSET  = 2;
-    private static final int RIGHT_INSET = 3;
-
+    private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+    private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
+    private static final int    LEFT_MARGIN  = 2;
+    private static final int    RIGHT_MARGIN = 2;
+    
     private final JList listBox;
     private final CellRendererPane rendererPane;
 
-    private   JComboBox  comboBox;
-    private   Icon       comboIcon;
-    protected boolean   iconOnly = false;
-    private   boolean   borderPaintsFocus;
+    private JComboBox comboBox;
+    private Icon      comboIcon;
+    private boolean   iconOnly = false;
+    private boolean   borderPaintsFocus;
 
     /**
      * Constructs a <code>PlasticComboBoxButton</code>.
      */
     PlasticComboBoxButton(
-        JComboBox comboBox,
-        Icon comboIcon,
-        boolean iconOnly,
-        CellRendererPane rendererPane,
-        JList listBox) {
+            JComboBox comboBox,
+            Icon comboIcon,
+            boolean iconOnly,
+            CellRendererPane rendererPane,
+            JList listBox) {
         super("");
         setModel(new DefaultButtonModel() {
             public void setArmed(boolean armed) {
@@ -87,7 +92,7 @@ final class PlasticComboBoxButton extends JButton {
         setFocusable(false);
         setRequestFocusEnabled(comboBox.isEnabled());
         setBorder(UIManager.getBorder("ComboBox.arrowButtonBorder"));
-        setMargin(new Insets(0, LEFT_INSET, 0, RIGHT_INSET));
+        setMargin(new Insets(0, LEFT_MARGIN, 0, RIGHT_MARGIN));
         borderPaintsFocus = UIManager.getBoolean("ComboBox.borderPaintsFocus");
     }
 
@@ -138,16 +143,6 @@ final class PlasticComboBoxButton extends JButton {
         return false;
     }
 
-    /**
-     * Checks and answers if we should paint a pseudo 3D effect.
-     */
-    private boolean is3D() {
-        if (PlasticUtils.force3D(comboBox))
-            return true;
-        if (PlasticUtils.forceFlat(comboBox))
-            return false;
-        return PlasticUtils.is3D("ComboBox.");
-    }
 
     /**
      * Paints the component; honors the 3D settings and 
@@ -156,16 +151,12 @@ final class PlasticComboBoxButton extends JButton {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         boolean leftToRight = PlasticUtils.isLeftToRight(comboBox);
-
         Insets insets = getInsets();
-        
         int width  = getWidth()  - (insets.left + insets.right);
         int height = getHeight() - (insets.top  + insets.bottom);
-
         if (height <= 0 || width <= 0) {
             return;
         }
-
         int left   = insets.left;
         int top    = insets.top;
         int right  = left + (width - 1);
@@ -183,104 +174,61 @@ final class PlasticComboBoxButton extends JButton {
                 iconLeft = (getWidth()  - iconWidth)  / 2;
                 iconTop  = (getHeight() - iconHeight) / 2;
             } else {
-                if (leftToRight) {
-                    iconLeft = (left + (width - 1)) - iconWidth;
-                } else {
-                    iconLeft = left;
-                }
+                iconLeft = leftToRight
+                    ? left + (width - 1) - iconWidth
+                    : left;
                 iconTop = (getHeight() - iconHeight) / 2;
             }
-
             comboIcon.paintIcon(this, g, iconLeft, iconTop);
-
         }
 
         // Let the renderer paint
         if (!iconOnly && comboBox != null) {
             ListCellRenderer renderer = comboBox.getRenderer();
             boolean renderPressed = getModel().isPressed();
-            Component c =
-                renderer.getListCellRendererComponent(
-                    listBox,
-                    comboBox.getSelectedItem(),
-                    -1,
-                    renderPressed,
-                    false);
-            c.setFont(rendererPane.getFont());
+            Component c = renderer.getListCellRendererComponent(
+                    listBox, comboBox.getSelectedItem(), -1, renderPressed, false);
+            
+            int x = leftToRight ? left : left + iconWidth;
+            int y = top;
+            int w = getWidth() - left - PlasticComboBoxUI.getEditableButtonWidth();
+            int h = height;
 
-            if (model.isArmed() && model.isPressed()) {
-                if (isOpaque()) {
-                    c.setBackground(UIManager.getColor("Button.select"));
+            Border oldBorder = null;
+            if ((c instanceof JComponent) && !isTableCellEditor()) {
+                JComponent component = (JComponent) c;
+                if (c instanceof BasicComboBoxRenderer.UIResource) {
+                    oldBorder = component.getBorder();
+                    component.setBorder(EMPTY_BORDER);
                 }
-                c.setForeground(comboBox.getForeground());
-            } else if (!comboBox.isEnabled()) {
-                if (isOpaque()) {
-                    c.setBackground(
-                        UIManager.getColor("ComboBox.disabledBackground"));
-                }
-                c.setForeground(
-                    UIManager.getColor("ComboBox.disabledForeground"));
-            } else {
-                c.setForeground(comboBox.getForeground());
-                c.setBackground(comboBox.getBackground());
+                Insets rendererInsets = component.getInsets();
+                Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
+                int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
+                int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
+                y += offsetTop;
+                h -= offsetTop + offsetBottom;
             }
+            c.setFont(rendererPane.getFont());
+            configureColors(c);
 
-            int cWidth = width - (insets.right + iconWidth);
 
             // Fix for 4238829: should lay out the JPanel.
             boolean shouldValidate = c instanceof JPanel;
-            int x = leftToRight ? left : left + iconWidth;
-            int myHeight = getHeight() - LEFT_INSET - RIGHT_INSET - 1;
-
-            if (!is3D()) {
-                rendererPane.paintComponent(
-                    g,
-                    c,
-                    this,
-                    x,
-                    top + 2,
-                    cWidth,
-                    myHeight,
-                    shouldValidate);
-            } else if (!(c instanceof JComponent)) {
-                rendererPane.paintComponent(
-                    g,
-                    c,
-                    this,
-                    x,
-                    top + 2,
-                    cWidth,
-                    myHeight,
-                    shouldValidate);
-                //LookUtils.log("Custom renderer detected: " + c);				
-                //LookUtils.log("Custom renderer superclass: " + c.getClass().getSuperclass().getName());				
-            } else if (!c.isOpaque()) {
-                rendererPane.paintComponent(
-                    g,
-                    c,
-                    this,
-                    x,
-                    top + 2,
-                    cWidth,
-                    myHeight,
-                    shouldValidate);
+            
+            if (!is3D()  || !(c instanceof JComponent) || !c.isOpaque()) {
+                rendererPane.paintComponent(g, c, this, x, y, w, h, shouldValidate);
             } else {
                 // In case, we are in 3D mode _and_ have a non-transparent
                 // JComponent renderer, store the opaque state, set it
                 // to transparent, paint, then restore.
                 JComponent component = (JComponent) c;
-                boolean hasBeenOpaque = component.isOpaque();
+                boolean oldOpaque = component.isOpaque();
                 component.setOpaque(false);
-                rendererPane.paintComponent(
-                    g,
-                    c,
-                    this,
-                    x,
-                    top + 2,
-                    cWidth,
-                    myHeight,
-                    shouldValidate);
-                component.setOpaque(hasBeenOpaque);
+                rendererPane.paintComponent(g, c, this, x, y, w, h, shouldValidate);
+                component.setOpaque(oldOpaque);
+            }
+            if (oldBorder != null) {
+                ((JComponent) c).setBorder(oldBorder);
             }
         }
         
@@ -289,14 +237,54 @@ final class PlasticComboBoxButton extends JButton {
             boolean hasFocus = comboBox.hasFocus();
             if (!borderPaintsFocus && hasFocus) {
                 g.setColor(PlasticLookAndFeel.getFocusColor());
-                int x = LEFT_INSET;
-                int y = LEFT_INSET;
-                int w = getWidth()  - LEFT_INSET - RIGHT_INSET;
-                int h = getHeight() - LEFT_INSET - RIGHT_INSET;
-                g.drawRect(x, y, w - 1, h - 1);
+                g.drawRect(2, 2, getWidth() - 5, getHeight() - 5);
             }
         }
 
     }
+
+    private void configureColors(Component c) {
+        if (model.isArmed() && model.isPressed()) {
+            if (isOpaque()) {
+                c.setBackground(UIManager.getColor("Button.select"));
+            }
+            c.setForeground(comboBox.getForeground());
+        } else if (!comboBox.isEnabled()) {
+            if (isOpaque()) {
+                c.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
+            }
+            c.setForeground(UIManager.getColor("ComboBox.disabledForeground"));
+        } else {
+            c.setForeground(comboBox.getForeground());
+            c.setBackground(comboBox.getBackground());
+        }
+    }
+    
+    
+    // Helper Code ************************************************************
+
+    /**
+     * Checks and answers if we should paint a pseudo 3D effect.
+     */
+    private boolean is3D() {
+        if (PlasticUtils.force3D(comboBox))
+            return true;
+        if (PlasticUtils.forceFlat(comboBox))
+            return false;
+        return PlasticUtils.is3D("ComboBox.");
+    }
+
+    
+    /**
+     * Checks and answers if this UI's combo has a client property
+     * that indicates that the combo is used as a table cell editor.
+     * 
+     * @return <code>true</code> if the table cell editor client property
+     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     */
+    private boolean isTableCellEditor() {
+        return Boolean.TRUE.equals(comboBox.getClientProperty(PlasticComboBoxUI.CELL_EDITOR_KEY));
+    }
+    
 
 }
