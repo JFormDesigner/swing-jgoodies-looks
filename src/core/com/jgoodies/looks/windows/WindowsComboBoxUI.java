@@ -57,7 +57,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -106,56 +106,17 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     
     
     /**
-     * The minumum size is the size of the display area plus insets plus the button.
+     * Creates the arrow button that is to be used in the combo box.<p>
+     * 
+     * Overridden to paint black triangles.
      */
-    public Dimension getMinimumSize(JComponent c) {
-        if (!isMinimumSizeDirty) {
-            return new Dimension(cachedMinimumSize);
-        }
-        Dimension size = getDisplaySize();
-        Insets insets = getInsets();
-        size.height += insets.top + insets.bottom;
-        int buttonWidth = UIManager.getInt("ScrollBar.width");
-        size.width +=  insets.left + insets.right + buttonWidth;
-        // The combo editor benefits from extra space for the caret.
-        // To make editable and non-editable equally wide, 
-        // we always add 1 pixel.
-        size.width += 1;
-        
-        // Honor corrections made in #paintCurrentValue
-        ListCellRenderer renderer = comboBox.getRenderer();
-        if (renderer instanceof JComponent) {
-            JComponent component = (JComponent) renderer;
-            Insets rendererInsets = component.getInsets();
-            Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
-            int offsetLeft   = Math.max(0, editorInsets.left - rendererInsets.left);
-            int offsetRight  = Math.max(0, editorInsets.right - rendererInsets.right);
-            // int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
-            // int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
-            size.width += offsetLeft + offsetRight;
-            //size.height += offsetTop + offsetBottom;
-        }
-        
-        // The height is oriented on the JTextField height
-        Dimension textFieldSize = PHANTOM.getMinimumSize();
-        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
-           ? textFieldSize.height
-           : Math.max(textFieldSize.height, size.height);
-
-        cachedMinimumSize.setSize(size.width, size.height); 
-        isMinimumSizeDirty = false;
-        
-        return new Dimension(size);
+    protected JButton createArrowButton() {
+        return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+                    ? super.createArrowButton()
+                    : new WindowsArrowButton(SwingConstants.SOUTH);
     }
-
-    /**
-     * Delegates to #getMinimumSize(Component).
-     * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
-     */
-    public Dimension getPreferredSize(JComponent c) {
-        return getMinimumSize(c);
-    }
-
+    
+    
     /**
      * Creates the editor that is to be used in editable combo boxes. 
      * This method only gets called if a custom editor has not already 
@@ -211,44 +172,57 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
 
 
     /**
-     * Creates the arrow button that is to be used in the combo box.<p>
-     * 
-     * Overridden to paint black triangles.
+     * The minumum size is the size of the display area plus insets plus the button.
      */
-    protected JButton createArrowButton() {
-        return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
-                    ? super.createArrowButton()
-                    : new WindowsArrowButton(SwingConstants.SOUTH);
-    }
-    
-    
-    /**
-     * Returns the area that is reserved for drawing the currently selected item.
-     */
-    protected Rectangle rectangleForCurrentValue() {
-        int width  = comboBox.getWidth();
-        int height = comboBox.getHeight();
+    public Dimension getMinimumSize(JComponent c) {
+        if (!isMinimumSizeDirty) {
+            return new Dimension(cachedMinimumSize);
+        }
+        Dimension size = getDisplaySize();
         Insets insets = getInsets();
-        int buttonWidth = UIManager.getInt("ScrollBar.width");
-        if (arrowButton != null) {
-            buttonWidth = arrowButton.getWidth();
+        size.height += insets.top + insets.bottom;
+        int buttonWidth = getEditableButtonWidth();
+        size.width +=  insets.left + insets.right + buttonWidth;
+        // The combo editor benefits from extra space for the caret.
+        // To make editable and non-editable equally wide, 
+        // we always add 1 pixel.
+        size.width += 1;
+        
+        // Honor corrections made in #paintCurrentValue
+        ListCellRenderer renderer = comboBox.getRenderer();
+        if (renderer instanceof JComponent) {
+            JComponent component = (JComponent) renderer;
+            Insets rendererInsets = component.getInsets();
+            Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
+            int offsetLeft   = Math.max(0, editorInsets.left - rendererInsets.left);
+            int offsetRight  = Math.max(0, editorInsets.right - rendererInsets.right);
+            // int offsetTop    = Math.max(0, editorInsets.top - rendererInsets.top);
+            // int offsetBottom = Math.max(0, editorInsets.bottom - rendererInsets.bottom);
+            size.width += offsetLeft + offsetRight;
+            //size.height += offsetTop + offsetBottom;
         }
-        if (comboBox.getComponentOrientation().isLeftToRight()) {
-            return new Rectangle(
-                    insets.left,
-                    insets.top,
-                    width  - (insets.left + insets.right + buttonWidth),
-                    height - (insets.top  + insets.bottom));
-        } else {
-            return new Rectangle(
-                    insets.left + buttonWidth,
-                    insets.top ,
-                    width  - (insets.left + insets.right + buttonWidth),
-                    height - (insets.top  + insets.bottom));
-        }
-    }
-    
+        
+        // The height is oriented on the JTextField height
+        Dimension textFieldSize = PHANTOM.getMinimumSize();
+        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
+           ? textFieldSize.height
+           : Math.max(textFieldSize.height, size.height);
 
+        cachedMinimumSize.setSize(size.width, size.height); 
+        isMinimumSizeDirty = false;
+        
+        return new Dimension(size);
+    }
+
+    /**
+     * Delegates to #getMinimumSize(Component).
+     * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
+     */
+    public Dimension getPreferredSize(JComponent c) {
+        return getMinimumSize(c);
+    }
+
+    
     /**
      * Paints the currently selected item.
      */
@@ -314,7 +288,43 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     }
     
     
+    /**
+     * Returns the area that is reserved for drawing the currently selected item.
+     */
+    protected Rectangle rectangleForCurrentValue() {
+        int width  = comboBox.getWidth();
+        int height = comboBox.getHeight();
+        Insets insets = getInsets();
+        int buttonWidth = getEditableButtonWidth();
+        if (arrowButton != null) {
+            buttonWidth = arrowButton.getWidth();
+        }
+        if (comboBox.getComponentOrientation().isLeftToRight()) {
+            return new Rectangle(
+                    insets.left,
+                    insets.top,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
+        } else {
+            return new Rectangle(
+                    insets.left + buttonWidth,
+                    insets.top ,
+                    width  - (insets.left + insets.right + buttonWidth),
+                    height - (insets.top  + insets.bottom));
+        }
+    }
+    
+
     // Helper Code ************************************************************
+    
+    /**
+     * Computes and returns the width of the arrow button in editable state.
+     * 
+     * @return the width of the arrow button in editable state
+     */
+    private int getEditableButtonWidth() {
+        return UIManager.getInt("ScrollBar.width");
+    }
     
     /**
      * Checks and answers if this UI's combo has a client property
@@ -345,7 +355,7 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
             int height = cb.getHeight();
 
             Insets insets = getInsets();
-            int buttonWidth  = UIManager.getInt("ScrollBar.width");
+            int buttonWidth  = getEditableButtonWidth();
             int buttonHeight = height - (insets.top + insets.bottom);
 
             if (arrowButton != null) {
