@@ -1,6 +1,6 @@
 
                          JGoodies Looks
-                       Version 2.0 Preview 2
+                       Version 2.0 Snapshot (Jan-26-2006)
                           Release Notes
                         
 
@@ -98,10 +98,14 @@ BUGS FIXED
          in Java 5 or later if the content border is disabled.
     #84: Windows L&F combo margin too wide in table.
     #86: Windows combobox too narrow if the renderer has zero insets.
+    #89: Plastic L&F editable combo margin too large in table.
     #90: Spinner does not stop the timer when loosing focus.
     #91: Progress invisible in Plastic Silver theme.
     #94: Windows default title font shall be plain not bold.
     #95: Display Windows toolbar drag handles.
+    #96: Fix Windows formatted text field background.
+    #97: Fix text area disabled/non-editable background.
+    #98: Fix Windows disabled non-editable combo background.
     
 
 NEW FEATURES
@@ -128,9 +132,8 @@ OTHER CHANGES
 
     o The Windows and Plastic L&fs have been tweaked for Windows Vista.
     o Overhauled the Windows combobox layout and rendering.
+    o Overhauled the Plastic combobox layout and rendering.
     o Improved appearance of the Looks demo tabs on Windows.
-    o Password field antialiasing honors the field's aa hint
-      and uses subpixel aa if available.
     o The demo's DemoFrame class accepts a parameter for the L&f: 
       "Windows", "Plastic", "Plastic3D", "PlasticXP",
       or a full class name like:
