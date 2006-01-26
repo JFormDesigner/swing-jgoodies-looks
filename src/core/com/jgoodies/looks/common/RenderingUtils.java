@@ -31,7 +31,6 @@
 package com.jgoodies.looks.common;
 
 import java.awt.Graphics;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -47,11 +46,9 @@ import com.jgoodies.looks.LookUtils;
  * It should be treated as library internal and should not be used by
  * API users. It may be removed or changed with the Looks version
  * without further notice.
- * 
- * TODO: Remove the drawing methods if we require Java 5.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @since 2.0
  */
@@ -76,45 +73,11 @@ public final class RenderingUtils {
      */
     private static Method drawStringUnderlineCharAtMethod = null;
     
-    /**
-     * In Java 5, this field holds the private static method 
-     * <code>SwingUtilities2#drawTextAntialiased(JComponent)</code>
-     * has been replaced by a public method in Java 6. 
-     */
-    private static Method drawTextAntialiasedJava5Method;
-    
-    /**
-     * In Java 6 or later, this field holds the public static method 
-     * <code>SwingUtilities2#drawTextAntialiased(JComponent)</code> 
-     * that has been added in Java 6. 
-     */
-    private static Method drawTextAntialiasedJava6Method;
-    
-    /**
-     * In Java 6 or later, this field holds the field
-     * <code>SwingUtilitites2$AATextInfo.aaHint</code>.
-     */
-    private static Field aaHintField;
-    
-    /**
-     * Describes if the <code>aaHintField</code> can be accessed or not.
-     * Will be disabled if the field cannot be looked up, or if the
-     * access to the field failed.
-     */
-    private static boolean canAccessAAHintField = true;
-
-
     static {
         if (LookUtils.IS_JAVA_5_OR_LATER) {
             drawStringMethod = getMethodDrawString();
             drawStringUnderlineCharAtMethod = getMethodDrawStringUnderlineCharAt();
         }
-        if (LookUtils.IS_JAVA_5) {
-            drawTextAntialiasedJava5Method = getMethodDrawTextAntialiasedJava5();
-        } else if (LookUtils.IS_JAVA_6_OR_LATER) {
-            drawTextAntialiasedJava6Method = getMethodDrawTextAntialiasedJava6();
-        }
-        aaHintField = getFieldAAHint();
     }
     
     
@@ -180,77 +143,6 @@ public final class RenderingUtils {
     }
     
     
-    public static Object getTextAntialiasingHint(JComponent c) {
-        if (LookUtils.IS_JAVA_1_4) {
-            return null;
-        } else if (LookUtils.IS_JAVA_5 && (drawTextAntialiasedJava5Method != null)) {
-            try {
-                return drawTextAntialiasedJava5Method.invoke(null, new Object[]{c});
-            } catch (IllegalArgumentException e) {
-                // Use the BasicGraphicsUtils as fallback
-            } catch (IllegalAccessException e) {
-                // Use the BasicGraphicsUtils as fallback
-            } catch (InvocationTargetException e) {
-                // Use the BasicGraphicsUtils as fallback
-            }
-            return null;
-        } else if (LookUtils.IS_JAVA_6_OR_LATER) {
-            Object aaTextInfo = drawTextAntialiasedJava6(c);
-            return aaTextInfo == null
-                ? null
-                : aaHint(aaTextInfo);
-        } else {
-            return null;
-        }
-    }
-    
-    
-    private static Object drawTextAntialiasedJava6(JComponent c) {
-        if (drawTextAntialiasedJava6Method != null) {
-            try {
-                return drawTextAntialiasedJava6Method.invoke(null, new Object[]{c});
-            } catch (IllegalArgumentException e) {
-                // Use the BasicGraphicsUtils as fallback
-            } catch (IllegalAccessException e) {
-                // Use the BasicGraphicsUtils as fallback
-            } catch (InvocationTargetException e) {
-                // Use the BasicGraphicsUtils as fallback
-            }
-        }
-        return null;    
-    }
-    
-    private static Object aaHint(Object aaTextInfo) {
-        if (aaHintField != null && canAccessAAHintField) {
-            try {
-                return aaHintField.get(aaTextInfo);
-            } catch (Exception e) {
-                // Return null as fallback
-                canAccessAAHintField = false;
-            }
-        }
-        return null;
-    }
-
-    
-    private static Field getFieldAAHint() {
-        try {
-            Class clazz = Class.forName("com.sun.java.swing.SwingUtilities2$AATextInfo");
-            Field field = clazz.getDeclaredField("aaHint");
-            field.setAccessible(true);
-            return field;
-        } catch (ClassNotFoundException e) {
-            // returns null as fallback
-        } catch (SecurityException e) {
-            // returns null as fallback
-        } catch (NoSuchFieldException e) {
-            // returns null as fallback
-        }
-        canAccessAAHintField = false;
-        return null;
-    }
-
-        
     // Private Helper Code ****************************************************
     
     
@@ -271,6 +163,7 @@ public final class RenderingUtils {
         return null;
     }
     
+    
     private static Method getMethodDrawStringUnderlineCharAt() {
         try {
             Class clazz = Class.forName(SWING_UTILITIES2_NAME);
@@ -289,42 +182,4 @@ public final class RenderingUtils {
     }
     
     
-    private static Method getMethodDrawTextAntialiasedJava5() {
-        try {
-            Class clazz = Class.forName(SWING_UTILITIES2_NAME);
-            Method method = clazz.getMethod(
-                    "drawTextAntialiased",
-                    new Class[] {JComponent.class}
-                    );
-            method.setAccessible(true);
-            return method;
-        } catch (ClassNotFoundException e) {
-            // returns null
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        return null;
-    }
-
-   
-    private static Method getMethodDrawTextAntialiasedJava6() {
-        try {
-            Class clazz = Class.forName(SWING_UTILITIES2_NAME);
-            return clazz.getMethod(
-                    "drawTextAntialiased",
-                    new Class[] {JComponent.class}
-                    );
-        } catch (ClassNotFoundException e) {
-            // returns null
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        return null;
-    }
-
-   
 }
