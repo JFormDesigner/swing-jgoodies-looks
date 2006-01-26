@@ -51,7 +51,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -237,7 +237,7 @@ final class PlasticComboBoxButton extends JButton {
             boolean hasFocus = comboBox.hasFocus();
             if (!borderPaintsFocus && hasFocus) {
                 g.setColor(PlasticLookAndFeel.getFocusColor());
-                g.drawRect(2, 2, getWidth() - 5, getHeight() - 5);
+                g.drawRect(2, 2, getWidth() - 6, getHeight() - 6);
             }
         }
 
