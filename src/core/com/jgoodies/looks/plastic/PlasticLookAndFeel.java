@@ -32,7 +32,6 @@ package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
 import java.awt.Insets;
-import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -47,12 +46,10 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.plaf.metal.*;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
 import sun.awt.AppContext;
-import sun.security.action.GetPropertyAction;
 
 import com.jgoodies.looks.FontChoicePolicies;
 import com.jgoodies.looks.FontChoicePolicy;
@@ -71,7 +68,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
