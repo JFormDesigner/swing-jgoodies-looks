@@ -51,7 +51,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * and proper preferred size computations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class ComboBoxTab {
     
@@ -120,6 +120,10 @@ final class ComboBoxTab {
         builder.append(createComboBox(TEST_STR, true,  null));
         builder.append(createComboBox(TEST_STR, false, null));
         
+        builder.append("Panel");
+        builder.append(createComboBox(TEST_STR, true,  panelRenderer));
+        builder.append(createComboBox(TEST_STR, false, panelRenderer));
+
         builder.append("Narrow Margin");
         builder.append(createComboBox(TEST_STR, true,  narrowMarginRenderer));
         builder.append(createComboBox(TEST_STR, false, narrowMarginRenderer));
@@ -132,10 +136,6 @@ final class ComboBoxTab {
         builder.append(createComboBox(TEST_STR, true,  wideMarginRenderer));
         builder.append(createComboBox(TEST_STR, false, wideMarginRenderer));
         
-        builder.append("Panel");
-        builder.append(createComboBox(TEST_STR, true,  panelRenderer));
-        builder.append(createComboBox(TEST_STR, false, panelRenderer));
-
         return builder.getPanel();
     }
     
