@@ -49,7 +49,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class NarrowTab {
 
@@ -58,9 +58,9 @@ final class NarrowTab {
      */
     JComponent build() {
         FormLayout layout = new FormLayout(
-                "7dlu, left:pref, 0:grow",
-                "pref, 2dlu, pref, 11dlu, "
-              + "pref, 2dlu, pref, 11dlu, "
+                "left:pref, 0:grow",
+                "pref, 2dlu, pref, 14dlu, "
+              + "pref, 2dlu, pref, 14dlu, "
               + "pref, 2dlu, pref, 0:grow");
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
@@ -68,13 +68,12 @@ final class NarrowTab {
 
         CellConstraints cc = new CellConstraints();
         
-        // BoxLayout
-        builder.addSeparator("Raw Button Widths (BoxLayout)",        cc.xyw(1,  1, 3));
-        builder.add(buildButtonBoxNoNarrow(),                        cc.xy (2,  3));
-        builder.addSeparator("Adjusted Button Widths (FormLayout)",  cc.xyw(1,  5, 3));
-        builder.add(buildButtonFormNoNarrow(),                       cc.xy (2,  7));
-        builder.addSeparator("Equalized Button Widths (GridLayout)", cc.xyw(1,  9, 3));
-        builder.add(buildButtonGridNoNarrow(),                       cc.xy (2, 11));
+        builder.addTitle("Raw Button Widths (BoxLayout)",        cc.xyw(1,  1, 2));
+        builder.add(buildButtonBoxNoNarrow(),                    cc.xy (1,  3));
+        builder.addTitle("Adjusted Button Widths (FormLayout)",  cc.xyw(1,  5, 2));
+        builder.add(buildButtonFormNoNarrow(),                   cc.xy (1,  7));
+        builder.addTitle("Equalized Button Widths (GridLayout)", cc.xyw(1,  9, 2));
+        builder.add(buildButtonGridNoNarrow(),                   cc.xy (1, 11));
 
         return builder.getPanel();
     }

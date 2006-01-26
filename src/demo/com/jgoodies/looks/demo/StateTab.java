@@ -49,9 +49,9 @@ import com.jgoodies.looks.Options;
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  */
-final class StatesTab {
+final class StateTab {
 
     /**
      * Builds and returns the states panel.

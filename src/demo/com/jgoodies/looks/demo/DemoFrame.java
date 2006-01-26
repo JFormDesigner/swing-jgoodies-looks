@@ -60,7 +60,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class DemoFrame extends JFrame {
 
@@ -320,7 +320,7 @@ public class DemoFrame extends JFrame {
     }
 
     private void addTabs(JTabbedPane tabbedPane) {
-        tabbedPane.addTab("State",     new StatesTab().build());
+        tabbedPane.addTab("State",     new StateTab().build());
         tabbedPane.addTab("Align",     new AlignmentTab().build());
         tabbedPane.addTab("Tab",       new TabTestTab().build());
         tabbedPane.addTab("Split",     new SplitTab().build());

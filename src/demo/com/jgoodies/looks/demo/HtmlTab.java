@@ -39,7 +39,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of components with HTML labels.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class HtmlTab {
     
@@ -75,18 +75,17 @@ final class HtmlTab {
         initComponents();
         
         FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref), 6dlu, pref",
-                "");
+                "right:max(50dlu;pref), 6dlu, pref");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setDefaultDialogBorder();
         builder.getPanel().setOpaque(false);
         
-        builder.append("Button:",        button);
-        builder.append("Toggle Button:", toggleButton);
-        builder.append("Combo Box:",     comboBox);
-        builder.append("Label:",         label);
-        builder.append("Radio Button:",  radioButton);
-        builder.append("Check Box:",     checkBox);
+        builder.append("Label:",  label);
+        builder.append("Radio:",  radioButton);
+        builder.append("Check:",  checkBox);
+        builder.append("Button:", button);
+        builder.append("Toggle:", toggleButton);
+        builder.append("Combo:",  comboBox);
         return builder.getPanel();
     }
 
