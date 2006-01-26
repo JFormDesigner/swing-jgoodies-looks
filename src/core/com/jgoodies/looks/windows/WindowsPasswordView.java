@@ -30,16 +30,15 @@
  
 package com.jgoodies.looks.windows;
 
-import java.awt.*;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.Shape;
 
-import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
 import javax.swing.text.Position;
-
-import com.jgoodies.looks.common.RenderingUtils;
 
 
 /**
@@ -47,7 +46,7 @@ import com.jgoodies.looks.common.RenderingUtils;
  * not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class WindowsPasswordView extends PasswordView {
     
@@ -67,13 +66,15 @@ final class WindowsPasswordView extends PasswordView {
         return super.modelToView(pos, a, b);
     }
     
+    
     public int viewToModel(float fx, float fy, Shape a, Position.Bias[] bias) {
         overrideEchoChar();
         return super.viewToModel(fx, fy, a, bias);
     }
     
-    /*
-     * Overrides the superclass behavior to paint a filled circle,
+    
+    /**
+     * Overrides the superclass behavior to draw the Windows dot, 
      * not the star (&quot;*&quot;) character.
      */
     protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
@@ -85,19 +86,7 @@ final class WindowsPasswordView extends PasswordView {
         if (canOverrideEchoChar(field)) {
             c = DOT_CHAR;
         }
-        Graphics2D g2 = (Graphics2D) g;
-        Object newAAHint = getAntiAliasingHint(field);
-        Object oldAAHint = g2.getRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING);
-        if (newAAHint != oldAAHint) {
-            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, newAAHint);
-        } else {
-            oldAAHint = null;
-        }
-        int newX = super.drawEchoCharacter(g, x, y, c);
-        if (oldAAHint != null) {
-            g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, oldAAHint);
-        }
-        return newX;
+        return super.drawEchoCharacter(g, x, y, c);
     }
     
     
@@ -112,28 +101,9 @@ final class WindowsPasswordView extends PasswordView {
         }
     }
     
+    
     private boolean canOverrideEchoChar(JPasswordField field) {
         return field.echoCharIsSet() && field.getEchoChar() == '*';
-    }
-    
-    
-    // Getting an AA Hint *****************************************************
-
-    /**
-     * Returns the anti-aliasing (AA) hint to be used for rendering the echo 
-     * character. Returns <code>RenderingHints.VALUE_TEXT_ANTIALIAS_ON</code>
-     * or a better rendering hint - if available for the given component.
-     * The latter may be the case in Java 6 or later, where the component's
-     * AA hint may be a subpixel AA hint.
-     * 
-     * @param c the component to render on
-     * @return the anti-aliasing hint for rendering the echo char
-     */
-    private Object getAntiAliasingHint(JComponent c) {
-        Object aaHint = RenderingUtils.getTextAntialiasingHint(c);
-        return aaHint != null
-            ? aaHint
-            : RenderingHints.VALUE_TEXT_ANTIALIAS_ON;
     }
     
     
