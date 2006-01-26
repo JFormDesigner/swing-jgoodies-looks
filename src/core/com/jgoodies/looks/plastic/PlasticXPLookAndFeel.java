@@ -33,6 +33,8 @@ package com.jgoodies.looks.plastic;
 import java.awt.Insets;
 
 import javax.swing.UIDefaults;
+import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.InsetsUIResource;
 
@@ -45,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -110,7 +112,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object buttonBorder         = PlasticXPBorders.getButtonBorder();
         Object checkBoxIcon         = PlasticXPIconFactory.getCheckBoxIcon();
         Object comboBoxButtonBorder = PlasticXPBorders.getComboBoxArrowButtonBorder();
-        Object comboBoxEditorBorder = PlasticXPBorders.getComboBoxEditorBorder();
+        Border comboBoxEditorBorder = PlasticXPBorders.getComboBoxEditorBorder();
         Object radioButtonIcon      = PlasticXPIconFactory.getRadioButtonIcon();
         Object scrollPaneBorder     = PlasticXPBorders.getScrollPaneBorder();
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
@@ -120,10 +122,17 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
                                             
-        Object textInsets = isVista
-            ? new InsetsUIResource(2, 2, 2, 2)
+        Insets textInsets = isVista
+            ? new InsetsUIResource(1, 2, 1, 2)
             : new InsetsUIResource(2, 2, 3, 2);
                                             
+        Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);
+        int comboBorderSize  = comboEditorBorderInsets.left;
+        int comboPopupBorderSize = 1;
+        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
+        Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
+                
 		Object[] defaults = {
             "Button.border",                  buttonBorder,
             "Button.borderPaintsFocus",       Boolean.TRUE,
@@ -134,6 +143,10 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "ComboBox.arrowButtonBorder",     comboBoxButtonBorder,
             "ComboBox.editorBorder",          comboBoxEditorBorder,
             "ComboBox.borderPaintsFocus",     Boolean.TRUE,
+            "ComboBox.editorBorderInsets",    comboEditorBorderInsets,          // Added by JGoodies
+            "ComboBox.editorInsets",          textInsets,          // Added by JGoodies
+            "ComboBox.tableEditorInsets",     comboTableEditorInsets,            
+            "ComboBox.rendererBorder",        comboRendererBorder, // Added by JGoodies
 
             "EditorPane.margin",              textInsets,
 

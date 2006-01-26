@@ -41,6 +41,7 @@ import javax.swing.Icon;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
@@ -68,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -346,6 +347,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 // Uses a modified split divider
 				"SplitPaneUI", 				plasticPrefix + "SplitPaneUI",
 				
+                // Updates the disabled and inactive background
+                "TextAreaUI",               plasticPrefix + "TextAreaUI",
+
 				// Modified icons and lines
 				"TreeUI", 					plasticPrefix + "TreeUI",
 				
@@ -373,6 +377,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object marginBorder				= new BasicBorders.MarginBorder();
 		
         Object buttonBorder				= PlasticBorders.getButtonBorder();
+        Object comboBoxButtonBorder     = PlasticBorders.getComboBoxArrowButtonBorder();
+        Border comboBoxEditorBorder     = PlasticBorders.getComboBoxEditorBorder();
 		Object menuItemBorder			= PlasticBorders.getMenuItemBorder();
         Object textFieldBorder			= PlasticBorders.getTextFieldBorder();
         Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder();
@@ -401,15 +407,22 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
         Object buttonMargin = createButtonMargin();
 		
-		Object textInsets = isVista
-            ? new InsetsUIResource(1, 1, 1, 1)
+		Insets textInsets = isVista
+            ? new InsetsUIResource(0, 1, 0, 1)
             : new InsetsUIResource(1, 1, 2, 1);
             
         Object wrappedTextInsets = isVista
-            ? new InsetsUIResource(1, 1, 2, 1)
+            ? new InsetsUIResource(1, 1, 1, 1)
             : new InsetsUIResource(2, 1, 2, 1);
-                                                
-		Object menuItemMargin			= new InsetsUIResource(3, 0, 3, 0);
+                                 
+        Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);
+        int comboBorderSize  = comboEditorBorderInsets.left;
+        int comboPopupBorderSize = 1;
+        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
+        Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
+            
+	    Object menuItemMargin			= new InsetsUIResource(3, 0, 3, 0);
 		Object menuMargin				= new InsetsUIResource(2, 4, 2, 4);
 
 		Icon   menuItemCheckIcon		= new MinimumSizedIcon(); 
@@ -418,6 +431,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
 		Color  menuItemForeground		= table.getColor("MenuItem.foreground");
 
+        Color inactiveTextBackground    = table.getColor("TextField.inactiveBackground");
+        
 		// 	Should be active.
 		int     treeFontSize			= table.getFont("Tree.font").getSize(); 
 		Integer rowHeight				= new Integer(treeFontSize + 6);
@@ -449,9 +464,13 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		// ComboBox uses menu item selection colors
 		"ComboBox.selectionForeground",					getMenuSelectedForeground(),
 		"ComboBox.selectionBackground",					getMenuSelectedBackground(),
-        "ComboBox.arrowButtonBorder",                   PlasticBorders.getComboBoxArrowButtonBorder(),
-        "ComboBox.editorBorder",                        PlasticBorders.getComboBoxEditorBorder(),
+        "ComboBox.arrowButtonBorder",                   comboBoxButtonBorder,
+        "ComboBox.editorBorder",                        comboBoxEditorBorder,
         "ComboBox.editorColumns",                       new Integer(5),
+        "ComboBox.editorBorderInsets",                  comboEditorBorderInsets,          // Added by JGoodies
+        "ComboBox.editorInsets",                        textInsets,          // Added by JGoodies
+        "ComboBox.tableEditorInsets",                   comboTableEditorInsets,            
+        "ComboBox.rendererBorder",                      comboRendererBorder, // Added by JGoodies
         
         "EditorPane.margin",                            wrappedTextInsets,
 
@@ -534,6 +553,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"Table.gridColor",								controlColor, //new ColorUIResource(new Color(216, 216, 216)),
         "Table.scrollPaneBorder", 						scrollPaneBorder,
 		"TableHeader.cellBorder",						tableHeaderBorder,
+        "TextArea.inactiveBackground",                  inactiveTextBackground,
 		"TextArea.margin",								wrappedTextInsets,	
 		"TextField.border",								textFieldBorder,			
 		"TextField.margin", 							textInsets,				
@@ -601,7 +621,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     protected Insets createButtonMargin() {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_OS_WINDOWS_VISTA
-            ? new InsetsUIResource(0, pad, 1, pad)
+            ? new InsetsUIResource(1, pad, 1, pad)
             : (LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(1, pad, 1, pad)
                 : new InsetsUIResource(2, pad, 3, pad));
