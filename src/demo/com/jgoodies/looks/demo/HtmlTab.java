@@ -32,14 +32,16 @@ package com.jgoodies.looks.demo;
 
 import javax.swing.*;
 
-import com.jgoodies.forms.builder.DefaultFormBuilder;
+import com.jgoodies.forms.builder.PanelBuilder;
+import com.jgoodies.forms.factories.Borders;
+import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
 /** 
  * Contains a bunch of components with HTML labels.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class HtmlTab {
     
@@ -75,17 +77,25 @@ final class HtmlTab {
         initComponents();
         
         FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref), 6dlu, pref");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
-        builder.setDefaultDialogBorder();
+                "right:max(50dlu;pref):grow, 6dlu, pref, 0:grow",
+                "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p");
+        PanelBuilder builder = new PanelBuilder(layout);
+        builder.setBorder(Borders.DLU14_BORDER);
         builder.getPanel().setOpaque(false);
         
-        builder.append("Label:",  label);
-        builder.append("Radio:",  radioButton);
-        builder.append("Check:",  checkBox);
-        builder.append("Button:", button);
-        builder.append("Toggle:", toggleButton);
-        builder.append("Combo:",  comboBox);
+        CellConstraints cc = new CellConstraints();
+        builder.addLabel("Label:",  cc.xy(1,  1));
+        builder.add(label,          cc.xy(3,  1));
+        builder.addLabel("Radio:",  cc.xy(1,  3));
+        builder.add(radioButton,    cc.xy(3,  3));
+        builder.addLabel("Check:",  cc.xy(1,  5));
+        builder.add(checkBox,       cc.xy(3,  5));
+        builder.addLabel("Button:", cc.xy(1,  7));
+        builder.add(button,         cc.xy(3,  7));
+        builder.addLabel("Toggle:", cc.xy(1,  9));
+        builder.add(toggleButton,   cc.xy(3,  9));
+        builder.addLabel("Combo:",  cc.xy(1, 11));
+        builder.add(comboBox,       cc.xy(3, 11));
         return builder.getPanel();
     }
 

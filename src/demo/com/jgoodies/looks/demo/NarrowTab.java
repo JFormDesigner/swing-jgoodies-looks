@@ -30,6 +30,7 @@
 
 package com.jgoodies.looks.demo;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
 
@@ -37,6 +38,9 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.TitledBorder;
 
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import com.jgoodies.forms.builder.PanelBuilder;
@@ -49,7 +53,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class NarrowTab {
 
@@ -59,21 +63,15 @@ final class NarrowTab {
     JComponent build() {
         FormLayout layout = new FormLayout(
                 "left:pref, 0:grow",
-                "pref, 2dlu, pref, 14dlu, "
-              + "pref, 2dlu, pref, 14dlu, "
-              + "pref, 2dlu, pref, 0:grow");
+                "pref, 14dlu, pref, 14dlu, pref, 0:grow");
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
         builder.getPanel().setOpaque(false);
 
         CellConstraints cc = new CellConstraints();
-        
-        builder.addTitle("Raw Button Widths (BoxLayout)",        cc.xyw(1,  1, 2));
-        builder.add(buildButtonBoxNoNarrow(),                    cc.xy (1,  3));
-        builder.addTitle("Adjusted Button Widths (FormLayout)",  cc.xyw(1,  5, 2));
-        builder.add(buildButtonFormNoNarrow(),                   cc.xy (1,  7));
-        builder.addTitle("Equalized Button Widths (GridLayout)", cc.xyw(1,  9, 2));
-        builder.add(buildButtonGridNoNarrow(),                   cc.xy (1, 11));
+        builder.add(buildButtonBoxNoNarrow(),  cc.xy (1, 1));
+        builder.add(buildButtonFormNoNarrow(), cc.xy (1, 3));
+        builder.add(buildButtonGridNoNarrow(), cc.xy (1, 5));
 
         return builder.getPanel();
     }
@@ -90,7 +88,12 @@ final class NarrowTab {
             box.add(buttons[i]);
             box.add(Box.createHorizontalStrut(6));
         }
-        return box;
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(box, BorderLayout.CENTER);
+        panel.setBorder(new CompoundBorder(
+                new TitledBorder("Raw Button Widths (BoxLayout)"),
+                new EmptyBorder(14, 14, 14, 14)));
+        return panel;
     }
 
     // Button DesignGrids ***************************************************
@@ -104,7 +107,13 @@ final class NarrowTab {
             builder.addRelatedGap();
         }
         builder.addFixed(buttons[buttons.length - 1]);
-        return builder.getPanel();
+        
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(builder.getPanel(), BorderLayout.CENTER);
+        panel.setBorder(new CompoundBorder(
+                new TitledBorder("Adjusted Button Widths (FormLayout)"),
+                new EmptyBorder(14, 14, 14, 14)));
+        return panel;
     }
 
     
@@ -120,7 +129,12 @@ final class NarrowTab {
         for (int i = 0; i < buttons.length; i++) {
             grid.add(buttons[i]);
         }
-        return grid;
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(grid, BorderLayout.CENTER);
+        panel.setBorder(new CompoundBorder(
+                new TitledBorder("Equalized Button Widths (GridLayout)"),
+                new EmptyBorder(14, 14, 14, 14)));
+        return panel;
     }
 
     // Helper Code **********************************************************

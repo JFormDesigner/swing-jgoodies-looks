@@ -51,7 +51,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * and proper preferred size computations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class ComboBoxTab {
     
@@ -84,8 +84,8 @@ final class ComboBoxTab {
         initRenderers();
         
         FormLayout layout = new FormLayout(
-                "0:grow, center:pref, 0:grow", 
-                "pref, 21dlu, pref, 21dlu, 50dlu");
+                "0:grow, pref, 0:grow", 
+                "pref, 9dlu, pref, 2dlu, pref, 21dlu, pref, 2dlu, 50dlu");
         
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
@@ -93,8 +93,10 @@ final class ComboBoxTab {
         CellConstraints cc = new CellConstraints();
         
         builder.add(buildHelpPanel(), cc.xy(2, 1));
-        builder.add(buildTestPanel(), cc.xy(2, 3));
-        builder.add(buildTable(),     cc.xy(2, 5));
+        builder.addSeparator("Form",  cc.xy(2, 3));
+        builder.add(buildTestPanel(), cc.xy(2, 5, "center, fill"));
+        builder.addTitle("Table",     cc.xy(2, 7));
+        builder.add(buildTable(),     cc.xy(2, 9));
         
         return builder.getPanel();
     }
