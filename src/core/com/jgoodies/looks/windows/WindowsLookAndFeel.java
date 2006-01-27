@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -65,16 +65,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      */
     public static final String BORDER_STYLE_KEY = "jgoodies.windows.borderStyle";
     
-    
-    /**
-     * A UIManager key used to store and retrieve 
-     * the FontChoicePolicy for this Look&amp;Feel.
-     * 
-     * @see #getFontChoicePolicy()
-     * @see #setFontChoicePolicy(FontChoicePolicy)
-     */
-    private static final String FONT_CHOICE_POLICY_KEY = "Windows.fontChoicePolicy";
-
     
     public String getID() {
         return "JGoodies Windows";
@@ -109,14 +99,17 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      *     - if any, or the default Windows font choice policy. 
      * 
      * @see #setFontChoicePolicy
+     * @see Options#WINDOWS_FONT_CHOICE_POLICY_KEY
      * @see FontChoicePolicies
      * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      * @see FontChoicePolicies#getDefaultWindowsPolicy()
      */
     public static FontChoicePolicy getFontChoicePolicy() {
-        FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
+        FontChoicePolicy policy = 
+            (FontChoicePolicy) UIManager.get(Options.WINDOWS_FONT_CHOICE_POLICY_KEY);
         if (policy != null)
             return policy;
+        
         FontChoicePolicy defaultPolicy = FontChoicePolicies.getDefaultWindowsPolicy();
         return FontChoicePolicies.customSettingsPolicy(defaultPolicy);
     }
@@ -131,9 +124,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      *     to the default
      *     
      * @see #getFontChoicePolicy()
+     * @see Options#WINDOWS_FONT_CHOICE_POLICY_KEY
      */
     public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
-        UIManager.put(FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
+        UIManager.put(Options.WINDOWS_FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
     }
     
 

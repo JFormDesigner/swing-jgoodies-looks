@@ -69,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -124,16 +124,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "metal";
 
         
-    /**
-     * A UIManager key used to store and retrieve 
-     * the FontChoicePolicy for this Look&amp;Feel.
-     * 
-     * @see #getFontChoicePolicy()
-     * @see #setFontChoicePolicy(FontChoicePolicy)
-     */
-    private static final String FONT_CHOICE_POLICY_KEY = "Plastic.fontChoicePolicy";
-
-    
     /**
      * A UIManager key used to store and retrieve the PlasticTheme.
      * 
@@ -229,14 +219,17 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *     - if any, or the default Plastic font choice policy. 
      * 
      * @see #setFontChoicePolicy
+     * @see Options#PLASTIC_FONT_CHOICE_POLICY_KEY
      * @see FontChoicePolicies
      * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      * @see FontChoicePolicies#getDefaultPlasticPolicy()
      */
     public static FontChoicePolicy getFontChoicePolicy() {
-        FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
+        FontChoicePolicy policy = 
+            (FontChoicePolicy) UIManager.get(Options.PLASTIC_FONT_CHOICE_POLICY_KEY);
         if (policy != null)
             return policy;
+        
         FontChoicePolicy defaultPolicy = FontChoicePolicies.getDefaultPlasticPolicy();
         return FontChoicePolicies.customSettingsPolicy(defaultPolicy);
     }
@@ -252,9 +245,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *     to the default
      *     
      * @see #getFontChoicePolicy()
+     * @see Options#PLASTIC_FONT_CHOICE_POLICY_KEY
      */
     public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
-        UIManager.put(FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
+        UIManager.put(Options.PLASTIC_FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
     }
     
 
