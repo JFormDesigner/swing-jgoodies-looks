@@ -38,7 +38,7 @@ import java.awt.Toolkit;
  * Provides only static access to popular Windows fonts.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -163,14 +163,14 @@ public final class Fonts {
     
     static Font getDefaultGUIFontWesternModernWindowsNormal() {
         return LookUtils.IS_LOW_RESOLUTION
-            ? XP_96DPI_NORMAL
-            : XP_120DPI_NORMAL;
+            ? XP_96DPI_DEFAULT_GUI
+            : XP_120DPI_DEFAULT_GUI;
     }
     
     static Font getDefaultIconFontWesternModernWindowsNormal() {
         return LookUtils.IS_LOW_RESOLUTION
-            ? XP_96DPI_DEFAULT_GUI
-            : XP_120DPI_DEFAULT_GUI;
+            ? XP_96DPI_NORMAL
+            : XP_120DPI_NORMAL;
     }
     
     static Font getDefaultIconFontWesternWindowsVistaNormal() {
