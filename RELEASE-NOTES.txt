@@ -1,19 +1,15 @@
 
                          JGoodies Looks
-                       Version 2.0 Snapshot (Jan-26-2006)
+                        Version 2.0 Beta
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a stable preview for the JGoodies Looks 2.0.
+    This is a stable beta for the JGoodies Looks 2.0.
     The major changes are better support for Windows Vista,
     Java 6, and an overhauled font lookup in all L&fs.
     
-    NOTE: THE CODE IS MORE "RAW" THAN OTHER RELEASES THAT 
-    YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
-    It that may contain known bugs in some areas. 
-        
     The font lookup in the Windows L&f has been overhauled.
     Text component insets have been adjusted to better comply 
     with the Microsoft Layout Specification and Guidelines.
@@ -23,10 +19,13 @@ INTRODUCTION
     The text component insets of the Plastic L&f family
     have been adjusted to the new Windows L&f dimensions.
     The Plastic font lookup has been completely overhauled; 
-    the current implementation is fine on Windows but needs 
-    improvements on other platforms. 
+    the current implementation is fine on Windows and works
+    well on other platforms. The font customization mechanism
+    allows you to change the fonts used per environment
+    including the L&f, platform, locale and desktop settings.
     
-    THE DOCUMENTATION IS INCONSISTENT WITH THE CODE.  
+    THE HTML DOCUMENTATION IS INCONSISTENT WITH THE CODE.  
+    The docs will be updated for the release candidate.
     
 	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
@@ -52,8 +51,6 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Removed FontSizeHints
     o Removed LookUtils#createButtonMargin(boolean)
     o Removed LookUtils#installNarrowMargin
-    o Removed WindowsButtonUI
-    o Removed WindowsToggleButtonUI
     o Removed FontUtils
     o Options#initializeDefaultReplacements now private
     o Removed obsolete Plastic themes: SkyBluerTahoma, 
@@ -62,9 +59,21 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
 
-    Basically, the Windows L&f now follows the "Microsoft
-    Layout Specifications and Guidelines" even closer than
-    the JGoodies Windows L&f in the JGoodies Looks 1.3.
+    Options#getUseNarrowButtons returns true by default.
+    Although the narrow margins are the correct button margins,
+    it leads to poor design if you don't ensure a reasonable
+    minimum width for buttons with a short text, e.g. "OK".
+    You can disable this feature using #setUseNarrowButtons(false),
+    which was the behavior in the JGoodies Looks 1.x.
+    
+    Options.DEFAULT_LOOK_NAME is now PLASTICXP_NAME
+    making PlasticXP the default L&f when chosen via
+    the Options L&f names. PLASTICXP_NAME is also returned
+    by Options#getCrossPlatformLookAndFeelClassName.
+      
+    On Windows 95/98/ME/NT/2000/2003/XP the JGoodies Windows L&f 
+    follows the "Microsoft Layout Specifications and Guidelines" 
+    even closer than the JGoodies Windows L&f version 1.3.
     Components that are arranged in a row have perceived bounds 
     of 14 dialog units (dlu). Since Windows XP command buttons
     (in the default styles) have two transparent lines in 
@@ -72,40 +81,84 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
     are 2 pixels larger than for the textfield, combo, etc.
     If you lay out them in a row and center them vertically 
     the perceived (aka visual) bounds will be aligned.
+       On Windows Vista the JGoodies Windows L&f dimensions
+    and insets are based on the "Windows Vista UX Guidelines" 
+    version 0.8. The JGoodies sizes differ slightly from
+    the sizes recommended by these guidelines. For example
+    the guidelines recommend to make a text field on 96dpi
+    with normal fonts 20px tall, a combo 21px and buttons 22px
+    (or 13dlu). The JGoodies Windows L&f uses consistent sizes, 
+    insets and font baseline positions for all components
+    that are arranged in a row - just as recommended in  all 
+    previous Windows editions, but based on 13dlu because 
+    the new default font Segoe UI is significantly taller.
+    
+    Also, the default font chosen on Windows now honors
+    the desktop font setting (Normal/Large/Extra Large).
+    Although Microsoft recommends to use the font size
+    to get larger fonts, many applications ignore it
+    and just scale with the software resolution (96dpi/120dpi).
+       On 96dpi the new font doesn't differ from the 
+    font chosen by the Looks 1.x; it's Tahoma 8pt on modern
+    Windows, and Segoe UI 9pt on Vista. However, on 120dpi
+    the new font is 1px taller than the font used by the
+    Looks 1.x. 
+    
+    The Plastic L&f family uses Windows fonts on Windows
+    and logical fonts on all other platforms. In the Looks 1.x
+    most Plastic themes used the Tahoma font on all platforms.
+    If Tahoma was absent, the logical fonts were used.
 
-    o Options#getUseNarrowButtons returns true by default.
-      You can disable this feature using #setUseNarrowButtons(false).
-    o Options.DEFAULT_LOOK_NAME is now PLASTICXP_NAME.
-    o Options.getCrossPlatformLookAndFeelClassName returns
-      the PLASTICXP_NAME.
+      
+VISUAL BACKWARD COMPATIBILITY
+
+    Is recommended to use the new default settings and 
+    it is strongly recommended to use the new font lookup
+    on Windows. However, here's how you can get the appearance
+    of the Looks 1.x. These configurations listed below
+    must be performed before you install a look&feel.
+    
+    o To get the wrong wide button margins, call:
+      Options.setNarrowMargins(false).
+    o To use the Looks 1.x fonts in the Windows L&f use:
+      WindowsLookAndFeel.setFontChoicePolicy(
+          FontChoicePolicies.getLooks1xWindowsPolicy());
+    o To use the Looks 1.x fonts in the Plastic L&fs use:
+      PlasticLookAndFeel.setFontChoicePolicy(
+          FontChoicePolicies.getLooks1xPlasticPolicy());
+    o To give Plastic the new fonts on Windows and the
+      Looks 1.x fonts on other platforms use:
+      PlasticLookAndFeel.setFontChoicePolicy(
+          FontChoicePolicies.getTransitionalPlasticPolicy());
 
 
 BUGS FIXED
 
-    #50: ToolBar 3D effect ignores the orientation.
-    #51: Windows combobox with custom render is too narrow.
-    #60: Wrong combobox height in Java 5 and Java 6.
-    #67: Wrong menu border in Windows XP L&f.
-    #69: Broken menu item anti-aliasing in Java 5 or later.
-    #70: Inconsistent bounds, insets and baselines on Windows Vista.
-    #71: Password echo character too small on Windows Vista.
-    #73: Windows L&f ignores the desktop control font size setting.
-    #74: Color theme lost on Applet refresh.
-    #79: Windows combobox too narrow.
-    #80: Plastic combo arrow button is focusable in Java 6.
-    #81: Wrong icon for "OptionPane.questionIcon" property.
-    #83: Windows tabbed pane has line under selected tab
-         in Java 5 or later if the content border is disabled.
-    #84: Windows L&F combo margin too wide in table.
-    #86: Windows combobox too narrow if the renderer has zero insets.
-    #89: Plastic L&F editable combo margin too large in table.
-    #90: Spinner does not stop the timer when loosing focus.
-    #91: Progress invisible in Plastic Silver theme.
-    #94: Windows default title font shall be plain not bold.
-    #95: Display Windows toolbar drag handles.
-    #96: Fix Windows formatted text field background.
-    #97: Fix text area disabled/non-editable background.
-    #98: Fix Windows disabled non-editable combo background.
+    #50:  ToolBar 3D effect ignores the orientation.
+    #51:  Windows combobox with custom render is too narrow.
+    #60:  Wrong combobox height in Java 5 and Java 6.
+    #67:  Wrong menu border in Windows XP L&f.
+    #69:  Broken menu item anti-aliasing in Java 5 or later.
+    #70:  Inconsistent bounds, insets and baselines on Windows Vista.
+    #71:  Password echo character too small on Windows Vista.
+    #73:  Windows L&f ignores the desktop control font size setting.
+    #74:  Color theme lost on Applet refresh.
+    #79:  Windows combobox too narrow.
+    #80:  Plastic combo arrow button is focusable in Java 6.
+    #81:  Wrong icon for "OptionPane.questionIcon" property.
+    #83:  Windows tabbed pane has line under selected tab
+          in Java 5 or later if the content border is disabled.
+    #84:  Windows L&F combo margin too wide in table.
+    #86:  Windows combobox too narrow if the renderer has zero insets.
+    #89:  Plastic L&F editable combo margin too large in table.
+    #90:  Spinner does not stop the timer when loosing focus.
+    #91:  Progress invisible in Plastic Silver theme.
+    #94:  Windows default title font shall be plain not bold.
+    #95:  Display Windows toolbar drag handles.
+    #96:  Fix Windows formatted text field background.
+    #97:  Fix text area disabled/non-editable background.
+    #98:  Fix Windows disabled non-editable combo background.
+    #100: Fix WindowsXP title color on Java 1.4.2.
     
 
 NEW FEATURES
