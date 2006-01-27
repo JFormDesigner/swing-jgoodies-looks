@@ -69,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -192,6 +192,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * and sets it as current Plastic theme.
      */
     public PlasticLookAndFeel() {
+        getPlasticTheme();
     }
 
     
@@ -242,12 +243,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     
     /**
-     * Sets the FontChoicePolicy to be used with the JGoodies Windows L&amp;F.
-     * If the specified policy is <code>null</code>, the policy is used
-     * to the default.
+     * Sets the FontChoicePolicy to be used with the JGoodies Plastic L&amp;F
+     * family. If the specified policy is <code>null</code>, the default will
+     * be reset.
      * 
      * @param fontChoicePolicy   the FontChoicePolicy to be used with 
-     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
+     *     the JGoodies Plastic L&amp;F family, or <code>null</code> to reset
      *     to the default
      *     
      * @see #getFontChoicePolicy()
