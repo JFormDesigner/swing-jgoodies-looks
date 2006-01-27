@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -124,8 +124,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     
     /**
      * Sets the FontChoicePolicy to be used with the JGoodies Windows L&amp;F.
-     * If the specified policy is <code>null</code>, the policy is used
-     * to the default.
+     * If the specified policy is <code>null</code>, the default will be reset.
      * 
      * @param fontChoicePolicy   the FontChoicePolicy to be used with 
      *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
@@ -274,6 +273,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         if (isClassic) {
             initComponentDefaultsClassic(table);
+        }
+        if (isXP && LookUtils.IS_JAVA_1_4) {
+            initComponentDefaultsXP14(table);
         }
 
         Object marginBorder = new BasicBorders.MarginBorder();
@@ -464,7 +466,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     }
 
     /**
-     * Initializes component defaults required in 1.3 runtime environments only.
+     * Initializes component defaults required in classic mode only.
      */
     private void initComponentDefaultsClassic(UIDefaults table) {
         Object checkBoxIcon = new SimpleProxyLazyValue(
@@ -488,6 +490,16 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "RadioButton.icon",       radioButtonIcon, 
             "Table.scrollPaneBorder", winInsetBorder, // 1.4.1 Bug
 
+        };
+        table.putDefaults(defaults);
+    }
+
+    /**
+     * Initializes component defaults required in XP mode on Java 1.4.2 only.
+     */
+    private void initComponentDefaultsXP14(UIDefaults table) {
+        Object[] defaults = {
+            "TitledBorder.titleColor", table.getColor("activeCaption")
         };
         table.putDefaults(defaults);
     }
