@@ -39,13 +39,15 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see     FontSet
  * 
  * @since 2.0
  */ 
 public final class FontSets {
+    
+    private static FontSet logicalFontSet;
 
 
     private FontSets() {
@@ -53,9 +55,90 @@ public final class FontSets {
     }
     
     
+    // Default FontSets *******************************************************
+    
+    /**
+     * Creates and returns a FontSet that is based only 
+     * on the given control font. The small font will be
+     * derived from the control font; all other fonts 
+     * returned are the control font.
+     * 
+     * @param controlFont   the font used for all controls
+     * 
+     * @return a FontSet based on the given fonts
+     * 
+     * @throws NullPointerException  if the control font is <code>null</code>
+     */
+    public static FontSet createDefaultFontSet(Font controlFont) {
+        return createDefaultFontSet(controlFont, null);
+    }
+
+    
+    /**
+     * Creates and returns a FontSet that is based on the given control font
+     * and menu font. The small font will be derived from the control font; 
+     * all other fonts return, except the menu font, are the control font.
+     * 
+     * @param controlFont   the font used for all controls
+     * @param menuFont      the font used for the menu bar and menu items
+     * 
+     * @return a FontSet based on the given fonts
+     * 
+     * @throws NullPointerException  if the control font is <code>null</code>
+     */
+    public static FontSet createDefaultFontSet(Font controlFont, Font menuFont) {
+        return createDefaultFontSet(controlFont, menuFont, null, null, null, null);
+    }
+    
+    
+    /**
+     * Creates and returns a FontSet for the given fonts.
+     * If a font is <code>null</code>, it uses the control font as
+     * fallback. If the small font is <code>null</code> it will 
+     * be derived from the control font.
+     * 
+     * @param controlFont      used for all controls
+     * @param menuFont         used for the menu bar and menu items
+     * @param titleFont        used for TitledBorder, titles and titled separators
+     * @param messageFont      used for OptionPanes
+     * @param smallFont        used for tool tips and similar components 
+     * @param windowTitleFont  used for internal frame window titles
+     * 
+     * @return a FontSet based on the given fonts
+     * 
+     * @throws NullPointerException  if the control font is <code>null</code>
+     */
+    public static FontSet createDefaultFontSet(
+            Font controlFont, 
+            Font menuFont,
+            Font titleFont, 
+            Font messageFont, 
+            Font smallFont, 
+            Font windowTitleFont) {
+        return new DefaultFontSet(controlFont, menuFont, titleFont, messageFont, smallFont, windowTitleFont);
+    }
+    
+    
+    // Logical FontSet ********************************************************
+    
+    /**
+     * Lazily creates and returns the FontSet that returns 
+     * the logical fonts specified by the Java runtime environment.
+     * 
+     * @return a FontSets that uses the logical fonts specified
+     *     by the Java environment
+     */
+    public static FontSet getLogicalFontSet() {
+        if (logicalFontSet == null) {
+            logicalFontSet = new LogicalFontSet();
+        }
+        return logicalFontSet;
+    }
+    
+    
     // Helper Code ************************************************************
     
-    public static final class DefaultFontSet implements FontSet {
+    private static final class DefaultFontSet implements FontSet {
         
         private final FontUIResource controlFont;
         private final FontUIResource menuFont;
@@ -66,37 +149,6 @@ public final class FontSets {
         
         
         // Instance Creation --------------------------------------------------
-        
-        /**
-         * Constructs a DefaultFontSet that is based only 
-         * on the given control font. The small font will be
-         * derived from the control font; all other fonts 
-         * returned are the control font.
-         * 
-         * @param controlFont   the font used for all controls
-         * 
-         * @throws NullPointerException  if the control font is <code>null</code>
-         */
-        public DefaultFontSet(FontUIResource controlFont) {
-            this(controlFont, null);
-        }
-
-        
-        /**
-         * Constructs a DefaultFontSet that is based on the given control font
-         * and menu font. The small font will be derived from the control font; 
-         * all other fonts return, except the menu font, are the control font.
-         * 
-         * @param controlFont   the font used for all controls
-         * @param menuFont      the font used for the menu bar and menu items
-         * 
-         * @throws NullPointerException  if the control font is <code>null</code>
-         */
-        public DefaultFontSet(FontUIResource controlFont, 
-                FontUIResource menuFont) {
-            this(controlFont, menuFont, null, null, null, null);
-        }
-        
         
         /**
          * Constructs a DefaultFontSet for the given fonts.
@@ -113,28 +165,29 @@ public final class FontSets {
          * 
          * @throws NullPointerException  if the control font is <code>null</code>
          */
-        public DefaultFontSet(FontUIResource controlFont, 
-                FontUIResource menuFont,
-                FontUIResource titleFont, 
-                FontUIResource messageFont, 
-                FontUIResource smallFont, 
-                FontUIResource windowTitleFont) {
-            this.controlFont = controlFont;
-            this.menuFont = menuFont == null
-                ? controlFont 
-                : menuFont;
-            this.titleFont = titleFont == null
-                ? controlFont //new FontUIResource(controlFont.deriveFont(Font.BOLD))
-                : titleFont;
-            this.messageFont = messageFont == null
-                ? controlFont
-                : messageFont;
-            this.smallFont = smallFont == null
-                ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
-                : smallFont;
-            this.windowTitleFont = windowTitleFont == null
-                ? controlFont
-                : windowTitleFont;
+        public DefaultFontSet(
+                Font controlFont, 
+                Font menuFont,
+                Font titleFont, 
+                Font messageFont, 
+                Font smallFont, 
+                Font windowTitleFont) {
+            this.controlFont = new FontUIResource(controlFont);
+            this.menuFont = menuFont != null
+                ? new FontUIResource(menuFont)
+                : this.controlFont;
+            this.titleFont = titleFont != null
+                ? new FontUIResource(titleFont)
+                : this.controlFont; //new FontUIResource(controlFont.deriveFont(Font.BOLD))
+            this.messageFont = messageFont != null
+                ? new FontUIResource(messageFont)
+                : this.controlFont;
+            this.smallFont = smallFont != null
+                ? new FontUIResource(smallFont)
+                : new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
+            this.windowTitleFont = windowTitleFont != null
+                ? new FontUIResource(windowTitleFont)
+                : this.controlFont;
         }
         
         
@@ -168,9 +221,10 @@ public final class FontSets {
     
     
     /**
-     * Looks up and returns the logical fonts.
+     * Looks up and returns the logical fonts as specified
+     * by the Java runtime environment.
      */
-    public static final class LogicalFontSet implements FontSet {
+    private static final class LogicalFontSet implements FontSet {
 
         private FontUIResource controlFont;
         private FontUIResource titleFont;

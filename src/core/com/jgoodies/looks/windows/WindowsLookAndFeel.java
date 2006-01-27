@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -97,18 +97,28 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     /**
      * Looks up and retrieves the FontChoicePolicy used
      * by the JGoodies Windows Look&amp;Feel.
-     * If none is set a default policy is used.
+     * If a FontChoicePolicy has been set for this look, it'll be returned.
+     * Otherwise, this method checks if a FontChoicePolicy or FontSet is defined 
+     * in the system properties or UIDefaults. If so, it is returned.
+     * If no FontChoicePolicy has been set for this look, in the system
+     * properties or UIDefaults, the default Windows font choice policy 
+     * will be returned.
      * 
-     * @return the FontChoicePolicy set for this Look&amp;feel,
-     *     or a default policy if none has been set.
+     * @return the FontChoicePolicy set for this Look&amp;feel - if any,
+     *     the FontChoicePolicy specified in the system properties or UIDefaults
+     *     - if any, or the default Windows font choice policy. 
      * 
      * @see #setFontChoicePolicy
+     * @see FontChoicePolicies
+     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
+     * @see FontChoicePolicies#getDefaultWindowsPolicy()
      */
     public static FontChoicePolicy getFontChoicePolicy() {
         FontChoicePolicy policy = (FontChoicePolicy) UIManager.get(FONT_CHOICE_POLICY_KEY);
-        return policy != null
-            ? policy
-            : FontChoicePolicies.getCustomizableWindowsPolicy();
+        if (policy != null)
+            return policy;
+        FontChoicePolicy defaultPolicy = FontChoicePolicies.getDefaultWindowsPolicy();
+        return FontChoicePolicies.customSettingsPolicy(defaultPolicy);
     }
     
     

@@ -36,15 +36,12 @@ import java.awt.Toolkit;
 import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
 
-import com.jgoodies.looks.FontSets.DefaultFontSet;
-import com.jgoodies.looks.FontSets.LogicalFontSet;
-
 
 /**
  * Provides predefined FontChoicePolicy implementations.<p>
  * 
  * <strong>Note:</strong> The available policies work well on Windows.
- * On other platforms the font specified by the runtime environment
+ * On other platforms the fonts specified by the runtime environment
  * are chosen. I plan to provide more logic or options for other platforms,
  * for example that a Linux system checks for a Tahoma or Segoe UI.<p>
  * 
@@ -56,9 +53,11 @@ import com.jgoodies.looks.FontSets.LogicalFontSet;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see     FontChoicePolicy
+ * @see     FontSet
+ * @see     FontSets
  * 
  * @since 2.0
  */ 
@@ -73,36 +72,6 @@ public final class FontChoicePolicies {
     // Getting a FontChoicePolicy *********************************************
     
     /**
-     * Returns the default font choice policy. It checks for a custom
-     * font choice policy and custom fonts first. Otherwise it returns
-     * the default policy for Windows.<p>
-     * 
-     * A custom FontChoicePolicy or a custom FontSet can be set 
-     * by name in the System properties, or as object in the UIManager.
-     * 
-     * @return the default font choice policy.
-     */
-    public static FontChoicePolicy getCustomizableWindowsPolicy() {
-        return getCustomSettingsPolicy(getDefaultWindowsPolicy());
-    }
-    
-    
-    /**
-     * Returns the default font choice policy. It checks for a custom
-     * font choice policy and custom fonts first. Otherwise it returns
-     * a platform specific default policy.<p>
-     * 
-     * A custom FontChoicePolicy or a custom FontSet can be set 
-     * by name in the System properties, or as object in the UIManager.
-     * 
-     * @return the default font choice policy.
-     */
-    public static FontChoicePolicy getCustomizablePlatformSpecificPolicy() {
-        return getCustomSettingsPolicy(getPlatformSpecificDefaultPolicy());
-    }
-    
-    
-    /**
      * Returns a font choice policy that checks for a custom FontChoicePolicy
      * and a custom FontSet specified in the System settings or UIManager.
      * If no custom settings are available, the given default policy will
@@ -112,23 +81,54 @@ public final class FontChoicePolicies {
      * @return a FontChoicePolicy that checks for custom settings
      *     before the default policy is returned.
      */
-    public static FontChoicePolicy getCustomSettingsPolicy(FontChoicePolicy defaultPolicy) {
+    public static FontChoicePolicy customSettingsPolicy(FontChoicePolicy defaultPolicy) {
         return new CustomSettingsPolicy(defaultPolicy);
     }
     
     
+//    /**
+//     * Returns the default platform independent font choice policy.<p>
+//     * 
+//     * The current implementation just returns the logical fonts.
+//     * A future version shall check for available good fonts
+//     * and shall use them before it falls back to the logical fonts.
+//     * 
+//     * @return the default platform independent font choice policy.
+//     */
+//    public static FontChoicePolicy getDefaultCrossPlatformPolicy() {
+//        return new DefaultCrossPlatformPolicy();
+//    }
+    
+    
     /**
-     * Returns a platform specific default font choice policy.
-     * On Windows, it returns the default Windows font choice policy,
-     * etc.
+     * Returns the default font choice policy for Plastic on the Windows platform.
+     * It differs from the default Windows policy in that it uses a bold font
+     * for TitledBorders, titles, and titled separators.
      * 
-     * @return a platform specific default font choice policy.
+     * @return the default font choice policy for Plastic on the Windows platform.
      */
-    public static FontChoicePolicy getPlatformSpecificDefaultPolicy() {
+    public static FontChoicePolicy getDefaultPlasticOnWindowsPolicy() {
+        return new DefaultPlasticOnWindowsPolicy();
+    }
+    
+    
+    /**
+     * Returns the default Plastic FontChoicePolicy that may vary 
+     * with the platform and environment. 
+     * On Windows, the PlasticOnWindowsPolicy is returned that
+     * is much like the defualt WindowsPolicy but uses a bold title font.
+     * On other Platforms, the logical fonts policy is returned
+     * that uses the logical fonts as specified by the Java runtime environment.
+     * 
+     * @return a Windows-like policy on Windows, a logical fonts policy 
+     *    on all other platforms
+     */
+    public static FontChoicePolicy getDefaultPlasticPolicy() {
         if (LookUtils.IS_OS_WINDOWS) {
             return getDefaultPlasticOnWindowsPolicy();
         } else {
-            return getDefaultCrossPlatformPolicy();
+            return getLogicalFontsPolicy();
+//            return getDefaultCrossPlatformPolicy();
         }
     }
     
@@ -150,43 +150,6 @@ public final class FontChoicePolicies {
     
     
     /**
-     * Returns the default font choice policy for Plastic on the Windows platform.
-     * It differs from the default Windows policy in that it uses a bold font
-     * for TitledBorders, titles, and titled separators.
-     * 
-     * @return the default font choice policy for Plastic on the Windows platform.
-     */
-    public static FontChoicePolicy getDefaultPlasticOnWindowsPolicy() {
-        return new DefaultPlasticOnWindowsPolicy();
-    }
-    
-    
-    /**
-     * Returns the default platform independent font choice policy.<p>
-     * 
-     * The current implementation just returns the logical fonts.
-     * A future version shall check for available good fonts
-     * and shall use them before it falls back to the logical fonts.
-     * 
-     * @return the default platform independent font choice policy.
-     */
-    public static FontChoicePolicy getDefaultCrossPlatformPolicy() {
-        return new DefaultCrossPlatformPolicy();
-    }
-    
-    
-    /**
-     * Returns a font choice policy that in turn 
-     * always chooses the logical fonts.
-     * 
-     * @return a font choice policy that returns logical fonts.
-     */
-    public static FontChoicePolicy getLogicalFontsPolicy() {
-        return new FixedFontSetPolicy(new LogicalFontSet());
-    }
-    
-    
-    /**
      * Returns a font choice policy that returns the specified FontSet.
      * 
      * @param fontSet   the FontSet to be return by this policy
@@ -197,22 +160,35 @@ public final class FontChoicePolicies {
     }
     
     
-    // Utility Methods ********************************************************
-    
     /**
-     * Looks up and returns a custom FontChoicePolicy for the given 
-     * Look&amp;Feel name, or <code>null</code> if no custom policy has been 
-     * defined for this Look&amp;Feel.
+     * Returns a font choice policy that returns the logical fonts
+     * as specified by the Java runtime environment.
      * 
-     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
-     *     <code>"Windows"</code>
-     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     * @return a font choice policy that returns logical fonts.
      */
-    private static FontChoicePolicy getCustomPolicy(String lafName) {
-        // TODO: Look up predefined font choice policies
-        return null;
+    public static FontChoicePolicy getLogicalFontsPolicy() {
+        return new FixedFontSetPolicy(FontSets.getLogicalFontSet());
     }
     
+    
+    /**
+     * Returns a font choice policy that returns the logical fonts
+     * as specified by the Java runtime environment.
+     * 
+     * @return a font choice policy that returns logical fonts.
+     */
+    public static FontChoicePolicy getPlasticLooks13Policy() {
+        if (LookUtils.IS_OS_WINDOWS) {
+            return getDefaultPlasticOnWindowsPolicy();
+        } 
+        int tahomaFontSize = LookUtils.IS_LOW_RESOLUTION ? 11 : 13;
+        Font tahoma = new Font("Tahoma", Font.PLAIN, tahomaFontSize);
+        FontSet fontSet = FontSets.createDefaultFontSet(tahoma);
+        return new FixedFontSetPolicy(fontSet);
+    }
+    
+    
+    // Utility Methods ********************************************************
     
     /**
      * Looks up and returns a custom FontSet for the given 
@@ -234,10 +210,25 @@ public final class FontChoicePolicies {
         FontUIResource menuFont = decodedMenuFont == null
             ? null 
             : new FontUIResource(Font.decode(decodedMenuFont));
-        return new DefaultFontSet(controlFont, menuFont);
+        return FontSets.createDefaultFontSet(controlFont, menuFont);
     }
 
 
+    /**
+     * Looks up and returns a custom FontChoicePolicy for the given 
+     * Look&amp;Feel name, or <code>null</code> if no custom policy has been 
+     * defined for this Look&amp;Feel.
+     * 
+     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
+     *     <code>"Windows"</code>
+     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     */
+    private static FontChoicePolicy getCustomPolicy(String lafName) {
+        // TODO: Look up predefined font choice policies
+        return null;
+    }
+    
+    
     /**
      * Returns the Windows icon font - unless Java can't render it well. The 
      * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
@@ -257,85 +248,6 @@ public final class FontChoicePolicies {
 
 
     // FontChoicePolicy Implementations ***************************************       
-
-    private static final class FixedFontSetPolicy implements FontChoicePolicy {
-        
-        private final FontSet fontSet;
-        
-        FixedFontSetPolicy(FontSet fontSet) {
-            this.fontSet = fontSet;
-        }
-        
-        public FontSet getFontSet(String lafName, UIDefaults table) {
-            return fontSet;
-        }
-    }
-    
-
-    private static final class DefaultWindowsPolicy implements FontChoicePolicy {
-        
-        public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
-            
-            FontUIResource menuFont = table == null
-                ? controlFont
-                : (FontUIResource) table.getFont("Menu.font");
-
-            FontUIResource titleFont = controlFont; 
-            
-            FontUIResource messageFont = table == null
-                ? controlFont 
-                : (FontUIResource) table.getFont("OptionPane.font");
-            FontUIResource smallFont = table == null
-                ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
-                : (FontUIResource) table.getFont("ToolTip.font");
-            FontUIResource windowTitleFont  = table == null
-                ? controlFont
-                : (FontUIResource) table.getFont("InternalFrame.titleFont");
-            return new FontSets.DefaultFontSet(
-                    controlFont, 
-                    menuFont,
-                    titleFont, 
-                    messageFont, 
-                    smallFont, 
-                    windowTitleFont);
-        }
-    }
-    
-
-    private static final class DefaultPlasticOnWindowsPolicy implements FontChoicePolicy {
-        
-        public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
-            
-            FontUIResource menuFont = table == null
-                ? controlFont
-                : (FontUIResource) table.getFont("Menu.font");
-
-            FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
-            FontUIResource smallFont = new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
-            FontUIResource messageFont = controlFont;
-            FontUIResource windowTitleFont = titleFont;
-            return new FontSets.DefaultFontSet(
-                    controlFont, 
-                    menuFont,
-                    titleFont, 
-                    messageFont,
-                    smallFont, 
-                    windowTitleFont);  
-        }
-    }
-    
-
-    private static final class DefaultCrossPlatformPolicy implements FontChoicePolicy {
-        
-        public FontSet getFontSet(String lafName, UIDefaults table) {
-            // TODO: If Tahoma or Segoe UI is available, return them
-            // in a size appropriate for the screen resolution.
-            // Otherwise return the logical font set.
-            return new LogicalFontSet();
-        }
-    }
     
     
     private static final class CustomSettingsPolicy implements FontChoicePolicy {
@@ -360,4 +272,84 @@ public final class FontChoicePolicies {
     }
     
     
+//    private static final class DefaultCrossPlatformPolicy implements FontChoicePolicy {
+//        
+//        public FontSet getFontSet(String lafName, UIDefaults table) {
+//            // TODO: If Tahoma or Segoe UI is available, return them
+//            // in a size appropriate for the screen resolution.
+//            // Otherwise return the logical font set.
+//            return FontSets.getLogicalFontSet();
+//        }
+//    }
+    
+    
+    private static final class DefaultPlasticOnWindowsPolicy implements FontChoicePolicy {
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
+            
+            FontUIResource menuFont = table == null
+                ? controlFont
+                : (FontUIResource) table.getFont("Menu.font");
+
+            FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
+            FontUIResource smallFont = new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
+            FontUIResource messageFont = controlFont;
+            FontUIResource windowTitleFont = titleFont;
+            return FontSets.createDefaultFontSet(
+                    controlFont, 
+                    menuFont,
+                    titleFont, 
+                    messageFont,
+                    smallFont, 
+                    windowTitleFont);  
+        }
+    }
+    
+
+    private static final class DefaultWindowsPolicy implements FontChoicePolicy {
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
+            
+            FontUIResource menuFont = table == null
+                ? controlFont
+                : (FontUIResource) table.getFont("Menu.font");
+
+            FontUIResource titleFont = controlFont; 
+            
+            FontUIResource messageFont = table == null
+                ? controlFont 
+                : (FontUIResource) table.getFont("OptionPane.font");
+            FontUIResource smallFont = table == null
+                ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
+                : (FontUIResource) table.getFont("ToolTip.font");
+            FontUIResource windowTitleFont  = table == null
+                ? controlFont
+                : (FontUIResource) table.getFont("InternalFrame.titleFont");
+            return FontSets.createDefaultFontSet(
+                    controlFont, 
+                    menuFont,
+                    titleFont, 
+                    messageFont, 
+                    smallFont, 
+                    windowTitleFont);
+        }
+    }
+    
+
+    private static final class FixedFontSetPolicy implements FontChoicePolicy {
+        
+        private final FontSet fontSet;
+        
+        FixedFontSetPolicy(FontSet fontSet) {
+            this.fontSet = fontSet;
+        }
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            return fontSet;
+        }
+    }
+    
+
 }
