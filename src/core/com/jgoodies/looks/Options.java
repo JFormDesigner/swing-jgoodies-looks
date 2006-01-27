@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class Options {
 
@@ -106,6 +106,9 @@ public final class Options {
     /**
      * A key for setting a custom FontChoicePolicy for the Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see PlasticLookAndFeel#getFontChoicePolicy()
+     * @see PlasticLookAndFeel#setFontChoicePolicy(FontChoicePolicy)
      */
     public static final String PLASTIC_FONT_CHOICE_POLICY_KEY = 
         "Plastic.fontChoicePolicy";
@@ -113,6 +116,8 @@ public final class Options {
     /**
      * A key for setting the default control font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      */
     public static final String PLASTIC_CONTROL_FONT_KEY = 
         "Plastic.controlFont";
@@ -120,6 +125,8 @@ public final class Options {
     /**
      * A key for setting the default menu font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      */
     public static final String PLASTIC_MENU_FONT_KEY = 
         "Plastic.menuFont";
@@ -127,6 +134,9 @@ public final class Options {
     /**
      * A key for setting a custom FontChoicePolicy for the Windows L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see WindowsLookAndFeel#getFontChoicePolicy()
+     * @see WindowsLookAndFeel#setFontChoicePolicy(FontChoicePolicy)
      */
     public static final String WINDOWS_FONT_CHOICE_POLICY_KEY = 
         "Windows.fontChoicePolicy";
@@ -134,6 +144,8 @@ public final class Options {
     /**
      * A key for setting the default control font in the Windows L&amp;f.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      */
     public static final String WINDOWS_CONTROL_FONT_KEY = 
         "Windows.controlFont";
@@ -141,6 +153,8 @@ public final class Options {
     /**
      * A key for setting the default menu font in the Windows L&amp;f.
      * Used for both the system properties and the UIDefaults table.
+     * 
+     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
      */
     public static final String WINDOWS_MENU_FONT_KEY = 
         "Windows.menuFont";
