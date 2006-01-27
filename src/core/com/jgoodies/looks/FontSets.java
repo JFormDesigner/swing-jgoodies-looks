@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see     FontSet
  * 
@@ -297,7 +297,7 @@ public final class FontSets {
         }
 
         public FontUIResource getWindowTitleFont() {
-            return getControlFont();
+            return getTitleFont();
         }
         
 
