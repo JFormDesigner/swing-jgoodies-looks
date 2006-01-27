@@ -46,7 +46,7 @@ import com.jgoodies.looks.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class DesktopTab {
     
@@ -122,13 +122,18 @@ final class DesktopTab {
     }
 
     private JComponent buildPaletteContentPane() {
+        JCheckBox check1 = new JCheckBox("be consistent", true);
+        check1.setContentAreaFilled(false);
+        JCheckBox check2 = new JCheckBox("use less ink", true);
+        check2.setContentAreaFilled(false);
         final Border cardDialogBorder = new EmptyBorder(10, 6, 7, 6);
         Box box = Box.createVerticalBox();
-        box.add(new JCheckBox("be consistent", true));
+        box.add(check1);
         box.add(Box.createVerticalStrut(6));
-        box.add(new JCheckBox("use less ink", true));
+        box.add(check2);
 
         JPanel generalTab = new JPanel(new BorderLayout());
+        generalTab.setOpaque(false);
         generalTab.add(box);
         generalTab.setBorder(cardDialogBorder);
 
