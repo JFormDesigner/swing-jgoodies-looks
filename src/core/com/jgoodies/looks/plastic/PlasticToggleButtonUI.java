@@ -33,7 +33,6 @@ package com.jgoodies.looks.plastic;
 import java.awt.*;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.plaf.metal.MetalToggleButtonUI;
@@ -45,7 +44,7 @@ import javax.swing.text.View;
  * and that the border can paint the focus.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 
@@ -233,15 +232,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
         return PlasticUtils.is3D("ToggleButton.")
             && b.isBorderPainted()
             && model.isEnabled()
-            && !model.isPressed()
-            && !(b.getBorder() instanceof EmptyBorder);
-
-        /*
-         * Implementation note regarding the last line: instead of checking 
-         * for the EmptyBorder in NetBeans, I'd prefer to just check the
-         * 'borderPainted' property. I'd recommend to the NetBeans developers,
-         * to switch this property on and off, instead of changing the border.
-         */
+            && !model.isPressed();
     }
 
 }
