@@ -52,7 +52,7 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see     FontChoicePolicy
  * @see     FontSet
@@ -167,6 +167,22 @@ public final class FontChoicePolicies {
      */
     public static FontChoicePolicy getLogicalFontsPolicy() {
         return new FixedFontSetPolicy(FontSets.getLogicalFontSet());
+    }
+    
+    
+    /**
+     * Returns a font choice policy for getting a Windows appearance
+     * that is backward compatible with the JGoodies Looks version 1.x.
+     * It uses a font choice similar to the choice implemented 
+     * by the Windows L&amp;f in the JGoodies Looks version 1.x.
+     * 
+     * @return a font choice policy that reproduces the Windows font choice
+     *     in the JGoodies Looks 1.x.
+     */
+    public static FontChoicePolicy getLooks1xWindowsPolicy() {
+        Font controlFont = Fonts.getLooks1xWindowsControlFont();
+        FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
+        return new FixedFontSetPolicy(fontSet);
     }
     
     

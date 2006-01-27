@@ -38,7 +38,7 @@ import java.awt.Toolkit;
  * Provides only static access to popular Windows fonts.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -180,6 +180,30 @@ public final class Fonts {
     }
 
 
+    /**
+     * Returns the Windows control font used by the JGoodies Looks version 1.x.
+     * It is intended for backward compatibility only.
+     * The font returned is the default GUI font that scales with the resolution 
+     * (96dpi, 120dpi, etc) but not with the desktop font size settings 
+     * (normal, large, extra large).<p>
+     * 
+     * On Windows Vista, the font may be completely wrong.
+     *  
+     * @return the Windows default GUI font that scales with the resolution,
+     *     but not the desktop font size setting
+     * 
+     * @throws UnsupportedOperationException on non-Windows platforms
+     */
+    static Font getLooks1xWindowsControlFont() {
+        if (!LookUtils.IS_OS_WINDOWS)
+            throw new UnsupportedOperationException();
+        
+        String fontName = "win.defaultGUI.font";
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        return (Font) toolkit.getDesktopProperty(fontName);
+    }
+    
+    
     /**
      * Returns the Windows icon font - unless Java can't render it well. The 
      * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
