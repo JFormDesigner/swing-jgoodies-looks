@@ -31,7 +31,6 @@
 package com.jgoodies.looks;
 
 import java.awt.Font;
-import java.awt.Toolkit;
 
 import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
@@ -53,7 +52,7 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see     FontChoicePolicy
  * @see     FontSet
@@ -172,19 +171,36 @@ public final class FontChoicePolicies {
     
     
     /**
-     * Returns a font choice policy that returns the logical fonts
-     * as specified by the Java runtime environment.
+     * Returns a font choice policy for getting a Plastic appearance
+     * that is backward compatible with the JGoodies Looks version 1.x.
+     * It uses a font choice similar to the choice implemented 
+     * by the Plastic L&amp;fs in the JGoodies Looks version 1.x.
      * 
-     * @return a font choice policy that returns logical fonts.
+     * @return a font choice policy that reproduces the Plastic font choice
+     *     in the JGoodies Looks 1.x.
      */
-    public static FontChoicePolicy getPlasticLooks13Policy() {
-        if (LookUtils.IS_OS_WINDOWS) {
-            return getDefaultPlasticOnWindowsPolicy();
-        } 
-        int tahomaFontSize = LookUtils.IS_LOW_RESOLUTION ? 11 : 13;
-        Font tahoma = new Font("Tahoma", Font.PLAIN, tahomaFontSize);
-        FontSet fontSet = FontSets.createDefaultFontSet(tahoma);
+    public static FontChoicePolicy getLooks1xPlasticPolicy() {
+        Font controlFont = Fonts.getDefaultGUIFontWesternModernWindowsNormal();
+        Font menuFont = controlFont;
+        Font titleFont = controlFont.deriveFont(Font.BOLD);
+        FontSet fontSet = FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);
         return new FixedFontSetPolicy(fontSet);
+    }
+    
+    
+    /**
+     * Returns a font choice policy intended for API users that
+     * want to move Plastic code from the Looks 1.x to the Looks 2.0.
+     * On Windows, it uses the Looks 2.0 Plastic fonts,
+     * on other platforms it uses the Looks 1.x Plastic fonts.
+     * 
+     * @return the recent Plastic font choice policy on Windows,
+     *     the JGoodies Looks 1.x on other Platforms.
+     */
+    public static FontChoicePolicy getTransitionalPlasticPolicy() {
+        return LookUtils.IS_OS_WINDOWS
+            ? getDefaultPlasticOnWindowsPolicy()
+            : getLooks1xPlasticPolicy();
     }
     
     
@@ -229,27 +245,6 @@ public final class FontChoicePolicies {
     }
     
     
-    /**
-     * Returns the Windows icon font - unless Java can't render it well. The 
-     * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
-     * and the desktop font size settings (normal, large, extra large).
-     * Since Java 1.4 and Java 5 render the Windows Vista icon font
-     * Segoe UI poorly, we return the default GUI font in these environments.
-     *  
-     * @return the Windows scalable control font - unless Java can't render it well
-     */
-    private static Font getWindowsControlFont() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        String fontName = ((LookUtils.IS_JAVA_5 || LookUtils.IS_JAVA_1_4) && LookUtils.IS_OS_WINDOWS_VISTA)
-            ? "win.defaultGUI.font"
-            : "win.icon.font";
-        return (Font) toolkit.getDesktopProperty(fontName);
-    }
-
-
-    // FontChoicePolicy Implementations ***************************************       
-    
-    
     private static final class CustomSettingsPolicy implements FontChoicePolicy {
         
         private final FontChoicePolicy wrappedPolicy;
@@ -286,23 +281,13 @@ public final class FontChoicePolicies {
     private static final class DefaultPlasticOnWindowsPolicy implements FontChoicePolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
-            
-            FontUIResource menuFont = table == null
+            Font controlFont = Fonts.getWindowsControlFont();
+            Font menuFont = table == null
                 ? controlFont
                 : (FontUIResource) table.getFont("Menu.font");
-
-            FontUIResource titleFont = new FontUIResource(controlFont.deriveFont(Font.BOLD));
-            FontUIResource smallFont = new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
-            FontUIResource messageFont = controlFont;
-            FontUIResource windowTitleFont = titleFont;
-            return FontSets.createDefaultFontSet(
-                    controlFont, 
-                    menuFont,
-                    titleFont, 
-                    messageFont,
-                    smallFont, 
-                    windowTitleFont);  
+            Font titleFont = controlFont.deriveFont(Font.BOLD);
+            
+            return FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);  
         }
     }
     
@@ -310,14 +295,11 @@ public final class FontChoicePolicies {
     private static final class DefaultWindowsPolicy implements FontChoicePolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(FontChoicePolicies.getWindowsControlFont());
-            
+            FontUIResource controlFont = new FontUIResource(Fonts.getWindowsControlFont());
             FontUIResource menuFont = table == null
                 ? controlFont
                 : (FontUIResource) table.getFont("Menu.font");
-
             FontUIResource titleFont = controlFont; 
-            
             FontUIResource messageFont = table == null
                 ? controlFont 
                 : (FontUIResource) table.getFont("OptionPane.font");

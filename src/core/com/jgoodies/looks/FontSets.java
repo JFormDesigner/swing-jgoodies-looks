@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see     FontSet
  * 
@@ -88,6 +88,24 @@ public final class FontSets {
      */
     public static FontSet createDefaultFontSet(Font controlFont, Font menuFont) {
         return createDefaultFontSet(controlFont, menuFont, null, null, null, null);
+    }
+    
+    
+    /**
+     * Creates and returns a FontSet that is based on the given control font
+     * and menu font. The small font will be derived from the control font; 
+     * all other fonts return, except the menu font, are the control font.
+     * 
+     * @param controlFont   the font used for all controls
+     * @param menuFont      the font used for the menu bar and menu items
+     * @param titleFont        used for TitledBorder, titles and titled separators
+     * 
+     * @return a FontSet based on the given fonts
+     * 
+     * @throws NullPointerException  if the control font is <code>null</code>
+     */
+    public static FontSet createDefaultFontSet(Font controlFont, Font menuFont, Font titleFont) {
+        return createDefaultFontSet(controlFont, menuFont, titleFont, null, null, null);
     }
     
     
@@ -187,7 +205,7 @@ public final class FontSets {
                 : new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
             this.windowTitleFont = windowTitleFont != null
                 ? new FontUIResource(windowTitleFont)
-                : this.controlFont;
+                : this.titleFont;
         }
         
         
