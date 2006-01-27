@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class Options {
 
@@ -643,10 +643,9 @@ public final class Options {
      * @see #getCrossPlatformLookAndFeelClassName()
      */
     public static String getSystemLookAndFeelClassName() {
-        String osName = System.getProperty("os.name");
-        if (osName.startsWith("Windows"))
+        if (LookUtils.IS_OS_WINDOWS)
             return Options.JGOODIES_WINDOWS_NAME;
-        else if (osName.startsWith("Mac"))
+        else if (LookUtils.IS_OS_MAC)
             return UIManager.getSystemLookAndFeelClassName();
         else
             return getCrossPlatformLookAndFeelClassName();
