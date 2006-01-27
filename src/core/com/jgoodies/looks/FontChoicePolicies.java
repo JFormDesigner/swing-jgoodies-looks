@@ -52,7 +52,7 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see     FontChoicePolicy
  * @see     FontSet
@@ -237,12 +237,15 @@ public final class FontChoicePolicies {
         String decodedControlFont = LookUtils.getSystemProperty(controlFontKey);
         if (decodedControlFont == null) 
             return null;
-        FontUIResource controlFont = new FontUIResource(Font.decode(decodedControlFont));
+        Font controlFont = Font.decode(decodedControlFont);
         String decodedMenuFont = LookUtils.getSystemProperty(menuFontKey);
-        FontUIResource menuFont = decodedMenuFont == null
-            ? null 
-            : new FontUIResource(Font.decode(decodedMenuFont));
-        return FontSets.createDefaultFontSet(controlFont, menuFont);
+        Font menuFont = decodedMenuFont != null
+            ? Font.decode(decodedMenuFont)
+            : null;
+        Font titleFont = "Plastic".equals(lafName)
+            ? controlFont.deriveFont(Font.BOLD)
+            : controlFont;
+        return FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);
     }
 
 
