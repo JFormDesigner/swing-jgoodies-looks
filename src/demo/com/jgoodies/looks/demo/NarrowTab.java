@@ -53,7 +53,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class NarrowTab {
 
@@ -90,6 +90,7 @@ final class NarrowTab {
         }
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(box, BorderLayout.CENTER);
+        panel.setOpaque(false);
         panel.setBorder(new CompoundBorder(
                 new TitledBorder("Raw Button Widths (BoxLayout)"),
                 new EmptyBorder(14, 14, 14, 14)));
@@ -110,6 +111,7 @@ final class NarrowTab {
         
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(builder.getPanel(), BorderLayout.CENTER);
+        panel.setOpaque(false);
         panel.setBorder(new CompoundBorder(
                 new TitledBorder("Adjusted Button Widths (FormLayout)"),
                 new EmptyBorder(14, 14, 14, 14)));
@@ -131,6 +133,7 @@ final class NarrowTab {
         }
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(grid, BorderLayout.CENTER);
+        panel.setOpaque(false);
         panel.setBorder(new CompoundBorder(
                 new TitledBorder("Equalized Button Widths (GridLayout)"),
                 new EmptyBorder(14, 14, 14, 14)));
