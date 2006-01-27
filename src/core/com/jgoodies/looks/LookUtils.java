@@ -47,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class LookUtils {
     
@@ -370,7 +370,7 @@ public final class LookUtils {
         if ((laf instanceof PlasticLookAndFeel)
             && (theme != null)
             && (theme instanceof PlasticTheme)) {
-            PlasticLookAndFeel.setMyCurrentTheme((PlasticTheme) theme);
+            PlasticLookAndFeel.setPlasticTheme((PlasticTheme) theme);
         }
         UIManager.setLookAndFeel(laf);
     }

@@ -47,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -199,7 +199,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 
 
     private ColorUIResource getToggleButtonCheckColor() {
-        return getMyCurrentTheme().getToggleButtonCheckColor();
+        return getPlasticTheme().getToggleButtonCheckColor();
     }
 
 
