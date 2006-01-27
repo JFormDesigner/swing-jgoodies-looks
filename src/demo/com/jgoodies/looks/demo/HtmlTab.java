@@ -30,7 +30,13 @@
 
 package com.jgoodies.looks.demo;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.JRadioButton;
+import javax.swing.JToggleButton;
 
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.Borders;
@@ -41,7 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of components with HTML labels.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class HtmlTab {
     
@@ -77,25 +83,26 @@ final class HtmlTab {
         initComponents();
         
         FormLayout layout = new FormLayout(
-                "right:max(50dlu;pref):grow, 6dlu, pref, 0:grow",
+                "0:grow, right:pref, 6dlu, pref, pref, 0:grow",
                 "p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p, 3dlu, p");
+        layout.setColumnGroups(new int[][]{{2, 5}});
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setBorder(Borders.DLU14_BORDER);
         builder.getPanel().setOpaque(false);
         
         CellConstraints cc = new CellConstraints();
-        builder.addLabel("Label:",  cc.xy(1,  1));
-        builder.add(label,          cc.xy(3,  1));
-        builder.addLabel("Radio:",  cc.xy(1,  3));
-        builder.add(radioButton,    cc.xy(3,  3));
-        builder.addLabel("Check:",  cc.xy(1,  5));
-        builder.add(checkBox,       cc.xy(3,  5));
-        builder.addLabel("Button:", cc.xy(1,  7));
-        builder.add(button,         cc.xy(3,  7));
-        builder.addLabel("Toggle:", cc.xy(1,  9));
-        builder.add(toggleButton,   cc.xy(3,  9));
-        builder.addLabel("Combo:",  cc.xy(1, 11));
-        builder.add(comboBox,       cc.xy(3, 11));
+        builder.addLabel("Label:",  cc.xy(2,  1));
+        builder.add(label,          cc.xy(4,  1));
+        builder.addLabel("Radio:",  cc.xy(2,  3));
+        builder.add(radioButton,    cc.xy(4,  3));
+        builder.addLabel("Check:",  cc.xy(2,  5));
+        builder.add(checkBox,       cc.xy(4,  5));
+        builder.addLabel("Button:", cc.xy(2,  7));
+        builder.add(button,         cc.xy(4,  7));
+        builder.addLabel("Toggle:", cc.xy(2,  9));
+        builder.add(toggleButton,   cc.xy(4,  9));
+        builder.addLabel("Combo:",  cc.xy(2, 11));
+        builder.add(comboBox,       cc.xy(4, 11));
         return builder.getPanel();
     }
 
