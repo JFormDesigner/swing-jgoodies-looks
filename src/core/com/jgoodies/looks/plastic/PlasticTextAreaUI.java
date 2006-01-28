@@ -47,7 +47,7 @@ import javax.swing.text.JTextComponent;
  * background colors using behavior from BasicTextFieldUI.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticTextAreaUI extends BasicTextAreaUI {
 
@@ -78,8 +78,9 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
      * @param evt the property change event
      */
     protected void propertyChange(PropertyChangeEvent evt) {
-    if (  evt.getPropertyName().equals("editable")
-       || evt.getPropertyName().equals("enabled")) {
+        super.propertyChange(evt);
+        if (  evt.getPropertyName().equals("editable")
+           || evt.getPropertyName().equals("enabled")) {
             updateBackground((JTextComponent) evt.getSource());
         }
     }
