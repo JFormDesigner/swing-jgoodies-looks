@@ -205,6 +205,7 @@ BUGS FIXED
     #98:  Fix Windows disabled non-editable combo background.
     #100: Fix WindowsXP title color on Java 1.4.2.
     #101: Windows combo text phantom UI doesn't change with L&f.   
+    #102: Plastic menu doesn't restore opaque state.
     
 
 NEW FEATURES
