@@ -39,6 +39,8 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.looks.Options;
+
 
 /**
  * The JGoodies Windows L&amp;F implementation of <code>TextAreaUI</code>.
@@ -46,7 +48,7 @@ import javax.swing.text.JTextComponent;
  * background colors using behavior from BasicTextFieldUI.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.WindowsTextAreaUI {
 
@@ -70,16 +72,18 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
     
     /**
      * This method gets called when a bound property is changed
-     * on the associated JTextComponent.  This is a hook
-     * which UI implementations may change to reflect how the
-     * UI displays bound properties of JTextComponent subclasses.
-     *
-     * @param evt the property change event
+     * on the associated JTextComponent. In addition to the superclass
+     * behavior, this UI updates the background if the <em>editable</em> or
+     * <em>enabled</em> property changes or the JGoodies client property
+     * <code>Options.TEXT_AREA_INFO_BACKGROUND_KEY</code> which is
+     * "JTextArea.infoBackground".
      */
     protected void propertyChange(PropertyChangeEvent evt) {
         super.propertyChange(evt);
-        if (  evt.getPropertyName().equals("editable")
-           || evt.getPropertyName().equals("enabled")) {
+        String propertyName = evt.getPropertyName();
+        if (    "editable".equals(propertyName)
+             || "enabled".equals(propertyName)
+             || Options.TEXT_AREA_INFO_BACKGROUND_KEY.equals(propertyName)) {
             updateBackground((JTextComponent) evt.getSource());
         }
     }
@@ -94,7 +98,7 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
         if (!c.isEnabled()) {
             newColor = UIManager.getColor("TextArea.disabledBackground");
         }
-        if (newColor == null && !c.isEditable()) {
+        if (newColor == null && !c.isEditable() && !isInfoArea(c)) {
             newColor = UIManager.getColor("TextArea.inactiveBackground");
         }
         if (newColor == null) {
@@ -103,6 +107,12 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
         if (newColor != null && newColor != background) {
             c.setBackground(newColor);
         }
+    }
+    
+    
+    private boolean isInfoArea(JTextComponent c) {
+        Object value = c.getClientProperty(Options.TEXT_AREA_INFO_BACKGROUND_KEY);
+        return Boolean.TRUE.equals(value);
     }
 
 

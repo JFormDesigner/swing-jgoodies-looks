@@ -51,7 +51,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class Options {
 
@@ -238,6 +238,14 @@ public final class Options {
      * contains only a single component, for example a scrollpane.
      */
     public static final String NO_MARGIN_KEY = "JPopupMenu.noMargin";
+
+    /** 
+     * A JTextArea client property key for a hint that the text area
+     * shall use the editable background, even if it's not editable.
+     * This is useful if you display info text with text areas.
+     */
+    public static final String TEXT_AREA_INFO_BACKGROUND_KEY = 
+        "JTextArea.infoBackground";
 
     /** 
      * A JTree client property key for a tree line style hint.

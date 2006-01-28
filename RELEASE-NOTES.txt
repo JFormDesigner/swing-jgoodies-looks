@@ -216,6 +216,9 @@ NEW FEATURES
     o Added a JPopupMenu client property for no-margin borders,
       see Options#NO_MARGIN_KEY. This is useful if a JPopupMenu 
       contains a single component, for example a JScrollPane.
+    o Added a JTextArea client property for an info background.
+      This hint is used for non-editable areas that shall use
+      the editable background, not the inactive background.
 
 
 DISTRIBUTION CHANGES
