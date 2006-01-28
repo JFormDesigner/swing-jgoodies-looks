@@ -53,7 +53,7 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.5 $
+* @version $Revision: 1.6 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
@@ -182,7 +182,6 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             return new Dimension(cachedMinimumSize);
         }
         Dimension size = getDisplaySize();
-        System.out.println();
         Insets insets = getInsets();
         size.height += insets.top + insets.bottom;
         if (comboBox.isEditable()) {
