@@ -37,6 +37,8 @@ import java.util.Map;
 import javax.swing.UIManager;
 
 import com.jgoodies.looks.common.ShadowPopup;
+import com.jgoodies.looks.plastic.PlasticLookAndFeel;
+import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /**
  * Provides access to optional features of the JGoodies L&amp;Fs 
@@ -49,7 +51,7 @@ import com.jgoodies.looks.common.ShadowPopup;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class Options {
 
