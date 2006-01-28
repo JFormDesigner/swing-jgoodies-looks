@@ -46,6 +46,7 @@ import javax.swing.plaf.basic.ComboPopup;
 
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
+import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of 
@@ -57,7 +58,7 @@ import com.jgoodies.looks.Options;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -70,7 +71,6 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     private static final JTextField PHANTOM = new JTextField("Phantom");
     
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
-    
     private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
     
     
@@ -81,13 +81,24 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
     // ************************************************************************
     
     public static ComponentUI createUI(JComponent b) {
+        ensurePhantomHasWindowsUI();
         return new WindowsComboBoxUI();
+    }
+
+    
+    /**
+     * Ensures that the phantom text field has a Windows text field UI.
+     */
+    private static void ensurePhantomHasWindowsUI() {
+        if (!(PHANTOM.getUI() instanceof WindowsTextFieldUI)) {
+            PHANTOM.updateUI();
+        }
     }
     
     
     // ************************************************************************
     
-    public void installUI( JComponent c ) {
+    public void installUI(JComponent c) {
         super.installUI(c);
         tableCellEditor = isTableCellEditor();
     }   

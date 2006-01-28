@@ -43,6 +43,7 @@ import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.plaf.metal.MetalComboBoxUI;
 import javax.swing.plaf.metal.MetalScrollBarUI;
+import javax.swing.plaf.metal.MetalTextFieldUI;
 
 import com.jgoodies.looks.Options;
 
@@ -52,7 +53,7 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.4 $
+* @version $Revision: 1.5 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
@@ -72,10 +73,21 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
     // ************************************************************************
     
     public static ComponentUI createUI(JComponent b) {
+        ensurePhantomHasPlasticUI();
         return new PlasticComboBoxUI();
     }
 
 
+    /**
+     * Ensures that the phantom text field has a Plastic text field UI.
+     */
+    private static void ensurePhantomHasPlasticUI() {
+        if (!(PHANTOM.getUI() instanceof MetalTextFieldUI)) {
+            PHANTOM.updateUI();
+        }
+    }
+    
+    
     // ************************************************************************
     
     public void installUI( JComponent c ) {

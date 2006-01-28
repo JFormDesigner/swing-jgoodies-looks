@@ -204,6 +204,7 @@ BUGS FIXED
     #97:  Fix text area disabled/non-editable background.
     #98:  Fix Windows disabled non-editable combo background.
     #100: Fix WindowsXP title color on Java 1.4.2.
+    #101: Windows combo text phantom UI doesn't change with L&f.   
     
 
 NEW FEATURES
