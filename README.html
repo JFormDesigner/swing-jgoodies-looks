@@ -95,7 +95,30 @@
 	
 	As&nbsp;a&nbsp;next&nbsp;step you can study the 
 	<a href="http://www.jgoodies.com/articles/">JGoodies articles and presentations</a>.
+
 	
+	<h2>Help required from users with non-western Windows</h2>
+
+    The Looks 2.0 shall better support non-western environments.
+    Especially it shall be able to display Chinese, Japanese,
+    Korean and other non-western languages easily 
+    (<a href="https://looks.dev.java.net/issues/show_bug.cgi?id=10">Issue #10</a>).
+    This should already work on non-Windows platforms, because the Looks 
+    then use the logical fonts defined by the Java runtime. 
+    And it may work on non-western Windows too; 
+    but I'd like to verify the latter before publishing the 2.0 final.
+    
+    <p>
+    Therefore I'd like to get feedback from users that run Java 1.4.2, 
+    Java 5 or Java 6 on a non-western Windows, especially XP and Vista.    
+    This Beta ships with a FontTest tool (<tt>fonttest.jar</tt>)
+    that displays detailed information about the Java environment,
+    platform, and font settings. I should appreciate
+    if some users of non-western Windows could run the tool,
+    copy the displayed information to the clipboard
+    and send it to 
+    <a href="mailto:dev@looks.dev.java.net">dev@looks.dev.java.net</a>.
+
 
 	<h2>Support</h2>
 	
@@ -130,6 +153,12 @@
 		    <td><tt>looks-2.0-beta.jar</tt></td>
 		    <td>&nbsp;</td>
 		    <td>the library jar</td>
+		</tr>
+		<tr><td colspan="3">&nbsp;</td></tr>
+		<tr>
+		    <td><tt>fonttest.jar</tt></td>
+		    <td>&nbsp;</td>
+		    <td>Beta test tool, see the <a href="RELEASE-NOTES.txt">Release Notes</a></td>
 		</tr>
 		<tr><td colspan="3">&nbsp;</td></tr>
 		<tr>
@@ -222,10 +251,11 @@
 	precise layout system such as 
 	the <a href="http://forms.dev.java.net/">JGoodies Forms</a>.
 	The JGoodies Windows l&amp;f uses consistent component sizes and insets,
-	and it follows the Windows Layout Specifications and Guidelines.
+	and it follows the "Windows Layout Specifications and Guidelines"
+	and the "Windows Vista UX Guidelines" 0.8.
 	Unlike winlaf, the JGoodies L&f can be uninstalled properly at runtime
 	enabling a hot L&amp;f switch.
-	Last but not least, the Looks 2.0 supports Java 6 and Windows Vista.
+	Last but not least, the Looks 2.0 support Java 6 and Windows Vista.
 	
 	<p>
 	Since the Plastic L&amp;f family uses the same fonts, component
@@ -241,13 +271,18 @@
 	<h2>Acknowledgements</h2>
 		
 	The Looks project has been financed by customers of the 
-	<a href="http://www.jgoodies.com/products/index.html">JGoodies Swing Suite</a>. 
+	<a href="http://www.jgoodies.com/products/index.html">JGoodies Swing Suite</a>
+	and the Java desktop team at Sun Microsystems. 
 	It is only with their money that I can provide, maintain and improve 
 	this library at no charge.<p>
 	
-	Many thanks to Andrej Golovnin who has reported, verified, managed
-	and fixed several issues. His patches are the major contribution 
-	for the Looks 1.3.
+	Thanks to those who have taken the time to identify, report 
+	and discuss issues in the JGoodies Looks.
+	And many thanks to Andrej Golovnin who has reported, verified, managed
+	and fixed several issues. His patches have improved the quality
+	of the JGoodies Looks and have helped me save time.
+	He's also a frequent and valueable poster in the Looks
+    <a href="mailto:users@looks.dev.java.net">user mailing list</a>.
 
 
 	<h2>You can Help</h2>
@@ -257,6 +292,12 @@
 	<a href="http://www.jgoodies.com/products/index.html">JGoodies Swing Suite</a>.
 	
 
+	<p>
+    I hope the JGoodies Looks package improves the readability, 
+    consistency and elegance of your Windows and multi-platform 
+    screen design.
+	<br>
+	Karsten Lentzsch
 
 	</td>
 	</tr>

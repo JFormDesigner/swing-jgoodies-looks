@@ -16,16 +16,45 @@ INTRODUCTION
     Also, Windows Vista is now supported; bounds, insets and 
     font baseline positions are consistent on the Vista betas.
     
-    The text component insets of the Plastic L&f family
-    have been adjusted to the new Windows L&f dimensions.
+    The Plastic L&f family component bounds and insets 
+    have been adjusted to the new Windows bounds and insets.
     The Plastic font lookup has been completely overhauled; 
     the current implementation is fine on Windows and works
-    well on other platforms. The font customization mechanism
-    allows you to change the fonts used per environment
-    including the L&f, platform, locale and desktop settings.
+    well on other platforms. A new font customization mechanism
+    allows you to change the fonts per L&f, platform, locale 
+    and desktop settings.
     
     THE HTML DOCUMENTATION IS INCONSISTENT WITH THE CODE.  
-    The docs will be updated for the release candidate.
+    The docs will be updated for the 2.0 release candidate.
+    
+    Although this is a beta, the contained Windows L&f
+    and Plastic L&fs supercede all previous version w.r.t.
+    consistency, micro design precision, and support
+    for new Java runtimes and Windows editions.
+    
+    The beta state shall indicate that the user community
+    can still change the new font lookup mechnism before
+    the 2.0 final is released. So speak up now if you need 
+    API changes or implementation changes.
+    
+    
+HELP REQUIRED FROM USERS WITH NON-WESTERN WINDOWS
+
+    The Looks 2.0 shall better support non-western environments.
+    Especially it shall be able to display Chinese, Japanese,
+    Korean and other non-western languages easily (Issue #10).
+    This should work on non-Windows platforms, because the Looks 
+    then use the logical fonts defined by the Java runtime. 
+    And it may work on non-western Windows too; but I'd like 
+    to verify the latter before publishing the 2.0 final.
+    
+    Therefore I'd like to get feedback from users that run Java 1.4.2, 
+    Java 5 or Java 6 on a non-western Windows, especially XP and Vista.    
+    This Beta ships with a FontTest tool ("fonttest.jar") that 
+    displays detailed information about the Java environment,
+    platform, and font settings. I should appreciate if some users 
+    of non-western Windows could run the tool, copy the information 
+    to the clipboard and send it to dev@looks.dev.java.net.
     
 	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
@@ -33,7 +62,7 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     All font options have been removed from the Windows L&f;
     it shall be as close to the native original as possible.
 
-    o Replace Options.CONTROL_FONT_KEY and MENU_FONT_KEY by:
+    o Replaced Options.CONTROL_FONT_KEY and MENU_FONT_KEY by:
       - PLASTIC_FONT_CHOICE_POLICY_KEY
       - PLASTIC_CONTROL_FONT_KEY    
       - PLASTIC_MENU_FONT_KEY    
@@ -55,6 +84,9 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Options#initializeDefaultReplacements now private
     o Removed obsolete Plastic themes: SkyBluerTahoma, 
       ExperienceBlueDefaultFont, DesertBluerDefautFont
+      
+    The font size hints system has been replaced
+    by the new FontChoicePolicy mechanism.
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
@@ -118,18 +150,31 @@ VISUAL BACKWARD COMPATIBILITY
     of the Looks 1.x. These configurations listed below
     must be performed before you install a look&feel.
     
-    o To get the wrong wide button margins, call:
+    To get the wrong wide button margins, call:
       Options.setNarrowMargins(false).
-    o To use the Looks 1.x fonts in the Windows L&f use:
+      
+    To use the Looks 1.x fonts in the Windows L&f use:
       WindowsLookAndFeel.setFontChoicePolicy(
           FontChoicePolicies.getLooks1xWindowsPolicy());
-    o To use the Looks 1.x fonts in the Plastic L&fs use:
+          
+    To use the Looks 1.x fonts in the Plastic L&fs use:
       PlasticLookAndFeel.setFontChoicePolicy(
           FontChoicePolicies.getLooks1xPlasticPolicy());
-    o To give Plastic the new fonts on Windows and the
-      Looks 1.x fonts on other platforms use:
+          
+    To give Plastic the new fonts on Windows and the
+    Looks 1.x fonts on other platforms use:
       PlasticLookAndFeel.setFontChoicePolicy(
           FontChoicePolicies.getTransitionalPlasticPolicy());
+          
+    You can customize the control font and menu font
+    in the system properties for Windows and Plastic:
+    java -jar -DWindows.controlFont="Tahoma-plain-11"
+              -DWindows.menuFont="Tahoma-plain-12"
+              -DPlastic.controlFont="Tahoma-plain-12"
+              -DPlastic.menuFont="Verdana-bold-12"
+        myapplication.jar
+    If the menu font is not specified, the control font
+    will be used for menus too.
 
 
 BUGS FIXED
@@ -164,6 +209,9 @@ BUGS FIXED
 NEW FEATURES
     
     #55: Add option to make combo popups wider than the combo.
+         You can set a popup prototype display value that
+         is used to determine with popup widths.
+         
     o Narrow buttons can be disabled in the system properties.
     o Added a JPopupMenu client property for no-margin borders,
       see Options#NO_MARGIN_KEY. This is useful if a JPopupMenu 

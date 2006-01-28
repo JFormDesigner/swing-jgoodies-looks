@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.23 2005-11-24 22:33:49 karsten Exp $
+   $Id: build.xml,v 1.24 2006-01-28 00:47:13 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -207,7 +207,7 @@
     <!-- J A R                                       				       -->
     <!-- ***************************************************************** -->
 	<target name="jar" 
-			depends="jar-all, jar-plastic, jar-windows, jar-demo, jar-tiny"
+			depends="jar-all, jar-plastic, jar-windows, jar-demo, jar-tiny, jar-fonttest"
 	        description="Creates library and example jars." >
 	</target>
 	
@@ -281,7 +281,7 @@
 		<jar 
 			destfile="${build.demo.jar}" >
 			<fileset    dir="${build.demo.dir}"    
-                        excludes="Tiny.*"          />
+                        excludes="Tiny.*, FontTest.*"          />
 			<fileset    dir="${src.demo.dir}" 
 			            includes="images/**/*"     />
 			<manifest>
@@ -315,6 +315,25 @@
 	
 	
     <!-- ***************************************************************** -->
+    <target name="jar-fonttest" depends="jar-plastic"
+            description="Creates the fonttest jar." >
+        <jar 
+            destfile="${build.fonttest.jar}" >
+            <fileset    dir="${build.demo.dir}"    
+                        includes="FontTest.*"          />
+            <manifest>
+                <attribute name ="Built-By" 
+                           value="${user.name}"/>
+                <attribute name ="Main-Class" 
+                           value="FontTest"/>
+                <attribute name ="Class-Path" 
+                           value="${dist.all.name}"/>
+            </manifest>     
+        </jar>
+    </target>
+    
+    
+    <!-- ***************************************************************** -->
     <!-- P A C K A G E                                                     -->
     <!-- ***************************************************************** -->
 	<target name="package" depends="clean, compile, javadoc, test, jar"
@@ -332,7 +351,10 @@
 		<copy todir="${dist.demo.dir}" file="${build.demo.jar}" />
 		<copy todir="${dist.demo.dir}" file="${build.tiny.jar}" />
 		
-		<!-- Copy the libraries. -->
+        <!-- Copy the examples. -->
+        <copy todir="${dist.dir}" file="${build.fonttest.jar}" />
+
+        <!-- Copy the libraries. -->
 		<copy todir="${dist.lib.dir}" >
 		    <fileset dir="${lib.dir}" 
                      includes="forms-*.jar"      />
