@@ -48,7 +48,7 @@ import com.jgoodies.looks.common.ExtBasicMenuUI;
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see	com.jgoodies.looks.Options
  */
@@ -64,17 +64,12 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
 	
     protected void installDefaults() {
         super.installDefaults();
-        if (((JMenu) menuItem).isTopLevelMenu()) {
-            oldOpaque = menuItem.isOpaque();
-            menuItem.setOpaque(false);
-        }
+        oldOpaque = menuItem.isOpaque();
     }
     
     protected void uninstallDefaults() {
         super.uninstallDefaults();
-        if (((JMenu) menuItem).isTopLevelMenu()) {
-            menuItem.setOpaque(oldOpaque);
-        }
+        menuItem.setOpaque(oldOpaque);
     }
 
 
@@ -87,6 +82,7 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
         JMenuItem b = (JMenuItem) c;
 
         if (((JMenu) menuItem).isTopLevelMenu()) {
+            b.setOpaque(false);
             if (b.getModel().isSelected()) {
                 int menuWidth  = menuItem.getWidth();
                 int menuHeight = menuItem.getHeight();
