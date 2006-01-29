@@ -8,7 +8,7 @@ INTRODUCTION
 
     This is a stable beta for the JGoodies Looks 2.0.
     The major changes are better support for Windows Vista,
-    Java 6, and an overhauled font lookup in all L&fs.
+    Java 5 and 6, and an overhauled font lookup in all L&fs.
     
     The font lookup in the Windows L&f has been overhauled.
     Text component insets have been adjusted to better comply 
@@ -121,7 +121,7 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
     with normal fonts 20px tall, a combo 21px and buttons 22px
     (or 13dlu). The JGoodies Windows L&f uses consistent sizes, 
     insets and font baseline positions for all components
-    that are arranged in a row - just as recommended in  all 
+    that are arranged in a row - just as recommended in all 
     previous Windows editions, but based on 13dlu because 
     the new default font Segoe UI is significantly taller.
     
@@ -144,7 +144,7 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
       
 VISUAL BACKWARD COMPATIBILITY
 
-    Is recommended to use the new default settings and 
+    It is recommended to use the new default settings and 
     it is strongly recommended to use the new font lookup
     on Windows. However, here's how you can get the appearance
     of the Looks 1.x. These configurations listed below
