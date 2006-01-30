@@ -1,12 +1,12 @@
 
                          JGoodies Looks
-                        Version 2.0 Beta
+                       Version 2.0 Snapshot
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a stable beta for the JGoodies Looks 2.0.
+    This is a stable pre-RC build for the JGoodies Looks 2.0.
     The major changes are better support for Windows Vista,
     Java 5 and 6, and an overhauled font lookup in all L&fs.
     
@@ -48,8 +48,9 @@ HELP REQUIRED FROM USERS WITH NON-WESTERN WINDOWS
     And it may work on non-western Windows too; but I'd like 
     to verify the latter before publishing the 2.0 final.
     
-    Therefore I'd like to get feedback from users that run Java 1.4.2, 
-    Java 5 or Java 6 on a non-western Windows, especially XP and Vista.    
+    Therefore I'd like to get feedback from users that run 
+    a Chinese, Japanese, Korean, or other non-Western Windows XP
+    or Windows Vista with Java 1.4.2, Java 5 or Java 6.
     This Beta ships with a FontTest tool ("fonttest.jar") that 
     displays detailed information about the Java environment,
     platform, and font settings. I should appreciate if some users 
@@ -206,6 +207,16 @@ BUGS FIXED
     #100: Fix WindowsXP title color on Java 1.4.2.
     #101: Windows combo text phantom UI doesn't change with L&f.   
     #102: Plastic menu doesn't restore opaque state.
+    #103: Disabled menu items lack shadow in classic mode.
+    #105: Menu items mnemonic display shall check for show/hide status.
+    
+    
+KNOWN ISSUES
+
+    Plastic 3D effect broken on Mac OS X Tiger with Java 1.4 and 5.
+    Due to a bug in the Tiger Java2D implementation, the pseudo 3D
+    up and down effects are not rendered. Instead a plain white
+    is painted. See also issue #92.
     
 
 NEW FEATURES
