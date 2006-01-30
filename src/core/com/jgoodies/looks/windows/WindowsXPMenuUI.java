@@ -45,19 +45,19 @@ import javax.swing.plaf.UIResource;
 import com.jgoodies.looks.common.MenuItemRenderer;
 
 /**
- * The JGoodies Windows look&amp;feel implementation of <code>MenuUI</code>.<p>
+ * The JGoodies Windows XP look&amp;feel implementation of <code>MenuUI</code>.<p>
  * 
  * It differs from the superclass in that it uses an overhauled menu
  * rendering an aligmnent system. Furthermore, you can set a client property
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.1 $
  * 
  * @see	com.jgoodies.looks.Options
  */
 
-public final class WindowsMenuUI extends com.sun.java.swing.plaf.windows.WindowsMenuUI {
+public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.WindowsMenuUI {
 
     private static final String MENU_PROPERTY_PREFIX    = "Menu";
     private static final String SUBMENU_PROPERTY_PREFIX = "MenuItem";
@@ -68,7 +68,7 @@ public final class WindowsMenuUI extends com.sun.java.swing.plaf.windows.Windows
     private MenuItemRenderer renderer;
 
     public static ComponentUI createUI(JComponent b) {
-        return new WindowsMenuUI();
+        return new WindowsXPMenuUI();
     }
 
     // Install and Uninstall **************************************************

@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -166,10 +166,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         final String windowsPrefix = "com.jgoodies.looks.windows.Windows";
         final String commonPrefix  = "com.jgoodies.looks.common.ExtBasic";
 
-        String menuUIPrefix = LookUtils.IS_LAF_WINDOWS_XP_ENABLED
-                ? windowsPrefix
-                : commonPrefix;
-
         // Overwrite some of the uiDefaults.
         Object[] uiDefaults = {
             // Modified size 
@@ -185,8 +181,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "MenuBarUI",             windowsPrefix + "MenuBarUI", 
 
             // Aligned menu items
-            "MenuUI",                menuUIPrefix + "MenuUI", 
-			"MenuItemUI",            commonPrefix + "MenuItemUI", 
+			"MenuItemUI",            windowsPrefix + "MenuItemUI", 
 			"CheckBoxMenuItemUI",    commonPrefix + "CheckBoxMenuItemUI", 
 			"RadioButtonMenuItemUI", commonPrefix + "RadioButtonMenuItemUI", 
 
@@ -222,6 +217,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
    
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+            // Aligned menu items
+            uiDefaults = append(uiDefaults,
+                "MenuUI",             windowsPrefix + "XPMenuUI");
+            
             // Renders a dot, not the star ("*") character                       
             uiDefaults = append(uiDefaults, 
                 "PasswordFieldUI",    windowsPrefix + "XPPasswordFieldUI"); 
@@ -235,6 +234,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             uiDefaults = append(uiDefaults,
                 "TableHeaderUI",      windowsPrefix + "XPTableHeaderUI");            
         } else {
+            // Aligned menu items
+            uiDefaults = append(uiDefaults,
+                "MenuUI",             commonPrefix + "MenuUI");
+            
             // Optional style and optional special borders; 
             // rollover borders corrected
             uiDefaults = append(uiDefaults, 
