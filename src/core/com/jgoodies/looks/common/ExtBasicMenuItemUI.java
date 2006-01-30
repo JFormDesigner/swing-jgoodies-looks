@@ -32,10 +32,12 @@ package com.jgoodies.looks.common;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuItemUI;
@@ -48,7 +50,7 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
  * in the UI defaults.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class ExtBasicMenuItemUI extends BasicMenuItemUI {
@@ -63,8 +65,7 @@ public class ExtBasicMenuItemUI extends BasicMenuItemUI {
 
     protected void installDefaults() {
         super.installDefaults();
-        renderer =
-            new MenuItemRenderer(
+        renderer = createRenderer(
                 menuItem,
                 iconBorderEnabled(),
                 acceleratorFont,
@@ -120,6 +121,24 @@ public class ExtBasicMenuItemUI extends BasicMenuItemUI {
             background,
             foreground,
             textIconGap);
+    }
+    
+    protected MenuItemRenderer createRenderer(
+            JMenuItem menuItem, 
+            boolean iconBorderEnabled,
+            Font    acceleratorFont,
+            Color   selectionForeground,
+            Color   disabledForeground,
+            Color   acceleratorForeground,
+            Color   acceleratorSelectionForeground) {
+        return new MenuItemRenderer(
+                menuItem,
+                iconBorderEnabled(),
+                acceleratorFont,
+                selectionForeground,
+                disabledForeground,
+                acceleratorForeground,
+                acceleratorSelectionForeground);
     }
 
 }
