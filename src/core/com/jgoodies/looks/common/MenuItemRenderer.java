@@ -43,10 +43,10 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
-public final class MenuItemRenderer {
+public class MenuItemRenderer {
 
     /* 
      * Implementation note: The protected visibility prevents
@@ -382,7 +382,7 @@ public final class MenuItemRenderer {
 			g.setFont(acceleratorFont);
 			if (!model.isEnabled()) {
 				// *** paint the acceleratorText disabled
-				if (disabledForeground != null) {
+				if (!disabledTextHasShadow()) {
 					g.setColor(disabledForeground);
                     RenderingUtils.drawString(c, g, acceleratorText, 0,
 						acceleratorRect.x - accOffset,
@@ -594,15 +594,19 @@ public final class MenuItemRenderer {
 		ButtonModel model = aMenuItem.getModel();
 		FontMetrics fm = g.getFontMetrics();
 		int mnemIndex = aMenuItem.getDisplayedMnemonicIndex();
+        if (isMnemonicHidden()) {
+            mnemIndex = -1;
+        }
 	
 		if (!model.isEnabled()) {
-		    // *** paint the text disabled
-		    if ( UIManager.get("MenuItem.disabledForeground") instanceof Color ) {
-    			g.setColor( UIManager.getColor("MenuItem.disabledForeground") );
+		    if (!disabledTextHasShadow()) {
+                // *** paint the text disabled
+    			g.setColor(UIManager.getColor("MenuItem.disabledForeground"));
                 RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
     						      textRectangle.x, 
     						      textRectangle.y + fm.getAscent());
 		    } else {
+                // *** paint the text disabled with a shadow
     			g.setColor(aMenuItem.getBackground().brighter());
                 RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
     						      textRectangle.x, 
@@ -621,6 +625,15 @@ public final class MenuItemRenderer {
 						  textRectangle.x, 
 						  textRectangle.y + fm.getAscent());
 		}
+    }
+    
+    
+    protected boolean isMnemonicHidden() {
+        return false;
+    }
+    
+    protected boolean disabledTextHasShadow() {
+        return false;
     }
     
     
