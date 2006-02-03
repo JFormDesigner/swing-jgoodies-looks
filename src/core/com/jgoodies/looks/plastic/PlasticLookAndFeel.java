@@ -69,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -413,7 +413,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object buttonMargin = createButtonMargin();
 		
 		Insets textInsets = isVista
-            ? new InsetsUIResource(0, 1, 0, 1)
+            ? new InsetsUIResource(0, 1, 1, 1)
             : new InsetsUIResource(1, 1, 2, 1);
             
         Object wrappedTextInsets = isVista
@@ -626,7 +626,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     protected Insets createButtonMargin() {
         int pad = Options.getUseNarrowButtons() ? 4 : 14;
         return LookUtils.IS_OS_WINDOWS_VISTA
-            ? new InsetsUIResource(1, pad, 1, pad)
+            ? new InsetsUIResource(0, pad, 1, pad)
             : (LookUtils.IS_LOW_RESOLUTION
                 ? new InsetsUIResource(1, pad, 1, pad)
                 : new InsetsUIResource(2, pad, 3, pad));
