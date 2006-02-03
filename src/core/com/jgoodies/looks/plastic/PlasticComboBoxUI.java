@@ -36,6 +36,7 @@ import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.TextUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.plaf.basic.BasicComboBoxUI;
@@ -53,7 +54,7 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.6 $
+* @version $Revision: 1.7 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
@@ -64,6 +65,13 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
      * which in turn is used to answer the combobox's minimum height.
      */
     private static final JTextField PHANTOM = new JTextField("Phantom");
+    
+    /**
+     * Different Plastic L&amp;fs may need different phantom UIs.
+     * Therefore we store the LookAndFeel class and update the
+     * phantom UI whenever the Look&amp;Feel changes.
+     */
+    private static Class phantomLafClass;
     
     
     private boolean tableCellEditor;
@@ -82,7 +90,11 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
      * Ensures that the phantom text field has a Plastic text field UI.
      */
     private static void ensurePhantomHasPlasticUI() {
-        if (!(PHANTOM.getUI() instanceof MetalTextFieldUI)) {
+        TextUI ui = PHANTOM.getUI();
+        Class lafClass = UIManager.getLookAndFeel().getClass();
+        if (   (phantomLafClass != lafClass) 
+            || !(ui instanceof MetalTextFieldUI)) {
+            phantomLafClass = lafClass;
             PHANTOM.updateUI();
         }
     }
