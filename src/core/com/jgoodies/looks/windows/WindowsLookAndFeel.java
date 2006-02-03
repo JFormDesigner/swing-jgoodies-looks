@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -350,6 +350,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         Class superclass = getClass().getSuperclass();
         Color controlColor = table.getColor("control");
+        Color disabledTextBackground = table.getColor("TextField.disabledBackground");
         Color inactiveTextBackground = table.getColor("TextField.inactiveBackground");
 
         Object menuBarBackground = isXP 
@@ -371,7 +372,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "CheckBox.border",            marginBorder, 
             "CheckBox.margin",            checkBoxMargin,
             
-            "ComboBox.disabledBackground", inactiveTextBackground,
+            "ComboBox.disabledBackground", disabledTextBackground,
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
             "ComboBox.editorInsets",      textInsets,          // Added by JGoodies
@@ -403,7 +404,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
             "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
 
-            "FormattedTextField.disabledBackground", inactiveTextBackground, // for readonly
+            "FormattedTextField.disabledBackground", disabledTextBackground, // for readonly
             "FormattedTextField.inactiveBackground", inactiveTextBackground, // for readonly
             "FormattedTextField.margin",  textInsets, // Poor in 1.6
             "PasswordField.margin",       textInsets, // Poor in 1.6
@@ -423,7 +424,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
             "TextArea.margin",            textInsets, // 1.4.1 Bug
-            "TextArea.disabledBackground", inactiveTextBackground,
+            "TextArea.disabledBackground", disabledTextBackground,
             "TextArea.inactiveBackground", inactiveTextBackground,
             "TextField.margin",           textInsets, // 1.4.1 Bug
             "ToggleButton.margin",        buttonMargin, // Sun's 14px margin is too wide
