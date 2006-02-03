@@ -57,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 final class PlasticBorders {
@@ -376,9 +376,9 @@ final class PlasticBorders {
 	
 	private static class ButtonBorder extends AbstractBorder implements UIResource {
 
-		protected static final Insets INSETS = LookUtils.IS_LOW_RESOLUTION
-            ? new Insets(2, 3, 3, 3)
-            : new Insets(1, 3, 1, 3);
+		protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
+            ? new Insets(2, 3, 2, 3)
+            : (LookUtils.IS_LOW_RESOLUTION ? new Insets(2, 3, 3, 3) : new Insets(1, 3, 1, 3));
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;
