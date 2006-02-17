@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -156,11 +156,21 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX))
             return;
 
-        //System.out.println("Sub menu detected.");
+        ButtonModel model = menuItem.getModel();
+
+        //save values of armed and selected properties.
+        //they will be resetted in #ununinstallDefaults().
+        boolean oldArmed = model.isArmed();
+        boolean oldSelected = model.isSelected();
+
         uninstallRolloverListener();
         uninstallDefaults();
         propertyPrefix = SUBMENU_PROPERTY_PREFIX;
         installDefaults();
+
+        //restore values of armed and selected properties
+        model.setArmed(oldArmed);
+        model.setSelected(oldSelected);
     }
 
     // Rollover Listener ****************************************************
