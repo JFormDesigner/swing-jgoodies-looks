@@ -51,7 +51,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * the String values doesn't require the 
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class Options {
 
@@ -106,20 +106,20 @@ public final class Options {
     // Keys for Overriding Font Settings ************************************
 
     /**
-     * A key for setting a custom FontChoicePolicy for the Plastic L&amp;fs.
+     * A key for setting a custom FontPolicy for the Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see PlasticLookAndFeel#getFontChoicePolicy()
-     * @see PlasticLookAndFeel#setFontChoicePolicy(FontChoicePolicy)
+     * @see PlasticLookAndFeel#getFontPolicy()
+     * @see PlasticLookAndFeel#setFontPolicy(FontPolicy)
      */
-    public static final String PLASTIC_FONT_CHOICE_POLICY_KEY = 
+    public static final String PLASTIC_FONT_POLICY_KEY = 
         "Plastic.fontChoicePolicy";
         
     /**
      * A key for setting the default control font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
      */
     public static final String PLASTIC_CONTROL_FONT_KEY = 
         "Plastic.controlFont";
@@ -128,26 +128,26 @@ public final class Options {
      * A key for setting the default menu font in Plastic L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
      */
     public static final String PLASTIC_MENU_FONT_KEY = 
         "Plastic.menuFont";
         
     /**
-     * A key for setting a custom FontChoicePolicy for the Windows L&amp;fs.
+     * A key for setting a custom FontPolicy for the Windows L&amp;fs.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see WindowsLookAndFeel#getFontChoicePolicy()
-     * @see WindowsLookAndFeel#setFontChoicePolicy(FontChoicePolicy)
+     * @see WindowsLookAndFeel#getFontPolicy()
+     * @see WindowsLookAndFeel#setFontPolicy(FontPolicy)
      */
-    public static final String WINDOWS_FONT_CHOICE_POLICY_KEY = 
+    public static final String WINDOWS_FONT_POLICY_KEY = 
         "Windows.fontChoicePolicy";
         
     /**
      * A key for setting the default control font in the Windows L&amp;f.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
      */
     public static final String WINDOWS_CONTROL_FONT_KEY = 
         "Windows.controlFont";
@@ -156,7 +156,7 @@ public final class Options {
      * A key for setting the default menu font in the Windows L&amp;f.
      * Used for both the system properties and the UIDefaults table.
      * 
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
      */
     public static final String WINDOWS_MENU_FONT_KEY = 
         "Windows.menuFont";

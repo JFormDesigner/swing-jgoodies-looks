@@ -36,14 +36,14 @@ import javax.swing.plaf.ColorUIResource;
 import javax.swing.plaf.FontUIResource;
 import javax.swing.plaf.metal.DefaultMetalTheme;
 
-import com.jgoodies.looks.FontChoicePolicy;
+import com.jgoodies.looks.FontPolicy;
 import com.jgoodies.looks.FontSet;
 
 /**
  * Unlike its superclass this theme class has relaxed access.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
@@ -66,11 +66,11 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     
     /**
      * Holds the set of fonts used by this theme.
-     * It is lazily initialized using the shared FontChoicePolicy
+     * It is lazily initialized using the shared FontPolicy
      * provided by the PlasticLookAndFeel.
      * 
      * @see #getFontSet()
-     * @see PlasticLookAndFeel#getFontChoicePolicy()
+     * @see PlasticLookAndFeel#getFontPolicy()
      */
     private FontSet fontSet;
 
@@ -153,7 +153,7 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
     
     protected FontSet getFontSet() {
         if (fontSet == null) {
-            FontChoicePolicy policy = PlasticLookAndFeel.getFontChoicePolicy();
+            FontPolicy policy = PlasticLookAndFeel.getFontPolicy();
             fontSet = policy.getFontSet("Plastic", null);
         }
         return fontSet;

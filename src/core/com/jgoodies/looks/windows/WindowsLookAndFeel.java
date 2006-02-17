@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -85,49 +85,48 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     // Optional Settings ******************************************************
     
     /**
-     * Looks up and retrieves the FontChoicePolicy used
-     * by the JGoodies Windows Look&amp;Feel.
-     * If a FontChoicePolicy has been set for this look, it'll be returned.
-     * Otherwise, this method checks if a FontChoicePolicy or FontSet is defined 
+     * Looks up and retrieves the FontPolicy used by 
+     * the JGoodies Windows Look&amp;Feel. 
+     * If a FontPolicy has been set for this look, it'll be returned.
+     * Otherwise, this method checks if a FontPolicy or FontSet is defined 
      * in the system properties or UIDefaults. If so, it is returned.
-     * If no FontChoicePolicy has been set for this look, in the system
-     * properties or UIDefaults, the default Windows font choice policy 
+     * If no FontPolicy has been set for this look, in the system
+     * properties or UIDefaults, the default Windows font policy 
      * will be returned.
      * 
-     * @return the FontChoicePolicy set for this Look&amp;feel - if any,
-     *     the FontChoicePolicy specified in the system properties or UIDefaults
-     *     - if any, or the default Windows font choice policy. 
+     * @return the FontPolicy set for this Look&amp;feel - if any,
+     *     the FontPolicy specified in the system properties or UIDefaults
+     *     - if any, or the default Windows font policy. 
      * 
      * @see #setFontChoicePolicy
-     * @see Options#WINDOWS_FONT_CHOICE_POLICY_KEY
-     * @see FontChoicePolicies
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
-     * @see FontChoicePolicies#getDefaultWindowsPolicy()
+     * @see Options#WINDOWS_FONT_POLICY_KEY
+     * @see FontPolicies
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
+     * @see FontPolicies#getDefaultWindowsPolicy()
      */
-    public static FontChoicePolicy getFontChoicePolicy() {
-        FontChoicePolicy policy = 
-            (FontChoicePolicy) UIManager.get(Options.WINDOWS_FONT_CHOICE_POLICY_KEY);
+    public static FontPolicy getFontPolicy() {
+        FontPolicy policy = 
+            (FontPolicy) UIManager.get(Options.WINDOWS_FONT_POLICY_KEY);
         if (policy != null)
             return policy;
         
-        FontChoicePolicy defaultPolicy = FontChoicePolicies.getDefaultWindowsPolicy();
-        return FontChoicePolicies.customSettingsPolicy(defaultPolicy);
+        FontPolicy defaultPolicy = FontPolicies.getDefaultWindowsPolicy();
+        return FontPolicies.customSettingsPolicy(defaultPolicy);
     }
     
     
     /**
-     * Sets the FontChoicePolicy to be used with the JGoodies Windows L&amp;F.
+     * Sets the FontPolicy to be used with the JGoodies Windows L&amp;F.
      * If the specified policy is <code>null</code>, the default will be reset.
      * 
-     * @param fontChoicePolicy   the FontChoicePolicy to be used with 
-     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
-     *     to the default
+     * @param fontPolicy   the FontPolicy to be used with the JGoodies Windows 
+     *     L&amp;F, or <code>null</code> to reset to the default
      *     
-     * @see #getFontChoicePolicy()
-     * @see Options#WINDOWS_FONT_CHOICE_POLICY_KEY
+     * @see #getFontPolicy()
+     * @see Options#WINDOWS_FONT_POLICY_KEY
      */
-    public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
-        UIManager.put(Options.WINDOWS_FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
+    public static void setFontPolicy(FontPolicy fontPolicy) {
+        UIManager.put(Options.WINDOWS_FONT_POLICY_KEY, fontPolicy);
     }
     
 
@@ -506,7 +505,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * Looks up the correct control font and sets it for all controls.
      */
     private void initFontDefaults(UIDefaults table) {
-        FontChoicePolicy fontChoicePolicy = getFontChoicePolicy();
+        FontPolicy fontChoicePolicy = getFontPolicy();
         FontSet fontSet = fontChoicePolicy.getFontSet("Windows", table);
         initFontDefaults(table, fontSet);
     }

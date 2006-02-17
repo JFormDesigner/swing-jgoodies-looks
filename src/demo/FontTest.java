@@ -19,7 +19,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class FontTest {
     
@@ -242,7 +242,7 @@ public final class FontTest {
     private FontSet getWindowsFontSet() {
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
-            return WindowsLookAndFeel.getFontChoicePolicy().getFontSet("Windows", UIManager.getDefaults());
+            return WindowsLookAndFeel.getFontPolicy().getFontSet("Windows", UIManager.getDefaults());
         } catch (UnsupportedLookAndFeelException e) {
             return null;
         }
@@ -252,7 +252,7 @@ public final class FontTest {
     private FontSet getPlasticFontSet() {
         try {
             UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
-            return PlasticLookAndFeel.getFontChoicePolicy().getFontSet("Plastic", UIManager.getDefaults());
+            return PlasticLookAndFeel.getFontPolicy().getFontSet("Plastic", UIManager.getDefaults());
         } catch (UnsupportedLookAndFeelException e) {
             return null;
         }

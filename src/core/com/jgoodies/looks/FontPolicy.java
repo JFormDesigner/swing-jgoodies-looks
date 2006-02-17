@@ -37,14 +37,14 @@ import javax.swing.UIDefaults;
  * Looks up and returns a FontSet.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  * 
  * @see FontSet
- * @see FontChoicePolicies
+ * @see FontPolicies
  * 
  * @since 2.0
  */
-public interface FontChoicePolicy {
+public interface FontPolicy {
 
     /**
      * Looks up and returns a set of fonts that will be used

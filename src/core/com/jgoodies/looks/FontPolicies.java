@@ -37,50 +37,49 @@ import javax.swing.plaf.FontUIResource;
 
 
 /**
- * Provides predefined FontChoicePolicy implementations.<p>
+ * Provides predefined FontPolicy implementations.<p>
  * 
  * <strong>Note:</strong> The available policies work well on Windows.
  * On other platforms the fonts specified by the runtime environment
  * are chosen. I plan to provide more logic or options for other platforms,
  * for example that a Linux system checks for a Tahoma or Segoe UI.<p>
  * 
- * TODO: Add a check for a custom font choice policy set in the
- * System properties.<p>
+ * TODO: Add a check for a custom font policy set in the System properties.<p>
  * 
  * TODO: Add policies that emulate different Windows setups:
  * default XP on 96dpi with normal fonts ("XP-normal-96"),
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.1 $
  * 
- * @see     FontChoicePolicy
+ * @see     FontPolicy
  * @see     FontSet
  * @see     FontSets
  * 
  * @since 2.0
  */ 
-public final class FontChoicePolicies {
+public final class FontPolicies {
 
 
-    private FontChoicePolicies() {
+    private FontPolicies() {
         // Override default constructor; prevents instantation.
     }
     
     
-    // Getting a FontChoicePolicy *********************************************
+    // Getting a FontPolicy *********************************************
     
     /**
-     * Returns a font choice policy that checks for a custom FontChoicePolicy
+     * Returns a font policy that checks for a custom FontPolicy
      * and a custom FontSet specified in the System settings or UIManager.
      * If no custom settings are available, the given default policy will
      * be used to look up the FontSet. 
      * 
      * @param defaultPolicy   the policy used if there are no custom settings  
-     * @return a FontChoicePolicy that checks for custom settings
+     * @return a FontPolicy that checks for custom settings
      *     before the default policy is returned.
      */
-    public static FontChoicePolicy customSettingsPolicy(FontChoicePolicy defaultPolicy) {
+    public static FontPolicy customSettingsPolicy(FontPolicy defaultPolicy) {
         return new CustomSettingsPolicy(defaultPolicy);
     }
     
@@ -94,25 +93,25 @@ public final class FontChoicePolicies {
 //     * 
 //     * @return the default platform independent font choice policy.
 //     */
-//    public static FontChoicePolicy getDefaultCrossPlatformPolicy() {
+//    public static FontPolicy getDefaultCrossPlatformPolicy() {
 //        return new DefaultCrossPlatformPolicy();
 //    }
     
     
     /**
-     * Returns the default font choice policy for Plastic on the Windows platform.
+     * Returns the default font policy for Plastic on the Windows platform.
      * It differs from the default Windows policy in that it uses a bold font
      * for TitledBorders, titles, and titled separators.
      * 
-     * @return the default font choice policy for Plastic on the Windows platform.
+     * @return the default font policy for Plastic on the Windows platform.
      */
-    public static FontChoicePolicy getDefaultPlasticOnWindowsPolicy() {
+    public static FontPolicy getDefaultPlasticOnWindowsPolicy() {
         return new DefaultPlasticOnWindowsPolicy();
     }
     
     
     /**
-     * Returns the default Plastic FontChoicePolicy that may vary 
+     * Returns the default Plastic FontPolicy that may vary 
      * with the platform and environment. 
      * On Windows, the PlasticOnWindowsPolicy is returned that
      * is much like the defualt WindowsPolicy but uses a bold title font.
@@ -122,7 +121,7 @@ public final class FontChoicePolicies {
      * @return a Windows-like policy on Windows, a logical fonts policy 
      *    on all other platforms
      */
-    public static FontChoicePolicy getDefaultPlasticPolicy() {
+    public static FontPolicy getDefaultPlasticPolicy() {
         if (LookUtils.IS_OS_WINDOWS) {
             return getDefaultPlasticOnWindowsPolicy();
         } else {
@@ -133,7 +132,7 @@ public final class FontChoicePolicies {
     
     
     /**
-     * Returns the default font choice policy for the Windows platform.
+     * Returns the default font policy for the Windows platform.
      * It aims to return a FontSet that is close to the native guidelines
      * and useful for the current Java environment.<p>
      * 
@@ -141,45 +140,45 @@ public final class FontChoicePolicies {
      * (96dpi/101dpi/120dpi/144dpi/...) and honors the desktop font settings
      * (normal/large/extra large).
      * 
-     * @return the default font choice policy for the Windows platform.
+     * @return the default font policy for the Windows platform.
      */
-    public static FontChoicePolicy getDefaultWindowsPolicy() {
+    public static FontPolicy getDefaultWindowsPolicy() {
         return new DefaultWindowsPolicy();
     }
     
     
     /**
-     * Returns a font choice policy that returns the specified FontSet.
+     * Returns a font policy that returns the specified FontSet.
      * 
      * @param fontSet   the FontSet to be return by this policy
-     * @return a font choice policy that returns the specified FontSet.
+     * @return a font policy that returns the specified FontSet.
      */
-    public static FontChoicePolicy getFixedFontSetPolicy(FontSet fontSet) {
+    public static FontPolicy getFixedFontSetPolicy(FontSet fontSet) {
         return new FixedFontSetPolicy(fontSet);
     }
     
     
     /**
-     * Returns a font choice policy that returns the logical fonts
+     * Returns a font policy that returns the logical fonts
      * as specified by the Java runtime environment.
      * 
-     * @return a font choice policy that returns logical fonts.
+     * @return a font policy that returns logical fonts.
      */
-    public static FontChoicePolicy getLogicalFontsPolicy() {
+    public static FontPolicy getLogicalFontsPolicy() {
         return new FixedFontSetPolicy(FontSets.getLogicalFontSet());
     }
     
     
     /**
-     * Returns a font choice policy for getting a Windows appearance
+     * Returns a font policy for getting a Windows appearance
      * that is backward compatible with the JGoodies Looks version 1.x.
      * It uses a font choice similar to the choice implemented 
      * by the Windows L&amp;f in the JGoodies Looks version 1.x.
      * 
-     * @return a font choice policy that reproduces the Windows font choice
+     * @return a font policy that reproduces the Windows font choice
      *     in the JGoodies Looks 1.x.
      */
-    public static FontChoicePolicy getLooks1xWindowsPolicy() {
+    public static FontPolicy getLooks1xWindowsPolicy() {
         Font controlFont = Fonts.getLooks1xWindowsControlFont();
         FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
         return new FixedFontSetPolicy(fontSet);
@@ -187,15 +186,15 @@ public final class FontChoicePolicies {
     
     
     /**
-     * Returns a font choice policy for getting a Plastic appearance
+     * Returns a font policy for getting a Plastic appearance
      * that is backward compatible with the JGoodies Looks version 1.x.
      * It uses a font choice similar to the choice implemented 
      * by the Plastic L&amp;fs in the JGoodies Looks version 1.x.
      * 
-     * @return a font choice policy that reproduces the Plastic font choice
+     * @return a font policy that reproduces the Plastic font choice
      *     in the JGoodies Looks 1.x.
      */
-    public static FontChoicePolicy getLooks1xPlasticPolicy() {
+    public static FontPolicy getLooks1xPlasticPolicy() {
         Font controlFont = Fonts.getDefaultGUIFontWesternModernWindowsNormal();
         Font menuFont = controlFont;
         Font titleFont = controlFont.deriveFont(Font.BOLD);
@@ -205,15 +204,15 @@ public final class FontChoicePolicies {
     
     
     /**
-     * Returns a font choice policy intended for API users that
+     * Returns a font policy intended for API users that
      * want to move Plastic code from the Looks 1.x to the Looks 2.0.
      * On Windows, it uses the Looks 2.0 Plastic fonts,
      * on other platforms it uses the Looks 1.x Plastic fonts.
      * 
-     * @return the recent Plastic font choice policy on Windows,
+     * @return the recent Plastic font policy on Windows,
      *     the JGoodies Looks 1.x on other Platforms.
      */
-    public static FontChoicePolicy getTransitionalPlasticPolicy() {
+    public static FontPolicy getTransitionalPlasticPolicy() {
         return LookUtils.IS_OS_WINDOWS
             ? getDefaultPlasticOnWindowsPolicy()
             : getLooks1xPlasticPolicy();
@@ -229,7 +228,7 @@ public final class FontChoicePolicies {
      * 
      * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
      *     <code>"Windows"</code>
-     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     * @return a custom FontPolicy - if any - or otherwise <code>null</code>
      */
     private static FontSet getCustomFontSet(String lafName) {
         String controlFontKey = lafName + ".controlFont";
@@ -250,30 +249,30 @@ public final class FontChoicePolicies {
 
 
     /**
-     * Looks up and returns a custom FontChoicePolicy for the given 
+     * Looks up and returns a custom FontPolicy for the given 
      * Look&amp;Feel name, or <code>null</code> if no custom policy has been 
      * defined for this Look&amp;Feel.
      * 
      * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
      *     <code>"Windows"</code>
-     * @return a custom FontChoicePolicy - if any - or otherwise <code>null</code>
+     * @return a custom FontPolicy - if any - or otherwise <code>null</code>
      */
-    private static FontChoicePolicy getCustomPolicy(String lafName) {
+    private static FontPolicy getCustomPolicy(String lafName) {
         // TODO: Look up predefined font choice policies
         return null;
     }
     
     
-    private static final class CustomSettingsPolicy implements FontChoicePolicy {
+    private static final class CustomSettingsPolicy implements FontPolicy {
         
-        private final FontChoicePolicy wrappedPolicy;
+        private final FontPolicy wrappedPolicy;
         
-        CustomSettingsPolicy(FontChoicePolicy wrappedPolicy) {
+        CustomSettingsPolicy(FontPolicy wrappedPolicy) {
             this.wrappedPolicy = wrappedPolicy;
         }
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontChoicePolicy customPolicy = getCustomPolicy(lafName);
+            FontPolicy customPolicy = getCustomPolicy(lafName);
             if (customPolicy != null) {
                 return customPolicy.getFontSet(null, table);
             }
@@ -286,7 +285,7 @@ public final class FontChoicePolicies {
     }
     
     
-//    private static final class DefaultCrossPlatformPolicy implements FontChoicePolicy {
+//    private static final class DefaultCrossPlatformPolicy implements FontPolicy {
 //        
 //        public FontSet getFontSet(String lafName, UIDefaults table) {
 //            // TODO: If Tahoma or Segoe UI is available, return them
@@ -297,7 +296,7 @@ public final class FontChoicePolicies {
 //    }
     
     
-    private static final class DefaultPlasticOnWindowsPolicy implements FontChoicePolicy {
+    private static final class DefaultPlasticOnWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             Font controlFont = Fonts.getWindowsControlFont();
@@ -311,7 +310,7 @@ public final class FontChoicePolicies {
     }
     
 
-    private static final class DefaultWindowsPolicy implements FontChoicePolicy {
+    private static final class DefaultWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             FontUIResource controlFont = new FontUIResource(Fonts.getWindowsControlFont());
@@ -339,7 +338,7 @@ public final class FontChoicePolicies {
     }
     
 
-    private static final class FixedFontSetPolicy implements FontChoicePolicy {
+    private static final class FixedFontSetPolicy implements FontPolicy {
         
         private final FontSet fontSet;
         

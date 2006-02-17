@@ -52,8 +52,8 @@ import javax.swing.plaf.metal.MetalTheme;
 
 import sun.awt.AppContext;
 
-import com.jgoodies.looks.FontChoicePolicies;
-import com.jgoodies.looks.FontChoicePolicy;
+import com.jgoodies.looks.FontPolicies;
+import com.jgoodies.looks.FontPolicy;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
@@ -69,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -205,50 +205,50 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     // Optional Settings ******************************************************
     
     /**
-     * Looks up and retrieves the FontChoicePolicy used
+     * Looks up and retrieves the FontPolicy used
      * by the JGoodies Plastic Look&amp;Feel family.
-     * If a FontChoicePolicy has been set, it'll be returned.
-     * Otherwise, this method checks if a FontChoicePolicy or FontSet is defined 
+     * If a FontPolicy has been set, it'll be returned.
+     * Otherwise, this method checks if a FontPolicy or FontSet is defined 
      * in the system properties or UIDefaults. If so, it is returned.
-     * If no FontChoicePolicy has been set for this look, in the system
-     * properties or UIDefaults, the default Plastic font choice policy 
+     * If no FontPolicy has been set for this look, in the system
+     * properties or UIDefaults, the default Plastic font policy 
      * will be returned.
      * 
-     * @return the FontChoicePolicy set for this Look&amp;feel - if any,
-     *     the FontChoicePolicy specified in the system properties or UIDefaults
-     *     - if any, or the default Plastic font choice policy. 
+     * @return the FontPolicy set for this Look&amp;feel - if any,
+     *     the FontPolicy specified in the system properties or UIDefaults
+     *     - if any, or the default Plastic font policy. 
      * 
      * @see #setFontChoicePolicy
-     * @see Options#PLASTIC_FONT_CHOICE_POLICY_KEY
-     * @see FontChoicePolicies
-     * @see FontChoicePolicies#customSettingsPolicy(FontChoicePolicy)
-     * @see FontChoicePolicies#getDefaultPlasticPolicy()
+     * @see Options#PLASTIC_FONT_POLICY_KEY
+     * @see FontPolicies
+     * @see FontPolicies#customSettingsPolicy(FontPolicy)
+     * @see FontPolicies#getDefaultPlasticPolicy()
      */
-    public static FontChoicePolicy getFontChoicePolicy() {
-        FontChoicePolicy policy = 
-            (FontChoicePolicy) UIManager.get(Options.PLASTIC_FONT_CHOICE_POLICY_KEY);
+    public static FontPolicy getFontPolicy() {
+        FontPolicy policy = 
+            (FontPolicy) UIManager.get(Options.PLASTIC_FONT_POLICY_KEY);
         if (policy != null)
             return policy;
         
-        FontChoicePolicy defaultPolicy = FontChoicePolicies.getDefaultPlasticPolicy();
-        return FontChoicePolicies.customSettingsPolicy(defaultPolicy);
+        FontPolicy defaultPolicy = FontPolicies.getDefaultPlasticPolicy();
+        return FontPolicies.customSettingsPolicy(defaultPolicy);
     }
     
     
     /**
-     * Sets the FontChoicePolicy to be used with the JGoodies Plastic L&amp;F
+     * Sets the FontPolicy to be used with the JGoodies Plastic L&amp;F
      * family. If the specified policy is <code>null</code>, the default will
      * be reset.
      * 
-     * @param fontChoicePolicy   the FontChoicePolicy to be used with 
+     * @param fontPolicy   the FontPolicy to be used with 
      *     the JGoodies Plastic L&amp;F family, or <code>null</code> to reset
      *     to the default
      *     
-     * @see #getFontChoicePolicy()
-     * @see Options#PLASTIC_FONT_CHOICE_POLICY_KEY
+     * @see #getFontPolicy()
+     * @see Options#PLASTIC_FONT_POLICY_KEY
      */
-    public static void setFontChoicePolicy(FontChoicePolicy fontChoicePolicy) {
-        UIManager.put(Options.PLASTIC_FONT_CHOICE_POLICY_KEY, fontChoicePolicy);
+    public static void setFontPolicy(FontPolicy fontPolicy) {
+        UIManager.put(Options.PLASTIC_FONT_POLICY_KEY, fontPolicy);
     }
     
 

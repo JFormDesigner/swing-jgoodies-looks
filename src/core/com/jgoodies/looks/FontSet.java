@@ -37,7 +37,7 @@ import javax.swing.plaf.FontUIResource;
  * These Fonts must implement the UIResource marker interface.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @since 2.0
  */
@@ -54,5 +54,5 @@ public interface FontSet {
     FontUIResource getSmallFont();
     
     FontUIResource getMessageFont();
-
+    
 }

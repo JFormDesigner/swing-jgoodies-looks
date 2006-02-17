@@ -38,12 +38,12 @@ import java.awt.Toolkit;
  * Provides only static access to popular Windows fonts.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     FontSet
  * @see     FontSets
- * @see     FontChoicePolicy
- * @see     FontChoicePolicies
+ * @see     FontPolicy
+ * @see     FontPolicies
  * 
  * @since 2.0
  */ 
@@ -152,6 +152,13 @@ public final class Fonts {
     public static final Font VISTA_120DPI_NORMAL = SEGOE_UI_15PT;
     
     
+    // Desktop Property Font Keys *********************************************
+    
+    static final String WIN_DEFAULT_GUI_FONT_KEY = "win.defaultGUI.font";
+    
+    static final String WIN_ICON_FONT_KEY = "win.icon.font";
+
+    
     // Instance Creation ******************************************************
     
     private Fonts() {
@@ -198,7 +205,7 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
-        String fontName = "win.defaultGUI.font";
+        String fontName = WIN_DEFAULT_GUI_FONT_KEY;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         return (Font) toolkit.getDesktopProperty(fontName);
     }
@@ -219,9 +226,9 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
-        String fontName = LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_OS_WINDOWS_VISTA
-            ? "win.icon.font"
-            : "win.defaultGUI.font";
+        String fontName = LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5
+            ? WIN_DEFAULT_GUI_FONT_KEY
+            : WIN_ICON_FONT_KEY;
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         return (Font) toolkit.getDesktopProperty(fontName);
     }

@@ -47,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class LookUtils {
     
@@ -127,6 +127,12 @@ public final class LookUtils {
         && !IS_JAVA_5;
 
 
+    /**
+     * True if this is Java 1.4 or Java 5.
+     */
+    public static final boolean IS_JAVA_1_4_OR_5 = 
+        IS_JAVA_1_4 || IS_JAVA_5;
+    
 
     // Requesting the Operating System Name ***********************************
     
