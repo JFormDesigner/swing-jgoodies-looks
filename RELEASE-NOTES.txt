@@ -86,8 +86,7 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Removed obsolete Plastic themes: SkyBluerTahoma, 
       ExperienceBlueDefaultFont, DesertBluerDefautFont
       
-    The font size hints system has been replaced
-    by the new FontChoicePolicy mechanism.
+    The FontSizeHints have been replaced by the FontPolicy mechanism.
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
@@ -155,17 +154,17 @@ VISUAL BACKWARD COMPATIBILITY
       Options.setNarrowMargins(false).
       
     To use the Looks 1.x fonts in the Windows L&f use:
-      WindowsLookAndFeel.setFontChoicePolicy(
-          FontChoicePolicies.getLooks1xWindowsPolicy());
+      WindowsLookAndFeel.setFontPolicy(
+          FontPolicies.getLooks1xWindowsPolicy());
           
     To use the Looks 1.x fonts in the Plastic L&fs use:
-      PlasticLookAndFeel.setFontChoicePolicy(
-          FontChoicePolicies.getLooks1xPlasticPolicy());
+      PlasticLookAndFeel.setFontPolicy(
+          FontPolicies.getLooks1xPlasticPolicy());
           
     To give Plastic the new fonts on Windows and the
     Looks 1.x fonts on other platforms use:
-      PlasticLookAndFeel.setFontChoicePolicy(
-          FontChoicePolicies.getTransitionalPlasticPolicy());
+      PlasticLookAndFeel.setFontPolicy(
+          FontPolicies.getTransitionalPlasticPolicy());
           
     You can customize the control font and menu font
     in the system properties for Windows and Plastic:
