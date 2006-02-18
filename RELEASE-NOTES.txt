@@ -170,7 +170,7 @@ VISUAL BACKWARD COMPATIBILITY
     in the system properties for Windows and Plastic:
     java -jar -DWindows.controlFont="Tahoma-plain-11"
               -DWindows.menuFont="Tahoma-plain-12"
-              -DPlastic.controlFont="Tahoma-plain-12"
+              -DPlastic.controlFont="Tahoma-plain-11"
               -DPlastic.menuFont="Verdana-bold-12"
         myapplication.jar
     If the menu font is not specified, the control font
@@ -208,6 +208,8 @@ BUGS FIXED
     #102: Plastic menu doesn't restore opaque state.
     #103: Disabled menu items lack shadow in classic mode.
     #105: Menu items mnemonic display shall check for show/hide status.
+    #108: JMenu on JPopupMenu not always drawn in selected state.
+    #110: NPE with invalid default Plastic theme set via system props.
     
     
 KNOWN ISSUES
