@@ -69,7 +69,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * that is public since 1.5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -669,13 +669,13 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		
 		// In case the user tried to set a theme, log a message.
 		if (overridden) {
-			String className = theme.getClass().getName().substring(
+			String className = result.getClass().getName().substring(
 													THEME_CLASSNAME_PREFIX.length());
 			if (className.equals(userName)) {
-				LookUtils.log("I have successfully installed the '" + theme.getName() + "' theme.");
+				LookUtils.log("I have successfully installed the '" + result.getName() + "' theme.");
 			} else {
 				LookUtils.log("I could not install the Plastic theme '" + userName + "'.");
-				LookUtils.log("I have installed the '" + theme.getName() + "' theme, instead.");
+				LookUtils.log("I have installed the '" + result.getName() + "' theme, instead.");
 			}
 		}
 		return result;
