@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     Options
  */
@@ -386,7 +386,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                      }
                  }
                  if (cropShape != null) {
-                     save = g2.getClip();
+                     save = g.getClip();
                      g2.clip(cropShape);
                  }
              }
@@ -417,7 +417,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          if (cropShape != null) {
              paintCroppedTabEdge(g, tabPlacement, tabIndex, isSelected, cropx,
                      cropy);
-             g2.setClip(save);
+             g.setClip(save);
          }
      }
 
@@ -1215,12 +1215,13 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     private boolean requestFocusForVisibleComponent() {
         Component visibleComponent = getVisibleComponent();
         if (visibleComponent.isFocusable()) {
-             visibleComponent.requestFocus();
-             return true;
-        } else if (visibleComponent instanceof JComponent) {
-             if (((JComponent) visibleComponent).requestDefaultFocus()) {
-                 return true;
-             }
+            visibleComponent.requestFocus();
+            return true;
+        }
+        if (visibleComponent instanceof JComponent) {
+            if (((JComponent) visibleComponent).requestDefaultFocus()) { 
+                return true; 
+            }
         }
         return false;
     }
@@ -1499,7 +1500,6 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Insets tabAreaInsets = getTabAreaInsets(tabPlacement);
             int fontHeight = metrics.getHeight();
             int selectedIndex = tabPane.getSelectedIndex();
-            int i, j;
             boolean verticalTabRuns = (tabPlacement == LEFT || tabPlacement == RIGHT);
             boolean leftToRight = PlasticUtils.isLeftToRight(tabPane);
             int x = tabAreaInsets.left;
@@ -1533,7 +1533,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
             // Run through tabs and lay them out in a single run
             Rectangle rect;
-            for (i = 0; i < tabCount; i++) {
+            for (int i = 0; i < tabCount; i++) {
                 rect = rects[i];
 
                 if (!verticalTabRuns) {
@@ -1581,7 +1581,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             if (!leftToRight && !verticalTabRuns) {
                 int rightMargin = size.width 
                                   - (insets.right + tabAreaInsets.right);
-                for (i = 0; i < tabCount; i++) {
+                for (int i = 0; i < tabCount; i++) {
                     rects[i].x = rightMargin - rects[i].x - rects[i].width;
                 }
             }
