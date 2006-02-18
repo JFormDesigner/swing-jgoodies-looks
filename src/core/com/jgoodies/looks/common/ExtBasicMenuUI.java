@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -111,12 +111,12 @@ public class ExtBasicMenuUI extends BasicMenuUI {
                 aCheckIcon,
                 anArrowIcon,
                 textIconGap);
-        } else
-            return super.getPreferredMenuItemSize(
-                c,
-                aCheckIcon,
-                anArrowIcon,
-                textIconGap);
+        } 
+        return super.getPreferredMenuItemSize(
+            c,
+            aCheckIcon,
+            anArrowIcon,
+            textIconGap);
     }
 
     protected void paintMenuItem(

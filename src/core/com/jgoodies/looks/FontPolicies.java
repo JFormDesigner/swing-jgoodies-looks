@@ -51,7 +51,7 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see     FontPolicy
  * @see     FontSet
@@ -124,10 +124,9 @@ public final class FontPolicies {
     public static FontPolicy getDefaultPlasticPolicy() {
         if (LookUtils.IS_OS_WINDOWS) {
             return getDefaultPlasticOnWindowsPolicy();
-        } else {
-            return getLogicalFontsPolicy();
-//            return getDefaultCrossPlatformPolicy();
-        }
+        } 
+        return getLogicalFontsPolicy();
+//      return getDefaultCrossPlatformPolicy();
     }
     
     

@@ -44,7 +44,7 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 public final class ExtButtonAreaLayout
@@ -171,17 +171,16 @@ public final class ExtButtonAreaLayout
                     return new Dimension(
                         maxWidth * numChildren + (numChildren - 1) * padding,
                         extraHeight + height);
-                } else {
-                    int totalWidth = 0;
-
-                    for (int counter = 0; counter < numChildren; counter++) {
-                        aSize = children[counter].getPreferredSize();
-                        height = Math.max(height, aSize.height);
-                        totalWidth += aSize.width;
-                    }
-                    totalWidth += ((numChildren - 1) * padding);
-                    return new Dimension(totalWidth, extraHeight + height);
                 }
+                int totalWidth = 0;
+
+                for (int counter = 0; counter < numChildren; counter++) {
+                    aSize = children[counter].getPreferredSize();
+                    height = Math.max(height, aSize.height);
+                    totalWidth += aSize.width;
+                }
+                totalWidth += ((numChildren - 1) * padding);
+                return new Dimension(totalWidth, extraHeight + height);
             }
         }
         return new Dimension(0, 0);
