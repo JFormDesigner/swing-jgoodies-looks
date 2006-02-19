@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public class MenuItemRenderer {
@@ -376,7 +376,9 @@ public class MenuItemRenderer {
 				int maxValue = maxValueInt != null ? maxValueInt.intValue() : acceleratorRect.width;
 
 				//Calculate the offset, with which the accelerator texts will be drawn with.
-				accOffset = maxValue - acceleratorRect.width;
+                accOffset = isLeftToRight(menuItem)
+                    ? maxValue - acceleratorRect.width
+                    : acceleratorRect.width - maxValue;
 			}
 
 			g.setFont(acceleratorFont);
