@@ -32,13 +32,14 @@ package com.jgoodies.looks;
 
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.Locale;
 
 
 /**
  * Provides only static access to popular Windows fonts.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -157,7 +158,7 @@ public final class Fonts {
     static final String WIN_DEFAULT_GUI_FONT_KEY = "win.defaultGUI.font";
     
     static final String WIN_ICON_FONT_KEY = "win.icon.font";
-
+    
     
     // Instance Creation ******************************************************
     
@@ -205,20 +206,26 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
-        String fontName = WIN_DEFAULT_GUI_FONT_KEY;
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        return (Font) toolkit.getDesktopProperty(fontName);
+        return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
     }
     
     
     /**
-     * Returns the Windows icon font - unless Java can't render it well. The 
-     * icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
+     * Looks up and returns the Windows control font. Returns the Windows icon 
+     * title font unless it is inappropriate for the Windows version, 
+     * Java renderer, or locale.<p>
+     * The icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
      * and the desktop font size settings (normal, large, extra large).
-     * Since Java 1.4 and Java 5 render the Windows Vista icon font
-     * Segoe UI poorly, we return the default GUI font in these environments.
+     * Older versions may return a poor font. Also, since Java 1.4 and Java 5 
+     * render the Windows Vista icon font Segoe UI poorly, 
+     * we return the default GUI font in these environments.<p>
+     * 
+     * The last check is, if the icon font can display text in the 
+     * default locale. Therefore we test if the locale's localized display name
+     * can be displayed by the icon font. For example, Tahoma can display
+     * "English", "Deutsch", but not the display name for "Chinese" in Chinese.
      *  
-     * @return the Windows scalable control font - unless Java can't render it well
+     * @return the Windows control font
      * 
      * @throws UnsupportedOperationException on non-Windows platforms
      */
@@ -226,9 +233,28 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
-        String fontName = LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5
-            ? WIN_DEFAULT_GUI_FONT_KEY
-            : WIN_ICON_FONT_KEY;
+        if (LookUtils.IS_OS_WINDOWS_95
+         || LookUtils.IS_OS_WINDOWS_98
+         || LookUtils.IS_OS_WINDOWS_NT
+         || LookUtils.IS_OS_WINDOWS_ME
+         || LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5)
+            return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
+        
+        Font iconFont = getDesktopFont(WIN_ICON_FONT_KEY);
+        if (canDisplayLocalizedText(iconFont, Locale.getDefault()))
+            return iconFont;
+        
+        return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
+    }
+    
+    private static boolean canDisplayLocalizedText(Font font, Locale locale) {
+        String testString = locale.getDisplayLanguage(locale);
+        int index = font.canDisplayUpTo(testString);
+        return index == -1;
+    }
+    
+    
+    private static Font getDesktopFont(String fontName) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         return (Font) toolkit.getDesktopProperty(fontName);
     }
