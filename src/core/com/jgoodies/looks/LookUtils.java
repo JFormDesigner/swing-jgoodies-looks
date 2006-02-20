@@ -47,7 +47,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class LookUtils {
     
@@ -173,6 +173,46 @@ public final class LookUtils {
         startsWith(OS_NAME, "Windows") && !startsWith(OS_VERSION, "4.0");
 
     /**
+     * True if this is Windows 95.
+     * 
+     * @since 2.0
+     */
+    public static final boolean IS_OS_WINDOWS_95 =
+        startsWith(OS_NAME, "Windows 9") && startsWith(OS_VERSION, "4.0");
+    
+    /**
+     * True if this is Windows 98.
+     * 
+     * @since 2.0
+     */
+    public static final boolean IS_OS_WINDOWS_98 =
+        startsWith(OS_NAME, "Windows 9") && startsWith(OS_VERSION, "4.1");
+    
+    /**
+     * True if this is Windows NT.
+     * 
+     * @since 2.0
+     */
+    public static final boolean IS_OS_WINDOWS_NT =
+        startsWith(OS_NAME, "Windows NT");
+    
+    /**
+     * True if this is Windows ME.
+     * 
+     * @since 2.0
+     */
+    public static final boolean IS_OS_WINDOWS_ME =
+        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "4.9");
+    
+    /**
+     * True if this is Windows 2000.
+     * 
+     * @since 2.0
+     */
+    public static final boolean IS_OS_WINDOWS_2000 =
+        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.0");
+    
+    /**
      * True if this is Windows XP.
      */
     public static final boolean IS_OS_WINDOWS_XP =
@@ -180,6 +220,8 @@ public final class LookUtils {
     
     /**
      * True if this is Windows Vista.
+     * 
+     * @since 2.0
      */
     public static final boolean IS_OS_WINDOWS_VISTA =
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.0");
