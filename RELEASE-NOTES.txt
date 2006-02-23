@@ -24,46 +24,22 @@ INTRODUCTION
     allows you to change the fonts per L&f, platform, locale 
     and desktop settings.
 
-    THE HTML DOCUMENTATION IS INCONSISTENT WITH THE CODE.  
-
     Although this is a beta, the contained Windows L&f
     and Plastic L&fs supercede all previous version w.r.t.
     consistency, micro design precision, and support
     for new Java runtimes and Windows editions.
     
 
-LOOKS 2.0 FINAL ROADMAP
+LOOKS 2.0 ROADMAP
     
     The API shall remain unchanged for the 2.0 final.
     The new font lookup shall remain as-is, but will be
     changed if some users detect major or minor issues.
-    The docs will be updated for the 2.0 release candidate.
     
     The release candidate is scheduled for February 28th.
     It'll be turned into the final if no show stoppers come up.
     
     
-HELP REQUIRED FROM USERS WITH NON-WESTERN WINDOWS
-
-    The Looks 2.0 shall better support non-western environments.
-    Especially it shall be able to display Chinese, Japanese,
-    Korean, Thai and other non-western languages easily (Issue #10).
-    This should work on non-Windows platforms, because the Looks 
-    then use the logical fonts defined by the Java runtime. 
-    And it may work on non-western Windows too; but I'd like 
-    to verify the latter before publishing the 2.0 final.
-    
-    Therefore I'd like to get feedback from users that run 
-    a Chinese, Japanese, Korean, Thai or other non-Western Windows XP
-    or Windows Vista with Java 1.4.2, Java 5 or Java 6.
-    This Beta2 ships with a FontTest tool ("fonttest.jar") that 
-    displays detailed information about the Java environment,
-    platform, and font settings. I should appreciate if some users 
-    of a Chinese, Japanese, Korean, Thai or other non-Western Windows 
-    could run the tool, copy the information to the clipboard and 
-    send it to dev@looks.dev.java.net.
-    
-	
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
     All font options have been removed from the Windows L&f;

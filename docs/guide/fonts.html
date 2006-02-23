@@ -106,9 +106,12 @@
 	
 	<h2>FontSet and FontSets</h2>
 	
-	The JGoodies L&amp;fs use instances of <code>FontSet</code>
+	The JGoodies L&amp;fs use instances of 
+	<a href="../api/com/jgoodies/looks/FontSet.html"><code>FontSet</code></a>
 	to describe the fonts used for the components, menus, tool tips, etc.
-	The class <code>FontSets</code> vends predefined FontSet instances.
+	The class 
+	<a href="../api/com/jgoodies/looks/FontSets.html"><code>FontSets</code></a>
+   vends predefined FontSet instances.
 	Here's an example how to use a custom FontSet:
 <pre>
 FontSet fontSet = FontSets.createDefaultFontSet(
@@ -125,11 +128,15 @@ PlasticLookAndFeel.setFontPolicy(fixedPolicy);
 	<h2>FontPolicy and FontPolicies</h2>
 	
 	The JGoodies Windows L&amp;f and the Plastic L&amp;f family
-	use a <code>FontPolicy</code> to determine the <code>FontSet</code>
+	use a 
+	<a href="../api/com/jgoodies/looks/FontPolicy.html"><code>FontPolicy</code></a>
+	to determine the <code>FontSet</code>
 	to be used. Typically a FontPolicy returns a FontSet
 	that varies with the L&amp;f, locale, platform, and platform settings
 	such as the software display resolution or user desktop settings. 
-	Class <code>FontPolicies</code> vends predefined FontPolicy instances.
+	Class 
+	<a href="../api/com/jgoodies/looks/FontPolicies.html"><code>FontPolicies</code></a>
+	vends predefined FontPolicy instances.
 	Here's an example for a custom FontPolicy that sets custom fonts
 	on a special platform:
 <pre>
@@ -163,7 +170,9 @@ PlasticLookAndFeel.setFontPolicy(myFontPolicy);
 
 	<h2>Fonts</h2>
 	
-	The <tt>Fonts</tt> class provides fonts and font names For popular Windows fonts. 
+	The 
+	<a href="../api/com/jgoodies/looks/Fonts.html"><code>Fonts</code></a>
+	class provides fonts and font names For popular Windows fonts. 
 	For example <tt>Fonts.WINDOWS_XP_96DPI_NORMAL</tt>
 	is the default font on Windows XP with a 96dpi software resolution
 	and a desktop font size <i>Normal</i>. 
@@ -179,7 +188,9 @@ WindowsLookAndFeel.setFontPolicy(fontPolicy);
 	
 	<h2>Visual Backward Compatibility</h2>
 	
-	The JGoodies Looks 2.0 include FontPolicies that mimic the 
+	The JGoodies Looks 2.0 include 
+	<a href="../api/com/jgoodies/looks/FontPolicies.html"><code>FontPolicies</code></a>
+	that mimic the 
 	font lookup of the JGoodies Looks 1.x and one that can be used
 	during a transition from 1.x to 2.0:
 <pre>
