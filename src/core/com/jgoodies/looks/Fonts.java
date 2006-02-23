@@ -36,10 +36,18 @@ import java.util.Locale;
 
 
 /**
- * Provides only static access to popular Windows fonts.
+ * Provides static access to popular Windows fonts.
+ * The sizes of the font constants are specified in 
+ * <em>typographic points</em>, approximately 1/72 of an inch.<p>
+ * 
+ * TODO: Consider changing the visibility of the package private methods
+ * to public. As an alternative we may provide a FontPolicy that can 
+ * emulate the font choice on Windows XP/2000 and Windows Vista for
+ * different software resolutions (96dpi/120dpi) and desktop font size settings
+ * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -102,62 +110,84 @@ public final class Fonts {
      * The default icon font on western Windows XP with 96dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font XP_96DPI_NORMAL = TAHOMA_11PT;
+    public static final Font WINDOWS_XP_96DPI_NORMAL = TAHOMA_11PT;
 
     /**
      * The default GUI font on western Windows XP with 96dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font XP_96DPI_DEFAULT_GUI = TAHOMA_11PT;
+    public static final Font WINDOWS_XP_96DPI_DEFAULT_GUI = TAHOMA_11PT;
     
     /**
      * The default icon font on western Windows XP with 96dpi
      * and the dialog font desktop setting "Large".
      */
-    public static final Font XP_96DPI_LARGE = TAHOMA_13PT;
+    public static final Font WINDOWS_XP_96DPI_LARGE = TAHOMA_13PT;
     
     /**
      * The default icon font on western Windows XP with 120dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font XP_120DPI_NORMAL = TAHOMA_14PT;
+    public static final Font WINDOWS_XP_120DPI_NORMAL = TAHOMA_14PT;
 
     /**
      * The default GUI font on western Windows XP with 120dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font XP_120DPI_DEFAULT_GUI = TAHOMA_13PT;
+    public static final Font WINDOWS_XP_120DPI_DEFAULT_GUI = TAHOMA_13PT;
     
     /**
      * The default icon font on western Windows Vista with 96dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font VISTA_96DPI_NORMAL = SEGOE_UI_12PT;
+    public static final Font WINDOWS_VISTA_96DPI_NORMAL = SEGOE_UI_12PT;
 
     /**
      * The default icon font on western Windows Vista with 96dpi
      * and the dialog font desktop setting "Large".
      */
-    public static final Font VISTA_96DPI_LARGE = SEGOE_UI_15PT;
+    public static final Font WINDOWS_VISTA_96DPI_LARGE = SEGOE_UI_15PT;
 
     /**
      * The default icon font on western Windows Vista with 101dpi
-     * and the dialog font desktop setting "Normal".
+     * and the dialog font desktop setting "Normal".<P>
+     * 
+     * TODO: Check if this shall be removed or not.
      */
-    public static final Font VISTA_101DPI_NORMAL = SEGOE_UI_13PT;
+    static final Font WINDOWS_VISTA_101DPI_NORMAL = SEGOE_UI_13PT;
     
     /**
      * The default icon font on western Windows Vista with 120dpi
      * and the dialog font desktop setting "Normal".
      */
-    public static final Font VISTA_120DPI_NORMAL = SEGOE_UI_15PT;
+    public static final Font WINDOWS_VISTA_120DPI_NORMAL = SEGOE_UI_15PT;
     
     
     // Desktop Property Font Keys *********************************************
     
-    static final String WIN_DEFAULT_GUI_FONT_KEY = "win.defaultGUI.font";
+    /**
+     * The desktop property key used to lookup the DEFAULTGUI font.
+     * This font scales with the software resolution only 
+     * but works in western and non-western Windows environments.
+     * 
+     * @see #getWindowsControlFont()
+     */
+    static final String WINDOWS_DEFAULT_GUI_FONT_KEY = "win.defaultGUI.font";
     
-    static final String WIN_ICON_FONT_KEY = "win.icon.font";
+    /**
+     * The desktop property key used to lookup Windows' icon font.
+     * This font scales with the software resolution and 
+     * the desktop font size setting (Normal/Large/Extra Large).
+     * However, in some non-western Windows environments
+     * this font cannot display the locale's glyphs.<p>
+     * 
+     * Implementation Note: Windows uses the icon font to label icons
+     * in the Windows Explorer and other places. It seems to me that
+     * this works in non-western environments due to font chaining.
+     * 
+     * @see #getWindowsControlFont()
+     */
+    static final String WINDOWS_ICON_FONT_KEY = "win.icon.font";
     
     
     // Instance Creation ******************************************************
@@ -171,20 +201,20 @@ public final class Fonts {
     
     static Font getDefaultGUIFontWesternModernWindowsNormal() {
         return LookUtils.IS_LOW_RESOLUTION
-            ? XP_96DPI_DEFAULT_GUI
-            : XP_120DPI_DEFAULT_GUI;
+            ? WINDOWS_XP_96DPI_DEFAULT_GUI
+            : WINDOWS_XP_120DPI_DEFAULT_GUI;
     }
     
     static Font getDefaultIconFontWesternModernWindowsNormal() {
         return LookUtils.IS_LOW_RESOLUTION
-            ? XP_96DPI_NORMAL
-            : XP_120DPI_NORMAL;
+            ? WINDOWS_XP_96DPI_NORMAL
+            : WINDOWS_XP_120DPI_NORMAL;
     }
     
     static Font getDefaultIconFontWesternWindowsVistaNormal() {
         return LookUtils.IS_LOW_RESOLUTION
-            ? VISTA_96DPI_NORMAL
-            : VISTA_120DPI_NORMAL;
+            ? WINDOWS_VISTA_96DPI_NORMAL
+            : WINDOWS_VISTA_120DPI_NORMAL;
     }
 
 
@@ -206,7 +236,7 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
-        return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
+        return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
     }
     
     
@@ -229,7 +259,7 @@ public final class Fonts {
      * 
      * @throws UnsupportedOperationException on non-Windows platforms
      */
-    static Font getWindowsControlFont() {
+    public static Font getWindowsControlFont() {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
@@ -238,15 +268,30 @@ public final class Fonts {
          || LookUtils.IS_OS_WINDOWS_NT
          || LookUtils.IS_OS_WINDOWS_ME
          || LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5)
-            return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
+            return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
         
-        Font iconFont = getDesktopFont(WIN_ICON_FONT_KEY);
+        Font iconFont = getDesktopFont(WINDOWS_ICON_FONT_KEY);
         if (canDisplayLocalizedText(iconFont, Locale.getDefault()))
             return iconFont;
         
-        return getDesktopFont(WIN_DEFAULT_GUI_FONT_KEY);
+        return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
     }
     
+    
+    /**
+     * Checks and answers if the given font can display text
+     * that is localized for the specified locale.
+     * The test invokes <code>Font#canDisplayUpTo</code> on the locale's
+     * name in the locale's language, e.g. "English" for English, 
+     * "Deutsch" for German, etc. In a Chinese locale this test
+     * will check if the font can display Chinese glyphs.
+     * The international Java runtime environments seem to have this
+     * name in the localized form for all supported locales. 
+     *  
+     * @param font     the font to be tested
+     * @param locale   the locale to be used
+     * @return true if the font can display the locale's text, false otherwise
+     */
     private static boolean canDisplayLocalizedText(Font font, Locale locale) {
         String testString = locale.getDisplayLanguage(locale);
         int index = font.canDisplayUpTo(testString);
@@ -254,6 +299,13 @@ public final class Fonts {
     }
     
     
+    /**
+     * Looks up and returns a font using the default toolkit's 
+     * desktop properties. 
+     * 
+     * @param fontName    the name of the font to return
+     * @return the font
+     */
     private static Font getDesktopFont(String fontName) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         return (Font) toolkit.getDesktopProperty(fontName);

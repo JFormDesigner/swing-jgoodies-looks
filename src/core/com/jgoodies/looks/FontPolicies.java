@@ -51,11 +51,12 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see     FontPolicy
  * @see     FontSet
  * @see     FontSets
+ * @see     Fonts
  * 
  * @since 2.0
  */ 
@@ -68,6 +69,19 @@ public final class FontPolicies {
     
     
     // Getting a FontPolicy *********************************************
+    
+    /**
+     * Returns a font policy that in turn always returns the specified FontSet.
+     * The FontSet will be fixed, but the FontSet itself may
+     * return different fonts in different environments. 
+     * 
+     * @param fontSet   the FontSet to be return by this policy
+     * @return a font policy that returns the specified FontSet.
+     */
+    public static FontPolicy createFixedPolicy(FontSet fontSet) {
+        return new FixedPolicy(fontSet);
+    }
+    
     
     /**
      * Returns a font policy that checks for a custom FontPolicy
@@ -147,40 +161,13 @@ public final class FontPolicies {
     
     
     /**
-     * Returns a font policy that returns the specified FontSet.
-     * 
-     * @param fontSet   the FontSet to be return by this policy
-     * @return a font policy that returns the specified FontSet.
-     */
-    public static FontPolicy getFixedFontSetPolicy(FontSet fontSet) {
-        return new FixedFontSetPolicy(fontSet);
-    }
-    
-    
-    /**
      * Returns a font policy that returns the logical fonts
      * as specified by the Java runtime environment.
      * 
      * @return a font policy that returns logical fonts.
      */
     public static FontPolicy getLogicalFontsPolicy() {
-        return new FixedFontSetPolicy(FontSets.getLogicalFontSet());
-    }
-    
-    
-    /**
-     * Returns a font policy for getting a Windows appearance
-     * that is backward compatible with the JGoodies Looks version 1.x.
-     * It uses a font choice similar to the choice implemented 
-     * by the Windows L&amp;f in the JGoodies Looks version 1.x.
-     * 
-     * @return a font policy that reproduces the Windows font choice
-     *     in the JGoodies Looks 1.x.
-     */
-    public static FontPolicy getLooks1xWindowsPolicy() {
-        Font controlFont = Fonts.getLooks1xWindowsControlFont();
-        FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
-        return new FixedFontSetPolicy(fontSet);
+        return createFixedPolicy(FontSets.getLogicalFontSet());
     }
     
     
@@ -198,13 +185,29 @@ public final class FontPolicies {
         Font menuFont = controlFont;
         Font titleFont = controlFont.deriveFont(Font.BOLD);
         FontSet fontSet = FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);
-        return new FixedFontSetPolicy(fontSet);
+        return createFixedPolicy(fontSet);
     }
     
     
     /**
-     * Returns a font policy intended for API users that
-     * want to move Plastic code from the Looks 1.x to the Looks 2.0.
+     * Returns a font policy for getting a Windows appearance
+     * that is backward compatible with the JGoodies Looks version 1.x.
+     * It uses a font choice similar to the choice implemented 
+     * by the Windows L&amp;f in the JGoodies Looks version 1.x.
+     * 
+     * @return a font policy that reproduces the Windows font choice
+     *     in the JGoodies Looks 1.x.
+     */
+    public static FontPolicy getLooks1xWindowsPolicy() {
+        Font controlFont = Fonts.getLooks1xWindowsControlFont();
+        FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
+        return createFixedPolicy(fontSet);
+    }
+    
+    
+    /**
+     * Returns a font policy intended for API users that want to 
+     * move Plastic code from the Looks 1.x to the Looks 2.0.
      * On Windows, it uses the Looks 2.0 Plastic fonts,
      * on other platforms it uses the Looks 1.x Plastic fonts.
      * 
@@ -337,11 +340,11 @@ public final class FontPolicies {
     }
     
 
-    private static final class FixedFontSetPolicy implements FontPolicy {
+    private static final class FixedPolicy implements FontPolicy {
         
         private final FontSet fontSet;
         
-        FixedFontSetPolicy(FontSet fontSet) {
+        FixedPolicy(FontSet fontSet) {
             this.fontSet = fontSet;
         }
         

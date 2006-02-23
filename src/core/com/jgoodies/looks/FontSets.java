@@ -39,9 +39,11 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see     FontSet
+ * @see     FontPolicy
+ * @see     FontPolicies
  * 
  * @since 2.0
  */ 
@@ -98,7 +100,7 @@ public final class FontSets {
      * 
      * @param controlFont   the font used for all controls
      * @param menuFont      the font used for the menu bar and menu items
-     * @param titleFont        used for TitledBorder, titles and titled separators
+     * @param titleFont     used for TitledBorder, titles and titled separators
      * 
      * @return a FontSet based on the given fonts
      * 
