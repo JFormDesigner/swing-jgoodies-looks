@@ -37,22 +37,59 @@ import javax.swing.plaf.FontUIResource;
  * These Fonts must implement the UIResource marker interface.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @since 2.0
  */
 public interface FontSet {
 
+    /**
+     * Returns the font used for all dialog components.
+     * 
+     * @return the font used for all dialog components.
+     */
     FontUIResource getControlFont();
     
+    
+    /**
+     * Returns the font used for the menu.
+     * 
+     * @return the font used for the menu.
+     */
     FontUIResource getMenuFont();
     
+    
+    /**
+     * Returns the font used for the title label in TitledBorders.
+     * This font is also used by JGoodies Forms titles,
+     * and titled separators.
+     * 
+     * @return the font used for TitledBorder titles.
+     */
     FontUIResource getTitleFont();
 
+    
+    /**
+     * Returns the font used for internal frame titles.
+     * 
+     * @return the font used for internal frame titles.
+     */
     FontUIResource getWindowTitleFont();
     
+    
+    /**
+     * Returns the font used for tool tips.
+     * 
+     * @return the tool tip font.
+     */
     FontUIResource getSmallFont();
     
+    
+    /**
+     * Returns the font used for message dialogs.
+     * 
+     * @return the font used for message dialogs.
+     */
     FontUIResource getMessageFont();
     
 }
