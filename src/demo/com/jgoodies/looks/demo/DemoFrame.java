@@ -60,7 +60,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public class DemoFrame extends JFrame {
 
@@ -129,10 +129,6 @@ public class DemoFrame extends JFrame {
     private void configureUI() {
         Options.setDefaultIconSize(new Dimension(18, 18));
 
-        // Set font options		
-        UIManager.put(
-            Options.USE_SYSTEM_FONTS_APP_KEY,
-            settings.isUseSystemFonts());
         Options.setUseNarrowButtons(settings.isUseNarrowButtons());
         
         // Global options

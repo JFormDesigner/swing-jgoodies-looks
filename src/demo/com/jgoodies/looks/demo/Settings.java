@@ -44,7 +44,7 @@ import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
  * Used by the <code>DemoFrame</code> to configure the UI.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see     com.jgoodies.looks.BorderStyle
  * @see     com.jgoodies.looks.HeaderStyle
@@ -56,8 +56,6 @@ public final class Settings {
 
     private PlasticTheme selectedTheme;
 
-    private Boolean useSystemFonts;
-    
     private boolean useNarrowButtons;
 
     private boolean tabIconsEnabled;
@@ -96,7 +94,6 @@ public final class Settings {
         settings.setSelectedLookAndFeel(new PlasticXPLookAndFeel());
         settings.setSelectedTheme(PlasticLookAndFeel.createMyDefaultTheme());
         settings.setUseNarrowButtons(true);
-        settings.setUseSystemFonts(Boolean.TRUE);
         settings.setTabIconsEnabled(true);
         settings.setPlasticTabStyle(PlasticLookAndFeel.TAB_STYLE_DEFAULT_VALUE);
         settings.setPlasticHighContrastFocusEnabled(false);
@@ -243,14 +240,6 @@ public final class Settings {
 
     public void setUseNarrowButtons(boolean useNarrowButtons) {
         this.useNarrowButtons = useNarrowButtons;
-    }
-
-    public Boolean isUseSystemFonts() {
-        return useSystemFonts;
-    }
-
-    public void setUseSystemFonts(Boolean useSystemFonts) {
-        this.useSystemFonts = useSystemFonts;
     }
 
 }
