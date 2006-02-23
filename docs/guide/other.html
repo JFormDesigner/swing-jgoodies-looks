@@ -72,55 +72,29 @@
 	
 	<h2>Narrow Button Margins</h2>
 
-	Sun's Java l&amp;f and Windows l&amp;f implementations
-	use a button margin of 14 pixels on each side. While this
-	will often lead to good minimum button widths, it can 
-	waste screen space if you use long labels, especially
-	in button grids. See the <i>Narrow Test</i> page in this demo.
+	Sun's Java l&amp;f and Sun's Windows l&amp;f use wide
+	button margins of 14 pixel on each side, where most
+	native toolkits use small margins like 4 or 5 pixel.
+	Wide margins make buttons with a short label ("OK") a bit wider, 
+	which makes it easier to hit the button with the mouse.
+	But it leads to a poor appearance if you use long labels. 
+	Most style guides recommend to use a button minimum widths
+	that is independent of the button label. For example 
+	the MS Windows Layout Specifications recommend to use
+	a minimum width of 50 Dialog Units (dlu) for command buttons.
 
 	<p>
-	The JGoodies l&amp;fs allow you to use narrow button margins,
-	which you can switch on for all buttons, or for individual buttons.
-	Using narrow margins globally may significantly change 
-	your panel layout, if your layout management doesn't care about 
-	minimum button sizes. Hence, it is switched off by default.
-
-	<p>
-	The following code demos the global and individual options
-	using the <tt>Options</tt> class and Strings:
+	The JGoodies l&amp;fs allow you to use narrow button margins.
+	See the <i>Narrow</i> page in the (Simple) Looks Demo. 
+	Since the Looks 2.0 the default is to use narrow buttons.
+	Using narrow margins may significantly change your panel layout, 
+	if your layout management doesn't care about minimum button sizes. 
+	To turn off the use of narrow buttons you can use one of:
 <pre>
-   Options.setUseNarrowButtons(true);
-   JButton button = new JButton("Remove All Entries");
-   button.putClientProperty(Options.IS_NARROW_KEY, Boolean.TRUE);
-
-   UIManager.put("jgoodies.useNarrowButtons", Boolean.TRUE);
-   JButton button = new JButton("Remove All Entries");
-   button.putClientProperty("jgoodies.isNarrow", Boolean.TRUE);
-</pre>
-
-	<h2>Default Icon Size</h2>
-
-	The JGoodies l&amp;fs try to vertically align menu item labels. 
-	Therefore a default icon size is is used if no icon is set. 
-	You should set this default size using one of the following methods:
-<pre>     
-   Options.setDefaultIconSize(new Dimension(18, 18));
-
-   UIManager.put(
-      com.jgoodies.looks.Options.DEFAULT_ICON_SIZE_KEY, 
-      new Dimension(18, 18));
-</pre>
-
-
-	<h2>No Icon in Menu</h2>
-
-	You can set a client property for JMenus to indicate
-	that no item in this menu has an icon. You can see this
-	effect in the File->New submenu and in the backward button
-	popup-menu of this help viewer.
-<pre>
-   JMenu menu = new JMenu();
-   menu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
+   Options.setUseNarrowButtons(false);
+   UIManager.put("jgoodies.useNarrowButtons", Boolean.FALSE);
+   
+   java -Djgoodies.useNarrowButtons=false ...
 </pre>
 
 
@@ -128,7 +102,7 @@
 
 	You can enable or disable drop shadows for popup menus.
 	As of the Looks 1.3 this feature is enabled on modern 
-	Windows (98/ME/2000/XP) and disabled otherwise.
+	Windows (98/ME/2000/2003/XP/Vista) and disabled otherwise.
     
 	<p>
 	Note that this feature may be inactive even though it is enabled.
@@ -147,13 +121,44 @@ java -Djgoodies.popupDropShadowEnabled=true ...
 </pre>
 
 
+	<h2>ComboBox Popup Menu Width</h2>
+	
+	By default a JComboBox's popup menu is as wide as the combo box.
+	You can change the popup menu by setting a popup prototype display value
+	using one of:
+	
+<pre>
+   aJComboBox.putClientProperty(
+        Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY,
+        "The longest text in the combo popup menu");
+        
+   aJComboBox.putClientProperty(     
+        "ComboBox.popupPrototypeDisplayValue",
+        "The longest text in the combo popup menu");
+</pre>
+	
+	
+	
+
+	<h2>Default Icon Size</h2>
+
+	The JGoodies l&amp;fs try to vertically align menu item labels. 
+	Therefore a default icon size is is used if no icon is set. 
+	You should set this default size using one of the following methods:
+<pre>     
+   Options.setDefaultIconSize(new Dimension(18, 18));
+
+   UIManager.put(
+      com.jgoodies.looks.Options.DEFAULT_ICON_SIZE_KEY, 
+      new Dimension(18, 18));
+</pre>
+
 
 	<h2>Tabbed Panes without Content Border</h2>
 
 	You can set a hint to paint tabbed panes without content border:
 <pre>
-   JTabbedPane tabbedPane = new JTabbedPane();
-   tabbedPane.putClientProperty(Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
+   a JTabbedPane.putClientProperty(Options.NO_CONTENT_BORDER_KEY, Boolean.TRUE);
 </pre>
 
 
@@ -161,8 +166,7 @@ java -Djgoodies.popupDropShadowEnabled=true ...
 
 	You can set a hint to render tabbed pane tab in an embedded style:
 <pre>
-   JTabbedPane tabbedPane = new JTabbedPane();
-   tabbedPane.putClientProperty(Options.EMBEDDED_TABS_KEY, Boolean.TRUE);
+   aJTabbedPane.putClientProperty(Options.EMBEDDED_TABS_KEY, Boolean.TRUE);
 </pre>
 
 
@@ -179,13 +183,42 @@ java -Djgoodies.popupDropShadowEnabled=true ...
 		by setting a client property. The property key and values are a subset
 of the Metal lines style properties.
 <pre>
-   JTree tree = new JTree();
-   tree.putClientProperty(Options.TREE_LINE_STYLE_KEY, 
-                          Options.TREE_LINE_STYLE_NONE_VALUE);
+   aJTree.putClientProperty(Options.TREE_LINE_STYLE_KEY, 
+                            Options.TREE_LINE_STYLE_NONE_VALUE);
+</pre>
+
+
+	<h2>No Icon in Menu</h2>
+
+	You can set a client property for JMenus to indicate
+	that no item in this menu has an icon. You can see this
+	effect in the File->New submenu and in the backward button
+	popup-menu of this help viewer.
+<pre>
+   aJMenu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
 </pre>
 
 
 
+	<h2>No Popup Menu Margin</h2>
+	
+	By default the JGoodies L&amp;fs popup menus have a non-empty margin.
+	You can set an empty margin using:
+<pre>
+   aJPopupMenu.putClientProperty(Options.NO_MARGIN_KEY, Boolean.TRUE);
+</pre>
+
+
+	<h2>Text Area Info Background</h2>
+	
+	Since the Looks 2.0, disabled or non-editable JTextAreas 
+	use the same background colors as JTextField, JFormattedTextField, etc.
+	If you want to keep the text area's background the same
+	independent of its state, you can use:
+<pre>
+   aJTextArea.putClientProperty(Options.TEXT_AREA_INFO_BACKGROUND_KEY, Boolean.TRUE);
+</pre>
+	
 
 
 	     

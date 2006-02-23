@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>JGoodies Looks :: User's Guide :: Fonts</title>
+	<title>JGoodies Looks :: User's Guide :: Font Settings</title>
         <link rel="stylesheet" type="text/css" href="../style.css" >
 	<meta name="description" content="The JGoodies Looks make your Swing apps and applets look better.">
 	<meta name="author"	 content="Karsten Lentzsch">
@@ -68,80 +68,127 @@
 	<table width="530" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 	  <td>
-	<h1>:: Font Settings and Font Size Hints ::</h1>
+	<h1>:: Font Settings ::</h1>
 	
-	<h2>Using System Fonts</h2>
-
-	You can force the JGoodies looks and the 1.4 versions of the Sun looks
-	to use system fonts using a String key, or JGoodies constant:
+	The JGoodies Looks 2.0 use a completely overhauled font lookup.
+	On Windows this mechanism aims to use the native originals.
+	On other platforms it uses the logical fonts defined by the Java environment.
+	It is recommended to use the fonts suggested by the JGoodies Looks
+	- at least on Windows.
+	
+	<p>
+	You can customize the fonts used by the JGoodies Windows L&amp;f and
+	the Plastic L&amp;f family. You can set a fixed control and menu fonts,
+	provide a set of fonts, or replace the default font lookup with a
+	custom font policy. 
+	
+	
+	<h2>Setting the Control and Menu Font</h2>
+	
+	If you just want to set a specific font for the components and menu,
+	set it in the system properties, either as a runtime argument
+	or during the application start.
 <pre>
-   UIManager.put("Application.useSystemFontSettings", Boolean.TRUE);
-   UIManager.put(Options.USE_SYSTEM_FONTS_APP_KEY,    Boolean.TRUE);
+    java -DWindows.controlFont="Segoe UI-plain-15" 
+         -DPlastic.controlFont="Segoe UI-plain-15" 
+         ...
+
+    java -DWindows.controlFont=Tahoma-plain-11 
+         -DWindows.menuFont=Tahoma-plain-12
+         -DPlastic.controlFont=Tahoma-plain-11 
+         -DPlastic.menuFont=Tahoma-bold-11 
+	     ...
+	     
+    System.setProperty("Windows.controlFont", "Segoe UI-plain-15");
+    System.setProperty("Plastic.controlFont", "Segoe UI-plain-15");
+</pre>
+	
+	
+	<h2>FontSet and FontSets</h2>
+	
+	The JGoodies L&amp;fs use instances of <code>FontSet</code>
+	to describe the fonts used for the components, menus, tool tips, etc.
+	The class <code>FontSets</code> vends predefined FontSet instances.
+	Here's an example how to use a custom FontSet:
+<pre>
+FontSet fontSet = FontSets.createDefaultFontSet(
+    new Font("Tahoma", Font.PLAIN, 11),    // control font
+    new Font("Tahoma", Font.PLAIN, 12),    // menu font
+    new Font("Tahoma", Font.BOLD, 11),     // title font
+    );
+FontPolicy fixedPolicy = FontPolicies.createFixedPolicy(fontSet);
+PlasticLookAndFeel.setFontPolicy(fixedPolicy);
+</pre>
+	
+	
+	
+	<h2>FontPolicy and FontPolicies</h2>
+	
+	The JGoodies Windows L&amp;f and the Plastic L&amp;f family
+	use a <code>FontPolicy</code> to determine the <code>FontSet</code>
+	to be used. Typically a FontPolicy returns a FontSet
+	that varies with the L&amp;f, locale, platform, and platform settings
+	such as the software display resolution or user desktop settings. 
+	Class <code>FontPolicies</code> vends predefined FontPolicy instances.
+	Here's an example for a custom FontPolicy that sets custom fonts
+	on a special platform:
+<pre>
+public final class MyPlasticFontPolicy implements FontPolicy {
+
+    public FontSet getFontSet(String lafName, UIDefaults table) {
+        if (MyFontUtils.IS_TAHOMA_AVAILABE) {
+            Font controlFont = MyFonts.getTahoma();
+            return FontSets.createDefaultFontSet(controlFont);
+        } 
+        if (MySystemUtils.IS_OS_LINUX_UBUNTU) {
+            return MyFontSets.getUbuntuFontSet();
+        } 
+        FontPolicy default = FontPolicies.getDefaultPlasticFontPolicy().
+        return default.getFontSet(lafName, table);
+    }
+}
+
+// Instantiate my Plastic font policy.
+FontPolicy myPlasticFontPolicy = new MyPlasticFontPolicy();
+
+// Wrap the above to honor the System properties (Plastic.controlFont, etc).
+FontPolicy myFontPolicy = FontPolicies.customSettingsPolicy(
+    myPlasticFontPolicy);
+    
+// Set the wrapped policy.
+PlasticLookAndFeel.setFontPolicy(myFontPolicy);
 </pre>
 
-	<p>
-	You can override this application property by setting
-	the system property <tt>"swing.useSystemFontSettings"</tt>
-	to "false". The system property can be set when launching the VM
-	and so, enables you to tweak this setting even for a finished app.
-	<p>
-	If the system fonts do not support the current encoding,
-	the Windows look will fall back to the non-system fonts 
-	as defined by the Java runtime.
 
 
-	<h2>Setting Font Size Hints</h2>
-
-	In Microsoft environments that use Tahoma as dialog font,
-	you can tweak the choosen font sizes by setting optional JGoodies font size hints.
-	The global hints can be overriden by look-specific hints:
+	<h2>Fonts</h2>
+	
+	The <tt>Fonts</tt> class provides fonts and font names For popular Windows fonts. 
+	For example <tt>Fonts.WINDOWS_XP_96DPI_NORMAL</tt>
+	is the default font on Windows XP with a 96dpi software resolution
+	and a desktop font size <i>Normal</i>. 
+	This can be used to preview how your application looks 
+	in different environments:
 <pre>
-   Options.setGlobalFontSizeHints(FontSizeHints.MIXED);
-   PlasticLookAndFeel.setFontSizeHints(FontSizeHints.SYSTEM);
+Font controlFont = Fonts.WINDOWS_VISTA_96DPI_NORMAL;
+FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
+FontPolicy fontPolicy = FontPolicies.createFixedPolicy(fontSet);
+WindowsLookAndFeel.setFontPolicy(fontPolicy);
 </pre>
+	
+	
+	<h2>Visual Backward Compatibility</h2>
+	
+	The JGoodies Looks 2.0 include FontPolicies that mimic the 
+	font lookup of the JGoodies Looks 1.x and one that can be used
+	during a transition from 1.x to 2.0:
+<pre>
+WindowsLookAndFeel.setFontPolicy(FontPolicies.getLooks1xWindowsPolicy());
+PlasticLookAndFeel.setFontPolicy(FontPolicies.getLooks1xPlasticPolicy());
 
-	<p>
-	The <i>System</i> hint is the default. It doesn't modify the sizes in 1.4. 
-	All JGoodies applications use the <i>Mixed</i> style.
+PlasticLookAndFeel.setFontPolicy(FontPolicies.getTransitionalPlasticPolicy());
 
-
-	The following table describes the effect of different font size hints
-	in an environment with a 11pt system font on 96dpi and a 14pt system font 
-	on 120 dpi: 
-
-<br>
-<table border="1">
-<tr>
-	<td>Hint</td><td>Menu 96dpi</td><td>Control 96dpi</td><td>Menu 120dpi</td><td>Control 120dpi</td>
-</tr>
-<tr>
-	<td>System</td><td>11 pt</td>   <td>11 pt</td>        <td>14 pt</td>     <td>14 pt</td>
-</tr>
-<tr>
-	<td>Large</td><td>12 pt</td>   <td>12 pt</td>        <td>14 pt</td>     <td>14 pt</td>
-</tr>
-<tr>
-	<td>Mixed</td><td>11 pt</td>   <td>11 pt</td>        <td>14 pt</td>     <td>12 pt</td>
-</tr>
-<tr>
-	<td>Fixed</td><td>12 pt</td>   <td>12 pt</td>        <td>12 pt</td>     <td>12 pt</td>
-</tr>
-<tr>
-	<td>Small</td><td>11 pt</td>   <td>11 pt</td>        <td>12 pt</td>     <td>12 pt</td>
-</tr>
-</table>
-
-<br>
-Find more information in classes <tt>com.jgoodies.looks.FontSizeHints</tt> 
-and <tt>com.jgoodies.looks.FontUtils</tt>.
-
-
-	<h2>Background Information</h2>
-
-	Microsoft uses different font sizes in primary and secondary windows.
-	The mixed style aims to mimic this behavior if the dialog font is Tahoma.
-
-
+</pre>
 	     
 	</td>
 	</tr>
@@ -156,7 +203,7 @@ and <tt>com.jgoodies.looks.FontUtils</tt>.
 <tr>
     <td nowrap="nowrap" bgcolor="F4f3f3">
       <div style="font-size: 10px; margin-left: 17px; margin-top: 20px; margin-right: 10px; margin-bottom: 4px;">
-      (c) 2004 JGoodies
+      (c) 2006 JGoodies
       </div>
     </td>
     <td width="1" bgcolor="E7E5E5"></td>
