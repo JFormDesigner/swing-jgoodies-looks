@@ -19,7 +19,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class FontTest {
     
@@ -56,7 +56,7 @@ public final class FontTest {
         frame.setContentPane(buildContentPane());
         frame.setSize(400, 600);
         locateOnScreen(frame);
-        frame.setTitle("JGoodies Looks 2.0 Beta :: FontTest");
+        frame.setTitle("JGoodies Looks 2.0 RC :: FontTest");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
@@ -178,13 +178,13 @@ public final class FontTest {
         }
         buffer.append("\n    controlFont=");
         buffer.append(encodeFont(fontSet.getControlFont()));
-        buffer.append("\n    menuFont   =");
+        buffer.append("\n    menuFont=");
         buffer.append(encodeFont(fontSet.getMenuFont()));
-        buffer.append("\n    titleFont  =");
+        buffer.append("\n    titleFont=");
         buffer.append(encodeFont(fontSet.getTitleFont()));
         buffer.append("\n    messageFont=");
         buffer.append(encodeFont(fontSet.getMessageFont()));
-        buffer.append("\n    smallFont  =");
+        buffer.append("\n    smallFont=");
         buffer.append(encodeFont(fontSet.getSmallFont()));
         buffer.append("\n    windowTitleFont=");
         buffer.append(encodeFont(fontSet.getWindowTitleFont()));
