@@ -1,12 +1,12 @@
 
                          JGoodies Looks
-                        Version 2.0 Beta2
+                  Version 2.0 Release Candidate
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a stable Beta build for the JGoodies Looks 2.0.
+    This is the release candidate for the JGoodies Looks 2.0.
     The major changes are better support for Windows Vista,
     Java 5 and 6, and an overhauled font lookup in all L&fs.
     
@@ -24,20 +24,18 @@ INTRODUCTION
     allows you to change the fonts per L&f, platform, locale 
     and desktop settings.
 
-    Although this is a beta, the contained Windows L&f
-    and Plastic L&fs supercede all previous version w.r.t.
-    consistency, micro design precision, and support
-    for new Java runtimes and Windows editions.
+    The contained Windows L&f and Plastic L&fs supercede 
+    all previous version w.r.t. consistency, design precision, 
+    and support for new Java runtimes and Windows editions.
     
 
-LOOKS 2.0 ROADMAP
+LOOKS 2.0 FINAL
     
-    The API shall remain unchanged for the 2.0 final.
-    The new font lookup shall remain as-is, but will be
-    changed if some users detect major or minor issues.
-    
-    The release candidate is scheduled for February 28th.
-    It'll be turned into the final if no show stoppers come up.
+    The API and font lookup shall remain unchanged for 
+    the 2.0 final that is scheduled for February 28th.
+    If users detect major issues, another release candidate
+    will be built and published. Otherwise this release
+    candidate will be turned into the 2.0 final
     
     
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
