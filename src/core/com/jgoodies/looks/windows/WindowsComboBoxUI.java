@@ -58,7 +58,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -423,6 +423,22 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
                 Component c = renderer.getListCellRendererComponent(list, popupPrototypeDisplayValue,
                         -1, true, true);
                 pw = c.getPreferredSize().width;
+                if (comboBox.getItemCount() > comboBox.getMaximumRowCount()) {
+                    JScrollBar verticalBar = scroller.getVerticalScrollBar();
+                    pw += verticalBar.getPreferredSize().width;
+                }
+                // Andrej: the code below is analog to the code used by
+                //         ScrollPaneLayout to determine whether to show
+                //         a vertical scroll bar or not. But the solution
+                //         above is faster and requires less memory.
+                //         If the faster solution fails for some case
+                //         (IMHO it will never happen), we can switch
+                //         to the code below.
+//              JViewport viewport = scroller.getViewport();
+//              if (viewport.getViewSize().height > viewport.getPreferredSize().height) {
+//                  JScrollBar verticalBar = scroller.getVerticalScrollBar();
+//                  pw += verticalBar.getPreferredSize().width;
+//              }
             }
             return super.computePopupBounds(px, py, pw, ph); 
         }
