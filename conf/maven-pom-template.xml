@@ -5,7 +5,7 @@
 	<version>@impl.version</version>
 	<packaging>jar</packaging>
 	<name>JGoodies Looks</name>
-	<url>https://binding.dev.java.net/</url>
+	<url>https://looks.dev.java.net/</url>
 	<description>The JGoodies Looks make your Swing applications and 
 	    applets look better. They have been optimized for readability, 
 	    precise micro-design and usability. And they simplify 
