@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.24 2006-01-28 00:47:13 karsten Exp $
+   $Id: build.xml,v 1.25 2006-02-24 16:46:42 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -9,20 +9,22 @@
      ant <target>
    with one of the following targets:
    
-     clean          removes temporary files and directories
-     compile        compiles the l&fs, demo, and tests
-     javadoc        creates the API documentation
-     test           compiles and runs the unit tests
-     jar            creates all library jars
-     package        builds a distribution tree: docs, sources, jars
-     package-zip    builds a zipped distribution
+     clean               removes temporary files and directories
+     compile             compiles the framework, extras, tutorial and tests
+     javadoc             creates the API documentation
+     test                compiles and runs the unit tests
+     jar                 creates a library jar
+     create-dist-dir     creates a distribution tree: docs, sources, jar
+     create-dist-zip     creates a zipped distribution
+     create-maven-bundle creates a Maven bundle
+     create-all          creates the distribution zip and Maven bundle
      
    To run the unit tests you MUST set the junit.jar property,
    for example in your user build.properties file. 
 
 -->
 
-<project default="jar" basedir="." name="JGoodies Looks" >
+<project default="create-all" basedir="." name="JGoodies Looks" >
 
     <!-- ***************************************************************** -->
     <!-- Give users a chance to override build properties.                 -->
@@ -334,9 +336,14 @@
     
     
     <!-- ***************************************************************** -->
-    <!-- P A C K A G E                                                     -->
+    <!-- C R E A T E                                                       -->
     <!-- ***************************************************************** -->
-	<target name="package" depends="clean, compile, javadoc, test, jar"
+    <target name="create-all" depends="create-dist-zip, create-maven-bundle"
+            description="Creates the distribution zip and Maven bundle." >
+    </target>   
+
+  
+	<target name="create-dist-dir" depends="clean, compile, javadoc, test, jar"
 	        description="Creates the distribution directory tree." >
 	
 		<mkdir dir="${dist.dir}" />
@@ -382,7 +389,7 @@
 	</target>
 
     <!-- ***************************************************************** -->
-	<target name="package-zip" depends="package"
+	<target name="create-dist-zip" depends="create-dist-dir"
 	        description="Packages the distribution as a zip file." >
 	        
         <zip 
@@ -391,5 +398,25 @@
         	includes="${dist.subdir}/**/*" />
 	</target>
 	
+    <!-- ***************************************************************** -->
+    <target name="create-maven-bundle" depends="create-dist-dir"
+            description="Creates a Maven bundle for the Ibiblio upload." >
+            
+        <!-- Copy the Maven pom template. -->
+        <copy tofile="${dist.maven.pom}" file="${build.maven.pom.template}" />
+        <!-- Replace the version in the pom.xml. -->
+        <replace file="${dist.maven.pom}"
+            token="@impl.version"
+            value="${impl.version}" />   
+        
+        <copy tofile="${dist.maven.bin.jar}" file="${build.all.jar}" />
+        <jar 
+            destfile="${dist.maven.src.jar}"
+            basedir="${dist.src.dir}" />   
+        <jar 
+            destfile="${dist.maven.bundle}" 
+            basedir="${build.maven.dir}" />
+    </target>
     
+        
 </project>
