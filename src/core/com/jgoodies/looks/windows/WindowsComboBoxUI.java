@@ -58,7 +58,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * that is used to compute the combo's popup menu width.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
@@ -405,7 +405,12 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
          * In addition to the superclass behavior, this class uses the combo's 
          * popup prototype display value to compute the popup menu width. 
          * This is an optional feature of the JGoodies Plastic L&amp;f
-         * implemented via a client property key.
+         * implemented via a client property key.<p>
+         * 
+         * If a prototype is set, the renderer is used to render the prototype.
+         * The popup width is the prototype's width plus the scrollbar width
+         * - if any. The scrollbar test checks if there are more items
+         * than the combo's maximum row count.  
          * 
          * @param px starting x location
          * @param py starting y location
@@ -414,31 +419,23 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
          * @return a rectangle which represents the placement and size of the popup
          * 
          * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
+         * @see JComboBox#getMaximumRowCount()
          */
         protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
             Object popupPrototypeDisplayValue = comboBox.getClientProperty(
                     Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
             if (popupPrototypeDisplayValue != null) {
                 ListCellRenderer renderer = list.getCellRenderer();
-                Component c = renderer.getListCellRendererComponent(list, popupPrototypeDisplayValue,
-                        -1, true, true);
+                Component c = renderer.getListCellRendererComponent(
+                        list, popupPrototypeDisplayValue, -1, true, true);
                 pw = c.getPreferredSize().width;
-                if (comboBox.getItemCount() > comboBox.getMaximumRowCount()) {
+                boolean hasVerticalScrollBar = 
+                    comboBox.getItemCount() > comboBox.getMaximumRowCount();
+                if (hasVerticalScrollBar) {
+                    // Add the scrollbar width.
                     JScrollBar verticalBar = scroller.getVerticalScrollBar();
                     pw += verticalBar.getPreferredSize().width;
                 }
-                // Andrej: the code below is analog to the code used by
-                //         ScrollPaneLayout to determine whether to show
-                //         a vertical scroll bar or not. But the solution
-                //         above is faster and requires less memory.
-                //         If the faster solution fails for some case
-                //         (IMHO it will never happen), we can switch
-                //         to the code below.
-//              JViewport viewport = scroller.getViewport();
-//              if (viewport.getViewSize().height > viewport.getPreferredSize().height) {
-//                  JScrollBar verticalBar = scroller.getVerticalScrollBar();
-//                  pw += verticalBar.getPreferredSize().width;
-//              }
             }
             return super.computePopupBounds(px, py, pw, ph); 
         }
