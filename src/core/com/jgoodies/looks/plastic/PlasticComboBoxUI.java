@@ -54,7 +54,7 @@ import com.jgoodies.looks.Options;
  * Has the same height as text fields - unless you change the renderer.
  *
 * @author Karsten Lentzsch
-* @version $Revision: 1.7 $
+* @version $Revision: 1.8 $
  */
 public final class PlasticComboBoxUI extends MetalComboBoxUI {
 
@@ -204,7 +204,7 @@ public final class PlasticComboBoxUI extends MetalComboBoxUI {
             // To make editable and non-editable equally wide, 
             // we always add 1 pixel.
             size.width += 1;
-        } else {
+        } else if (arrowButton != null) {
             Insets arrowButtonInsets = arrowButton.getInsets();
             size.width += arrowButtonInsets.left;
         }
