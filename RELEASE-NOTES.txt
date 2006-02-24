@@ -31,11 +31,9 @@ INTRODUCTION
 
 LOOKS 2.0 FINAL
     
-    The API and font lookup shall remain unchanged for 
-    the 2.0 final that is scheduled for February 28th.
-    If users detect major issues, another release candidate
-    will be built and published. Otherwise this release
-    candidate will be turned into the 2.0 final
+    The API and font lookup shall remain as-is for the 2.0 final.
+    In case of major issues, another candidate will be published. 
+    Otherwise this version will be declared as the 2.0 final.
     
     
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
@@ -193,6 +191,7 @@ BUGS FIXED
     #108: JMenu on JPopupMenu not always drawn in selected state.
     #110: NPE with invalid default Plastic theme set via system props.
     #111: RTL menus have problems with accelerator alignment.
+    #113: Combo popup with prototype ignores scrollbar visibility.
     
     
 KNOWN ISSUES
@@ -234,7 +233,8 @@ OTHER CHANGES
     o The Windows and Plastic L&fs have been tweaked for Windows Vista.
     o Overhauled the Windows combobox layout and rendering.
     o Overhauled the Plastic combobox layout and rendering.
-    o Improved appearance of the Looks demo tabs on Windows.
+    o Improved appearance of the Looks Demo tabs on Windows.
+    o The ANT build can now create a Maven bundle.
     o The demo's DemoFrame class accepts a parameter for the L&f: 
       "Windows", "Plastic", "Plastic3D", "PlasticXP",
       or a full class name like:
