@@ -1,0 +1,32 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.jgoodies</groupId>
+	<artifactId>looks</artifactId>
+	<version>@impl.version</version>
+	<packaging>jar</packaging>
+	<name>JGoodies Looks</name>
+	<url>https://binding.dev.java.net/</url>
+	<description>The JGoodies Looks make your Swing applications and 
+	    applets look better. They have been optimized for readability, 
+	    precise micro-design and usability. And they simplify 
+	    the multi-platform support by using similar widget dimensions. 
+	    In addition, many people have reviewed them as elegant.</description>
+	<licenses>
+		<license>
+			<name>The BSD License</name>
+			<url>http://www.opensource.org/licenses/bsd-license.html</url>
+		</license>
+	</licenses>
+	<developers>
+		<developer>
+			<id>Karsten</id>
+			<name>Karsten Lentzsch</name>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:cvs:pserver:guest@cvs.dev.java.net:/cvs:looks</connection>
+		<tag>head</tag>
+		<url>https://looks.dev.java.net/source/browse/looks/</url>
+	</scm>
+</project>
