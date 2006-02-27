@@ -58,7 +58,7 @@ import com.jgoodies.looks.LookUtils;
  *
  * @author  Karsten Lentzsch
  * @author  Andrej Golovnin
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @since 2.0
  */
@@ -73,13 +73,6 @@ public final class RenderingUtils {
     
     /**
      * In Java 5 or later, this field holds the public static method 
-     * <code>SwingUtilities2#drawString</code> that has been added
-     * for Java 5. 
-     */
-    private static Method drawStringMethod = null;
-    
-    /**
-     * In Java 5 or later, this field holds the public static method 
      * <code>SwingUtilities2#drawStringUnderlinedAt</code> that has been added
      * for Java 5. 
      */
@@ -87,7 +80,6 @@ public final class RenderingUtils {
     
     static {
         if (LookUtils.IS_JAVA_5_OR_LATER) {
-            drawStringMethod = getMethodDrawString();
             drawStringUnderlineCharAtMethod = getMethodDrawStringUnderlineCharAt();
         }
     }
@@ -97,45 +89,6 @@ public final class RenderingUtils {
         // Overrides default constructor; prevents instantiation.
     }
     
-    /**
-     * Draws the string at the specified location underlining the specified
-     * character.
-     *
-     * @param c JComponent that will display the string, may be null
-     * @param g Graphics to draw the text to
-     * @param text String to display
-     * @param underlinedChar the char to be underlined
-     * @param x X coordinate to draw the text at
-     * @param y Y coordinate to draw the text at
-     */
-    public static void drawString(JComponent c, Graphics g, String text, 
-            int underlinedChar, int x, int y) {
-        if (LookUtils.IS_JAVA_5_OR_LATER) {
-            if (drawStringMethod != null) {
-                try {
-                    drawStringMethod.invoke(null,
-                            new Object[]{c, g, text, new Integer(x), new Integer(y)});
-                    return;
-                } catch (IllegalArgumentException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (IllegalAccessException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                } catch (InvocationTargetException e) {
-                    // Use the BasicGraphicsUtils as fallback
-                }
-            }
-            Graphics2D g2 = (Graphics2D) g;
-            Map oldRenderingHints = installDesktopHints(g2);
-            BasicGraphicsUtils.drawString(g, text, underlinedChar, x, y);
-            if (oldRenderingHints != null) {
-                g2.addRenderingHints(oldRenderingHints);
-            }
-            return;
-        }
-        BasicGraphicsUtils.drawString(g, text, underlinedChar, x, y);
-    }
-    
-
     /**
      * Draws the string at the specified location underlining the specified
      * character.
@@ -177,24 +130,6 @@ public final class RenderingUtils {
     
     
     // Private Helper Code ****************************************************
-    
-    
-    private static Method getMethodDrawString() {
-        try {
-            Class clazz = Class.forName(SWING_UTILITIES2_NAME);
-            return clazz.getMethod(
-                    "drawString",
-                    new Class[] {JComponent.class, Graphics.class, String.class, Integer.TYPE, Integer.TYPE}
-                    );
-        } catch (ClassNotFoundException e) {
-            // returns null
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        return null;
-    }
     
     
     private static Method getMethodDrawStringUnderlineCharAt() {
