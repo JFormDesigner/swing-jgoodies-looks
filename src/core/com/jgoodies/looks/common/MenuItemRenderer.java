@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public class MenuItemRenderer {
@@ -386,16 +386,16 @@ public class MenuItemRenderer {
 				// *** paint the acceleratorText disabled
 				if (!disabledTextHasShadow()) {
 					g.setColor(disabledForeground);
-                    RenderingUtils.drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawStringUnderlineCharAt(c, g, acceleratorText, -1,
 						acceleratorRect.x - accOffset,
 						acceleratorRect.y + fmAccel.getAscent());
 				} else {
 					g.setColor(b.getBackground().brighter());
-                    RenderingUtils.drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawStringUnderlineCharAt(c, g, acceleratorText, -1,
 						acceleratorRect.x - accOffset,
 						acceleratorRect.y + fmAccel.getAscent());
 					g.setColor(b.getBackground().darker());
-                    RenderingUtils.drawString(c, g, acceleratorText, 0,
+                    RenderingUtils.drawStringUnderlineCharAt(c, g, acceleratorText, -1,
 						acceleratorRect.x - accOffset - 1,
 						acceleratorRect.y + fmAccel.getAscent() - 1);
 				}
@@ -406,7 +406,7 @@ public class MenuItemRenderer {
 				} else {
 					g.setColor(acceleratorForeground);
 				}
-                RenderingUtils.drawString(c, g, acceleratorText, 0,
+                RenderingUtils.drawStringUnderlineCharAt(c, g, acceleratorText, -1,
 					acceleratorRect.x - accOffset,
 					acceleratorRect.y + fmAccel.getAscent());
 			}
