@@ -42,7 +42,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 
@@ -73,17 +73,15 @@ public abstract class InvertedColorTheme extends PlasticTheme {
 
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
-        Object[] uiDefaults =
-            {
-                "jgoodies.useControlGradient",
-                Boolean.TRUE,
+        Object[] uiDefaults = {
                 "TextField.ineditableForeground",
                 getSoftWhite(),
-            //table.get("controlText")};
-            "Plastic.brightenStop",
+                "Plastic.brightenStop",
                 new Color(255, 255, 255, 20),
                 "Plastic.ltBrightenStop",
                 new Color(255, 255, 255, 16),
+                "SimpleInternalFrame.activeTitleBackground",
+                getPrimary2()
                 };
         table.putDefaults(uiDefaults);
     }
