@@ -52,9 +52,8 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
-
 public class MenuBarView {
     
     private static final String HTML_TEXT = 
@@ -62,7 +61,7 @@ public class MenuBarView {
     
     
 	/**
-	 * Builds, configures, and answers the menubar. Requests HeaderStyle, 
+	 * Builds, configures, and returns the menubar. Requests HeaderStyle, 
 	 * look-specific BorderStyles, and Plastic 3D hint from Launcher.
 	 */
 	JMenuBar buildMenuBar(
@@ -91,7 +90,7 @@ public class MenuBarView {
 	
 	
 	/**
-	 * Builds and answers the file menu.
+	 * Builds and returns the file menu.
 	 */
 	private JMenu buildFileMenu() {
 		JMenuItem item;
@@ -101,11 +100,11 @@ public class MenuBarView {
 		// Build a submenu that has the noIcons hint set.
 		JMenu submenu = createMenu("New", 'N');
 		submenu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
-		submenu.add(createMenuItem("Project...", 'P'));
-		submenu.add(createMenuItem("Folder...", 'F'));
-		submenu.add(createMenuItem("Document...", 'D'));
+		submenu.add(createMenuItem("Project\u2026", 'P'));
+		submenu.add(createMenuItem("Folder\u2026", 'F'));
+		submenu.add(createMenuItem("Document\u2026", 'D', KeyStroke.getKeyStroke("ctrl F8")));
 		submenu.addSeparator();
-		submenu.add(createMenuItem("No icon hint set"));
+		submenu.add(createMenuItem("No icon hint set", 'N', KeyStroke.getKeyStroke("ctrl F9")));
 		
 		menu.add(submenu);
 		menu.addSeparator();
@@ -120,7 +119,7 @@ public class MenuBarView {
                               KeyStroke.getKeyStroke("ctrl S"));
 		item.setEnabled(false);
 		menu.add(item);
-		item = createMenuItem("Save description.txt As...", 
+		item = createMenuItem("Save description.txt As\u2026", 
                 readImageIcon("saveas_edit.gif"),
                 'e');
         menu.add(item);
@@ -145,7 +144,7 @@ public class MenuBarView {
     
 
 	/**
-	 * Builds and answers a menu with different JRadioButtonMenuItems.
+	 * Builds and returns a menu with different JRadioButtonMenuItems.
 	 */
 	private JMenu buildRadioMenu() {
 		JRadioButtonMenuItem item;
@@ -197,7 +196,7 @@ public class MenuBarView {
 	
 	
 	/**
-	 * Builds and answers a menu with different JCheckBoxMenuItems.
+	 * Builds and returns a menu with different JCheckBoxMenuItems.
 	 */
 	private JMenu buildCheckMenu() {
 		JCheckBoxMenuItem item;
@@ -240,7 +239,7 @@ public class MenuBarView {
 	
 	
     /**
-     * Builds and answers a menu with items that use a HTML text.
+     * Builds and returns a menu with items that use a HTML text.
      */
     private JMenu buildHtmlMenu() {
         JMenu menu = createMenu("Styled", 'S');
@@ -256,8 +255,9 @@ public class MenuBarView {
         return menu;
     }
         
+    
     /**
-     * Builds and answers a menu with items that use a HTML text.
+     * Builds and returns a menu with items that use a HTML text.
      */
     private JMenu buildAlignmentTestMenu() {
         JMenu menu = createMenu("Alignment", 'A');
@@ -275,8 +275,9 @@ public class MenuBarView {
         return menu;
     }
         
+   
 	/**
-	 * Builds and answers the help menu.
+	 * Builds and and returns the help menu.
 	 */
 	private JMenu buildHelpMenu(
         ActionListener helpActionListener, 
@@ -300,6 +301,7 @@ public class MenuBarView {
 		return menu;
 	}
     
+    
     // Factory Methods ********************************************************
 
     protected JMenu createMenu(String text, char mnemonic) {
@@ -308,13 +310,16 @@ public class MenuBarView {
         return menu;
     }
         
+    
     protected JMenuItem createMenuItem(String text) {
         return new JMenuItem(text);
     }
     
+    
     protected JMenuItem createMenuItem(String text, char mnemonic) {
         return new JMenuItem(text, mnemonic);
     }
+    
     
     protected JMenuItem createMenuItem(String text, char mnemonic, KeyStroke key) {
         JMenuItem menuItem = new JMenuItem(text, mnemonic);
@@ -322,9 +327,11 @@ public class MenuBarView {
         return menuItem;
     }
     
+    
     protected JMenuItem createMenuItem(String text, Icon icon) {
         return new JMenuItem(text, icon);
     }
+    
 	
     protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic) {
         JMenuItem menuItem = new JMenuItem(text, icon);
@@ -332,15 +339,18 @@ public class MenuBarView {
         return menuItem;
     }
     
+    
     protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic, KeyStroke key) {
         JMenuItem menuItem = createMenuItem(text, icon, mnemonic);
         menuItem.setAccelerator(key);
         return menuItem;
     }
     
+    
     protected JRadioButtonMenuItem createRadioButtonMenuItem(String text, boolean selected) {
         return new JRadioButtonMenuItem(text, selected);
     }
+    
     
     protected JCheckBoxMenuItem createCheckBoxMenuItem(String text, boolean selected) {
         return new JCheckBoxMenuItem(text, selected);
@@ -374,7 +384,7 @@ public class MenuBarView {
     // Higher Level Factory Methods *****************************************
     
 	/**
-	 * Creates and answers a <code>JRadioButtonMenuItem</code>
+	 * Creates and returns a JRadioButtonMenuItem
 	 * with the given enablement and selection state.
 	 */
 	private JRadioButtonMenuItem createRadioItem(boolean enabled, boolean selected) {
@@ -393,7 +403,7 @@ public class MenuBarView {
 	
 
 	/**
-	 * Creates and answers a <code>JCheckBoxMenuItem</code>
+	 * Creates and returns a JCheckBoxMenuItem
 	 * with the given enablement and selection state.
 	 */
 	private JCheckBoxMenuItem createCheckItem(boolean enabled, boolean selected) {
@@ -412,7 +422,7 @@ public class MenuBarView {
 	
 	
 	/**
-	 *  Answers an appropriate label for the given enablement and selection state.
+	 *  Returns an appropriate label for the given enablement and selection state.
 	 */
 	protected String getToggleLabel(boolean enabled, boolean selected) {
 		String prefix = enabled  ? "Enabled" : "Disabled";
@@ -420,18 +430,20 @@ public class MenuBarView {
 		return prefix + " and " + suffix;
 	}
 	
+    
     // Helper Code ************************************************************
     
     /**
-     * Looks up and answers an icon for the specified filename suffix.
+     * Looks up and returns an icon for the specified filename suffix.
      */
     private ImageIcon readImageIcon(String filename) {
         URL url = getClass().getClassLoader().getResource("images/" + filename);
         return new ImageIcon(url);
     }
     
+    
     /**
-     * Creates and answers a submenu labeled with the given text.
+     * Creates and returns a submenu labeled with the given text.
      */
     private JMenu createSubmenu(String text) {
         JMenu submenu = new JMenu(text);
