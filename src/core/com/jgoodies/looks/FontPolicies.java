@@ -33,7 +33,6 @@ package com.jgoodies.looks;
 import java.awt.Font;
 
 import javax.swing.UIDefaults;
-import javax.swing.plaf.FontUIResource;
 
 
 /**
@@ -51,7 +50,7 @@ import javax.swing.plaf.FontUIResource;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     FontPolicy
  * @see     FontSet
@@ -304,7 +303,7 @@ public final class FontPolicies {
             Font controlFont = Fonts.getWindowsControlFont();
             Font menuFont = table == null
                 ? controlFont
-                : (FontUIResource) table.getFont("Menu.font");
+                : table.getFont("Menu.font");
             Font titleFont = controlFont.deriveFont(Font.BOLD);
             
             return FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);  
@@ -315,20 +314,20 @@ public final class FontPolicies {
     private static final class DefaultWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            FontUIResource controlFont = new FontUIResource(Fonts.getWindowsControlFont());
-            FontUIResource menuFont = table == null
+            Font controlFont = Fonts.getWindowsControlFont();
+            Font menuFont = table == null
                 ? controlFont
-                : (FontUIResource) table.getFont("Menu.font");
-            FontUIResource titleFont = controlFont; 
-            FontUIResource messageFont = table == null
+                : table.getFont("Menu.font");
+            Font titleFont = controlFont; 
+            Font messageFont = table == null
                 ? controlFont 
-                : (FontUIResource) table.getFont("OptionPane.font");
-            FontUIResource smallFont = table == null
-                ? new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2))
-                : (FontUIResource) table.getFont("ToolTip.font");
-            FontUIResource windowTitleFont  = table == null
+                : table.getFont("OptionPane.font");
+            Font smallFont = table == null
+                ? controlFont.deriveFont(controlFont.getSize() - 2)
+                : table.getFont("ToolTip.font");
+            Font windowTitleFont  = table == null
                 ? controlFont
-                : (FontUIResource) table.getFont("InternalFrame.titleFont");
+                : table.getFont("InternalFrame.titleFont");
             return FontSets.createDefaultFontSet(
                     controlFont, 
                     menuFont,
