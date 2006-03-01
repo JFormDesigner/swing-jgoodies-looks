@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public class MenuItemRenderer {
@@ -193,7 +193,7 @@ public class MenuItemRenderer {
 		resetRects();
 		
 		Icon wrappedIcon = getWrappedIcon(getIcon(menuItem, checkIcon));
-		Icon wrappedArrowIcon = getWrappedIcon(arrowIcon);
+        Icon wrappedArrowIcon = new MinimumSizedIcon(arrowIcon);
         Icon icon = wrappedIcon.getIconHeight() > fillerIcon.getIconHeight()
                     ? wrappedIcon
                     : null; 
