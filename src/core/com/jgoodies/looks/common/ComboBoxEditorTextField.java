@@ -28,49 +28,36 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.looks.plastic;
+package com.jgoodies.looks.common;
 
-import javax.swing.plaf.basic.BasicComboBoxEditor;
-
-import com.jgoodies.looks.common.ComboBoxEditorTextField;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 
 /**
- * The default editor for editable combo boxes in the 
- * JGoodies Plastic Look&amp;Feel. <p>
- * 
- * It differs from {@link javax.swing.plaf.metal.MetalComboBoxEditor} in that 
- * the border is quite the same as for text fields: 
- * a compound border with an inner <code>MarginBorder</code>.
+ * A text field designed to be used as combo box editor.
+ * It doesn't set a text if the text equals the content;
+ * this works around the Java issue #4530952.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.1 $
  */
-class PlasticComboBoxEditor extends BasicComboBoxEditor {
-
-    PlasticComboBoxEditor(boolean isTableCellEditor) {
-        editor = new ComboBoxEditorTextField(isTableCellEditor);
-    }
-
-    public void setItem(Object item) {
-        super.setItem(item);
-        editor.selectAll();
-    }
+public final class ComboBoxEditorTextField extends JTextField {
     
-
-    /**
-     * A subclass of BasicComboBoxEditor that implements UIResource.
-     * BasicComboBoxEditor and PlasticComboBoxEditor don't implement UIResource
-     * directly so that applications can safely override the cellRenderer
-     * property with BasicListCellRenderer subclasses.
-     */
-    static final class UIResource extends PlasticComboBoxEditor implements
-            javax.swing.plaf.UIResource {
-        // Just an implementation of UIResource
-        
-        UIResource(boolean isTableCellEditor) {
-            super(isTableCellEditor);
+    public ComboBoxEditorTextField(boolean isTableCellEditor) {
+        super("", UIManager.getInt("ComboBox.editorColumns"));
+        // Use special insets for tables, the text field defaults otherwise
+        if (isTableCellEditor) {
+            setMargin(UIManager.getInsets("ComboBox.tableEditorInsets"));
         }
+        setBorder(UIManager.getBorder("ComboBox.editorBorder"));
     }
     
+    // Workaround for 4530952
+    public void setText(String s) {
+        if (getText().equals(s)) {
+            return;
+        }
+        super.setText(s);
+    }
     
 }

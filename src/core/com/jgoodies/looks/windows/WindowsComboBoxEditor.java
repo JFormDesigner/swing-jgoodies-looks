@@ -30,9 +30,9 @@
 
 package com.jgoodies.looks.windows;
 
-import javax.swing.JTextField;
-import javax.swing.UIManager;
 import javax.swing.plaf.basic.BasicComboBoxEditor;
+
+import com.jgoodies.looks.common.ComboBoxEditorTextField;
 
 /**
  * The default editor for editable combo boxes in the 
@@ -42,17 +42,12 @@ import javax.swing.plaf.basic.BasicComboBoxEditor;
  * a compound border with an inner <code>MarginBorder</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 class WindowsComboBoxEditor extends BasicComboBoxEditor {
 
     WindowsComboBoxEditor(boolean isTableCellEditor) {
-        editor = new JTextField("", UIManager.getInt("ComboBox.editorColumns"));
-        // Use special insets for tables, the text field defaults otherwise
-        if (isTableCellEditor) {
-            editor.setMargin(UIManager.getInsets("ComboBox.tableEditorInsets"));
-        }
-        editor.setBorder(UIManager.getBorder("ComboBox.editorBorder"));
+        editor = new ComboBoxEditorTextField(isTableCellEditor);
     }
 
     public void setItem(Object item) {
