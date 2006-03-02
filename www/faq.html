@@ -22,9 +22,12 @@
 		<br>&nbsp;<a href="#howToGetStarted">How to get started?</a>
 		<br>&nbsp;<a href="#support">Where do I get support?</a>
 		<br>&nbsp;<a href="#howToReportAProblem">How to report a problem?</a>
+		<br>&nbsp;<a href="#howCanIHelp">How can I help?</a>
+		<br>&nbsp;<a href="#differencesSun">What are the differences between the Sun and JGoodies Windows L&amp;Fs?</a>
+		<br>&nbsp;<a href="#differencesWinLAF">What are the differences between WinLAF and the JGoodies Windows L&amp;F?</a>
 
 
-	<h3>Working With the Look&amp;Feels</h3>
+	<h3>Working With the JGoodies Look&amp;Feels</h3>
     <p>
 		    &nbsp;<a href="#2.1">How to use a JGoodies Look&amp;Feel?</a>
 		<br>&nbsp;<a href="#2.2">How to set a Plastic color theme?</a>
@@ -69,11 +72,13 @@
 
 	<h4><a name="howToGetStarted">How to get started?</a></h4>
 	<p>
-	To get started, download and run the 
-	<a href="http://www.jgoodies.com/freeware/looksdemo/index.html">JGoodies Looks Demo</a>,
-	follow the <a href="docs/quickstart.html">Quick Start</a>, 
-	read the <a href="docs/guide/index.html">User's Guide</a>,
-	and check this FAQ.
+	First, open and read the README.html and learn about the available documentation:
+	the <em>RELEASE-NOTES</em>, <em>Quick Start</em>, <em>User's Guide</em>, 
+	<em>Tips &amp; Tricks</em>, <em>JavaDocs</em>.
+	Then download and run the 
+	<a href="http://www.jgoodies.com/freeware/looksdemo/index.html">JGoodies Looks Demo</a>.
+	Follow the instructions in the User's Guide how to use a JGoodies Look&amp;Feel,
+	how to configure it, and how to use the optional features.
 	You may then study the 
 	<a href="http://www.jgoodies.com/articles/">JGoodies articles and presentations</a>.
 
@@ -145,7 +150,70 @@
 	
 		
 	
-		<h4><a name="2.1">How to use a JGoodies Look&amp;Feel?</a></h4>
+	<h4><a name="howCanIHelp">How can I help?</a></h4>
+	<p>
+	If you are a professional user, satisfied with the JGoodies Looks, you may help me
+	finance my&nbsp;Java desktop activities by licensing the commercial 
+	<a href="http://www.jgoodies.com/products/index.html">JGoodies Swing Suite</a>.
+	
+
+
+	<h4><a name="differencesSun">What are the differences between the Sun and JGoodies Windows L&amp;Fs?</a></h4>
+	<p>
+	The JGoodies Looks 2.0 uses more consistent fonts, font baseline positions,
+	component sizes, and insets than the Sun Windows L&amp;f.
+	On western Windows the JGoodies Windows L&amp;f honors 
+	the desktop font size setting <em>Normal/Large/Extra Large</em>.
+	And the JGoodies Looks brings bug fixes from recent Java versions
+	to older Java versions.
+	
+	<p>
+	On the other hand, the JGoodies Windows L&amp;F may lag slightly behind
+	the most recent Sun Windows L&amp;F. This is because the Sun or JGoodies
+	code may include a bug fix earlier than the other. Most Sun bug fixes
+	are inherited by the JGoodies implementation, not every bug.
+	For example when Sun introduced subpixel anti-aliasing in an early
+	Java 6 preview, the JGoodies implementation supported it with a delay
+	of 2 month. But we always try to catch up with the core 
+	before a new major Java version is available.
+	
+	<p>
+	We are interested in moving the fixes and changes made in the JGoodies
+	Looks to the Java core. This is the best way to help the Swing community
+	get a great Windows appearance. We were invited to join the Mustang effort 
+	lately. But more JGoodies improvements shall be moved to the Java 7 core.
+	Hopefully this will include the consistent micro design.
+	A proposal for an approach to move this to the core is tracked
+	under <a href="https://looks.dev.java.net/issues/show_bug.cgi?id=116">issue #116</a>.
+
+
+
+	<h4><a name="differencesWinLAF">What are the differences between WinLAF and the JGoodies Windows L&amp;F?</a></h4>
+	<p>
+	As of the Looks 2.0 and WinLAF 0.5.1, the JGoodies Windows l&amp;f 
+	provides a more precise micro design for 96dpi and 120dpi which 
+	leads to better readability and legibility, especially if used with a
+	precise layout system such as 
+	the <a href="http://forms.dev.java.net/">JGoodies Forms</a>.
+	The JGoodies Windows l&amp;f uses consistent component sizes and insets,
+	and it follows the "Windows Layout Specifications and Guidelines"
+	and the "Windows Vista UX Guidelines" 0.8.
+	Unlike WinLAF, the JGoodies L&amp;f can be uninstalled properly at runtime
+	enabling a hot L&amp;f switch.
+	Last but not least, the Looks 2.0 support Java 6 and Windows Vista.
+	
+	<p>
+	Currently both the winlaf and JGoodies l&amp;f fix bugs in the 
+	Sun Windows l&amp;f that are not addressed by the other project.
+	In 2005 WinLAF and JGoodies started to join their efforts in making 
+	the Windows look&amp;feel look and feel like Windows.
+	Several fixes could be moved to the Sun Windows l&amp;f in Java 6.
+
+	
+
+
+
+	<h4><a name="2.1">How to use a JGoodies Look&amp;Feel?</a></h4>
 
 <pre>
    try {
@@ -177,7 +245,6 @@ See also the section "Look &amp; Theme" in the Looks' User's Guide.
 		
 
 		<h4><a name="3.1">ClassNotFoundExceptions when launched with Java Web Start</a></h4>
-
 		<p>
 	If you use a third party l&amp;f in a network launchable environment
 	such as Java Web Start, you must indicate where to find the l&amp;f classes:
@@ -191,11 +258,11 @@ See also the section "Look &amp; Theme" in the Looks' User's Guide.
 		<p>
 	 To make use of a Plastic color theme, you must set the theme
 	 <em>before</em> you set the Plastic look&amp;feel in the UIManager.
-	 <a href="guide/lookandtheme.html">More...</a>
+	See also the section "Look &amp; Theme" in the Looks' User's Guide.
+
 
 
 		<h4><a name="3.3">Why not put the Looks JAR into the extension directory?</a></h4>
-		
 		<p>
 		First off, this issue is not specific to the JGoodies Looks,
 		it affects all Java libraries.
