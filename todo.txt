@@ -1,7 +1,4 @@
-o Provide the following FontChoicePolicies:
-  - Native Windows
-  - Fixed font with font name constructor
-  - Logical fonts
+o Provide the following FontPolicies:
   - Resolution-scaling fonts
   - Desktop-setting fonts
   - Constants for (western) Windows 2000/XP/Vista on 96dpi/101dpi/120dpi
@@ -9,27 +6,10 @@ o Provide the following FontChoicePolicies:
     and Segoe UI in the associated font sizes.
     This is useful to preview a layout for another platform.
 
-
 o Check problem with wide toolbar buttons in ExtWindows (classic mode)
-
-o Add a comment to the Release notes regarding the overall progress.
-
-o Schriftwahl in Plastic-Themen überarbeiten
-  + andere Oberklasse
-  + Tahoma-Hard code raus
-
 
 o Bug in Plastic: Jay Gindin hat ScrollBar-Problem gefunden.
        
-
-o ToolBarSeparator hat doofe Höhe; ist zu hoch
-
-
-Alle Looks:
-o Dokumentation zu den Einstellungen: 
-	+ NetBeans-Modus erklären
-	
-
 Plastic:
 o Anderer PopupMenu-Rahmen, wie bei BasicBorders?
 o Thema, dass unter Windows die Windows-Farben erfragt.

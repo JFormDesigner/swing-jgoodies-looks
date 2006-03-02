@@ -1,45 +1,40 @@
 
                          JGoodies Looks
-                  Version 2.0 Release Candidate
+                           Version 2.0
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is the release candidate for the JGoodies Looks 2.0.
-    The major changes are better support for Windows Vista,
-    Java 5 and 6, and an overhauled font lookup in all L&fs.
+    This JGoodies Looks version 2.0 fixes bugs, comes with 
+    many improvements and uses an overhauled font lookup.
+    The contained Windows L&f and Plastic L&fs supercede 
+    all previous version w.r.t. consistency, design precision, 
+    and support for Java 5, Java 6 and Windows Vista.
+    
+    Version 2.0 is binary and visually incompatible with the
+    Looks 1.x; however most API changes are simplifications and 
+    the visual changes improve the consistency of your apps.
     
     The font lookup in the Windows L&f has been overhauled.
     Text component insets have been adjusted to better comply 
-    with the Microsoft Layout Specification and Guidelines.
-    Also, Windows Vista is now supported; bounds, insets and 
+    with the "Microsoft Layout Specification and Guidelines".
+    Also, Windows Vista is now supported: bounds, insets and 
     font baseline positions are consistent on the Vista betas.
     
     The Plastic L&f family component bounds and insets 
     have been adjusted to the new Windows bounds and insets.
     The Plastic font lookup has been completely overhauled; 
-    the current implementation is fine on Windows and works
-    well on other platforms. A new font customization mechanism
-    allows you to change the fonts per L&f, platform, locale 
-    and desktop settings.
+    it is great on Windows and works well on other platforms. 
+    
+    The new font customization mechanism allows you to change 
+    the fonts per L&f, platform, locale and desktop settings.
 
-    The contained Windows L&f and Plastic L&fs supercede 
-    all previous version w.r.t. consistency, design precision, 
-    and support for new Java runtimes and Windows editions.
-    
 
-LOOKS 2.0 FINAL
-    
-    The API and font lookup shall remain as-is for the 2.0 final.
-    In case of major issues, another candidate will be published. 
-    Otherwise this version will be declared as the 2.0 final.
-    
-    
 CHANGES THAT AFFECT THE BINARY COMPATIBILITY
 
-    All font options have been removed from the Windows L&f;
-    it shall be as close to the native original as possible.
+    The old font options (FontSizeHints, etc) have been replaced 
+    by the new FontPolicy mechanism and predefined FontPolicies.
 
     o Replaced Options.CONTROL_FONT_KEY and MENU_FONT_KEY by:
       - PLASTIC_FONT_CHOICE_POLICY_KEY
@@ -63,8 +58,6 @@ CHANGES THAT AFFECT THE BINARY COMPATIBILITY
     o Options#initializeDefaultReplacements now private
     o Removed obsolete Plastic themes: SkyBluerTahoma, 
       ExperienceBlueDefaultFont, DesertBluerDefautFont
-      
-    The FontSizeHints have been replaced by the FontPolicy mechanism.
       
       
 CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
@@ -103,18 +96,16 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
     previous Windows editions, but based on 13dlu because 
     the new default font Segoe UI is significantly taller.
     
-    Also, the default font chosen on Windows now honors
-    the desktop font setting (Normal/Large/Extra Large)
-    if supported by the Windows version, Windows language,
-    and Java renderer.
+    The default font chosen on Windows now honors the desktop 
+    font setting (Normal/Large/Extra Large) if supported 
+    by the Windows version, Windows language, and Java renderer.
     Microsoft recommends to use the desktop setting "font size"
     to get larger fonts, many applications ignore it and 
     just scale with the software resolution (96dpi/120dpi).
        On 96dpi the new font doesn't differ from the 
     font chosen by the Looks 1.x; it's Tahoma 8pt on modern
-    Windows, and Segoe UI 9pt on Vista. However, on 120dpi
-    the new font is 1px taller than the font used by the
-    Looks 1.x. 
+    Windows, and Segoe UI 9pt on Vista. On 120dpi the new font 
+    is 1px taller than the font used by the Looks 1.x. 
     
     The Plastic L&f family uses Windows fonts on Windows
     and logical fonts on all other platforms. In the Looks 1.x
@@ -124,10 +115,10 @@ CHANGES THAT AFFECT THE VISUAL COMPATIBILITY
       
 VISUAL BACKWARD COMPATIBILITY
 
-    It is recommended to use the new default settings and 
-    it is strongly recommended to use the new font lookup
-    on Windows. However, here's how you can get the appearance
-    of the Looks 1.x. These configurations listed below
+    We recommend to use the new default settings and it is 
+    strongly recommended to use the new font lookup on Windows. 
+    However, here's how you can get the appearance of 
+    the Looks 1.x. The configurations listed below
     must be performed before you install a look&feel.
     
     To get the wrong wide button margins, call:
@@ -159,6 +150,7 @@ VISUAL BACKWARD COMPATIBILITY
 
 BUGS FIXED
 
+    #10:  Plastic looks can't display Chinese, Japanese, Korean.
     #50:  ToolBar 3D effect ignores the orientation.
     #51:  Windows combobox with custom render is too narrow.
     #60:  Wrong combobox height in Java 5 and Java 6.
@@ -192,6 +184,8 @@ BUGS FIXED
     #110: NPE with invalid default Plastic theme set via system props.
     #111: RTL menus have problems with accelerator alignment.
     #113: Combo popup with prototype ignores scrollbar visibility.
+    #114: Accelerator text overlaps menu text if no-icons is set.
+    #115: Need a fix for the Java bug 4530952.
     
     
 KNOWN ISSUES
@@ -386,393 +380,3 @@ OTHER CHANGES
     o Build: Added project name tag to the ANT build file.
     o Build: Added overview page.
     
-    
----------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-
-                    JGoodies Looks, Version 1.2.2
-                            Release Notes
-                        
-
-INTRODUCTION
-
-    This maintenance release fixes a bug and cleans up some code.
-
-
-DISTRIBUTION CHANGES
-
-    o I have discontinued to ship the plastic-xxx.jar and looks-win-xxx.jar
-      that contain only the classes for Plastic and ExtWindows respectively.
-      These jars were optional and seemed to confuse several developers;
-      I've seen installations where all three jars were in the classpath.
-      The ANT build script still generates all three jar files. 
-      It's just that since 1.2.2 I ship only the looks-xxx.jar.
-      
-
-BUGS FIXED
-
-    o Wide toolbar rollover button margins if no margin has been set.   
-    
-
-CHANGES THAT AFFECT THE COMPATIBILITY
-
-    o Renamed LookUtils#isLowRes to #IS_LOW_RESOLUTION.
-
-
-KNOWN ISSUES
-
-    For all issues see http://looks.dev.java.net/servlets/ProjectIssues
-
-    This release still lacks an improved font management
-    for the Plastic l&f family on non-Windows platforms.
-    For a workaround see issue #10.
-      
-
-OTHER CHANGES
-
-    o Docs:      Added FAQ entry regarding the use of the extension path
-    o Docs:      Refreshed the JavaDocs and HTML docs for font size hints.
-    o Demo:      Improved file headers and JavaDocs; removed unused code.
-    
-    
----------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-
-
-                    JGoodies Looks, Version 1.2.1
-                            Release Notes
-                        
-
-INTRODUCTION
-
-    This maintenance release fixes a couple of bugs.
-
-
-BUGS FIXED
-
-    o ExtWin:    SpinnerUI broken in 1.4.0 and 1.4.1
-    o ExtWin:    ToolBarSeperatorUI broken in 1.4.0 and 1.4.1
-    o ExtWin:    Missing Java cup icon in 1.5
-    o ExtWin:    LookUtils#isWindowsXPLafEnabled fails in IBM WSAD.
-                 Actually it seems to fail on non-XP Windows flavors.
-    o ExtWin:    Wrong XP popup menu border in 1.4 environments.
-    
-
-NEW FEATURES
-    o All l&fs:  Optional popup menu drop shadows, see class Options.  
-    o All l&fs:  New LookUtils#IS_OS_*: FreeBSD, Linux, OS/2, Solaris
-
-
-KNOWN ISSUES
-
-    o This release still lacks an improved font management
-      for the Plastic l&f family on non-Windows platforms.
-      For a workaround see issue #10.
-
-
-OTHER CHANGES
-
-    o ExtWin:    Reduced the number of updates to the UIDefaults.
-    o Docs:      Added a reference to the winlaf look&feel.
-    o Docs:      Added FAQ, Tips & Tricks, and Acknowledgements.
-    o Demos:     Uses the Forms 1.0.4
-    
-    
----------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-
-
-
-                    JGoodies Looks, Version 1.2.0
-                            Release Notes
-                        
-
-INTRODUCTION
-
-    This release requires Java 1.4 or later and fixes several bugs.
-
-    Also, the included Simple Looks Demo now ships with the
-    JGoodies SimpleInternalFrame that provides an eclipse-like
-    appearance and an elegant means to structure panels.
-    
-    NOTE: Due to incompatible class changes it is strongly recommended 
-    to not place the Looks jars in the Java extension directory!
-    
-
-
-DISTRIBUTION CHANGES
-
-    o Removed JGoodies Motif Look&Feel
-    o Moved 1.4 sources to the associated directories
-    
-    
-VISUAL INCOMPATIBILITIES
-
-    o Most Plastic and Plastic3D widget dimensions have been
-      reduced by 1 or 2 pixels to use the same dimensions 
-      as PlasticXP and the JGoodies Windows Look&Feel.
-    o PlasticXP favors the focus indication over the default border.
-    
-    
-BUGS FIXED
-
-    o All l&fs:  Inconsistent JFormattedTextField font.
-    o All l&fs:  Menu item layout doesn't honor a minimum arrow icon width
-    o All l&fs:  Menu item layout uses small gap between text and accelerator
-    o Plastic:   Non-editable combo abbreviates long label.
-    o Plastic:   Editable combo too narrow; doesn't take arrow button into account
-    o Plastic:   Poor layout for editable combos
-    o Plastic:   Combo box arrow not aligned with combo popup arrow
-    o Plastic:   Spinner too small 
-    o Plastic:   Inconsistent font baselines for text field and text area
-    o PlasticXP: Inconsistent border for text field and scroll pane
-    o ExtWin:    IllegalAccessExceptions in untrusted environments.
-    o ExtWin:    Uses Windows XP style even if switched off in OS or System
-    o ExtWin:    Combo box uses wrong insets, shall be (2, 2, 2, 2)
-    o ExtWin:    Poor spinner size and rendering
-    o ExtWinXP:  Password field still paints '*' as echo char
-    o ExtWinXP:  Lacks Windows XP icons
-    o Demo:      Fails to read UIManager with the GTKLookAndFeel
-
-
-NEW FEATURES
-    o All l&fs:  Honors UIDefaults setting "ComboBox.editorColumns" to set
-                 the columns in the default combo box editor  
-    o Demo:      Added JGoodies SimpleInternalFrame
-    
-    
-KNOWN ISSUES
-
-    o This release still lacks an improved font management
-      for the Plastic l&f family on non-Windows platforms.
-
-
-
-OTHER CHANGES
-
-    o All code:  Removed 1.3 code
-    o All code:  Reformatted sources
-    o Shared:    Renamed constants in LookUtils to follow the naming conventions 
-                 as used by the Jakarta Commons Lang SystemUtils class.
-    o Plastic:   Increased left and right menu margins by 2px on each side
-    o Plastic:   Crisper option pane icons
-    o Demo:      Moved split pane test from Looks Demo to simple Looks Demo
-    
-    
--------------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-
-                    JGoodies Looks, Version 1.1.3
-                            Release Notes
-                        
-
-INTRODUCTION
-
-    This maintenance update is primarily a code and documentation cleanup.
-    It fixes some errors in the distribution and only a minor code bug;
-    therefore this release is binary and visually compatible with 1.1.2.
-    Pending code and visual issues will be addressed by the next version.
-    This release also adds service descriptors to all JARs that can be 
-    used for an automatic look&feel detection. 
-
-
-DISTRIBUTION CHANGES
-
-    o Added service descriptors to all library JARs
-    o Removed class files from source zip
-    o Fixed broken classpath in demo jars
-    
-    
-OTHER CHANGES
-
-    o Code: Documented empty blocks.
-    o Docs: Added a note on how to set the class loader for 
-            network launchable environments like Java Web Start.
-    o Docs: Fixed typo in plastic.html
-    o Code: Extended and corrected JavaDocs.
-    
-    
--------------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-                    JGoodies Looks, Version 1.1.2
-                            Release Notes
-                        
-
-INTRODUCTION
-
-    This release contains minor code changes and no new library features. 
-    It is primarily intended to reflect the open source license terms 
-    in all source files. The distribution has been changed significantly.
-
-
-DISTRIBUTION CHANGES
-
-    o Added the sources for the simple Looks demo.
-    o Added a User's Guide
-    o Added an ANT build script
-    o Added precompiled jars for Tiny and the simple Looks demo.
-    o Renamed library JAR files
-    
-    
-    
-BUGS FIXED
-
-    o Catches IllegalAccessExceptions in unsigned Web Start Applications 
-      and unsigned Applets.
-
-
-CODE CLEANUP
-
-    o Removed obsolete type casts
-    o Removed obsolete semicolons
-    o Removed obsolete null check in class FontUtils
-    o Changed access to static members to be direct
-
-
--------------------------------------------------------------------------------
-
-Find below the change history for older releases.
-
-
-1.1.1 (June-22-2003)
-
-   o Code is now available under the BSD license
-   o Packaging reflects the new license
-   o Library jars are unobfuscated
-   o looks-all.jar is unsigned
-
-
-1.1 (May-05-2003)
-
-   o Removed leading text inset for Plastic in 1.3.
-
-
-b30-20030427 (Apr-27-2003)
-
-   o Plastic buttons lowered by 2 pixel in low res mode
-   o Fixed UIDefaults cycle in Plastic 1.3 initialization
-
-
-b29-20030422 (Apr-22-2003)
-
-   o Fixed broken alignment of Windows submenu items
-   o Added option to hide tree lines, see Options.TREE_LINE_STYLE*
-   o Replaced deprecated method invocations
-   o Improved ClearLook implementation of labels and panels
-   o Moved NetBeans specific code to NetBeansClearLookPolicy
-   o Windows 1.4.1: Menu mnemonics reactivated
-   o Several shadowing variables renamed, unused fields removed
-   o Plastic global option: use Metal tabs vs. Plastic tabs, see
-     PlasticLookAndFeel.setTabStyle(String)
-   o Themes overhauled:
-     + Final markers removed
-     + Focus color scheme moved back to the 1.0.6 low contrast colors;
-       The 1.0.7 high contrast focus colors can be switched on
-       via a System property, or 
-       PlasticLookAndFeel.setHighContrastFocusEnabled(true)
-
-
-b27-20030420 (Apr-20-2003)
-
-   o Non-Commercial edition includes the JGoodies Windows l&f
-   o Fixed broken ClearLook activation in NetBeans environments
-   o Adapted NetBeans detection for NetBeans 3.5
-   o ClearLook rules overhauled
-   o Can mark content borders in Plastic, via the System property
-     -DmarkContentBorders=true
-   o PlasticTheme now subclasses DefaultMetalTheme
-   o Skeleton app and Looks Demo refreshed
-   o LookUtils#activateLazyValue deleted
-   o Fixed HTML rendering in menu items and Plastic toggle buttons
-
-
-b24-1.0.9 (Apr-03-2003)
-
-   o Windows XP l&f: MenuBar and ToolBar improved
-   o Plastic InternalFrame: title and bump area adjusted
-   o Plastic ComboBox Focus overhauled
-   o Crisper Plastic message icons 
-   o L&F TextField defaults applied to FormattedTextField too
-   o Fixed a NPE in PlasticButtonUI
-   o PlasticButtonUI and PlasticToggleButtonUI are non-final
-     #isToggleButton and #is3D are now protected
-   o Text icon gap in menus is changeable via
-     "MenuItem.textIconGap" and "Menu.textIconGap".
-     The default gap has been changed from 4 to 2.
-
-
-b21-1.0.8 (Mar-03-2003)
-
-   o Sample code uses Forms 0.9.5
-   o Plastic button border colors harmonized
-   o Plastic combo box font baselines aligned
-   o Obsolete Plastic submenu rollover listener removed
-   o Improved OptionPane minimum button widths
-   o New PlasticXP radio buttons and check boxes
-   o Skeleton panel building style refreshed
-   o New Plastic OptionPane icons
-   o Windows: improved ExtWindows XP style on 1.4.2 or later.
-   o PlasticTabbedPaneUI workaround for broken backward
-     compatibility in BasicTabbedPaneUI.TabSelectionHandler.
-   o Doesn't override ClassLoader property if in NetBeans.
-   o Windows tab in embedded style improved.
-   o Windows tabs without content border improved. 
-   o Tabs show icon if there's no title - even if icons are disabled.
-   o Removed obsolete fields and methods
-   o Fixed a paint bug in Plastic tabbed panes
-     that occurred with large tab icons in top position.
-   o looks-plastic.jar renamed to plastic.jar
-   o NOTE: Some of the Plastic focus colors that have been introduced 
-     in version 1.0.7 look less aesthetic on some Windows flavors. 
-     However, users complained about the visual closeness of 
-     focused and default buttons. We will likely go back to 
-     the aesthetic focus colors if the Plastic feel makes
-     the focused button the default, as in the Windows feel.
-     
-
-b15-1.0.7 (Jan-24-2003)
-
-   o Focus colors changed in several themes.
-   o Sample code refreshed
-   o Fixed focus bugs in non-editable Plastic combo boxes.
-   o Fixed runtime error in PlasticTabbedPaneUI in 1.3 environments
-   o Looks Demo and Skeleton Pro use Forms panel building.
-   o Overhauled TabbedPaneUIs in Plastic and Windows looks.
-   o Added options for embedded tab style, 
-     see Options.EMBEDDED_TAB_KEY
-   o Added option for removing a tabbed pane's content border,
-     see Options.NO_CONTENT_BORDER_KEY
-   o Corrected a method signature in ExtWindowsScrollPaneUI
-   o Added a preview of the PlasticXP l&F  
-   
-   
-b8-1.0.6 (Nov-16-2002)
-
-   o Skeleton JavaDocs added.
-   o Tiny example application added.
-   o Includes recent versions of the Looks Demo and Skeleton
-   o Improved rendering of tabs on the left and right side.
-   o Fixed repaint bug in menu bar when using heavy-weight menus.
-   o Corrected Windows look control font for non-standard fonts;
-     now uses the Label.font property instead of Button.font.
-   o Fixed typos in the 'Using a JGoodies Look' section of this file.
-   o Implementation: Moved common implementation classes from 
-     package com.jgoodies.plaf to com.jgoodies.plaf.common
-   o Implementation: Added type check in MenuItemRenderer#hideIcons
-   o Implementation: Visibility of PlasticBorders reduced
-
