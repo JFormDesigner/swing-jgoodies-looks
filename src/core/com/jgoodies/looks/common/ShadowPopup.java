@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -213,6 +213,10 @@ public final class ShadowPopup extends Popup {
         if (owner instanceof JComboBox) {
             return;
         }
+        // Do not install the shadow border when the contents has no size.
+        if ((contents.getWidth() <= 0) || (contents.getHeight() <= 0)) {
+            return;
+        }
         for(Container p = contents.getParent(); p != null; p = p.getParent()) {
             if ((p instanceof JWindow) || (p instanceof Panel)) {
                 // Workaround for the gray rect problem.
@@ -260,11 +264,18 @@ public final class ShadowPopup extends Popup {
      */
     private void snapshot() {
         try {
-            Robot robot = new Robot(); // uses the default screen device
-
             Dimension size = heavyWeightContainer.getPreferredSize();
             int width = size.width;
             int height = size.height;
+            
+            if (height <= SHADOW_SIZE) {
+                // we don't capture the screen in this case as the rectangle
+                // for the vertical shadow background will be empty.
+                // in the reality this case should never happen.
+                return;
+            }
+
+            Robot robot = new Robot(); // uses the default screen device
 
             RECT.setBounds(x, y + height - SHADOW_SIZE, width, SHADOW_SIZE);
             BufferedImage hShadowBg = robot.createScreenCapture(RECT);
