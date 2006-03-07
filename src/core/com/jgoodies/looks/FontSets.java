@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see     FontSet
  * @see     FontPolicy
@@ -202,9 +202,9 @@ public final class FontSets {
             this.messageFont = messageFont != null
                 ? new FontUIResource(messageFont)
                 : this.controlFont;
-            this.smallFont = smallFont != null
-                ? new FontUIResource(smallFont)
-                : new FontUIResource(controlFont.deriveFont(controlFont.getSize() - 2));
+            this.smallFont = new FontUIResource(smallFont != null
+                ? smallFont
+                : controlFont.deriveFont(controlFont.getSize2D() - 2f));
             this.windowTitleFont = windowTitleFont != null
                 ? new FontUIResource(windowTitleFont)
                 : this.titleFont;

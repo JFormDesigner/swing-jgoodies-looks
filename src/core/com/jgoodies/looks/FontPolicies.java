@@ -50,7 +50,7 @@ import javax.swing.UIDefaults;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     FontPolicy
  * @see     FontSet
@@ -281,7 +281,7 @@ public final class FontPolicies {
             if (customFontSet != null) {
                 return customFontSet;
             }
-            return wrappedPolicy.getFontSet(null, table);
+            return wrappedPolicy.getFontSet(lafName, table);
         }
     }
     
@@ -323,7 +323,7 @@ public final class FontPolicies {
                 ? controlFont 
                 : table.getFont("OptionPane.font");
             Font smallFont = table == null
-                ? controlFont.deriveFont(controlFont.getSize() - 2)
+                ? controlFont.deriveFont(controlFont.getSize2D() - 2f)
                 : table.getFont("ToolTip.font");
             Font windowTitleFont  = table == null
                 ? controlFont
