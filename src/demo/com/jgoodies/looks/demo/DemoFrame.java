@@ -35,6 +35,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 
 import javax.swing.*;
@@ -60,7 +61,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class DemoFrame extends JFrame {
 
@@ -225,77 +226,75 @@ public class DemoFrame extends JFrame {
 
         AbstractButton button;
 
-        toolBar.add(createToolBarButton("backward.gif"));
-        button = createToolBarButton("forward.gif");
+        toolBar.add(createToolBarButton("backward.gif", "Back", null));
+        button = createToolBarButton("forward.gif", "Next", null);
         button.setEnabled(false);
         toolBar.add(button);
-        toolBar.add(createToolBarButton("home.gif"));
+        toolBar.add(createToolBarButton("home.gif", "Home", null));
         toolBar.addSeparator();
-        toolBar.add(createOpenButton());
-        toolBar.add(createToolBarButton("print.gif"));
-        toolBar.add(createToolBarButton("refresh.gif"));
+        
+        button = createToolBarButton("open.gif", "Open", KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
+        button.addActionListener(new OpenFileActionListener());
+        toolBar.add(button);
+        toolBar.add(createToolBarButton("print.gif", "Print", null));
+        toolBar.add(createToolBarButton("refresh.gif", "Update", null));
         toolBar.addSeparator();
 
         ButtonGroup group = new ButtonGroup();
-        button = createToolBarRadioButton("pie_mode.png");
+        button = createToolBarRadioButton("pie_mode.png", "Pie Chart");
         button.setSelectedIcon(readImageIcon("pie_mode_selected.gif"));
         group.add(button);
         button.setSelected(true);
         toolBar.add(button);
 
-        button = createToolBarRadioButton("bar_mode.png");
+        button = createToolBarRadioButton("bar_mode.png", "Bar Chart");
         button.setSelectedIcon(readImageIcon("bar_mode_selected.gif"));
         group.add(button);
         toolBar.add(button);
 
-        button = createToolBarRadioButton("table_mode.png");
+        button = createToolBarRadioButton("table_mode.png", "Table");
         button.setSelectedIcon(readImageIcon("table_mode_selected.gif"));
         group.add(button);
         toolBar.add(button);
         toolBar.addSeparator();
 
-        button = createToolBarButton("help.gif");
+        button = createToolBarButton("help.gif", "Open Help", null);
         button.addActionListener(createHelpActionListener());
         toolBar.add(button);
 
         return toolBar;
     }
 
-    private AbstractButton createOpenButton() {
-        AbstractButton button = createToolBarButton("open.gif");
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new JFileChooser().showOpenDialog(DemoFrame.this);
-            }
-
-        });
-        return button;
-    }
-
     /**
-     * Creates and returns a <code>JButton</code> 
-     * configured for use in a JToolBar.<p>
+     * Creates and returns a JButton configured for use in a JToolBar.<p>
      * 
      * This is a simplified method that is overriden by the Looks Demo.
      * The full code uses the JGoodies UI framework's ToolBarButton
      * that better handles platform differences.
      */
-    protected AbstractButton createToolBarButton(String iconName) {
+    protected AbstractButton createToolBarButton(String iconName, String toolTipText, KeyStroke keyStroke) {
         JButton button = new JButton(readImageIcon(iconName));
+        if (keyStroke != null) {
+            button.registerKeyboardAction(new DummyAction(toolTipText), keyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
+            int mod = keyStroke.getModifiers();
+            int keyCode = keyStroke.getKeyCode();
+            System.out.println("Registering: " + KeyEvent.getKeyModifiersText(mod) + "-" + KeyEvent.getKeyText(keyCode));
+        }
+        button.setToolTipText(toolTipText);
         button.setFocusable(false);
         return button;
     }
 
     /**
-     * Creates and returns a <code>JToggleButton</code> 
-     * configured for use in a JToolBar.<p>
+     * Creates and returns a JToggleButton configured for use in a JToolBar.<p>
      * 
      * This is a simplified method that is overriden by the Looks Demo.
      * The full code uses the JGoodies UI framework's ToolBarButton
      * that better handles platform differences.
      */
-    protected AbstractButton createToolBarRadioButton(String iconName) {
+    protected AbstractButton createToolBarRadioButton(String iconName, String toolTipText) {
         JToggleButton button = new JToggleButton(readImageIcon(iconName));
+        button.setToolTipText(toolTipText);
         button.setFocusable(false);
         return button;
     }
@@ -334,8 +333,8 @@ public class DemoFrame extends JFrame {
 
     // Helper Code **********************************************************************
 
-    /*
-     * Looks up and answers an icon for the specified filename suffix.<p>
+    /**
+     * Looks up and returns an icon for the specified filename suffix.
      */
     protected static ImageIcon readImageIcon(String filename) {
         URL url =
@@ -365,14 +364,35 @@ public class DemoFrame extends JFrame {
      * Creates and answers an ActionListener that opens the about dialog.
      */
     protected ActionListener createAboutActionListener() {
-        return new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(
-                    DemoFrame.this,
-                    "The simple Looks Demo Application\n\n"
-                        + COPYRIGHT + "\n\n");
-            }
-        };
+        return new AboutActionListener();
+    }
+
+    
+    private final class AboutActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(
+                DemoFrame.this,
+                "The simple Looks Demo Application\n\n"
+                    + COPYRIGHT + "\n\n");
+        }
+    }
+    
+    private final class OpenFileActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            new JFileChooser().showOpenDialog(DemoFrame.this);
+        }
+    }
+    
+    protected static final class DummyAction implements ActionListener {
+        private final String actionText;
+        
+        protected DummyAction(String actionText) {
+            this.actionText = actionText;
+        }
+        
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("Performing: " + actionText);
+        }
     }
 
 
