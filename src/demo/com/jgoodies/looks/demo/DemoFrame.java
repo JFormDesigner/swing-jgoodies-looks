@@ -51,9 +51,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
 /** 
  * Builds the main frame in the Simple Looks Demo. 
  * Demonstrates and tests different multi-platform issues by
- * showing a variety of Swing widgets in different configurations.
- * Also, this frame contains examples for Swing misuse,
- * that can be automatically corrected by ClearLook.<p>
+ * showing a variety of Swing widgets in different configurations.<p>
  * 
  * This class provides a couple of protected methods that create
  * components or a builder. The full JGoodies Looks Demo overrides 
@@ -61,7 +59,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class DemoFrame extends JFrame {
 
@@ -125,9 +123,11 @@ public class DemoFrame extends JFrame {
 
     /**
      * Configures the user interface; requests Swing settings and 
-     * jGoodies Looks options from the launcher.
+     * JGoodies Looks options from the launcher.
      */
     private void configureUI() {
+        // UIManager.put("ToolTip.hideAccelerator", Boolean.FALSE);
+        
         Options.setDefaultIconSize(new Dimension(18, 18));
 
         Options.setUseNarrowButtons(settings.isUseNarrowButtons());
@@ -226,18 +226,19 @@ public class DemoFrame extends JFrame {
 
         AbstractButton button;
 
-        toolBar.add(createToolBarButton("backward.gif", "Back", null));
-        button = createToolBarButton("forward.gif", "Next", null);
+        toolBar.add(createToolBarButton("backward.gif", "Back"));
+        button = createToolBarButton("forward.gif", "Next");
         button.setEnabled(false);
         toolBar.add(button);
-        toolBar.add(createToolBarButton("home.gif", "Home", null));
+        toolBar.add(createToolBarButton("home.gif", "Home"));
         toolBar.addSeparator();
         
-        button = createToolBarButton("open.gif", "Open", KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
-        button.addActionListener(new OpenFileActionListener());
+        ActionListener openAction = new OpenFileActionListener();
+        button = createToolBarButton("open.gif", "Open", openAction, KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
+        button.addActionListener(openAction);
         toolBar.add(button);
-        toolBar.add(createToolBarButton("print.gif", "Print", null));
-        toolBar.add(createToolBarButton("refresh.gif", "Update", null));
+        toolBar.add(createToolBarButton("print.gif", "Print"));
+        toolBar.add(createToolBarButton("refresh.gif", "Update"));
         toolBar.addSeparator();
 
         ButtonGroup group = new ButtonGroup();
@@ -258,7 +259,7 @@ public class DemoFrame extends JFrame {
         toolBar.add(button);
         toolBar.addSeparator();
 
-        button = createToolBarButton("help.gif", "Open Help", null);
+        button = createToolBarButton("help.gif", "Open Help");
         button.addActionListener(createHelpActionListener());
         toolBar.add(button);
 
@@ -272,16 +273,16 @@ public class DemoFrame extends JFrame {
      * The full code uses the JGoodies UI framework's ToolBarButton
      * that better handles platform differences.
      */
-    protected AbstractButton createToolBarButton(String iconName, String toolTipText, KeyStroke keyStroke) {
+    protected AbstractButton createToolBarButton(String iconName, String toolTipText) {
         JButton button = new JButton(readImageIcon(iconName));
-        if (keyStroke != null) {
-            button.registerKeyboardAction(new DummyAction(toolTipText), keyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
-            int mod = keyStroke.getModifiers();
-            int keyCode = keyStroke.getKeyCode();
-            System.out.println("Registering: " + KeyEvent.getKeyModifiersText(mod) + "-" + KeyEvent.getKeyText(keyCode));
-        }
         button.setToolTipText(toolTipText);
         button.setFocusable(false);
+        return button;
+    }
+    
+    private AbstractButton createToolBarButton(String iconName, String toolTipText, ActionListener action, KeyStroke keyStroke) {
+        AbstractButton button = createToolBarButton(iconName, toolTipText);
+        button.registerKeyboardAction(action, keyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
         return button;
     }
 
@@ -383,17 +384,5 @@ public class DemoFrame extends JFrame {
         }
     }
     
-    protected static final class DummyAction implements ActionListener {
-        private final String actionText;
-        
-        protected DummyAction(String actionText) {
-            this.actionText = actionText;
-        }
-        
-        public void actionPerformed(ActionEvent e) {
-            System.out.println("Performing: " + actionText);
-        }
-    }
-
 
 }
