@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -220,7 +220,7 @@ public final class Fonts {
 
     /**
      * Returns the Windows control font used by the JGoodies Looks version 1.x.
-     * It is intended for backward compatibility only.
+     * It is intended for visual backward compatibility only.
      * The font returned is the default GUI font that scales with the resolution 
      * (96dpi, 120dpi, etc) but not with the desktop font size settings 
      * (normal, large, extra large).<p>
@@ -244,6 +244,7 @@ public final class Fonts {
      * Looks up and returns the Windows control font. Returns the Windows icon 
      * title font unless it is inappropriate for the Windows version, 
      * Java renderer, or locale.<p>
+     * 
      * The icon title font scales with the resolution (96dpi, 101dpi, 120dpi, etc) 
      * and the desktop font size settings (normal, large, extra large).
      * Older versions may return a poor font. Also, since Java 1.4 and Java 5 
@@ -264,10 +265,10 @@ public final class Fonts {
             throw new UnsupportedOperationException();
         
         if (LookUtils.IS_OS_WINDOWS_95
-         || LookUtils.IS_OS_WINDOWS_98
-         || LookUtils.IS_OS_WINDOWS_NT
-         || LookUtils.IS_OS_WINDOWS_ME
-         || LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5)
+        ||  LookUtils.IS_OS_WINDOWS_98
+        ||  LookUtils.IS_OS_WINDOWS_NT
+        ||  LookUtils.IS_OS_WINDOWS_ME
+        || (LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5))
             return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
         
         Font iconFont = getDesktopFont(WINDOWS_ICON_FONT_KEY);
