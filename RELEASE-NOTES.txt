@@ -1,5 +1,36 @@
 
                          JGoodies Looks
+                          Version 2.0.1
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance release fixes a bug that affects those who
+    want to use the visual backward compatible Looks1xWindowsFontPolicy
+    on Windows 95/98/NT/ME. It also fixes two minor bugs that affect
+    all platforms.
+
+    
+BUGS FIXED
+
+    #107: IllegalArgumentException for degenerated popup with shadow.
+    #118: Potentially wrong font for menu item accelerators.
+    #120: NPE in visual backward compatiblity FontPolicy on Windows 98. 
+
+
+OTHER CHANGES
+
+    o Added toolbar tool tips and a keyboard action to the Looks Demo.
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+
+                         JGoodies Looks
                            Version 2.0
                           Release Notes
                         
