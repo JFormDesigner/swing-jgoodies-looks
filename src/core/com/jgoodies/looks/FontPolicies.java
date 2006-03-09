@@ -50,7 +50,7 @@ import javax.swing.UIDefaults;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * 
  * @see     FontPolicy
  * @see     FontSet
@@ -171,12 +171,12 @@ public final class FontPolicies {
     
     
     /**
-     * Returns a font policy for getting a Plastic appearance
-     * that is backward compatible with the JGoodies Looks version 1.x.
+     * Returns a font policy for getting a Plastic appearance that aims to be 
+     * visual backward compatible with the JGoodies Looks version 1.x.
      * It uses a font choice similar to the choice implemented 
      * by the Plastic L&amp;fs in the JGoodies Looks version 1.x.
      * 
-     * @return a font policy that reproduces the Plastic font choice
+     * @return a font policy that aims to reproduce the Plastic font choice
      *     in the JGoodies Looks 1.x.
      */
     public static FontPolicy getLooks1xPlasticPolicy() {
@@ -189,18 +189,16 @@ public final class FontPolicies {
     
     
     /**
-     * Returns a font policy for getting a Windows appearance
-     * that is backward compatible with the JGoodies Looks version 1.x.
+     * Returns a font policy for getting a Windows appearance that aims to be
+     * visual backward compatible with the JGoodies Looks version 1.x.
      * It uses a font choice similar to the choice implemented 
      * by the Windows L&amp;f in the JGoodies Looks version 1.x.
      * 
-     * @return a font policy that reproduces the Windows font choice
+     * @return a font policy that aims to reproduce the Windows font choice
      *     in the JGoodies Looks 1.x.
      */
     public static FontPolicy getLooks1xWindowsPolicy() {
-        Font controlFont = Fonts.getLooks1xWindowsControlFont();
-        FontSet fontSet = FontSets.createDefaultFontSet(controlFont);
-        return createFixedPolicy(fontSet);
+        return new Looks1xWindowsPolicy();
     }
     
     
@@ -300,7 +298,10 @@ public final class FontPolicies {
     private static final class DefaultPlasticOnWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            Font controlFont = Fonts.getWindowsControlFont();
+            Font windowsControlFont = Fonts.getWindowsControlFont();
+            Font controlFont = windowsControlFont != null
+                ? windowsControlFont
+                : table.getFont("Button.font");
             Font menuFont = table == null
                 ? controlFont
                 : table.getFont("Menu.font");
@@ -314,7 +315,10 @@ public final class FontPolicies {
     private static final class DefaultWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
-            Font controlFont = Fonts.getWindowsControlFont();
+            Font windowsControlFont = Fonts.getWindowsControlFont();
+            Font controlFont = windowsControlFont != null
+                ? windowsControlFont
+                : table.getFont("Button.font");
             Font menuFont = table == null
                 ? controlFont
                 : table.getFont("Menu.font");
@@ -349,6 +353,18 @@ public final class FontPolicies {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             return fontSet;
+        }
+    }
+    
+
+    private static final class Looks1xWindowsPolicy implements FontPolicy {
+        
+        public FontSet getFontSet(String lafName, UIDefaults table) {
+            Font windowsControlFont = Fonts.getLooks1xWindowsControlFont();
+            Font controlFont = windowsControlFont != null
+                ? windowsControlFont
+                : table.getFont("Button.font");
+            return FontSets.createDefaultFontSet(controlFont);
         }
     }
     
