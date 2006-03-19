@@ -10,6 +10,9 @@
 </head>
 <body>
 
+  <table border="0" width="540" cellspacing="0" cellpadding="0">
+  <tr>
+  <td>
 	 
 	<div class="h2">
 	<h2>Frequently Asked Questions</h2>
@@ -122,13 +125,29 @@
 	Before you post, check this FAQ, the relevant JavaDocs,
 	the User's Guide (available from the README.html), 
 	and the accompanying demo sources.
-	Please
-	<a href="https://looks.dev.java.net/servlets/ProjectMailingListList">register</a> 
-    with the user mailing list before you post, 
-    otherwise I need to manually accept your message.
     You can find and track the progress of Looks issues in the 
 	<a href="https://looks.dev.java.net/servlets/ProjectIssues">issue tracker</a>. 
 	As a project observer you can log defects, request features and suggest enhancements.
+	</p>
+	
+	<p>
+	The user mailing list helps us reduce the costs for managing 
+	this freeware project. In the mailing list all project users
+	can jump in to assist you if you face a problem with the library or API. 
+	And other users can benefit from your questions and our answers.
+	Personal mail to JGoodies.com bypasses the other project developers,
+	and often leads to unnecessary extra work; it slows down
+	the development process, costs time and money on our side.
+	</p>
+	
+	<p>
+	If you have downloaded the library at no charge,
+	I ask you to 
+	<a href="https://looks.dev.java.net/servlets/ProjectMailingListList">register</a> 
+    with the user mailing list before you post, and post only with the 
+    registered account.
+    Otherwise your messages won't show up automatically, 
+    and I need to manually accept every message.
 	</p>
 	
 	<p>
@@ -139,7 +158,7 @@
 		
 	<p>
 	If you have general questions about Swing and Java look&amp;feels,
-	you better post to the Java desktop forums at www.java.net.
+	please post to the Java Desktop forums at www.java.net.
 	That's a great place to share information with the Java desktop community.
 	And we frequently check this forum and participate in discussions.	
 	</p>
@@ -147,10 +166,12 @@
 
 	<h4><a name="howToReportAProblem">How to report a problem?</a></h4>
 	<p>
-	Before you report a problem, check this FAQ and check if the problem 
-	is in the Java core or in the JGoodies Looks. Basically bugs in 
-	the Java core shall be reported to Sun, bugs in the JGoodies
-	to the JGoodies project.
+	Before you report a problem, check this FAQ, the relevant JavaDocs,
+	the User's Guide (available from the README.html), 
+	and the accompanying demo sources.
+	Important: please check if the problem is in the Java core 
+	or in the JGoodies Looks. Basically bugs in the Java core 
+	shall be reported to Sun, bugs in the JGoodies to the JGoodies project.
 	</p>
 	
 	<p>
@@ -200,7 +221,7 @@
 
 	<h4><a name="differencesSun">What are the differences between the Sun and JGoodies Windows L&amp;Fs?</a></h4>
 	<p>
-	The JGoodies Looks 2.0 uses more consistent fonts, font baseline positions,
+	The JGoodies Looks 2.0.1 uses more consistent fonts, font baseline positions,
 	component sizes, and insets than the Sun Windows L&amp;f.
 	On western Windows the JGoodies Windows L&amp;f honors 
 	the desktop font size setting <em>Normal/Large/Extra Large</em>.
@@ -209,14 +230,20 @@
 	</p>
 	
 	<p>
-	On the other hand, the JGoodies Windows L&amp;F may lag slightly behind
-	the most recent Sun Windows L&amp;F. This is because the Sun or JGoodies
-	code may include a bug fix earlier than the other. Most Sun bug fixes
-	are inherited by the JGoodies implementation, but not every fix.
-	For example when Sun introduced subpixel anti-aliasing in an early
-	Java 6 preview, the JGoodies implementation supported it with a delay
-	of 2 months. But we always try to catch up with the core 
-	<em>before</em> a new major Java version is available.
+	The Sun Windows L&amp;F provides a better live update 
+	of colors and fonts. If the user changes the desktop settings
+	these changes shall be reflected in Swing immediately.
+	This works well with the Sun Windows L&amp;f.
+	The color and fonts corrected by the JGoodies Windows L&amp;f
+	may change immediately or may require an application restart.
+	Also, the JGoodies Windows L&amp;F may lag slightly behind
+	the most recent Sun Windows L&amp;F bug fixes. This is because 
+	the Sun or JGoodies code may include a bug fix earlier than the other. 
+	Most Sun bug fixes are inherited by the JGoodies implementation, 
+	but not every fix. For example when Sun introduced subpixel anti-aliasing 
+	in an early Java 6 preview, the JGoodies implementation supported 
+	this feature with a delay of 2 months. But we always try to catch up 
+	with the core <em>before</em> a new major Java version is available.
 	</p>
 	
 	<p>
@@ -277,6 +304,7 @@ See also the section "Look &amp; Theme" in the Looks' User's Guide.
    } catch (Exception e) {}
 </pre>
 See also the section "Look &amp; Theme" in the Looks' User's Guide.
+		
 		
 		
 		<h4><a name="2.3">How to remove the JTabbedPane content border?</a></h4>
@@ -351,6 +379,9 @@ See also the section "Look &amp; Theme" in the Looks' User's Guide.
 		to provide a Web start version. 				
 	</p>
 		
+  </td>
+  </tr>
+  </table>
 		
 
 </body>
