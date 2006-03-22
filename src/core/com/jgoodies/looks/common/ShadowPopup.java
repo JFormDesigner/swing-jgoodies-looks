@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -213,8 +213,11 @@ public final class ShadowPopup extends Popup {
         if (owner instanceof JComboBox) {
             return;
         }
-        // Do not install the shadow border when the contents has no size.
-        if ((contents.getWidth() <= 0) || (contents.getHeight() <= 0)) {
+        // Do not install the shadow border when the contents 
+        // has a preferred size less than or equal to 0.
+        // We can't use the size, because it is(0, 0) for new popups.
+        Dimension contentsPrefSize = contents.getPreferredSize();
+        if ((contentsPrefSize.width <= 0) || (contentsPrefSize.height <= 0)) {
             return;
         }
         for(Container p = contents.getParent(); p != null; p = p.getParent()) {
@@ -261,6 +264,7 @@ public final class ShadowPopup extends Popup {
      * 
      * @see #show()
      * @see com.jgoodies.looks.common.ShadowPopupBorder
+     * @see Robot#createScreenCapture(Rectangle)
      */
     private void snapshot() {
         try {
@@ -268,10 +272,9 @@ public final class ShadowPopup extends Popup {
             int width = size.width;
             int height = size.height;
             
-            if (height <= SHADOW_SIZE) {
-                // we don't capture the screen in this case as the rectangle
-                // for the vertical shadow background will be empty.
-                // in the reality this case should never happen.
+            // Avoid unnecessary and illegal screen captures 
+            // for degenerated popups.
+            if ((width <= 0) || (height <= SHADOW_SIZE)) {
                 return;
             }
 
