@@ -19,7 +19,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class FontTest {
     
@@ -56,7 +56,7 @@ public final class FontTest {
         frame.setContentPane(buildContentPane());
         frame.setSize(400, 600);
         locateOnScreen(frame);
-        frame.setTitle("JGoodies Looks 2.0 RC :: FontTest");
+        frame.setTitle("JGoodies Looks :: FontTest");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
