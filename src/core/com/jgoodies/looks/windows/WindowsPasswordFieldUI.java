@@ -28,26 +28,28 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.looks.plastic;
+package com.jgoodies.looks.windows;
 
 
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.common.ExtPasswordView;
 
 /**
- * The JGoodies PlasticXP Look&amp;Feel implementation of a password field UI
+ * The JGoodies Windows Look&amp;Feel implementation of a password field UI
  * delegate. It differs from its superclass in that it utilizes a password 
- * view that renders a dot, not a star (&quot;*&quot;) as echo character.
+ * view that renders a customizable echo char, not a star (&quot;*&quot;).
+ * 
+ * Used for Java 1.4 and Java 5.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  */
-public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
+public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI {
 
     /**
 	 * Creates a UI for a {@link JPasswordField}.
@@ -56,9 +58,22 @@ public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
 	 * @return the UI
 	 */
     public static ComponentUI createUI(JComponent c) {
-        return new PlasticXPPasswordFieldUI();
+        return new WindowsPasswordFieldUI();
     }
 
+    /*
+     * We'd like to just set the dot as echo character.
+     * But the JPasswordField (in Java 1.4 and Java 5) 
+     * installs the UI in a superclass and then sets the echo character. 
+     * The latter would override our call to #setEchoChar.
+     */
+//    protected void installDefaults() {
+//        super.installDefaults();
+//        JPasswordField field = (JPasswordField) getComponent();
+//        field.setEchoChar('\u25CF');
+//    }
+    
+    
     /**
 	 * Creates and returns a view (an <code>ExtPasswordView</code>) for an element.
 	 * 
@@ -66,7 +81,7 @@ public final class PlasticXPPasswordFieldUI extends BasicPasswordFieldUI {
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new PlasticPasswordView(elem);
+        return new ExtPasswordView(elem);
     }
     
     

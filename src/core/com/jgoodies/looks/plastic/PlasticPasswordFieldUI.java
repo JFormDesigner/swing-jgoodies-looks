@@ -28,26 +28,26 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
 
-package com.jgoodies.looks.windows;
+package com.jgoodies.looks.plastic;
 
 
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
-import com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI;
 
 /**
- * The JGoodies Windows Look&amp;Feel implementation of a password field UI
+ * The JGoodies PlasticXP Look&amp;Feel implementation of a password field UI
  * delegate. It differs from its superclass in that it utilizes a password 
- * view that renders a circle, not a star (&quot;*&quot;) as echo character.
+ * view that renders a dot, not a star (&quot;*&quot;) as echo character.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.1 $
  */
-public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
+public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 
     /**
 	 * Creates a UI for a {@link JPasswordField}.
@@ -56,30 +56,17 @@ public final class WindowsXPPasswordFieldUI extends WindowsPasswordFieldUI {
 	 * @return the UI
 	 */
     public static ComponentUI createUI(JComponent c) {
-        return new WindowsXPPasswordFieldUI();
+        return new PlasticPasswordFieldUI();
     }
 
-    /*
-     * We'd like to just set the dot as echo character.
-     * But the JPasswordField installs the UI in a superclass
-     * and then sets the echo character. The latter overrides
-     * our call to #setEchoChar.
-     */
-//    protected void installDefaults() {
-//        super.installDefaults();
-//        JPasswordField field = (JPasswordField) getComponent();
-//        field.setEchoChar('\u2022');
-//    }
-    
-    
     /**
-	 * Creates and returns a view (a <code>ExtPasswordView</code>) for an element.
+	 * Creates and returns a view (an <code>ExtPasswordView</code>) for an element.
 	 * 
 	 * @param elem the element
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new WindowsPasswordView(elem);
+        return new PlasticPasswordView(elem);
     }
     
     

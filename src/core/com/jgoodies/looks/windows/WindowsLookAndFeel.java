@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -214,16 +214,17 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "SpinnerUI",             windowsPrefix + "SpinnerUI"); 
         }
         
+        if (LookUtils.IS_JAVA_1_4_OR_5) {
+            // Renders a dot, not the star ("*") character                       
+            uiDefaults = append(uiDefaults, 
+                "PasswordFieldUI",    windowsPrefix + "PasswordFieldUI"); 
+        }
    
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
             uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
             
-            // Renders a dot, not the star ("*") character                       
-            uiDefaults = append(uiDefaults, 
-                "PasswordFieldUI",    windowsPrefix + "XPPasswordFieldUI"); 
-
             // Optional style and optional special borders; 
             // rollover borders for compound buttons
             uiDefaults = append(uiDefaults, 
@@ -362,6 +363,8 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                 ? table.get("MenuItem.selectionForeground")
                 : table.get("Menu.foreground");
         
+        Character  passwordEchoChar     = new Character(isXP ? '\u25CF' : '*');
+        
         Object[] defaults = {
             "Button.border",              buttonBorder, 
 			"Button.margin",              buttonMargin, // Sun's 14px margin is too wide
@@ -406,7 +409,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "FormattedTextField.disabledBackground", disabledTextBackground, // for readonly
             "FormattedTextField.inactiveBackground", inactiveTextBackground, // for readonly
             "FormattedTextField.margin",  textInsets, // Poor in 1.6
+            
             "PasswordField.margin",       textInsets, // Poor in 1.6
+            "PasswordField.echoChar",     passwordEchoChar,
             
             "PopupMenu.border",           WindowsBorders.getPopupMenuBorder(),
             "PopupMenu.noMarginBorder",   WindowsBorders.getNoMarginPopupMenuBorder(),
@@ -587,6 +592,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     public static Icon getRadioButtonIcon() {
         return WindowsIconFactory.getRadioButtonIcon();
     }
+    
     
     // Helper Code ************************************************************
     

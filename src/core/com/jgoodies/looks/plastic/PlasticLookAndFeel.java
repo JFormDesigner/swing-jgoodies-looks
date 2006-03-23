@@ -66,7 +66,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -356,11 +356,17 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 "ToolBarSeparatorUI",       plasticPrefix + "ToolBarSeparatorUI"
 
 			};
-		table.putDefaults(uiDefaults);
+        if (LookUtils.IS_JAVA_1_4_OR_5) {
+            // Renders a circle, not a star '*'
+            uiDefaults = append(uiDefaults,
+                    "PasswordFieldUI", plasticPrefix + "PasswordFieldUI");
+        }
         if (!useMetalTabs) {
             // Modified tabs and ability use a version with reduced borders.
-            table.put("TabbedPaneUI", plasticPrefix + "TabbedPaneUI");
+            uiDefaults = append(uiDefaults,
+                    "TabbedPaneUI", plasticPrefix + "TabbedPaneUI");
         }
+		table.putDefaults(uiDefaults);
 	}
 
 
@@ -436,6 +442,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         ColorUIResource gray 			= new ColorUIResource(Color.GRAY);
 		
 		Boolean is3D					= Boolean.valueOf(is3DEnabled());
+        
+        Character  passwordEchoChar     = new Character(LookUtils.IS_OS_WINDOWS ? '\u25CF' : '\u2022');
+        
 		
 		Object[] defaults = { 
 		"Button.border",								buttonBorder,
@@ -497,7 +506,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "OptionPane.warningIcon",                       makeIcon(getClass(), "icons/Warn.png"),
         "OptionPane.questionIcon",                      makeIcon(getClass(), "icons/Question.png"),
 		
-		//"DesktopIcon.icon", 							makeIcon(superclass, "icons/DesktopIcon.gif"),
+        //"DesktopIcon.icon", 							makeIcon(superclass, "icons/DesktopIcon.gif"),
 		"FileView.computerIcon",						makeIcon(getClass(), "icons/Computer.gif"),
 		"FileView.directoryIcon",						makeIcon(getClass(), "icons/TreeClosed.gif"),
 		"FileView.fileIcon", 							makeIcon(getClass(), "icons/File.gif"),
@@ -515,6 +524,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 		"PasswordField.border",							textFieldBorder,			
         "PasswordField.margin",                         textInsets,             
+        "PasswordField.echoChar",                       passwordEchoChar,
+        
 
 		"PopupMenu.border",								PlasticBorders.getPopupMenuBorder(),
         "PopupMenu.noMarginBorder",                     PlasticBorders.getNoMarginPopupMenuBorder(),
@@ -956,8 +967,24 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         }
         return null;
     }
-
-
     
+    
+    // Helper Code ************************************************************
+    
+    /**
+     * Appends the key and value to the given source array and returns
+     * a copy that has the two new elements at its end.
+     * 
+     * @return an array with the key and value appended
+     */
+    private static Object[] append(Object[] source, String key, Object value) {
+        int length = source.length;
+        Object[] destination = new Object[length + 2];
+        System.arraycopy(source, 0, destination, 0, length);
+        destination[length] = key;
+        destination[length + 1] = value;
+        return destination;
+    }
+
 
 }

@@ -28,13 +28,12 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
  */
  
-package com.jgoodies.looks.windows;
+package com.jgoodies.looks.common;
 
-import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.*;
 
 import javax.swing.JPasswordField;
+import javax.swing.UIManager;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.PasswordView;
@@ -42,17 +41,16 @@ import javax.swing.text.Position;
 
 
 /**
- * Differs from its superclass in that it uses a dot (\u25CF), 
- * not a star (&quot;*&quot;) as echo character.
+ * Differs from its superclass in that it uses the UIManager's echo char,
+ * not a star (&quot;*&quot;).
+ * Used in Java 1.4 and Java 5 only.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.5 $
  */
-final class WindowsPasswordView extends PasswordView {
+public final class ExtPasswordView extends PasswordView {
     
-    private static final char DOT_CHAR = '\u25CF'; 
-
-    WindowsPasswordView(Element element) {
+    public ExtPasswordView(Element element) {
         super(element);
     }
 
@@ -76,6 +74,12 @@ final class WindowsPasswordView extends PasswordView {
     /**
      * Overrides the superclass behavior to draw the Windows dot, 
      * not the star (&quot;*&quot;) character.
+     * 
+     * @param g the graphics context
+     * @param x the starting X coordinate >= 0
+     * @param y the starting Y coordinate >= 0
+     * @param c the echo character
+     * @return the updated X position >= 0
      */
     protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
         Container container = getContainer();
@@ -84,9 +88,24 @@ final class WindowsPasswordView extends PasswordView {
         }
         JPasswordField field = (JPasswordField) container;
         if (canOverrideEchoChar(field)) {
-            c = DOT_CHAR;
+            c = getEchoChar();
         }
-        return super.drawEchoCharacter(g, x, y, c);
+        // Painting the dot with anti-alias enabled.
+        Graphics2D g2 = (Graphics2D) g;
+        Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
+        Object oldAAHint = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
+        if (newAAHint != oldAAHint) {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, newAAHint);
+        } else {
+            oldAAHint = null;
+        }
+        
+        int newX = super.drawEchoCharacter(g, x, y, c);
+        
+        if (oldAAHint != null) {
+            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, oldAAHint);
+        }
+        return newX;
     }
     
     
@@ -97,13 +116,18 @@ final class WindowsPasswordView extends PasswordView {
         }
         JPasswordField field = (JPasswordField) container;
         if (canOverrideEchoChar(field)) {
-            field.setEchoChar(DOT_CHAR);
+            field.setEchoChar(getEchoChar());
         }
     }
     
     
     private boolean canOverrideEchoChar(JPasswordField field) {
         return field.echoCharIsSet() && field.getEchoChar() == '*';
+    }
+    
+    
+    private static char getEchoChar() {
+        return ((Character) UIManager.get("PasswordField.echoChar")).charValue();
     }
     
     
