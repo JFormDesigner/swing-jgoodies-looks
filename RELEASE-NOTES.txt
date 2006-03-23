@@ -6,13 +6,23 @@
 
 INTRODUCTION
 
-    This maintenance release ...
+    This maintenance release fixes a regression and improves 
+    the password field appearance in non-Windows environments.
 
     
 BUGS FIXED
 
     #122: Regression: Missing popup menu drop shadows.
 
+
+OTHER CHANGES
+
+    o Combo box popup uses the combo box width as minimum,
+      even if a popup prototype display value has been set.
+    o The Windows and Plastic password fields now use the
+      UIManager's echo character, share the password view,
+      and this patch is used in Java 1.4 and Java 5 only.
+    o The Looks Demo shows non-editable and disabled spinners.
 
 ---------------------------------------------------------------------------
 
