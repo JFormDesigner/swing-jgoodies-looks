@@ -53,14 +53,18 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * {@link javax.swing.plaf.ComboBoxUI}.
  * Corrects the editor insets for editable combo boxes 
  * as well as the render insets for non-editable combos. And it has 
- * the same height as text fields - unless you change the renderer.
- * Also, it honors an optional popup prototype display value
- * that is used to compute the combo's popup menu width.
+ * the same height as text fields - unless you change the renderer.<p>
+ * 
+ * Also, this class offers to use the combo's popup prototype display value 
+ * to compute the popup menu width. This is an optional feature of 
+ * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
+ * 
+ * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
-public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
+public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
     
     private static final String CELL_EDITOR_KEY = "JComboBox.isTableCellEditor";
     
@@ -402,15 +406,17 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
          * then the returned rectangle will have the same values 
          * as the parameters.<p>
          * 
-         * In addition to the superclass behavior, this class uses the combo's 
-         * popup prototype display value to compute the popup menu width. 
-         * This is an optional feature of the JGoodies Plastic L&amp;f
-         * implemented via a client property key.<p>
+         * In addition to the superclass behavior, this class offers 
+         * to use the combo's popup prototype display value to compute 
+         * the popup menu width. This is an optional feature of 
+         * the JGoodies Windows L&amp;f implemented via a client property key.<p>
          * 
-         * If a prototype is set, the renderer is used to render the prototype.
-         * The popup width is the prototype's width plus the scrollbar width
-         * - if any. The scrollbar test checks if there are more items
-         * than the combo's maximum row count.  
+         * If a prototype is set, the popup width is the maximum of the
+         * combobox width and the prototype based popup width.
+         * For the latter the renderer is used to render the prototype.
+         * The prototype based popup width is the prototype's width 
+         * plus the scrollbar width - if any. The scrollbar test checks 
+         * if there are more items than the combo's maximum row count.  
          * 
          * @param px starting x location
          * @param py starting y location
@@ -422,22 +428,28 @@ public final class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.Win
          * @see JComboBox#getMaximumRowCount()
          */
         protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
+            Rectangle defaultBounds = super.computePopupBounds(px, py, pw, ph); 
             Object popupPrototypeDisplayValue = comboBox.getClientProperty(
                     Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
-            if (popupPrototypeDisplayValue != null) {
-                ListCellRenderer renderer = list.getCellRenderer();
-                Component c = renderer.getListCellRendererComponent(
-                        list, popupPrototypeDisplayValue, -1, true, true);
-                pw = c.getPreferredSize().width;
-                boolean hasVerticalScrollBar = 
-                    comboBox.getItemCount() > comboBox.getMaximumRowCount();
-                if (hasVerticalScrollBar) {
-                    // Add the scrollbar width.
-                    JScrollBar verticalBar = scroller.getVerticalScrollBar();
-                    pw += verticalBar.getPreferredSize().width;
-                }
+            if (popupPrototypeDisplayValue == null) { 
+                return defaultBounds;
             }
-            return super.computePopupBounds(px, py, pw, ph); 
+        
+            ListCellRenderer renderer = list.getCellRenderer();
+            Component c = renderer.getListCellRendererComponent(
+                    list, popupPrototypeDisplayValue, -1, true, true);
+            pw = c.getPreferredSize().width;
+            boolean hasVerticalScrollBar = 
+                comboBox.getItemCount() > comboBox.getMaximumRowCount();
+            if (hasVerticalScrollBar) {
+                // Add the scrollbar width.
+                JScrollBar verticalBar = scroller.getVerticalScrollBar();
+                pw += verticalBar.getPreferredSize().width;
+            }
+            Rectangle prototypeBasedBounds = super.computePopupBounds(px, py, pw, ph);
+            return prototypeBasedBounds.width > defaultBounds.width
+                ? prototypeBasedBounds
+                : defaultBounds;
         }
 
     }    
