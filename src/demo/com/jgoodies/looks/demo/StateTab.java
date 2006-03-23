@@ -33,6 +33,7 @@ package com.jgoodies.looks.demo;
 import java.awt.Component;
 
 import javax.swing.*;
+import javax.swing.JSpinner.DefaultEditor;
 import javax.swing.text.JTextComponent;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -49,7 +50,7 @@ import com.jgoodies.looks.Options;
  * configurations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class StateTab {
 
@@ -71,9 +72,9 @@ final class StateTab {
         builder.append("Combo Box:",       buildComboBoxRow());
         builder.append("Text Field:",      buildTextRow(JTextField.class, false));
         builder.append("Formatted Field:", buildTextRow(JFormattedTextField.class, false));
-        builder.append("Password:",        buildTextRow(JPasswordField.class, false));
         builder.append("Text Area:",       buildTextRow(JTextArea.class, true));
         builder.append("Editor Pane:",     buildTextRow(JEditorPane.class, true));
+        builder.append("Password:",        buildTextRow(JPasswordField.class, false));
         builder.append("Spinner:",         buildSpinnerRow());
         
         return builder.getPanel();
@@ -217,19 +218,20 @@ final class StateTab {
     }
 
     private JComponent buildSpinnerRow() {
-        JPanel filler1 = new JPanel(null);
-        filler1.setOpaque(false);
-        JPanel filler2 = new JPanel(null);
-        filler2.setOpaque(false);
-        return buildGrid(createSpinner(true),
-                         filler1,
-                         createSpinner(false),
-                         filler2);
+        return buildGrid(createSpinner(true, true),
+                         createSpinner(true, false),
+                         createSpinner(false, true),
+                         createSpinner(false, false));
     }
 
-    private JComponent createSpinner(boolean enabled) {
+    private JComponent createSpinner(boolean enabled, boolean editable) {
         JSpinner spinner = new JSpinner();
+        spinner.setValue(new Integer(123));
         spinner.setEnabled(enabled);
+        JComponent editor = spinner.getEditor();
+        if (editor instanceof DefaultEditor) {
+            ((DefaultEditor) editor).getTextField().setEditable(editable);
+        }
         return spinner;
     }
 
