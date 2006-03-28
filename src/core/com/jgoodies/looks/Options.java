@@ -48,10 +48,13 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * API users can use this class' constants or their values to configure
  * the JGoodies L&amP;f. Using the constants requires the Looks library
  * classes in the class path of the using application/applet. Where using
- * the String values doesn't require the 
+ * the String values doesn't require having this class in the class path.<p>
+ * 
+ * TODO: Uncomment the constant for the combo renderer is-border-removable
+ * client property key in the Looks version 2.1.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class Options {
 
@@ -304,6 +307,19 @@ public final class Options {
         "ComboBox.popupPrototypeDisplayValue";
 
 
+//    /**
+//     * A client property key for combo box renderer components.
+//     * The Boolean value indicates whether the component's border 
+//     * can be temporarily removed when painting the current value or not. 
+//     * This is useful for custom renderers used with Windows combo boxes.
+//     * 
+//     * @see WindowsComboBoxUI#paintCurrentValue(java.awt.Graphics, java.awt.Rectangle, boolean)
+//     * @since 2.1
+//     */
+//    public static final String COMBO_RENDERER_IS_BORDER_REMOVABLE =
+//        "isBorderRemovable";
+    
+    
     // System Settings ********************************************************
     
     /**
