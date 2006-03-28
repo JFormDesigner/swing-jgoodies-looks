@@ -34,6 +34,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.ButtonModel;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
@@ -52,7 +53,7 @@ import com.jgoodies.looks.common.MenuItemRenderer;
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see	com.jgoodies.looks.Options
  */
@@ -165,9 +166,21 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
     private void ensureSubMenuInstalled() {
         if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX))
             return;
+
+        ButtonModel model = menuItem.getModel();
+
+        //save values of armed and selected properties.
+        //they will be resetted in #ununinstallDefaults().
+        boolean oldArmed = model.isArmed();
+        boolean oldSelected = model.isSelected();
+
         uninstallDefaults();
         propertyPrefix = SUBMENU_PROPERTY_PREFIX;
         installDefaults();
+
+        //restore values of armed and selected properties
+        model.setArmed(oldArmed);
+        model.setSelected(oldSelected);
     }
 
 
