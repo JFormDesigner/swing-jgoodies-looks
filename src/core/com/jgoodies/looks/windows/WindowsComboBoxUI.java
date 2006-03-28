@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -262,7 +262,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         Border oldBorder = null;
         if ((c instanceof JComponent) && !tableCellEditor) {
             JComponent component = (JComponent) c;
-            if (c instanceof BasicComboBoxRenderer.UIResource) {
+            if (isRendererBorderRemovable(component)) {
                 oldBorder = component.getBorder();
                 component.setBorder(EMPTY_BORDER);
             }
@@ -300,6 +300,39 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         if (oldBorder != null) {
             ((JComponent) c).setBorder(oldBorder);
         }
+    }
+    
+    
+    /**
+     * Checks and answer whether the border of the given renderer component
+     * can be removed temporarily, so the combo's selection background will
+     * be consistent with the default renderer and native appearance.
+     * This test is invoked from <code>#paintCurrentValue</code>.<p>
+     * 
+     * It is safe to remove an EmptyBorder if the component doesn't override
+     * <code>#update</code>, <code>#paint</code> and <code>#paintBorder</code>.
+     * Since we know the default renderer, we can remove its border.<p>
+     * 
+     * Custom renderers may set a hint to make their border removable.
+     * To do so, set the client property "isBorderRemovable" 
+     * to <code>Boolean.TRUE</code>. If this client property is set,
+     * its value will be returned. If it is not set, <code>true</code> is returned
+     * if and only if the component's border is an EmptyBorder.<p>
+     * 
+     * TODO: Make this method protected in the JGoodies Looks 2.1.
+     *  
+     * @param rendererComponent  the renderer component to check
+     * @return true if the component's border can be removed, false if not
+     * @see #paintCurrentValue(Graphics, Rectangle, boolean)
+     */
+    private boolean isRendererBorderRemovable(JComponent rendererComponent) {
+        if (rendererComponent instanceof BasicComboBoxRenderer.UIResource)
+            return true;
+        Object hint = rendererComponent.getClientProperty("isBorderRemovable");
+        if (hint != null)
+            return Boolean.TRUE.equals(hint);
+        Border border = rendererComponent.getBorder();
+        return border instanceof EmptyBorder;
     }
     
     
