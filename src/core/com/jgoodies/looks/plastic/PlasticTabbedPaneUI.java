@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @see     Options
  */
@@ -1209,6 +1209,21 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 }
             }
         }
+
+        /**
+         * Overridden to insure the same behavior in JDK 6.0 as in JDK 5.0.
+         */
+        protected void padSelectedTab(int tabPlacement, int selectedIndex) {
+            if (selectedIndex >= 0) {
+                Rectangle selRect = rects[selectedIndex];
+                Insets padInsets = getSelectedTabPadInsets(tabPlacement);
+                selRect.x -= padInsets.left;            
+                selRect.width += (padInsets.left + padInsets.right);
+                selRect.y -= padInsets.top;
+                selRect.height += (padInsets.top + padInsets.bottom);
+            }
+        }
+
     }
 
 
