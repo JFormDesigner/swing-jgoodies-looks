@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -462,6 +462,11 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
                                                : makeIcon(getClass(), "icons/TreeOpen.gif"),
             "Tree.closedIcon",            isXP ? makeIcon(getClass(), "icons/xp/TreeClosed.png")
                                                : makeIcon(getClass(), "icons/TreeClosed.gif")
+            });
+        }
+        if (LookUtils.IS_JAVA_6_OR_LATER) {
+            defaults = append(defaults, new Object[] {
+            "Spinner.border",             table.get("TextField.border")
             });
         }
         table.putDefaults(defaults);
