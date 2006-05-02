@@ -1,6 +1,6 @@
 
                          JGoodies Looks
-                          Version 2.0.2 Snapshot
+                          Version 2.0.2
                           Release Notes
                         
 
@@ -14,6 +14,7 @@ BUGS FIXED
 
     #122: Regression: Missing popup menu drop shadows.
     #123: Windows popup menu may lack the selection background.
+    #127: Spinner editor insets too large since Mustang b82. 
 
 
 OTHER CHANGES
