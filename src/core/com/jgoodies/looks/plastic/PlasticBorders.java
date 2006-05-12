@@ -30,19 +30,15 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
-import javax.swing.JInternalFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JToggleButton;
-import javax.swing.UIManager;
-import javax.swing.border.*;
+import javax.swing.*;
+import javax.swing.border.AbstractBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -57,7 +53,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 final class PlasticBorders {
@@ -461,53 +457,24 @@ final class PlasticBorders {
 	 */
     private static class InternalFrameBorder extends AbstractBorder implements UIResource {
 
-        private static final Insets NORMAL_INSETS	= new Insets(2, 2, 3, 3);
-        private static final Insets MAXIMIZED_INSETS	= new Insets(2, 2, 2, 2);
-				 static final int   ALPHA1			= 150;
-				 static final int   ALPHA2			=  50;
+        private static final Insets NORMAL_INSETS	 = new Insets(1, 1, 1, 1);
+        private static final Insets MAXIMIZED_INSETS = new Insets(1, 1, 0, 0);
 
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			JInternalFrame frame = (JInternalFrame) c;
 			if (frame.isMaximum())
-				PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
+				paintMaximizedBorder(g, x, y, w, h);
 			else
-				paintShadowedBorder(g, x, y, w, h);
+                PlasticUtils.drawThinFlush3DBorder(g, x, y, w, h);
 		}
 		
-		private void paintShadowedBorder(Graphics g, int x, int y, int w, int h) {
-			Color background	= UIManager.getColor("desktop");
-			Color highlight		= UIManager.getColor("controlLtHighlight");
-			Color darkShadow    = UIManager.getColor("controlDkShadow");
-			Color lightShadow   = new Color(darkShadow.getRed(), 
-											darkShadow.getGreen(), 
-											darkShadow.getBlue(), 
-											ALPHA1);
-			Color lighterShadow = new Color(darkShadow.getRed(), 
-											darkShadow.getGreen(), 
-											darkShadow.getBlue(), 
-											ALPHA2);
-			g.translate(x, y);
-			// Dark border 
-			g.setColor(darkShadow);
-			g.drawRect(0,   0, w-3, h-3);
-			// Highlight top and left
-			g.setColor(highlight);
-			g.drawLine(1, 1, w - 4, 1);
-			g.drawLine(1, 1, 1, h - 4);
-			// Paint background before painting the shadow
-			g.setColor(background);
-			g.fillRect(w - 2, 0, 2, h);
-			g.fillRect(0, h-2, w, 2);
-			// Shadow line 1
-			g.setColor(lightShadow);
-			g.drawLine(w - 2, 1, w - 2, h - 2);
-			g.drawLine(1, h - 2, w - 3, h - 2);
-			// Shadow line2
-			g.setColor(lighterShadow);
-			g.drawLine(w - 1, 2, w - 1, h - 2);
-			g.drawLine(2, h - 1, w - 2, h - 1);
-			g.translate(-x, -y);
+		private void paintMaximizedBorder(Graphics g, int x, int y, int w, int h) {
+            g.translate(x, y);
+            g.setColor(PlasticLookAndFeel.getControlHighlight());
+            g.drawLine(0, 0, w - 2, 0);
+            g.drawLine(0, 0, 0, h - 2);
+            g.translate(-x, -y);
 		}
 
 	    public Insets getBorderInsets(Component c) { 
