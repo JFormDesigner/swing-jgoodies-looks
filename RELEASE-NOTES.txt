@@ -6,13 +6,14 @@
 
 INTRODUCTION
 
-    This maintenance release fixes a regression, and brings a new 
+    This maintenance release fixes a regression, and brings the new 
     Plastic theme "Experience Royale" for use with XP's Royale theme.
 
     
 BUGS FIXED
 
-    #1xx: Windows XP table header border is wrong. 
+    #1xx: ...
+    #130: Plastic internal frames paint wrong drop shadow. 
 
 
 OTHER CHANGES
