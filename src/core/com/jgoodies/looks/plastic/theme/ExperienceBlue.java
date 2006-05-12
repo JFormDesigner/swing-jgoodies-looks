@@ -41,22 +41,30 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * default desktop settings.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public class ExperienceBlue extends DesertBluer {
 
+    
     public String getName() {
         return "Experience Blue";
     }
 
+    protected static final ColorUIResource LUNA_BACKGROUND =
+        new ColorUIResource(236, 233, 216);
+    
+    protected static final ColorUIResource LUNA_BACKGROUND_DARKER =
+        new ColorUIResource(189, 190, 176);
+    
+
     private static final ColorUIResource SECONDARY1 =
-        new ColorUIResource(128, 128, 128);
+        Colors.GRAY_MEDIUM;
         
     private static final ColorUIResource SECONDARY2 =
-        new ColorUIResource(189, 190, 176);
+        LUNA_BACKGROUND_DARKER;
         
     private static final ColorUIResource SECONDARY3 =
-        new ColorUIResource(236, 233, 216);
+        LUNA_BACKGROUND;
 
     protected ColorUIResource getPrimary1() {
         return Colors.BLUE_MEDIUM_DARK;
