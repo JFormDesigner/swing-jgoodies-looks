@@ -41,7 +41,9 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * using the "Royale" desktop theme.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ * 
+ * @since 2.0.3
  */
 public class ExperienceRoyale extends DesertBluer {
     
