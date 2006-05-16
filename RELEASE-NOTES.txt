@@ -12,13 +12,14 @@ INTRODUCTION
     
 BUGS FIXED
 
-    #1xx: ...
+    #128?: ...
+    #129?: ...
     #130: Plastic internal frames paint wrong drop shadow. 
 
 
-OTHER CHANGES
-
-    o ...
+NEW FEATURES
+    
+    o Added the "Experience Royale" Plastic theme.
 
 ---------------------------------------------------------------------------
 
