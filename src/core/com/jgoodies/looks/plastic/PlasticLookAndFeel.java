@@ -32,6 +32,7 @@ package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
 import java.awt.Insets;
+import java.awt.Toolkit;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -658,13 +659,18 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return the default color theme for the current environemt
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
-		String defaultName = LookUtils.IS_LAF_WINDOWS_XP_ENABLED
-								? "ExperienceBlue"
-								: (LookUtils.IS_OS_WINDOWS_MODERN ? "DesertBluer" : "SkyBlue");
+		String defaultName;
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+            defaultName = getDefaultXPTheme();
+        } else if (LookUtils.IS_OS_WINDOWS_MODERN) {
+            defaultName = "DesertBluer";
+        } else {
+            defaultName = "SkyBlue";
+        }
 		// Don't use the default now, so we can detect that the users tried to set one.
-		String   userName  = LookUtils.getSystemProperty(DEFAULT_THEME_KEY, "");
+		String userName  = LookUtils.getSystemProperty(DEFAULT_THEME_KEY, "");
 		boolean overridden = userName.length() > 0;
-		String   themeName = overridden ? userName : defaultName;
+		String themeName = overridden ? userName : defaultName;
 		PlasticTheme theme = createTheme(themeName);
 		PlasticTheme result = theme != null ? theme : new SkyBluer(); 
 		
@@ -680,8 +686,28 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 			}
 		}
 		return result;
-		
 	}
+    
+    
+    private static String getDefaultXPTheme() {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        String xpstyleColorName = (String) toolkit.getDesktopProperty("win.xpstyle.colorName");
+        String xpstyleDll = (String) toolkit.getDesktopProperty("win.xpstyle.dllName");
+        boolean isStyleLuna = xpstyleDll.endsWith("luna.msstyles");
+        boolean isStyleRoyale = xpstyleDll.endsWith("Royale.msstyles");
+        if (isStyleRoyale) {
+            return "ExperienceRoyale";
+        } else if (isStyleLuna) {
+            if (xpstyleColorName.equalsIgnoreCase("HomeStead")) {
+                return "ExperienceGreen";
+            } else if (xpstyleColorName.equalsIgnoreCase("Metallic")) {
+                return "Silver";
+            } else {
+                return "ExperienceBlue";
+            }
+        }
+        return "ExperienceBlue";
+    }
 	
 	
 	/**
