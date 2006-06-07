@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -264,18 +264,43 @@ public final class Fonts {
         if (!LookUtils.IS_OS_WINDOWS)
             throw new UnsupportedOperationException();
         
+        Font defaultGUIFont = getDefaultGUIFont();
+        // Return the default GUI font on older Windows versions.
         if (LookUtils.IS_OS_WINDOWS_95
         ||  LookUtils.IS_OS_WINDOWS_98
         ||  LookUtils.IS_OS_WINDOWS_NT
-        ||  LookUtils.IS_OS_WINDOWS_ME
-        || (LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5))
-            return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
+        ||  LookUtils.IS_OS_WINDOWS_ME)
+            return defaultGUIFont;
+        
+        // Java 1.4 and Java 5 raster the Segoe UI poorly, 
+        // so we use the older Tahoma, if it can display the localized text.
+        if (LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5) {
+            Font tahoma = getDefaultGUIFontWesternModernWindowsNormal();
+            return canDisplayLocalizedText(tahoma, Locale.getDefault())
+                ? tahoma
+                : defaultGUIFont;
+        } 
         
         Font iconFont = getDesktopFont(WINDOWS_ICON_FONT_KEY);
-        if (canDisplayLocalizedText(iconFont, Locale.getDefault()))
-            return iconFont;
-        
-        return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
+        return canDisplayLocalizedText(iconFont, Locale.getDefault())
+            ? iconFont
+            : defaultGUIFont;
+    }
+    
+    
+    /**
+     * Looks up and returns the Windows defaultGUI font. 
+     * Works around a bug with Java 1.4.2_11, 1.5.0_07, and 1.6 b86
+     * in the Vista Beta2, where the win.defaultGUI.font desktop property
+     * returns null. In this case a logical "Dialog" font is used as fallback.
+     * 
+     * @return the Windows defaultGUI font, or a dialog font as fallback.
+     */
+    private static Font getDefaultGUIFont() {
+        Font font = getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
+        if (font != null)
+            return font;
+        return new Font("Dialog", Font.PLAIN, 12);
     }
     
     
