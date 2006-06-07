@@ -32,7 +32,6 @@ package com.jgoodies.looks.demo;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -46,7 +45,7 @@ import com.jgoodies.looks.plastic.PlasticInternalFrameUI;
  * Demos the <code>JDesktopPane</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class DesktopTab {
     
@@ -97,15 +96,6 @@ final class DesktopTab {
         palette.setVisible(true);
         desktop.add(palette, JLayeredPane.PALETTE_LAYER);
 
-        palette = new JInternalFrame("Palette2", true, true, true, true);
-        palette.putClientProperty(
-            PlasticInternalFrameUI.IS_PALETTE,
-            Boolean.TRUE);
-        palette.setContentPane(buildBackgroundTestContentPane());
-        palette.setBounds(originX3, 170, extentX3, 160);
-        palette.setVisible(true);
-        desktop.add(palette, JLayeredPane.PALETTE_LAYER);
-
         return desktop;
     }
 
@@ -141,20 +131,6 @@ final class DesktopTab {
         tabbedPane.add(generalTab, "General");
         tabbedPane.add(new JLabel("Test1"), "Filter");
         return tabbedPane;
-    }
-
-    private JComponent buildBackgroundTestContentPane() {
-        JTextArea area1 =
-            new JTextArea("Background should be\nthe same as below.");
-        area1.setBackground(UIManager.getColor("control"));
-        JTextArea area2 =
-            new JTextArea("Background should be\nthe same as above.");
-        area2.setOpaque(false);
-        JPanel grid = new JPanel(new GridLayout(2, 1));
-        grid.add(area1);
-        grid.add(area2);
-        grid.setOpaque(false);
-        return grid;
     }
 
     /**
