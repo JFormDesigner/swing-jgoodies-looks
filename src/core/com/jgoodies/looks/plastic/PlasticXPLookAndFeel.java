@@ -47,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -103,6 +103,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
+        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+        final boolean isClassic = !isXP;
         final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
 
         Object buttonBorder         = PlasticXPBorders.getButtonBorder();
@@ -119,7 +121,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
                                             : "icons/RadioLight7x7.png";
                                             
         Insets textInsets = isVista
-            ? new InsetsUIResource(1, 2, 1, 2)
+            ? (isClassic
+                    ? new InsetsUIResource(2, 2, 3, 2)
+                    : new InsetsUIResource(1, 2, 2, 2))
             : new InsetsUIResource(2, 2, 3, 2);
                                             
         Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);

@@ -56,7 +56,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 final class PlasticXPBorders {
@@ -146,14 +146,19 @@ final class PlasticXPBorders {
         return toggleButtonBorder;
     }
 
-    /*
-     * A border for buttons.
+    
+    /**
+     * A border for XP style buttons.
      */
-    private static class XPButtonBorder extends AbstractBorder implements UIResource {
+    private static final class XPButtonBorder extends AbstractBorder implements UIResource {
 
         protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
-            ? new Insets(2, 2, 2, 2)
-            : (LookUtils.IS_LOW_RESOLUTION  ? new Insets(3, 2, 3, 2) : new Insets(2, 2, 2, 2));
+            ? (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED  // isClassic 
+                ? new Insets(3, 2, 4, 2) 
+                : new Insets(2, 2, 3, 2))
+            : (LookUtils.IS_LOW_RESOLUTION  
+                ? new Insets(3, 2, 3, 2) 
+                : new Insets(2, 2, 2, 2));
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
@@ -191,10 +196,10 @@ final class PlasticXPBorders {
     }
 
 
-    /*
+    /**
      * A border for combo box arrow buttons.
      */
-    private static class XPComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
+    private static final class XPComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
 
         protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -229,10 +234,10 @@ final class PlasticXPBorders {
     }
 
 
-    /*
+    /**
      * A border for combo box editors.
      */
-    private static class XPComboBoxEditorBorder extends AbstractBorder {
+    private static final class XPComboBoxEditorBorder extends AbstractBorder {
 
         private static final Insets INSETS  = new Insets(1, 1, 1, 0);
 
@@ -247,10 +252,10 @@ final class PlasticXPBorders {
     }
 
 
-    /*
+    /**
      * A border for text fields.
      */
-    private static class XPTextFieldBorder extends AbstractBorder  {
+    private static final class XPTextFieldBorder extends AbstractBorder  {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -277,13 +282,14 @@ final class PlasticXPBorders {
             return newInsets;
         }
 	}
+    
 
     /**
      * Unlike Metal we paint a simple rectangle.
      * Being a subclass of MetalBorders.ScrollPaneBorder ensures that
      * the ScrollPaneUI will update the ScrollbarsFreeStanding property.
      */
-    private static class XPScrollPaneBorder extends MetalBorders.ScrollPaneBorder  {
+    private static final class XPScrollPaneBorder extends MetalBorders.ScrollPaneBorder  {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 

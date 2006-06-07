@@ -67,7 +67,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -374,6 +374,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		
+        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+        final boolean isClassic = !isXP;
         final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
 
         Object marginBorder				= new BasicBorders.MarginBorder();
@@ -410,11 +412,15 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         Object buttonMargin = createButtonMargin();
 		
 		Insets textInsets = isVista
-            ? new InsetsUIResource(0, 1, 1, 1)
+            ? (isClassic
+                ? new InsetsUIResource(1, 1, 2, 1)
+                : new InsetsUIResource(1, 1, 1, 1))
             : new InsetsUIResource(1, 1, 2, 1);
             
         Object wrappedTextInsets = isVista
-            ? new InsetsUIResource(1, 1, 1, 1)
+            ? (isClassic
+                ? new InsetsUIResource(2, 1, 2, 1)
+                : new InsetsUIResource(1, 1, 1, 1))
             : new InsetsUIResource(2, 1, 2, 1);
                                  
         Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);

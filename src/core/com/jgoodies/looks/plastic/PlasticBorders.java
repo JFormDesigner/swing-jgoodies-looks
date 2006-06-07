@@ -53,7 +53,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 final class PlasticBorders {
@@ -373,8 +373,12 @@ final class PlasticBorders {
 	private static class ButtonBorder extends AbstractBorder implements UIResource {
 
 		protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
-            ? new Insets(2, 3, 2, 3)
-            : (LookUtils.IS_LOW_RESOLUTION ? new Insets(2, 3, 3, 3) : new Insets(1, 3, 1, 3));
+            ? (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED  // isClassic
+                ? new Insets(3, 3, 3, 3)
+                : new Insets(2, 3, 3, 3))
+            : (LookUtils.IS_LOW_RESOLUTION 
+                ? new Insets(2, 3, 3, 3) 
+                : new Insets(1, 3, 1, 3));
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;
@@ -410,7 +414,7 @@ final class PlasticBorders {
 	}	
 	
 	
-	private static class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
+	private static final class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
 
 	    protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -434,7 +438,7 @@ final class PlasticBorders {
 	}	
 
 	
-	private static class ComboBoxEditorBorder extends AbstractBorder {
+	private static final class ComboBoxEditorBorder extends AbstractBorder {
 
         private static final Insets INSETS  = new Insets(2, 2, 2, 0);
 
@@ -455,7 +459,7 @@ final class PlasticBorders {
 	/**
 	 * A border used for <code>JInternalFrame</code>s.
 	 */
-    private static class InternalFrameBorder extends AbstractBorder implements UIResource {
+    private static final class InternalFrameBorder extends AbstractBorder implements UIResource {
 
         private static final Insets NORMAL_INSETS	 = new Insets(1, 1, 1, 1);
         private static final Insets MAXIMIZED_INSETS = new Insets(1, 1, 0, 0);
@@ -486,7 +490,7 @@ final class PlasticBorders {
 	/**
 	 * A border used for the palette of <code>JInternalFrame</code>s.
 	 */
-    private static class PaletteBorder extends AbstractBorder implements UIResource {
+    private static final class PaletteBorder extends AbstractBorder implements UIResource {
     	
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -505,7 +509,7 @@ final class PlasticBorders {
 	 * A border that looks like a separator line; used for menu bars 
      * and tool bars.
 	 */	
-	private static class SeparatorBorder extends AbstractBorder implements UIResource {
+	private static final class SeparatorBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(0, 0, 2, 1);
 
@@ -522,7 +526,7 @@ final class PlasticBorders {
 	}
 
 
-	private static class ThinRaisedBorder extends AbstractBorder implements UIResource {
+	private static final class ThinRaisedBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -533,7 +537,7 @@ final class PlasticBorders {
 	}
 	
 
-	private static class ThinLoweredBorder extends AbstractBorder implements UIResource {
+	private static final class ThinLoweredBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -550,7 +554,7 @@ final class PlasticBorders {
      * raised border, which in turn is wrapped by an outer thin lowered
      * border.
 	 */	
-	private static class EtchedBorder extends AbstractBorder implements UIResource {
+	private static final class EtchedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
@@ -568,7 +572,7 @@ final class PlasticBorders {
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
-	private static class MenuBarHeaderBorder extends AbstractBorder implements UIResource {
+	private static final class MenuBarHeaderBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 1, 2);
 
@@ -586,7 +590,7 @@ final class PlasticBorders {
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
-	private static class ToolBarHeaderBorder extends AbstractBorder implements UIResource {
+	private static final class ToolBarHeaderBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 2, 2, 2);
 
@@ -599,7 +603,7 @@ final class PlasticBorders {
 	}
 	
 	
-	private static class MenuBorder extends AbstractBorder implements UIResource {
+	private static final class MenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets( 2, 2, 2, 2 );
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -633,7 +637,7 @@ final class PlasticBorders {
 	}
 
 
-	private static class PopupMenuBorder extends AbstractBorder implements UIResource {
+	private static final class PopupMenuBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(3, 3, 3, 3);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -650,7 +654,7 @@ final class PlasticBorders {
 	}
 	
 
-    private static class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
+    private static final class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -742,7 +746,7 @@ final class PlasticBorders {
 	 * Being a subclass of MetalBorders.ScrollPaneBorders ensures that
 	 * the ScrollPaneUI will update the ScrollbarsFreeStanding property.
 	 */
-	private static class ScrollPaneBorder extends MetalBorders.ScrollPaneBorder {
+	private static final class ScrollPaneBorder extends MetalBorders.ScrollPaneBorder {
 		
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
@@ -758,7 +762,7 @@ final class PlasticBorders {
 	}
 	
 	
-    private static class TextFieldBorder extends Flush3DBorder {
+    private static final class TextFieldBorder extends Flush3DBorder {
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 		
 			if (!(c instanceof JTextComponent)) {
@@ -779,7 +783,7 @@ final class PlasticBorders {
 	}
 
 
-	private static class ToggleButtonBorder extends ButtonBorder {
+	private static final class ToggleButtonBorder extends ButtonBorder {
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			if (!c.isEnabled()) {
 				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
