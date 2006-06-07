@@ -67,7 +67,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -713,7 +713,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 return "ExperienceBlue";
             }
         } else if (isStyleAero) {
-            return "Silver";
+            return "LightGray";
         }
         return "ExperienceBlue";
     }
@@ -757,6 +757,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 			"ExperienceBlue",
 			"ExperienceGreen",
             "ExperienceRoyale",
+            "LightGray",
 			"Silver",
 		    "SkyBlue",
 		    "SkyBluer",		
