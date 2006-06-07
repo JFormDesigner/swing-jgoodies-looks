@@ -67,7 +67,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -695,6 +695,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         String xpstyleDll = (String) toolkit.getDesktopProperty("win.xpstyle.dllName");
         boolean isStyleLuna = xpstyleDll.endsWith("luna.msstyles");
         boolean isStyleRoyale = xpstyleDll.endsWith("Royale.msstyles");
+        boolean isStyleAero = xpstyleDll.endsWith("Aero.msstyles");
         if (isStyleRoyale) {
             return "ExperienceRoyale";
         } else if (isStyleLuna) {
@@ -705,6 +706,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             } else {
                 return "ExperienceBlue";
             }
+        } else if (isStyleAero) {
+            return "Silver";
         }
         return "ExperienceBlue";
     }
