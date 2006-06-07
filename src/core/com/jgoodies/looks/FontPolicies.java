@@ -50,7 +50,7 @@ import javax.swing.UIDefaults;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * 
  * @see     FontPolicy
  * @see     FontSet
@@ -294,14 +294,24 @@ public final class FontPolicies {
 //        }
 //    }
     
-    
+
+    /**
+     * Implements the default font lookup for the Plastic L&f family
+     * when running in a Windows environment.
+     */
     private static final class DefaultPlasticOnWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getWindowsControlFont();
-            Font controlFont = windowsControlFont != null
-                ? windowsControlFont
-                : table.getFont("Button.font");
+            Font controlFont;
+            if (windowsControlFont != null) {
+                controlFont = windowsControlFont;
+            } else if (table != null) {
+                controlFont = table.getFont("Button.font");
+            } else {
+                controlFont = new Font("Dialog", Font.PLAIN, 12);
+            }
+            
             Font menuFont = table == null
                 ? controlFont
                 : table.getFont("Menu.font");
@@ -312,13 +322,21 @@ public final class FontPolicies {
     }
     
 
+    /**
+     * Implements the default font lookup on the Windows platform.
+     */
     private static final class DefaultWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getWindowsControlFont();
-            Font controlFont = windowsControlFont != null
-                ? windowsControlFont
-                : table.getFont("Button.font");
+            Font controlFont;
+            if (windowsControlFont != null) {
+                controlFont = windowsControlFont;
+            } else if (table != null) {
+                controlFont = table.getFont("Button.font");
+            } else {
+                controlFont = new Font("Dialog", Font.PLAIN, 12);
+            }
             Font menuFont = table == null
                 ? controlFont
                 : table.getFont("Menu.font");
@@ -343,6 +361,10 @@ public final class FontPolicies {
     }
     
 
+    /**
+     * A FontPolicy that returns a fixed FontSet and that ignores
+     * the laf name and UIDefaults table.
+     */
     private static final class FixedPolicy implements FontPolicy {
         
         private final FontSet fontSet;
@@ -357,13 +379,21 @@ public final class FontPolicies {
     }
     
 
+    /**
+     * Aims to mimic the font choice as used in the JGoodies Looks 1.x.
+     */
     private static final class Looks1xWindowsPolicy implements FontPolicy {
         
         public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getLooks1xWindowsControlFont();
-            Font controlFont = windowsControlFont != null
-                ? windowsControlFont
-                : table.getFont("Button.font");
+            Font controlFont;
+            if (windowsControlFont != null) {
+                controlFont = windowsControlFont;
+            } else if (table != null) {
+                controlFont = table.getFont("Button.font");
+            } else {
+                controlFont = new Font("Dialog", Font.PLAIN, 12);
+            }
             return FontSets.createDefaultFontSet(controlFont);
         }
     }
