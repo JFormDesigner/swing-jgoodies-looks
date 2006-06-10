@@ -1,26 +1,42 @@
 
                          JGoodies Looks
-                          Version 2.0.3 Snapshot
+                          Version 2.0.3
                           Release Notes
                         
 
 INTRODUCTION
 
-    This maintenance release fixes a regression, and brings the new 
-    Plastic theme "Experience Royale" for use with XP's Royale theme.
+    This maintenance release fixes a regression, comes with improved
+    support for the Windows Vista Beta2, and ship the Plastic themes 
+    "Experience Royale" for XP's Royale style, and "Light Gray"
+    for Vista's Aero style.
 
     
 BUGS FIXED
 
-    #128?: ...
-    #129?: ...
     #130: Plastic internal frames paint wrong drop shadow. 
+    #135: Fonts#getWindowsControlFont returns null on Vista Beta2.
+    #136: NPE in DefaultPlasticOnWindowsPolicy on Vista Beta2.
+    #137: Component height too small on Vista Beta2.
+    #138: Add a color theme that mimics Vista's Aero default.
 
 
 NEW FEATURES
     
-    o Added the "Experience Royale" Plastic theme.
+    o Added the "Experience Royale" and "Light Gray" Plastic themes.
+    o Improved the mechanism that chooses the default Plastic theme
+      to detect Luna Normal/Home Stead/Metallic, the MS Royale skin,
+      and Vista's Aero. "Experience Royale" is the default on XP-Royale, 
+      "Light Gray" is the default on Vista-Aero.
 
+
+OTHER CHANGES
+
+    o Distribution ships with a precompiled Font Test jar.
+    o Removed the Palette2 from the Looks Demo desktop tab.
+    o Minor cleanup in the build.xml and default.properties.
+      
+      
 ---------------------------------------------------------------------------
 
 Find below the change history for older releases.
@@ -46,6 +62,11 @@ BUGS FIXED
 
 OTHER CHANGES
 
+    o Marked Options.TEXT_AREA_INFO_BACKGROUND_KEY as deprecated.
+      We suggest to use a factory that vends JTextArea's 
+      with the background set to the editable background instead.
+      You may use a text area that sets the background in #updateUI
+      to ensure that it is refreshed on Look&Feel changes.
     o Combo box popup uses the combo box width as minimum,
       even if a popup prototype display value has been set.
     o The Windows and Plastic password fields now use the

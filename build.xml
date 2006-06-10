@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.26 2006-03-03 00:38:54 karsten Exp $
+   $Id: build.xml,v 1.27 2006-06-10 10:21:02 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -359,8 +359,7 @@
 		<copy todir="${dist.demo.dir}" file="${build.tiny.jar}" />
 		
         <!-- Copy the font test. -->
-<!--    <copy todir="${dist.dir}" file="${build.fonttest.jar}" />
--->
+        <copy todir="${dist.demo.dir}" file="${build.fonttest.jar}" />
 
         <!-- Copy the libraries. -->
 		<copy todir="${dist.lib.dir}" >
