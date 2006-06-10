@@ -1,5 +1,55 @@
 
                          JGoodies Looks
+                          Version 2.1 Preview
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This is an early preview of the JGoodies Looks 2.1.
+    
+    NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
+    THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
+    It is an engineering build that has seen minimal testing; 
+    it may lack functions and may contain known bugs in some areas. 
+        
+    ...
+    
+	
+CHANGES THAT AFFECT THE COMPATIBILITY
+
+    o Removed the deprecated Options.IS_NARROW_KEY.
+      Use Options#setUseNarrowButtons(boolean) instead.
+    o Removed the deprecated Options.TEXT_AREA_INFO_BACKGROUND_KEY.
+      We suggest to use a factory that vends JTextArea's 
+      with the background set to the editable background instead.    
+    o ...
+    
+
+BUGS FIXED
+
+    o ...
+    
+    
+NEW FEATURES
+    
+    o Added Options.COMBO_RENDERER_IS_BORDER_REMOVABLE. Indicates whether 
+      the component's border can be temporarily removed when painting 
+      the current value or not. Useful for custom Windows combo renderers.
+    o ...
+
+
+OTHER CHANGES
+
+    o ...
+    
+    
+---------------------------------------------------------------------------
+
+Find below the change history for older releases.
+
+
+                         JGoodies Looks
                           Version 2.0.3
                           Release Notes
                         
@@ -7,7 +57,7 @@
 INTRODUCTION
 
     This maintenance release fixes a regression, comes with improved
-    support for the Windows Vista Beta2, and ship the Plastic themes 
+    support for the Windows Vista Beta2, and ships the Plastic themes 
     "Experience Royale" for XP's Royale style, and "Light Gray"
     for Vista's Aero style.
 
@@ -23,7 +73,7 @@ BUGS FIXED
 
 NEW FEATURES
     
-    o Added the "Experience Royale" and "Light Gray" Plastic themes.
+    o Added the Plastic themes "Experience Royale" and "Light Gray".
     o Improved the mechanism that chooses the default Plastic theme
       to detect Luna Normal/Home Stead/Metallic, the MS Royale skin,
       and Vista's Aero. "Experience Royale" is the default on XP-Royale, 

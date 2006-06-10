@@ -42,19 +42,16 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /**
  * Provides access to optional features of the JGoodies L&amp;Fs 
- * via a key to the system properties, via a key for the <code>UIDefaults</code> table
- * via a method or all of them.<p>
+ * via a key to the system properties, via a key for the <code>UIDefaults</code> 
+ * table, via a method, or all of them.<p>
  * 
  * API users can use this class' constants or their values to configure
  * the JGoodies L&amP;f. Using the constants requires the Looks library
- * classes in the class path of the using application/applet. Where using
- * the String values doesn't require having this class in the class path.<p>
- * 
- * TODO: Uncomment the constant for the combo renderer is-border-removable
- * client property key in the Looks version 2.1.
+ * classes in the class path of the using application/applet, where using
+ * the String values doesn't require having this class in the class path.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class Options {
 
@@ -203,17 +200,6 @@ public final class Options {
     // Optional Client Properties *******************************************
 
     /** 
-     * A JButton client property key for a hint 
-     * that the button margin should be narrow.   
-     * 
-     * @deprecated As of the Looks 2.0 the narrow button property
-     *     is enabled or disabled only globally via 
-     *     {@link #USE_NARROW_BUTTONS_KEY} or 
-     *     {@link #setUseNarrowButtons(boolean)}.
-     */
-    public static final String IS_NARROW_KEY = "jgoodies.isNarrow";
-
-    /** 
      * A JScrollPane client property key for a hint 
      * that the scroll pane border should be etched.
      */
@@ -241,18 +227,6 @@ public final class Options {
      * contains only a single component, for example a scrollpane.
      */
     public static final String NO_MARGIN_KEY = "JPopupMenu.noMargin";
-
-    /** 
-     * A JTextArea client property key for a hint that the text area
-     * shall use the editable background, even if it's not editable.
-     * This is useful if you display info text with text areas.
-     * 
-     * @since 2.0
-     * @deprecated We suggest to use a factory that vends JTextArea's 
-     *     with the background set to the editable background instead. 
-     */
-    public static final String TEXT_AREA_INFO_BACKGROUND_KEY = 
-        "JTextArea.infoBackground";
 
     /** 
      * A JTree client property key for a tree line style hint.
@@ -311,17 +285,17 @@ public final class Options {
         "ComboBox.popupPrototypeDisplayValue";
 
 
-//    /**
-//     * A client property key for combo box renderer components.
-//     * The Boolean value indicates whether the component's border 
-//     * can be temporarily removed when painting the current value or not. 
-//     * This is useful for custom renderers used with Windows combo boxes.
-//     * 
-//     * @see WindowsComboBoxUI#paintCurrentValue(java.awt.Graphics, java.awt.Rectangle, boolean)
-//     * @since 2.1
-//     */
-//    public static final String COMBO_RENDERER_IS_BORDER_REMOVABLE =
-//        "isBorderRemovable";
+    /**
+     * A client property key for combo box renderer components.
+     * The Boolean value indicates whether the component's border 
+     * can be temporarily removed when painting the current value or not. 
+     * This is useful for custom renderers used with Windows combo boxes.
+     * 
+     * @see WindowsComboBoxUI#paintCurrentValue(java.awt.Graphics, java.awt.Rectangle, boolean)
+     * @since 2.1
+     */
+    public static final String COMBO_RENDERER_IS_BORDER_REMOVABLE =
+        "isBorderRemovable";
     
     
     // System Settings ********************************************************
