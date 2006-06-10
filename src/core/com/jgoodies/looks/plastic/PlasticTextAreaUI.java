@@ -40,8 +40,6 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicTextAreaUI;
 import javax.swing.text.JTextComponent;
 
-import com.jgoodies.looks.Options;
-
 
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>TextAreaUI</code>.
@@ -49,7 +47,7 @@ import com.jgoodies.looks.Options;
  * background colors using behavior from BasicTextFieldUI.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class PlasticTextAreaUI extends BasicTextAreaUI {
 
@@ -75,9 +73,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
      * This method gets called when a bound property is changed
      * on the associated JTextComponent. In addition to the superclass
      * behavior, this UI updates the background if the <em>editable</em> or
-     * <em>enabled</em> property changes or the JGoodies client property
-     * <code>Options.TEXT_AREA_INFO_BACKGROUND_KEY</code> which is
-     * "JTextArea.infoBackground".
+     * <em>enabled</em> property changes .
      *
      * @param evt the property change event
      */
@@ -85,8 +81,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
         super.propertyChange(evt);
         String propertyName = evt.getPropertyName();
         if (    "editable".equals(propertyName)
-             || "enabled".equals(propertyName)
-             || Options.TEXT_AREA_INFO_BACKGROUND_KEY.equals(propertyName)) {
+             || "enabled".equals(propertyName)) {
             updateBackground((JTextComponent) evt.getSource());
         }
     }
@@ -101,7 +96,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
         if (!c.isEnabled()) {
             newColor = UIManager.getColor("TextArea.disabledBackground");
         }
-        if (newColor == null && !c.isEditable() && !isInfoArea(c)) {
+        if (newColor == null && !c.isEditable()) {
             newColor = UIManager.getColor("TextArea.inactiveBackground");
         }
         if (newColor == null) {
@@ -110,12 +105,6 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
         if (newColor != null && newColor != background) {
             c.setBackground(newColor);
         }
-    }
-
-
-    private boolean isInfoArea(JTextComponent c) {
-        Object value = c.getClientProperty(Options.TEXT_AREA_INFO_BACKGROUND_KEY);
-        return Boolean.TRUE.equals(value);
     }
 
 
