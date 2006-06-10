@@ -1,6 +1,7 @@
 
 
 import java.awt.*;
+import java.util.Locale;
 
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
@@ -19,7 +20,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class FontTest {
     
@@ -124,10 +125,12 @@ public final class FontTest {
                 "win.frame.captionFont",
                 "win.tooltip.font"});
         
+        addInternationalizationProperties(buffer);
+        
         addFontSet(buffer, "JGoodies Windows L&f:", getWindowsFontSet());
         addFontSet(buffer, "JGoodies Plastic L&fs:", getPlasticFontSet());
         
-        buffer.append("\n\nThanks in advance,\nKarsten Lentzsch");
+        buffer.append("\n\n");
         return buffer.toString();
     }
     
@@ -166,6 +169,22 @@ public final class FontTest {
             buffer.append('=');
             buffer.append(printString);
         }
+    }
+    
+    
+    private void addInternationalizationProperties(StringBuffer buffer) {
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        buffer.append("\n\n");
+        buffer.append("Internationalization:");
+        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
+        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
+        Locale locale = Locale.getDefault();
+        buffer.append("\n    defaultLocale.getDisplayLanguage(defaultLocale)=");
+        buffer.append(locale.getDisplayLanguage(locale));
+        buffer.append("\n    defaultGUI font can display localized text=");
+        buffer.append(canDisplayLocalizedText(defaultGUIFont, locale));
+        buffer.append("\n    icon font can display localized text=");
+        buffer.append(canDisplayLocalizedText(iconFont, locale));
     }
     
     
@@ -256,6 +275,29 @@ public final class FontTest {
         } catch (UnsupportedLookAndFeelException e) {
             return null;
         }
+    }
+    
+    
+    // Helper Code ************************************************************
+    
+    /**
+     * Checks and answers if the given font can display text
+     * that is localized for the specified locale.
+     * The test invokes <code>Font#canDisplayUpTo</code> on the locale's
+     * name in the locale's language, e.g. "English" for English, 
+     * "Deutsch" for German, etc. In a Chinese locale this test
+     * will check if the font can display Chinese glyphs.
+     * The international Java runtime environments seem to have this
+     * name in the localized form for all supported locales. 
+     *  
+     * @param font     the font to be tested
+     * @param locale   the locale to be used
+     * @return true if the font can display the locale's text, false otherwise
+     */
+    private static boolean canDisplayLocalizedText(Font font, Locale locale) {
+        String testString = locale.getDisplayLanguage(locale);
+        int index = font.canDisplayUpTo(testString);
+        return index == -1;
     }
     
     
