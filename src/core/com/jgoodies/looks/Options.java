@@ -54,7 +54,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * client property key in the Looks version 2.1.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class Options {
 
@@ -246,6 +246,10 @@ public final class Options {
      * A JTextArea client property key for a hint that the text area
      * shall use the editable background, even if it's not editable.
      * This is useful if you display info text with text areas.
+     * 
+     * @since 2.0
+     * @deprecated We suggest to use a factory that vends JTextArea's 
+     *     with the background set to the editable background instead. 
      */
     public static final String TEXT_AREA_INFO_BACKGROUND_KEY = 
         "JTextArea.infoBackground";
