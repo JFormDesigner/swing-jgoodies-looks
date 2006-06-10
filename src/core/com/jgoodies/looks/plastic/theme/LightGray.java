@@ -40,7 +40,9 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * A very light color theme intended to be used on Windows Vista in Aero style.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
+ * 
+ * @since 2.0.3 
  */
 public class LightGray extends ExperienceBlue {
     
