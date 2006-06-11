@@ -41,19 +41,18 @@ import javax.swing.JButton;
 import javax.swing.JSplitPane;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
+import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
-
-import com.jgoodies.looks.plastic.PlasticSplitPaneUI;
 
 /**
  * Paints nicely rendered one touch triangles.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
- * @see PlasticSplitPaneUI
+ * @see WindowsSplitPaneUI
  */
-final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.WindowsSplitPaneDivider {
+final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
 
     private static final int EXT_ONE_TOUCH_SIZE   = 5;
     private static final int EXT_ONE_TOUCH_OFFSET = 2;
@@ -184,9 +183,8 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
                             for (int j = 1; j < blockSize; j++) {
                                 if (buffer[j - 1][i - 1] == 0) {
                                     continue;
-                                } else {
-                                    g.setColor(colors[buffer[j - 1][i - 1]]);
                                 }
+                                g.setColor(colors[buffer[j - 1][i - 1]]);
                                 g.drawLine(i - 1, j, i - 1, j);
                             }
                         }
@@ -203,11 +201,10 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
                                     // Nothing needs
                                     // to be drawn
                                     continue;
-                                } else {
-                                    // Set the color from the
-                                    // color map
-                                    g.setColor(colors[buffer[j - 1][i - 1]]);
                                 }
+                                // Set the color from the
+                                // color map
+                                g.setColor(colors[buffer[j - 1][i - 1]]);
                                 // Draw a pixel
                                 g.drawLine(j - 1, i, j - 1, i);
                             }
@@ -220,6 +217,7 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
         b.setFocusPainted(false);
         b.setBorderPainted(false);
         b.setFocusable(false);
+        b.setOpaque(false);
         return b;
     }
 
@@ -272,9 +270,8 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
                             for (int j = 1; j < blockSize; j++) {
                                 if (buffer[j - 1][i - 1] == 0) {
                                     continue;
-                                } else {
-                                    g.setColor(colors[buffer[j - 1][i - 1]]);
                                 }
+                                g.setColor(colors[buffer[j - 1][i - 1]]);
                                 g.drawLine(i, j, i, j);
                             }
                         }
@@ -291,11 +288,10 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
                                     // Nothing needs
                                     // to be drawn
                                     continue;
-                                } else {
-                                    // Set the color from the
-                                    // color map
-                                    g.setColor(colors[buffer[j - 1][i - 1]]);
                                 }
+                                // Set the color from the
+                                // color map
+                                g.setColor(colors[buffer[j - 1][i - 1]]);
                                 // Draw a pixel
                                 g.drawLine(j - 1, i, j - 1, i);
                             }
@@ -307,6 +303,7 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
         b.setFocusPainted(false);
         b.setBorderPainted(false);
         b.setFocusable(false);
+        b.setOpaque(false);
         return b;
     }
 
@@ -336,6 +333,20 @@ final class WindowsSplitPaneDivider extends com.sun.java.swing.plaf.windows.Wind
     
     JSplitPane getSplitPaneFromSuper() {
         return super.splitPane;
+    }
+
+    public void paint(Graphics g) {
+        if (splitPane.isOpaque()) {
+            Color bgColor = splitPane.hasFocus()
+                ? UIManager.getColor("SplitPane.shadow")
+                : getBackground();
+    
+            if (bgColor != null) {
+                g.setColor(bgColor);
+                g.fillRect(0, 0, getWidth(), getHeight());
+            }
+        }
+        super.paint(g);
     }
     
 }

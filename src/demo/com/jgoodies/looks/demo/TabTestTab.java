@@ -49,7 +49,7 @@ import com.jgoodies.uif_lite.panel.SimpleInternalFrame;
  * tabbed panes using two <code>SimpleInternalFrame</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class TabTestTab {
 
@@ -74,11 +74,13 @@ final class TabTestTab {
      * components in the component tree and the border states.
      */
     private JComponent buildHorizontalSplit() {
-        return Factory.createStrippedSplitPane(
+        JSplitPane pane = Factory.createStrippedSplitPane(
             JSplitPane.HORIZONTAL_SPLIT,
             buildMainLeftPanel(),
             buildMainRightPanel(),
             0.2f);
+        pane.setOpaque(false);
+        return pane;
     }
     
     
@@ -158,6 +160,7 @@ final class TabTestTab {
                 buildTabPanel(tabPlacement, JTabbedPane.WRAP_TAB_LAYOUT),
                 buildTabPanel(tabPlacement, JTabbedPane.SCROLL_TAB_LAYOUT),
                 0.5f);
+        split.setOpaque(false);
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(split, BorderLayout.CENTER);
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));

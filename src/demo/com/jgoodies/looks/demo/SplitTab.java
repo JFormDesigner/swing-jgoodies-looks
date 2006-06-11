@@ -47,7 +47,7 @@ import com.jgoodies.uif_lite.component.UIFSplitPane;
  * removes obsolete decorations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see UIFSplitPane
  */
@@ -88,10 +88,12 @@ final class SplitTab {
                     JSplitPane.VERTICAL_SPLIT, 
                     upperRight, 
                     lowerRight);
+        verticalSplit.setOpaque(false);
         JSplitPane horizontalSplit = UIFSplitPane.createStrippedSplitPane(
             JSplitPane.HORIZONTAL_SPLIT,
             left,
             verticalSplit);
+        horizontalSplit.setOpaque(false);
         return horizontalSplit;
     }
     

@@ -31,9 +31,9 @@
 package com.jgoodies.looks.plastic;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.JButton;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
 
@@ -42,7 +42,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * Paints a single drag symbol instead of many bumps.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see PlasticSplitPaneUI
  */
@@ -52,16 +52,27 @@ final class PlasticSplitPaneDivider extends BasicSplitPaneDivider {
 	PlasticSplitPaneDivider(BasicSplitPaneUI ui) {
 		super(ui);
 	}
-	
-	
-	public void paint(Graphics g) {
-		Dimension size = getSize();
-		Color bgColor = getBackground();
 
-		if (bgColor != null) {
-			g.setColor(bgColor);
-			g.fillRect(0, 0, size.width, size.height);
-		}
+    protected JButton createLeftOneTouchButton() {
+        JButton btn = super.createLeftOneTouchButton();
+        btn.setOpaque(false);
+        return btn;
+    }
+
+    protected JButton createRightOneTouchButton() {
+        JButton btn = super.createRightOneTouchButton();
+        btn.setOpaque(false);
+        return btn;
+    }
+
+    public void paint(Graphics g) {
+        if (splitPane.isOpaque()) {
+    		Color bgColor = getBackground();
+    		if (bgColor != null) {
+    			g.setColor(bgColor);
+    			g.fillRect(0, 0, getWidth(), getHeight());
+    		}
+        }
 		
 		/*
 		Object value = splitPane.getClientProperty("add3D");
