@@ -56,19 +56,28 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
     private static final boolean IS_XP_LAF_5_OR_LATER =
         LookUtils.IS_JAVA_5_OR_LATER && LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
 
+    /** Insets used for the embedded style content border. */
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
+
+    /** Insets used if we paint no content border. */
     private static final int INSET = IS_XP_LAF_5_OR_LATER ? -1 : 1; 
-    private static final Insets NORTH_INSETS = new Insets(INSET, 0, 0, 0);
-    private static final Insets WEST_INSETS  = new Insets(0, INSET, 0, 0);
-    private static final Insets SOUTH_INSETS = new Insets(0, 0, INSET, 0);
-    private static final Insets EAST_INSETS  = new Insets(0, 0, 0, INSET);
+    private static final Insets NO_CONTENT_BORDER_NORTH_INSETS = new Insets(INSET, 0, 0, 0);
+    private static final Insets NO_CONTENT_BORDER_WEST_INSETS  = new Insets(0, INSET, 0, 0);
+    private static final Insets NO_CONTENT_BORDER_SOUTH_INSETS = new Insets(0, 0, INSET, 0);
+    private static final Insets NO_CONTENT_BORDER_EAST_INSETS  = new Insets(0, 0, 0, INSET);
+
+    /** Insets used if we paint content border. */
+    private static final Insets CONTENT_BORDER_NORTH_INSETS = new Insets(0, 2, 4, 4);
+    private static final Insets CONTENT_BORDER_WEST_INSETS  = new Insets(2, 0, 4, 4);
+    private static final Insets CONTENT_BORDER_SOUTH_INSETS = new Insets(4, 2, 0, 4);
+    private static final Insets CONTENT_BORDER_EAST_INSETS  = new Insets(2, 4, 4, 0);
 
 
     /**
@@ -77,11 +86,9 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     private static boolean isTabIconsEnabled = Options.isTabIconsEnabled();
 
     /**
-     * Describes if we paint no content border or not; is false by default.
+     * Describes if we paint no content border or not; this is false by default.
      * You can disable the content border by setting the client property
      * Options.NO_CONTENT_BORDER_KEY to Boolean.TRUE;
-     * <p>
-     * Overrides any ClearLook considerations.
      */
     private Boolean noContentBorder;
 
@@ -90,8 +97,6 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      * less decoration; this is false by default.
      * You can enable the embedded tabs style by setting the client property
      * Options.EMBEDDED_TABS_KEY to Boolean.TRUE.
-     * <p>
-     * Overrides any ClearLook considerations.
      */
     private Boolean embeddedTabs;
 
@@ -184,21 +189,34 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
 
     protected Insets getContentBorderInsets(int tabPlacement) {
-        if (!hasNoContentBorder())
+        if (!hasNoContentBorder()) {
+            if (IS_XP_LAF_5_OR_LATER) {
+                switch (tabPlacement) {
+                    case RIGHT :
+                        return CONTENT_BORDER_EAST_INSETS;
+                    case LEFT :
+                        return CONTENT_BORDER_WEST_INSETS;
+                    case TOP :
+                        return CONTENT_BORDER_NORTH_INSETS;
+                    case BOTTOM :
+                    default :
+                    return CONTENT_BORDER_SOUTH_INSETS;
+                }
+            }
             return contentBorderInsets;
-        else if (hasEmbeddedTabs())
+        } else if (hasEmbeddedTabs()) {
             return EMPTY_INSETS;
-        else {
+        } else {
             switch (tabPlacement) {
                 case RIGHT :
-                    return EAST_INSETS;
+                    return NO_CONTENT_BORDER_EAST_INSETS;
                 case LEFT :
-                    return WEST_INSETS;
+                    return NO_CONTENT_BORDER_WEST_INSETS;
                 case TOP :
-                    return NORTH_INSETS;
+                    return NO_CONTENT_BORDER_NORTH_INSETS;
                 case BOTTOM :
                 default :
-                    return SOUTH_INSETS;
+                    return NO_CONTENT_BORDER_SOUTH_INSETS;
             }
         }
     }
@@ -538,7 +556,8 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      * class behavior we listen to changes of the ancestor, tab placement,
      * and JGoodies options for content border, and embedded tabs.
      */
-    private class MyPropertyChangeHandler extends BasicTabbedPaneUI.PropertyChangeHandler {
+    private final class MyPropertyChangeHandler extends BasicTabbedPaneUI.PropertyChangeHandler {
+
         public void propertyChange(PropertyChangeEvent e) {
             super.propertyChange(e);
 
