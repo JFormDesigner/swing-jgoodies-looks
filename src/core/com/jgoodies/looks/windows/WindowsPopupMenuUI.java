@@ -33,11 +33,14 @@ package com.jgoodies.looks.windows;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.LookAndFeel;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.plaf.UIResource;
 
 import com.jgoodies.looks.Options;
+import com.jgoodies.looks.common.PopupMenuLayout;
 
 /**
  * The JGoodies Windows look&amp;feel implementation of <code>PopMenuUI</code>.
@@ -49,7 +52,7 @@ import com.jgoodies.looks.Options;
  * a JScrollPane.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @see	com.jgoodies.looks.Options#NO_MARGIN_KEY
  */
@@ -65,6 +68,10 @@ public final class WindowsPopupMenuUI extends com.sun.java.swing.plaf.windows.Wi
     public void installDefaults() {
         super.installDefaults();
         installBorder();
+        if (   (popupMenu.getLayout() == null)
+            || (popupMenu.getLayout() instanceof UIResource)) {
+            popupMenu.setLayout(new PopupMenuLayout(popupMenu, BoxLayout.Y_AXIS));
+        }
     }
 
     public void installListeners() {

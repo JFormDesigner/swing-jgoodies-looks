@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public class MenuItemRenderer {
@@ -57,10 +57,10 @@ public class MenuItemRenderer {
     protected static final String HTML_KEY = BasicHTML.propertyKey;
 
     /* Client Property keys for text and accelerator text widths */
-    private static final String MAX_TEXT_WIDTH = "maxTextWidth";
-	private static final String MAX_ACC_WIDTH  = "maxAccWidth";
+    static final String MAX_TEXT_WIDTH  = "maxTextWidth";
+	static final String MAX_ACC_WIDTH   = "maxAccWidth";
 
-	private static final Icon   NO_ICON        = new NullIcon();
+	private static final Icon   NO_ICON = new NullIcon();
 
 
     static Rectangle zeroRect		= new Rectangle(0, 0, 0, 0);
