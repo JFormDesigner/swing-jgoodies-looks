@@ -54,7 +54,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 final class PlasticIconFactory {
@@ -268,6 +268,7 @@ final class PlasticIconFactory {
     private static Icon menuArrowIcon;
     private static Icon expandedTreeIcon;
     private static Icon collapsedTreeIcon;
+    private static Icon comboBoxButtonIcon;
 	
 
 	/**
@@ -338,7 +339,10 @@ final class PlasticIconFactory {
 	 * Answers an <code>Icon</code> used in <code>JComboBox</code>es.
 	 */		
     static Icon getComboBoxButtonIcon() {
-		return new ComboBoxButtonIcon();
+        if (comboBoxButtonIcon == null) {
+            comboBoxButtonIcon = new ComboBoxButtonIcon();
+        }
+		return comboBoxButtonIcon;
     }
 
 
