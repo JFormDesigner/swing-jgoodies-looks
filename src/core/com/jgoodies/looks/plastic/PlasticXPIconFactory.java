@@ -55,7 +55,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticXPIconFactory {
 
@@ -93,7 +93,7 @@ public final class PlasticXPIconFactory {
     }
 
 
-    private static class CheckBoxIcon implements Icon, UIResource, Serializable {
+    private static final class CheckBoxIcon implements Icon, UIResource, Serializable {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
 
@@ -109,7 +109,10 @@ public final class PlasticXPIconFactory {
             
             drawBorder(g2, model.isEnabled(), x, y, SIZE - 1, SIZE - 1);
             drawFill(g2, model.isPressed(), x + 1, y + 1, SIZE - 2, SIZE - 2);
-            if (model.isEnabled() && (model.isArmed() && !(model.isPressed()))) {
+            boolean paintFocus = model.isEnabled()
+                              && ((model.isArmed() && !model.isPressed()) ||
+                                  (cb.hasFocus() && cb.getText().length() == 0));
+            if (paintFocus) {
                 drawFocus(g2, x + 1, y + 1, SIZE - 3, SIZE - 3);
             }
             if (model.isSelected()) {
@@ -171,7 +174,7 @@ public final class PlasticXPIconFactory {
     }
 
     // Paints the icon for a radio button.
-    private static class RadioButtonIcon implements Icon, UIResource, Serializable {
+    private static final class RadioButtonIcon implements Icon, UIResource, Serializable {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
         
