@@ -53,7 +53,7 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
  * specified in the XP style.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 
@@ -98,35 +98,27 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 
         TableColumn draggedColumn = header.getDraggedColumn();
         int columnWidth;
-        int columnMargin = cm.getColumnMargin();
         Rectangle cellRect = header.getHeaderRect(cMin);
         TableColumn aColumn;
         if (ltr) {
             for (int column = cMin; column <= cMax; column++) {
                 aColumn = cm.getColumn(column);
                 columnWidth = aColumn.getWidth();
-                cellRect.width = columnWidth - columnMargin;
+                cellRect.width = columnWidth;
                 if (aColumn != draggedColumn) {
                     paintCell(g, cellRect, column);
                 }
                 cellRect.x += columnWidth;
             }
         } else {
-            aColumn = cm.getColumn(cMin);
-            if (aColumn != draggedColumn) {
-                columnWidth = aColumn.getWidth();
-                cellRect.width = columnWidth - columnMargin;
-                cellRect.x += columnMargin;
-                paintCell(g, cellRect, cMin);
-            }
-            for (int column = cMin + 1; column <= cMax; column++) {
+            for (int column = cMax; column >= cMin; column--) {
                 aColumn = cm.getColumn(column);
                 columnWidth = aColumn.getWidth();
-                cellRect.width = columnWidth - columnMargin;
-                cellRect.x -= columnWidth;
+                cellRect.width = columnWidth;
                 if (aColumn != draggedColumn) {
                     paintCell(g, cellRect, column);
                 }
+                cellRect.x += columnWidth;
             }
         }
 
@@ -175,8 +167,7 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
             // the component to the renderer pane to determine its
             // non-opaqueness.
             rendererPane.add(c);
-            boolean nonOpaque = !c.isOpaque();
-            if (nonOpaque) {
+            if (!c.isOpaque()) {
                 rendererPane.paintComponent(g, background, header, cellRect.x,
                         cellRect.y, cellRect.width, cellRect.height, true);
 
