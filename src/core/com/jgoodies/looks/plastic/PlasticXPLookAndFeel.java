@@ -47,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -115,6 +115,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object scrollPaneBorder     = PlasticXPBorders.getScrollPaneBorder();
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
         Object toggleButtonBorder   = PlasticXPBorders.getToggleButtonBorder();
+        Object spinnerBorder        = PlasticXPBorders.getSpinnerBorder();
 
         String radioCheckIconName   = LookUtils.IS_LOW_RESOLUTION
                                             ? "icons/RadioLight5x5.png"
@@ -154,9 +155,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "FormattedTextField.margin",      textInsets,             
             "PasswordField.border",           textFieldBorder,
             "PasswordField.margin",           textInsets,             
-            "Spinner.border", 				  scrollPaneBorder,
+            "Spinner.border", 				  spinnerBorder,
             "Spinner.defaultEditorInsets",	  textInsets,
-            "Spinner.arrowButtonInsets",      null, 
             
             "ScrollPane.border",              scrollPaneBorder,
             "Table.scrollPaneBorder", 		  scrollPaneBorder,

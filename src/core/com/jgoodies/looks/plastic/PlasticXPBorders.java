@@ -38,6 +38,7 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -56,7 +57,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 final class PlasticXPBorders {
@@ -74,6 +75,7 @@ final class PlasticXPBorders {
     private static Border scrollPaneBorder;
     private static Border textFieldBorder;
     private static Border toggleButtonBorder;
+    private static Border spinnerBorder;
     
 
     /*
@@ -144,6 +146,16 @@ final class PlasticXPBorders {
                     new BasicBorders.MarginBorder());
         }
         return toggleButtonBorder;
+    }
+
+    /*
+     * Returns a border instance for a <code>JSpinner</code>.
+     */
+    static Border getSpinnerBorder() {
+        if (spinnerBorder == null) {
+            spinnerBorder = new XPSpinnerBorder();
+        }
+        return spinnerBorder;
     }
 
     
@@ -312,4 +324,35 @@ final class PlasticXPBorders {
     }
 
     
+    /**
+     * A border for <code>JSpinner</code> components.
+     */
+    private static class XPSpinnerBorder extends MetalBorders.ScrollPaneBorder  {
+
+        private static final Insets INSETS = new Insets(1, 1, 1, 1);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            g.setColor(c.isEnabled() 
+                    ? PlasticLookAndFeel.getControlDarkShadow()
+                    : MetalLookAndFeel.getControlShadow());
+            // If you change the value of arrowButtonWidth, don't forget
+            // to change it in PlasticXPSpinnerUI#SpinnerXPArrowButton too.
+            int arrowButtonWidth = UIManager.getInt("ScrollBar.width") - 1;
+            w -= arrowButtonWidth;
+            g.fillRect(x,   y,     w,   1);
+            g.fillRect(x,   y+1,   1,   h-1);
+            g.fillRect(x+1, y+h-1, w-1, 1);
+        }    
+
+        public Insets getBorderInsets(Component c) { return INSETS; }
+
+        public Insets getBorderInsets(Component c, Insets newInsets) {
+            newInsets.top    = INSETS.top;
+            newInsets.left   = INSETS.left;
+            newInsets.bottom = INSETS.bottom;
+            newInsets.right  = INSETS.right;
+            return newInsets;
+        }
+    }
+
 }
