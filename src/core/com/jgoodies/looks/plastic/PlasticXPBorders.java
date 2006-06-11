@@ -38,10 +38,12 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JToggleButton;
 import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -57,7 +59,8 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @author Andrej Golovnin
+ * @version $Revision: 1.6 $
  */
 
 final class PlasticXPBorders {
@@ -76,6 +79,7 @@ final class PlasticXPBorders {
     private static Border textFieldBorder;
     private static Border toggleButtonBorder;
     private static Border spinnerBorder;
+    private static Border rolloverButtonBorder;
     
 
     /*
@@ -160,9 +164,23 @@ final class PlasticXPBorders {
 
     
     /**
+     * Returns a rollover border for buttons in a <code>JToolBar</code>.
+     * 
+     * @return the lazily created rollover button border
+     */
+    static Border getRolloverButtonBorder() {
+        if (rolloverButtonBorder == null) { 
+            rolloverButtonBorder = new BorderUIResource.CompoundBorderUIResource(
+                                    new RolloverButtonBorder(),
+                                    new PlasticBorders.RolloverMarginBorder());
+        }
+        return rolloverButtonBorder;
+    }
+
+    /**
      * A border for XP style buttons.
      */
-    private static final class XPButtonBorder extends AbstractBorder implements UIResource {
+    private static class XPButtonBorder extends AbstractBorder implements UIResource {
 
         protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
             ? (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED  // isClassic 
@@ -323,7 +341,7 @@ final class PlasticXPBorders {
         }
     }
 
-    
+
     /**
      * A border for <code>JSpinner</code> components.
      */
@@ -353,6 +371,42 @@ final class PlasticXPBorders {
             newInsets.right  = INSETS.right;
             return newInsets;
         }
+    }
+
+
+    /**
+     * A rollover border for buttons in toolbars.
+     */
+    private static final class RolloverButtonBorder extends XPButtonBorder {
+
+        private static final Insets INSETS_3 = new Insets(3, 3, 3, 3);
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+            AbstractButton b = (AbstractButton) c;
+            ButtonModel model = b.getModel();
+
+            if (!model.isEnabled())
+                return;
+
+            if (!(c instanceof JToggleButton)) {
+                if (model.isRollover() && !(model.isPressed() && !model.isArmed())) {
+                    super.paintBorder( c, g, x, y, w, h );
+                }
+                return;
+            }
+
+            if (model.isRollover()) {
+                if (model.isPressed() && model.isArmed()) {
+                    PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
+                } else {
+                    PlasticXPUtils.drawPlainButtonBorder(g, x, y, w, h);
+                }
+            } else if (model.isSelected()) {
+                PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
+            }
+        }
+
+        public Insets getBorderInsets(Component c) { return INSETS_3; }
     }
 
 }

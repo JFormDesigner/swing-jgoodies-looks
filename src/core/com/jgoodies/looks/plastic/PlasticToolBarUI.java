@@ -58,10 +58,10 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
-public final class PlasticToolBarUI extends MetalToolBarUI {
+public class PlasticToolBarUI extends MetalToolBarUI {
 
     private static final String PROPERTY_PREFIX = "ToolBar.";
 

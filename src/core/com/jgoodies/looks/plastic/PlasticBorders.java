@@ -53,7 +53,7 @@ import com.jgoodies.looks.LookUtils;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 final class PlasticBorders {
@@ -706,9 +706,9 @@ final class PlasticBorders {
      * A border which is like a Margin border but it will only honor the margin
      * if the margin has been explicitly set by the developer.
      */
-	private static final class RolloverMarginBorder extends EmptyBorder {
+	static final class RolloverMarginBorder extends EmptyBorder {
 
-        private RolloverMarginBorder() {
+        RolloverMarginBorder() {
             super(1, 1, 1, 1); 
         }
 

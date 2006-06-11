@@ -47,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -90,6 +90,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             
             // Changed buttons
             "SpinnerUI",       uiClassnamePrefix + "SpinnerUI",
+
+            // Uses rounded rollover borders
+            "ToolBarUI",       uiClassnamePrefix + "ToolBarUI"
         };
         table.putDefaults(uiDefaults);
     }
