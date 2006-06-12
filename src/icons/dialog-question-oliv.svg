@@ -15,7 +15,7 @@
    sodipodi:version="0.32"
    inkscape:version="0.43"
    sodipodi:docbase="D:\workspaces\default\Looks\src\icons"
-   sodipodi:docname="dialog-question.svg"
+   sodipodi:docname="dialog-question-oliv.svg"
    inkscape:export-filename="D:\temp\tango-icon-theme-0.7.2\48x48\dialog-question.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90">
@@ -108,8 +108,8 @@
      inkscape:showpageshadow="false"
      inkscape:window-width="891"
      inkscape:window-height="900"
-     inkscape:window-x="1284"
-     inkscape:window-y="17" />
+     inkscape:window-x="120"
+     inkscape:window-y="21" />
   <metadata
      id="metadata4">
     <rdf:RDF>
@@ -171,7 +171,7 @@
        sodipodi:type="arc" />
     <path
        sodipodi:type="arc"
-       style="opacity:1.0000000;fill:#65a826;fill-opacity:1;fill-rule:nonzero;stroke:#3b7304;stroke-width:0.98214624;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1"
+       style="opacity:1.0000000;fill:#8d9642;fill-opacity:1;fill-rule:nonzero;stroke:#4d5506;stroke-width:0.98214624;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1"
        id="path1650"
        sodipodi:cx="24.130018"
        sodipodi:cy="23.428040"
@@ -181,7 +181,7 @@
        transform="matrix(0.944630,0.000000,0.000000,0.980053,1.504174,-1.556912)" />
     <path
        sodipodi:type="arc"
-       style="opacity:1.0000000;fill:none;fill-opacity:1.0000000;fill-rule:nonzero;stroke:#4e9a06;stroke-width:0.98214942;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1"
+       style="opacity:1.0000000;fill:none;fill-opacity:1.0000000;fill-rule:nonzero;stroke:#b0b778;stroke-width:0.98214942;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0000000;stroke-dasharray:none;stroke-dashoffset:0.0000000;stroke-opacity:1"
        id="path3392"
        sodipodi:cx="24.130018"
        sodipodi:cy="23.428040"
