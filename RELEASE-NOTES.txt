@@ -28,20 +28,26 @@ CHANGES THAT AFFECT THE COMPATIBILITY
 
 BUGS FIXED
 
-    o ...
+    #088: SplitPaneDivider ignores the opaque property of the split pane.
+    #111: RTL menus have problems with accelerator alignment.
+    #128: Windows XP table header border is wrong.
+    #131: Tabbed pane content is not properly centered in WinXP L&f.
     
     
 NEW FEATURES
     
-    o Added Options.COMBO_RENDERER_IS_BORDER_REMOVABLE. Indicates whether 
-      the component's border can be temporarily removed when painting 
-      the current value or not. Useful for custom Windows combo renderers.
+    #117: Consider removing more combo box renderer borders. Added 
+          Options.COMBO_RENDERER_IS_BORDER_REMOVABLE. Indicates whether 
+          the component border can be temporarily removed when painting 
+          the current value. Useful for custom Windows combo renderers.
     o ...
 
 
 OTHER CHANGES
 
-    o ...
+    #040: Consider improving instance reuse.
+    #093: Consider making PlasticXP spinner buttons round.
+    #133: Consider making PlasticXP toolbar button rollover border round.
     
     
 ---------------------------------------------------------------------------
