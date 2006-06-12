@@ -55,7 +55,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class PlasticXPIconFactory {
 
@@ -93,6 +93,9 @@ public final class PlasticXPIconFactory {
     }
 
 
+    /**
+     * Paints the the icon and focus border for Plastic XP check boxes.
+     */
     private static final class CheckBoxIcon implements Icon, UIResource, Serializable {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
@@ -104,21 +107,30 @@ public final class PlasticXPIconFactory {
             JCheckBox cb = (JCheckBox) c;
             ButtonModel model = cb.getModel();
             Graphics2D g2 = (Graphics2D) g;
-            Object hint = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
+            || (cb.hasFocus() && (cb.getText().length() == 0));
+            
+            final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
+            Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
+            Object oldAAHint = g2.getRenderingHint(key);
+            if (newAAHint != oldAAHint) {
+                g2.setRenderingHint(key, newAAHint);
+            } else {
+                oldAAHint = null;
+            }
             
             drawBorder(g2, model.isEnabled(), x, y, SIZE - 1, SIZE - 1);
             drawFill(g2, model.isPressed(), x + 1, y + 1, SIZE - 2, SIZE - 2);
-            boolean paintFocus = model.isEnabled()
-                              && ((model.isArmed() && !model.isPressed()) ||
-                                  (cb.hasFocus() && cb.getText().length() == 0));
             if (paintFocus) {
                 drawFocus(g2, x + 1, y + 1, SIZE - 3, SIZE - 3);
             }
             if (model.isSelected()) {
                 drawCheck(g2, model.isEnabled(), x + 3, y + 3, SIZE - 7, SIZE - 7);
             }
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, hint);
+            
+            if (oldAAHint != null) {
+                g2.setRenderingHint(key, oldAAHint);
+            }
         }
 
         private void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int width, int height) {
@@ -173,7 +185,10 @@ public final class PlasticXPIconFactory {
 
     }
 
-    // Paints the icon for a radio button.
+    
+    /** 
+     * Paints the the icon and focus border for Plastic XP check boxes.
+     */
     private static final class RadioButtonIcon implements Icon, UIResource, Serializable {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
@@ -185,22 +200,32 @@ public final class PlasticXPIconFactory {
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g;
-            AbstractButton b = (AbstractButton) c;
-            ButtonModel model = b.getModel();
+            AbstractButton rb = (AbstractButton) c;
+            ButtonModel model = rb.getModel();
+            boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
+                                 || (rb.hasFocus() && (rb.getText().length() == 0));
         
-            Object hint = g2.getRenderingHint(RenderingHints.KEY_ANTIALIASING);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
+            Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
+            Object oldAAHint = g2.getRenderingHint(key);
+            if (newAAHint != oldAAHint) {
+                g2.setRenderingHint(key, newAAHint);
+            } else {
+                oldAAHint = null;
+            }
         
             drawFill(g2, model.isPressed(), x, y, SIZE - 1, SIZE - 1);
-        
-            if (model.isArmed() && !(model.isPressed())) {
+            if (paintFocus) {
                 drawFocus(g2, x + 1, y + 1, SIZE - 3, SIZE - 3);
             }
             if (model.isSelected()) {
                 drawCheck(g2, c, model.isEnabled(), x + 4, y + 4, SIZE - 8, SIZE - 8);
             }
         	drawBorder(g2, model.isEnabled(), x, y, SIZE-1, SIZE-1);
-            g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, hint);
+            
+            if (oldAAHint != null) {
+                g2.setRenderingHint(key, oldAAHint);
+            }
         }
 
         private void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int w, int h) {
