@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -317,18 +317,16 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * To do so, set the client property "isBorderRemovable" 
      * to <code>Boolean.TRUE</code>. If this client property is set,
      * its value will be returned. If it is not set, <code>true</code> is returned
-     * if and only if the component's border is an EmptyBorder.<p>
-     * 
-     * TODO: Make this method protected in the JGoodies Looks 2.1.
+     * if and only if the component's border is an EmptyBorder.
      *  
      * @param rendererComponent  the renderer component to check
      * @return true if the component's border can be removed, false if not
      * @see #paintCurrentValue(Graphics, Rectangle, boolean)
      */
-    private boolean isRendererBorderRemovable(JComponent rendererComponent) {
+    protected boolean isRendererBorderRemovable(JComponent rendererComponent) {
         if (rendererComponent instanceof BasicComboBoxRenderer.UIResource)
             return true;
-        Object hint = rendererComponent.getClientProperty("isBorderRemovable");
+        Object hint = rendererComponent.getClientProperty(Options.COMBO_RENDERER_IS_BORDER_REMOVABLE);
         if (hint != null)
             return Boolean.TRUE.equals(hint);
         Border border = rendererComponent.getBorder();
