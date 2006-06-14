@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.27 2006-06-10 10:21:02 karsten Exp $
+   $Id: build.xml,v 1.28 2006-06-14 08:22:12 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -329,7 +329,7 @@
                 <attribute name ="Main-Class" 
                            value="FontTest"/>
                 <attribute name ="Class-Path" 
-                           value="${dist.all.name}"/>
+                           value="../${dist.all.name}"/>
             </manifest>     
         </jar>
     </target>
