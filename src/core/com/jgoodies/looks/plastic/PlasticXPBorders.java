@@ -34,16 +34,10 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -60,7 +54,7 @@ import com.jgoodies.looks.LookUtils;
  *
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 final class PlasticXPBorders {
