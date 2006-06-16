@@ -32,6 +32,7 @@ BUGS FIXED
     #111: RTL menus have problems with accelerator alignment.
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
+    #141: fonttest.jar manifest classpath broken.
     
     
 NEW FEATURES
