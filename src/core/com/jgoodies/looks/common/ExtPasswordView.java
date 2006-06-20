@@ -46,7 +46,7 @@ import javax.swing.text.Position;
  * Used in Java 1.4 and Java 5 only.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class ExtPasswordView extends PasswordView {
     
@@ -116,13 +116,27 @@ public final class ExtPasswordView extends PasswordView {
         }
         JPasswordField field = (JPasswordField) container;
         if (canOverrideEchoChar(field)) {
-            field.setEchoChar(getEchoChar());
+            setFieldEchoChar(field, getEchoChar());
         }
     }
     
     
     private boolean canOverrideEchoChar(JPasswordField field) {
         return field.echoCharIsSet() && field.getEchoChar() == '*';
+    }
+    
+    /**
+     * Sets a new echo char in the given password field,
+     * if and only if the new echo char differs from the old one.
+     * 
+     * @param field        the JPasswordField to change
+     * @param newEchoChar  the echo char that shall be set
+     */
+    private void setFieldEchoChar(JPasswordField field, char newEchoChar) {
+        char oldEchoChar = field.getEchoChar();
+        if (oldEchoChar == newEchoChar) 
+            return;
+        field.setEchoChar(newEchoChar);
     }
     
     
