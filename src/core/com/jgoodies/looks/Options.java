@@ -39,6 +39,7 @@ import javax.swing.UIManager;
 import com.jgoodies.looks.common.ShadowPopup;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
+import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
 
 /**
  * Provides access to optional features of the JGoodies L&amp;Fs 
@@ -51,7 +52,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * the String values doesn't require having this class in the class path.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public final class Options {
 
