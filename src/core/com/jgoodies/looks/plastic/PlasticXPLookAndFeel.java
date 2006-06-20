@@ -47,7 +47,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -175,6 +175,9 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             
             "ToggleButton.border",            toggleButtonBorder,
             "ToggleButton.borderPaintsFocus", Boolean.TRUE,
+            
+            "Tree.expandedIcon",              makeIcon(getClass(), "icons/TreeExpanded.png"),
+            "Tree.collapsedIcon",             makeIcon(getClass(), "icons/TreeCollapsed.png")
 		};
 		table.putDefaults(defaults);
 	}
