@@ -36,16 +36,19 @@ import java.awt.Insets;
 import java.lang.reflect.Method;
 
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.DimensionUIResource;
+import javax.swing.plaf.IconUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
 import com.jgoodies.looks.*;
 import com.jgoodies.looks.common.MinimumSizedIcon;
+import com.jgoodies.looks.common.RGBGrayFilter;
 import com.jgoodies.looks.common.ShadowPopupFactory;
 
 /**
@@ -55,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -154,8 +157,23 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         super.uninitialize();
         ShadowPopupFactory.uninstall();
     }
-    
-    
+
+
+    /**
+     * Returns an icon with a disabled appearance. This method is used
+     * to generate a disabled icon when one has not been specified.<p>
+     * 
+     * This method will be used only on JDK 5.0 and later.
+     *
+     * @param component the component that will display the icon, may be null.
+     * @param icon the icon to generate disabled icon from.
+     * @return disabled icon, or null if a suitable icon can not be generated.
+     */
+    public Icon getDisabledIcon(JComponent component, Icon icon) {
+        return new IconUIResource(RGBGrayFilter.getDisabledIcon(component, icon));
+    }
+
+
     /**
      * Initializes the class defaults, that is, overrides some UI delegates
      * with JGoodies Windows implementations.

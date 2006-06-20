@@ -41,14 +41,12 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.Icon;
+import javax.swing.JComponent;
 import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.BorderUIResource;
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.FontUIResource;
-import javax.swing.plaf.InsetsUIResource;
+import javax.swing.plaf.*;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
@@ -58,6 +56,7 @@ import com.jgoodies.looks.FontPolicy;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
+import com.jgoodies.looks.common.RGBGrayFilter;
 import com.jgoodies.looks.common.ShadowPopupFactory;
 import com.jgoodies.looks.plastic.theme.SkyBluer;
 
@@ -67,7 +66,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -294,6 +293,21 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     }
     
     
+    /**
+     * Returns an icon with a disabled appearance. This method is used
+     * to generate a disabled icon when one has not been specified.<p>
+     * 
+     * This method will be used only on JDK 5.0 and later.
+     *
+     * @param component the component that will display the icon, may be null.
+     * @param icon the icon to generate disabled icon from.
+     * @return disabled icon, or null if a suitable icon can not be generated.
+     */
+    public Icon getDisabledIcon(JComponent component, Icon icon) {
+        return new IconUIResource(RGBGrayFilter.getDisabledIcon(component, icon));
+    }
+
+
 	/**
 	 * Initializes the class defaults, that is, overrides some UI delegates
 	 * with JGoodies Plastic implementations.
