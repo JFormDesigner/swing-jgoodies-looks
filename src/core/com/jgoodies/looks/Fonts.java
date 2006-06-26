@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -276,13 +276,13 @@ public final class Fonts {
         // so we use the older Tahoma, if it can display the localized text.
         if (LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5) {
             Font tahoma = getDefaultGUIFontWesternModernWindowsNormal();
-            return canDisplayLocalizedText(tahoma, Locale.getDefault())
+            return Boolean.TRUE.equals(canDisplayLocalizedText(tahoma, Locale.getDefault()))
                 ? tahoma
                 : defaultGUIFont;
         } 
         
         Font iconFont = getDesktopFont(WINDOWS_ICON_FONT_KEY);
-        return canDisplayLocalizedText(iconFont, Locale.getDefault())
+        return Boolean.TRUE.equals(canDisplayLocalizedText(iconFont, Locale.getDefault()))
             ? iconFont
             : defaultGUIFont;
     }
@@ -290,7 +290,7 @@ public final class Fonts {
     
     /**
      * Looks up and returns the Windows defaultGUI font. 
-     * Works around a bug with Java 1.4.2_11, 1.5.0_07, and 1.6 b86
+     * Works around a bug with Java 1.4.2_11, 1.5.0_07, and 1.6 b89
      * in the Vista Beta2, where the win.defaultGUI.font desktop property
      * returns null. In this case a logical "Dialog" font is used as fallback.
      * 
@@ -305,23 +305,88 @@ public final class Fonts {
     
     
     /**
-     * Checks and answers if the given font can display text
+     * Checks and answers whether the given font can display text
      * that is localized for the specified locale.
-     * The test invokes <code>Font#canDisplayUpTo</code> on the locale's
-     * name in the locale's language, e.g. "English" for English, 
-     * "Deutsch" for German, etc. In a Chinese locale this test
-     * will check if the font can display Chinese glyphs.
-     * The international Java runtime environments seem to have this
-     * name in the localized form for all supported locales. 
+     * Returns <code>null</code> if we can't test it.<p>
+     * 
+     * First checks, if the locale's display language is available
+     * in localized form, for example "Deutsch" for the German locale.
+     * If so, we check if the given font can display the localized
+     * display language.<p>
+     * 
+     * Otherwise we check some known combinations of fonts and locales
+     * and return the associated results. For all other combinations,
+     * <code>null</code> is returned to indicate that we don't know
+     * whether the font can display text in the given locale.
      *  
      * @param font     the font to be tested
      * @param locale   the locale to be used
-     * @return true if the font can display the locale's text, false otherwise
+     * @return <code>Boolean.TRUE</code> if the font can display the locale's text, 
+     *    <code>Boolean.FALSE</code> if not,
+     *    <code>null</code> if we don't know
      */
-    private static boolean canDisplayLocalizedText(Font font, Locale locale) {
+    public static Boolean canDisplayLocalizedText(Font font, Locale locale) {
+        if (localeHasLocalizedDisplayLanguage(locale)) {
+            return Boolean.valueOf(canDisplayLocalizedDisplayLanguage(font, locale));
+        }
+        String fontName = font.getName();
+        String language = locale.getLanguage();
+        if ("Tahoma".equals(fontName)) {
+            if ("hi".equals(language))
+                return Boolean.FALSE;
+            else if ("ja".equals(language))
+                return Boolean.FALSE;
+            else if ("ko".equals(language))
+                return Boolean.FALSE;
+            else if ("zh".equals(language))
+                return Boolean.FALSE;
+        }
+        if ("MS Sans Serif".equals(fontName)) {
+            if ("ja".equals(language))
+                return Boolean.FALSE;
+            else if ("ko".equals(language))
+                return Boolean.FALSE;
+            else if ("zh".equals(language))
+                return Boolean.FALSE;
+        }
+        return null;
+    }
+    
+    
+    /**
+     * Checks and answers if the given font can display the locale's
+     * localized display language, for example "English" for English, 
+     * "Deutsch" for German, etc. 
+     * The test invokes <code>Font#canDisplayUpTo</code> on the localized
+     * display language. In a Chinese locale this test
+     * will check if the font can display Chinese glyphs.
+     *  
+     * @param font     the font to be tested
+     * @param locale   the locale to be used
+     * @return true if the font can display the locale's localized display language, 
+     *     false otherwise
+     */
+    private static boolean canDisplayLocalizedDisplayLanguage(Font font, Locale locale) {
         String testString = locale.getDisplayLanguage(locale);
         int index = font.canDisplayUpTo(testString);
         return index == -1;
+    }
+    
+    
+    /**
+     * Checks and answers whether the locale's display language
+     * is available in a localized form, for example "Deutsch" for the
+     * German locale.
+     * 
+     * @param locale   the Locale to test
+     * @return true if the display language is localized, false if not
+     */
+    private static boolean localeHasLocalizedDisplayLanguage(Locale locale) {
+        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage()))
+            return true;
+        String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
+        String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
+        return !(englishDisplayLanguage.equals(localizedDisplayLanguage));
     }
     
     
