@@ -7,6 +7,7 @@ import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
 import com.jgoodies.looks.FontSet;
+import com.jgoodies.looks.Fonts;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
@@ -20,7 +21,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class FontTest {
     
@@ -179,12 +180,27 @@ public final class FontTest {
         Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
         Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
         Locale locale = Locale.getDefault();
+        buffer.append("\n    defaultLocale.getDisplayName(Locale.ENGLISH)=");
+        buffer.append(locale.getDisplayName(Locale.ENGLISH));
+        buffer.append("\n    defaultLocale.getDisplayLanguage(Locale.ENGLISH)=");
+        buffer.append(locale.getDisplayLanguage(Locale.ENGLISH));
         buffer.append("\n    defaultLocale.getDisplayLanguage(defaultLocale)=");
         buffer.append(locale.getDisplayLanguage(locale));
+        buffer.append("\n    locale has localized display language=" + localeHasLocalizedDisplayLanguage(locale));
         buffer.append("\n    defaultGUI font can display localized text=");
-        buffer.append(canDisplayLocalizedText(defaultGUIFont, locale));
+        buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(defaultGUIFont, locale)));
         buffer.append("\n    icon font can display localized text=");
-        buffer.append(canDisplayLocalizedText(iconFont, locale));
+        buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(iconFont, locale)));
+    }
+    
+    
+    private static String yesNoDontKnow(Boolean b) {
+        if (Boolean.TRUE.equals(b))
+            return "yes";
+        else if (Boolean.FALSE.equals(b))
+            return "no";
+        else 
+            return "don't know";
     }
     
     
@@ -281,23 +297,19 @@ public final class FontTest {
     // Helper Code ************************************************************
     
     /**
-     * Checks and answers if the given font can display text
-     * that is localized for the specified locale.
-     * The test invokes <code>Font#canDisplayUpTo</code> on the locale's
-     * name in the locale's language, e.g. "English" for English, 
-     * "Deutsch" for German, etc. In a Chinese locale this test
-     * will check if the font can display Chinese glyphs.
-     * The international Java runtime environments seem to have this
-     * name in the localized form for all supported locales. 
-     *  
-     * @param font     the font to be tested
-     * @param locale   the locale to be used
-     * @return true if the font can display the locale's text, false otherwise
+     * Checks and answers whether the locale's display language
+     * is available in a localized form, for example "Deutsch" for the
+     * German locale.
+     * 
+     * @param locale   the Locale to test
+     * @return true if the display language is localized, false if not
      */
-    private static boolean canDisplayLocalizedText(Font font, Locale locale) {
-        String testString = locale.getDisplayLanguage(locale);
-        int index = font.canDisplayUpTo(testString);
-        return index == -1;
+    private static boolean localeHasLocalizedDisplayLanguage(Locale locale) {
+        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage()))
+            return true;
+        String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
+        String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
+        return !(englishDisplayLanguage.equals(localizedDisplayLanguage));
     }
     
     
