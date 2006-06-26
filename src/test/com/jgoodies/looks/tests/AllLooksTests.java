@@ -37,7 +37,7 @@ import junit.framework.TestSuite;
  * A test suite for all tests related to the JGoodies Looks.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class AllLooksTests {
 
@@ -48,6 +48,7 @@ public final class AllLooksTests {
     public static Test suite() {
         TestSuite suite = new TestSuite("Test for com.jgoodies.looks");
         //$JUnit-BEGIN$
+        suite.addTest(new TestSuite(FontsTest.class));
         suite.addTest(new TestSuite(OptionsTest.class));
         //$JUnit-END$
         return suite;
