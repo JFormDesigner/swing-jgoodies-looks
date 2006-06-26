@@ -32,21 +32,21 @@ BUGS FIXED
     #111: RTL menus have problems with accelerator alignment.
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
-    #141: fonttest.jar manifest classpath broken.
     
     
 NEW FEATURES
     
-    #117: Consider removing more combo box renderer borders. Added 
-          Options.COMBO_RENDERER_IS_BORDER_REMOVABLE. Indicates whether 
-          the component border can be temporarily removed when painting 
-          the current value. Useful for custom Windows combo renderers.
-    o ...
+    #117: Consider removing more combo box renderer borders. 
+          Added the Options.COMBO_RENDERER_IS_BORDER_REMOVABLE hint
+          for combo box renders that indicates whether a  border 
+          can be temporarily removed when painting the current value. 
+          This is useful for custom Windows combo renderers.
 
 
 OTHER CHANGES
 
     #040: Consider improving instance reuse.
+    #048: Add 3D icons for PlasticXP's tree collapse/expand.
     #093: Consider making PlasticXP spinner buttons round.
     #132: PlasticXP checkbox/radio button without text doesn't paint focus.
     #133: Consider making PlasticXP toolbar button rollover border round.
@@ -55,7 +55,41 @@ OTHER CHANGES
     
     
 ---------------------------------------------------------------------------
+Find below the change history for older releases.
 
+
+
+                         JGoodies Looks
+                          Version 2.0.4
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance release fixes a severe regression (issue #142)
+    that affects the JGoodies Windows L&fs in classic Windows mode
+    on Java 1.4/Java 1.5 where a window displays a JPasswordField. 
+    It is strongly recommended to update your Looks library version.
+    
+    Also, the font choice in Chinese, Korean, and other non-western
+    environments has been improved for the case where the Java env
+    lacks the multi-language files.
+
+    
+BUGS FIXED
+
+    #141: fonttest.jar manifest classpath broken.
+    #142: Broken classic Windows password field in 1.4 and 1.5.
+    #143: Broken font choice in non-western envs that lack i18n files
+
+
+OTHER CHANGES
+
+    o FontTest shows more detailed internationalization data.
+    o Added a JUnit test for Fonts#canDisplayLocalizedText(Font, Locale).
+
+
+---------------------------------------------------------------------------
 Find below the change history for older releases.
 
 
