@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -324,6 +324,8 @@ public final class Fonts {
      * @return <code>Boolean.TRUE</code> if the font can display the locale's text, 
      *    <code>Boolean.FALSE</code> if not,
      *    <code>null</code> if we don't know
+     *    
+     * @since 2.0.4
      */
     public static Boolean canDisplayLocalizedText(Font font, Locale locale) {
         if (localeHasLocalizedDisplayLanguage(locale)) {
