@@ -105,7 +105,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see     Options
  */
@@ -1461,7 +1461,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                 case LEFT:
                                 case RIGHT:
                                     int totalTabHeight = rects[tabCount - 1].y
-                                            + rects[tabCount - 1].height;
+                                            + rects[tabCount - 1].height
+                                            + renderer.getTabsOverlay();
                                     if (totalTabHeight > th) {
                                         visible = true;
                                         bx = (tabPlacement == LEFT ? tx + tw
@@ -1477,7 +1478,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                 case TOP:
                                 default:
                                     int totalTabWidth = rects[tabCount - 1].x
-                                            + rects[tabCount - 1].width;
+                                            + rects[tabCount - 1].width
+                                            + renderer.getTabsOverlay();
     
                                     if (totalTabWidth > tw) {
                                         visible = true;
