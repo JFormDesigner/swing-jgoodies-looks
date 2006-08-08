@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * 
  * @see     FontSet
  * @see     FontSets
@@ -343,7 +343,7 @@ public final class Fonts {
             else if ("zh".equals(language))
                 return Boolean.FALSE;
         }
-        if ("MS Sans Serif".equals(fontName)) {
+        if ("Microsoft Sans Serif".equals(fontName)) {
             if ("ja".equals(language))
                 return Boolean.FALSE;
             else if ("ko".equals(language))
