@@ -35,6 +35,7 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
@@ -47,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class LookUtils {
     
@@ -484,7 +485,7 @@ public final class LookUtils {
     }
     
     private static boolean startsWithIgnoreCase(String str, String prefix) {
-        return str != null && str.toUpperCase().startsWith(prefix.toUpperCase());
+        return str != null && str.toUpperCase(Locale.ENGLISH).startsWith(prefix.toUpperCase(Locale.ENGLISH));
     }
 
 
