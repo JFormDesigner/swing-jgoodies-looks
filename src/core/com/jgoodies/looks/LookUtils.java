@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class LookUtils {
     
@@ -265,7 +265,7 @@ public final class LookUtils {
      * 
      * @param key   the name of the system property
      * @return the system property's String value, or <code>null</code> if there's
-     *     no such value, or a SecurityException has been catched
+     *     no such value, or a SecurityException has been caught
      */
     public static String getSystemProperty(String key) {
         try {
@@ -284,7 +284,7 @@ public final class LookUtils {
      * @param key          the name of the system property
      * @param defaultValue the default value if no property exists.
      * @return the system property's String value, or the defaultValue 
-     *     if there's no such value, or a SecurityException has been catched
+     *     if there's no such value, or a SecurityException has been caught
      */
     public static String getSystemProperty(String key, String defaultValue) {
         try {
