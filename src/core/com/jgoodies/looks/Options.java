@@ -52,7 +52,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class Options {
 
@@ -194,9 +194,26 @@ public final class Options {
     public static final String TAB_ICONS_ENABLED_KEY =
         "jgoodies.tabIconsEnabled";
         
+    /**
+     * A UIDefaults key for the popup drop shadow enablement.
+     * 
+     * @see #isPopupDropShadowEnabled()
+     * @see #setPopupDropShadowEnabled(boolean)
+     */
     public static final String POPUP_DROP_SHADOW_ENABLED_KEY =
         "jgoodies.popupDropShadowEnabled";
         
+    
+    /**
+     * A UIDefaults key for enabling/disabling the new high-resolution 
+     * gray filter.
+     * 
+     * @since 2.1
+     */
+    public static final String HI_RES_GRAY_FILTER_ENABLED_KEY = 
+        "HiResGrayFilterEnabled";
+    
+    
 
     // Optional Client Properties *******************************************
 
@@ -297,6 +314,18 @@ public final class Options {
      */
     public static final String COMBO_RENDERER_IS_BORDER_REMOVABLE =
         "isBorderRemovable";
+    
+    
+    /**
+     * A client property key for components with a disabled icon
+     * such as buttons, labels, and tabbed panes. Specifies whether
+     * the new high resolution gray filter shall be used to compute
+     * a disabled icon - if none is available.
+     * 
+     * @since 2.1
+     */
+    public static final String HI_RES_DISABLED_ICON_CLIENT_KEY = 
+        "generateHiResDisabledIcon";
     
     
     // System Settings ********************************************************
@@ -583,6 +612,39 @@ public final class Options {
     }
 
 
+    /**
+     * Checks and answers whether the new high-resolution gray filter
+     * is enabled or disabled. It is enabled by default.
+     * 
+     * @return true if the high-resolution gray filter is enabled, false if disabled
+     * 
+     * @see #setHiResGrayFilterEnabled(boolean)
+     * @see #HI_RES_GRAY_FILTER_ENABLED_KEY
+     * @see #HI_RES_DISABLED_ICON_CLIENT_KEY
+     * 
+     * @since 2.1
+     */
+    public static boolean isHiResGrayFilterEnabled() {
+        return !Boolean.FALSE.equals(UIManager.get(HI_RES_GRAY_FILTER_ENABLED_KEY));
+    }
+
+    /**
+     * Enables or disables the new high-resolution gray filter globally. 
+     * This gray filter can be disabled for individual components using the 
+     * client property key <code>HI_RES_DISABLED_ICON_CLIENT_KEY</code>.
+     * 
+     * @param b  true to enable the high-resolution gray filter, 
+     *     false to disable them
+     * 
+     * @see #isHiResGrayFilterEnabled()
+     * 
+     * @since 2.1
+     */
+    public static void setHiResGrayFilterEnabled(boolean b) {
+        UIManager.put(HI_RES_GRAY_FILTER_ENABLED_KEY, Boolean.valueOf(b));
+    }
+    
+    
     // Look And Feel Replacements *******************************************
 
     /**
