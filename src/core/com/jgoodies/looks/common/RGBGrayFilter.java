@@ -30,33 +30,39 @@
 
 package com.jgoodies.looks.common;
 
-import java.awt.Component;
 import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.FilteredImageSource;
-import java.awt.image.ImageProducer;
-import java.awt.image.RGBImageFilter;
+import java.awt.image.*;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
+
+import com.jgoodies.looks.Options;
 
 /**
- * An image filter that turns an icon into a grayscale icon.
- * Used by the JGoodies Windows and Plastic L&amp;Fs to create a disabled icon.
+ * An image filter that turns an icon into a grayscale icon. Used by 
+ * the JGoodies Windows and Plastic L&amp;Fs to create a disabled icon.<p>
+ * 
+ * The high-resolution gray filter can be disabled globally using
+ * {@link Options#setHiResGrayFilterEnabled(boolean)}; it is enabled by default.
+ * The global setting can be overridden per component by setting
+ * the client property key {@link Options#HI_RES_DISABLED_ICON_CLIENT_KEY}
+ * to <code>Boolean.FALSE</code>.
  *
  * @author Sun
  * @author Andrej Golovnin
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class RGBGrayFilter extends RGBImageFilter {
 
-    /** Overrides default constructor; prevents instantiation. */
+    /** 
+     * Overrides default constructor; prevents instantiation. 
+     */
     private RGBGrayFilter() {
         canFilterIndexColorModel = true;
     }
 
+    
     /**
      * Returns an icon with a disabled appearance. This method is used
      * to generate a disabled icon when one has not been specified.
@@ -65,25 +71,30 @@ public final class RGBGrayFilter extends RGBImageFilter {
      * @param icon the icon to generate disabled icon from.
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
-    public static Icon getDisabledIcon(Component component, Icon icon) {
-        if (icon == null) {
+    public static Icon getDisabledIcon(JComponent component, Icon icon) {
+        if (   !Options.isHiResGrayFilterEnabled()
+            || (icon == null)
+            || (component == null)
+            || (Boolean.FALSE.equals(component.getClientProperty(Options.HI_RES_DISABLED_ICON_CLIENT_KEY)))
+            || (icon.getIconWidth() == 0)
+            || (icon.getIconHeight() == 0)) {
             return null;
         }
-
         Image img;
         if (icon instanceof ImageIcon) {
             img = ((ImageIcon) icon).getImage();
         } else {
-            img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(),
+            img = new BufferedImage(
+                    icon.getIconWidth(), 
+                    icon.getIconHeight(),
                     BufferedImage.TYPE_INT_ARGB);
-            // TODO: Clarify if we call #paintIcon with a null component.
             icon.paintIcon(component, img.getGraphics(), 0, 0);
         }
 
         ImageProducer producer =
             new FilteredImageSource(img.getSource(), new RGBGrayFilter());
 
-        return new ImageIcon(Toolkit.getDefaultToolkit().createImage(producer));
+        return new ImageIcon(component.createImage(producer));
     }
     
 
