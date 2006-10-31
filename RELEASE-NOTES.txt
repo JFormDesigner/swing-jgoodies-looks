@@ -46,6 +46,9 @@ NEW FEATURES
           for combo box renders that indicates whether a  border 
           can be temporarily removed when painting the current value. 
           This is useful for custom Windows combo renderers.
+    #151: Select text field text after focus gained by keyboard.
+          This is always enabled in the Windows L&f, and can be
+          enabled for Plastic.
 
 
 OTHER CHANGES
