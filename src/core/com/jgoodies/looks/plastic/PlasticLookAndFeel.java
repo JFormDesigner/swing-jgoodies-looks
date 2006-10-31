@@ -66,7 +66,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -154,7 +154,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	private static boolean is3DEnabled = false;
 	
     
-    private static boolean selectTextOnKeyboardFocusGained = false;
+    private static boolean selectTextOnKeyboardFocusGained = 
+        LookUtils.IS_OS_WINDOWS;
     
     /**
      * In Java 5 or later, this field holds the public static method 
@@ -273,6 +274,14 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         return selectTextOnKeyboardFocusGained;
     }
 
+    
+    /**
+     * Sets whether text field text shall be selected when it gains focus
+     * via the keyboard. This is enabled on Windows by default and 
+     * disabled on all other platforms.
+     * 
+     * @param b
+     */
     public static void setSelectTextOnKeyboardFocusGained(boolean b) {
         selectTextOnKeyboardFocusGained = b;
     }
