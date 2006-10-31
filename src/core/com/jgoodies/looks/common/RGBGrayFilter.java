@@ -33,6 +33,7 @@ package com.jgoodies.looks.common;
 import java.awt.Image;
 import java.awt.image.*;
 
+import javax.swing.GrayFilter;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -51,7 +52,7 @@ import com.jgoodies.looks.Options;
  *
  * @author Sun
  * @author Andrej Golovnin
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public final class RGBGrayFilter extends RGBImageFilter {
 
@@ -72,10 +73,8 @@ public final class RGBGrayFilter extends RGBImageFilter {
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
     public static Icon getDisabledIcon(JComponent component, Icon icon) {
-        if (   !Options.isHiResGrayFilterEnabled()
-            || (icon == null)
+        if (   (icon == null)
             || (component == null)
-            || (Boolean.FALSE.equals(component.getClientProperty(Options.HI_RES_DISABLED_ICON_CLIENT_KEY)))
             || (icon.getIconWidth() == 0)
             || (icon.getIconHeight() == 0)) {
             return null;
@@ -89,6 +88,10 @@ public final class RGBGrayFilter extends RGBImageFilter {
                     icon.getIconHeight(),
                     BufferedImage.TYPE_INT_ARGB);
             icon.paintIcon(component, img.getGraphics(), 0, 0);
+        }
+        if (   !Options.isHiResGrayFilterEnabled()
+            || (Boolean.FALSE.equals(component.getClientProperty(Options.HI_RES_DISABLED_ICON_CLIENT_KEY)))) {
+            return new ImageIcon(GrayFilter.createDisabledImage(img));
         }
 
         ImageProducer producer =
