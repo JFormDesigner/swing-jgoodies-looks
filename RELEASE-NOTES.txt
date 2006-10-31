@@ -36,6 +36,11 @@ BUGS FIXED
     
 NEW FEATURES
     
+    #087: Added a new gray filter for disabled icons in Java 5 and later.
+          It can be enabled or disabled globally; it is on by default.
+          The global setting can be overridden per component, see:
+          Options.setHiResGrayFilterEnabled and the
+          Options#HI_RES_DISABLED_ICON_CLIENT_KEY client property key.
     #117: Consider removing more combo box renderer borders. 
           Added the Options.COMBO_RENDERER_IS_BORDER_REMOVABLE hint
           for combo box renders that indicates whether a  border 
