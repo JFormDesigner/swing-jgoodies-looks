@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -217,6 +217,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             // Work in progress: Can have a flat presentation
             "TabbedPaneUI",          windowsPrefix + "TabbedPaneUI", 
             
+            // Selects text after focus gained via keyboard
+            "TextFieldUI",           windowsPrefix + "TextFieldUI",
+
             // Updates the disabled and inactive background
             "TextAreaUI",            windowsPrefix + "TextAreaUI",
 

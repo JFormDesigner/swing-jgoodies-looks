@@ -66,7 +66,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -153,6 +153,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	/** The look-global state for the 3D enablement. */
 	private static boolean is3DEnabled = false;
 	
+    
+    private static boolean selectTextOnKeyboardFocusGained = false;
+    
     /**
      * In Java 5 or later, this field holds the public static method 
      * <code>MetalLookAndFeel#getCurrentTheme</code>. 
@@ -264,6 +267,14 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     public static void setHighContrastFocusColorsEnabled(boolean b) {
         useHighContrastFocusColors = b;
+    }
+    
+    public static boolean isSelectTextOnKeyboardFocusGained() {
+        return selectTextOnKeyboardFocusGained;
+    }
+
+    public static void setSelectTextOnKeyboardFocusGained(boolean b) {
+        selectTextOnKeyboardFocusGained = b;
     }
     
     
@@ -380,6 +391,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             // Modified tabs and ability use a version with reduced borders.
             uiDefaults = append(uiDefaults,
                     "TabbedPaneUI", plasticPrefix + "TabbedPaneUI");
+        }
+        if (isSelectTextOnKeyboardFocusGained()) {
+            // Selects all text after focus gain via keyboard.
+            uiDefaults = append(uiDefaults,
+                    "TextFieldUI", plasticPrefix + "TextFieldUI");
         }
 		table.putDefaults(uiDefaults);
 	}
