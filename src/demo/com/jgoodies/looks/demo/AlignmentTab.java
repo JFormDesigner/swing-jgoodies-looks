@@ -44,7 +44,7 @@ import com.jgoodies.forms.layout.Sizes;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class AlignmentTab {
     
@@ -114,7 +114,9 @@ final class AlignmentTab {
         builder.append(createCenteredLabel("Button"));
         builder.append(TEST_STR);
         builder.append(new JTextField(TEST_STR));
-        builder.append(new JFormattedTextField(TEST_STR));
+        JFormattedTextField field = new JFormattedTextField();
+        field.setText(TEST_STR);
+        builder.append(field);
         builder.append(new JPasswordField(TEST_STR));
         builder.append(new JButton(TEST_STR));
         
