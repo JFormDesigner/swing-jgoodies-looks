@@ -51,10 +51,7 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
-import com.jgoodies.looks.FontPolicies;
-import com.jgoodies.looks.FontPolicy;
-import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.Options;
+import com.jgoodies.looks.*;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.RGBGrayFilter;
 import com.jgoodies.looks.common.ShadowPopupFactory;
@@ -66,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -243,6 +240,44 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      */
     public static void setFontPolicy(FontPolicy fontPolicy) {
         UIManager.put(Options.PLASTIC_FONT_POLICY_KEY, fontPolicy);
+    }
+    
+
+    /**
+     * Looks up and retrieves the MicroLayoutPolicy used by 
+     * the JGoodies Windows Look&amp;Feel. 
+     * If a MicroLayoutPolicy has been set for this look, it'll be returned.
+     * Otherwise, the default Windows micro layout policy will be returned.
+     * 
+     * @return the MicroLayoutPolicy set for this Look&amp;feel - if any,
+     *     or the default Windows MicroLayoutPolicy. 
+     * 
+     * @see #setMicroLayoutPolicy
+     * @see Options#PLASTIC_MICRO_LAYOUT_POLICY_KEY
+     * @see MicroLayoutPolicies
+     */
+    public static MicroLayoutPolicy getMicroLayoutPolicy() {
+        MicroLayoutPolicy policy = 
+            (MicroLayoutPolicy) UIManager.get(Options.PLASTIC_MICRO_LAYOUT_POLICY_KEY);
+        return policy != null
+            ? policy
+            : MicroLayoutPolicies.getDefaultPlasticPolicy();
+    }
+    
+    
+    /**
+     * Sets the MicroLayoutPolicy to be used with the JGoodies Windows L&amp;F.
+     * If the specified policy is <code>null</code>, the default will be reset.
+     * 
+     * @param microLayoutPolicy   the MicroLayoutPolicy to be used with 
+     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset 
+     *     to the default
+     *     
+     * @see #getMicroLayoutPolicy()
+     * @see Options#PLASTIC_MICRO_LAYOUT_POLICY_KEY
+     */
+    public static void setMicroLayoutPolicy(MicroLayout microLayoutPolicy) {
+        UIManager.put(Options.PLASTIC_MICRO_LAYOUT_POLICY_KEY, microLayoutPolicy);
     }
     
 
