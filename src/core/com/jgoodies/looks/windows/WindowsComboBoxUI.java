@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -155,6 +155,13 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     }
 
 
+    protected void configureEditor() {
+        super.configureEditor();
+        if (!comboBox.isEnabled()) {
+            editor.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
+        }
+    }
+        
     /**
      * Creates a ComboPopup that honors the optional combo popup display value
      * that is used to compute the popup menu width. 
@@ -244,6 +251,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
         ListCellRenderer renderer = comboBox.getRenderer();
         Component c;
+        boolean isVistaReadOnlyCombo = isVistaXPStyleReadOnlyCombo();
 
         if (hasFocus && !isPopupVisible(comboBox)) {
             c = renderer.getListCellRendererComponent(listBox,
@@ -279,7 +287,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         }
         
         c.setFont(comboBox.getFont());
-        if (hasFocus && !isPopupVisible(comboBox)) {
+        if (hasFocus && !isPopupVisible(comboBox) && !isVistaReadOnlyCombo) {
             c.setForeground(listBox.getSelectionForeground());
             c.setBackground(listBox.getSelectionBackground());
         } else {
@@ -295,8 +303,16 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         // Fix for 4238829: should lay out the JPanel.
         boolean shouldValidate = c instanceof JPanel;
 
+        Boolean oldOpaque = null;
+        if (isVistaReadOnlyCombo && (c instanceof JComponent)) {
+            oldOpaque = Boolean.valueOf(c.isOpaque());
+            ((JComponent) c).setOpaque(false);
+        }
         currentValuePane.paintComponent(g, c, comboBox, bounds.x, bounds.y,
                                         bounds.width, bounds.height, shouldValidate);
+        if (oldOpaque != null) {
+            ((JComponent) c).setOpaque(oldOpaque.booleanValue());
+        }
         if (oldBorder != null) {
             ((JComponent) c).setBorder(oldBorder);
         }
@@ -331,6 +347,13 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             return Boolean.TRUE.equals(hint);
         Border border = rendererComponent.getBorder();
         return border instanceof EmptyBorder;
+    }
+    
+    
+    private boolean isVistaXPStyleReadOnlyCombo() {
+        return     LookUtils.IS_OS_WINDOWS_VISTA 
+                && LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+                && !comboBox.isEditable();
     }
     
     
