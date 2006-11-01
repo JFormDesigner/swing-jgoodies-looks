@@ -38,11 +38,11 @@ import com.jgoodies.looks.common.ComboBoxEditorTextField;
  * The default editor for editable combo boxes in the 
  * JGoodies Windows Look&amp;Feel.<p>
  * 
- * It differs from its superclass in that the border is quite the same as for text fields: 
- * a compound border with an inner <code>MarginBorder</code>.
+ * It differs from its superclass in that the border is quite the same as for 
+ * text fields: a compound border with an inner <code>MarginBorder</code>.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 class WindowsComboBoxEditor extends BasicComboBoxEditor {
 
