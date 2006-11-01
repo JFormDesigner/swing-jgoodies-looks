@@ -31,6 +31,7 @@
 package com.jgoodies.looks.demo;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.*;
@@ -51,7 +52,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * and proper preferred size computations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class ComboBoxTab {
     
@@ -221,8 +222,7 @@ final class ComboBoxTab {
             if (isSelected) {
                 setBackground(list.getSelectionBackground());
                 label.setForeground(list.getSelectionForeground());
-            }
-            else {
+            } else {
                 setBackground(list.getBackground());
                 label.setForeground(list.getForeground());
             }
@@ -230,8 +230,7 @@ final class ComboBoxTab {
             if (value instanceof Icon) {
                 label.setIcon((Icon)value);
                 label.setText("");
-            }
-            else {
+            } else {
                 label.setIcon(null);
                 label.setText((value == null) ? "" : value.toString());
             }
@@ -242,6 +241,13 @@ final class ComboBoxTab {
 
             return this;
          }
+        
+        
+        public void setForeground(Color c) {
+            if (label != null) { 
+                label.setForeground(c);
+            }
+        }
         
     }
     
