@@ -52,11 +52,11 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public final class Options {
 
-    // Look & Feel Names ****************************************************
+    // Look & Feel Names ******************************************************
 
     /**
      * The class name of the JGoodies Plastic L&amp;f.
@@ -104,7 +104,7 @@ public final class Options {
     }
     
 
-    // Keys for Overriding Font Settings ************************************
+    // Keys for Overriding Font Settings **************************************
 
     /**
      * A key for setting a custom FontPolicy for the Plastic L&amp;fs.
@@ -114,7 +114,7 @@ public final class Options {
      * @see PlasticLookAndFeel#setFontPolicy(FontPolicy)
      */
     public static final String PLASTIC_FONT_POLICY_KEY = 
-        "Plastic.fontChoicePolicy";
+        "Plastic.fontPolicy";
         
     /**
      * A key for setting the default control font in Plastic L&amp;fs.
@@ -142,7 +142,7 @@ public final class Options {
      * @see WindowsLookAndFeel#setFontPolicy(FontPolicy)
      */
     public static final String WINDOWS_FONT_POLICY_KEY = 
-        "Windows.fontChoicePolicy";
+        "Windows.fontPolicy";
         
     /**
      * A key for setting the default control font in the Windows L&amp;f.
@@ -181,9 +181,33 @@ public final class Options {
      */
     public static final String USE_SYSTEM_FONTS_APP_KEY =
         "Application.useSystemFontSettings";
+    
+    
+    // Keys for Micro Layout Policies *****************************************
 
+    /**
+     * A UIManager key for setting a custom MicroLayoutPolicy 
+     * for the Plastic L&amp;fs.
+     * 
+     * @see PlasticLookAndFeel#getMicroLayoutPolicy()
+     * @see PlasticLookAndFeel#setMicroLayoutPolicy(MicroLayout)
+     */
+    public static final String PLASTIC_MICRO_LAYOUT_POLICY_KEY = 
+        "Plastic.MicroLayoutPolicy";
+        
 
-    // Optional Global User Properties **************************************
+    /**
+     * A UIManager key for setting a custom MicroLayoutPolicy 
+     * for the Windows L&amp;f.
+     * 
+     * @see WindowsLookAndFeel#getMicroLayoutPolicy()
+     * @see WindowsLookAndFeel#setMicroLayoutPolicy(MicroLayout)
+     */
+    public static final String WINDOWS_MICRO_LAYOUT_POLICY_KEY = 
+        "Windows.MicroLayoutPolicy";
+        
+
+    // Optional Global User Properties ****************************************
 
     public static final String DEFAULT_ICON_SIZE_KEY =
         "jgoodies.defaultIconSize";
@@ -215,7 +239,7 @@ public final class Options {
     
     
 
-    // Optional Client Properties *******************************************
+    // Optional Client Properties *********************************************
 
     /** 
      * A JScrollPane client property key for a hint 
@@ -645,7 +669,7 @@ public final class Options {
     }
     
     
-    // Look And Feel Replacements *******************************************
+    // Look And Feel Replacements *********************************************
 
     /**
      * Puts a replacement name for a given <code>LookAndFeel</code> 
