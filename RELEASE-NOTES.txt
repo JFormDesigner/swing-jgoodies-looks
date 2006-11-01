@@ -1,12 +1,16 @@
 
                          JGoodies Looks
-                          Version 2.1 Preview
+                      Version 2.1 Preview 4
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a preview of the JGoodies Looks 2.1.
+    This is a reasonable stable preview of the JGoodies Looks 2.1.
+    
+    Although not heavily tested, it seems to be better than 
+    the Looks 2.0.4. This preview lacks documentation for the
+    new features, primarily the new customizable micro layouts.
     
     ...
     
@@ -35,6 +39,7 @@ BUGS FIXED
     #111: RTL menus have problems with accelerator alignment.
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
+    #153: Vista read-only combo renderer not transparent.
     
     
 NEW FEATURES
@@ -55,7 +60,6 @@ NEW FEATURES
           This is done in the Windows L&f, and can be enabled for Plastic, 
           see PlasticLookandFeel#setSelectTextOnKeyboardFocusGained.
           For Plastic this feature is enabled by default on Windows.
-        o Fixed appearance of read-only combos on Vista.
 
 
 OTHER CHANGES
