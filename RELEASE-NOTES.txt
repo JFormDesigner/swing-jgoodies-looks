@@ -23,7 +23,12 @@ CHANGES THAT AFFECT THE COMPATIBILITY
     o Removed the deprecated Options.TEXT_AREA_INFO_BACKGROUND_KEY.
       We suggest to use a factory that vends JTextArea's 
       with the background set to the editable background instead.    
-    o ...
+    o Key constants for setting a FontPolicy by name have been renamed
+      to be consistent with the feature they describe, e.g.
+      "Plastic.fontChoicePolicy" -> "Plastic.fontPolicy".
+      This won't affect you if you use the API method
+      xxxLookAndFeel#setFontPolicy or the key value from the
+      Options class, for example Options.PLASTIC_FONT_POLICY_KEY
     
 
 BUGS FIXED
@@ -41,6 +46,8 @@ NEW FEATURES
           The global setting can be overridden per component, see:
           Options.setHiResGrayFilterEnabled and the
           Options#HI_RES_DISABLED_ICON_CLIENT_KEY client property key.
+    #116: Provide option to customize the component micro layout. 
+          (API started)
     #117: Consider removing more combo box renderer borders. 
           Added the Options.COMBO_RENDERER_IS_BORDER_REMOVABLE hint
           for combo box renders that indicates whether a  border 
