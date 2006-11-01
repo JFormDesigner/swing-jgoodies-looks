@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -130,6 +130,45 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      */
     public static void setFontPolicy(FontPolicy fontPolicy) {
         UIManager.put(Options.WINDOWS_FONT_POLICY_KEY, fontPolicy);
+    }
+    
+
+    /**
+     * Looks up and retrieves the MicroLayoutPolicy used by 
+     * the JGoodies Windows Look&amp;Feel. 
+     * If a MicroLayoutPolicy has been set for this look, it'll be returned.
+     * Otherwise, the default Windows micro layout policy will be returned.
+     * 
+     * @return the MicroLayoutPolicy set for this Look&amp;feel - if any,
+     *     or the default Windows MicroLayoutPolicy. 
+     * 
+     * @see #setMicroLayoutPolicy
+     * @see Options#WINDOWS_MICRO_LAYOUT_POLICY_KEY
+     * @see MicroLayoutPolicies
+     * @see MicroLayoutPolicies#getDefaultWindowsPolicy()
+     */
+    public static MicroLayoutPolicy getMicroLayoutPolicy() {
+        MicroLayoutPolicy policy = 
+            (MicroLayoutPolicy) UIManager.get(Options.WINDOWS_MICRO_LAYOUT_POLICY_KEY);
+        return policy != null
+            ? policy
+            : MicroLayoutPolicies.getDefaultWindowsPolicy();
+    }
+    
+    
+    /**
+     * Sets the MicroLayoutPolicy to be used with the JGoodies Windows L&amp;F.
+     * If the specified policy is <code>null</code>, the default will be reset.
+     * 
+     * @param microLayoutPolicy   the MicroLayoutPolicy to be used with 
+     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset 
+     *     to the default
+     *     
+     * @see #getMicroLayoutPolicy()
+     * @see Options#WINDOWS_MICRO_LAYOUT_POLICY_KEY
+     */
+    public static void setMicroLayoutPolicy(MicroLayout microLayoutPolicy) {
+        UIManager.put(Options.WINDOWS_MICRO_LAYOUT_POLICY_KEY, microLayoutPolicy);
     }
     
 
