@@ -30,16 +30,11 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
 
 import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
 import javax.swing.plaf.ComponentUI;
-import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalTextFieldUI;
 import javax.swing.text.Caret;
-import javax.swing.text.DefaultCaret;
 
 
 /**
@@ -48,7 +43,7 @@ import javax.swing.text.DefaultCaret;
  * that selects all text when the field gains focus via the keyboard.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class PlasticTextFieldUI extends MetalTextFieldUI {
 
@@ -70,67 +65,6 @@ public final class PlasticTextFieldUI extends MetalTextFieldUI {
      */
     protected Caret createCaret() {
         return new PlasticFieldCaret();
-    }
-
-    
-    // Helper Classes *********************************************************
-    
-    /**
-     * PlasticFieldCaret is visible in non-editable fields, 
-     * and the text is selected after a keyboard focus gained event.
-     * For the latter see also issue #4337647 in Sun's bug database.
-     */
-    static class PlasticFieldCaret extends DefaultCaret implements UIResource {
-
-        public PlasticFieldCaret() {
-            super();
-        }
-
-
-        private boolean isKeyboardFocusEvent = true;
-
-
-        public void focusGained(FocusEvent e) {
-            if (getComponent().isEnabled()) {
-                setVisible(true);
-                setSelectionVisible(true);
-            }
-
-            if (getComponent().isEnabled() && isKeyboardFocusEvent) {
-                super.setDot(0);
-                super.moveDot(getComponent().getDocument().getLength());
-            }
-        }
-
-
-        public void focusLost(FocusEvent e) {
-            super.focusLost(e);
-            if (!e.isTemporary()) {
-                isKeyboardFocusEvent = true;
-            }
-        }
-
-
-        public void mousePressed(MouseEvent e) {
-            if (SwingUtilities.isLeftMouseButton(e) || e.isPopupTrigger()) {
-                isKeyboardFocusEvent = false;
-            }
-            super.mousePressed(e);
-
-        }
-
-
-        public void mouseReleased(MouseEvent e) {
-            super.mouseReleased(e);
-            if (e.isPopupTrigger()) {
-                isKeyboardFocusEvent = false;
-                if ((getComponent() != null) && getComponent().isEnabled()
-                        && getComponent().isRequestFocusEnabled()) {
-                    getComponent().requestFocus();
-                }
-            }
-        }
-        
     }  
     
     

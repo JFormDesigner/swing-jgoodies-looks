@@ -34,9 +34,11 @@ package com.jgoodies.looks.windows;
 import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
+import javax.swing.text.Caret;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.common.ExtPasswordView;
 
 /**
@@ -47,7 +49,7 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * Used for Java 1.4 and Java 5.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI {
 
@@ -81,8 +83,20 @@ public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.window
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new ExtPasswordView(elem);
+        return (LookUtils.IS_JAVA_1_4_OR_5)
+            ? new ExtPasswordView(elem)
+            : super.create(elem);
     }
     
+    
+    /**
+     * Creates the caret for a field.
+     *
+     * @return the caret
+     */
+    protected Caret createCaret() {
+        return new WindowsFieldCaret();
+    }
+
     
 }

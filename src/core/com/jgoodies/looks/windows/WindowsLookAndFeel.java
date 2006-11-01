@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -258,7 +258,13 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             
             // Selects text after focus gained via keyboard
             "TextFieldUI",           windowsPrefix + "TextFieldUI",
+            "FormattedTextFieldUI",  windowsPrefix + "FormattedTextFieldUI",
 
+            // Selects text after focus gained via keyboard
+            // Renders a dot, not the star ("*") character on Java 1.4 and 5                       
+            "PasswordFieldUI",       windowsPrefix + "PasswordFieldUI", 
+
+            
             // Updates the disabled and inactive background
             "TextAreaUI",            windowsPrefix + "TextAreaUI",
 
@@ -274,12 +280,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "SpinnerUI",             windowsPrefix + "SpinnerUI"); 
         }
         
-        if (LookUtils.IS_JAVA_1_4_OR_5) {
-            // Renders a dot, not the star ("*") character                       
-            uiDefaults = append(uiDefaults, 
-                "PasswordFieldUI",    windowsPrefix + "PasswordFieldUI"); 
-        }
-   
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
             uiDefaults = append(uiDefaults,

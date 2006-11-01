@@ -35,9 +35,11 @@ import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPasswordFieldUI;
+import javax.swing.text.Caret;
 import javax.swing.text.Element;
 import javax.swing.text.View;
 
+import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.common.ExtPasswordView;
 
 
@@ -45,10 +47,10 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * The JGoodies PlasticXP Look&amp;Feel implementation of a password field UI
  * delegate. It differs from its superclass in that it utilizes a password 
  * view that renders the UIManager's echo char, not a star (&quot;*&quot;).
- * Used in Java 1.4 and Java 5 only.
+ * In addition it uses a custom caret if enabled by the L&amp;f.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 
@@ -69,8 +71,22 @@ public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 	 * @return the view
 	 */
     public View create(Element elem) {
-        return new ExtPasswordView(elem);
+        return (LookUtils.IS_JAVA_1_4_OR_5)
+            ? new ExtPasswordView(elem)
+            : super.create(elem);
     }
+    
+    
+    /**
+     * Creates the caret for a field.
+     *
+     * @return the caret
+     */
+    protected Caret createCaret() {
+        return (PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained())
+            ? new PlasticFieldCaret()
+            : super.createCaret();
+    }  
     
     
 }

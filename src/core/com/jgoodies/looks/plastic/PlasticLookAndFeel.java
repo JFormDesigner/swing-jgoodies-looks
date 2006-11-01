@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -412,6 +412,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 // Uses a modified split divider
 				"SplitPaneUI", 				plasticPrefix + "SplitPaneUI",
 				
+                // Renders a circle, not a star '*' in Java 1.4 and Java 5
+                // Selects all text after focus gain via keyboard.
+                "PasswordFieldUI",          plasticPrefix + "PasswordFieldUI",
+                
                 // Updates the disabled and inactive background
                 "TextAreaUI",               plasticPrefix + "TextAreaUI",
 
@@ -426,11 +430,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 "ToolBarSeparatorUI",       plasticPrefix + "ToolBarSeparatorUI"
 
 			};
-        if (LookUtils.IS_JAVA_1_4_OR_5) {
-            // Renders a circle, not a star '*'
-            uiDefaults = append(uiDefaults,
-                    "PasswordFieldUI", plasticPrefix + "PasswordFieldUI");
-        }
         if (!useMetalTabs) {
             // Modified tabs and ability use a version with reduced borders.
             uiDefaults = append(uiDefaults,
@@ -440,6 +439,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             // Selects all text after focus gain via keyboard.
             uiDefaults = append(uiDefaults,
                     "TextFieldUI", plasticPrefix + "TextFieldUI");
+            uiDefaults = append(uiDefaults,
+                    "FormattedTextFieldUI", plasticPrefix + "FormattedTextFieldUI");
         }
 		table.putDefaults(uiDefaults);
 	}
