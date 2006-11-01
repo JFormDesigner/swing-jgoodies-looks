@@ -36,26 +36,28 @@ import javax.swing.plaf.InsetsUIResource;
  * Describes the insets and margins used by a Look&amp;Feel or theme.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @since 2.1
  */
 public final class MicroLayout {
     
+    private final InsetsUIResource textInsets;
+    private final InsetsUIResource comboBoxInsets;
     private final InsetsUIResource buttonMargin;
-    private final InsetsUIResource commandButtonMargin;
+    private final InsetsUIResource commitButtonMargin;
     private final int comboBorderSize;
     private final int comboPopupBorderSize;
     private final InsetsUIResource menuItemMargin;
     private final InsetsUIResource menuMargin;
     private final InsetsUIResource popupMenuSeparatorMargin;
-    private final InsetsUIResource textInsets;
     
     
     // Instance Creation ******************************************************
     
     public MicroLayout(
             InsetsUIResource textInsets,
+            InsetsUIResource comboBoxInsets,
             InsetsUIResource buttonMargin, 
             InsetsUIResource commandButtonMargin, 
             int comboBorderSize,
@@ -64,8 +66,9 @@ public final class MicroLayout {
             InsetsUIResource menuMargin,
             InsetsUIResource popupMenuSeparatorMargin) {
         this.textInsets = textInsets;
+        this.comboBoxInsets = comboBoxInsets;
         this.buttonMargin = buttonMargin;
-        this.commandButtonMargin = commandButtonMargin;
+        this.commitButtonMargin = commandButtonMargin;
         this.comboBorderSize = comboBorderSize;
         this.comboPopupBorderSize = comboPopupBorderSize;
         this.menuItemMargin = menuItemMargin;
@@ -75,16 +78,39 @@ public final class MicroLayout {
     
     // Getters ****************************************************************
 
-    public InsetsUIResource getTextInsets() {
-        return textInsets;
-    }
-    
+    /**
+     * Returns the insets used for standard buttons. These insets describe
+     * buttons that are arranged with other components in a row of a form.
+     * The standard button <em>height</em> will often be the same for 
+     * text fields, combo boxes, and other components that are arranged in 
+     * a row.<p>
+     * 
+     * Toolbar buttons may have a different height, as well as
+     * commit buttons that are placed in a special command bar area,
+     * for example OK, Cancel, Apply.
+     * 
+     * @return the margin for standard buttons.
+     * 
+     * @see #getCommitButtonMargin()
+     */
     public InsetsUIResource getButtonMargin() {
         return buttonMargin;
     }
 
-    public InsetsUIResource getCommandButtonMargin() {
-        return commandButtonMargin;
+    /**
+     * Returns the insets used for commit buttons in command areas.
+     * Such command areas are often at the bottom or side of a dialog or pane;
+     * frequently used labels are OK, Cancel, Apply, Yes, No, Retry.
+     * The <em>height</em> of a commit button may differ from the height
+     * used for buttons that are arranged in a row with other components
+     * in a form.
+     * 
+     * @return the margin for commit buttons in command areas.
+     * 
+     * @see #getButtonMargin()
+     */
+    public InsetsUIResource getCommitButtonMargin() {
+        return commitButtonMargin;
     }
 
     public int getComboBorderSize() {
@@ -95,6 +121,11 @@ public final class MicroLayout {
         return comboPopupBorderSize;
     }
 
+    public InsetsUIResource getComboBoxInsets() {
+        return comboBoxInsets;
+    }
+    
+    
     public InsetsUIResource getMenuItemMargin() {
         return menuItemMargin;
     }
@@ -106,5 +137,10 @@ public final class MicroLayout {
     public InsetsUIResource getPopupMenuSeparatorMargin() {
         return popupMenuSeparatorMargin;
     }
+    
+    public InsetsUIResource getTextInsets() {
+        return textInsets;
+    }
+    
     
 }
