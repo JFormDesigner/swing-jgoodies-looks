@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -324,7 +324,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
         final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
         final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
 
         initFontDefaults(table);
 
@@ -334,9 +333,11 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         if (isXP && LookUtils.IS_JAVA_1_4) {
             initComponentDefaultsXP14(table);
         }
+        
+        MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout("Windows", table);
 
         Object marginBorder = new BasicBorders.MarginBorder();
-        Object checkBoxMargin = new InsetsUIResource(2, 0, 2, 0);
+        Object checkBoxMargin = microLayout.getCheckBoxMargin();
 
         Object etchedBorder = new UIDefaults.ProxyLazyValue(
                 "javax.swing.plaf.BorderUIResource",
@@ -359,48 +360,25 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object toolBarEtchedBorder    = WindowsBorders.getEtchedBorder();
         Object toolBarHeaderBorder    = WindowsBorders.getToolBarHeaderBorder();
 
-        int buttonPad = Options.getUseNarrowButtons() ? 4 : 14;
-        Object buttonMargin = isVista 
-            ? (isClassic
-                    ? new InsetsUIResource(1, buttonPad, 1, buttonPad)
-                    : new InsetsUIResource(1, buttonPad, 2, buttonPad))
-            : (isClassic
-                    ? new InsetsUIResource(1, buttonPad, 1, buttonPad)
-                    : new InsetsUIResource(2, buttonPad, 3, buttonPad));
+        Object buttonMargin = microLayout.getButtonMargin();
 
         Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
             ? null
             : new DimensionUIResource(6, Options.getDefaultIconSize().height);
 
-        Insets textInsets = isVista 
-            ? (isClassic
-                    ? new InsetsUIResource(1, 2, 2, 2)
-                    : new InsetsUIResource(1, 2, 2, 2))
-            : (isClassic
-                    ? new InsetsUIResource(1, 2, 2, 2)
-                    : new InsetsUIResource(2, 2, 3, 2));
+        Object textInsets = microLayout.getTextInsets();
+        Object wrappedTextInsets = microLayout.getWrappedTextInsets();
+        Insets comboEditorInsets = microLayout.getComboBoxEditorInsets();
         
-        int comboBorderSize  = isClassic ? 2 : 1;
-        int comboPopupBorderSize = 1;
-        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        int comboBorderSize  = microLayout.getComboBorderSize();
+        int comboPopupBorderSize = microLayout.getComboPopupBorderSize();
+        int comboRendererGap = comboEditorInsets.left + comboBorderSize - comboPopupBorderSize;
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
         
-        Object menuItemMargin = LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(3, 0, 3, 0)
-                : new InsetsUIResource(2, 0, 2, 0);
-        Object menuMargin = isXP
-                ? (LookUtils.IS_LOW_RESOLUTION
-                        ? new InsetsUIResource(2, 3, 2, 4)
-                        : new InsetsUIResource(2, 5, 2, 6))
-                : (LookUtils.IS_LOW_RESOLUTION
-                        ? new InsetsUIResource(2, 3, 2, 3)
-                        : new InsetsUIResource(2, 4, 2, 4));
-
-        int pad = isXP ? 3 : 0;
-        Object popupMenuSeparatorMargin = LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(2, pad, 3, pad)
-                : new InsetsUIResource(3, pad, 4, pad);
+        Object menuItemMargin = microLayout.getMenuItemMargin();
+        Object menuMargin = microLayout.getMenuMargin();
+        Object popupMenuSeparatorMargin = microLayout.getPopupMenuSeparatorMargin();
 
         Icon menuItemCheckIcon = new MinimumSizedIcon();
 
@@ -437,11 +415,11 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "ComboBox.disabledBackground", disabledTextBackground,
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
-            "ComboBox.editorInsets",      textInsets,          // Added by JGoodies
+            "ComboBox.editorInsets",      comboEditorInsets,   // Added by JGoodies
             "ComboBox.tableEditorInsets", comboTableEditorInsets,            
             "ComboBox.rendererBorder",    comboRendererBorder, // Added by JGoodies
             
-            "EditorPane.margin",		  textInsets,
+            "EditorPane.margin",		  wrappedTextInsets,
             
             // Begin 1.3 und 1.4.0
             "Menu.border",                menuBorder, // Fixed in 1.4.1
@@ -487,7 +465,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "RadioButton.margin",         checkBoxMargin, 
             
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
-            "TextArea.margin",            textInsets, // 1.4.1 Bug
+            "TextArea.margin",            wrappedTextInsets, // 1.4.1 Bug
             "TextArea.disabledBackground", disabledTextBackground,
             "TextArea.inactiveBackground", inactiveTextBackground,
             "TextField.margin",           textInsets, // 1.4.1 Bug

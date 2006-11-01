@@ -36,10 +36,9 @@ import javax.swing.UIDefaults;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.InsetsUIResource;
 
 import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.Options;
+import com.jgoodies.looks.MicroLayout;
 
 
 /**
@@ -47,7 +46,7 @@ import com.jgoodies.looks.Options;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	
@@ -106,34 +105,29 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
-        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-        final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
-
-        Object buttonBorder         = PlasticXPBorders.getButtonBorder();
+        MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout(getName(), table);
+        Insets buttonBorderInsets = microLayout.getButtonBorderInsets();
+        
+        Object buttonBorder         = PlasticXPBorders.getButtonBorder(buttonBorderInsets);
+        Object toggleButtonBorder   = PlasticXPBorders.getToggleButtonBorder(buttonBorderInsets);
         Object checkBoxIcon         = PlasticXPIconFactory.getCheckBoxIcon();
         Object comboBoxButtonBorder = PlasticXPBorders.getComboBoxArrowButtonBorder();
         Border comboBoxEditorBorder = PlasticXPBorders.getComboBoxEditorBorder();
         Object radioButtonIcon      = PlasticXPIconFactory.getRadioButtonIcon();
         Object scrollPaneBorder     = PlasticXPBorders.getScrollPaneBorder();
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
-        Object toggleButtonBorder   = PlasticXPBorders.getToggleButtonBorder();
         Object spinnerBorder        = PlasticXPBorders.getSpinnerBorder();
 
         String radioCheckIconName   = LookUtils.IS_LOW_RESOLUTION
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
                                             
-        Insets textInsets = isVista
-            ? (isClassic
-                    ? new InsetsUIResource(2, 2, 3, 2)
-                    : new InsetsUIResource(1, 2, 2, 2))
-            : new InsetsUIResource(2, 2, 3, 2);
+        Insets comboEditorInsets = microLayout.getComboBoxEditorInsets();
                                             
         Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);
         int comboBorderSize  = comboEditorBorderInsets.left;
-        int comboPopupBorderSize = 1;
-        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        int comboPopupBorderSize = microLayout.getComboPopupBorderSize();
+        int comboRendererGap = comboEditorInsets.left + comboBorderSize - comboPopupBorderSize;
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
                 
@@ -148,18 +142,12 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "ComboBox.editorBorder",          comboBoxEditorBorder,
             "ComboBox.borderPaintsFocus",     Boolean.TRUE,
             "ComboBox.editorBorderInsets",    comboEditorBorderInsets,          // Added by JGoodies
-            "ComboBox.editorInsets",          textInsets,          // Added by JGoodies
             "ComboBox.tableEditorInsets",     comboTableEditorInsets,            
             "ComboBox.rendererBorder",        comboRendererBorder, // Added by JGoodies
 
-            "EditorPane.margin",              textInsets,
-
             "FormattedTextField.border",      textFieldBorder,
-            "FormattedTextField.margin",      textInsets,             
             "PasswordField.border",           textFieldBorder,
-            "PasswordField.margin",           textInsets,             
             "Spinner.border", 				  spinnerBorder,
-            "Spinner.defaultEditorInsets",	  textInsets,
             
             "ScrollPane.border",              scrollPaneBorder,
             "Table.scrollPaneBorder", 		  scrollPaneBorder,
@@ -169,9 +157,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
             "RadioButton.interiorBackground", getControlHighlight(),
             "RadioButton.checkIcon",          makeIcon(getClass(), radioCheckIconName),
             
-            "TextArea.margin",				  textInsets,	
             "TextField.border",               textFieldBorder,
-            "TextField.margin", 			  textInsets,
             
             "ToggleButton.border",            toggleButtonBorder,
             "ToggleButton.borderPaintsFocus", Boolean.TRUE,
@@ -184,26 +170,6 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     
     protected static void installDefaultThemes() {}   
     
-    /**
-     * Creates and returns the margin used by <code>JButton</code>
-     * and <code>JToggleButton</code>. Honors the screen resolution
-     * and the global <code>Options.getUseNarrowButtons()</code> property.<p>
-     *
-     * Sun's L&F implementations use wide button margins.
-     * 
-     * @return an Insets object that describes the button margin
-     * @see Options#getUseNarrowButtons()
-     */
-    protected Insets createButtonMargin() {
-        int pad = Options.getUseNarrowButtons() ? 4 : 14;
-        return LookUtils.IS_OS_WINDOWS_VISTA
-            ? new InsetsUIResource(0, pad, 0, pad)
-            : (LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(0, pad, 1, pad)
-                : new InsetsUIResource(1, pad, 2, pad));
-    }
-
-
     private ColorUIResource getToggleButtonCheckColor() {
         return getPlasticTheme().getToggleButtonCheckColor();
     }

@@ -37,9 +37,10 @@ import javax.swing.UIDefaults;
  * Provides predefined MicroLayoutPolicy implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  * @see     MicroLayout
+ * @see     MicroLayouts
  * @see     MicroLayoutPolicy
  * 
  * @since 2.1
@@ -86,8 +87,33 @@ public final class MicroLayoutPolicies {
     private static final class DefaultPlasticPolicy implements MicroLayoutPolicy {
         
         public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
-            return null;  
+            boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+            boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+            boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
+            boolean isPlasticXP = lafName.equals("JGoodies Plastic XP");
+            if (isPlasticXP) {
+                if (isVista) {
+                    return isClassic
+                        ? MicroLayouts.createPlasticXPVistaClassicMicroLayout()
+                        : MicroLayouts.createPlasticXPVistaMicroLayout();
+                } else {
+                    return isLowRes
+                        ? MicroLayouts.createPlasticXPLowResMicroLayout()
+                        : MicroLayouts.createPlasticXPHiResMicroLayout();
+                }
+            } else {
+                if (isVista) {
+                    return isClassic
+                        ? MicroLayouts.createPlasticVistaClassicMicroLayout()
+                        : MicroLayouts.createPlasticVistaMicroLayout();
+                } else {
+                    return isLowRes
+                        ? MicroLayouts.createPlasticLowResMicroLayout()
+                        : MicroLayouts.createPlasticHiResMicroLayout();
+                }
+            }
         }
+        
     }
     
 
@@ -97,7 +123,22 @@ public final class MicroLayoutPolicies {
     private static final class DefaultWindowsPolicy implements MicroLayoutPolicy {
         
         public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
-            return null;
+            boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+            boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+            boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
+            if (isClassic) {
+                return isLowRes
+                    ? MicroLayouts.createWindowsClassicLowResMicroLayout()
+                    : MicroLayouts.createWindowsClassicHiResMicroLayout();
+            } else if (isVista) {
+                return isLowRes
+                    ? MicroLayouts.createWindowsVistaLowResMicroLayout()
+                    : MicroLayouts.createWindowsVistaHiResMicroLayout();
+            } else {
+                return isLowRes
+                ? MicroLayouts.createWindowsXPLowResMicroLayout()
+                : MicroLayouts.createWindowsXPHiResMicroLayout();
+            }
         }
         
     }

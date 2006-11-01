@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -245,12 +245,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Looks up and retrieves the MicroLayoutPolicy used by 
-     * the JGoodies Windows Look&amp;Feel. 
+     * the JGoodies Plastic Look&amp;Fs. 
      * If a MicroLayoutPolicy has been set for this look, it'll be returned.
-     * Otherwise, the default Windows micro layout policy will be returned.
+     * Otherwise, the default Plastic micro layout policy will be returned.
      * 
      * @return the MicroLayoutPolicy set for this Look&amp;feel - if any,
-     *     or the default Windows MicroLayoutPolicy. 
+     *     or the default Plastic MicroLayoutPolicy. 
      * 
      * @see #setMicroLayoutPolicy
      * @see Options#PLASTIC_MICRO_LAYOUT_POLICY_KEY
@@ -266,11 +266,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     
     /**
-     * Sets the MicroLayoutPolicy to be used with the JGoodies Windows L&amp;F.
+     * Sets the MicroLayoutPolicy to be used with the JGoodies Plastic L&amp;Fs.
      * If the specified policy is <code>null</code>, the default will be reset.
      * 
      * @param microLayoutPolicy   the MicroLayoutPolicy to be used with 
-     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset 
+     *     the JGoodies Plastic L&amp;Fs, or <code>null</code> to reset 
      *     to the default
      *     
      * @see #getMicroLayoutPolicy()
@@ -448,18 +448,17 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 		
-        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-        final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
-
+        MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout(getName(), table);
+        Insets buttonBorderInsets = microLayout.getButtonBorderInsets();
+                
         Object marginBorder				= new BasicBorders.MarginBorder();
 		
-        Object buttonBorder				= PlasticBorders.getButtonBorder();
+        Object buttonBorder				= PlasticBorders.getButtonBorder(buttonBorderInsets);
         Object comboBoxButtonBorder     = PlasticBorders.getComboBoxArrowButtonBorder();
         Border comboBoxEditorBorder     = PlasticBorders.getComboBoxEditorBorder();
 		Object menuItemBorder			= PlasticBorders.getMenuItemBorder();
         Object textFieldBorder			= PlasticBorders.getTextFieldBorder();
-        Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder();
+        Object toggleButtonBorder		= PlasticBorders.getToggleButtonBorder(buttonBorderInsets);
 
 		Object scrollPaneBorder			= PlasticBorders.getScrollPaneBorder();
 		Object tableHeaderBorder		= new BorderUIResource(
@@ -481,31 +480,22 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		Color controlColor 				= table.getColor("control");
 		
 		Object checkBoxIcon				= PlasticIconFactory.getCheckBoxIcon();
-		Object checkBoxMargin			= new InsetsUIResource(2, 0, 2, 1); // 1.4.1 uses 2,2,2,2
+		Object checkBoxMargin = microLayout.getCheckBoxMargin();
 		
-        Object buttonMargin = createButtonMargin();
-		
-		Insets textInsets = isVista
-            ? (isClassic
-                ? new InsetsUIResource(1, 1, 2, 1)
-                : new InsetsUIResource(1, 1, 1, 1))
-            : new InsetsUIResource(1, 1, 2, 1);
-            
-        Object wrappedTextInsets = isVista
-            ? (isClassic
-                ? new InsetsUIResource(2, 1, 2, 1)
-                : new InsetsUIResource(1, 1, 1, 1))
-            : new InsetsUIResource(2, 1, 2, 1);
+        Object buttonMargin = microLayout.getButtonMargin();
+		Object textInsets = microLayout.getTextInsets();
+        Object wrappedTextInsets = microLayout.getWrappedTextInsets();
+        Insets comboEditorInsets = microLayout.getComboBoxEditorInsets();
                                  
         Insets comboEditorBorderInsets = comboBoxEditorBorder.getBorderInsets(null);
         int comboBorderSize  = comboEditorBorderInsets.left;
-        int comboPopupBorderSize = 1;
-        int comboRendererGap = textInsets.left + comboBorderSize - comboPopupBorderSize;
+        int comboPopupBorderSize = microLayout.getComboPopupBorderSize();
+        int comboRendererGap = comboEditorInsets.left + comboBorderSize - comboPopupBorderSize;
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
             
-	    Object menuItemMargin			= new InsetsUIResource(3, 0, 3, 0);
-		Object menuMargin				= new InsetsUIResource(2, 4, 2, 4);
+	    Object menuItemMargin			= microLayout.getMenuItemMargin();
+		Object menuMargin				= microLayout.getMenuMargin();
 
 		Icon   menuItemCheckIcon		= new MinimumSizedIcon(); 
 		Icon   checkBoxMenuItemIcon		= PlasticIconFactory.getCheckBoxMenuItemIcon();
@@ -693,26 +683,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             table.putDefaults(audioDefaults);
         }
 	}
-
-
-    /**
-     * Creates and returns the margin used by <code>JButton</code>
-     * and <code>JToggleButton</code>. Honors the screen resolution
-     * and the global <code>Options.getUseNarrowButtons()</code> property.<p>
-     *
-     * Sun's L&F implementations use wide button margins.
-     * 
-     * @return an Insets object that describes the button margin
-     * @see Options#getUseNarrowButtons()
-     */
-    protected Insets createButtonMargin() {
-        int pad = Options.getUseNarrowButtons() ? 4 : 14;
-        return LookUtils.IS_OS_WINDOWS_VISTA
-            ? new InsetsUIResource(0, pad, 1, pad)
-            : (LookUtils.IS_LOW_RESOLUTION
-                ? new InsetsUIResource(1, pad, 1, pad)
-                : new InsetsUIResource(2, pad, 3, pad));
-    }
 
 
 	/**
@@ -929,29 +899,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         setCurrentTheme(theme);
     }
     
-	/**
-     * Looks up and returns the PlasticTheme stored in the UIManager.
-     * 
-     * @return the current PlasticTheme
-     * 
-     * @deprecated Replaced by {@link #getPlasticTheme()}.
-	 */
-	public static PlasticTheme getMyCurrentTheme() {
-		return getPlasticTheme();
-	}
-	
-	
-	/**
-	 * Sets a new <code>PlasticTheme</code> for colors and fonts.
-     * 
-     * @param theme    the PlasticTheme to be set
-     * 
-     * @deprecated Replaced by {@link #setPlasticTheme(PlasticTheme)}.
-	 */
-	public static void setMyCurrentTheme(PlasticTheme theme) {
-		setPlasticTheme(theme);
-	}
-	
 	
 	// Accessed by ProxyLazyValues ******************************************
 	

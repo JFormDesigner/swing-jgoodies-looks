@@ -30,24 +30,29 @@
 
 package com.jgoodies.looks;
 
+import java.awt.Insets;
+
 import javax.swing.plaf.InsetsUIResource;
 
 /**
  * Describes the insets and margins used by a Look&amp;Feel or theme.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  * @since 2.1
  */
 public final class MicroLayout {
     
     private final InsetsUIResource textInsets;
-    private final InsetsUIResource comboBoxInsets;
+    private final InsetsUIResource wrappedTextInsets;
+    private final InsetsUIResource comboBoxEditorInsets;
+    private final Insets           buttonBorderInsets;
     private final InsetsUIResource buttonMargin;
     private final InsetsUIResource commitButtonMargin;
     private final int comboBorderSize;
     private final int comboPopupBorderSize;
+    private final InsetsUIResource checkBoxMargin;
     private final InsetsUIResource menuItemMargin;
     private final InsetsUIResource menuMargin;
     private final InsetsUIResource popupMenuSeparatorMargin;
@@ -57,29 +62,46 @@ public final class MicroLayout {
     
     public MicroLayout(
             InsetsUIResource textInsets,
-            InsetsUIResource comboBoxInsets,
-            InsetsUIResource buttonMargin, 
-            InsetsUIResource commandButtonMargin, 
+            InsetsUIResource wrappedTextInsets,
+            InsetsUIResource comboBoxEditorInsets,
             int comboBorderSize,
             int comboPopupBorderSize,
+            Insets           buttonBorderInsets,
+            InsetsUIResource buttonMargin, 
+            InsetsUIResource commitButtonMargin, 
+            InsetsUIResource checkBoxMargin,
             InsetsUIResource menuItemMargin,
             InsetsUIResource menuMargin,
             InsetsUIResource popupMenuSeparatorMargin) {
         this.textInsets = textInsets;
-        this.comboBoxInsets = comboBoxInsets;
+        this.wrappedTextInsets = wrappedTextInsets;
+        this.comboBoxEditorInsets = comboBoxEditorInsets;
+        this.buttonBorderInsets = buttonBorderInsets;
         this.buttonMargin = buttonMargin;
-        this.commitButtonMargin = commandButtonMargin;
+        this.commitButtonMargin = commitButtonMargin;
         this.comboBorderSize = comboBorderSize;
         this.comboPopupBorderSize = comboPopupBorderSize;
+        this.checkBoxMargin = checkBoxMargin;
         this.menuItemMargin = menuItemMargin;
         this.menuMargin = menuMargin;
         this.popupMenuSeparatorMargin = popupMenuSeparatorMargin;
     }
     
+    
     // Getters ****************************************************************
 
     /**
-     * Returns the insets used for standard buttons. These insets describe
+     * Returns the insets used for button borders.
+     * 
+     * @return the insets used for button borders.
+     */
+    public Insets getButtonBorderInsets() {
+        return buttonBorderInsets;
+    }
+    
+    
+    /**
+     * Returns the margin used for standard buttons. These insets describe
      * buttons that are arranged with other components in a row of a form.
      * The standard button <em>height</em> will often be the same for 
      * text fields, combo boxes, and other components that are arranged in 
@@ -98,7 +120,7 @@ public final class MicroLayout {
     }
 
     /**
-     * Returns the insets used for commit buttons in command areas.
+     * Returns the margin used for commit buttons in command areas.
      * Such command areas are often at the bottom or side of a dialog or pane;
      * frequently used labels are OK, Cancel, Apply, Yes, No, Retry.
      * The <em>height</em> of a commit button may differ from the height
@@ -121,8 +143,12 @@ public final class MicroLayout {
         return comboPopupBorderSize;
     }
 
-    public InsetsUIResource getComboBoxInsets() {
-        return comboBoxInsets;
+    public InsetsUIResource getComboBoxEditorInsets() {
+        return comboBoxEditorInsets;
+    }
+    
+    public InsetsUIResource getCheckBoxMargin() {
+        return checkBoxMargin;
     }
     
     
@@ -138,9 +164,14 @@ public final class MicroLayout {
         return popupMenuSeparatorMargin;
     }
     
+    
     public InsetsUIResource getTextInsets() {
         return textInsets;
     }
     
+    
+    public InsetsUIResource getWrappedTextInsets() {
+        return wrappedTextInsets;
+    }
     
 }

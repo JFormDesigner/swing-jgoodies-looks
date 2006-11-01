@@ -45,15 +45,13 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.text.JTextComponent;
 
-import com.jgoodies.looks.LookUtils;
-
 
 /**
  * This class consists of a set of <code>Border</code>s used 
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 final class PlasticBorders {
@@ -65,7 +63,6 @@ final class PlasticBorders {
 
     // Accessing and Creating Borders ***************************************
 
-    private static Border buttonBorder;
     private static Border comboBoxEditorBorder;
     private static Border comboBoxArrowButtonBorder;
     private static Border etchedBorder;
@@ -81,7 +78,6 @@ final class PlasticBorders {
     private static Border textFieldBorder;
     private static Border thinLoweredBorder;
     private static Border thinRaisedBorder;
-    private static Border toggleButtonBorder;
     private static Border toolBarHeaderBorder;
 
 
@@ -90,13 +86,10 @@ final class PlasticBorders {
      * 
      * @return the lazily created button border
      */
-    static Border getButtonBorder() {
-        if (buttonBorder == null) {
-            buttonBorder = new BorderUIResource.CompoundBorderUIResource(
-                                    new ButtonBorder(),
+    static Border getButtonBorder(Insets buttonMargin) {
+        return new BorderUIResource.CompoundBorderUIResource(
+                                    new ButtonBorder(buttonMargin),
                                     new BasicBorders.MarginBorder());
-        }
-        return buttonBorder;
     }
 
     /**
@@ -323,13 +316,10 @@ final class PlasticBorders {
      * 
      * @return the lazily created toggle button border
      */
-    static Border getToggleButtonBorder() {
-        if (toggleButtonBorder == null) {
-            toggleButtonBorder = new BorderUIResource.CompoundBorderUIResource(
-                                    new ToggleButtonBorder(),
+    static Border getToggleButtonBorder(Insets buttonMargin) {
+        return new BorderUIResource.CompoundBorderUIResource(
+                                    new ToggleButtonBorder(buttonMargin),
                                     new BasicBorders.MarginBorder());
-        }
-        return toggleButtonBorder;
     }
 
     /**
@@ -372,13 +362,11 @@ final class PlasticBorders {
 	
 	private static class ButtonBorder extends AbstractBorder implements UIResource {
 
-		protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
-            ? (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED  // isClassic
-                ? new Insets(3, 3, 3, 3)
-                : new Insets(2, 3, 3, 3))
-            : (LookUtils.IS_LOW_RESOLUTION 
-                ? new Insets(2, 3, 3, 3) 
-                : new Insets(1, 3, 1, 3));
+        protected final Insets insets;
+        
+        protected ButtonBorder(Insets insets) {
+            this.insets = insets;
+        }
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;
@@ -402,13 +390,13 @@ final class PlasticBorders {
 			}
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		public Insets getBorderInsets(Component c) { return insets; }
 		
 		public Insets getBorderInsets(Component c, Insets newInsets) {
-			newInsets.top	 = INSETS.top;
-			newInsets.left	 = INSETS.left;
-			newInsets.bottom = INSETS.bottom;
-			newInsets.right  = INSETS.right;
+			newInsets.top	 = insets.top;
+			newInsets.left	 = insets.left;
+			newInsets.bottom = insets.bottom;
+			newInsets.right  = insets.right;
 			return newInsets;
 		}
 	}	
@@ -669,7 +657,10 @@ final class PlasticBorders {
     
 
 	private static class RolloverButtonBorder extends ButtonBorder {
-		private static final Insets INSETS_3 = new Insets(3, 3, 3, 3);
+        
+        private RolloverButtonBorder() {
+            super(new Insets(3, 3, 3, 3));
+        }
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
@@ -698,7 +689,6 @@ final class PlasticBorders {
 			} else if (model.isSelected())
 				PlasticUtils.drawDark3DBorder(g, x, y, w, h);
 		}
-		public Insets getBorderInsets(Component c) { return INSETS_3; }
 	}
 	
 	
@@ -784,6 +774,11 @@ final class PlasticBorders {
 
 
 	private static final class ToggleButtonBorder extends ButtonBorder {
+        
+        private ToggleButtonBorder(Insets insets) {
+            super(insets);
+        }
+        
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			if (!c.isEnabled()) {
 				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
@@ -798,6 +793,7 @@ final class PlasticBorders {
 					PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
 			}
 		}
+        
 	}	
 	
 

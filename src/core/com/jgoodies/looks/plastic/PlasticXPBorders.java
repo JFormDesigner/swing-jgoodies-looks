@@ -45,8 +45,6 @@ import javax.swing.plaf.metal.MetalBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.text.JTextComponent;
 
-import com.jgoodies.looks.LookUtils;
-
 
 /**
  * This class consists of a set of <code>Border</code>s used 
@@ -54,7 +52,7 @@ import com.jgoodies.looks.LookUtils;
  *
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 final class PlasticXPBorders {
@@ -66,12 +64,10 @@ final class PlasticXPBorders {
 
     // Accessing and Creating Borders ***************************************
 
-    private static Border buttonBorder;
     private static Border comboBoxArrowButtonBorder;
     private static Border comboBoxEditorBorder;
     private static Border scrollPaneBorder;
     private static Border textFieldBorder;
-    private static Border toggleButtonBorder;
     private static Border spinnerBorder;
     private static Border rolloverButtonBorder;
     
@@ -79,13 +75,10 @@ final class PlasticXPBorders {
     /*
      * Returns a border instance for a <code>JButton</code>.
      */
-    static Border getButtonBorder() {
-        if (buttonBorder == null) {
-            buttonBorder = new BorderUIResource.CompoundBorderUIResource(
-                    new XPButtonBorder(),
+    static Border getButtonBorder(Insets buttonMargin) {
+        return new BorderUIResource.CompoundBorderUIResource(
+                    new XPButtonBorder(buttonMargin),
                     new BasicBorders.MarginBorder());
-        }
-        return buttonBorder;
     }
 
     /*
@@ -137,13 +130,10 @@ final class PlasticXPBorders {
     /*
      * Returns a border instance for a <code>JToggleButton</code>.
      */
-    static Border getToggleButtonBorder() {
-        if (toggleButtonBorder == null) {
-            toggleButtonBorder = new BorderUIResource.CompoundBorderUIResource(
-                    new XPButtonBorder(),
+    static Border getToggleButtonBorder(Insets buttonMargin) {
+         return new BorderUIResource.CompoundBorderUIResource(
+                    new XPButtonBorder(buttonMargin),
                     new BasicBorders.MarginBorder());
-        }
-        return toggleButtonBorder;
     }
 
     /*
@@ -176,13 +166,11 @@ final class PlasticXPBorders {
      */
     private static class XPButtonBorder extends AbstractBorder implements UIResource {
 
-        protected static final Insets INSETS = LookUtils.IS_OS_WINDOWS_VISTA
-            ? (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED  // isClassic 
-                ? new Insets(3, 2, 4, 2) 
-                : new Insets(2, 2, 3, 2))
-            : (LookUtils.IS_LOW_RESOLUTION  
-                ? new Insets(3, 2, 3, 2) 
-                : new Insets(2, 2, 2, 2));
+        protected final Insets insets;
+        
+        protected XPButtonBorder(Insets insets) {
+            this.insets = insets;
+        }
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
@@ -208,13 +196,13 @@ final class PlasticXPBorders {
                 PlasticXPUtils.drawPlainButtonBorder(g, x, y, w, h);
         }
 
-        public Insets getBorderInsets(Component c) { return INSETS; }
+        public Insets getBorderInsets(Component c) { return insets; }
 
         public Insets getBorderInsets(Component c, Insets newInsets) {
-            newInsets.top    = INSETS.top;
-            newInsets.left   = INSETS.left;
-            newInsets.bottom = INSETS.bottom;
-            newInsets.right  = INSETS.right;
+            newInsets.top    = insets.top;
+            newInsets.left   = insets.left;
+            newInsets.bottom = insets.bottom;
+            newInsets.right  = insets.right;
             return newInsets;
         }
     }
@@ -373,7 +361,9 @@ final class PlasticXPBorders {
      */
     private static final class RolloverButtonBorder extends XPButtonBorder {
 
-        private static final Insets INSETS_3 = new Insets(3, 3, 3, 3);
+        private RolloverButtonBorder() {
+            super(new Insets(3, 3, 3, 3));
+        }
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton b = (AbstractButton) c;
@@ -400,7 +390,6 @@ final class PlasticXPBorders {
             }
         }
 
-        public Insets getBorderInsets(Component c) { return INSETS_3; }
     }
 
 }
