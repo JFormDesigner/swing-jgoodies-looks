@@ -6,13 +6,8 @@
 
 INTRODUCTION
 
-    This is an early preview of the JGoodies Looks 2.1.
+    This is a preview of the JGoodies Looks 2.1.
     
-    NOTE: THE CODE IS MUCH MORE "RAW" THAN OTHER RELEASES
-    THAT YOU MAY HAVE DOWNLOADED FROM JGOODIES IN THE PAST!
-    It is an engineering build that has seen minimal testing; 
-    it may lack functions and may contain known bugs in some areas. 
-        
     ...
     
 	
@@ -23,6 +18,9 @@ CHANGES THAT AFFECT THE COMPATIBILITY
     o Removed the deprecated Options.TEXT_AREA_INFO_BACKGROUND_KEY.
       We suggest to use a factory that vends JTextArea's 
       with the background set to the editable background instead.    
+    o Removed the deprecated methods PlasticLookAndFeel#getMyCurrentTheme
+      and PlasticLookAndFeel#setMyCurrentTheme. These have been replaced
+      in the Looks 2.0 by #getPlasticTheme and #setPlasticTheme.
     o Key constants for setting a FontPolicy by name have been renamed
       to be consistent with the feature they describe, e.g.
       "Plastic.fontChoicePolicy" -> "Plastic.fontPolicy".
@@ -54,8 +52,10 @@ NEW FEATURES
           can be temporarily removed when painting the current value. 
           This is useful for custom Windows combo renderers.
     #151: Select text field text after focus gained by keyboard.
-          This is always enabled in the Windows L&f, and can be
-          enabled for Plastic.
+          This is done in the Windows L&f, and can be enabled for Plastic, 
+          see PlasticLookandFeel#setSelectTextOnKeyboardFocusGained.
+          For Plastic this feature is enabled by default on Windows.
+        o Fixed appearance of read-only combos on Vista.
 
 
 OTHER CHANGES
