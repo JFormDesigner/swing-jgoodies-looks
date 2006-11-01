@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -324,6 +324,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         
         final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
         final boolean isClassic = !isXP;
+        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
 
         initFontDefaults(table);
 
@@ -388,8 +389,12 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         Class superclass = getClass().getSuperclass();
         Color controlColor = table.getColor("control");
-        Color disabledTextBackground = table.getColor("TextField.disabledBackground");
-        Color inactiveTextBackground = table.getColor("TextField.inactiveBackground");
+        Object disabledTextBackground = table.getColor("TextField.disabledBackground");
+        Object inactiveTextBackground = table.getColor("TextField.inactiveBackground");
+        
+        Object comboBoxDisabledBackground = (isVista && isXP)
+            ? table.getColor("ComboBox.background")
+            : disabledTextBackground;
 
         Object menuBarBackground = isXP 
                 ? table.get("control") 
@@ -412,7 +417,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "CheckBox.border",            marginBorder, 
             "CheckBox.margin",            checkBoxMargin,
             
-            "ComboBox.disabledBackground", disabledTextBackground,
+            "ComboBox.disabledBackground", comboBoxDisabledBackground,
             "ComboBox.editorBorder",      marginBorder,
             "ComboBox.editorColumns",     new Integer(5),
             "ComboBox.editorInsets",      comboEditorInsets,   // Added by JGoodies
