@@ -45,7 +45,7 @@ import javax.swing.border.Border;
  * and in <code>#hide</code> it cleans up all changes made before.
  * 
  * @author Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -166,7 +166,7 @@ public final class ShadowPopup extends Popup {
 
         JComponent parent = (JComponent) contents.getParent();
         popup.hide();
-        if (parent.getBorder() == SHADOW_BORDER) {
+        if ((parent != null) && parent.getBorder() == SHADOW_BORDER) {
             parent.setBorder(oldBorder);
             parent.setOpaque(oldOpaque);
             oldBorder = null;
