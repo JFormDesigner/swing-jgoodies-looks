@@ -1,15 +1,15 @@
 
                          JGoodies Looks
-                      Version 2.1 Preview 4
+                        Version 2.1 Beta1
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a reasonable stable preview of the JGoodies Looks 2.1.
+    This is a stable Beta version of the JGoodies Looks 2.1.
     
     Although not heavily tested, it seems to be better than 
-    the Looks 2.0.4. This preview lacks documentation for the
+    the Looks 2.0.4. This beta lacks documentation for the
     new features, primarily the new customizable micro layouts.
     
     ...
@@ -40,7 +40,7 @@ BUGS FIXED
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
     #153: Vista read-only combo renderer not transparent.
-    
+    #???: NPE in ShadowPopup#hide
     
 NEW FEATURES
     
