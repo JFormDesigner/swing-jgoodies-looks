@@ -52,7 +52,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class MenuBarView {
     
@@ -188,7 +188,7 @@ public class MenuBarView {
 		menu.add(item);
 		item = createRadioItem(false, true);
 		item.setIcon(readImageIcon("size_sort.png"));
-		item.setDisabledIcon(readImageIcon("size_sort_gray.png"));
+		//item.setDisabledIcon(readImageIcon("size_sort_gray.png"));
 		menu.add(item);
 		
 		return menu;	
@@ -437,7 +437,7 @@ public class MenuBarView {
      * Looks up and returns an icon for the specified filename suffix.
      */
     private ImageIcon readImageIcon(String filename) {
-        URL url = getClass().getClassLoader().getResource("images/" + filename);
+        URL url = getClass().getResource("resources/images/" + filename);
         return new ImageIcon(url);
     }
     

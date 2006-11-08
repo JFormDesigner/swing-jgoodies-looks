@@ -59,7 +59,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * JGoodies UI framework that better handle different platforms.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public class DemoFrame extends JFrame {
 
@@ -338,8 +338,7 @@ public class DemoFrame extends JFrame {
      * Looks up and returns an icon for the specified filename suffix.
      */
     protected static ImageIcon readImageIcon(String filename) {
-        URL url =
-            DemoFrame.class.getClassLoader().getResource("images/" + filename);
+        URL url = DemoFrame.class.getResource("resources/images/" + filename);
         return new ImageIcon(url);
     }
 
