@@ -1,6 +1,6 @@
 
                          JGoodies Looks
-                        Version 2.1 Beta1
+                        Version 2.1 Beta2
                           Release Notes
                         
 
@@ -71,6 +71,7 @@ OTHER CHANGES
     #133: Consider making PlasticXP toolbar button rollover border round.
     
     o Plastic uses Tango icons, see www.tango-project.org.
+    o Plastic option pane icon size honors the software resolution.
     
     
 ---------------------------------------------------------------------------
