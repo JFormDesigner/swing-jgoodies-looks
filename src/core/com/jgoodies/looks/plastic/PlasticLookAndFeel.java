@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -517,6 +517,12 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         
         Character  passwordEchoChar     = new Character(LookUtils.IS_OS_WINDOWS ? '\u25CF' : '\u2022');
         
+        String iconPrefix = "icons/" + (LookUtils.IS_LOW_RESOLUTION ? "32x32/" : "48x48/");
+        Object errorIcon       = makeIcon(getClass(), iconPrefix + "dialog-error.png");
+        Object informationIcon = makeIcon(getClass(), iconPrefix + "dialog-information.png");
+        Object questionIcon    = makeIcon(getClass(), iconPrefix + "dialog-warning.png");
+        Object warningIcon     = makeIcon(getClass(), iconPrefix + "dialog-question.png");
+        
 		
 		Object[] defaults = { 
 		"Button.border",								buttonBorder,
@@ -573,10 +579,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		"MenuItem.acceleratorSelectionForeground",		getMenuItemSelectedForeground(),
 		"MenuItem.acceleratorSelectionBackground",		getMenuItemSelectedBackground(),
 
-		"OptionPane.errorIcon",							makeIcon(getClass(), "icons/48x48/dialog-error.png"),
-        "OptionPane.informationIcon",                   makeIcon(getClass(), "icons/48x48/dialog-information.png"),
-        "OptionPane.warningIcon",                       makeIcon(getClass(), "icons/48x48/dialog-warning.png"),
-        "OptionPane.questionIcon",                      makeIcon(getClass(), "icons/48x48/dialog-question.png"),
+		"OptionPane.errorIcon",							errorIcon,
+        "OptionPane.informationIcon",                   informationIcon,
+        "OptionPane.questionIcon",                      questionIcon,
+        "OptionPane.warningIcon",                       warningIcon,
 		
         //"DesktopIcon.icon", 							makeIcon(superclass, "icons/DesktopIcon.gif"),
 		"FileView.computerIcon",						makeIcon(getClass(), "icons/Computer.gif"),
