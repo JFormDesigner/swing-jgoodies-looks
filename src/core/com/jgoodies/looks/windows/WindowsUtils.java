@@ -38,7 +38,7 @@ import javax.swing.UIManager;
  * Drawing utils.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 
 final class WindowsUtils {
@@ -191,23 +191,19 @@ final class WindowsUtils {
 	}
 	*/
 
-	public static void drawDashedRect(Graphics g, int x, int y, int width, int height) {
-	    int vx, vy;
-	
-	    // draw upper and lower horizontal dashes
-	    for (vx = x; vx < (x + width); vx += 2) {
-	        g.fillRect(vx, y, 1, 1);
-	        g.fillRect(vx, y + height - 1, 1, 1);
-	    }
-	
-	    // draw left and right vertical dashes
-	    for (vy = y; vy < (y + height); vy += 2) {
-	        g.fillRect(x, vy, 1, 1);
-	        g.fillRect(x + width - 1, vy, 1, 1);
-	    }
-	}
-	
-	
+    public static void drawRoundedDashedRect(Graphics g, int x, int y, int width, int height) {
+        for (int vx = x+1; vx < (x + width); vx += 2) {
+            g.fillRect(vx, y, 1, 1);
+            g.fillRect(vx, y + height-1, 1, 1);
+        }
+        int offset = (width + 1) % 2;
+        for (int vy = y+1; vy < (y + height - offset); vy += 2) {
+            g.fillRect(x, vy, 1, 1);
+            g.fillRect(x + width-1, vy+offset, 1, 1);
+        }
+    }
+    
+    
 	static void drawFlush3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
 		g.setColor(UIManager.getColor("controlLtHighlight"));
