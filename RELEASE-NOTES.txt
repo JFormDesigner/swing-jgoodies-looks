@@ -1,18 +1,38 @@
 
                          JGoodies Looks
-                        Version 2.1 Beta2
+                          Version 2.1.0
                           Release Notes
                         
 
 INTRODUCTION
 
-    This is a stable Beta version of the JGoodies Looks 2.1.
+    This JGoodies Looks version 2.1 fixes bugs, comes with 
+    a few improvements and adds micro layout customization.
+    Version 2.1 is binary incompatible with previous versions.
+    However the changes will affect only very few API users.
     
-    Although not heavily tested, it seems to be better than 
-    the Looks 2.0.4. This beta lacks documentation for the
-    new features, primarily the new customizable micro layouts.
-    
-    ...
+    The most visible changes are a new gray filter for icons, 
+    new Plastic icons, Vista improvements, and that text is
+    selected after keyboard focus changes.
+
+    The micro layout API allows to customize the insets,
+    margins, and gaps used in the components. The default
+    micro layout aims to comply with the "Microsoft Layout 
+    Specification and Guidelines". The default is used for 
+    the JGoodies Windows L&f and the Plastic L&f family.
+       Since most native Windows applications don't comply
+    with the Windows style guide, you may wish to change
+    the micro layout to be closer to a given native app,
+    such as MS Office, MS Internet Explorer, etc. 
+       From my perspective the micro layout specified in
+    the Windows style guide is best for Windows, and it's
+    good on other platforms. It aims to reduce visual noise
+    by using consistent component sizes and text positions
+    for all components that are arranged in a row. Therefore
+    I recommend to use the default micro layout.
+       A custom micro layout may be useful, if you design
+    many large forms and vertical space is scarce. You can 
+    then define smaller insets to gain more space.
     
 	
 CHANGES THAT AFFECT THE COMPATIBILITY
@@ -42,6 +62,7 @@ BUGS FIXED
     #153: Vista read-only combo renderer not transparent.
     #???: Vista read-only combo box lacks focus dashed rect.
     #???: NPE in ShadowPopup#hide
+    
     
 NEW FEATURES
     
