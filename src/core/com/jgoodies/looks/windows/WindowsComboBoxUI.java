@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -268,11 +268,12 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             c.setBackground(UIManager.getColor("ComboBox.background"));
         }
         Border oldBorder = null;
+        Rectangle originalBounds = new Rectangle(bounds);
         if ((c instanceof JComponent) && !tableCellEditor) {
             JComponent component = (JComponent) c;
             if (isRendererBorderRemovable(component)) {
                 oldBorder = component.getBorder();
-                component.setBorder(EMPTY_BORDER);
+                component.setBorder(EMPTY_BORDER); //new WindowsBorders.DashedBorder(c.getForeground(), 1));
             }
             Insets rendererInsets = component.getInsets();
             Insets editorInsets = UIManager.getInsets("ComboBox.editorInsets");
@@ -310,6 +311,23 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         }
         currentValuePane.paintComponent(g, c, comboBox, bounds.x, bounds.y,
                                         bounds.width, bounds.height, shouldValidate);
+        if (hasFocus) {
+            Color oldColor = g.getColor();
+            g.setColor(comboBox.getForeground());
+            if (isVistaReadOnlyCombo) {
+                int width = originalBounds.width - 2;
+                if ((width % 2) == 0) {
+                    width += 1;
+                }
+                WindowsUtils.drawRoundedDashedRect(g, 
+                        originalBounds.x+1, originalBounds.y+1, 
+                        width, originalBounds.height-2);
+            } /*else {
+                BasicGraphicsUtils.drawDashedRect(g,
+                        bounds.x, bounds.y, bounds.width, bounds.height);
+            }*/
+            g.setColor(oldColor);
+        }
         if (oldOpaque != null) {
             ((JComponent) c).setOpaque(oldOpaque.booleanValue());
         }
@@ -317,7 +335,6 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             ((JComponent) c).setBorder(oldBorder);
         }
     }
-    
     
     /**
      * Checks and answer whether the border of the given renderer component
