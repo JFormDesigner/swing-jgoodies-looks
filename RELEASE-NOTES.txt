@@ -40,6 +40,7 @@ BUGS FIXED
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
     #153: Vista read-only combo renderer not transparent.
+    #???: Vista read-only combo box lacks focus dashed rect.
     #???: NPE in ShadowPopup#hide
     
 NEW FEATURES
@@ -50,7 +51,6 @@ NEW FEATURES
           Options.setHiResGrayFilterEnabled and the
           Options#HI_RES_DISABLED_ICON_CLIENT_KEY client property key.
     #116: Provide option to customize the component micro layout. 
-          (API started)
     #117: Consider removing more combo box renderer borders. 
           Added the Options.COMBO_RENDERER_IS_BORDER_REMOVABLE hint
           for combo box renders that indicates whether a  border 
