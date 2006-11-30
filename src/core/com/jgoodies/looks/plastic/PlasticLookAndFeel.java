@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -359,7 +359,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
     public Icon getDisabledIcon(JComponent component, Icon icon) {
-        return new IconUIResource(RGBGrayFilter.getDisabledIcon(component, icon));
+        Icon disabledIcon = RGBGrayFilter.getDisabledIcon(component, icon);
+        return disabledIcon != null
+             ? new IconUIResource(disabledIcon)
+             : null;
     }
 
 

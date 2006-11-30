@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -209,7 +209,10 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
     public Icon getDisabledIcon(JComponent component, Icon icon) {
-        return new IconUIResource(RGBGrayFilter.getDisabledIcon(component, icon));
+        Icon disabledIcon = RGBGrayFilter.getDisabledIcon(component, icon);
+        return disabledIcon != null
+             ? new IconUIResource(disabledIcon)
+             : null;
     }
 
 
