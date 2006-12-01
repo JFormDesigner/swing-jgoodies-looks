@@ -30,12 +30,15 @@
 
 package com.jgoodies.looks.plastic;
 
+import java.awt.EventQueue;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JSpinner;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.UIResource;
 import javax.swing.text.DefaultCaret;
+import javax.swing.text.JTextComponent;
 
 /**
  * PlasticFieldCaret is visible in non-editable fields, 
@@ -43,7 +46,7 @@ import javax.swing.text.DefaultCaret;
  * For the latter see also issue #4337647 in Sun's bug database.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 
@@ -61,9 +64,19 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
             setSelectionVisible(true);
         }
 
-        if (getComponent().isEnabled() && isKeyboardFocusEvent) {
-            super.setDot(0);
-            super.moveDot(getComponent().getDocument().getLength());
+        final JTextComponent c = getComponent();
+        if (c.isEnabled() && isKeyboardFocusEvent) {
+            if (c.getParent() instanceof JSpinner.DefaultEditor) {
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        PlasticFieldCaret.super.setDot(0);
+                        PlasticFieldCaret.super.moveDot(c.getDocument().getLength());
+                    }
+                });
+            } else {
+                super.setDot(0);
+                super.moveDot(c.getDocument().getLength());
+            }
         }
     }
 

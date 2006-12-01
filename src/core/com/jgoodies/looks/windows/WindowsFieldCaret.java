@@ -31,6 +31,7 @@
 package com.jgoodies.looks.windows;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
@@ -39,6 +40,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 
 import javax.swing.BoundedRangeModel;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.TextUI;
@@ -52,7 +54,7 @@ import javax.swing.text.*;
  * For the latter see also issue #4337647 in Sun's bug database.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * 
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -77,9 +79,19 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             setSelectionVisible(true);
         }
 
-        if (getComponent().isEnabled() && isKeyboardFocusEvent) {
-            super.setDot(0);
-            super.moveDot(getComponent().getDocument().getLength());
+        final JTextComponent c = getComponent();
+        if (c.isEnabled() && isKeyboardFocusEvent) {
+            if (c.getParent() instanceof JSpinner.DefaultEditor) {
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                        WindowsFieldCaret.super.setDot(0);
+                        WindowsFieldCaret.super.moveDot(c.getDocument().getLength());
+                    }
+                });
+            } else {
+                super.setDot(0);
+                super.moveDot(c.getDocument().getLength());
+            }
         }
     }
 
