@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -433,10 +433,12 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * 
      * Overriden to use a fixed arrow button width. 
      */
-    private final class WindowsComboBoxLayoutManager extends BasicComboBoxUI.ComboBoxLayoutManager {
-        
+    private final class WindowsComboBoxLayoutManager
+        extends BasicComboBoxUI.ComboBoxLayoutManager {
+
         public void layoutContainer(Container parent) {
             JComboBox cb = (JComboBox) parent;
+
             int width  = cb.getWidth();
             int height = cb.getHeight();
 
@@ -446,10 +448,17 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
             if (arrowButton != null) {
                 if (cb.getComponentOrientation().isLeftToRight()) {
-                    arrowButton.setBounds(width - (insets.right + buttonWidth),
-                        insets.top, buttonWidth, buttonHeight);
+                    arrowButton.setBounds(
+                        width - (insets.right + buttonWidth),
+                        insets.top,
+                        buttonWidth,
+                        buttonHeight);
                 } else {
-                    arrowButton.setBounds(insets.left, insets.top, buttonWidth, buttonHeight);
+                    arrowButton.setBounds(
+                        insets.left,
+                        insets.top,
+                        buttonWidth,
+                        buttonHeight);
                 }
             }
             if (editor != null) {
@@ -544,6 +553,5 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             }
         }
     }
-    
-    
+
 }
