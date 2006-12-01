@@ -32,6 +32,7 @@ package com.jgoodies.looks.windows;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Shape;
 import java.awt.event.FocusEvent;
@@ -51,22 +52,22 @@ import javax.swing.text.*;
  * For the latter see also issue #4337647 in Sun's bug database.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * 
  */
-class WindowsFieldCaret extends DefaultCaret implements UIResource {
+final class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
-    private static LayeredHighlighter.LayerPainter WindowsPainter = 
+    private static final LayeredHighlighter.LayerPainter WindowsPainter = 
         new WindowsHighlightPainter(null);
 
-    
+
     WindowsFieldCaret() {
         super();
     }
 
 
     // Begin of Added Code ----------------------------------------------
-    
+
     private boolean isKeyboardFocusEvent = true;
 
 
@@ -112,9 +113,9 @@ class WindowsFieldCaret extends DefaultCaret implements UIResource {
             }
         }
     }
-    
+
     // End of Added Code ------------------------------------------------
-    
+
     /**
      * Adjusts the visibility of the caret according to
      * the windows feel which seems to be to move the
@@ -135,7 +136,9 @@ class WindowsFieldCaret extends DefaultCaret implements UIResource {
         return WindowsPainter;
     }
 
+
     private final class SafeScroller implements Runnable {
+
         SafeScroller(Rectangle r) {
             this.r = r;
         }
@@ -152,12 +155,14 @@ class WindowsFieldCaret extends DefaultCaret implements UIResource {
                 try {
                     startRect = ui.modelToView(field, dot, bias);
                 } catch (BadLocationException ble) {}
+
+                Insets i = field.getInsets();
                 BoundedRangeModel vis = field.getHorizontalVisibility();
-                int x = r.x + vis.getValue();
+                int x = r.x + vis.getValue() - i.left;
                 int quarterSpan = vis.getExtent() / 4;
-                if (x < vis.getValue()) {
+                if (r.x < i.left) {
                     vis.setValue(x - quarterSpan);
-                } else if (x > vis.getValue() + vis.getExtent()) {
+                } else if (r.x + r.width > i.left + vis.getExtent()) {
                     vis.setValue(x - (3 * quarterSpan));
                 }
                 // If we scroll, our visual location will have changed,
@@ -168,7 +173,7 @@ class WindowsFieldCaret extends DefaultCaret implements UIResource {
                     try {
                         Rectangle endRect;
                         endRect = ui.modelToView(field, dot, bias);
-                        if (endRect != null && !endRect.equals(startRect)) {
+                        if (endRect != null && !endRect.equals(startRect)){
                             damage(endRect);
                         }
                     } catch (BadLocationException ble) {}
@@ -332,5 +337,4 @@ class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
     }
 
-    
 }
