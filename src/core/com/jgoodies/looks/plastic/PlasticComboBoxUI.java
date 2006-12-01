@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * the JGoodies Plastic L&amp;fs implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -363,7 +363,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
             if (arrowButton != null) {
                 if (cb.getComponentOrientation().isLeftToRight()) {
                     arrowButton.setBounds(
-                        width - (insets.left + insets.right + buttonWidth),
+                        width - (insets.right + buttonWidth),
                         insets.top,
                         buttonWidth,
                         buttonHeight);
