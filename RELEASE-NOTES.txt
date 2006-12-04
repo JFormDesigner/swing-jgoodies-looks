@@ -19,6 +19,7 @@ BUGS FIXED
 OTHER CHANGES
 
     #156: Content of JSpinner not selected after keyboard focus gain
+    o     Added missing icons to the Simple Looks Demo's demo.jar.
     
     
 ---------------------------------------------------------------------------

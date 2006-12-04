@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.28 2006-06-14 08:22:12 karsten Exp $
+   $Id: build.xml,v 1.29 2006-12-04 11:51:34 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -285,7 +285,7 @@
 			<fileset    dir="${build.demo.dir}"    
                         excludes="Tiny.*, FontTest.*"          />
 			<fileset    dir="${src.demo.dir}" 
-			            includes="images/**/*"     />
+			            includes="com/jgoodies/looks/demo/resources/**/*" />
 			<manifest>
                 <attribute name ="Built-By" 
                            value="${user.name}"/>
