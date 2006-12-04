@@ -1,5 +1,32 @@
 
                          JGoodies Looks
+                          Version 2.1.1
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance update just fixes bugs in version 2.1.0.
+    
+
+BUGS FIXED
+
+    #154: Editable JComboBox size problem with border and GroupLayout
+    #155: Exception with icon-less disabled JTabbedPane tabs
+    #157: Plastic question & warning icons are reversed
+    
+    
+OTHER CHANGES
+
+    #156: Content of JSpinner not selected after keyboard focus gain
+    
+    
+---------------------------------------------------------------------------
+Find below the change history for older releases.
+
+
+
+                         JGoodies Looks
                           Version 2.1.0
                           Release Notes
                         
@@ -59,8 +86,8 @@ BUGS FIXED
     #111: RTL menus have problems with accelerator alignment.
     #128: Windows XP table header border is wrong.
     #131: Tabbed pane content is not properly centered in WinXP L&f.
-    #153: Vista read-only combo renderer not transparent.
-    #???: Vista read-only combo box lacks focus dashed rect.
+    #150: Vista read-only combo renderer not transparent.
+    #152: Vista read-only combo box lacks focus dashed rect.
     #???: NPE in ShadowPopup#hide
     
     
