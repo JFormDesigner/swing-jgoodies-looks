@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ import javax.swing.Icon;
  * The bumps used in the JGoodies Plastic Look&amp;Feel.
  *
  * @author Sun
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class PlasticBumps implements Icon {
 

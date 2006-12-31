@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import javax.swing.text.JTextComponent;
  * For the latter see also issue #4337647 in Sun's bug database.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  */
 final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2006 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without 
  * modification, are permitted provided that the following conditions are met:
@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * the JGoodies Plastic L&amp;fs implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
