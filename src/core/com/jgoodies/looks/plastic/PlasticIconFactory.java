@@ -54,7 +54,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 final class PlasticIconFactory {
@@ -186,7 +186,8 @@ final class PlasticIconFactory {
     
 
     /**
-     * Paints the minus sign button icon used in trees.
+     * Paints a minus sign button icon used in trees.
+     * Uses a white background, gray border, and black foreground.
      */
     private static class ExpandedTreeIcon implements Icon, Serializable {
     	
@@ -194,9 +195,7 @@ final class PlasticIconFactory {
 		protected static final int HALF_SIZE = 4;
 
 		public void paintIcon(Component c, Graphics g, int x, int y) {
-			Color backgroundColor = c.getBackground();
-
-			g.setColor(backgroundColor != null ? backgroundColor : Color.WHITE);
+            g.setColor(Color.WHITE);
 			g.fillRect(x, y, SIZE - 1, SIZE - 1);
 			g.setColor(Color.GRAY);
 			g.drawRect(x, y, SIZE - 1, SIZE - 1);
