@@ -1,5 +1,29 @@
 
                          JGoodies Looks
+                          Version 2.1.2
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance update contains a few minor improvements.
+    
+
+OTHER CHANGES
+
+    #161: Plastic file chooser ignores system icons.
+          You can enable system icons by calling
+          UIManager.put("FileChooser.useSystemIcons", Boolean.TRUE)
+          before installing a Plastic L&f.
+    #162: Tree +/- invisible on dark background
+    
+    
+---------------------------------------------------------------------------
+Find below the change history for older releases.
+
+
+
+                         JGoodies Looks
                           Version 2.1.1
                           Release Notes
                         
