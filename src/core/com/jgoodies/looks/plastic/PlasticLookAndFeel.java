@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.32 $
+ * @version $Revision: 1.33 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -430,7 +430,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 
                 // Share the UI delegate instances
                 "SeparatorUI",              plasticPrefix + "SeparatorUI",
-                "ToolBarSeparatorUI",       plasticPrefix + "ToolBarSeparatorUI"
+                "ToolBarSeparatorUI",       plasticPrefix + "ToolBarSeparatorUI",
+                
+                // Optionally looks up the system icons
+                "FileChooserUI",            plasticPrefix + "FileChooserUI"
 
 			};
         if (!useMetalTabs) {
