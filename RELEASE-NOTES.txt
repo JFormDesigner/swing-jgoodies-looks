@@ -9,6 +9,11 @@ INTRODUCTION
     This maintenance update contains a few minor improvements.
     
 
+BUGS FIXED
+
+    #163: Formatted text field content not selected after focus gained
+
+
 OTHER CHANGES
 
     #161: Plastic file chooser ignores system icons.
