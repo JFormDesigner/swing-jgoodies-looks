@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -173,6 +173,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         model.setSelected(oldSelected);
     }
 
+
     // Rollover Listener ****************************************************
 
     protected void installListeners() {
@@ -185,7 +186,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         super.uninstallListeners();
         uninstallRolloverListener();
     }
-    
+
     private void uninstallRolloverListener() {
         if (mouseListener != null) {
             menuItem.removeMouseListener(mouseListener);
@@ -193,24 +194,27 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         }
     }
 
-    
+
     // Helper Code **********************************************************
 
     private boolean isSubMenu(JMenuItem aMenuItem) {
         return !((JMenu) aMenuItem).isTopLevelMenu();
     }
-    
-    
-    private final class RolloverHandler extends MouseAdapter {
+
+
+    private static final class RolloverHandler extends MouseAdapter {
+
         public void mouseEntered(MouseEvent e) {
             AbstractButton b = (AbstractButton) e.getSource();
             b.getModel().setRollover(true);
         }
+
         public void mouseExited(MouseEvent e) {
             AbstractButton b = (AbstractButton) e.getSource();
             b.getModel().setRollover(false);
         }
+
     }
-    
+
 
 }
