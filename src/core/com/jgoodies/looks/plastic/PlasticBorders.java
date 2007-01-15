@@ -51,7 +51,7 @@ import javax.swing.text.JTextComponent;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 final class PlasticBorders {
@@ -239,9 +239,9 @@ final class PlasticBorders {
      */
     static Border getRolloverButtonBorder() {
         if (rolloverButtonBorder == null) { 
-            rolloverButtonBorder = new BorderUIResource.CompoundBorderUIResource(
-                                    new RolloverButtonBorder(),
-                                    new RolloverMarginBorder());
+            rolloverButtonBorder = new CompoundBorder( // No UIResource
+                                        new RolloverButtonBorder(),
+                                        new RolloverMarginBorder());
         }
         return rolloverButtonBorder;
     }

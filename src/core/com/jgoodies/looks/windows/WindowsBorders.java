@@ -43,6 +43,7 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.BorderUIResource;
 import javax.swing.plaf.UIResource;
@@ -54,7 +55,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class WindowsBorders {
     
@@ -204,9 +205,9 @@ final class WindowsBorders {
      */
     static Border getRolloverButtonBorder() {
 		if (rolloverButtonBorder == null) { 
-	    	rolloverButtonBorder = new BorderUIResource.CompoundBorderUIResource(
-						   				new RolloverButtonBorder(),
-						   				new RolloverMarginBorder());
+            rolloverButtonBorder = new CompoundBorder( // No UIResource
+                                        new RolloverButtonBorder(),
+                                        new RolloverMarginBorder());
 		}
 		return rolloverButtonBorder;
     }
@@ -216,7 +217,7 @@ final class WindowsBorders {
 
 
 	// Copied from BasicBorders, has correct black color for the outer default rectangle.
-   private static class ButtonBorder extends AbstractBorder implements UIResource {
+   private static final class ButtonBorder extends AbstractBorder implements UIResource {
    	
    		private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
    		
@@ -293,7 +294,7 @@ final class WindowsBorders {
 	/**
 	 * A border used for <code>Buttons</code> that have the rollover property enabled.
 	 */
-	private static class RolloverButtonBorder extends AbstractButtonBorder {
+	private static final class RolloverButtonBorder extends AbstractButtonBorder {
 		
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
@@ -365,7 +366,7 @@ final class WindowsBorders {
 	/**
 	 * A border that looks like a separator line; used for menu bars and tool bars.
 	 */	
-	private static class SeparatorBorder extends AbstractBorder implements UIResource {
+	private static final class SeparatorBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(0, 3, 2, 1);
 
@@ -386,7 +387,7 @@ final class WindowsBorders {
 	/**
 	 * A thin raised border.
 	 */	
-	static class ThinRaisedBorder extends AbstractBorder implements UIResource {
+	static final class ThinRaisedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -401,7 +402,7 @@ final class WindowsBorders {
 	/**
 	 * A thin lowered border.
 	 */	
-	static class ThinLoweredBorder extends AbstractBorder implements UIResource {
+	static final class ThinLoweredBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
@@ -418,7 +419,7 @@ final class WindowsBorders {
 	 * The bar is wrapped by an inner thin raised border, 
 	 * which in turn is wrapped by an outer thin lowered border.
 	 */	
-	private static class EtchedBorder extends AbstractBorder implements UIResource {
+	private static final class EtchedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
@@ -436,7 +437,7 @@ final class WindowsBorders {
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
-	private static class MenuBarHeaderBorder extends AbstractBorder implements UIResource {
+	private static final class MenuBarHeaderBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 1, 2);  
 
@@ -449,7 +450,8 @@ final class WindowsBorders {
 	}
 	
 	
-    private static class PopupMenuBorder extends AbstractBorder implements UIResource {
+    private static final class PopupMenuBorder extends AbstractBorder implements UIResource {
+
         private static final Insets INSETS = new Insets(3, 3, 3, 3);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -466,7 +468,8 @@ final class WindowsBorders {
     }
     
 
-    private static class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
+    private static final class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
+
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -486,7 +489,7 @@ final class WindowsBorders {
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
-	private static class ToolBarHeaderBorder extends AbstractBorder implements UIResource {
+	private static final class ToolBarHeaderBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 2, 2, 2);  
 
@@ -502,7 +505,7 @@ final class WindowsBorders {
 	/**
 	 * A border used for menus.
 	 */
-	private static class MenuBorder extends AbstractBorder implements UIResource {
+	private static final class MenuBorder extends AbstractBorder implements UIResource {
 		
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 

@@ -52,7 +52,7 @@ import javax.swing.text.JTextComponent;
  *
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 final class PlasticXPBorders {
@@ -154,9 +154,9 @@ final class PlasticXPBorders {
      */
     static Border getRolloverButtonBorder() {
         if (rolloverButtonBorder == null) { 
-            rolloverButtonBorder = new BorderUIResource.CompoundBorderUIResource(
-                                    new RolloverButtonBorder(),
-                                    new PlasticBorders.RolloverMarginBorder());
+            rolloverButtonBorder = new CompoundBorder(
+                                        new RolloverButtonBorder(),
+                                        new PlasticBorders.RolloverMarginBorder());
         }
         return rolloverButtonBorder;
     }
@@ -327,7 +327,7 @@ final class PlasticXPBorders {
     /**
      * A border for <code>JSpinner</code> components.
      */
-    private static class XPSpinnerBorder extends MetalBorders.ScrollPaneBorder  {
+    private static final class XPSpinnerBorder extends MetalBorders.ScrollPaneBorder  {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
