@@ -40,7 +40,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * A very light color theme intended to be used on Windows Vista in Aero style.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * 
  * @since 2.0.3 
  */
@@ -78,7 +78,7 @@ public class LightGray extends ExperienceBlue {
     }
 
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }

@@ -42,7 +42,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DesertBlue extends DesertBluer {
 	
@@ -65,7 +65,7 @@ public class DesertBlue extends DesertBluer {
 	public    ColorUIResource getTitleTextColor()	{ return Colors.BLUE_MEDIUM_DARKEST;}
 	
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.YELLOW_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }

@@ -41,7 +41,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * in Windows XP environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class Silver extends ExperienceBlue {
     
@@ -77,7 +77,7 @@ public class Silver extends ExperienceBlue {
     }
 
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }

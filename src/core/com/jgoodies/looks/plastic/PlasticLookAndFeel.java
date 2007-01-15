@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.33 $
+ * @version $Revision: 1.34 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -139,7 +139,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     /**
      * Holds whether we are using the high contrast focus colors.
      */
-    public static boolean useHighContrastFocusColors =
+    private static boolean useHighContrastFocusColors =
         LookUtils.getSystemProperty(HIGH_CONTRAST_FOCUS_ENABLED_KEY) != null;
                 
 	/** 

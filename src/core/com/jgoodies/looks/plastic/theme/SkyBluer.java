@@ -41,7 +41,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * A theme with medium blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class SkyBluer extends PlasticTheme {
 
@@ -86,7 +86,7 @@ public class SkyBluer extends PlasticTheme {
     }
 
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.YELLOW_FOCUS
             : super.getFocusColor();
     }

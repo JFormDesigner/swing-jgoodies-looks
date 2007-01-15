@@ -38,7 +38,7 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
  * A theme with metal blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public class SkyKrupp extends AbstractSkyTheme {
@@ -72,7 +72,7 @@ public class SkyKrupp extends AbstractSkyTheme {
     }
 
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : Colors.GRAY_DARK;
     }

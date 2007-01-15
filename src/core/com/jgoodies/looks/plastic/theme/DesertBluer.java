@@ -39,7 +39,7 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 public class DesertBluer extends SkyBluer {
 	
@@ -66,7 +66,7 @@ public class DesertBluer extends SkyBluer {
 	public    ColorUIResource getMenuItemSelectedBackground() { return getPrimary1(); }
 
     public ColorUIResource getFocusColor() {
-        return PlasticLookAndFeel.useHighContrastFocusColors
+        return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : super.getFocusColor();
     }
