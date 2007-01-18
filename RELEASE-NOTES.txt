@@ -12,6 +12,7 @@ INTRODUCTION
 BUGS FIXED
 
     #163: Formatted text field content not selected after focus gained
+    #165: Rollover mode in JToolBar is lost after first switching L&F
 
 
 OTHER CHANGES
