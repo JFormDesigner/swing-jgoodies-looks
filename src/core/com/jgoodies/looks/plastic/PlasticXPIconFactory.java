@@ -55,7 +55,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class PlasticXPIconFactory {
 
@@ -108,7 +108,7 @@ public final class PlasticXPIconFactory {
             ButtonModel model = cb.getModel();
             Graphics2D g2 = (Graphics2D) g;
             boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
-            || (cb.hasFocus() && (cb.getText().length() == 0));
+                                 || (cb.hasFocus() && isBlank(cb.getText()));
             
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
@@ -203,7 +203,7 @@ public final class PlasticXPIconFactory {
             AbstractButton rb = (AbstractButton) c;
             ButtonModel model = rb.getModel();
             boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
-                                 || (rb.hasFocus() && (rb.getText().length() == 0));
+                                 || (rb.hasFocus() && isBlank(rb.getText()));
         
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
@@ -278,5 +278,37 @@ public final class PlasticXPIconFactory {
         }
 
     }
-
+    
+    
+    // Helper Code ************************************************************
+    
+    /**
+     * Checks and answers if the given string is whitespace, 
+     * empty ("") or <code>null</code>.
+     * 
+     * <pre>
+     * isBlank(null)    == true
+     * isBlank("")      == true
+     * isBlank(" ")     == true
+     * isBlank(" abc")  == false
+     * isBlank("abc ")  == false
+     * isBlank(" abc ") == false
+     * </pre>
+     * 
+     * @param str   the string to check, may be <code>null</code>
+     * @return <code>true</code> if the string is whitespace, empty 
+     *    or <code>null</code>
+     */
+    private static boolean isBlank(String str) {
+        int length;
+        if ((str == null) || ((length = str.length()) == 0))
+            return true;
+        for (int i = length-1; i >= 0; i--) {
+            if (!Character.isWhitespace(str.charAt(i)))
+                return false;
+        }
+        return true;
+    }
+    
+    
 }
