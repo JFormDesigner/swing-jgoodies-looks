@@ -34,6 +34,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -47,7 +49,7 @@ import com.jgoodies.uif_lite.component.UIFSplitPane;
  * removes obsolete decorations.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * 
  * @see UIFSplitPane
  */
@@ -125,14 +127,15 @@ final class SplitTab {
      * Builds and returns a sample table.
      */
     private JTable buildTable() {
-        JTable table =
-            new JTable(
+        TableModel model = new SampleTableModel(
                 createSampleTableData(),
-                new String[] { "Artist", "Title      " });
+                new String[] { "Artist", "Title      ", "Free" });
+        JTable table = new JTable(model);
 
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.getColumnModel().getColumn(0).setPreferredWidth(100);
-        table.getColumnModel().getColumn(1).setPreferredWidth(300);
+        table.getColumnModel().getColumn(1).setPreferredWidth(250);
+        table.getColumnModel().getColumn(2).setPreferredWidth(50);
         table.setRowSelectionInterval(2, 2);
         int tableFontSize    = table.getFont().getSize();
         int minimumRowHeight = tableFontSize + 6;
@@ -180,25 +183,48 @@ final class SplitTab {
     /**
      * Creates and returns sample table data.
      */
-    private String[][] createSampleTableData() {
-        return new String[][] { 
-            { "Albert Ayler",   "Greenwich Village"         }, 
-            { "Carla Bley",     "Escalator Over the Hill"   }, 
-            { "Frank Zappa",    "Yo' Mama"                  },
-            { "John Coltrane",  "Ascension"                 }, 
-            { "Miles Davis",    "In a Silent Way"           }, 
-            { "Pharoa Sanders", "Karma"                     }, 
-            { "Wayne Shorter",  "Juju"                      },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
-            { "",               ""                          },
+    private Object[][] createSampleTableData() {
+        return new Object[][] { 
+            { "Albert Ayler",   "Greenwich Village",       Boolean.TRUE  }, 
+            { "Carla Bley",     "Escalator Over the Hill", Boolean.TRUE  }, 
+            { "Frank Zappa",    "Yo' Mama",                Boolean.TRUE  },
+            { "John Coltrane",  "Ascension",               Boolean.TRUE  }, 
+            { "Miles Davis",    "In a Silent Way",         Boolean.TRUE  }, 
+            { "Pharoa Sanders", "Karma",                   Boolean.TRUE  }, 
+            { "Wayne Shorter",  "Juju",                    Boolean.TRUE  },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
+            { "",               "",                        Boolean.FALSE },
         };
+    }
+    
+    private static final class SampleTableModel extends AbstractTableModel {
+        
+        private final String[] columnNames;
+        private final Object[][] rowData;
+        
+        SampleTableModel(Object[][] rowData, String[] columnNames) {
+            this.columnNames = columnNames;
+            this.rowData = rowData;
+        }
+        public String getColumnName(int column) { return columnNames[column].toString(); }
+        public int getRowCount() { return rowData.length; }
+        public int getColumnCount() { return columnNames.length; }
+        public Class getColumnClass(int column) {
+            return column == 2 ? Boolean.class : super.getColumnClass(column);
+        }
+        public Object getValueAt(int row, int col) { return rowData[row][col]; }
+        public boolean isCellEditable(int row, int column) { return true; }
+        public void setValueAt(Object value, int row, int col) {
+            rowData[row][col] = value;
+            fireTableCellUpdated(row, col);
+        }
     }
 
 }
