@@ -52,7 +52,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public final class Options {
 
@@ -698,6 +698,18 @@ public final class Options {
         LAF_REPLACEMENTS.remove(original);
     }
 
+    
+    /**
+     * A replacement used to replace a given L&f with nothing,
+     * that indicates that it should not be used. For example,
+     * by default we mark the WindowsClass L&f this way,
+     * to remove it from L&f lists that replace the Sun Windows L&f
+     * with the JGoodies Windows L&f.
+     * 
+     * @since 2.1.3
+     */
+    public static final String NO_REPLACEMENT = "none";
+    
     /**
      * Initializes some default class name replacements, that replace
      * Sun's Java look and feel, and Sun's Windows look and feel by
@@ -714,6 +726,9 @@ public final class Options {
         putLookAndFeelReplacement(
             "com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
             JGOODIES_WINDOWS_NAME);
+        putLookAndFeelReplacement(
+                "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel",
+                NO_REPLACEMENT);
     }
 
     /**
@@ -728,7 +743,13 @@ public final class Options {
      */
     public static String getReplacementClassNameFor(String className) {
         String replacement = (String) LAF_REPLACEMENTS.get(className);
-        return replacement == null ? className : replacement;
+        if (replacement == null) {
+            return className;
+        } else if (replacement.equals(NO_REPLACEMENT)) {
+            return null;
+        } else {
+            return replacement;
+        }
     }
 
     /**
