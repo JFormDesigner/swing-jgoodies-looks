@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.33 $
+ * @version $Revision: 1.34 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -81,7 +81,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
-                + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
+                + " - \u00a9 2001-2007 JGoodies Karsten Lentzsch";
     }
     
     

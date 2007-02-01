@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
  * look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 
@@ -57,7 +57,7 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic 3D Look and Feel"
-            + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2007 JGoodies Karsten Lentzsch";
     }
 
     protected boolean is3DEnabled() {

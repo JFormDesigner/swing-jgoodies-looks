@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.35 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -189,7 +189,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
-            + " - \u00a9 2001-2006 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2007 JGoodies Karsten Lentzsch";
     }
     
     
