@@ -44,7 +44,7 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  * 
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class ExtButtonAreaLayout
@@ -100,12 +100,17 @@ public final class ExtButtonAreaLayout
                         xOffset = 0;
                     }
                 }
+                boolean ltr = container.getComponentOrientation()
+                                       .isLeftToRight();
                 for (counter = 0; counter < numChildren; counter++) {
-                    children[counter].setBounds(
+                    int index = (ltr)
+                              ? counter
+                              : numChildren - counter - 1;
+                    children[index].setBounds(
                         xLocation,
                         yLocation,
                         maxWidth,
-                        sizes[counter].height);
+                        sizes[index].height);
                     xLocation += xOffset;
                 }
             } else {
@@ -137,13 +142,18 @@ public final class ExtButtonAreaLayout
                     }
                 }
 
+                boolean ltr = container.getComponentOrientation()
+                                       .isLeftToRight();
                 for (counter = 0; counter < numChildren; counter++) {
-                    children[counter].setBounds(
+                    int index = (ltr)
+                              ? counter
+                              : numChildren - counter - 1;
+                    children[index].setBounds(
                         xLocation,
                         yLocation,
-                        sizes[counter].width,
-                        sizes[counter].height);
-                    xLocation += xOffset + sizes[counter].width;
+                        sizes[index].width,
+                        sizes[index].height);
+                    xLocation += xOffset + sizes[index].width;
                 }
             }
         }
