@@ -6,12 +6,13 @@
 
 INTRODUCTION
 
-    This maintenance update ...
+    This update contains minor bug fixes and a tiny enhancement.
     
 
 BUGS FIXED
 
     #166: NPE if PlasticXP checkbox or radio text is null
+    #169: RTL orientation ignored for JOptionPane buttons
 
 
 OTHER CHANGES
