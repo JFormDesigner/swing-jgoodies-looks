@@ -1,5 +1,24 @@
 
                          JGoodies Looks
+                          Version 2.1.4
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This update contains minor bug fixes.
+    
+
+BUGS FIXED
+
+    #173: NPE in PlasticLookAndFeel#getDefaultXPTheme
+
+
+---------------------------------------------------------------------------
+Find below the change history for older releases.
+
+
+                         JGoodies Looks
                           Version 2.1.3
                           Release Notes
                         
