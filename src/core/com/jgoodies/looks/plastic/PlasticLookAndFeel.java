@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.35 $
+ * @version $Revision: 1.36 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 	
@@ -753,26 +753,33 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     
     
     private static String getDefaultXPTheme() {
+        String fallbackName = "ExperienceBlue";
         Toolkit toolkit = Toolkit.getDefaultToolkit();
-        String xpstyleColorName = (String) toolkit.getDesktopProperty("win.xpstyle.colorName");
         String xpstyleDll = (String) toolkit.getDesktopProperty("win.xpstyle.dllName");
+        if (xpstyleDll == null) {
+            return fallbackName;
+        }
         boolean isStyleLuna = xpstyleDll.endsWith("luna.msstyles");
         boolean isStyleRoyale = xpstyleDll.endsWith("Royale.msstyles");
         boolean isStyleAero = xpstyleDll.endsWith("Aero.msstyles");
         if (isStyleRoyale) {
             return "ExperienceRoyale";
         } else if (isStyleLuna) {
+            String xpstyleColorName = (String) toolkit.getDesktopProperty("win.xpstyle.colorName");
+            if (xpstyleColorName == null) {
+                return fallbackName;
+            }
             if (xpstyleColorName.equalsIgnoreCase("HomeStead")) {
                 return "ExperienceGreen";
             } else if (xpstyleColorName.equalsIgnoreCase("Metallic")) {
                 return "Silver";
             } else {
-                return "ExperienceBlue";
+                return fallbackName;
             }
         } else if (isStyleAero) {
             return "LightGray";
         }
-        return "ExperienceBlue";
+        return fallbackName;
     }
 	
 	
