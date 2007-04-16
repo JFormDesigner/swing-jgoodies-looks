@@ -58,7 +58,7 @@ import com.jgoodies.looks.LookUtils;
  *
  * @author  Karsten Lentzsch
  * @author  Andrej Golovnin
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * 
  * @since 2.0
  */
@@ -106,8 +106,8 @@ public final class RenderingUtils {
             if (drawStringUnderlineCharAtMethod != null) {
                 try {
                     drawStringUnderlineCharAtMethod.invoke(null,
-                            new Object[] {c, g, text, Integer.valueOf(underlinedIndex),
-                                          Integer.valueOf(x), Integer.valueOf(y)});
+                            new Object[] {c, g, text, new Integer(underlinedIndex),
+                                          new Integer(x), new Integer(y)});
                     return;
                 } catch (IllegalArgumentException e) {
                     // Use the BasicGraphicsUtils as fallback
