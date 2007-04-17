@@ -6,12 +6,15 @@
 
 INTRODUCTION
 
-    This update contains minor bug fixes.
+    This maintenance update contains bug fixes, primarily
+    for Java 6 update 1 or later on Windows Vista.
     
 
 BUGS FIXED
 
+    #171: Menu rendering incorrect on Vista
     #173: NPE in PlasticLookAndFeel#getDefaultXPTheme
+    #174: Invisible combo box items in Vista file chooser
 
 
 ---------------------------------------------------------------------------
