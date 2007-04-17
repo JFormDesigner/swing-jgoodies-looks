@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  * 
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -305,7 +305,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         boolean shouldValidate = c instanceof JPanel;
 
         Boolean oldOpaque = null;
-        if (isVistaReadOnlyCombo && (c instanceof JComponent)) {
+        if (isVistaReadOnlyCombo && (c instanceof JComponent) && !(c instanceof DefaultListCellRenderer)) {
             oldOpaque = Boolean.valueOf(c.isOpaque());
             ((JComponent) c).setOpaque(false);
         }
