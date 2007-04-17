@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.35 $
+ * @version $Revision: 1.36 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -392,7 +392,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
         
-        Object menuMargin = microLayout.getMenuMargin();
         Object popupMenuSeparatorMargin = microLayout.getPopupMenuSeparatorMargin();
 
         // 	Should be active.
@@ -445,8 +444,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 			"Menu.selectionForeground",   menuSelectionForeground, 
 			"Menu.selectionBackground",   menuSelectionBackground, 
             // End 1.3 und 1.4.0
-
-            "Menu.margin",                menuMargin, // 1.4.1 Bug
 
             "MenuBar.background",         menuBarBackground, 
 			"MenuBar.border",             menuBarSeparatorBorder, // 1.4.1 Separator wrong
@@ -571,9 +568,12 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     
     
     private void initMenuItemDefaults(UIDefaults table, MicroLayout microLayout) {
+        Object menuMargin     = microLayout.getMenuMargin();
         Object menuItemMargin = microLayout.getMenuItemMargin();
         Icon menuItemCheckIcon = new MinimumSizedIcon();
         Object[] defaults = {
+
+        "Menu.margin",                menuMargin, // 1.4.1 Bug
 
         "MenuItem.borderPainted",     Boolean.TRUE, 
         "MenuItem.checkIcon",         menuItemCheckIcon, // Aligns menu items
