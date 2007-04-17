@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.35 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -239,17 +239,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             // Optional style and optional special borders
             "MenuBarUI",             windowsPrefix + "MenuBarUI", 
 
-            // Aligned menu items
-			"MenuItemUI",            windowsPrefix + "MenuItemUI", 
-			"CheckBoxMenuItemUI",    commonPrefix + "CheckBoxMenuItemUI", 
-			"RadioButtonMenuItemUI", commonPrefix + "RadioButtonMenuItemUI", 
-
             // Provides an option for a no margin border              
             "PopupMenuUI",           windowsPrefix + "PopupMenuUI",
            
-            // Has padding above and below the separator lines				
-            "PopupMenuSeparatorUI",  commonPrefix + "PopupMenuSeparatorUI", 
-
             // Honors the screen resolution and uses a minimum button width             
             "OptionPaneUI",          windowsPrefix + "OptionPaneUI", 
 
@@ -282,11 +274,28 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             uiDefaults = append(uiDefaults, 
             "SpinnerUI",             windowsPrefix + "SpinnerUI"); 
         }
+
+        // Aligned menu items
+        if (  !LookUtils.IS_JAVA_6_OR_LATER 
+           || !LookUtils.IS_OS_WINDOWS_VISTA 
+           || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+            uiDefaults = append(uiDefaults, 
+            "MenuItemUI",            windowsPrefix + "MenuItemUI");
+            uiDefaults = append(uiDefaults, 
+            "CheckBoxMenuItemUI",    commonPrefix + "CheckBoxMenuItemUI");
+            uiDefaults = append(uiDefaults, 
+            "RadioButtonMenuItemUI", commonPrefix + "RadioButtonMenuItemUI");
+            // Has padding above and below the separator lines              
+            uiDefaults = append(uiDefaults, 
+            "PopupMenuSeparatorUI",  commonPrefix + "PopupMenuSeparatorUI"); 
+        }
         
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
-            uiDefaults = append(uiDefaults,
+            if (!LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_OS_WINDOWS_VISTA) {
+                uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
+            }
             
             // Optional style and optional special borders; 
             // rollover borders for compound buttons
@@ -339,6 +348,9 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         }
         
         MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout("Windows", table);
+        if (!isVista || !LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+            initMenuItemDefaults(table, microLayout);
+        }
 
         Object marginBorder = new BasicBorders.MarginBorder();
         Object checkBoxMargin = microLayout.getCheckBoxMargin();
@@ -380,11 +392,8 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         Object comboRendererBorder = new EmptyBorder(1, comboRendererGap, 1, comboRendererGap);
         Object comboTableEditorInsets = new Insets(0, 0, 0, 0);
         
-        Object menuItemMargin = microLayout.getMenuItemMargin();
         Object menuMargin = microLayout.getMenuMargin();
         Object popupMenuSeparatorMargin = microLayout.getPopupMenuSeparatorMargin();
-
-        Icon menuItemCheckIcon = new MinimumSizedIcon();
 
         // 	Should be active.
         int treeFontSize = table.getFont("Tree.font").getSize();
@@ -445,12 +454,6 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
             "MenuBar.separatorBorder",    menuBarSeparatorBorder, // Added by JGoodies 
             "MenuBar.etchedBorder",       menuBarEtchedBorder, // Added by JGoodies
             "MenuBar.headerBorder",       menuBarHeaderBorder, // Added by JGoodies
-
-            "MenuItem.borderPainted",     Boolean.TRUE, 
-			"MenuItem.checkIcon",         menuItemCheckIcon, // Aligns menu items
-            "MenuItem.margin",            menuItemMargin, // 1.4.1 Bug
-            "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
-            "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
 
             "FormattedTextField.disabledBackground", disabledTextBackground, // for readonly
             "FormattedTextField.inactiveBackground", inactiveTextBackground, // for readonly
@@ -564,6 +567,21 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         FontPolicy fontChoicePolicy = getFontPolicy();
         FontSet fontSet = fontChoicePolicy.getFontSet("Windows", table);
         initFontDefaults(table, fontSet);
+    }
+    
+    
+    private void initMenuItemDefaults(UIDefaults table, MicroLayout microLayout) {
+        Object menuItemMargin = microLayout.getMenuItemMargin();
+        Icon menuItemCheckIcon = new MinimumSizedIcon();
+        Object[] defaults = {
+
+        "MenuItem.borderPainted",     Boolean.TRUE, 
+        "MenuItem.checkIcon",         menuItemCheckIcon, // Aligns menu items
+        "MenuItem.margin",            menuItemMargin, // 1.4.1 Bug
+        "CheckBoxMenuItem.margin",    menuItemMargin, // 1.4.1 Bug
+        "RadioButtonMenuItem.margin", menuItemMargin, // 1.4.1 Bug
+        };
+        table.putDefaults(defaults);
     }
 
     
