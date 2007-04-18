@@ -15,6 +15,7 @@ BUGS FIXED
     #171: Menu rendering incorrect on Vista
     #173: NPE in PlasticLookAndFeel#getDefaultXPTheme
     #174: Invisible combo box items in Vista file chooser
+          Plastic menu opaque after switching L&f.
 
 
 ---------------------------------------------------------------------------
