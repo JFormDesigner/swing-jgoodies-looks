@@ -47,7 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of buttons to open a bunch of standard dialogs.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 final class DialogsTab {
     
@@ -142,7 +142,7 @@ final class DialogsTab {
                 "0:grow, pref, 4dlu, pref, 14dlu, pref, 4dlu, pref, 14dlu, pref, 4dlu, pref, 0:grow");
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
 
         CellConstraints cc = new CellConstraints();
 
@@ -163,7 +163,7 @@ final class DialogsTab {
      */
     private JPanel buildButtonBar() {
         ButtonBarBuilder builder = new ButtonBarBuilder();
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
         builder.addGriddedButtons(new JButton[]{
             informationButton, warningButton, questionButton, errorButton});
         return builder.getPanel();

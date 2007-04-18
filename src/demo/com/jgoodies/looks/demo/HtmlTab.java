@@ -47,7 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of components with HTML labels.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class HtmlTab {
     
@@ -88,7 +88,7 @@ final class HtmlTab {
         layout.setColumnGroups(new int[][]{{2, 5}});
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setBorder(Borders.DLU14_BORDER);
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
         
         CellConstraints cc = new CellConstraints();
         builder.addLabel("Label:",  cc.xy(2,  1));

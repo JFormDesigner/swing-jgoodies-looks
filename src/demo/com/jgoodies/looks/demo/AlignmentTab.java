@@ -44,7 +44,7 @@ import com.jgoodies.forms.layout.Sizes;
  * of font baselines and centered perceived bounds.
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class AlignmentTab {
     
@@ -63,7 +63,7 @@ final class AlignmentTab {
         
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
         
         builder.add(createHelpLabel(),         new CellConstraints(2, 1));
         builder.add(buildAlignmentTestPanel(), new CellConstraints(2, 3));
@@ -77,7 +77,7 @@ final class AlignmentTab {
         
         DefaultFormBuilder builder = new DefaultFormBuilder(layout);
         builder.setLineGapSize(Sizes.pixel(1));
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
         
         builder.append(createCenteredLabel("Label"));
         builder.append(createCenteredLabel("Field"));

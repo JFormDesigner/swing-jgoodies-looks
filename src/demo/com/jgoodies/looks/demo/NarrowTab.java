@@ -53,7 +53,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints. 
  * 
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class NarrowTab {
 
@@ -66,7 +66,7 @@ final class NarrowTab {
                 "pref, 14dlu, pref, 14dlu, pref, 0:grow");
         PanelBuilder builder = new PanelBuilder(layout);
         builder.setDefaultDialogBorder();
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
 
         CellConstraints cc = new CellConstraints();
         builder.add(buildButtonBoxNoNarrow(),  cc.xy (1, 1));
@@ -102,7 +102,7 @@ final class NarrowTab {
     private Component buildButtonFormNoNarrow() {
         JButton[] buttons = createButtons();
         ButtonBarBuilder builder = new ButtonBarBuilder();
-        builder.getPanel().setOpaque(false);
+        builder.setOpaque(false);
         for (int i = 0; i < buttons.length - 1; i++) {
             builder.addGridded(buttons[i]);
             builder.addRelatedGap();
