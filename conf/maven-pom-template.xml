@@ -29,4 +29,7 @@
 		<tag>head</tag>
 		<url>https://looks.dev.java.net/source/browse/looks/</url>
 	</scm>
+	<dependencies>
+	<!-- This library doesn't depend on any other library. -->
+	<dependencies>
 </project>
