@@ -1,27 +1,15 @@
 /*
  * Copyright (c) Sun Microsystems.
- * 
+ *
  * JGoodies Note: I've added this copyright to clarify
  * that this code has been developed and published by Sun.
  */
 
 package com.jgoodies.looks.common;
 
-import java.awt.AWTEvent;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FocusTraversalPolicy;
-import java.awt.KeyboardFocusManager;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.text.AttributedCharacterIterator;
-import java.text.CharacterIterator;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.ParseException;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.*;
 import java.util.Calendar;
 import java.util.Map;
 
@@ -29,25 +17,25 @@ import javax.swing.*;
 import javax.swing.text.InternationalFormatter;
 
 /**
- * A handler for spinner arrow button mouse and action events.  When 
- * a left mouse pressed event occurs we look up the (enabled) spinner 
+ * A handler for spinner arrow button mouse and action events.  When
+ * a left mouse pressed event occurs we look up the (enabled) spinner
  * that's the source of the event and start the autorepeat timer.  The
- * timer fires action events until any button is released at which 
+ * timer fires action events until any button is released at which
  * point the timer is stopped and the reference to the spinner cleared.
- * The timer doesn't start until after a 300ms delay, so often the 
+ * The timer doesn't start until after a 300ms delay, so often the
  * source of the initial (and final) action event is just the button
  * logic for mouse released - which means that we're relying on the fact
  * that our mouse listener runs after the buttons mouse listener.<p>
- * 
- * Note that one instance of this handler is shared by all slider previous 
- * arrow buttons and likewise for all of the next buttons, 
+ *
+ * Note that one instance of this handler is shared by all slider previous
+ * arrow buttons and likewise for all of the next buttons,
  * so it doesn't have any state that persists beyond the limits
  * of a single button pressed/released gesture.<p>
- * 
+ *
  * Copied from javax.swing.BasicSpinnerUI
- * 
- * @version $Revision: 1.4 $
- * 
+ *
+ * @version $Revision: 1.5 $
+ *
  * @see javax.swing.plaf.basic.BasicSpinnerUI
  */
 public final class ExtBasicArrowButtonHandler extends AbstractAction implements

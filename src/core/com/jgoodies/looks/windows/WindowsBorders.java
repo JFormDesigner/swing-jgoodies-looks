@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.windows;
@@ -35,12 +35,7 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Insets;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.JButton;
-import javax.swing.JToggleButton;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
@@ -51,18 +46,18 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
- * Consists of static inner classes that define different 
+ * Consists of static inner classes that define different
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class WindowsBorders {
-    
+
     private WindowsBorders() {
         // Overrides default constructor; prevents instantiation.
     }
-    
+
 	// Accessing and Creating Borders ***************************************************
 
     private static Border menuBorder;
@@ -151,7 +146,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a special border for a <code>JMenuBar</code> that 
+     * Returns a special border for a <code>JMenuBar</code> that
      * is used in a header just above a <code>JToolBar</code>.
      */
     static Border getMenuBarHeaderBorder() {
@@ -165,7 +160,7 @@ final class WindowsBorders {
 
     /**
      * Returns a border instance for a <code>JPopupMenu</code>.
-     * 
+     *
      * @return the lazily created popup menu border
      */
     static Border getPopupMenuBorder() {
@@ -177,7 +172,7 @@ final class WindowsBorders {
 
     /**
      * Returns a no-margin border instance for a <code>JPopupMenu</code>.
-     * 
+     *
      * @return the lazily created no-margin popup menu border
      */
     static Border getNoMarginPopupMenuBorder() {
@@ -188,11 +183,11 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a special border for a <code>JToolBar</code> that 
+     * Returns a special border for a <code>JToolBar</code> that
      * is used in a header just below a <code>JMenuBar</code>.
      */
     static Border getToolBarHeaderBorder() {
-		if (toolBarHeaderBorder == null) { 
+		if (toolBarHeaderBorder == null) {
 	    	toolBarHeaderBorder = new BorderUIResource.CompoundBorderUIResource(
 						   				new ToolBarHeaderBorder(),
 						   				new BasicBorders.MarginBorder());
@@ -204,7 +199,7 @@ final class WindowsBorders {
      * Returns a border for a rollover <code>AbstractButton</code>.
      */
     static Border getRolloverButtonBorder() {
-		if (rolloverButtonBorder == null) { 
+		if (rolloverButtonBorder == null) {
             rolloverButtonBorder = new CompoundBorder( // No UIResource
                                         new RolloverButtonBorder(),
                                         new RolloverMarginBorder());
@@ -218,20 +213,20 @@ final class WindowsBorders {
 
 	// Copied from BasicBorders, has correct black color for the outer default rectangle.
    private static final class ButtonBorder extends AbstractBorder implements UIResource {
-   	
+
    		private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
-   		
+
         private final Color shadow;
         private final Color darkShadow;
         private final Color highlight;
         private final Color lightHighlight;
         private final Color defaultColor;
 
-        public ButtonBorder(Color shadow, Color darkShadow, 
+        public ButtonBorder(Color shadow, Color darkShadow,
                              Color highlight, Color lightHighlight, Color defaultColor) {
             this.shadow = shadow;
             this.darkShadow = darkShadow;
-            this.highlight = highlight; 
+            this.highlight = highlight;
             this.lightHighlight = lightHighlight;
             this.defaultColor = defaultColor;
         }
@@ -239,16 +234,16 @@ final class WindowsBorders {
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             boolean isPressed = false;
             boolean isDefault = false;
-      
+
             if (c instanceof AbstractButton) {
 	        	AbstractButton b = (AbstractButton) c;
 	        	ButtonModel model = b.getModel();
-	
+
    	        	isPressed = model.isPressed() && model.isArmed();
                 if (c instanceof JButton) {
                     isDefault = ((JButton) c).isDefaultButton();
                 }
-            }	
+            }
             drawBezel(g, x, y, width, height, isPressed, isDefault, shadow,
                       darkShadow, highlight, lightHighlight, defaultColor);
         }
@@ -289,13 +284,13 @@ final class WindowsBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
+
 
 	/**
 	 * A border used for <code>Buttons</code> that have the rollover property enabled.
 	 */
 	private static final class RolloverButtonBorder extends AbstractButtonBorder {
-		
+
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
 			ButtonModel model = b.getModel();
@@ -331,7 +326,7 @@ final class WindowsBorders {
     private static final class RolloverMarginBorder extends EmptyBorder {
 
         private RolloverMarginBorder() {
-            super(1, 1, 1, 1); 
+            super(1, 1, 1, 1);
         }
 
 
@@ -365,7 +360,7 @@ final class WindowsBorders {
 
 	/**
 	 * A border that looks like a separator line; used for menu bars and tool bars.
-	 */	
+	 */
 	private static final class SeparatorBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(0, 3, 2, 1);
@@ -379,14 +374,14 @@ final class WindowsBorders {
 	  		g.drawLine( 0, h - 1, w - 1, h - 1 );
 			g.translate(-x, -y);
 		}
-		
+
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
 	/**
 	 * A thin raised border.
-	 */	
+	 */
 	static final class ThinRaisedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
@@ -394,14 +389,14 @@ final class WindowsBorders {
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
 		}
-		
+
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A thin lowered border.
-	 */	
+	 */
 	static final class ThinLoweredBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
@@ -409,16 +404,16 @@ final class WindowsBorders {
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
 		}
-		
+
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A border used for menu bars and tool bars in <code>HeaderStyle.SINGLE</code>.
-	 * The bar is wrapped by an inner thin raised border, 
+	 * The bar is wrapped by an inner thin raised border,
 	 * which in turn is wrapped by an outer thin lowered border.
-	 */	
+	 */
 	private static final class EtchedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
@@ -430,8 +425,8 @@ final class WindowsBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A border used for menu bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
@@ -439,7 +434,7 @@ final class WindowsBorders {
 	 */
 	private static final class MenuBarHeaderBorder extends AbstractBorder implements UIResource {
 
-		private static final Insets INSETS = new Insets(2, 2, 1, 2);  
+		private static final Insets INSETS = new Insets(2, 2, 1, 2);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y, w, h + 1);
@@ -448,8 +443,8 @@ final class WindowsBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
     private static final class PopupMenuBorder extends AbstractBorder implements UIResource {
 
         private static final Insets INSETS = new Insets(3, 3, 3, 3);
@@ -466,7 +461,7 @@ final class WindowsBorders {
 
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
-    
+
 
     private static final class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
 
@@ -483,7 +478,7 @@ final class WindowsBorders {
 
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
-    
+
 	/**
 	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
@@ -491,7 +486,7 @@ final class WindowsBorders {
 	 */
 	private static final class ToolBarHeaderBorder extends AbstractBorder implements UIResource {
 
-		private static final Insets INSETS = new Insets(1, 2, 2, 2);  
+		private static final Insets INSETS = new Insets(1, 2, 2, 2);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y - 1, w, h + 1);
@@ -500,13 +495,13 @@ final class WindowsBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A border used for menus.
 	 */
 	private static final class MenuBorder extends AbstractBorder implements UIResource {
-		
+
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
@@ -521,7 +516,7 @@ final class WindowsBorders {
 				WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
 			//}
 		}
-		
+
 		public Insets getBorderInsets(Component c) { return INSETS; }
 
 	}
@@ -530,14 +525,14 @@ final class WindowsBorders {
     // Helper Code **********************************************************************
 
 	// Copied from BasicGraphicsUtils, has an additional color for the default rectangle.
-    private static void drawBezel(Graphics g, int x, int y, int w, int h, 
-                                 boolean isPressed, boolean isDefault, 
-                                 Color shadow, Color darkShadow, 
+    private static void drawBezel(Graphics g, int x, int y, int w, int h,
+                                 boolean isPressed, boolean isDefault,
+                                 Color shadow, Color darkShadow,
                                  Color highlight, Color lightHighlight, Color defaultColor)
     {
         Color oldColor = g.getColor();  // Make no net change to g
         g.translate(x, y);
-        
+
         if (isPressed && isDefault) {
             g.setColor(darkShadow);
             g.drawRect(0, 0, w - 1, h - 1);
@@ -547,10 +542,10 @@ final class WindowsBorders {
             BasicGraphicsUtils.drawLoweredBezel(g, x, y, w, h,
                              shadow, darkShadow, highlight, lightHighlight);
         } else if (isDefault) {
-            g.setColor(defaultColor);       
+            g.setColor(defaultColor);
             g.drawRect(0, 0, w-1, h-1);
 
-            g.setColor(lightHighlight);   
+            g.setColor(lightHighlight);
             g.drawLine(1, 1, 1, h-3);
             g.drawLine(2, 1, w-3, 1);
 
@@ -562,11 +557,11 @@ final class WindowsBorders {
             g.drawLine(2, h-3, w-3, h-3);
             g.drawLine(w-3, 2, w-3, h-4);
 
-            g.setColor(darkShadow);        
+            g.setColor(darkShadow);
             g.drawLine(1, h-2, w-2, h-2);
             g.drawLine(w-2, h-2, w-2, 1);
         } else {
-            g.setColor(lightHighlight);    
+            g.setColor(lightHighlight);
             g.drawLine(0, 0, 0, h-1);
             g.drawLine(1, 0, w-2, 0);
 
@@ -578,7 +573,7 @@ final class WindowsBorders {
             g.drawLine(1, h-2, w-2, h-2);
             g.drawLine(w-2, 1, w-2, h-3);
 
-            g.setColor(darkShadow);         
+            g.setColor(darkShadow);
             g.drawLine(0, h-1, w-1, h-1);
             g.drawLine(w-1, h-1, w-1, 0);
         }

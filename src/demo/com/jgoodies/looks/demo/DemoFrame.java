@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.demo;
@@ -48,36 +48,36 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
-/** 
- * Builds the main frame in the Simple Looks Demo. 
+/**
+ * Builds the main frame in the Simple Looks Demo.
  * Demonstrates and tests different multi-platform issues by
  * showing a variety of Swing widgets in different configurations.<p>
- * 
+ *
  * This class provides a couple of protected methods that create
- * components or a builder. The full JGoodies Looks Demo overrides 
- * these methods to vend components or builders from the 
+ * components or a builder. The full JGoodies Looks Demo overrides
+ * these methods to vend components or builders from the
  * JGoodies UI framework that better handle different platforms.
- * 
+ *
  * @author Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class DemoFrame extends JFrame {
 
     protected static final Dimension PREFERRED_SIZE =
-        LookUtils.IS_LOW_RESOLUTION 
-            ? new Dimension(650, 510) 
+        LookUtils.IS_LOW_RESOLUTION
+            ? new Dimension(650, 510)
             : new Dimension(730, 560);
 
-            
-    private static final String COPYRIGHT = 
-        "\u00a9 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.";    
-        
-    
+
+    private static final String COPYRIGHT =
+        "\u00a9 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.";
+
+
     /** Describes optional settings of the JGoodies Looks. */
     private final Settings settings;
 
     /**
-     * Constructs a <code>DemoFrame</code>, configures the UI, 
+     * Constructs a <code>DemoFrame</code>, configures the UI,
      * and builds the content.
      */
     protected DemoFrame(Settings settings) {
@@ -86,7 +86,7 @@ public class DemoFrame extends JFrame {
         build();
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
-    
+
     public static void main(String[] args) {
         Settings settings = createDefaultSettings();
         if (args.length > 0) {
@@ -111,30 +111,30 @@ public class DemoFrame extends JFrame {
         instance.locateOnScreen(instance);
         instance.setVisible(true);
     }
-    
+
     private static Settings createDefaultSettings() {
         Settings settings = Settings.createDefault();
-        
+
         // Configure the settings here.
-        
+
         return settings;
     }
-    
+
 
     /**
-     * Configures the user interface; requests Swing settings and 
+     * Configures the user interface; requests Swing settings and
      * JGoodies Looks options from the launcher.
      */
     private void configureUI() {
         // UIManager.put("ToolTip.hideAccelerator", Boolean.FALSE);
-        
+
         Options.setDefaultIconSize(new Dimension(18, 18));
 
         Options.setUseNarrowButtons(settings.isUseNarrowButtons());
-        
+
         // Global options
         Options.setTabIconsEnabled(settings.isTabIconsEnabled());
-        UIManager.put(Options.POPUP_DROP_SHADOW_ENABLED_KEY, 
+        UIManager.put(Options.POPUP_DROP_SHADOW_ENABLED_KEY,
                 settings.isPopupDropShadowEnabled());
 
         // Swing Settings
@@ -147,7 +147,7 @@ public class DemoFrame extends JFrame {
         } else if (selectedLaf.getClass() == MetalLookAndFeel.class) {
             MetalLookAndFeel.setCurrentTheme(new DefaultMetalTheme());
         }
-        
+
         // Work around caching in MetalRadioButtonUI
         JRadioButton radio = new JRadioButton();
         radio.getUI().uninstallUI(radio);
@@ -175,14 +175,14 @@ public class DemoFrame extends JFrame {
                 createAboutActionListener()));
         setIconImage(readImageIcon("eye_16x16.gif").getImage());
     }
-    
-    
-    /** 
+
+
+    /**
      * Creates and returns a builder that builds the menu.
      * This method is overriden by the full JGoodies Looks Demo to use
      * a more sophisticated menu builder that uses the JGoodies
      * UI Framework.
-     * 
+     *
      * @return the builder that builds the menu bar
      */
     protected MenuBarView createMenuBuilder() {
@@ -203,7 +203,7 @@ public class DemoFrame extends JFrame {
 
     /**
      * Builds, configures and returns the toolbar. Requests
-     * HeaderStyle, look-specific BorderStyles, and Plastic 3D Hint 
+     * HeaderStyle, look-specific BorderStyles, and Plastic 3D Hint
      * from Launcher.
      */
     private Component buildToolBar() {
@@ -232,7 +232,7 @@ public class DemoFrame extends JFrame {
         toolBar.add(button);
         toolBar.add(createToolBarButton("home.gif", "Home"));
         toolBar.addSeparator();
-        
+
         ActionListener openAction = new OpenFileActionListener();
         button = createToolBarButton("open.gif", "Open", openAction, KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK));
         button.addActionListener(openAction);
@@ -268,7 +268,7 @@ public class DemoFrame extends JFrame {
 
     /**
      * Creates and returns a JButton configured for use in a JToolBar.<p>
-     * 
+     *
      * This is a simplified method that is overriden by the Looks Demo.
      * The full code uses the JGoodies UI framework's ToolBarButton
      * that better handles platform differences.
@@ -279,7 +279,7 @@ public class DemoFrame extends JFrame {
         button.setFocusable(false);
         return button;
     }
-    
+
     private AbstractButton createToolBarButton(String iconName, String toolTipText, ActionListener action, KeyStroke keyStroke) {
         AbstractButton button = createToolBarButton(iconName, toolTipText);
         button.registerKeyboardAction(action, keyStroke, JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -288,7 +288,7 @@ public class DemoFrame extends JFrame {
 
     /**
      * Creates and returns a JToggleButton configured for use in a JToolBar.<p>
-     * 
+     *
      * This is a simplified method that is overriden by the Looks Demo.
      * The full code uses the JGoodies UI framework's ToolBarButton
      * that better handles platform differences.
@@ -326,11 +326,11 @@ public class DemoFrame extends JFrame {
         tabbedPane.addTab("Desktop",   new DesktopTab().build());
         tabbedPane.addTab("Narrow",    new NarrowTab().build());
     }
-    
+
     protected String getWindowTitle() {
         return "Simple Looks Demo";
     }
-    
+
 
     // Helper Code **********************************************************************
 
@@ -367,7 +367,7 @@ public class DemoFrame extends JFrame {
         return new AboutActionListener();
     }
 
-    
+
     private final class AboutActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(
@@ -376,12 +376,12 @@ public class DemoFrame extends JFrame {
                     + COPYRIGHT + "\n\n");
         }
     }
-    
+
     private final class OpenFileActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             new JFileChooser().showOpenDialog(DemoFrame.this);
         }
     }
-    
+
 
 }

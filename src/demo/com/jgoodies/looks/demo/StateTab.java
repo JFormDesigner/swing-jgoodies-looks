@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.demo;
@@ -45,12 +45,12 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.Sizes;
 import com.jgoodies.looks.Options;
 
-/** 
- * Presents a larger set of Swing components in different states and 
+/**
+ * Presents a larger set of Swing components in different states and
  * configurations.
- * 
+ *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class StateTab {
 
@@ -76,7 +76,7 @@ final class StateTab {
         builder.append("Editor Pane:",     buildTextRow(JEditorPane.class, true));
         builder.append("Password:",        buildTextRow(JPasswordField.class, false));
         builder.append("Spinner:",         buildSpinnerRow());
-        
+
         return builder.getPanel();
     }
 
@@ -147,7 +147,7 @@ final class StateTab {
      * Creates and returns a bar with 4 text components.
      * These are created using the given class;
      * they are wrapped in a <code>JScrollpane</code> iff the
-     * wrap flag is set. 
+     * wrap flag is set.
      */
     private JComponent buildTextRow(Class textComponentClass, boolean wrap) {
         JTextComponent[] components = new JTextComponent[4];
@@ -185,7 +185,7 @@ final class StateTab {
                 components[2],
                 components[3]);
     }
-    
+
     private Component wrapWithScrollPane(Component c) {
         return new JScrollPane(
             c,
@@ -212,7 +212,7 @@ final class StateTab {
         box.setEnabled(enabled);
         box.setEditable(editable);
         box.putClientProperty(
-                Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY, 
+                Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY,
                 "A Quite Long Label");
         return box;
     }
@@ -241,7 +241,7 @@ final class StateTab {
 //    private static class CustomComboBoxRenderer implements ListCellRenderer {
 //
 //        private static final Border EMPTY_BORDER = new EmptyBorder(1,1,1,1);
-//        
+//
 //        private final JLabel label = new JLabel();
 //
 //        public Component getListCellRendererComponent(
@@ -250,7 +250,7 @@ final class StateTab {
 //            int index,
 //            boolean isSelected,
 //            boolean cellHasFocus) {
-//            label.setBackground(isSelected 
+//            label.setBackground(isSelected
 //                    ? list.getSelectionBackground()
 //                    : list.getBackground());
 //            label.setForeground(isSelected
@@ -270,25 +270,25 @@ final class StateTab {
 //        }
 //
 //    }
-    
-    
+
+
     // Helper Code **********************************************************
 
     private JComponent buildGrid(
-                Component c1, 
-                Component c2, 
-                Component c3, 
+                Component c1,
+                Component c2,
+                Component c3,
                 Component c4) {
-         return buildGrid(c1, c2, c3, c4, 
+         return buildGrid(c1, c2, c3, c4,
                             new ColumnSpec(ColumnSpec.DEFAULT,
                                             Sizes.dluX(20),
                                             ColumnSpec.DEFAULT_GROW));
     }
 
     private JComponent buildGrid(
-                Component c1, 
-                Component c2, 
-                Component c3, 
+                Component c1,
+                Component c2,
+                Component c3,
                 Component c4,
                 ColumnSpec colSpec) {
         FormLayout layout = new FormLayout("", "pref");

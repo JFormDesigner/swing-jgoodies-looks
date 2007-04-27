@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.demo;
@@ -42,9 +42,9 @@ import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /**
- * Builds the menu bar and pull-down menus in the Simple Looks Demo. 
+ * Builds the menu bar and pull-down menus in the Simple Looks Demo.
  * Demonstrates and tests different multi-platform issues.<p>
- * 
+ *
  * This class provides a couple of factory methods that create
  * menu items, check box menu items, and radio button menu items.
  * The full JGoodies Looks Demo overrides these methods to vend
@@ -52,29 +52,29 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public class MenuBarView {
-    
-    private static final String HTML_TEXT = 
+
+    private static final String HTML_TEXT =
         "<html><b>Bold</b>, <i>Italics</i>, <tt>Typewriter</tt></html>";
-    
-    
+
+
 	/**
-	 * Builds, configures, and returns the menubar. Requests HeaderStyle, 
+	 * Builds, configures, and returns the menubar. Requests HeaderStyle,
 	 * look-specific BorderStyles, and Plastic 3D hint from Launcher.
 	 */
 	JMenuBar buildMenuBar(
-        Settings settings, 
-        ActionListener helpActionListener, 
+        Settings settings,
+        ActionListener helpActionListener,
         ActionListener aboutActionListener) {
-            
+
 		JMenuBar bar = new JMenuBar();
-		bar.putClientProperty(Options.HEADER_STYLE_KEY, 
+		bar.putClientProperty(Options.HEADER_STYLE_KEY,
 							  settings.getMenuBarHeaderStyle());
-		bar.putClientProperty(PlasticLookAndFeel.BORDER_STYLE_KEY, 
+		bar.putClientProperty(PlasticLookAndFeel.BORDER_STYLE_KEY,
 							  settings.getMenuBarPlasticBorderStyle());
-		bar.putClientProperty(WindowsLookAndFeel.BORDER_STYLE_KEY, 
+		bar.putClientProperty(WindowsLookAndFeel.BORDER_STYLE_KEY,
 							  settings.getMenuBarWindowsBorderStyle());
 		bar.putClientProperty(PlasticLookAndFeel.IS_3D_KEY,
 							  settings.getMenuBar3DHint());
@@ -87,16 +87,16 @@ public class MenuBarView {
 		bar.add(buildHelpMenu(helpActionListener, aboutActionListener));
 		return bar;
 	}
-	
-	
+
+
 	/**
 	 * Builds and returns the file menu.
 	 */
 	private JMenu buildFileMenu() {
 		JMenuItem item;
-		
+
 		JMenu menu = createMenu("File", 'F');
-		
+
 		// Build a submenu that has the noIcons hint set.
 		JMenu submenu = createMenu("New", 'N');
 		submenu.putClientProperty(Options.NO_ICONS_KEY, Boolean.TRUE);
@@ -105,7 +105,7 @@ public class MenuBarView {
 		submenu.add(createMenuItem("Document\u2026", 'D', KeyStroke.getKeyStroke("ctrl F8")));
 		submenu.addSeparator();
 		submenu.add(createMenuItem("No icon hint set", 'N', KeyStroke.getKeyStroke("ctrl F9")));
-		
+
 		menu.add(submenu);
 		menu.addSeparator();
 		item = createMenuItem("Close", 'C', KeyStroke.getKeyStroke("ctrl F4"));
@@ -113,13 +113,13 @@ public class MenuBarView {
 		item = createMenuItem("Close All", 'o', KeyStroke.getKeyStroke("ctrl shift F4"));
 		menu.add(item);
 		menu.addSeparator();
-		item = createMenuItem("Save description.txt", 
+		item = createMenuItem("Save description.txt",
                               readImageIcon("save_edit.gif"),
                               'd',
                               KeyStroke.getKeyStroke("ctrl S"));
 		item.setEnabled(false);
 		menu.add(item);
-		item = createMenuItem("Save description.txt As\u2026", 
+		item = createMenuItem("Save description.txt As\u2026",
                 readImageIcon("saveas_edit.gif"),
                 'e');
         menu.add(item);
@@ -127,7 +127,7 @@ public class MenuBarView {
 		item.setEnabled(false);
 		menu.add(item);
 		menu.addSeparator();
-		item = createMenuItem("Print", readImageIcon("print.gif"), 'P', 
+		item = createMenuItem("Print", readImageIcon("print.gif"), 'P',
                 KeyStroke.getKeyStroke("ctrl P"));
 		menu.add(item);
 		menu.addSeparator();
@@ -141,16 +141,16 @@ public class MenuBarView {
         }
 		return menu;
 	}
-    
+
 
 	/**
 	 * Builds and returns a menu with different JRadioButtonMenuItems.
 	 */
 	private JMenu buildRadioMenu() {
 		JRadioButtonMenuItem item;
-		
+
 		JMenu menu = createMenu("Radio", 'R');
-		
+
 		// Default icon
 		ButtonGroup group1 = new ButtonGroup();
 		item = createRadioItem(true, false);
@@ -159,16 +159,16 @@ public class MenuBarView {
 		item = createRadioItem(true, true);
 		group1.add(item);
 		menu.add(item);
-		
+
 		menu.addSeparator();
 
 		item = createRadioItem(false, false);
 		menu.add(item);
 		item = createRadioItem(false, true);
 		menu.add(item);
-		
+
 		menu.addSeparator();
-		
+
 		// Custom icon
 		ButtonGroup group2 = new ButtonGroup();
 		item = createRadioItem(true, false);
@@ -190,28 +190,28 @@ public class MenuBarView {
 		item.setIcon(readImageIcon("size_sort.png"));
 		//item.setDisabledIcon(readImageIcon("size_sort_gray.png"));
 		menu.add(item);
-		
-		return menu;	
+
+		return menu;
 	}
-	
-	
+
+
 	/**
 	 * Builds and returns a menu with different JCheckBoxMenuItems.
 	 */
 	private JMenu buildCheckMenu() {
 		JCheckBoxMenuItem item;
-		
+
 		JMenu menu = createMenu("Check", 'C');
-		
+
 		// Default icon
 		menu.add(createCheckItem(true, false));
 		menu.add(createCheckItem(true, true));
 		menu.addSeparator();
 		menu.add(createCheckItem(false, false));
 		menu.add(createCheckItem(false, true));
-		
+
 		menu.addSeparator();
-		
+
 		// Custom icon
 		item = createCheckItem(true, false);
 		item.setIcon(readImageIcon("check.gif"));
@@ -222,8 +222,8 @@ public class MenuBarView {
 		item.setSelectedIcon(readImageIcon("check_selected.gif"));
 		menu.add(item);
 
-		menu.addSeparator(); 
-		
+		menu.addSeparator();
+
 		item = createCheckItem(false, false);
 		item.setIcon(readImageIcon("check.gif"));
 		item.setSelectedIcon(readImageIcon("check_selected.gif"));
@@ -233,11 +233,11 @@ public class MenuBarView {
 		item.setSelectedIcon(readImageIcon("check_selected.gif"));
 		item.setDisabledSelectedIcon(readImageIcon("check_disabled_selected.gif"));
 		menu.add(item);
-		
+
 		return menu;
 	}
-	
-	
+
+
     /**
      * Builds and returns a menu with items that use a HTML text.
      */
@@ -254,14 +254,14 @@ public class MenuBarView {
         menu.add(new JCheckBoxMenuItem(HTML_TEXT, false));
         return menu;
     }
-        
-    
+
+
     /**
      * Builds and returns a menu with items that use a HTML text.
      */
     private JMenu buildAlignmentTestMenu() {
         JMenu menu = createMenu("Alignment", 'A');
-        
+
         menu.add(createMenuItem("Menu item"));
         menu.add(createMenuItem("Menu item with icon", readImageIcon("refresh.gif")));
         menu.addSeparator();
@@ -271,20 +271,20 @@ public class MenuBarView {
         submenu = createSubmenu("Submenu with icon");
         submenu.setIcon(readImageIcon("refresh.gif"));
         menu.add(submenu);
-        
+
         return menu;
     }
-        
-   
+
+
 	/**
 	 * Builds and and returns the help menu.
 	 */
 	private JMenu buildHelpMenu(
-        ActionListener helpActionListener, 
+        ActionListener helpActionListener,
         ActionListener aboutActionListener) {
 
 		JMenu menu = createMenu("Help", 'H');
-		
+
 		JMenuItem item;
         item = createMenuItem("Help Contents", readImageIcon("help.gif"), 'H');
         if (helpActionListener != null) {
@@ -297,11 +297,11 @@ public class MenuBarView {
             item.addActionListener(aboutActionListener);
             menu.add(item);
         }
-		
+
 		return menu;
 	}
-    
-    
+
+
     // Factory Methods ********************************************************
 
     protected JMenu createMenu(String text, char mnemonic) {
@@ -309,80 +309,80 @@ public class MenuBarView {
         menu.setMnemonic(mnemonic);
         return menu;
     }
-        
-    
+
+
     protected JMenuItem createMenuItem(String text) {
         return new JMenuItem(text);
     }
-    
-    
+
+
     protected JMenuItem createMenuItem(String text, char mnemonic) {
         return new JMenuItem(text, mnemonic);
     }
-    
-    
+
+
     protected JMenuItem createMenuItem(String text, char mnemonic, KeyStroke key) {
         JMenuItem menuItem = new JMenuItem(text, mnemonic);
         menuItem.setAccelerator(key);
         return menuItem;
     }
-    
-    
+
+
     protected JMenuItem createMenuItem(String text, Icon icon) {
         return new JMenuItem(text, icon);
     }
-    
-	
+
+
     protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic) {
         JMenuItem menuItem = new JMenuItem(text, icon);
         menuItem.setMnemonic(mnemonic);
         return menuItem;
     }
-    
-    
+
+
     protected JMenuItem createMenuItem(String text, Icon icon, char mnemonic, KeyStroke key) {
         JMenuItem menuItem = createMenuItem(text, icon, mnemonic);
         menuItem.setAccelerator(key);
         return menuItem;
     }
-    
-    
+
+
     protected JRadioButtonMenuItem createRadioButtonMenuItem(String text, boolean selected) {
         return new JRadioButtonMenuItem(text, selected);
     }
-    
-    
+
+
     protected JCheckBoxMenuItem createCheckBoxMenuItem(String text, boolean selected) {
         return new JCheckBoxMenuItem(text, selected);
     }
-    
+
 
     // Subclass will override the following methods ***************************
-    
+
     /**
      * Checks and answers whether the quit action has been moved to an
      * operating system specific menu, e.g. the OS X application menu.
-     *  
+     *
      * @return true if the quit action is in an OS-specific menu
      */
     protected boolean isQuitInOSMenu() {
         return false;
     }
-    
+
 
     /**
      * Checks and answers whether the about action has been moved to an
      * operating system specific menu, e.g. the OS X application menu.
-     *  
+     *
      * @return true if the about action is in an OS-specific menu
      */
     protected boolean isAboutInOSMenu() {
         return false;
     }
-    
-    
+
+
     // Higher Level Factory Methods *****************************************
-    
+
 	/**
 	 * Creates and returns a JRadioButtonMenuItem
 	 * with the given enablement and selection state.
@@ -400,7 +400,7 @@ public class MenuBarView {
 		});
 		return item;
 	}
-	
+
 
 	/**
 	 * Creates and returns a JCheckBoxMenuItem
@@ -419,8 +419,8 @@ public class MenuBarView {
 		});
 		return item;
 	}
-	
-	
+
+
 	/**
 	 *  Returns an appropriate label for the given enablement and selection state.
 	 */
@@ -429,10 +429,10 @@ public class MenuBarView {
 		String suffix = selected ? "Selected" : "Deselected";
 		return prefix + " and " + suffix;
 	}
-	
-    
+
+
     // Helper Code ************************************************************
-    
+
     /**
      * Looks up and returns an icon for the specified filename suffix.
      */
@@ -440,8 +440,8 @@ public class MenuBarView {
         URL url = getClass().getResource("resources/images/" + filename);
         return new ImageIcon(url);
     }
-    
-    
+
+
     /**
      * Creates and returns a submenu labeled with the given text.
      */
@@ -452,6 +452,6 @@ public class MenuBarView {
         submenu.add(new JMenuItem("Item 3"));
         return submenu;
     }
-    
+
 
 }

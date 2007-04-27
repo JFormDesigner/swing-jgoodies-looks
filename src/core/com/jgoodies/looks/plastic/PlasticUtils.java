@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -39,7 +39,7 @@ import javax.swing.UIManager;
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class PlasticUtils {
@@ -47,8 +47,8 @@ public final class PlasticUtils {
     private PlasticUtils() {
         // Overrides default constructor; prevents instantiation.
     }
-    
-    
+
+
 	static void drawDark3DBorder(Graphics g, int x, int y, int w, int h) {
 		drawFlush3DBorder(g, x, y, w, h);
 		g.setColor(PlasticLookAndFeel.getControl());
@@ -96,7 +96,7 @@ public final class PlasticUtils {
 	 */
     static void drawButtonBorder(Graphics g, int x, int y, int w, int h, boolean active) {
         if (active) {
-            drawActiveButtonBorder(g, x, y, w, h);	    
+            drawActiveButtonBorder(g, x, y, w, h);
         } else {
             drawFlush3DBorder(g, x, y, w, h);
 		}
@@ -119,7 +119,7 @@ public final class PlasticUtils {
 	 * Modified edges.
 	 */
     static void drawDefaultButtonBorder(Graphics g, int x, int y, int w, int h, boolean active) {
-        drawButtonBorder(g, x+1, y+1, w-1, h-1, active);	    
+        drawButtonBorder(g, x+1, y+1, w-1, h-1, active);
         g.translate(x, y);
         g.setColor(PlasticLookAndFeel.getControlDarkShadow() );
 		drawRect(g, 0, 0, w-3, h-3 );
@@ -130,7 +130,7 @@ public final class PlasticUtils {
 		g.drawLine(0, h-1, 0, h-1);
         g.translate(-x, -y);
     }
-    
+
     static void drawDefaultButtonPressedBorder(Graphics g, int x, int y, int w, int h) {
         drawPressed3DBorder(g, x + 1, y + 1, w - 1, h - 1);
         g.translate(x, y);
@@ -154,8 +154,8 @@ public final class PlasticUtils {
 		g.drawLine(0, h - 1, w - 1, h - 1);
 		g.translate(-x, -y);
 	}
-	
-	
+
+
 	static void drawThinPressed3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
 		g.setColor(PlasticLookAndFeel.getControlDarkShadow());
@@ -166,7 +166,7 @@ public final class PlasticUtils {
 		g.drawLine(0, h - 1, w - 1, h - 1);
 		g.translate(-x, -y);
 	}
-	
+
 	/*
 	 * Convenience function for determining ComponentOrientation.  Helps us
 	 * avoid having Munge directives throughout the code.
@@ -174,18 +174,18 @@ public final class PlasticUtils {
 	static boolean isLeftToRight(Component c) {
 		return c.getComponentOrientation().isLeftToRight();
 	}
-	
-	
+
+
 	// 3D Effects ***********************************************************************
 
 	/**
 	 * Checks and returns whether the specified component type has 3D effects.
-     * 
+     *
      * @param keyPrefix    the prefix of the key used to lookup the setting
      * @return true if the component type shall be rendered with a 3D effect
      * @see #force3D(JComponent)
      * @see #forceFlat(JComponent)
-	 */	
+	 */
 	static boolean is3D(String keyPrefix) {
 		Object value = UIManager.get(keyPrefix + "is3DEnabled");
 		return Boolean.TRUE.equals(value);
@@ -194,7 +194,7 @@ public final class PlasticUtils {
 
 	/**
 	 * Checks and returns whether we have a custom hint that forces the 3D mode.
-	 * 
+	 *
      * @param c   the component to inspect
      * @return true if the given component has a 3D hint set
 	 * @see #forceFlat(JComponent)
@@ -207,7 +207,7 @@ public final class PlasticUtils {
 
 	/**
 	 * Checks and returns whether we have a custom hint that prevents the 3D mode.
-	 * 
+	 *
      * @param c   the component to inspect
      * @return true if the given component has a flat hint set
 	 * @see #force3D(JComponent)
@@ -219,13 +219,13 @@ public final class PlasticUtils {
 
 
 	// Painting 3D Effects *************************************************************
-	
+
 	private static final float FRACTION_3D = 0.5f;
-	
+
 
 	private static void add3DEffekt(Graphics g, Rectangle r, boolean isHorizontal,
 		Color startC0, Color stopC0, Color startC1, Color stopC1) {
-			
+
 		Graphics2D g2 = (Graphics2D) g;
 		int xb0, yb0, xb1, yb1, xd0, yd0, xd1, yd1, width, height;
 		if (isHorizontal) {
@@ -284,8 +284,8 @@ public final class PlasticUtils {
 
 		add3DEffekt(g, r, isHorizontal, PlasticTheme.BRIGHTEN_START, ltBrightenStop, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP);
 	}
-	
-	
+
+
 	/*
 	 * TODO: Required by the Chartster and JPathReport Filler; move to a
 	 * FillerUI.
@@ -297,7 +297,7 @@ public final class PlasticUtils {
 
 		add3DEffekt(g, r, true, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP, PlasticTheme.BRIGHTEN_START, ltBrightenStop);
 	}
-    
+
 
     // Low level graphics ***************************************************
 

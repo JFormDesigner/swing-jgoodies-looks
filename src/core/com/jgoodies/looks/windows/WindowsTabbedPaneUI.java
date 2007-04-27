@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.windows;
@@ -51,12 +51,12 @@ import com.jgoodies.looks.Options;
 
 /**
  * The JGoodies Windows L&amp;F implementation of <code>TabbedPaneUI</code>.<p>
- * 
+ *
  * The flat appearance is work in progress; currently it works only
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -67,7 +67,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
 
     /** Insets used if we paint no content border. */
-    private static final int INSET = IS_XP_LAF_5_OR_LATER ? -1 : 1; 
+    private static final int INSET = IS_XP_LAF_5_OR_LATER ? -1 : 1;
     private static final Insets NO_CONTENT_BORDER_NORTH_INSETS = new Insets(INSET, 0, 0, 0);
     private static final Insets NO_CONTENT_BORDER_WEST_INSETS  = new Insets(0, INSET, 0, 0);
     private static final Insets NO_CONTENT_BORDER_SOUTH_INSETS = new Insets(0, 0, INSET, 0);
@@ -102,7 +102,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
 
     /**
      * Creates and answers the <code>WindowsTabbedPaneUI</code>.
-     * 
+     *
      * @see javax.swing.plaf.ComponentUI#createUI(JComponent)
      */
     public static ComponentUI createUI(JComponent x) {
@@ -153,7 +153,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         tabPane.revalidate();
         tabPane.repaint();
     }
-    
+
     /**
      * Updates the embedded tabs property. This message is sent by
      * my PropertyChangeHandler whenever the embedded tabs property changes.
@@ -220,7 +220,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
             }
         }
     }
-    
+
     protected int getTabLabelShiftX(int tabPlacement, int tabIndex, boolean isSelected) {
         switch (tabPlacement) {
             case RIGHT :
@@ -260,24 +260,24 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
 
 
     protected Insets getTabAreaInsets(int tabPlacement) {
-        return hasEmbeddedTabs() 
-                ? /*new Insets(1,1,1,1)*/EMPTY_INSETS 
+        return hasEmbeddedTabs()
+                ? /*new Insets(1,1,1,1)*/EMPTY_INSETS
                 : super.getTabAreaInsets(tabPlacement);
     }
-    
+
     /**
-     * Paints the top edge of the pane's content border. 
+     * Paints the top edge of the pane's content border.
      */
     protected void paintContentBorderTopEdge(Graphics g, int tabPlacement,
-                                         int selectedIndex, 
+                                         int selectedIndex,
                                          int x, int y, int w, int h) {
         if (hasNoContentBorder() && tabPlacement != TOP) {
             return;
         }
         Rectangle selRect = selectedIndex < 0
-                            ? null 
+                            ? null
                             : getTabBounds(selectedIndex, calcRect);
-        if (tabPlacement != TOP || selectedIndex < 0 || 
+        if (tabPlacement != TOP || selectedIndex < 0 ||
            (selRect.y + selRect.height + 1 < y) ||
            (selRect.x < x || selRect.x > x + w)) {
             // no special case, do the super thing
@@ -285,16 +285,16 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         } else {
             g.setColor(lightHighlight);
             g.fillRect(x, y, selRect.x + 1-x, 1);
-            g.fillRect(selRect.x + selRect.width, y, 
+            g.fillRect(selRect.x + selRect.width, y,
                        x+w-2 -selRect.x-selRect.width, 1);
         }
     }
-    
+
     /**
-     * Paints the bottom edge of the pane's content border. 
+     * Paints the bottom edge of the pane's content border.
      */
     protected void paintContentBorderBottomEdge(Graphics g, int tabPlacement,
-                                         int selectedIndex, 
+                                         int selectedIndex,
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0 ? null :
@@ -324,10 +324,10 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
 
     /**
-     * Paints the left Edge of the pane's content border. 
+     * Paints the left Edge of the pane's content border.
      */
     protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement,
-                                         int selectedIndex, 
+                                         int selectedIndex,
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0 ? null :
@@ -338,11 +338,11 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                  // no special case, do the super thing
                 super.paintContentBorderLeftEdge(g, tabPlacement, selectedIndex, x, y, w, h);
             } else {
-               g.setColor(lightHighlight); 
+               g.setColor(lightHighlight);
                g.fillRect(x, y, 1, selRect.y + 1 - y);
-               g.fillRect(x, selRect.y + selRect.height, 
+               g.fillRect(x, selRect.y + selRect.height,
                            1, y+h-1-selRect.y-selRect.height);
-                
+
             }
         } else if (!(tabPlacement == LEFT)) {
             // no content border really means only one content border:
@@ -354,10 +354,10 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
 
     /**
-     * Paints the right Edge of the pane's content border. 
+     * Paints the right Edge of the pane's content border.
      */
     protected void paintContentBorderRightEdge(Graphics g, int tabPlacement,
-                                         int selectedIndex, 
+                                         int selectedIndex,
                                          int x, int y, int w, int h) {
         if (!hasNoContentBorder()) {
             Rectangle selRect = selectedIndex < 0 ? null :
@@ -372,13 +372,13 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                g.fillRect(x+w-1, y,1,1);
                g.setColor(shadow);
                g.fillRect(x+w-2, y+1, 1, selRect.y - 1-y);
-               g.fillRect(x+w-2, selRect.y + selRect.height, 
+               g.fillRect(x+w-2, selRect.y + selRect.height,
                            1, y+h-1-selRect.y- selRect.height);
                g.setColor(darkShadow);
                g.fillRect(x+w-1, y, 1, selRect.y - y);
-               g.fillRect(x+w-1, selRect.y + selRect.height-1, 
+               g.fillRect(x+w-1, selRect.y + selRect.height-1,
                            1, y+h-selRect.y-selRect.height);
-          
+
              }
         } else if (!(tabPlacement == RIGHT)) {
             // no content border really means only one content border:
@@ -486,7 +486,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
 
     /**
-     * Copied here from super(super)class to avoid labels being centered on 
+     * Copied here from super(super)class to avoid labels being centered on
      * vertical tab runs if they consist of icon and text.
      */
     protected void layoutLabel(
@@ -500,13 +500,13 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         Rectangle textRect,
         boolean isSelected) {
         textRect.x = textRect.y = iconRect.x = iconRect.y = 0;
-        
+
         //fix of issue #4
         View v = getTextViewForTab(tabIndex);
         if (v != null) {
             tabPane.putClientProperty("html", v);
         }
-        
+
         int xNudge = getTabLabelShiftX(tabPlacement, tabIndex, isSelected);
         int yNudge = getTabLabelShiftY(tabPlacement, tabIndex, isSelected);
         if ((tabPlacement == RIGHT || tabPlacement == LEFT) && icon != null && title != null && !title.equals("")) {
@@ -543,14 +543,14 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
 
         //fix of issue #4
         tabPane.putClientProperty("html", null);
-        
+
         iconRect.x += xNudge;
         iconRect.y += yNudge;
         textRect.x += xNudge;
         textRect.y += yNudge;
     }
-    
-    
+
+
     /**
      * Catches and handles property change events. In addition to the super
      * class behavior we listen to changes of the ancestor, tab placement,
@@ -578,6 +578,6 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
 
     }
 
-    
+
 
 }

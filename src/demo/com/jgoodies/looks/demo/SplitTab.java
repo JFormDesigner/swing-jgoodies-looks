@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.demo;
@@ -44,17 +44,17 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.uif_lite.component.UIFSplitPane;
 
-/** 
+/**
  * Contains nested split panels and demonstrates how ClearLook
  * removes obsolete decorations.
- * 
+ *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
- * 
+ * @version $Revision: 1.6 $
+ *
  * @see UIFSplitPane
  */
 final class SplitTab {
-    
+
 
     /**
      * Builds and returns the panel.
@@ -66,14 +66,14 @@ final class SplitTab {
         panel.add(buildHorizontalSplit());
         return panel;
     }
-    
+
 
     /**
      * Builds and returns the horizontal split using stripped split panes.<p>
-     * 
-     * Nesting split panes often leads to duplicate borders. 
+     *
+     * Nesting split panes often leads to duplicate borders.
      * However, a look&feel should not remove borders completely
-     * - unless he has good knowledge about the context: the surrounding 
+     * - unless he has good knowledge about the context: the surrounding
      * components in the component tree and the border states.
      */
     private JComponent buildHorizontalSplit() {
@@ -87,8 +87,8 @@ final class SplitTab {
         lowerRight.setPreferredSize(new Dimension(100, 100));
 
         JSplitPane verticalSplit = UIFSplitPane.createStrippedSplitPane(
-                    JSplitPane.VERTICAL_SPLIT, 
-                    upperRight, 
+                    JSplitPane.VERTICAL_SPLIT,
+                    upperRight,
                     lowerRight);
         verticalSplit.setOpaque(false);
         JSplitPane horizontalSplit = UIFSplitPane.createStrippedSplitPane(
@@ -98,7 +98,7 @@ final class SplitTab {
         horizontalSplit.setOpaque(false);
         return horizontalSplit;
     }
-    
+
 
     /**
      * Builds and returns a sample tree.
@@ -111,7 +111,7 @@ final class SplitTab {
         return tree;
     }
 
-    
+
     /**
      * Builds and returns a sample text area.
      */
@@ -121,7 +121,7 @@ final class SplitTab {
             "May\nI\nKindly\nRemind you that a\nMargin\nImproves a text's readability.");
         return area;
     }
-    
+
 
     /**
      * Builds and returns a sample table.
@@ -144,7 +144,7 @@ final class SplitTab {
         return table;
     }
 
-    
+
     /**
      * Creates and returns a sample tree model.
      */
@@ -179,18 +179,18 @@ final class SplitTab {
         return new DefaultTreeModel(root);
     }
 
-    
+
     /**
      * Creates and returns sample table data.
      */
     private Object[][] createSampleTableData() {
-        return new Object[][] { 
-            { "Albert Ayler",   "Greenwich Village",       Boolean.TRUE  }, 
-            { "Carla Bley",     "Escalator Over the Hill", Boolean.TRUE  }, 
+        return new Object[][] {
+            { "Albert Ayler",   "Greenwich Village",       Boolean.TRUE  },
+            { "Carla Bley",     "Escalator Over the Hill", Boolean.TRUE  },
             { "Frank Zappa",    "Yo' Mama",                Boolean.TRUE  },
-            { "John Coltrane",  "Ascension",               Boolean.TRUE  }, 
-            { "Miles Davis",    "In a Silent Way",         Boolean.TRUE  }, 
-            { "Pharoa Sanders", "Karma",                   Boolean.TRUE  }, 
+            { "John Coltrane",  "Ascension",               Boolean.TRUE  },
+            { "Miles Davis",    "In a Silent Way",         Boolean.TRUE  },
+            { "Pharoa Sanders", "Karma",                   Boolean.TRUE  },
             { "Wayne Shorter",  "Juju",                    Boolean.TRUE  },
             { "",               "",                        Boolean.FALSE },
             { "",               "",                        Boolean.FALSE },
@@ -203,12 +203,12 @@ final class SplitTab {
             { "",               "",                        Boolean.FALSE },
         };
     }
-    
+
     private static final class SampleTableModel extends AbstractTableModel {
-        
+
         private final String[] columnNames;
         private final Object[][] rowData;
-        
+
         SampleTableModel(Object[][] rowData, String[] columnNames) {
             this.columnNames = columnNames;
             this.rowData = rowData;

@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.common;
@@ -39,14 +39,14 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 /**
- * Does all the magic for getting popups with drop shadows. 
- * It adds the drop shadow border to the Popup, 
- * in <code>#show</code> it snapshots the screen background as needed, 
+ * Does all the magic for getting popups with drop shadows.
+ * It adds the drop shadow border to the Popup,
+ * in <code>#show</code> it snapshots the screen background as needed,
  * and in <code>#hide</code> it cleans up all changes made before.
- * 
+ *
  * @author Andrej Golovnin
- * @version $Revision: 1.6 $
- * 
+ * @version $Revision: 1.7 $
+ *
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
  */
@@ -144,7 +144,7 @@ public final class ShadowPopup extends Popup {
             }
         }
     }
-    
+
     public static boolean canSnapshot() {
         return canSnapshot;
     }
@@ -156,7 +156,7 @@ public final class ShadowPopup extends Popup {
      * based on the <code>PopupFactory</code>. As such, if you invoke methods
      * on a <code>disposed</code> <code>Popup</code>, indeterminate
      * behavior will result.<p>
-     * 
+     *
      * In addition to the superclass behavior, we reset the stored
      * horizontal and vertical drop shadows - if any.
      */
@@ -183,7 +183,7 @@ public final class ShadowPopup extends Popup {
     }
 
     /**
-     * Makes the <code>Popup</code> visible. If the popup has a 
+     * Makes the <code>Popup</code> visible. If the popup has a
      * heavy-weight container, we try to snapshot the background.
      * If the <code>Popup</code> is currently visible, it remains visible.
      */
@@ -196,7 +196,7 @@ public final class ShadowPopup extends Popup {
 
     /**
      * Reinitializes this ShadowPopup using the given parameters.
-     * 
+     *
      * @param owner component mouse coordinates are relative to, may be null
      * @param contents the contents of the popup
      * @param x the desired x location of the popup
@@ -213,7 +213,7 @@ public final class ShadowPopup extends Popup {
         if (owner instanceof JComboBox) {
             return;
         }
-        // Do not install the shadow border when the contents 
+        // Do not install the shadow border when the contents
         // has a preferred size less than or equal to 0.
         // We can't use the size, because it is(0, 0) for new popups.
         Dimension contentsPrefSize = contents.getPreferredSize();
@@ -245,7 +245,7 @@ public final class ShadowPopup extends Popup {
     /**
      * The 'scratch pad' objects used to calculate dirty regions of
      * the screen snapshots.
-     * 
+     *
      * @see #snapshot()
      */
     private static final Point     POINT = new Point();
@@ -255,13 +255,13 @@ public final class ShadowPopup extends Popup {
      * Snapshots the background. The snapshots are stored as client
      * properties of the contents' parent. The next time the border is drawn,
      * this background will be used.<p>
-     * 
+     *
      * Uses a robot on the default screen device to capture the screen
      * region under the drop shadow. Does <em>not</em> use the window's
      * device, because that may be an outdated device (due to popup reuse)
      * and the robot's origin seems to be adjusted with the default screen
      * device.
-     * 
+     *
      * @see #show()
      * @see com.jgoodies.looks.common.ShadowPopupBorder
      * @see Robot#createScreenCapture(Rectangle)
@@ -271,8 +271,8 @@ public final class ShadowPopup extends Popup {
             Dimension size = heavyWeightContainer.getPreferredSize();
             int width = size.width;
             int height = size.height;
-            
-            // Avoid unnecessary and illegal screen captures 
+
+            // Avoid unnecessary and illegal screen captures
             // for degenerated popups.
             if ((width <= 0) || (height <= SHADOW_SIZE)) {
                 return;
@@ -374,10 +374,10 @@ public final class ShadowPopup extends Popup {
         Container parent = null;
         if (owner != null) {
             parent = owner instanceof Container
-                    ? (Container) owner 
+                    ? (Container) owner
                     : owner.getParent();
         }
-        // Try to find a JLayeredPane and Window to add 
+        // Try to find a JLayeredPane and Window to add
         for (Container p = parent; p != null; p = p.getParent()) {
             if (p instanceof JRootPane) {
                 if (p.getParent() instanceof JInternalFrame) {

@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -45,7 +45,7 @@ import com.jgoodies.looks.Options;
 /**
  * The JGoodies Plastic Look&amp;Feel implementation of <code>TreeUI</code>.
  * It provides two line styles: angled dashed lines, or no lines at all.
- * By default, lines are drawn. 
+ * By default, lines are drawn.
  * <p>
  * You can change the line style by setting a client property.
  * The property key and values are a subset of the values used
@@ -53,24 +53,24 @@ import com.jgoodies.looks.Options;
  * <pre>
  * JTree tree1 = new JTree();
  * tree1.putClientProperty("JTree.lineStyle", "None");
- * 
+ *
  * JTree tree2 = new JTree();
- * tree1.putClientProperty(Options.TREE_LINE_STYLE_KEY, 
+ * tree1.putClientProperty(Options.TREE_LINE_STYLE_KEY,
  *                         Options.TREE_LINE_STYLE_NONE_VALUE);
  * </pre>
- * 
+ *
  * Although lines are shown by default, you could code:
  * <pre>
  * JTree tree1 = new JTree();
  * tree1.putClientProperty("JTree.lineStyle", "Angled");
- * 
+ *
  * JTree tree2 = new JTree();
- * tree1.putClientProperty(Options.TREE_LINE_STYLE_KEY, 
+ * tree1.putClientProperty(Options.TREE_LINE_STYLE_KEY,
  *                         Options.TREE_LINE_STYLE_ANGLED_VALUE);
  * </pre>
- * 
+ *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  */
 
 public final class PlasticTreeUI extends BasicTreeUI {
@@ -96,8 +96,8 @@ public final class PlasticTreeUI extends BasicTreeUI {
         c.removePropertyChangeListener(lineStyleHandler);
         super.uninstallUI(c);
     }
-    
-    
+
+
     // Painting ***************************************************************
 
     protected void paintVerticalLine(Graphics g, JComponent c, int x, int top, int bottom) {
@@ -126,8 +126,8 @@ public final class PlasticTreeUI extends BasicTreeUI {
     private void updateLineStyle(Object lineStyle) {
         linesEnabled = !Options.TREE_LINE_STYLE_NONE_VALUE.equals(lineStyle);
     }
-    
-    // Listens for changes of the line style property 
+
+    // Listens for changes of the line style property
     private class LineStyleHandler implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent e) {
             String name  = e.getPropertyName();
@@ -137,5 +137,5 @@ public final class PlasticTreeUI extends BasicTreeUI {
             }
         }
     }
-    
+
 }

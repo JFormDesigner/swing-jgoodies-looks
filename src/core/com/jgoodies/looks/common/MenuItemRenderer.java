@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.common;
@@ -41,19 +41,19 @@ import com.jgoodies.looks.Options;
 
 /**
  * Renders and lays out menu items.
- * 
+ *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public class MenuItemRenderer {
 
-    /* 
+    /*
      * Implementation note: The protected visibility prevents
      * the String value from being encrypted by the obfuscator.
      * An encrypted String key would break the client property lookup
      * in the #paint method below.
-     */    
+     */
     protected static final String HTML_KEY = BasicHTML.propertyKey;
 
     /* Client Property keys for text and accelerator text widths */
@@ -80,12 +80,12 @@ public class MenuItemRenderer {
 	private final Color		disabledForeground;
 	private final Color		acceleratorForeground;
 	private final Color		acceleratorSelectionForeground;
-	
+
 	private final String	acceleratorDelimiter;
 	private final Icon	  	fillerIcon;
-	
-	
-	
+
+
+
 	/**
 	 * Constructs a MenuItemRenderer for the specified menu item and settings.
 	 */
@@ -103,22 +103,22 @@ public class MenuItemRenderer {
 		this.acceleratorForeground	= acceleratorForeground;
 		this.acceleratorSelectionForeground = acceleratorSelectionForeground;
 		this.acceleratorDelimiter	= UIManager.getString("MenuItem.acceleratorDelimiter");
-		this.fillerIcon			= new MinimumSizedIcon();	 	
+		this.fillerIcon			= new MinimumSizedIcon();
 	}
-	
-	
+
+
 	/**
 	 * Looks up and answers the appropriate menu item icon.
 	 */
 	private Icon getIcon(JMenuItem aMenuItem, Icon defaultIcon) {
 		Icon icon = aMenuItem.getIcon();
-		if (icon == null) 
+		if (icon == null)
 			return defaultIcon;
-			
+
 		ButtonModel model = aMenuItem.getModel();
 		if (!model.isEnabled()) {
-			return model.isSelected() 
-						? aMenuItem.getDisabledSelectedIcon() 
+			return model.isSelected()
+						? aMenuItem.getDisabledSelectedIcon()
 						: aMenuItem.getDisabledIcon();
 		} else if (model.isPressed() && model.isArmed()) {
 			Icon pressedIcon = aMenuItem.getPressedIcon();
@@ -129,8 +129,8 @@ public class MenuItemRenderer {
 		} else
 			return icon;
 	}
-	
-	
+
+
 	/**
 	 * Checks and answers if the menu item has a custom icon.
 	 */
@@ -148,11 +148,11 @@ public class MenuItemRenderer {
 		if (icon == null)
 			return fillerIcon;
 		return iconBorderEnabled && hasCustomIcon()
-			? new MinimumSizedCheckIcon(icon, menuItem) 
+			? new MinimumSizedCheckIcon(icon, menuItem)
 			: new MinimumSizedIcon(icon);
 	}
-	
-	
+
+
 	private void resetRects() {
 		iconRect.setBounds(zeroRect);
 		textRect.setBounds(zeroRect);
@@ -162,11 +162,11 @@ public class MenuItemRenderer {
 		viewRect.setBounds(0, 0, Short.MAX_VALUE, Short.MAX_VALUE);
 		r.setBounds(zeroRect);
 	}
-	
+
 
 	public Dimension getPreferredMenuItemSize(JComponent c,
 		Icon checkIcon, Icon arrowIcon, int defaultTextIconGap) {
-			
+
 		JMenuItem b = (JMenuItem) c;
 		String text = b.getText();
 		KeyStroke accelerator = b.getAccelerator();
@@ -191,16 +191,16 @@ public class MenuItemRenderer {
 		FontMetrics fmAccel = b.getFontMetrics(acceleratorFont);
 
 		resetRects();
-		
+
 		Icon wrappedIcon = getWrappedIcon(getIcon(menuItem, checkIcon));
         Icon wrappedArrowIcon = new MinimumSizedIcon(arrowIcon);
         Icon icon = wrappedIcon.getIconHeight() > fillerIcon.getIconHeight()
                     ? wrappedIcon
-                    : null; 
+                    : null;
 
-		layoutMenuItem(fm, text, fmAccel, acceleratorText, 
-			//icon, checkIcon, 
-            icon, wrappedIcon, 
+		layoutMenuItem(fm, text, fmAccel, acceleratorText,
+			//icon, checkIcon,
+            icon, wrappedIcon,
 			wrappedArrowIcon, //arrowIcon,
 			b.getVerticalAlignment(), b.getHorizontalAlignment(),
 			b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
@@ -244,7 +244,7 @@ public class MenuItemRenderer {
 				p.putClientProperty(MAX_ACC_WIDTH, new Integer(acceleratorRect.width));
 			}
 
-			//Add on the widest accelerator 
+			//Add on the widest accelerator
 			r.width += maxAccValue;
 			r.width += 10;
 		}
@@ -330,20 +330,20 @@ public class MenuItemRenderer {
 
 		Icon wrappedIcon = getWrappedIcon(getIcon(menuItem, checkIcon));
 		Icon wrappedArrowIcon = new MinimumSizedIcon(arrowIcon);
-		
+
 		// layout the text and icon
 		String text = layoutMenuItem(fm, b.getText(), fmAccel, acceleratorText,
 				// b.getIcon(), checkIcon,
-				null, wrappedIcon, 
-				wrappedArrowIcon, //arrowIcon, 
-				b.getVerticalAlignment(), b.getHorizontalAlignment(), 
-				b.getVerticalTextPosition(), b.getHorizontalTextPosition(), 
+				null, wrappedIcon,
+				wrappedArrowIcon, //arrowIcon,
+				b.getVerticalAlignment(), b.getHorizontalAlignment(),
+				b.getVerticalTextPosition(), b.getHorizontalTextPosition(),
 				viewRect, iconRect, textRect, acceleratorRect, checkIconRect, arrowIconRect,
 				b.getText() == null ? 0 : defaultTextIconGap,
 				defaultTextIconGap);
 
 		// Paint background
-		paintBackground(g, b, background); 
+		paintBackground(g, b, background);
 
 		// Paint icon
 		Color holdc = g.getColor();
@@ -360,7 +360,7 @@ public class MenuItemRenderer {
 			if (v != null) {
 				v.paint(g, textRect);
 			} else {
-				paintText(g, b, textRect, text); 
+				paintText(g, b, textRect, text);
 			}
 		}
 
@@ -423,13 +423,13 @@ public class MenuItemRenderer {
 		g.setFont(holdf);
 	}
 
-    /** 
-     * Compute and return the location of the icons origin, the 
+    /**
+     * Compute and return the location of the icons origin, the
      * location of origin of the text baseline, and a possibly clipped
      * version of the compound labels string.  Locations are computed
-     * relative to the viewRect rectangle. 
+     * relative to the viewRect rectangle.
      */
-	private String layoutMenuItem(FontMetrics fm, String text, 
+	private String layoutMenuItem(FontMetrics fm, String text,
 		FontMetrics fmAccel, String acceleratorText,
 		Icon icon, Icon checkIcon, Icon arrowIcon,
 		int verticalAlignment, int horizontalAlignment,
@@ -448,8 +448,8 @@ public class MenuItemRenderer {
 			verticalTextPosition, horizontalTextPosition,
 			viewRectangle, iconRectangle, textRectangle, textIconGap);
 
-		/* Initialize the acceleratorText bounds rectangle textRect.  If a null 
-		 * or and empty String was specified we substitute "" here 
+		/* Initialize the acceleratorText bounds rectangle textRect.  If a null
+		 * or and empty String was specified we substitute "" here
 		 * and use 0,0,0,0 for acceleratorTextRect.
 		 */
 		if ((acceleratorText == null) || acceleratorText.equals("")) {
@@ -459,7 +459,7 @@ public class MenuItemRenderer {
 			acceleratorRectangle.width  = SwingUtilities.computeStringWidth(fmAccel, acceleratorText);
 			acceleratorRectangle.height = fmAccel.getHeight();
 		}
-		
+
 		boolean useCheckAndArrow = useCheckAndArrow();
 
 		// Initialize the checkIcon bounds rectangle's width & height.
@@ -494,7 +494,7 @@ public class MenuItemRenderer {
 					- menuItemGap
 					- acceleratorRectangle.width;
 
-			// Position the Check and Arrow Icons 
+			// Position the Check and Arrow Icons
 			if (useCheckAndArrow) {
 				checkIconRectangle.x = viewRectangle.x; // + menuItemGap;  JGoodies: No leading gap
 				textRectangle.x += menuItemGap + checkIconRectangle.width;
@@ -508,7 +508,7 @@ public class MenuItemRenderer {
 			// Position the Accelerator text rect
 			acceleratorRectangle.x = viewRectangle.x + arrowIconRectangle.width + menuItemGap;
 
-			// Position the Check and Arrow Icons 
+			// Position the Check and Arrow Icons
 			if (useCheckAndArrow) {
 				// JGoodies: No trailing gap
 				checkIconRectangle.x = viewRectangle.x + viewRectangle.width - checkIconRectangle.width;
@@ -519,7 +519,7 @@ public class MenuItemRenderer {
 		}
 
 		// Align the accelerator text and the check and arrow icons vertically
-		// with the center of the label rect.  
+		// with the center of the label rect.
 		acceleratorRectangle.y = labelRect.y + (labelRect.height / 2) - (acceleratorRectangle.height / 2);
 		if (useCheckAndArrow) {
 			arrowIconRectangle.y = labelRect.y + (labelRect.height / 2) - (arrowIconRectangle.height / 2);
@@ -535,31 +535,31 @@ public class MenuItemRenderer {
 
 		return text;
 	}
-	
+
     /*
      * Returns false if the component is a JMenu and it is a top
      * level menu (on the menubar).
      */
 	private boolean useCheckAndArrow() {
-		boolean isTopLevelMenu = menuItem instanceof JMenu && 
+		boolean isTopLevelMenu = menuItem instanceof JMenu &&
 								 ((JMenu) menuItem).isTopLevelMenu();
 		return !isTopLevelMenu;
 	}
-	
-	
+
+
 	private boolean isLeftToRight(Component c) {
         return c.getComponentOrientation().isLeftToRight();
     }
-    
-    
-	// Copies from 1.4.1 ****************************************************    
+
+
+	// Copies from 1.4.1 ****************************************************
 
 
     /**
      * Draws the background of the menu item.
      * Copied from 1.4.1 BasicMenuItem to make it visible to the
      * MenuItemLayouter
-     * 
+     *
      * @param g the paint graphics
      * @param aMenuItem menu item to be painted
      * @param bgColor selection background color
@@ -567,11 +567,11 @@ public class MenuItemRenderer {
      */
     private void paintBackground(Graphics g, JMenuItem aMenuItem, Color bgColor) {
 		ButtonModel model = aMenuItem.getModel();
-		
+
 		if (aMenuItem.isOpaque()) {
             int menuWidth  = aMenuItem.getWidth();
             int menuHeight = aMenuItem.getHeight();
-            Color c = model.isArmed() || 
+            Color c = model.isArmed() ||
                      (aMenuItem instanceof JMenu && model.isSelected())
                        ? bgColor
                        : aMenuItem.getBackground();
@@ -582,7 +582,7 @@ public class MenuItemRenderer {
 		}
     }
 
-    
+
     /**
      * Renders the text of the current menu item.
      * <p>
@@ -599,23 +599,23 @@ public class MenuItemRenderer {
         if (isMnemonicHidden()) {
             mnemIndex = -1;
         }
-	
+
 		if (!model.isEnabled()) {
 		    if (!disabledTextHasShadow()) {
                 // *** paint the text disabled
     			g.setColor(UIManager.getColor("MenuItem.disabledForeground"));
                 RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
-    						      textRectangle.x, 
+    						      textRectangle.x,
     						      textRectangle.y + fm.getAscent());
 		    } else {
                 // *** paint the text disabled with a shadow
     			g.setColor(aMenuItem.getBackground().brighter());
-                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
-    						      textRectangle.x, 
+                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
+    						      textRectangle.x,
     						      textRectangle.y + fm.getAscent());
     			g.setColor(aMenuItem.getBackground().darker());
-                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
-    						      textRectangle.x - 1, 
+                RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
+    						      textRectangle.x - 1,
     						      textRectangle.y + fm.getAscent() - 1);
 		    }
 		} else {
@@ -623,22 +623,22 @@ public class MenuItemRenderer {
 		    if (model.isArmed()|| (aMenuItem instanceof JMenu && model.isSelected())) {
 		        g.setColor(selectionForeground); // Uses protected field.
 		    }
-            RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex, 
-						  textRectangle.x, 
+            RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
+						  textRectangle.x,
 						  textRectangle.y + fm.getAscent());
 		}
     }
-    
-    
+
+
     protected boolean isMnemonicHidden() {
         return false;
     }
-    
+
     protected boolean disabledTextHasShadow() {
         return false;
     }
-    
-    
+
+
     /**
      * Checks and answers if the parent menu indicates that we should use no icons.
      */
@@ -656,11 +656,11 @@ public class MenuItemRenderer {
     	}
     	return Boolean.TRUE.equals(value);
     }
-    
-    
+
+
 	/**
      * Used as a placeholder if icons are disabled.
-     */	
+     */
     private static class NullIcon implements Icon {
     	public int getIconWidth()	{ return 0; }
     	public int getIconHeight() { return 0; }
@@ -668,7 +668,7 @@ public class MenuItemRenderer {
             // The NullIcon doesn't paint anything.
         }
     }
-    
-	
+
+
 
 }

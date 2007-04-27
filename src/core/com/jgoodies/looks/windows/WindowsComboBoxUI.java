@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.windows;
@@ -49,47 +49,47 @@ import com.jgoodies.looks.Options;
 import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
 
 /**
- * The JGoodies Windows Look&amp;Feel implementation of 
+ * The JGoodies Windows Look&amp;Feel implementation of
  * {@link javax.swing.plaf.ComboBoxUI}.
- * Corrects the editor insets for editable combo boxes 
- * as well as the render insets for non-editable combos. And it has 
+ * Corrects the editor insets for editable combo boxes
+ * as well as the render insets for non-editable combos. And it has
  * the same height as text fields - unless you change the renderer.<p>
- * 
- * Also, this class offers to use the combo's popup prototype display value 
- * to compute the popup menu width. This is an optional feature of 
+ *
+ * Also, this class offers to use the combo's popup prototype display value
+ * to compute the popup menu width. This is an optional feature of
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.19 $
- * 
+ * @version $Revision: 1.20 $
+ *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
 public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsComboBoxUI {
-    
+
     private static final String CELL_EDITOR_KEY = "JComboBox.isTableCellEditor";
-    
-    /** 
-     * Used to determine the minimum height of a text field, 
+
+    /**
+     * Used to determine the minimum height of a text field,
      * which in turn is used to answer the combobox's minimum height.
      */
     private static final JTextField PHANTOM = new JTextField("Phantom");
-    
+
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
     private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
-    
-    
+
+
     private boolean tableCellEditor;
     private PropertyChangeListener propertyChangeListener;
-    
-    
+
+
     // ************************************************************************
-    
+
     public static ComponentUI createUI(JComponent b) {
         ensurePhantomHasWindowsUI();
         return new WindowsComboBoxUI();
     }
 
-    
+
     /**
      * Ensures that the phantom text field has a Windows text field UI.
      */
@@ -98,31 +98,31 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             PHANTOM.updateUI();
         }
     }
-    
-    
+
+
     // ************************************************************************
-    
+
     public void installUI(JComponent c) {
         super.installUI(c);
         tableCellEditor = isTableCellEditor();
-    }   
-    
+    }
+
     protected void installListeners() {
         super.installListeners();
         propertyChangeListener = new TableCellEditorPropertyChangeHandler();
         comboBox.addPropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
     }
-    
+
     protected void uninstallListeners() {
         super.uninstallListeners();
         comboBox.removePropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
         propertyChangeListener = null;
     }
-    
-    
+
+
     /**
      * Creates the arrow button that is to be used in the combo box.<p>
-     * 
+     *
      * Overridden to paint black triangles.
      */
     protected JButton createArrowButton() {
@@ -130,11 +130,11 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                     ? super.createArrowButton()
                     : new WindowsArrowButton(SwingConstants.SOUTH);
     }
-    
-    
+
+
     /**
-     * Creates the editor that is to be used in editable combo boxes. 
-     * This method only gets called if a custom editor has not already 
+     * Creates the editor that is to be used in editable combo boxes.
+     * This method only gets called if a custom editor has not already
      * been installed in the JComboBox.
      */
     protected ComboBoxEditor createEditor() {
@@ -143,11 +143,11 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
 
     /**
-     * Creates a layout manager for managing the components which 
+     * Creates a layout manager for managing the components which
      * make up the combo box.<p>
-     * 
+     *
      * Overriden to use a layout that has a fixed width arrow button.
-     * 
+     *
      * @return an instance of a layout manager
      */
     protected LayoutManager createLayoutManager() {
@@ -161,25 +161,25 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             editor.setBackground(UIManager.getColor("ComboBox.disabledBackground"));
         }
     }
-        
+
     /**
      * Creates a ComboPopup that honors the optional combo popup display value
-     * that is used to compute the popup menu width. 
+     * that is used to compute the popup menu width.
      */
     protected ComboPopup createPopup() {
         return new WindowsComboPopup(comboBox);
     }
-    
-    
+
+
     /**
-     * Creates the default renderer that will be used in a non-editiable combo 
-     * box. A default renderer will used only if a renderer has not been 
+     * Creates the default renderer that will be used in a non-editiable combo
+     * box. A default renderer will used only if a renderer has not been
      * explicitly set with <code>setRenderer</code>.<p>
-     * 
-     * This method differs from the superclass implementation in that 
+     *
+     * This method differs from the superclass implementation in that
      * it uses an empty border with the default left and right text insets,
-     * the same as used by a combo box editor. 
-     * 
+     * the same as used by a combo box editor.
+     *
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
@@ -206,10 +206,10 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         int buttonWidth = getEditableButtonWidth();
         size.width +=  insets.left + insets.right + buttonWidth;
         // The combo editor benefits from extra space for the caret.
-        // To make editable and non-editable equally wide, 
+        // To make editable and non-editable equally wide,
         // we always add 1 pixel.
         size.width += 1;
-        
+
         // Honor corrections made in #paintCurrentValue
         ListCellRenderer renderer = comboBox.getRenderer();
         if (renderer instanceof JComponent) {
@@ -223,16 +223,16 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             size.width += offsetLeft + offsetRight;
             //size.height += offsetTop + offsetBottom;
         }
-        
+
         // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
-        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) 
+        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
            ? textFieldSize.height
            : Math.max(textFieldSize.height, size.height);
 
-        cachedMinimumSize.setSize(size.width, size.height); 
+        cachedMinimumSize.setSize(size.width, size.height);
         isMinimumSizeDirty = false;
-        
+
         return new Dimension(size);
     }
 
@@ -244,7 +244,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         return getMinimumSize(c);
     }
 
-    
+
     /**
      * Paints the currently selected item.
      */
@@ -286,7 +286,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             bounds.width  -= offsetLeft + offsetRight - 1;
             bounds.height -= offsetTop + offsetBottom;
         }
-        
+
         c.setFont(comboBox.getFont());
         if (hasFocus && !isPopupVisible(comboBox) && !isVistaReadOnlyCombo) {
             c.setForeground(listBox.getSelectionForeground());
@@ -319,8 +319,8 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                 if ((width % 2) == 0) {
                     width += 1;
                 }
-                WindowsUtils.drawRoundedDashedRect(g, 
-                        originalBounds.x+1, originalBounds.y+1, 
+                WindowsUtils.drawRoundedDashedRect(g,
+                        originalBounds.x+1, originalBounds.y+1,
                         width, originalBounds.height-2);
             } /*else {
                 BasicGraphicsUtils.drawDashedRect(g,
@@ -335,23 +335,23 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             ((JComponent) c).setBorder(oldBorder);
         }
     }
-    
+
     /**
      * Checks and answer whether the border of the given renderer component
      * can be removed temporarily, so the combo's selection background will
      * be consistent with the default renderer and native appearance.
      * This test is invoked from <code>#paintCurrentValue</code>.<p>
-     * 
+     *
      * It is safe to remove an EmptyBorder if the component doesn't override
      * <code>#update</code>, <code>#paint</code> and <code>#paintBorder</code>.
      * Since we know the default renderer, we can remove its border.<p>
-     * 
+     *
      * Custom renderers may set a hint to make their border removable.
-     * To do so, set the client property "isBorderRemovable" 
+     * To do so, set the client property "isBorderRemovable"
      * to <code>Boolean.TRUE</code>. If this client property is set,
      * its value will be returned. If it is not set, <code>true</code> is returned
      * if and only if the component's border is an EmptyBorder.
-     *  
+     *
      * @param rendererComponent  the renderer component to check
      * @return true if the component's border can be removed, false if not
      * @see #paintCurrentValue(Graphics, Rectangle, boolean)
@@ -365,15 +365,15 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         Border border = rendererComponent.getBorder();
         return border instanceof EmptyBorder;
     }
-    
-    
+
+
     private boolean isVistaXPStyleReadOnlyCombo() {
-        return     LookUtils.IS_OS_WINDOWS_VISTA 
+        return     LookUtils.IS_OS_WINDOWS_VISTA
                 && LookUtils.IS_LAF_WINDOWS_XP_ENABLED
                 && !comboBox.isEditable();
     }
-    
-    
+
+
     /**
      * Returns the area that is reserved for drawing the currently selected item.
      */
@@ -399,39 +399,39 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                     height - (insets.top  + insets.bottom));
         }
     }
-    
+
 
     // Helper Code ************************************************************
-    
+
     /**
      * Computes and returns the width of the arrow button in editable state.
-     * 
+     *
      * @return the width of the arrow button in editable state
      */
     private int getEditableButtonWidth() {
         return UIManager.getInt("ScrollBar.width");
     }
-    
+
     /**
      * Checks and answers if this UI's combo has a client property
      * that indicates that the combo is used as a table cell editor.
-     * 
+     *
      * @return <code>true</code> if the table cell editor client property
      *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
      */
     private boolean isTableCellEditor() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
     }
-    
+
 
     // Collaborator Classes ***************************************************
 
     /**
-     * This layout manager handles the 'standard' layout of combo boxes.  
+     * This layout manager handles the 'standard' layout of combo boxes.
      * It puts the arrow button to the right and the editor to the left.
      * If there is no editor it still keeps the arrow button to the right.
-     * 
-     * Overriden to use a fixed arrow button width. 
+     *
+     * Overriden to use a fixed arrow button width.
      */
     private final class WindowsComboBoxLayoutManager
         extends BasicComboBoxUI.ComboBoxLayoutManager {
@@ -465,12 +465,12 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                 editor.setBounds(rectangleForCurrentValue());
             }
         }
-    
+
    }
-    
-    
+
+
     /**
-     * Differs from the BasicComboPopup in that it uses the standard 
+     * Differs from the BasicComboPopup in that it uses the standard
      * popmenu border and honors an optional popup prototype display value.
      */
     private static final class WindowsComboPopup extends BasicComboPopup {
@@ -480,46 +480,46 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         }
 
         /**
-         * Calculates the placement and size of the popup portion 
-         * of the combo box based on the combo box location and 
+         * Calculates the placement and size of the popup portion
+         * of the combo box based on the combo box location and
          * the enclosing screen bounds. If no transformations are required,
-         * then the returned rectangle will have the same values 
+         * then the returned rectangle will have the same values
          * as the parameters.<p>
-         * 
-         * In addition to the superclass behavior, this class offers 
-         * to use the combo's popup prototype display value to compute 
-         * the popup menu width. This is an optional feature of 
+         *
+         * In addition to the superclass behavior, this class offers
+         * to use the combo's popup prototype display value to compute
+         * the popup menu width. This is an optional feature of
          * the JGoodies Windows L&amp;f implemented via a client property key.<p>
-         * 
+         *
          * If a prototype is set, the popup width is the maximum of the
          * combobox width and the prototype based popup width.
          * For the latter the renderer is used to render the prototype.
-         * The prototype based popup width is the prototype's width 
-         * plus the scrollbar width - if any. The scrollbar test checks 
-         * if there are more items than the combo's maximum row count.  
-         * 
+         * The prototype based popup width is the prototype's width
+         * plus the scrollbar width - if any. The scrollbar test checks
+         * if there are more items than the combo's maximum row count.
+         *
          * @param px starting x location
          * @param py starting y location
          * @param pw starting width
          * @param ph starting height
          * @return a rectangle which represents the placement and size of the popup
-         * 
+         *
          * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
          * @see JComboBox#getMaximumRowCount()
          */
         protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
-            Rectangle defaultBounds = super.computePopupBounds(px, py, pw, ph); 
+            Rectangle defaultBounds = super.computePopupBounds(px, py, pw, ph);
             Object popupPrototypeDisplayValue = comboBox.getClientProperty(
                     Options.COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY);
-            if (popupPrototypeDisplayValue == null) { 
+            if (popupPrototypeDisplayValue == null) {
                 return defaultBounds;
             }
-        
+
             ListCellRenderer renderer = list.getCellRenderer();
             Component c = renderer.getListCellRendererComponent(
                     list, popupPrototypeDisplayValue, -1, true, true);
             pw = c.getPreferredSize().width;
-            boolean hasVerticalScrollBar = 
+            boolean hasVerticalScrollBar =
                 comboBox.getItemCount() > comboBox.getMaximumRowCount();
             if (hasVerticalScrollBar) {
                 // Add the scrollbar width.
@@ -532,11 +532,11 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                 : defaultBounds;
         }
 
-    }    
-    
-    
+    }
+
+
     // Handling Combo Changes *************************************************
-    
+
     /**
      * Listens to changes in the table cell editor client property
      * and updates the default editor - if any - to use the correct

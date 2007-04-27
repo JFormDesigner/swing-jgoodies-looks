@@ -21,14 +21,14 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class FontTest {
-    
+
     private JTextComponent textArea;
 
-    
-    // Launching ************************************************************** 
+
+    // Launching **************************************************************
 
     /**
      * Builds and the UI.
@@ -38,22 +38,22 @@ public final class FontTest {
         instance.buildInterface();
     }
 
-    
+
     // Building the UI ********************************************************
 
     private void initComponents() {
         textArea = new JTextArea();
         textArea.setText(readConfiguration());
     }
-    
-    
+
+
     /**
      * Creates and configures a frame, builds the menu bar, builds the
      * content, locates the frame on the screen, and finally shows the frame.
      */
     private void buildInterface() {
         initComponents();
-        
+
         JFrame frame = new JFrame();
         frame.setContentPane(buildContentPane());
         frame.setSize(400, 600);
@@ -62,14 +62,14 @@ public final class FontTest {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    
-    
+
+
     private JComponent buildContentPane() {
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(new JScrollPane(textArea), BorderLayout.CENTER);
         return panel;
     }
-    
+
 
     /**
      * Locates the frame on the screen center.
@@ -81,27 +81,27 @@ public final class FontTest {
             (screenSize.width  - paneSize.width)  / 2,
             (screenSize.height - paneSize.height) / 2);
     }
-    
-    
+
+
     // Configuration **********************************************************
-    
+
     private String readConfiguration() {
         StringBuffer buffer = new StringBuffer();
-        
+
         buffer.append("Please copy the information below to your clipboard");
         buffer.append("\nand send them to dev@looks.dev.java.net");
-        
-        addSystemProperties(buffer, "Java environment:", 
+
+        addSystemProperties(buffer, "Java environment:",
                 new String[]{
-                    "java.vendor", 
-                    "java.version", 
+                    "java.vendor",
+                    "java.version",
                     "java.runtime.version",
                     "java.vm.version",
                     "sun.desktop"});
 
-        addSystemProperties(buffer, "Operating System:", 
+        addSystemProperties(buffer, "Operating System:",
                 new String[]{
-                    "os.name", 
+                    "os.name",
                     "os.version"});
         if (LookUtils.IS_OS_WINDOWS) {
             addWindowsSettings(buffer, "Windows Settings:");
@@ -109,33 +109,33 @@ public final class FontTest {
 
         addAWTProperties(buffer, "AWT Properties:");
 
-        addSystemProperties(buffer, "User Settings:", 
+        addSystemProperties(buffer, "User Settings:",
                 new String[]{
-                    "user.language", 
+                    "user.language",
                     "user.country",
                     "user.timezone"});
-        
-        addDesktopProperties(buffer, "Desktop Properties:", 
+
+        addDesktopProperties(buffer, "Desktop Properties:",
                 new String[]{
-                "win.defaultGUI.font", 
+                "win.defaultGUI.font",
                 "win.icon.font",
-                "win.menu.font", 
+                "win.menu.font",
                 "win.messagebox.font",
                 "win.ansiVar.font",
                 "win.ansiFixed.font",
                 "win.frame.captionFont",
                 "win.tooltip.font"});
-        
+
         addInternationalizationProperties(buffer);
-        
+
         addFontSet(buffer, "JGoodies Windows L&f:", getWindowsFontSet());
         addFontSet(buffer, "JGoodies Plastic L&fs:", getPlasticFontSet());
-        
+
         buffer.append("\n\n");
         return buffer.toString();
     }
-    
-    
+
+
     private void addSystemProperties(StringBuffer buffer, String description, String[] keys) {
         buffer.append("\n\n");
         buffer.append(description);
@@ -148,8 +148,8 @@ public final class FontTest {
             buffer.append(value);
         }
     }
-    
-    
+
+
     private void addDesktopProperties(StringBuffer buffer, String description, String[] keys) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
@@ -171,8 +171,8 @@ public final class FontTest {
             buffer.append(printString);
         }
     }
-    
-    
+
+
     private void addInternationalizationProperties(StringBuffer buffer) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
@@ -192,18 +192,18 @@ public final class FontTest {
         buffer.append("\n    icon font can display localized text=");
         buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(iconFont, locale)));
     }
-    
-    
+
+
     private static String yesNoDontKnow(Boolean b) {
         if (Boolean.TRUE.equals(b))
             return "yes";
         else if (Boolean.FALSE.equals(b))
             return "no";
-        else 
+        else
             return "don't know";
     }
-    
-    
+
+
     private void addFontSet(StringBuffer buffer, String description, FontSet fontSet) {
         buffer.append("\n\n");
         buffer.append(description);
@@ -224,8 +224,8 @@ public final class FontTest {
         buffer.append("\n    windowTitleFont=");
         buffer.append(encodeFont(fontSet.getWindowTitleFont()));
     }
-    
-    
+
+
     private void addWindowsSettings(StringBuffer buffer, String description) {
         buffer.append("\n\n");
         buffer.append(description);
@@ -239,7 +239,7 @@ public final class FontTest {
         buffer.append(LookUtils.IS_LAF_WINDOWS_XP_ENABLED);
     }
 
-    
+
     private void addAWTProperties(StringBuffer buffer, String description) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
@@ -273,7 +273,7 @@ public final class FontTest {
         return buffer.toString();
     }
 
-    
+
     private FontSet getWindowsFontSet() {
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
@@ -282,7 +282,7 @@ public final class FontTest {
             return null;
         }
     }
-    
+
 
     private FontSet getPlasticFontSet() {
         try {
@@ -292,15 +292,15 @@ public final class FontTest {
             return null;
         }
     }
-    
-    
+
+
     // Helper Code ************************************************************
-    
+
     /**
      * Checks and answers whether the locale's display language
      * is available in a localized form, for example "Deutsch" for the
      * German locale.
-     * 
+     *
      * @param locale   the Locale to test
      * @return true if the display language is localized, false if not
      */
@@ -311,6 +311,6 @@ public final class FontTest {
         String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
         return !(englishDisplayLanguage.equals(localizedDisplayLanguage));
     }
-    
-    
+
+
 }

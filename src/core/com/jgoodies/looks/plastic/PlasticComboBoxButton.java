@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -51,7 +51,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -59,7 +59,7 @@ final class PlasticComboBoxButton extends JButton {
     private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
     private static final int    LEFT_MARGIN  = 2;
     private static final int    RIGHT_MARGIN = 2;
-    
+
     private final JList listBox;
     private final CellRendererPane rendererPane;
 
@@ -99,7 +99,7 @@ final class PlasticComboBoxButton extends JButton {
     public JComboBox getComboBox() {
         return comboBox;
     }
-    
+
     public void setComboBox(JComboBox cb) {
         comboBox = cb;
     }
@@ -107,7 +107,7 @@ final class PlasticComboBoxButton extends JButton {
     public Icon getComboIcon() {
         return comboIcon;
     }
-    
+
     public void setComboIcon(Icon i) {
         comboIcon = i;
     }
@@ -115,7 +115,7 @@ final class PlasticComboBoxButton extends JButton {
     public boolean isIconOnly() {
         return iconOnly;
     }
-    
+
     public void setIconOnly(boolean b) {
         iconOnly = b;
     }
@@ -145,7 +145,7 @@ final class PlasticComboBoxButton extends JButton {
 
 
     /**
-     * Paints the component; honors the 3D settings and 
+     * Paints the component; honors the 3D settings and
      * tries to switch the renderer component to transparent.
      */
     public void paintComponent(Graphics g) {
@@ -188,7 +188,7 @@ final class PlasticComboBoxButton extends JButton {
             boolean renderPressed = getModel().isPressed();
             Component c = renderer.getListCellRendererComponent(
                     listBox, comboBox.getSelectedItem(), -1, renderPressed, false);
-            
+
             int x = leftToRight ? left : left + iconWidth;
             int y = top;
             int w = getWidth() - left - PlasticComboBoxUI.getEditableButtonWidth();
@@ -214,7 +214,7 @@ final class PlasticComboBoxButton extends JButton {
 
             // Fix for 4238829: should lay out the JPanel.
             boolean shouldValidate = c instanceof JPanel;
-            
+
             if (!is3D()  || !(c instanceof JComponent) || !c.isOpaque()) {
                 rendererPane.paintComponent(g, c, this, x, y, w, h, shouldValidate);
             } else {
@@ -231,7 +231,7 @@ final class PlasticComboBoxButton extends JButton {
                 ((JComponent) c).setBorder(oldBorder);
             }
         }
-        
+
         if (comboIcon != null) {
             // Paint the focus
             boolean hasFocus = comboBox.hasFocus();
@@ -259,8 +259,8 @@ final class PlasticComboBoxButton extends JButton {
             c.setBackground(comboBox.getBackground());
         }
     }
-    
-    
+
+
     // Helper Code ************************************************************
 
     /**
@@ -274,17 +274,17 @@ final class PlasticComboBoxButton extends JButton {
         return PlasticUtils.is3D("ComboBox.");
     }
 
-    
+
     /**
      * Checks and answers if this UI's combo has a client property
      * that indicates that the combo is used as a table cell editor.
-     * 
+     *
      * @return <code>true</code> if the table cell editor client property
      *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
      */
     private boolean isTableCellEditor() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(PlasticComboBoxUI.CELL_EDITOR_KEY));
     }
-    
+
 
 }

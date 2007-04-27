@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -33,29 +33,25 @@ package com.jgoodies.looks.plastic;
 import java.awt.*;
 import java.io.Serializable;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonModel;
-import javax.swing.Icon;
-import javax.swing.JCheckBox;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import com.jgoodies.looks.LookUtils;
 
 /**
- * Factory class that vends <code>Icon</code>s for the JGoodies 
+ * Factory class that vends <code>Icon</code>s for the JGoodies
  * Plastic XP look&amp;feel.
  * These icons are used extensively in PlasticXP via the defaults mechanism.
  * While other look and feels often use GIFs for icons, creating icons
  * in code facilitates switching to other themes.
  * <p>
- * Each method in this class returns either an <code>Icon</code> or 
- * <code>null</code>, where <code>null</code> implies that there is 
+ * Each method in this class returns either an <code>Icon</code> or
+ * <code>null</code>, where <code>null</code> implies that there is
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticXPIconFactory {
 
@@ -66,11 +62,11 @@ public final class PlasticXPIconFactory {
     private PlasticXPIconFactory() {
         // Overrides default constructor; prevents instantiation.
     }
-    
-    
+
+
     /**
      * Lazily creates and returns the check box icon.
-     * 
+     *
      * @return the check box icon
      */
     static Icon getCheckBoxIcon() {
@@ -82,7 +78,7 @@ public final class PlasticXPIconFactory {
 
     /**
      * Lazily creates and returns the radio button icon.
-     * 
+     *
      * @return the check box icon
      */
     static Icon getRadioButtonIcon() {
@@ -107,9 +103,9 @@ public final class PlasticXPIconFactory {
             JCheckBox cb = (JCheckBox) c;
             ButtonModel model = cb.getModel();
             Graphics2D g2 = (Graphics2D) g;
-            boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
+            boolean paintFocus =    (model.isArmed() && !model.isPressed())
                                  || (cb.hasFocus() && isBlank(cb.getText()));
-            
+
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
             Object oldAAHint = g2.getRenderingHint(key);
@@ -118,7 +114,7 @@ public final class PlasticXPIconFactory {
             } else {
                 oldAAHint = null;
             }
-            
+
             drawBorder(g2, model.isEnabled(), x, y, SIZE - 1, SIZE - 1);
             drawFill(g2, model.isPressed(), x + 1, y + 1, SIZE - 2, SIZE - 2);
             if (paintFocus) {
@@ -127,7 +123,7 @@ public final class PlasticXPIconFactory {
             if (model.isSelected()) {
                 drawCheck(g2, model.isEnabled(), x + 3, y + 3, SIZE - 7, SIZE - 7);
             }
-            
+
             if (oldAAHint != null) {
                 g2.setRenderingHint(key, oldAAHint);
             }
@@ -185,14 +181,14 @@ public final class PlasticXPIconFactory {
 
     }
 
-    
-    /** 
+
+    /**
      * Paints the the icon and focus border for Plastic XP check boxes.
      */
     private static final class RadioButtonIcon implements Icon, UIResource, Serializable {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
-        
+
         private static final Stroke FOCUS_STROKE = new BasicStroke(2);
 
         public int getIconWidth()  { return SIZE; }
@@ -202,9 +198,9 @@ public final class PlasticXPIconFactory {
             Graphics2D g2 = (Graphics2D) g;
             AbstractButton rb = (AbstractButton) c;
             ButtonModel model = rb.getModel();
-            boolean paintFocus =    (model.isArmed() && !model.isPressed()) 
+            boolean paintFocus =    (model.isArmed() && !model.isPressed())
                                  || (rb.hasFocus() && isBlank(rb.getText()));
-        
+
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
             Object oldAAHint = g2.getRenderingHint(key);
@@ -213,7 +209,7 @@ public final class PlasticXPIconFactory {
             } else {
                 oldAAHint = null;
             }
-        
+
             drawFill(g2, model.isPressed(), x, y, SIZE - 1, SIZE - 1);
             if (paintFocus) {
                 drawFocus(g2, x + 1, y + 1, SIZE - 3, SIZE - 3);
@@ -222,7 +218,7 @@ public final class PlasticXPIconFactory {
                 drawCheck(g2, c, model.isEnabled(), x + 4, y + 4, SIZE - 8, SIZE - 8);
             }
         	drawBorder(g2, model.isEnabled(), x, y, SIZE-1, SIZE-1);
-            
+
             if (oldAAHint != null) {
                 g2.setRenderingHint(key, oldAAHint);
             }
@@ -278,14 +274,14 @@ public final class PlasticXPIconFactory {
         }
 
     }
-    
-    
+
+
     // Helper Code ************************************************************
-    
+
     /**
-     * Checks and answers if the given string is whitespace, 
+     * Checks and answers if the given string is whitespace,
      * empty ("") or <code>null</code>.
-     * 
+     *
      * <pre>
      * isBlank(null)    == true
      * isBlank("")      == true
@@ -294,9 +290,9 @@ public final class PlasticXPIconFactory {
      * isBlank("abc ")  == false
      * isBlank(" abc ") == false
      * </pre>
-     * 
+     *
      * @param str   the string to check, may be <code>null</code>
-     * @return <code>true</code> if the string is whitespace, empty 
+     * @return <code>true</code> if the string is whitespace, empty
      *    or <code>null</code>
      */
     private static boolean isBlank(String str) {
@@ -309,6 +305,6 @@ public final class PlasticXPIconFactory {
         }
         return true;
     }
-    
-    
+
+
 }

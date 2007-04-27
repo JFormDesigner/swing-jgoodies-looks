@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -46,29 +46,29 @@ import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
 /**
  * The JGoodies PlasticXP Look&amp;Feel implementation of <code>SpinnerUI</code>.
  * Configures the default editor to adjust font baselines and component
- * bounds. Also, changes the border of the buttons and the size of the arrows. 
- * 
+ * bounds. Also, changes the border of the buttons and the size of the arrows.
+ *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
-	
+
 	public static ComponentUI createUI(JComponent b) {
 		return new PlasticXPSpinnerUI();
 	}
 
 
     /**
-     * The mouse/action listeners that are added to the spinner's 
-     * arrow buttons.  These listeners are shared by all 
+     * The mouse/action listeners that are added to the spinner's
+     * arrow buttons.  These listeners are shared by all
      * spinner arrow buttons.
-     * 
+     *
      * @see #createNextButton
      * @see #createPreviousButton
      */
-    private static final ExtBasicArrowButtonHandler NEXT_BUTTON_HANDLER     
+    private static final ExtBasicArrowButtonHandler NEXT_BUTTON_HANDLER
     							= new ExtBasicArrowButtonHandler("increment", true);
-    private static final ExtBasicArrowButtonHandler PREVIOUS_BUTTON_HANDLER 
+    private static final ExtBasicArrowButtonHandler PREVIOUS_BUTTON_HANDLER
     							= new ExtBasicArrowButtonHandler("decrement", false);
 
 
@@ -126,17 +126,17 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
             int arrowHeight = Math.min((height - 4) / 3, (width - 4) / 3);
             return Math.max(arrowHeight, 3);
         }
-                
+
         protected boolean isPaintingNorthBottom() {
             return true;
         }
-        
+
         protected int calculateArrowOffset() {
             return 1;
         }
 
-        protected void paintNorth(Graphics g, boolean leftToRight, boolean isEnabled, 
-                Color arrowColor, boolean isPressed, 
+        protected void paintNorth(Graphics g, boolean leftToRight, boolean isEnabled,
+                Color arrowColor, boolean isPressed,
                 int width, int height, int w, int h, int arrowHeight, int arrowOffset,
                 boolean paintBottom) {
             if (!isFreeStanding) {
@@ -198,9 +198,9 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 
 
         protected void paintSouth(Graphics g, boolean leftToRight, boolean isEnabled,
-                Color arrowColor, boolean isPressed, 
+                Color arrowColor, boolean isPressed,
                 int width, int height, int w, int h, int arrowHeight, int arrowOffset) {
-                    
+
             if (!isFreeStanding) {
                 height += 1;
                 if (!leftToRight) {

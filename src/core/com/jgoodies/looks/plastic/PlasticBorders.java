@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -47,11 +47,11 @@ import javax.swing.text.JTextComponent;
 
 
 /**
- * This class consists of a set of <code>Border</code>s used 
+ * This class consists of a set of <code>Border</code>s used
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 final class PlasticBorders {
@@ -59,7 +59,7 @@ final class PlasticBorders {
     private PlasticBorders() {
         // Overrides default constructor; prevents instantiation.
     }
-    
+
 
     // Accessing and Creating Borders ***************************************
 
@@ -83,7 +83,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JButton</code>.
-     * 
+     *
      * @return the lazily created button border
      */
     static Border getButtonBorder(Insets buttonMargin) {
@@ -94,11 +94,11 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JComboBox</code>'s button.
-     * 
+     *
      * @return the lazily created combo box arrow button border
      */
     static Border getComboBoxArrowButtonBorder() {
-        if (comboBoxArrowButtonBorder == null) { 
+        if (comboBoxArrowButtonBorder == null) {
             comboBoxArrowButtonBorder = new CompoundBorder(  // No UIResource
                     new ComboBoxArrowButtonBorder(),
                     new BasicBorders.MarginBorder());
@@ -108,11 +108,11 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JComboBox</code>'s editor.
-     * 
+     *
      * @return the lazily created combo box editor border
      */
     static Border getComboBoxEditorBorder() {
-        if (comboBoxEditorBorder == null) { 
+        if (comboBoxEditorBorder == null) {
             comboBoxEditorBorder = new CompoundBorder( // No UIResource
                             new ComboBoxEditorBorder(),
                             new BasicBorders.MarginBorder());
@@ -123,7 +123,7 @@ final class PlasticBorders {
     /**
      * Returns an etched border instance for <code>JMenuBar</code> or
      * <code>JToolBar</code>.
-     * 
+     *
      * @return the lazily created etched border
      */
     static Border getEtchedBorder() {
@@ -137,7 +137,7 @@ final class PlasticBorders {
 
     /**
      * Returns a flushed 3D border.
-     * 
+     *
      * @return the lazily created flushed 3D border
      */
     static Border getFlush3DBorder() {
@@ -149,7 +149,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JInternalFrame</code>.
-     * 
+     *
      * @return an internal frame border
      */
     static Border getInternalFrameBorder() {
@@ -157,9 +157,9 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a special border for a <code>JMenuBar</code> that 
+     * Returns a special border for a <code>JMenuBar</code> that
      * is used in a header just above a <code>JToolBar</code>.
-     * 
+     *
      * @return the lazily created menu bar header border
      */
     static Border getMenuBarHeaderBorder() {
@@ -173,7 +173,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JMenu</code>.
-     * 
+     *
      * @return the lazily created menu border
      */
     static Border getMenuBorder() {
@@ -187,7 +187,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JMenuItem</code>.
-     * 
+     *
      * @return the lazily created menu item border
      */
     static Border getMenuItemBorder() {
@@ -200,7 +200,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a <code>JPopupMenu</code>.
-     * 
+     *
      * @return the lazily created popup menu border
      */
     static Border getPopupMenuBorder() {
@@ -211,9 +211,9 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JPopupMenu</code> that 
+     * Returns a border instance for a <code>JPopupMenu</code> that
      * has no (extra) margin.
-     * 
+     *
      * @return the lazily created no-margin popup menu border
      */
     static Border getNoMarginPopupMenuBorder() {
@@ -225,7 +225,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border for a <code>JInternalFrame</code>'s palette.
-     * 
+     *
      * @return a border for an internal frame in palette mode
      */
     static Border getPaletteBorder() {
@@ -234,11 +234,11 @@ final class PlasticBorders {
 
     /**
      * Returns a rollover border for buttons in a <code>JToolBar</code>.
-     * 
+     *
      * @return the lazily created rollover button border
      */
     static Border getRolloverButtonBorder() {
-        if (rolloverButtonBorder == null) { 
+        if (rolloverButtonBorder == null) {
             rolloverButtonBorder = new CompoundBorder( // No UIResource
                                         new RolloverButtonBorder(),
                                         new RolloverMarginBorder());
@@ -248,7 +248,7 @@ final class PlasticBorders {
 
     /**
      * Returns a separator border instance for <code>JScrollPane</code>.
-     * 
+     *
      * @return the lazily created scroll pane border
      */
     static Border getScrollPaneBorder() {
@@ -261,7 +261,7 @@ final class PlasticBorders {
     /**
      * Returns a separator border instance for <code>JMenuBar</code> or
      * <code>JToolBar</code>.
-     * 
+     *
      * @return the lazily created separator border
      */
     static Border getSeparatorBorder() {
@@ -275,7 +275,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a JTextField.
-     * 
+     *
      * @return the lazily created text field border
      */
     static Border getTextFieldBorder() {
@@ -289,7 +289,7 @@ final class PlasticBorders {
 
     /**
      * Returns a thin lowered border.
-     * 
+     *
      * @return the lazily created thin lowered border
      */
     static Border getThinLoweredBorder() {
@@ -301,7 +301,7 @@ final class PlasticBorders {
 
     /**
      * Returns a thin raised border.
-     * 
+     *
      * @return the lazily created thin raised border
      */
     static Border getThinRaisedBorder() {
@@ -313,7 +313,7 @@ final class PlasticBorders {
 
     /**
      * Returns a border instance for a JToggleButton.
-     * 
+     *
      * @return the lazily created toggle button border
      */
     static Border getToggleButtonBorder(Insets buttonMargin) {
@@ -323,13 +323,13 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a special border for a <code>JToolBar</code> that 
+     * Returns a special border for a <code>JToolBar</code> that
      * is used in a header just below a <code>JMenuBar</code>.
-     * 
+     *
      * @return the lazily created toolbar header border
      */
     static Border getToolBarHeaderBorder() {
-        if (toolBarHeaderBorder == null) { 
+        if (toolBarHeaderBorder == null) {
             toolBarHeaderBorder = new BorderUIResource.CompoundBorderUIResource(
                                     new ToolBarHeaderBorder(),
                                     new BasicBorders.MarginBorder());
@@ -347,9 +347,9 @@ final class PlasticBorders {
 			else
 				PlasticUtils.drawDisabledBorder(g, x, y, w, h);
 		}
-		
+
 		public Insets getBorderInsets(Component c) { return INSETS; }
-		
+
 		public Insets getBorderInsets(Component c, Insets newInsets) {
 			newInsets.top	 = INSETS.top;
 			newInsets.left	 = INSETS.left;
@@ -358,12 +358,12 @@ final class PlasticBorders {
 			return newInsets;
 		}
 	}
-	
-	
+
+
 	private static class ButtonBorder extends AbstractBorder implements UIResource {
 
         protected final Insets insets;
-        
+
         protected ButtonBorder(Insets insets) {
             this.insets = insets;
         }
@@ -374,10 +374,10 @@ final class PlasticBorders {
 
 			if (model.isEnabled()) {
 				boolean isPressed = model.isPressed() && model.isArmed();
-				boolean isDefault = button instanceof JButton 
+				boolean isDefault = button instanceof JButton
 									 && ((JButton) button).isDefaultButton();
 
-				if (isPressed && isDefault) 
+				if (isPressed && isDefault)
 					PlasticUtils.drawDefaultButtonPressedBorder(g, x, y, w, h);
 				else if (isPressed)
 					PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
@@ -391,7 +391,7 @@ final class PlasticBorders {
 		}
 
 		public Insets getBorderInsets(Component c) { return insets; }
-		
+
 		public Insets getBorderInsets(Component c, Insets newInsets) {
 			newInsets.top	 = insets.top;
 			newInsets.left	 = insets.left;
@@ -399,9 +399,9 @@ final class PlasticBorders {
 			newInsets.right  = insets.right;
 			return newInsets;
 		}
-	}	
-	
-	
+	}
+
+
 	private static final class ComboBoxArrowButtonBorder extends AbstractBorder implements UIResource {
 
 	    protected static final Insets INSETS = new Insets(1, 1, 1, 1);
@@ -423,9 +423,9 @@ final class PlasticBorders {
 	    }
 
 	    public Insets getBorderInsets(Component c) { return INSETS; }
-	}	
+	}
 
-	
+
 	private static final class ComboBoxEditorBorder extends AbstractBorder {
 
         private static final Insets INSETS  = new Insets(2, 2, 2, 0);
@@ -460,7 +460,7 @@ final class PlasticBorders {
 			else
                 PlasticUtils.drawThinFlush3DBorder(g, x, y, w, h);
 		}
-		
+
 		private void paintMaximizedBorder(Graphics g, int x, int y, int w, int h) {
             g.translate(x, y);
             g.setColor(PlasticLookAndFeel.getControlHighlight());
@@ -469,21 +469,21 @@ final class PlasticBorders {
             g.translate(-x, -y);
 		}
 
-	    public Insets getBorderInsets(Component c) { 
+	    public Insets getBorderInsets(Component c) {
 	    	return ((JInternalFrame) c).isMaximum() ? MAXIMIZED_INSETS : NORMAL_INSETS;
 	    }
     }
-    
-    
+
+
 	/**
 	 * A border used for the palette of <code>JInternalFrame</code>s.
 	 */
     private static final class PaletteBorder extends AbstractBorder implements UIResource {
-    	
+
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h ) {  
-		    g.translate(x,y);  
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h ) {
+		    g.translate(x,y);
 		    g.setColor(PlasticLookAndFeel.getControlDarkShadow());
 		    g.drawRect(0, 0, w-1, h-1);
 		    g.translate(-x,-y);
@@ -491,12 +491,12 @@ final class PlasticBorders {
 
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
-    
+
 
 	/**
-	 * A border that looks like a separator line; used for menu bars 
+	 * A border that looks like a separator line; used for menu bars
      * and tool bars.
-	 */	
+	 */
 	private static final class SeparatorBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(0, 0, 2, 1);
@@ -523,7 +523,7 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
+
 
 	private static final class ThinLoweredBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
@@ -534,14 +534,14 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
+
 
 	/**
-	 * A border used for menu bars and tool bars in 
+	 * A border used for menu bars and tool bars in
      * <code>HeaderStyle.SINGLE</code>. The bar is wrapped by an inner thin
      * raised border, which in turn is wrapped by an outer thin lowered
      * border.
-	 */	
+	 */
 	private static final class EtchedBorder extends AbstractBorder implements UIResource {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
@@ -553,8 +553,8 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A border used for menu bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
@@ -571,8 +571,8 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	/**
 	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
@@ -589,8 +589,8 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
-	
+
+
 	private static final class MenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets( 2, 2, 2, 2 );
 
@@ -612,7 +612,7 @@ final class PlasticBorders {
 				g.translate(-x, -y);
 			}
 		}
-		
+
         public Insets getBorderInsets(Component c) { return INSETS; }
 
         public Insets getBorderInsets(Component c, Insets newInsets) {
@@ -640,7 +640,7 @@ final class PlasticBorders {
 
 		public Insets getBorderInsets(Component c) { return INSETS; }
 	}
-	
+
 
     private static final class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
@@ -654,10 +654,10 @@ final class PlasticBorders {
 
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
-    
+
 
 	private static class RolloverButtonBorder extends ButtonBorder {
-        
+
         private RolloverButtonBorder() {
             super(new Insets(3, 3, 3, 3));
         }
@@ -690,8 +690,8 @@ final class PlasticBorders {
 				PlasticUtils.drawDark3DBorder(g, x, y, w, h);
 		}
 	}
-	
-	
+
+
     /**
      * A border which is like a Margin border but it will only honor the margin
      * if the margin has been explicitly set by the developer.
@@ -699,7 +699,7 @@ final class PlasticBorders {
 	static final class RolloverMarginBorder extends EmptyBorder {
 
         RolloverMarginBorder() {
-            super(1, 1, 1, 1); 
+            super(1, 1, 1, 1);
         }
 
 
@@ -737,7 +737,7 @@ final class PlasticBorders {
 	 * the ScrollPaneUI will update the ScrollbarsFreeStanding property.
 	 */
 	private static final class ScrollPaneBorder extends MetalBorders.ScrollPaneBorder {
-		
+
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
 
@@ -750,11 +750,11 @@ final class PlasticBorders {
 			g.translate(-x, -y);
 		}
 	}
-	
-	
+
+
     private static final class TextFieldBorder extends Flush3DBorder {
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-		
+
 			if (!(c instanceof JTextComponent)) {
 				// special case for non-text components (bug ID 4144840)
 				if (c.isEnabled()) {
@@ -764,21 +764,21 @@ final class PlasticBorders {
 				}
 				return;
 			}
-		
+
 			if (c.isEnabled() && ((JTextComponent) c).isEditable())
 				PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
 			else
 				PlasticUtils.drawDisabledBorder(g, x, y, w, h);
-		}    
+		}
 	}
 
 
 	private static final class ToggleButtonBorder extends ButtonBorder {
-        
+
         private ToggleButtonBorder(Insets insets) {
             super(insets);
         }
-        
+
 		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			if (!c.isEnabled()) {
 				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
@@ -793,8 +793,8 @@ final class PlasticBorders {
 					PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
 			}
 		}
-        
-	}	
-	
+
+	}
+
 
 }

@@ -1,67 +1,43 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ActionMap;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JViewport;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ComponentUI;
@@ -74,12 +50,12 @@ import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Plastic Look&amp;Feel implementation of 
+ * The JGoodies Plastic Look&amp;Feel implementation of
  * <code>TabbedPaneUI</code>. It differs from its superclass
  * <code>MetalTabbedPaneUI</code> in that it paints new tab shapes,
  * provides two options, and supports ClearLook.
  * <p>
- * You can enable or disable icons in tabs globally via 
+ * You can enable or disable icons in tabs globally via
  * com.jgoodies.looks.Options.setTabIconsEnabled(boolean).
  * <p>
  * To disable the content border set
@@ -93,20 +69,20 @@ import com.jgoodies.looks.Options;
  * tabbedPane.putClientProperty(Option.EMBEDDED_TABS_KEY, Boolean.TRUE);
  * </pre>
  * <p>
- * There's a special mode that helps you detect content borders in 
- * heavily wrapped component hierarchies - such as the NetBeans IDE. 
- * In this marked mode the content border is painted as a Magenta line. 
- * You can enable this mode by setting the System property 
+ * There's a special mode that helps you detect content borders in
+ * heavily wrapped component hierarchies - such as the NetBeans IDE.
+ * In this marked mode the content border is painted as a Magenta line.
+ * You can enable this mode by setting the System property
  * <tt>markContentBorders</tt> to <tt>true</tt>; in a command line:
  * <pre>
  * java -DmarkContentBorders=true
  * </pre>
- *  
+ *
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.6 $
- * 
+ * @version $Revision: 1.7 $
+ *
  * @see     Options
  */
 public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
@@ -118,9 +94,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Describes if tabs are painted with or without icons.
      */
     private static boolean isTabIconsEnabled = Options.isTabIconsEnabled();
-    
+
     /**
-     * Describes if we paint no content border or not; is false by default. 
+     * Describes if we paint no content border or not; is false by default.
      * You can disable the content border by setting the client property
      * Options.NO_CONTENT_BORDER_KEY to Boolean.TRUE;
      */
@@ -142,10 +118,10 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     /** For use when tabLayoutPolicy == SCROLL_TAB_LAYOUT. */
     private ScrollableTabSupport tabScroller;
-    
+
     /**
      * Creates the <code>PlasticTabbedPaneUI</code>.
-     * 
+     *
      * @see javax.swing.plaf.ComponentUI#createUI(JComponent)
      */
     public static ComponentUI createUI(JComponent tabPane) {
@@ -154,7 +130,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     /**
      * Installs the UI.
-     * 
+     *
      * @see javax.swing.plaf.ComponentUI#installUI(JComponent)
      */
     public void installUI(JComponent c) {
@@ -186,7 +162,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
     }
-    
+
     /**
      * Removes any installed subcomponents from the JTabbedPane.
      * Invoked by uninstallUI.
@@ -200,12 +176,12 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             tabScroller = null;
         }
     }
-    
+
     protected void installListeners() {
         super.installListeners();
         // if the layout policy is the SCROLL_TAB_LAYOUT, the super class
         // will install the mouse listener on tabPane instead of
-        // tabScroller#tabPanel and there is no way to prevent this. 
+        // tabScroller#tabPanel and there is no way to prevent this.
         // That's why the mouse listener must be removed from tabPane and
         // added to tabScroller#tabPanel when the scroll tab layout is enabled.
         // This applies only to JDK 1.4!!!
@@ -216,7 +192,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
     }
-    
+
     protected void uninstallListeners() {
         if ((mouseListener != null) && (LookUtils.IS_JAVA_1_4)) {
             if (scrollableTabLayoutEnabled()) { // SCROLL_TAB_LAYOUT
@@ -228,7 +204,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
         super.uninstallListeners();
     }
-    
+
     protected void installKeyboardActions() {
         super.installKeyboardActions();
         // if the layout policy is the SCROLL_TAB_LAYOUT, then replace
@@ -244,7 +220,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             tabScroller.scrollBackwardButton.setAction(backwardAction);
         }
     }
-    
+
     /**
      * Checks and answers if content border will be painted.
      * This is controlled by the component's client property
@@ -284,7 +260,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     protected ChangeListener createChangeListener() {
         return new TabSelectionHandler();
     }
-    
+
     /*
      * Private helper method for the next three methods.
      */
@@ -294,7 +270,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
      /**
-      * Updates the renderer and layout. This message is sent by 
+      * Updates the renderer and layout. This message is sent by
       * my PropertyChangeHandler whenever the tab placement changes.
       */
      private void tabPlacementChanged() {
@@ -316,7 +292,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
      /**
-      * Updates the no content border property. This message is sent 
+      * Updates the no content border property. This message is sent
       * by my PropertyChangeHandler whenever the noContentBorder
       * property changes.
       */
@@ -338,11 +314,11 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          if (!scrollableTabLayoutEnabled()) { // WRAP_TAB_LAYOUT
              paintTabArea(g, tabPlacement, selectedIndex);
          }
-     
+
          // Paint content border
          paintContentBorder(g, tabPlacement, selectedIndex);
      }
-     
+
      protected void paintTab(Graphics g, int tabPlacement, Rectangle[] rects,
              int tabIndex, Rectangle iconRect, Rectangle textRect) {
          Rectangle tabRect = rects[tabIndex];
@@ -425,7 +401,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
       * This method will create and return a polygon shape for the given tab
       * rectangle which has been cropped at the specified cropline with a torn
       * edge visual. e.g. A "File" tab which has cropped been cropped just after
-      * the "i": 
+      * the "i":
       *    -------------
       *    |  .....     |
       *    |  .          |
@@ -434,7 +410,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
       *    |  .    .    |
       *    |  .    .     |
       *    --------------
-      * 
+      *
       * The x, y arrays below define the pattern used to create a "torn" edge
       * segment which is repeated to fill the edge of the tab. For tabs placed on
       * TOP and BOTTOM, this righthand torn edge is created by line segments
@@ -542,17 +518,17 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      private void ensureCurrentLayout() {
          if (!tabPane.isValid()) {
              tabPane.validate();
-         } 
+         }
          /* If tabPane doesn't have a peer yet, the validate() call will
           * silently fail.  We handle that by forcing a layout if tabPane
           * is still invalid.  See bug 4237677.
           */
          if (!tabPane.isValid()) {
              TabbedPaneLayout layout = (TabbedPaneLayout) tabPane.getLayout();
-             layout.calculateLayoutInfo();          
+             layout.calculateLayoutInfo();
          }
      }
-     
+
      /**
       * Returns the tab index which intersects the specified point
       * in the JTabbedPane's coordinate space.
@@ -560,7 +536,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      public int tabForCoordinate(JTabbedPane pane, int x, int y) {
          ensureCurrentLayout();
          Point p = new Point(x, y);
-     
+
          if (scrollableTabLayoutEnabled()) {
              translatePointToTabPanel(x, y, p);
              Rectangle viewRect = tabScroller.viewport.getViewRect();
@@ -581,7 +557,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          dest.width = rects[tabIndex].width;
          dest.height = rects[tabIndex].height;
          if (scrollableTabLayoutEnabled()) { // SCROLL_TAB_LAYOUT
-             // Need to translate coordinates based on viewport location & 
+             // Need to translate coordinates based on viewport location &
              // view position
              Point vpp = tabScroller.viewport.getLocation();
              Point viewp = tabScroller.viewport.getViewPosition();
@@ -593,7 +569,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          }
          return dest;
      }
-     
+
      /**
       * Returns the index of the tab closest to the passed in location, note
       * that the returned tab may not contain the location x,y.
@@ -634,7 +610,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          }
          return min;
      }
-     
+
      /**
       * Returns a point which is translated from the specified point in the
       * JTabbedPane's coordinate space to the coordinate space of the
@@ -647,13 +623,13 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          dest.y = srcy - vpp.y + viewp.y;
          return dest;
      }
-     
+
     protected void paintTabArea(Graphics g, int tabPlacement, int selectedIndex) {
         int tabCount = tabPane.getTabCount();
 
         Rectangle iconRect = new Rectangle(),
                   textRect = new Rectangle();
-        Rectangle clipRect = g.getClipBounds();  
+        Rectangle clipRect = g.getClipBounds();
 
         // Paint tabRuns of tabs from back to front
         for (int i = runCount - 1; i >= 0; i--) {
@@ -673,9 +649,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             paintTab(g, tabPlacement, rects, selectedIndex, iconRect, textRect);
         }
     }
-    
+
     /*
-     * Copied here from super(super)class to avoid labels being centered on 
+     * Copied here from super(super)class to avoid labels being centered on
      * vertical tab runs if they consist of icon and text
      */
     protected void layoutLabel(
@@ -739,7 +715,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
         //fix of issue #4
         tabPane.putClientProperty("html", null);
-        
+
         iconRect.x += xNudge;
         iconRect.y += yNudge;
         textRect.x += xNudge;
@@ -778,7 +754,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     private boolean scrollableTabLayoutEnabled() {
         return tabPane.getLayout() instanceof TabbedPaneScrollLayout;
     }
-    
+
     protected boolean isTabInFirstRun(int tabIndex) {
         return getRunForTab(tabPane.getTabCount(), tabIndex) == 0;
     }
@@ -810,7 +786,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 h -= (y - insets.top);
         }
         // Fill region behind content area
-        g.setColor(selectColor == null 
+        g.setColor(selectColor == null
                         ? tabPane.getBackground()
                         : selectColor);
         g.fillRect(x, y, w, h);
@@ -819,7 +795,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         selRect = (selectedIndex < 0) ? null : getTabBounds(selectedIndex, calcRect);
         boolean drawBroken = selectedIndex >= 0 && isTabInFirstRun(selectedIndex);
         boolean isContentBorderPainted = !hasNoContentBorder();
-        // It sounds a bit odd to call paintContentBorder with 
+        // It sounds a bit odd to call paintContentBorder with
         // a parameter isContentBorderPainted set to false.
         // But in this case the part of the border touching the tab
         // area will still be painted so best let the renderer decide.
@@ -830,10 +806,10 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     //
-    // Here comes a number of methods that are just delegated to the 
+    // Here comes a number of methods that are just delegated to the
     // appropriate renderer
     //
-    /** 
+    /**
      * Returns the insets (i.e. the width) of the content Border.
      */
     protected Insets getContentBorderInsets(int tabPlacement) {
@@ -841,7 +817,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Returns the amount by which the Tab Area is inset. 
+     * Returns the amount by which the Tab Area is inset.
      */
     protected Insets getTabAreaInsets(int tabPlacement) {
         return renderer.getTabAreaInsets(super.getTabAreaInsets(tabPlacement));
@@ -869,7 +845,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * This boolean controls wheather the given run should be padded to 
+     * This boolean controls wheather the given run should be padded to
      * use up as much space as the others (with more tabs in them).
      */
     protected boolean shouldPadTabRun(int tabPlacement, int run) {
@@ -914,7 +890,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Fills the background of the given tab to make sure overlap of 
+     * Fills the background of the given tab to make sure overlap of
      * tabs is handled correctly.
      * Note: that tab backgrounds seem to be painted somewhere else, too.
      */
@@ -941,9 +917,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     private class TabSelectionHandler implements ChangeListener {
-        
+
         private Rectangle rect = new Rectangle();
-        
+
         public void stateChanged(ChangeEvent e) {
             JTabbedPane tabPane = (JTabbedPane) e.getSource();
             tabPane.revalidate();
@@ -964,10 +940,10 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
     }
-    
+
     /**
-     * Catches and handles property change events. In addition to the super 
-     * class behavior we listen to changes of the ancestor, tab placement, 
+     * Catches and handles property change events. In addition to the super
+     * class behavior we listen to changes of the ancestor, tab placement,
      * and JGoodies options for content border, and embedded tabs.
      */
     private class MyPropertyChangeHandler
@@ -978,7 +954,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             if (null == pName) {
                 return;
             }
-            
+
             super.propertyChange(e);
 
             if (pName.equals("tabPlacement")) {
@@ -995,7 +971,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
     }
-    
+
     /**
      * Does all the layout work. The result is stored in the container
      * class's instance variables. Mainly the rects[] vector.
@@ -1052,7 +1028,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             runCount = 0;
             selectedRun = -1;
             //keeps track of where we are in the current run.
-            //this helps not to rely on fragile positioning 
+            //this helps not to rely on fragile positioning
             //informaion to find out wheter the active Tab
             //is the first in run
             int tabInRun = -1;
@@ -1084,11 +1060,11 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     rect.width  = calculateTabWidth(tabPlacement, i, metrics);
                     maxTabWidth = Math.max(maxTabWidth, rect.width);
 
-                    // Never move a TAB down a run if it is the first in run. 
-                    // Even if there isn't enough room, moving it to a fresh 
+                    // Never move a TAB down a run if it is the first in run.
+                    // Even if there isn't enough room, moving it to a fresh
                     // line won't help.
                     //                    if (rect.x != 2 + insets.left && rect.x + rect.width > returnAt) {
-                    // Never rely on phisical position information to determine 
+                    // Never rely on phisical position information to determine
                     // logical position (if you can avoid it)
                     if (tabInRun != 0 && rect.x + rect.width > runReturnAt) {
                         if (runCount > tabRuns.length - 1) {
@@ -1119,8 +1095,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     rect.height = calculateTabHeight(tabPlacement, i, fontHeight);
                     maxTabHeight = Math.max(maxTabHeight, rect.height);
 
-                    // Never move a TAB over a run if it is the first in run. 
-                    // Even if there isn't enough room, moving it to a fresh 
+                    // Never move a TAB over a run if it is the first in run.
+                    // Even if there isn't enough room, moving it to a fresh
                     // run won't help.
                     //                    if (rect.y != 2 + insets.top && rect.y + rect.height > returnAt) {
                     if (tabInRun != 0 && rect.y + rect.height > runReturnAt) {
@@ -1168,7 +1144,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                         rect = rects[j];
                         rect.y = y;
                         rect.x += indent;
-                        // try to make tabRunIndent symmetric          
+                        // try to make tabRunIndent symmetric
                         //	rect.width -= 2* indent + 20;
                     }
                     if (shouldPadTabRun(tabPlacement, i)) {
@@ -1217,7 +1193,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             if (selectedIndex >= 0) {
                 Rectangle selRect = rects[selectedIndex];
                 Insets padInsets = getSelectedTabPadInsets(tabPlacement);
-                selRect.x -= padInsets.left;            
+                selRect.x -= padInsets.left;
                 selRect.width += (padInsets.left + padInsets.right);
                 selRect.y -= padInsets.top;
                 selRect.height += (padInsets.top + padInsets.bottom);
@@ -1234,13 +1210,13 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             return true;
         }
         if (visibleComponent instanceof JComponent) {
-            if (((JComponent) visibleComponent).requestDefaultFocus()) { 
-                return true; 
+            if (((JComponent) visibleComponent).requestDefaultFocus()) {
+                return true;
             }
         }
         return false;
     }
-    
+
     private static class ScrollTabsForwardAction extends AbstractAction {
 
         public void actionPerformed(ActionEvent e) {
@@ -1321,8 +1297,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                             visibleComponent != null) {
                         if (SwingUtilities.findFocusOwner(visibleComponent) != null) {
                             shouldChangeFocus = true;
-                        }                   
-                    } 
+                        }
+                    }
                     setVisibleComponent(selectedComponent);
                 }
                 int tx, ty, tw, th; // tab area bounds
@@ -1340,7 +1316,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                             th = bounds.height - insets.top - insets.bottom;
                             tx = insets.left;
                             ty = insets.top;
-    
+
                             // calculate content area bounds
                             cx = tx + tw + contentInsets.left;
                             cy = ty + contentInsets.top;
@@ -1356,7 +1332,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                             th = bounds.height - insets.top - insets.bottom;
                             tx = bounds.width - insets.right - tw;
                             ty = insets.top;
-    
+
                             // calculate content area bounds
                             cx = insets.left + contentInsets.left;
                             cy = insets.top + contentInsets.top;
@@ -1372,7 +1348,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                     maxTabHeight);
                             tx = insets.left;
                             ty = bounds.height - insets.bottom - th;
-    
+
                             // calculate content area bounds
                             cx = insets.left + contentInsets.left;
                             cy = insets.top + contentInsets.top;
@@ -1389,7 +1365,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                     maxTabHeight);
                             tx = insets.left;
                             ty = insets.top;
-    
+
                             // calculate content area bounds
                             cx = tx + contentInsets.left;
                             cy = ty + th + contentInsets.top;
@@ -1443,9 +1419,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                             vw = totalTabWidth - viewRect.x;
                                         }
                                     }
-                            }   
-                            child.setBounds(tx, ty, vw, vh);                      
-                    
+                            }
+                            child.setBounds(tx, ty, vw, vh);
+
                         } else if (tabScroller != null &&
                                    (child == tabScroller.scrollForwardButton ||
                                     child == tabScroller.scrollBackwardButton)) {
@@ -1456,7 +1432,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                             int bw = bsize.width;
                             int bh = bsize.height;
                             boolean visible = false;
-                
+
                             switch (tabPlacement) {
                                 case LEFT:
                                 case RIGHT:
@@ -1473,14 +1449,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                                         * bsize.height;
                                     }
                                     break;
-    
+
                                 case BOTTOM:
                                 case TOP:
                                 default:
                                     int totalTabWidth = rects[tabCount - 1].x
                                             + rects[tabCount - 1].width
                                             + renderer.getTabsOverlay();
-    
+
                                     if (totalTabWidth > tw) {
                                         visible = true;
                                         bx = (child == tabScroller.scrollForwardButton) ? bounds.width
@@ -1513,7 +1489,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         protected void calculateTabRects(int tabPlacement, int tabCount) {
             FontMetrics metrics = getFontMetrics();
             Dimension size = tabPane.getSize();
-            Insets insets = tabPane.getInsets(); 
+            Insets insets = tabPane.getInsets();
             Insets tabAreaInsets = getTabAreaInsets(tabPlacement);
             int fontHeight = metrics.getHeight();
             int selectedIndex = tabPane.getSelectedIndex();
@@ -1587,7 +1563,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     rect.x = x;
                     rect.width = maxTabWidth/* - 2*/;
 
-                }            
+                }
             }
 
             // Pad the selected tab so that it appears raised in front
@@ -1596,7 +1572,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             // if right to left and tab placement on the top or
             // the bottom, flip x positions and adjust by widths
             if (!leftToRight && !verticalTabRuns) {
-                int rightMargin = size.width 
+                int rightMargin = size.width
                                   - (insets.right + tabAreaInsets.right);
                 for (int i = 0; i < tabCount; i++) {
                     rects[i].x = rightMargin - rects[i].x - rects[i].width;
@@ -1682,7 +1658,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 case BOTTOM:
                     tabViewPosition.x = leadingTabIndex == 0 ? 0
                             : rects[leadingTabIndex].x - renderer.getTabsOverlay();
-    
+
                     if ((viewSize.width - tabViewPosition.x) < viewRect.width) {
                         // We've scrolled to the end, so adjust the viewport size
                         // to ensure the view position remains aligned on a tab
@@ -1696,7 +1672,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 case RIGHT:
                     tabViewPosition.y = leadingTabIndex == 0 ? 0
                             : rects[leadingTabIndex].y;
-    
+
                     if ((viewSize.height - tabViewPosition.y) < viewRect.height) {
                         // We've scrolled to the end, so adjust the viewport size
                         // to ensure the view position remains aligned on a tab
@@ -2113,7 +2089,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             boolean isSelected);
 
         /**
-         * Fills the background of the given tab to make sure overlap of 
+         * Fills the background of the given tab to make sure overlap of
          * tabs is handled correctly.
          */
         protected abstract void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected);
@@ -2210,7 +2186,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                g.fillRect(x + w - 1, y, 1, h);
             }
         }
-        
+
         /**
          * Returns the amount of overlap for two tabs.
          */
@@ -2219,7 +2195,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
-    /** 
+    /**
      * The renderer for the case where tabs are displayed below the contents
      * and with minimal decoration.
      */
@@ -2244,7 +2220,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left, tabInsets.bottom, tabInsets.right);
         }
-        
+
         /**
          * Paints no focus: minimal decoration is really minimal.
          */
@@ -2331,7 +2307,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * decoration is standard.
      */
     private static final class BottomRenderer extends AbstractRenderer {
-        
+
         private BottomRenderer(JTabbedPane tabPane) {
             super(tabPane);
         }
@@ -2440,7 +2416,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
             g.translate(-x, -bottom);
         }
-        
+
         protected int getTabsOverlay() {
             return 4;
         }
@@ -2947,7 +2923,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     g.fillRect(right - 1, 0, 1, 1);
                     //right
                     g.fillRect(right, 1, 1, bottom);
-                } 
+                }
             } else {
                 if (isSelected) {
                     g.setColor(selectHighlight);
@@ -2986,7 +2962,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.setColor(shadowColor);
             g.fillRect(x, y, w, 1);
         }
-        
+
     }
 
     /**
@@ -3101,7 +3077,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                 g.fillRect(x, top, w - 1, 1);
             }
         }
-        
+
         protected int getTabsOverlay() {
             return 6;
         }

@@ -1,31 +1,31 @@
 /*
  * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
- * Redistribution and use in source and binary forms, with or without 
+ * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
- * 
- *  o Redistributions of source code must retain the above copyright notice, 
- *    this list of conditions and the following disclaimer. 
- *     
- *  o Redistributions in binary form must reproduce the above copyright notice, 
- *    this list of conditions and the following disclaimer in the documentation 
- *    and/or other materials provided with the distribution. 
- *     
- *  o Neither the name of JGoodies Karsten Lentzsch nor the names of 
- *    its contributors may be used to endorse or promote products derived 
- *    from this software without specific prior written permission. 
- *     
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
- * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR 
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR 
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, 
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; 
- * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
- * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE 
- * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, 
- * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+ *
+ *  o Redistributions of source code must retain the above copyright notice,
+ *    this list of conditions and the following disclaimer.
+ *
+ *  o Redistributions in binary form must reproduce the above copyright notice,
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
+ *
+ *  o Neither the name of JGoodies Karsten Lentzsch nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+ * OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+ * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
+ * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 package com.jgoodies.looks.plastic;
@@ -44,50 +44,50 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
 
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>ScrollBarUI</code>.
- * Can add a pseudo 3D effect and honors the Plastic Option 
+ * Can add a pseudo 3D effect and honors the Plastic Option
  * <tt>ScrollBar.maxBumpsWidth</tt> to limit the with of the scroll bar bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 
 public final class PlasticScrollBarUI extends MetalScrollBarUI {
-	
+
 	private static final String PROPERTY_PREFIX	  = "ScrollBar.";
 	public  static final String MAX_BUMPS_WIDTH_KEY = PROPERTY_PREFIX + "maxBumpsWidth";
-	
+
     private Color shadowColor;
     private Color highlightColor;
     private Color darkShadowColor;
     private Color thumbColor;
     private Color thumbShadow;
-    private Color thumbHighlightColor; 
+    private Color thumbHighlightColor;
 
     private PlasticBumps bumps;
 
 	public static ComponentUI createUI(JComponent b) {
 		return new PlasticScrollBarUI();
 	}
-	
-	
+
+
     protected void installDefaults() {
     	super.installDefaults();
-		bumps = new PlasticBumps(10, 10, thumbHighlightColor, thumbShadow, thumbColor);    
+		bumps = new PlasticBumps(10, 10, thumbHighlightColor, thumbShadow, thumbColor);
     }
-    
-    
+
+
 	protected JButton createDecreaseButton(int orientation) {
 		decreaseButton = new PlasticArrowButton(orientation, scrollBarWidth, isFreeStanding);
 		return decreaseButton;
 	}
-	
-	
+
+
 	protected JButton createIncreaseButton(int orientation) {
 		increaseButton = new PlasticArrowButton(orientation, scrollBarWidth, isFreeStanding);
 		return increaseButton;
 	}
-	
-	
+
+
     protected void configureScrollBarColors() {
         super.configureScrollBarColors();
         shadowColor         = UIManager.getColor(PROPERTY_PREFIX + "shadow");
@@ -96,9 +96,9 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
         thumbColor          = UIManager.getColor(PROPERTY_PREFIX + "thumb");
         thumbShadow         = UIManager.getColor(PROPERTY_PREFIX + "thumbShadow");
         thumbHighlightColor = UIManager.getColor(PROPERTY_PREFIX + "thumbHighlight");
-    } 
-    
-    
+    }
+
+
 	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
 		g.translate(trackBounds.x, trackBounds.y);
 
@@ -143,7 +143,7 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 					trackBounds.width -= 2;
 				}
 			}
-		} else { // HORIZONTAL 
+		} else { // HORIZONTAL
 			if (!isFreeStanding) {
 				trackBounds.height += 2;
 			}
@@ -176,9 +176,9 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 			}
 		}
 		g.translate(-trackBounds.x, -trackBounds.y);
-	}	
-	
-	
+	}
+
+
 	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
@@ -219,7 +219,7 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 					thumbBounds.width -= 2;
 				}
 			}
-		} else { // HORIZONTAL 
+		} else { // HORIZONTAL
 			if (!isFreeStanding) {
 				thumbBounds.height += 2;
 			}
@@ -242,12 +242,12 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 		}
 		g.translate(-thumbBounds.x, -thumbBounds.y);
 
-		if (PlasticUtils.is3D(PROPERTY_PREFIX)) 
+		if (PlasticUtils.is3D(PROPERTY_PREFIX))
 			paintThumb3D(g, thumbBounds);
-		
+
 	}
-	
-	
+
+
 	private void paintBumps(Graphics g, JComponent c, int x, int y, int width, int height) {
 		if (!useNarrowBumps()) {
 			bumps.setBumpArea(width, height);
@@ -262,8 +262,8 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 			bumps.paintIcon(c, g, myX, myY);
 		}
 	}
-    
-    
+
+
     private void paintThumb3D(Graphics g, Rectangle thumbBounds) {
 		boolean isHorizontal = scrollbar.getOrientation() == Adjustable.HORIZONTAL;
 		int width   = thumbBounds.width  - (isHorizontal ? 3 : 1);
@@ -271,10 +271,10 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 		Rectangle r = new Rectangle(thumbBounds.x + 2, thumbBounds.y + 2, width, height);
 		PlasticUtils.addLight3DEffekt(g, r, isHorizontal);
 	}
-	
-	
+
+
 	// Accessing Special Client Properties **********************************************
-	
+
 	private boolean useNarrowBumps() {
 		Object value = UIManager.get(MAX_BUMPS_WIDTH_KEY);
 		return value != null && value instanceof Integer;
