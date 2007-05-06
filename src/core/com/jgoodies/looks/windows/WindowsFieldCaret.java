@@ -49,7 +49,7 @@ import javax.swing.text.*;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -188,7 +188,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             }
         }
 
-        private Rectangle r;
+        private final Rectangle r;
     }
 
     // Helper Classes *********************************************************

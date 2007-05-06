@@ -43,7 +43,7 @@ import javax.swing.Icon;
  * The bumps used in the JGoodies Plastic Look&amp;Feel.
  *
  * @author Sun
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 final class PlasticBumps implements Icon {
 
@@ -148,7 +148,7 @@ final class BumpBuffer {
 	Color topColor;
 	Color shadowColor;
 	Color backColor;
-	private GraphicsConfiguration gc;
+	private final GraphicsConfiguration gc;
 
 	public BumpBuffer(
 		GraphicsConfiguration gc,

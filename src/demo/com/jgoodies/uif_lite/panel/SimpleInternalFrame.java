@@ -55,7 +55,7 @@ import javax.swing.border.AbstractBorder;
  * be displayed as selected.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
@@ -63,7 +63,7 @@ import javax.swing.border.AbstractBorder;
 
 public class SimpleInternalFrame extends JPanel {
 
-    private JLabel        titleLabel;
+    private final JLabel  titleLabel;
     private GradientPanel gradientPanel;
     private JPanel        headerPanel;
     private boolean       selected;

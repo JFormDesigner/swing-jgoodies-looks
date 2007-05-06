@@ -81,7 +81,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see     Options
  */
@@ -419,9 +419,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
       * LEFT or RIGHT, the bottom torn edge is created by subtracting xCropLen[i]
       * from (tab.y + tab.height) and adding yCropLen[i] to (tab.x).
       */
-     private int[] xCropLen = { 1, 1, 0, 0, 1, 1, 2, 2 };
+     private final int[] xCropLen = { 1, 1, 0, 0, 1, 1, 2, 2 };
 
-     private int[] yCropLen = { 0, 3, 3, 6, 6, 9, 9, 12 };
+     private final int[] yCropLen = { 0, 3, 3, 6, 6, 9, 9, 12 };
 
      private static final int CROP_SEGMENT = 12;
 
@@ -918,7 +918,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     private class TabSelectionHandler implements ChangeListener {
 
-        private Rectangle rect = new Rectangle();
+        private final Rectangle rect = new Rectangle();
 
         public void stateChanged(ChangeEvent e) {
             JTabbedPane tabPane = (JTabbedPane) e.getSource();
@@ -1590,7 +1590,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         public JButton scrollForwardButton;
         public JButton scrollBackwardButton;
         public int leadingTabIndex;
-        private Point tabViewPosition = new Point(0, 0);
+        private final Point tabViewPosition = new Point(0, 0);
 
         ScrollableTabSupport(int tabPlacement) {
             viewport = new ScrollableTabViewport();
