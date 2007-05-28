@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.29 2006-12-04 11:51:34 karsten Exp $
+   $Id: build.xml,v 1.30 2007-05-28 16:10:00 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -19,6 +19,10 @@
      create-maven-bundle creates a Maven bundle
      create-all          creates the distribution zip and Maven bundle
      
+   To compile, you MUST set the property "build.boot.classpath",
+   for example in your user build.properties file a line like:
+   build.boot.classpath=C:/Java/Jdk1.5.0_11/jre/lib/rt.jar
+   
    To run the unit tests you MUST set the junit.jar property,
    for example in your user build.properties file. 
 
