@@ -1,3 +1,6 @@
+o Consider using SwingUtilities2#getGraphics2D to avoid
+  ClassCastExceptions.
+
 o Provide the following FontPolicies:
   - Resolution-scaling fonts
   - Desktop-setting fonts
