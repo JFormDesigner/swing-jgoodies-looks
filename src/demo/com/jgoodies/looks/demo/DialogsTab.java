@@ -47,7 +47,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * Contains a bunch of buttons to open a bunch of standard dialogs.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class DialogsTab {
 
@@ -112,7 +112,7 @@ final class DialogsTab {
                     JOptionPane.ERROR_MESSAGE);
             }
         });
-        chooseFileNativeButton = new JButton("Open...");
+        chooseFileNativeButton = new JButton("Open\u2026");
         chooseFileNativeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Dialog dialog = new FileDialog(
@@ -121,7 +121,7 @@ final class DialogsTab {
                 dialog.setVisible(true);
             }
         });
-        chooseFileSwingButton = new JButton("Open...");
+        chooseFileSwingButton = new JButton("Open\u2026");
         chooseFileSwingButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new JFileChooser("Open File (Swing)").showOpenDialog(
