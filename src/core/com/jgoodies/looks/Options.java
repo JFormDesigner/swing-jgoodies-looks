@@ -52,7 +52,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public final class Options {
 
@@ -491,7 +491,7 @@ public final class Options {
      * Narrow button margins make it easier to give buttons in a button bar
      * the same width, even if some button labels are long. And narrow margins
      * are useful for embedded command buttons that just have an icon,
-     * or an ellipsis (...). Many style guides recommend to use a minimum
+     * or an ellipsis (&hellip;). Many style guides recommend to use a minimum
      * button width in command button bars, for example 50 dialog units on
      * Windows. Such a minimum width makes it easier to click a button,
      * just because the button area has a reasonable minimum size.
