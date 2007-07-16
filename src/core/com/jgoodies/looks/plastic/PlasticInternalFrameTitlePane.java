@@ -41,7 +41,7 @@ import javax.swing.plaf.metal.MetalInternalFrameTitlePane;
  * Paints the internal frame title. Uses JGoodies Plastic colors.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class PlasticInternalFrameTitlePane
     extends MetalInternalFrameTitlePane {
@@ -243,7 +243,7 @@ public final class PlasticInternalFrameTitlePane
         if ((text == null) || (text.equals("")))
             return "";
         int textWidth = SwingUtilities.computeStringWidth(fm, text);
-        String clipString = "...";
+        String clipString = "\u2026";
         if (textWidth > availTextWidth) {
             int totalWidth = SwingUtilities.computeStringWidth(fm, clipString);
             int nChars;
