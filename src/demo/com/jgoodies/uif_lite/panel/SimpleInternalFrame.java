@@ -55,7 +55,7 @@ import javax.swing.border.AbstractBorder;
  * be displayed as selected.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see    javax.swing.JInternalFrame
  * @see    javax.swing.JDesktopPane
@@ -70,6 +70,15 @@ public class SimpleInternalFrame extends JPanel {
 
 
     // Instance Creation ****************************************************
+
+    /**
+     * Constructs a SimpleInternalFrame with a default title.
+     * This constructor is intended for visual editors.
+     */
+    public SimpleInternalFrame() {
+        this("Title");
+    }
+
 
     /**
      * Constructs a SimpleInternalFrame with the specified title.
