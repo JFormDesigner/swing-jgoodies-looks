@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -58,7 +58,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.37 $
+ * @version $Revision: 1.38 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -81,7 +81,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
-                + " - \u00a9 2001-2007 JGoodies Karsten Lentzsch";
+                + " - \u00a9 2001-2008 JGoodies Karsten Lentzsch";
     }
 
 

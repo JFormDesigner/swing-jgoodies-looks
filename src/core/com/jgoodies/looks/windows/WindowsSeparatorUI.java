@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.BasicSeparatorUI;
  * It differs from its superclass in that it uses a shared UI delegate.
  *
  * @author Andrej Golovnin
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  */
 public final class WindowsSeparatorUI extends BasicSeparatorUI {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2007 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class LookUtils {
 
