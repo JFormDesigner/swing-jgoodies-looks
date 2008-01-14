@@ -35,10 +35,7 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.lang.reflect.Method;
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.DimensionUIResource;
@@ -58,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.38 $
+ * @version $Revision: 1.39 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -69,11 +66,13 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
     public static final String BORDER_STYLE_KEY = "jgoodies.windows.borderStyle";
 
 
-    public String getID() {
-        return "JGoodies Windows";
-    }
-
-
+    /**
+     * Returns the String &quot;JGoodies Windows&quot;.
+     * Note that this L&amp;f's ID (&quot;Windows&quot;) is inherited
+     * from the superclass, because we don't do any fundamental changes.
+     *
+     * @see LookAndFeel#getID()
+     */
     public String getName() {
         return "JGoodies Windows";
     }

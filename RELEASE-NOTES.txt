@@ -1,5 +1,31 @@
 
                          JGoodies Looks
+                          Version 2.1.5
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance update contains minor improvements.
+    
+
+BUGS FIXED
+
+    ...
+    
+    
+OTHER CHANGES
+
+    o JGoodies WindowsLookAndFeel#getID now returns "Windows"
+      where it returned "JGoodies Windows" before.
+
+
+---------------------------------------------------------------------------
+Find below the change history for older releases.
+
+
+
+                         JGoodies Looks
                           Version 2.1.4
                           Release Notes
                         
