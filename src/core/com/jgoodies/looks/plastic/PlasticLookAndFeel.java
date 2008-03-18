@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.38 $
+ * @version $Revision: 1.39 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -719,7 +719,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Creates and returns the default color theme. Honors the current platform
      * and platform flavor - if available.
      *
-     * @return the default color theme for the current environemt
+     * @return the default color theme for the current environment
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
 		String defaultName;
@@ -764,7 +764,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         boolean isStyleAero = xpstyleDll.endsWith("Aero.msstyles");
         if (isStyleRoyale) {
             return "ExperienceRoyale";
-        } else if (isStyleLuna) {
+        } 
+        if (isStyleLuna) {
             String xpstyleColorName = (String) toolkit.getDesktopProperty("win.xpstyle.colorName");
             if (xpstyleColorName == null) {
                 return fallbackName;
@@ -776,7 +777,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
             } else {
                 return fallbackName;
             }
-        } else if (isStyleAero) {
+        } 
+        if (isStyleAero) {
             return "LightGray";
         }
         return fallbackName;
