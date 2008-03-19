@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public final class LookUtils {
 
@@ -168,7 +168,7 @@ public final class LookUtils {
         startsWith(OS_NAME, "Windows");
 
     /**
-     * True if this is Windows 98/ME/2000/XP/VISTA.
+     * True if this is Windows 98/ME/2000/Server 2003/XP/VISTA/Server 2008.
      */
     public static final boolean IS_OS_WINDOWS_MODERN =
         startsWith(OS_NAME, "Windows") && !startsWith(OS_VERSION, "4.0");
