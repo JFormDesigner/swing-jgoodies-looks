@@ -81,7 +81,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *
  * @see     Options
  */
@@ -916,7 +916,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         return false;
     }
 
-    private class TabSelectionHandler implements ChangeListener {
+    private final class TabSelectionHandler implements ChangeListener {
 
         private final Rectangle rect = new Rectangle();
 
@@ -946,7 +946,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * class behavior we listen to changes of the ancestor, tab placement,
      * and JGoodies options for content border, and embedded tabs.
      */
-    private class MyPropertyChangeHandler
+    private final class MyPropertyChangeHandler
         extends BasicTabbedPaneUI.PropertyChangeHandler {
         public void propertyChange(PropertyChangeEvent e) {
             String pName = e.getPropertyName();
@@ -976,7 +976,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Does all the layout work. The result is stored in the container
      * class's instance variables. Mainly the rects[] vector.
      */
-    private class TabbedPaneLayout extends BasicTabbedPaneUI.TabbedPaneLayout implements LayoutManager {
+    private class TabbedPaneLayout extends BasicTabbedPaneUI.TabbedPaneLayout {
 
         protected void calculateTabRects(int tabPlacement, int tabCount) {
             FontMetrics metrics = getFontMetrics();
@@ -1257,7 +1257,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
-    private class TabbedPaneScrollLayout extends TabbedPaneLayout {
+    private final class TabbedPaneScrollLayout extends TabbedPaneLayout {
 
         protected int preferredTabAreaHeight(int tabPlacement, int width) {
             return calculateMaxTabHeight(tabPlacement);
@@ -1582,7 +1582,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
-    private class ScrollableTabSupport implements ActionListener,
+    private final class ScrollableTabSupport implements ActionListener,
             ChangeListener {
 
         public ScrollableTabViewport viewport;
@@ -1775,7 +1775,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     }
 
-    private class ScrollableTabViewport extends JViewport implements UIResource {
+    private final class ScrollableTabViewport extends JViewport implements UIResource {
 
         public ScrollableTabViewport() {
             super();
@@ -1790,7 +1790,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
-    private class ScrollableTabPanel extends JPanel implements UIResource {
+    private final class ScrollableTabPanel extends JPanel implements UIResource {
 
         public ScrollableTabPanel() {
             super(null);
@@ -1810,7 +1810,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
-    private static class ArrowButton extends JButton implements UIResource {
+    private static final class ArrowButton extends JButton implements UIResource {
 
         private final int buttonWidth;
         private final int direction;
