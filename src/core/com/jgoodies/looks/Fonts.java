@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  *
  * @see     FontSet
  * @see     FontSets
@@ -292,7 +292,7 @@ public final class Fonts {
      * Looks up and returns the Windows defaultGUI font.
      * Works around a bug with Java 1.4.2_17, 1.5.0_15, and 1.6.0
      * on Vista, where the win.defaultGUI.font desktop property
-     * returns {@code null}. In this case a logical "Dialog" font 
+     * returns {@code null}. In this case a logical "Dialog" font
      * is used as fallback.
      *
      * @return the Windows defaultGUI font, or a dialog font as fallback.
