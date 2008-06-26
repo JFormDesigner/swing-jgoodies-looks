@@ -51,7 +51,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -66,7 +66,7 @@ final class PlasticComboBoxButton extends JButton {
     private JComboBox comboBox;
     private Icon      comboIcon;
     private boolean   iconOnly = false;
-    private boolean   borderPaintsFocus;
+    private final boolean   borderPaintsFocus;
 
     /**
      * Constructs a <code>PlasticComboBoxButton</code>.
