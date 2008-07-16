@@ -40,13 +40,15 @@ import javax.swing.plaf.UIResource;
 import javax.swing.text.DefaultCaret;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.looks.Options;
+
 /**
  * PlasticFieldCaret is visible in non-editable fields,
  * and the text is selected after a keyboard focus gained event.
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 
@@ -65,18 +67,31 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
         }
 
         final JTextComponent c = getComponent();
-        if (c.isEnabled() && isKeyboardFocusEvent) {
+        if (   c.isEnabled()
+            && isKeyboardFocusEvent
+            && Options.isSelectOnFocusGainActive(c)) {
             if (c instanceof JFormattedTextField) {
                 EventQueue.invokeLater(new Runnable() {
                     public void run() {
-                        PlasticFieldCaret.super.setDot(0);
-                        PlasticFieldCaret.super.moveDot(c.getDocument().getLength());
+                        selectAll();
                     }
                 });
             } else {
-                super.setDot(0);
-                super.moveDot(c.getDocument().getLength());
+                selectAll();
             }
+        }
+    }
+
+
+    private void selectAll() {
+        final JTextComponent c = getComponent();
+        boolean backward = Boolean.TRUE.equals(c.getClientProperty(Options.INVERT_SELECTION_CLIENT_KEY));
+        if (backward) {
+            setDot(c.getDocument().getLength());
+            moveDot(0);
+        } else {
+            setDot(0);
+            moveDot(c.getDocument().getLength());
         }
     }
 
@@ -85,6 +100,9 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
         super.focusLost(e);
         if (!e.isTemporary()) {
             isKeyboardFocusEvent = true;
+            if (Boolean.TRUE.equals(getComponent().getClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY))) {
+                setDot(0);
+            }
         }
     }
 
