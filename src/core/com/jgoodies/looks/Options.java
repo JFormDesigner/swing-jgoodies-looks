@@ -34,7 +34,9 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.text.JTextComponent;
 
 import com.jgoodies.looks.common.ShadowPopup;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
@@ -52,7 +54,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  */
 public final class Options {
 
@@ -230,13 +232,27 @@ public final class Options {
 
     /**
      * A UIDefaults key for enabling/disabling the new high-resolution
-     * gray filter.
+     * gray filter globally. This setting can be overridden per component.
+     *
+     * @see #setHiResGrayFilterEnabled(boolean)
+     * @see #HI_RES_DISABLED_ICON_CLIENT_KEY
      *
      * @since 2.1
      */
     public static final String HI_RES_GRAY_FILTER_ENABLED_KEY =
         "HiResGrayFilterEnabled";
 
+
+    /**
+     * A UIDefaults key for the global default whether text fields
+     * shall select all text on focus gain. This can be overridden per field.
+     *
+     * @see #setSelectOnFocusGainEnabled(boolean)
+     *
+     * @since 2.2
+     */
+    public static final String SELECT_ON_FOCUS_GAIN_KEY =
+        "JGoodies.selectAllOnFocusGain";
 
 
     // Optional Client Properties *********************************************
@@ -346,10 +362,70 @@ public final class Options {
      * the new high resolution gray filter shall be used to compute
      * a disabled icon - if none is available.
      *
+     * @see #isHiResGrayFilterEnabled()
+     * @see #setHiResGrayFilterEnabled(boolean)
+     * @see #HI_RES_GRAY_FILTER_ENABLED_KEY
+     *
      * @since 2.1
      */
     public static final String HI_RES_DISABLED_ICON_CLIENT_KEY =
         "generateHiResDisabledIcon";
+
+
+    /**
+     * A JTextField client property key that specifies whether all text shall
+     * be selected on focus gain. Overrides the global default.<p>
+     *
+     * This feature can be set using
+     * {@link #setSelectOnFocusGainEnabled(JTextField, Boolean)}.
+     * If you want to avoid to link application code to the JGoodies Looks
+     * library, you can set the client property directly using:
+     * <pre>
+     * aTextField.putClientProperty("JGoodies.selectAllOnFocusGain", Boolean.TRUE);
+     * </pre>
+     *
+     * @see #setSelectOnFocusGainEnabled(boolean)
+     *
+     * @since 2.2
+     */
+    public static final String SELECT_ON_FOCUS_GAIN_CLIENT_KEY =
+        "JGoodies.selectAllOnFocusGain";
+
+
+    /**
+     * A JTextField client property key that specifies the direction
+     * how text shall be selected on focus gain - if at all:
+     * from start to end vs. end to start.
+     *
+     * If the value is set to Boolean.TRUE, the text is selected
+     * from end to start, otherwise it is selected from start to end.<p>
+     *
+     * You can set the client property using:
+     * <pre>
+     * aTextField.putClientProperty("JGoodies.invertSelection", Boolean.TRUE);
+     * </pre>
+     *
+     * @since 2.2
+     */
+    public static final String INVERT_SELECTION_CLIENT_KEY =
+        "JGoodies.invertSelection";
+
+
+    /**
+     * A JTextField client property key that specifies whether the caret
+     * shall be positioned at the start on focus lost.
+     * If the value is set to Boolean.TRUE, the caret is set to position 0
+     * on focus lost, otherwise the caret remains unchanged.<p>
+     *
+     * You can set the client property using:
+     * <pre>
+     * aTextField.putClientProperty("JGoodies.setCaretToStartOnFocusLost", Boolean.TRUE);
+     * </pre>
+     *
+     * @since 2.2
+     */
+    public static final String SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY =
+        "JGoodies.setCaretToStartOnFocusLost";
 
 
     // System Settings ********************************************************
@@ -666,6 +742,101 @@ public final class Options {
      */
     public static void setHiResGrayFilterEnabled(boolean b) {
         UIManager.put(HI_RES_GRAY_FILTER_ENABLED_KEY, Boolean.valueOf(b));
+    }
+
+
+    /**
+     * Checks and answers whether the global default for text fields
+     * is to select all text on focus gain. The global default can be
+     * overridden per component.<p>
+     *
+     * For all full description and background
+     * see {@link #setSelectOnFocusGainEnabled(boolean)}.
+     *
+     * @return true if the select all feature is enabled globally,
+     *      false if disabled
+     *
+     * @see #SELECT_ON_FOCUS_GAIN_KEY
+     * @see #SELECT_ON_FOCUS_GAIN_CLIENT_KEY
+     *
+     * @since 2.2
+     */
+    public static boolean isSelectOnFocusGainEnabled() {
+        return !Boolean.FALSE.equals(UIManager.get(SELECT_ON_FOCUS_GAIN_KEY));
+    }
+
+    /**
+     * Enables or disables the select on focus gain feature globally.
+     * This feature can be disabled for individual components using the
+     * client property key <code>SELECT_ALL_ON_FOCUS_GAIN_CLIENT_KEY</code>.<p>
+     *
+     * <b>Background:</b> If users are more likely going to reenter the entire
+     * value in a text field, all text shall be selected on focus gain.
+     * If users are more likely to edit a text, the caret shall be placed
+     * at the end of the text.
+     *
+     * @param b  true to enable the select all on focus gain,
+     *     false to disable this feature globally
+     *
+     * @see #isSelectOnFocusGainEnabled()
+     *
+     * @since 2.2
+     */
+    public static void setSelectOnFocusGainEnabled(boolean b) {
+        UIManager.put(SELECT_ON_FOCUS_GAIN_KEY, Boolean.valueOf(b));
+    }
+
+
+    /**
+     * Checks and answers whether the select all on focus gain feature
+     * is active for the given field. Involves both the indiviual setting
+     * and the global default.
+     *
+     * @param c  the component to check
+     * @return true if the feature is enabled for <code>c</code> or globally,
+     *     false if the feature is disabled for <code>c</code> or globally
+     *     disabled.
+     *
+     * @since 2.2
+     */
+    public static boolean isSelectOnFocusGainActive(JTextComponent c) {
+        Boolean enabled = getSelectOnFocusGainEnabled(c);
+        if (enabled != null) {
+            return enabled.booleanValue();
+        }
+        return isSelectOnFocusGainEnabled();
+    }
+
+
+    /**
+     * Returns component's individual setting for the select on focus gain
+     * feature.
+     *
+     * @param c   the component to check
+     * @return Boolean.TRUE if enabled, Boolean.FALSE if disabled,
+     *     null if the global default is used
+     *
+     * @see #isSelectOnFocusGainActive(JTextComponent)
+     *
+     * @since 2.2
+     */
+    public static Boolean getSelectOnFocusGainEnabled(JTextComponent c) {
+        return (Boolean) c.getClientProperty(SELECT_ON_FOCUS_GAIN_CLIENT_KEY);
+    }
+
+
+    /**
+     * Overrides the global default for the select all feature for the given
+     * text field.
+     *
+     * @param field  the field to set this feature
+     * @param b      Boolean.TRUE to enable, Boolean.FALSE to disable,
+     *     null to use the global default
+     *
+     * @since 2.2
+     */
+    public static void setSelectOnFocusGainEnabled(JTextField field, Boolean b) {
+        field.putClientProperty(SELECT_ON_FOCUS_GAIN_CLIENT_KEY, b);
     }
 
 
