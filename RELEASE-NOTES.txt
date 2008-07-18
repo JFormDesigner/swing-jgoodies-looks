@@ -26,6 +26,7 @@ NEW FEATURES
 
 OTHER CHANGES
 
+    o The select on focus gain is applied only to editable fields.
     o JGoodies WindowsLookAndFeel#getID now returns "Windows"
       where it returned "JGoodies Windows" before.
     o Minor source code improvements.
