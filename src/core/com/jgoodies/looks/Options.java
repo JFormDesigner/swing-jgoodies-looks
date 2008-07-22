@@ -54,7 +54,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  */
 public final class Options {
 
@@ -748,7 +748,7 @@ public final class Options {
     /**
      * Checks and answers whether the global default for text fields
      * is to select all text on focus gain. The global default can be
-     * overridden per component.<p>
+     * overridden per component. This feature is turned on by default.<p>
      *
      * For all full description and background
      * see {@link #setSelectOnFocusGainEnabled(boolean)}.
@@ -768,7 +768,8 @@ public final class Options {
     /**
      * Enables or disables the select on focus gain feature globally.
      * This feature can be disabled for individual components using the
-     * client property key <code>SELECT_ALL_ON_FOCUS_GAIN_CLIENT_KEY</code>.<p>
+     * client property key <code>SELECT_ALL_ON_FOCUS_GAIN_CLIENT_KEY</code>.
+     * It is enabled by default.<p>
      *
      * <b>Background:</b> If users are more likely going to reenter the entire
      * value in a text field, all text shall be selected on focus gain.
