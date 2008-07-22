@@ -1,19 +1,24 @@
 
                          JGoodies Looks
-                          Version 2.2.0 Beta1
+                          Version 2.2.0
                           Release Notes
                         
 
 INTRODUCTION
 
-    This maintenance update ...
+    This maintenance update adds features useful for tweaking
+    the text field selection on keyboard focus gain. The JGoodies
+    Windows L&f now uses "Windows" as ID to comply with the
+    LookAndFeel#getID specification.
     
 
 NEW FEATURES
+
     o The feature that selects text field text on focus gain
       can now be enabled or disabled globally, and can be overridden
       per field. See Options#setSelectOnFocusGain(boolean) and
-      #setSelectOnFocusGain(JTextField, Boolean).
+      #setSelectOnFocusGain(JTextField, Boolean). As before, 
+      it is enabled by default.
     o If the select on focus gain is enabled, the selection is from
       start to end by default. The selection bias can be configured
       as end to start using Options#INVERT_SELECTION_CLIENT_KEY.
@@ -21,20 +26,24 @@ NEW FEATURES
       and where the leading text is more important than the trail.
     o On focus lost the caret can be positioned at the start.
       See Options#SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY.
+      This is useful for short field where the lead text shall
+      be visible after focus lost, because it is more important
+      than the trail.
       
     
+BUG FIXES
+
+    o The select on focus gain is applied only to editable fields.
+
 
 OTHER CHANGES
 
-    o The select on focus gain is applied only to editable fields.
     o JGoodies WindowsLookAndFeel#getID now returns "Windows"
       where it returned "JGoodies Windows" before.
     o Minor source code improvements.
 
-
 ---------------------------------------------------------------------------
 Find below the change history for older releases.
-
 
 
                          JGoodies Looks
