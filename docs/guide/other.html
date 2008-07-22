@@ -208,6 +208,43 @@ of the Metal lines style properties.
 </pre>
 
 
+	<h2>Text Field Selection on Keyboard Focus Traversal</h2>
+	
+	If users are more likely going to reenter the entire value 
+	in a text field, all text shall be selected on focus gain.
+    If users are more likely to edit a text, the caret shall be placed
+    at the end of the text.
+    
+    You can enable or disable this feature globally, and can 
+    override it per component. This feature is enabled by default.
+    
+	By default the JGoodies L&amp;fs popup menus have a non-empty margin.
+	You can set an empty margin using:
+<pre>
+   // Globally turn of the text selection on keyboard focus gain
+   Options.setSelectOnFocusGainEnabled(false); 
+    
+   // Turn select on focus gain on for an individual text field
+   Options.setSelectOnFocusGainEnabled(aTextField, Boolean.TRUE);
+   // Turn this feature on for a text field without linking to the Looks
+   aTextField.putClientProperty("JGoodies.selectAllOnFocusGain", Boolean.TRUE);
+   
+   // Select from end to start on keyboard focus gain.
+   // Useful if the lead text shall be visible on focus gain
+   // in a short field that often has a quite long text.
+   aTextField.putClientProperty(Options.INVERT_SELECTION_CLIENT_KEY, Boolean.TRUE);
+   // or:
+   aTextField.putClientProperty("JGoodies.invertSelection", Boolean.TRUE);
+   
+   // Set the caret to start on focus lost.
+   // Useful if the lead text shall be visible after focus lost
+   // in a short field that often has a quite long text.
+   aTextField.putClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY, Boolean.TRUE);
+   // or:
+   aTextField.putClientProperty("JGoodies.setCaretToStartOnFocusLost", Boolean.TRUE);
+</pre>
+
+
 	</td>
 	</tr>
 	</table>
