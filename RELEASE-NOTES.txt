@@ -40,6 +40,7 @@ OTHER CHANGES
 
     o JGoodies WindowsLookAndFeel#getID now returns "Windows"
       where it returned "JGoodies Windows" before.
+    o Updated to the Forms 1.2.1.
     o Minor source code improvements.
 
 ---------------------------------------------------------------------------
