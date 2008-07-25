@@ -14,11 +14,11 @@ INTRODUCTION
 
 NEW FEATURES
 
-    o The feature that selects text field text on focus gain
-      can now be enabled or disabled globally, and can be overridden
-      per field. See Options#setSelectOnFocusGain(boolean) and
-      #setSelectOnFocusGain(JTextField, Boolean). As before, 
-      it is enabled by default.
+    o The feature that selects text field text on focus gain can now 
+      be enabled or disabled globally, and it can be overridden
+      per field. See Options#setSelectOnFocusGainEnabled(boolean) and
+      #setSelectOnFocusGain(JTextField, Boolean). As before, the feature
+      is enabled by default.
     o If the select on focus gain is enabled, the selection is from
       start to end by default. The selection bias can be configured
       as end to start using Options#INVERT_SELECTION_CLIENT_KEY.
@@ -26,7 +26,7 @@ NEW FEATURES
       and where the leading text is more important than the trail.
     o On focus lost the caret can be positioned at the start.
       See Options#SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY.
-      This is useful for short field where the lead text shall
+      This is useful for short fields where the lead text shall
       be visible after focus lost, because it is more important
       than the trail.
       
