@@ -52,7 +52,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * different platforms.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class MenuBarView {
 
@@ -113,21 +113,22 @@ public class MenuBarView {
 		item = createMenuItem("Close All", 'o', KeyStroke.getKeyStroke("ctrl shift F4"));
 		menu.add(item);
 		menu.addSeparator();
-		item = createMenuItem("Save description.txt",
+		item = createMenuItem("Save",
                               readImageIcon("save_edit.gif"),
-                              'd',
+                              'S',
                               KeyStroke.getKeyStroke("ctrl S"));
 		item.setEnabled(false);
 		menu.add(item);
-		item = createMenuItem("Save description.txt As\u2026",
+		item = createMenuItem("Save As\u2026",
                 readImageIcon("saveas_edit.gif"),
-                'e');
+                'A');
+		item.setDisplayedMnemonicIndex(5);
         menu.add(item);
-		item = createMenuItem("Save All", 'A', KeyStroke.getKeyStroke("ctrl shift S"));
+		item = createMenuItem("Save All", 'e', KeyStroke.getKeyStroke("ctrl shift S"));
 		item.setEnabled(false);
 		menu.add(item);
 		menu.addSeparator();
-		item = createMenuItem("Print", readImageIcon("print.gif"), 'P',
+		item = createMenuItem("Print\u2026", readImageIcon("print.gif"), 'P',
                 KeyStroke.getKeyStroke("ctrl P"));
 		menu.add(item);
 		menu.addSeparator();
@@ -137,7 +138,7 @@ public class MenuBarView {
 		menu.add(createMenuItem("4 WinXPLookAndFeel.java", '4'));
         if (!isQuitInOSMenu()) {
             menu.addSeparator();
-            menu.add(createMenuItem("Exit", 'E'));
+            menu.add(createMenuItem("Exit", 'x'));
         }
 		return menu;
 	}
