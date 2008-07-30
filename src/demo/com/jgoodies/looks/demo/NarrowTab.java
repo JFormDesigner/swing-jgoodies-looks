@@ -42,7 +42,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
-import com.jgoodies.forms.builder.ButtonBarBuilder;
+import com.jgoodies.forms.builder.ButtonBarBuilder2;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
@@ -53,7 +53,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 final class NarrowTab {
 
@@ -100,14 +100,8 @@ final class NarrowTab {
     // Button DesignGrids ***************************************************
 
     private Component buildButtonFormNoNarrow() {
-        JButton[] buttons = createButtons();
-        ButtonBarBuilder builder = new ButtonBarBuilder();
-        builder.setOpaque(false);
-        for (int i = 0; i < buttons.length - 1; i++) {
-            builder.addGridded(buttons[i]);
-            builder.addRelatedGap();
-        }
-        builder.addFixed(buttons[buttons.length - 1]);
+        ButtonBarBuilder2 builder = new ButtonBarBuilder2();
+        builder.addButton(createButtons());
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(builder.getPanel(), BorderLayout.CENTER);
