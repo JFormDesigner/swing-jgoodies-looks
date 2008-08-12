@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -76,21 +76,20 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             setVisible(true);
             setSelectionVisible(true);
         }
-        if (!c.isEditable()) {
+        if (   !c.isEditable()
+            || !c.isEnabled()
+            || !isKeyboardFocusEvent
+            || !Options.isSelectOnFocusGainActive(c)) {
             return;
         }
-        if (   c.isEnabled()
-                && isKeyboardFocusEvent
-                && Options.isSelectOnFocusGainActive(c)) {
-            if (c instanceof JFormattedTextField) {
-                EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        selectAll();
-                    }
-                });
-            } else {
-                selectAll();
-            }
+        if (c instanceof JFormattedTextField) {
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    selectAll();
+                }
+            });
+        } else {
+            selectAll();
         }
     }
 
@@ -173,39 +172,41 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
         public void run() {
             JTextField field = (JTextField) getComponent();
-            if (field != null) {
-                TextUI ui = field.getUI();
-                int dot = getDot();
-                // PENDING: We need to expose the bias in DefaultCaret.
-                Position.Bias bias = Position.Bias.Forward;
-                Rectangle startRect = null;
-                try {
-                    startRect = ui.modelToView(field, dot, bias);
-                } catch (BadLocationException ble) {}
-
-                Insets i = field.getInsets();
-                BoundedRangeModel vis = field.getHorizontalVisibility();
-                int x = r.x + vis.getValue() - i.left;
-                int quarterSpan = vis.getExtent() / 4;
-                if (r.x < i.left) {
-                    vis.setValue(x - quarterSpan);
-                } else if (r.x + r.width > i.left + vis.getExtent()) {
-                    vis.setValue(x - (3 * quarterSpan));
-                }
-                // If we scroll, our visual location will have changed,
-                // but we won't have updated our internal location as
-                // the model hasn't changed. This checks for the change,
-                // and if necessary, resets the internal location.
-                if (startRect != null) {
-                    try {
-                        Rectangle endRect;
-                        endRect = ui.modelToView(field, dot, bias);
-                        if (endRect != null && !endRect.equals(startRect)){
-                            damage(endRect);
-                        }
-                    } catch (BadLocationException ble) {}
-                }
+            if (field == null) {
+                return;
             }
+            TextUI ui = field.getUI();
+            int dot = getDot();
+            // PENDING: We need to expose the bias in DefaultCaret.
+            Position.Bias bias = Position.Bias.Forward;
+            Rectangle startRect = null;
+            try {
+                startRect = ui.modelToView(field, dot, bias);
+            } catch (BadLocationException ble) {}
+
+            Insets i = field.getInsets();
+            BoundedRangeModel vis = field.getHorizontalVisibility();
+            int x = r.x + vis.getValue() - i.left;
+            int quarterSpan = vis.getExtent() / 4;
+            if (r.x < i.left) {
+                vis.setValue(x - quarterSpan);
+            } else if (r.x + r.width > (i.left + vis.getExtent()+1)) {
+                vis.setValue(x - (3 * quarterSpan));
+            }
+            // If we scroll, our visual location will have changed,
+            // but we won't have updated our internal location as
+            // the model hasn't changed. This checks for the change,
+            // and if necessary, resets the internal location.
+            if (startRect == null) {
+                return;
+            }
+            try {
+                Rectangle endRect;
+                endRect = ui.modelToView(field, dot, bias);
+                if (endRect != null && !endRect.equals(startRect)){
+                    damage(endRect);
+                }
+            } catch (BadLocationException ble) {}
         }
 
         private final Rectangle r;
