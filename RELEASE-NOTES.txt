@@ -1,5 +1,27 @@
 
                          JGoodies Looks
+                          Version 2.2.1
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance update fixes a minor issue with read-only text.
+    
+
+BUG FIXES
+
+    o Increased the preferred width of text fields by 1 pixel
+      to avoid scrolling non-editable content without border
+      (static text).
+
+
+---------------------------------------------------------------------------
+Find below the change history for older releases.
+
+
+
+                         JGoodies Looks
                           Version 2.2.0
                           Release Notes
                         
