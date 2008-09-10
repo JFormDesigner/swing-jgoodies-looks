@@ -48,7 +48,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 
@@ -66,23 +66,21 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
             setVisible(true);
             setSelectionVisible(true);
         }
-        if (!c.isEditable()) {
+        if (   !c.isEnabled()
+            || !isKeyboardFocusEvent
+            || !Options.isSelectOnFocusGainActive(c)) {
             return;
         }
-        if (   c.isEnabled()
-            && isKeyboardFocusEvent
-            && Options.isSelectOnFocusGainActive(c)) {
-            if (c instanceof JFormattedTextField) {
-                EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        selectAll();
-                    }
-                });
-            } else {
-                selectAll();
-            }
+        if (c instanceof JFormattedTextField) {
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    selectAll();
+                }
+            });
+        } else {
+            selectAll();
         }
-    }
+}
 
 
     private void selectAll() {

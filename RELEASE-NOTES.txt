@@ -14,6 +14,12 @@ BUG FIXES
     o Increased the preferred width of text fields by 1 pixel
       to avoid scrolling non-editable content without border
       (static text).
+      
+      
+OTHER CHANGES
+
+    o Non-editable text fields honor the global and per-component
+      setting for selection on keyboard focus gain.
 
 
 ---------------------------------------------------------------------------

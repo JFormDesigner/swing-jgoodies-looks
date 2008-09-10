@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -76,8 +76,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             setVisible(true);
             setSelectionVisible(true);
         }
-        if (   !c.isEditable()
-            || !c.isEnabled()
+        if (   !c.isEnabled()
             || !isKeyboardFocusEvent
             || !Options.isSelectOnFocusGainActive(c)) {
             return;
