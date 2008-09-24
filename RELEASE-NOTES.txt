@@ -6,7 +6,7 @@
 
 INTRODUCTION
 
-    This maintenance update fixes a minor issue with read-only text.
+    This maintenance update fixes a minor issues with read-only text.
     
 
 BUG FIXES
