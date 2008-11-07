@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.39 $
+ * @version $Revision: 1.40 $
  */
 public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -275,7 +275,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
         }
 
         // Aligned menu items
-        if (  !LookUtils.IS_JAVA_6_OR_LATER
+        if (  !LookUtils.IS_JAVA_5_OR_LATER
            || !LookUtils.IS_OS_WINDOWS_VISTA
            || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             uiDefaults = append(uiDefaults,
@@ -291,7 +291,7 @@ public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.Wi
 
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
-            if (!LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_OS_WINDOWS_VISTA) {
+            if (!LookUtils.IS_JAVA_5_OR_LATER || !LookUtils.IS_OS_WINDOWS_VISTA) {
                 uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
             }
