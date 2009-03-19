@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import com.jgoodies.looks.common.ExtButtonAreaLayout;
  * minimum button with that complies better with the Windows UI style guide.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsOptionPaneUI extends BasicOptionPaneUI {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * Unlike its superclass it returns even and odd preferred heights.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.WindowsButtonUI {
 

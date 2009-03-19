@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -44,10 +44,9 @@ import javax.swing.border.AbstractBorder;
  * of popups. Can paint the screen background if used with heavy-weight
  * popup windows.
  *
- * @author Stefan Matthias Aust
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see ShadowPopup
  * @see ShadowPopupFactory

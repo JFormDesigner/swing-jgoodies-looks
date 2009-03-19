@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2008 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.40 $
+ * @version $Revision: 1.41 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -189,7 +189,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
-            + " - \u00a9 2001-2008 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
     }
 
 
