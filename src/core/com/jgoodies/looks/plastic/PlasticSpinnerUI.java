@@ -39,7 +39,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicSpinnerUI;
 
-import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
 import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 
@@ -49,7 +48,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 
@@ -57,20 +56,6 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
 	public static ComponentUI createUI(JComponent b) {
 		return new PlasticSpinnerUI();
 	}
-
-
-    /**
-     * The mouse/action listeners that are added to the spinner's
-     * arrow buttons.  These listeners are shared by all
-     * spinner arrow buttons.
-     *
-     * @see #createNextButton
-     * @see #createPreviousButton
-     */
-    private static final ExtBasicArrowButtonHandler nextButtonHandler
-    							= new ExtBasicArrowButtonHandler("increment", true);
-    private static final ExtBasicArrowButtonHandler previousButtonHandler
-    							= new ExtBasicArrowButtonHandler("decrement", false);
 
 
     /**
@@ -87,7 +72,9 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createNextButton
      */
     protected Component createPreviousButton() {
-        return new SpinnerArrowButton(SwingConstants.SOUTH, previousButtonHandler);
+        Component c = createArrowButton(SwingConstants.SOUTH);
+        installPreviousButtonListeners(c);
+        return c;
     }
 
 
@@ -105,7 +92,14 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createPreviousButton
      */
     protected Component createNextButton() {
-        return new SpinnerArrowButton(SwingConstants.NORTH, nextButtonHandler);
+        Component c = createArrowButton(SwingConstants.NORTH);
+        installNextButtonListeners(c);
+        return c;
+    }
+
+
+    protected Component createArrowButton(int direction) {
+        return new SpinnerArrowButton(direction);
     }
 
 
@@ -201,11 +195,8 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * to calculate the arrow height.
      */
     private static final class SpinnerArrowButton extends PlasticArrowButton {
-        private SpinnerArrowButton(int direction,
-                ExtBasicArrowButtonHandler handler) {
+        private SpinnerArrowButton(int direction) {
             super(direction, UIManager.getInt("ScrollBar.width"), true);
-            addActionListener(handler);
-            addMouseListener(handler);
         }
 
         protected int calculateArrowHeight(int height, int width) {

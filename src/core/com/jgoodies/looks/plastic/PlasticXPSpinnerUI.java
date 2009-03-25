@@ -35,12 +35,9 @@ import java.awt.Component;
 import java.awt.Graphics;
 
 import javax.swing.JComponent;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalLookAndFeel;
-
-import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
 
 
 /**
@@ -49,7 +46,7 @@ import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 
@@ -58,53 +55,8 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 	}
 
 
-    /**
-     * The mouse/action listeners that are added to the spinner's
-     * arrow buttons.  These listeners are shared by all
-     * spinner arrow buttons.
-     *
-     * @see #createNextButton
-     * @see #createPreviousButton
-     */
-    private static final ExtBasicArrowButtonHandler NEXT_BUTTON_HANDLER
-    							= new ExtBasicArrowButtonHandler("increment", true);
-    private static final ExtBasicArrowButtonHandler PREVIOUS_BUTTON_HANDLER
-    							= new ExtBasicArrowButtonHandler("decrement", false);
-
-
-    /**
-     * Create a component that will replace the spinner models value
-     * with the object returned by <code>spinner.getPreviousValue</code>.
-     * By default the <code>previousButton</code> is a JButton
-     * who's <code>ActionListener</code> updates it's <code>JSpinner</code>
-     * ancestors model.  If a previousButton isn't needed (in a subclass)
-     * then override this method to return null.
-     *
-     * @return a component that will replace the spinners model with the
-     *     next value in the sequence, or null
-     * @see #installUI
-     * @see #createNextButton
-     */
-    protected Component createPreviousButton() {
-        return new SpinnerXPArrowButton(SwingConstants.SOUTH, PREVIOUS_BUTTON_HANDLER);
-    }
-
-
-    /**
-     * Create a component that will replace the spinner models value
-     * with the object returned by <code>spinner.getNextValue</code>.
-     * By default the <code>nextButton</code> is a JButton
-     * who's <code>ActionListener</code> updates it's <code>JSpinner</code>
-     * ancestors model.  If a nextButton isn't needed (in a subclass)
-     * then override this method to return null.
-     *
-     * @return a component that will replace the spinners model with the
-     *     next value in the sequence, or null
-     * @see #installUI
-     * @see #createPreviousButton
-     */
-    protected Component createNextButton() {
-        return new SpinnerXPArrowButton(SwingConstants.NORTH, NEXT_BUTTON_HANDLER);
+    protected Component createArrowButton(int direction) {
+        return new SpinnerXPArrowButton(direction);
     }
 
 
@@ -114,12 +66,10 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
      */
     private static final class SpinnerXPArrowButton extends PlasticArrowButton {
 
-        SpinnerXPArrowButton(int direction, ExtBasicArrowButtonHandler handler) {
+        SpinnerXPArrowButton(int direction) {
             // If you change the value of the button width, don't forget
             // to change it in PlasticXPBorders#XPSpinnerBorder too.
             super(direction, UIManager.getInt("ScrollBar.width") - 1, false);
-            addActionListener(handler);
-            addMouseListener(handler);
         }
 
         protected int calculateArrowHeight(int height, int width) {

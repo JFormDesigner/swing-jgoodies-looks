@@ -39,7 +39,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 
 import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.common.ExtBasicArrowButtonHandler;
 import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 /**
@@ -48,7 +47,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds, by setting an empty border with the default text insets.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
@@ -56,18 +55,6 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
     public static ComponentUI createUI(JComponent b) {
         return new WindowsSpinnerUI();
     }
-
-    /**
-     * The mouse/action listeners that are added to the spinner's arrow
-     * buttons. These listeners are shared by all spinner arrow buttons.
-     *
-     * @see #createNextButton
-     * @see #createPreviousButton
-     */
-    private static final ExtBasicArrowButtonHandler NEXT_BUTTON_HANDLER =
-        new ExtBasicArrowButtonHandler("increment", true);
-    private static final ExtBasicArrowButtonHandler PREVIOUS_BUTTON_HANDLER =
-        new ExtBasicArrowButtonHandler("decrement", false);
 
 
     /**
@@ -87,10 +74,9 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
             return super.createPreviousButton();
 
-        JButton b = new WindowsArrowButton(SwingConstants.SOUTH);
-        b.addActionListener(PREVIOUS_BUTTON_HANDLER);
-        b.addMouseListener(PREVIOUS_BUTTON_HANDLER);
-        return b;
+        Component c = new WindowsArrowButton(SwingConstants.SOUTH);
+        installPreviousButtonListeners(c);
+        return c;
     }
 
 
@@ -110,10 +96,9 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
             return super.createNextButton();
 
-        JButton b = new WindowsArrowButton(SwingConstants.NORTH);
-        b.addActionListener(NEXT_BUTTON_HANDLER);
-        b.addMouseListener(NEXT_BUTTON_HANDLER);
-        return b;
+        Component c = new WindowsArrowButton(SwingConstants.NORTH);
+        installNextButtonListeners(c);
+        return c;
     }
 
 
