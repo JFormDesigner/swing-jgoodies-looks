@@ -12,8 +12,14 @@ INTRODUCTION
 BUG FIXES
 
     o Poor menu selection foreground on Vista with Java 5.
+    o Fixed a potential NPE in WindowsFieldCaret#focusLost.
       
       
+OTHER CHANGES
+
+    o Removed the ExtBasicArrowButtonHandler that is now obsolete.
+
+
 ---------------------------------------------------------------------------
 Find below the change history for older releases.
 
