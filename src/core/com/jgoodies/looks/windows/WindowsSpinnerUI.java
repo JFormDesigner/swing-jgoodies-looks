@@ -33,6 +33,8 @@ package com.jgoodies.looks.windows;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -47,7 +49,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds, by setting an empty border with the default text insets.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
@@ -75,7 +77,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
             return super.createPreviousButton();
 
         Component c = new WindowsArrowButton(SwingConstants.SOUTH);
-        installPreviousButtonListeners(c);
+        installPreviousButtonListenersFromSuper(c);
         return c;
     }
 
@@ -97,8 +99,32 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
             return super.createNextButton();
 
         Component c = new WindowsArrowButton(SwingConstants.NORTH);
-        installNextButtonListeners(c);
+        installNextButtonListenersFromSuper(c);
         return c;
+    }
+
+
+    // TODO 1.5: Remove in 1.5
+    protected void installPreviousButtonListenersFromSuper(Component c) {
+        AbstractButton sc = (AbstractButton) super.createPreviousButton();
+        ActionListener[] als = sc.getActionListeners();
+        MouseListener[]  mls = sc.getMouseListeners();
+        if (c instanceof AbstractButton) {
+            ((AbstractButton) c).addActionListener(als[0]);
+        }
+        c.addMouseListener(mls[0]);
+    }
+
+
+    // TODO 1.5: Remove in 1.5
+    protected void installNextButtonListenersFromSuper(Component c) {
+        AbstractButton sc = (AbstractButton) super.createNextButton();
+        ActionListener[] als = sc.getActionListeners();
+        MouseListener[]  mls = sc.getMouseListeners();
+        if (c instanceof AbstractButton) {
+            ((AbstractButton) c).addActionListener(als[0]);
+        }
+        c.addMouseListener(mls[0]);
     }
 
 

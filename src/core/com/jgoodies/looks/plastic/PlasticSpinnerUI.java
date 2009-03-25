@@ -33,6 +33,8 @@ package com.jgoodies.looks.plastic;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.LayoutManager;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -48,7 +50,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 
@@ -73,7 +75,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      */
     protected Component createPreviousButton() {
         Component c = createArrowButton(SwingConstants.SOUTH);
-        installPreviousButtonListeners(c);
+        installPreviousButtonListenersFromSuper(c);
         return c;
     }
 
@@ -93,13 +95,37 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      */
     protected Component createNextButton() {
         Component c = createArrowButton(SwingConstants.NORTH);
-        installNextButtonListeners(c);
+        installNextButtonListenersFromSuper(c);
         return c;
     }
 
 
     protected Component createArrowButton(int direction) {
         return new SpinnerArrowButton(direction);
+    }
+
+
+    // TODO 1.5: Remove in 1.5
+    protected void installPreviousButtonListenersFromSuper(Component c) {
+        AbstractButton sc = (AbstractButton) super.createPreviousButton();
+        ActionListener[] als = sc.getActionListeners();
+        MouseListener[]  mls = sc.getMouseListeners();
+        if (c instanceof AbstractButton) {
+            ((AbstractButton) c).addActionListener(als[0]);
+        }
+        c.addMouseListener(mls[0]);
+    }
+
+
+    // TODO 1.5: Remove in 1.5
+    protected void installNextButtonListenersFromSuper(Component c) {
+        AbstractButton sc = (AbstractButton) super.createNextButton();
+        ActionListener[] als = sc.getActionListeners();
+        MouseListener[]  mls = sc.getMouseListeners();
+        if (c instanceof AbstractButton) {
+            ((AbstractButton) c).addActionListener(als[0]);
+        }
+        c.addMouseListener(mls[0]);
     }
 
 
