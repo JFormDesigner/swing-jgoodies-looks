@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  *
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -110,7 +110,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         super.focusLost(e);
         if (!e.isTemporary()) {
             isKeyboardFocusEvent = true;
-            if (Boolean.TRUE.equals(getComponent().getClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY))) {
+            if (  (getComponent() != null)
+                && Boolean.TRUE.equals(getComponent().getClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY))) {
                 setDot(0);
             }
         }
@@ -132,8 +133,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         // Windows does.
         if (e.isPopupTrigger()) {
             isKeyboardFocusEvent = false;
-            if ((getComponent() != null) && getComponent().isEnabled()
-                    && getComponent().isRequestFocusEnabled()) {
+            if (  (getComponent() != null)
+                && getComponent().isEnabled()
+                && getComponent().isRequestFocusEnabled()) {
                 getComponent().requestFocus();
             }
         }
