@@ -44,7 +44,7 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class ExtButtonAreaLayout
@@ -197,12 +197,20 @@ public final class ExtButtonAreaLayout
     }
 
     /**
-     * Computes and answers the minimum button width according to
-     * the Microsoft UI style guide. Honors 96dpi and 120dpi
-     * and assumes an 8pt Tahoma.
-     * <p>
-     * Obviously, this won't fit all sizes, it is an improvement
-     * over the superclass' value of 0.
+     * Computes and answers the minimum button width.
+     * The MS UX guide recommends a minimum width of 50 Dialog units (DLU).<p>
+     *  
+     * This current implementation assumes an 8pt Tahoma and honors resolutions
+     * of 96dpi and 120dpi. This leads to a good approximation of the 50dlu 
+     * for the vast majority of today's target systems. And it sure is
+     * an improvement over the superclass' value of 0.<p>
+     * 
+     * A better implementation would use a conversion from dlu to pixel
+     * for the given buttons (that may have different font render contexts
+     * if located in different graphics environments in a multi-screen context).
+     * The JGoodies Forms provides such a converter and offers a better button
+     * layout by means of the {@code ButtonBarBuilder2} class.
+     * 
      * @return the minimum button width
      */
     private int getMinimumButtonWidth() {
