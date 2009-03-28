@@ -48,11 +48,12 @@ import com.jgoodies.looks.Options;
  * {@link Options#setHiResGrayFilterEnabled(boolean)}; it is enabled by default.
  * The global setting can be overridden per component by setting
  * the client property key {@link Options#HI_RES_DISABLED_ICON_CLIENT_KEY}
- * to <code>Boolean.FALSE</code>.
+ * to <code>Boolean.FALSE</code>.<p>
+ * 
+ * Thanks to Andrej Golovnin for suggesting a simpler filter formula.
  *
- * @author Sun
- * @author Andrej Golovnin
- * @version $Revision: 1.8 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.9 $
  */
 public final class RGBGrayFilter extends RGBImageFilter {
 
@@ -123,14 +124,13 @@ public final class RGBGrayFilter extends RGBImageFilter {
 
         // Calculate the average.
         // Sun's formula: Math.min(1.0f, (1f - avg) / (100.0f / 35.0f) + avg);
-        // Andrej: the following formula uses less operations and hence is faster.
+        // The following formula uses less operations and hence is faster.
         avg = Math.min(1.0f, 0.35f + 0.65f * avg);
-        // Turn back into RGB.
-        int rgbval = (int) (alpha * 255f) << 24 |
-                     (int) (avg   * 255f) << 16 |
-                     (int) (avg   * 255f) << 8  |
-                     (int) (avg   * 255f);
-        return rgbval;
+        // Convert back into RGB.
+       return (int) (alpha * 255f) << 24 |
+              (int) (avg   * 255f) << 16 |
+              (int) (avg   * 255f) << 8  |
+              (int) (avg   * 255f);
     }
 
 }
