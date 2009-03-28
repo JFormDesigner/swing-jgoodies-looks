@@ -42,19 +42,22 @@ import javax.swing.Icon;
 /**
  * The bumps used in the JGoodies Plastic Look&amp;Feel.
  *
- * @author Sun
- * @version $Revision: 1.7 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.8 $
  */
 final class PlasticBumps implements Icon {
 
-	protected int xBumps;
-	protected int yBumps;
-	protected Color topColor;
-	protected Color shadowColor;
-	protected Color backColor;
+    private static Vector BUFFERS = new Vector();
 
-	protected static Vector buffers = new Vector();
-	protected BumpBuffer buffer;
+    private int xBumps;
+	private int yBumps;
+	private Color topColor;
+	private Color shadowColor;
+	private Color backColor;
+
+	private BumpBuffer buffer;
+	
+	// Instance Creation *****************************************************
 
 	public PlasticBumps(Dimension bumpArea) {
 		this(bumpArea.width, bumpArea.height);
@@ -80,7 +83,7 @@ final class PlasticBumps implements Icon {
 			return buffer;
 		}
 		BumpBuffer result = null;
-		Enumeration elements = buffers.elements();
+		Enumeration elements = BUFFERS.elements();
 		while (elements.hasMoreElements()) {
 			BumpBuffer aBuffer = (BumpBuffer) elements.nextElement();
 			if (aBuffer.hasSameConfiguration(gc, aTopColor, aShadowColor, aBackColor)) {
@@ -90,7 +93,7 @@ final class PlasticBumps implements Icon {
 		}
 		if (result == null) {
 			result = new BumpBuffer(gc, topColor, shadowColor, backColor);
-			buffers.addElement(result);
+			BUFFERS.addElement(result);
 		}
 		return result;
 	}
