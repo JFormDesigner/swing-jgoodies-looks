@@ -1,5 +1,16 @@
 
                          JGoodies Looks
+                          Version 2.2.3
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    The final marker has been removed from WindowsLookAndFeel.
+    
+---------------------------------------------------------------------------
+
+                         JGoodies Looks
                           Version 2.2.2
                           Release Notes
                         
