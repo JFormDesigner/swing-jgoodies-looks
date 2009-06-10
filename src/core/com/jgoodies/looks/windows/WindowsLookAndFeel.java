@@ -55,9 +55,9 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.41 $
+ * @version $Revision: 1.42 $
  */
-public final class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
+public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
     /**
      * An optional client property key for JMenu and JToolBar
