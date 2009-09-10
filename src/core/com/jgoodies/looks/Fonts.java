@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  *
  * @see     FontSet
  * @see     FontSets
@@ -274,7 +274,7 @@ public final class Fonts {
 
         // Java 1.4 and Java 5 raster the Segoe UI poorly,
         // so we use the older Tahoma, if it can display the localized text.
-        if (LookUtils.IS_OS_WINDOWS_VISTA && LookUtils.IS_JAVA_1_4_OR_5) {
+        if (LookUtils.IS_OS_WINDOWS_6_OR_LATER && LookUtils.IS_JAVA_1_4_OR_5) {
             Font tahoma = getDefaultGUIFontWesternModernWindowsNormal();
             return Boolean.TRUE.equals(canDisplayLocalizedText(tahoma, Locale.getDefault()))
                 ? tahoma

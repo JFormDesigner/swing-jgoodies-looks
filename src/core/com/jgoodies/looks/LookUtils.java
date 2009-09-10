@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 public final class LookUtils {
 
@@ -220,12 +220,22 @@ public final class LookUtils {
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.1");
 
     /**
-     * True if this is Windows Vista.
+     * True if this is Windows Vista/Server 2008.
      *
+     * @deprecated Use {@link #IS_OS_WINDOWS_6_OR_LATER} instead
      * @since 2.0
      */
     public static final boolean IS_OS_WINDOWS_VISTA =
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.0");
+
+    /**
+     * True if this is Windows Vista/Server 2008/7/2008 R2.
+     *
+     * @since 2.3
+     */
+    public static final boolean IS_OS_WINDOWS_6_OR_LATER =
+        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.");
+
 
     /**
      * True if this is Solaris.
@@ -344,7 +354,7 @@ public final class LookUtils {
      * @return true if the Windows XP style is enabled
      */
     private static boolean isWindowsXPLafEnabled() {
-        return (IS_OS_WINDOWS_XP || IS_OS_WINDOWS_VISTA)
+        return (IS_OS_WINDOWS_XP || IS_OS_WINDOWS_6_OR_LATER)
              && IS_JAVA_1_4_2_OR_LATER
              && Boolean.TRUE.equals(Toolkit.getDefaultToolkit().
                      getDesktopProperty("win.xpstyle.themeActive"))
@@ -416,9 +426,9 @@ public final class LookUtils {
 
     public static void setLookAndTheme(LookAndFeel laf, Object theme)
         throws UnsupportedLookAndFeelException {
-        if ((laf instanceof PlasticLookAndFeel)
-            && (theme != null)
-            && (theme instanceof PlasticTheme)) {
+        if (laf instanceof PlasticLookAndFeel
+            && theme != null
+            && theme instanceof PlasticTheme) {
             PlasticLookAndFeel.setPlasticTheme((PlasticTheme) theme);
         }
         UIManager.setLookAndFeel(laf);

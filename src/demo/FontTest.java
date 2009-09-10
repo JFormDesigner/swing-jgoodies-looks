@@ -21,7 +21,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class FontTest {
 
@@ -233,8 +233,8 @@ public final class FontTest {
         buffer.append(LookUtils.IS_OS_WINDOWS_MODERN);
         buffer.append("\n    Windows XP=");
         buffer.append(LookUtils.IS_OS_WINDOWS_XP);
-        buffer.append("\n    Windows Vista=");
-        buffer.append(LookUtils.IS_OS_WINDOWS_VISTA);
+        buffer.append("\n    Windows 6 or later=");
+        buffer.append(LookUtils.IS_OS_WINDOWS_6_OR_LATER);
         buffer.append("\n    Windows L&f XP Mode=");
         buffer.append(LookUtils.IS_LAF_WINDOWS_XP_ENABLED);
     }
@@ -262,7 +262,7 @@ public final class FontTest {
         buffer.append('-');
         String style = font.isBold()
             ? (font.isItalic() ? "bolditalic" : "bold")
-            : (font.isItalic() ? "italic" : "plain");
+            : font.isItalic() ? "italic" : "plain";
         buffer.append(style);
         buffer.append('-');
         buffer.append(font.getSize());
@@ -309,7 +309,7 @@ public final class FontTest {
             return true;
         String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
         String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
-        return !(englishDisplayLanguage.equals(localizedDisplayLanguage));
+        return !englishDisplayLanguage.equals(localizedDisplayLanguage);
     }
 
 

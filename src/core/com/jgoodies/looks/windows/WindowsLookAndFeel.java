@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.42 $
+ * @version $Revision: 1.43 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -276,7 +276,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
         // Aligned menu items
         if (  !LookUtils.IS_JAVA_5_OR_LATER
-           || !LookUtils.IS_OS_WINDOWS_VISTA
+           || !LookUtils.IS_OS_WINDOWS_6_OR_LATER
            || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             uiDefaults = append(uiDefaults,
             "MenuItemUI",            windowsPrefix + "MenuItemUI");
@@ -291,7 +291,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
-            if (!LookUtils.IS_JAVA_5_OR_LATER || !LookUtils.IS_OS_WINDOWS_VISTA) {
+            if (!LookUtils.IS_JAVA_5_OR_LATER || !LookUtils.IS_OS_WINDOWS_6_OR_LATER) {
                 uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
             }
@@ -335,7 +335,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
         final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
         final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+        final boolean isVista = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
 
         initFontDefaults(table);
 

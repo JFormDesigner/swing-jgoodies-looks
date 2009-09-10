@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
  * Provides predefined MicroLayoutPolicy implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see     MicroLayout
  * @see     MicroLayouts
@@ -88,11 +88,11 @@ public final class MicroLayoutPolicies {
 
         public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
             boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-            boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+            boolean is6OrLater = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
             boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
             boolean isPlasticXP = lafName.equals("JGoodies Plastic XP");
             if (isPlasticXP) {
-                if (isVista) {
+                if (is6OrLater) {
                     return isClassic
                         ? MicroLayouts.createPlasticXPVistaClassicMicroLayout()
                         : MicroLayouts.createPlasticXPVistaMicroLayout();
@@ -102,7 +102,7 @@ public final class MicroLayoutPolicies {
                         : MicroLayouts.createPlasticXPHiResMicroLayout();
                 }
             } else {
-                if (isVista) {
+                if (is6OrLater) {
                     return isClassic
                         ? MicroLayouts.createPlasticVistaClassicMicroLayout()
                         : MicroLayouts.createPlasticVistaMicroLayout();
@@ -124,7 +124,7 @@ public final class MicroLayoutPolicies {
 
         public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
             boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-            boolean isVista = LookUtils.IS_OS_WINDOWS_VISTA;
+            boolean isVista = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
             boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
             if (isClassic) {
                 return isLowRes

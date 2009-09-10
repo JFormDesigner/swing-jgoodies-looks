@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -226,7 +226,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
         // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
-        size.height = (LookUtils.IS_OS_WINDOWS_VISTA && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
+        size.height = (LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
            ? textFieldSize.height
            : Math.max(textFieldSize.height, size.height);
 
@@ -368,7 +368,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
 
     private boolean isVistaXPStyleReadOnlyCombo() {
-        return     LookUtils.IS_OS_WINDOWS_VISTA
+        return     LookUtils.IS_OS_WINDOWS_6_OR_LATER
                 && LookUtils.IS_LAF_WINDOWS_XP_ENABLED
                 && !comboBox.isEditable();
     }
