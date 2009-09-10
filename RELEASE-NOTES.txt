@@ -1,12 +1,19 @@
 
                          JGoodies Looks
-                          Version 2.2.3
+                          Version 2.3.0
                           Release Notes
                         
 
 INTRODUCTION
 
-    The final marker has been removed from WindowsLookAndFeel.
+    This update adds support for Windows 7 and Windows Server 2008 R2.
+
+
+CHANGES
+
+    o Introduced LookUtils#IS_OS_WINDOWS_6_OR_LATER that replaces
+      #IS_OS_WINDOWS_VISTA. The latter is now deprecated.
+    o The final marker has been removed from WindowsLookAndFeel.
     
 ---------------------------------------------------------------------------
 
