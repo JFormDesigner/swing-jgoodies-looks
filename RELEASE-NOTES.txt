@@ -1,5 +1,24 @@
 
                          JGoodies Looks
+                          Version 2.3.1
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This maintenance update fixes an issue with classic Windows combos
+    in white-on-black contrast mode. 
+    
+
+BUG FIXES
+
+    o The Windows classic L&f combo box arrow button paints the arrow icon
+      always in black, ignoring the desktop color theme.
+    
+---------------------------------------------------------------------------
+
+
+                         JGoodies Looks
                           Version 2.3.0
                           Release Notes
                         
