@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
  * in that the triangle is black and positioned correctly.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 final class WindowsArrowButton extends BasicArrowButton {
 
@@ -66,7 +66,7 @@ final class WindowsArrowButton extends BasicArrowButton {
         int y,
         int size,
         int triangleDirection,
-        boolean isEnabled) {
+        boolean enabled) {
         Color oldColor = g.getColor();
         int mid, i, j;
 
@@ -75,23 +75,20 @@ final class WindowsArrowButton extends BasicArrowButton {
         mid = (size - 1) / 2; // Modified by JGoodies
 
         g.translate(x, y);
-        if (isEnabled)
-            g.setColor(Color.black);
-        else
-            g.setColor(UIManager.getColor("controlShadow"));
+        g.setColor(UIManager.getColor(enabled ? "controlText" : "controlShadow"));
 
         switch (triangleDirection) {
             case NORTH :
                 for (i = 0; i < size; i++) {
                     g.drawLine(mid - i, i, mid + i, i);
                 }
-                if (!isEnabled) {
+                if (!enabled) {
                     g.setColor(UIManager.getColor("controlLtHighlight"));
                     g.drawLine(mid - i + 2, i, mid + i, i);
                 }
                 break;
             case SOUTH :
-                if (!isEnabled) {
+                if (!enabled) {
                     g.translate(1, 1);
                     g.setColor(UIManager.getColor("controlLtHighlight"));
                     for (i = size - 1; i >= 0; i--) {
@@ -112,13 +109,13 @@ final class WindowsArrowButton extends BasicArrowButton {
                 for (i = 0; i < size; i++) {
                     g.drawLine(i, mid - i, i, mid + i);
                 }
-                if (!isEnabled) {
+                if (!enabled) {
                     g.setColor(UIManager.getColor("controlLtHighlight"));
                     g.drawLine(i, mid - i + 2, i, mid + i);
                 }
                 break;
             case EAST :
-                if (!isEnabled) {
+                if (!enabled) {
                     g.translate(1, 1);
                     g.setColor(UIManager.getColor("controlLtHighlight"));
                     for (i = size - 1; i >= 0; i--) {
