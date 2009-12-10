@@ -37,11 +37,13 @@ import java.awt.event.KeyEvent;
 import javax.swing.*;
 import javax.swing.plaf.basic.ComboPopup;
 
+import com.sun.java.swing.plaf.windows.WindowsRootPaneUI;
+
 /**
  * Handles the Alt key to select the first menu in the menu bar - if any.
+ * Useful to let non-Windows L&amp;fs like Plastic feel more like Windows.
  *
- * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @see WindowsRootPaneUI
  */
 public final class MenuSelectionProcessor implements KeyEventPostProcessor {
 
