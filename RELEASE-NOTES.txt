@@ -6,8 +6,8 @@
 
 INTRODUCTION
 
-    This maintenance update fixes an issue with classic Windows combos
-    in white-on-black contrast mode. 
+    This maintenance update fixes an issue with classic Windows combo
+    boxes in white-on-black contrast mode. 
     
 
 BUG FIXES
