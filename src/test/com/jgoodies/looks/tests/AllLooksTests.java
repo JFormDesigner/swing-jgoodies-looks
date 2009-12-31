@@ -30,27 +30,22 @@
 
 package com.jgoodies.looks.tests;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  * A test suite for all tests related to the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
+@RunWith(Suite.class)
+@Suite.SuiteClasses({
+    FontsTest.class,
+    OptionsTest.class
+})
 public final class AllLooksTests {
 
-    public static void main(String[] args) {
-        junit.textui.TestRunner.run(AllLooksTests.class);
-    }
+    // Just a suite definition class.
 
-    public static Test suite() {
-        TestSuite suite = new TestSuite("Test for com.jgoodies.looks");
-        //$JUnit-BEGIN$
-        suite.addTest(new TestSuite(FontsTest.class));
-        suite.addTest(new TestSuite(OptionsTest.class));
-        //$JUnit-END$
-        return suite;
-    }
 }
