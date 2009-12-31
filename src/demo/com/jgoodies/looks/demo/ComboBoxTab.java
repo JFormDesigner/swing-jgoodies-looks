@@ -52,7 +52,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * and proper preferred size computations.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 final class ComboBoxTab {
 
@@ -243,6 +243,7 @@ final class ComboBoxTab {
          }
 
 
+        @Override
         public void setForeground(Color c) {
             if (label != null) {
                 label.setForeground(c);

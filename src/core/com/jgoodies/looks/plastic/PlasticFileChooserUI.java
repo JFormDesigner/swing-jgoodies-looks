@@ -48,7 +48,7 @@ import javax.swing.plaf.metal.MetalFileChooserUI;
  *
  * @author Andrej Golovnin
  * @author Karsten Lentzsch
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  *
  * @see FileSystemView#getSystemIcon(File)
  */
@@ -67,11 +67,13 @@ public final class PlasticFileChooserUI extends MetalFileChooserUI {
     }
 
 
+    @Override
     public void clearIconCache() {
         fileView.clearIconCache();
     }
 
 
+    @Override
     public FileView getFileView(JFileChooser fc) {
         return fileView;
     }
@@ -83,6 +85,7 @@ public final class PlasticFileChooserUI extends MetalFileChooserUI {
      */
     private final class SystemIconFileView extends BasicFileView {
 
+        @Override
         public Icon getIcon(File f) {
             Icon icon = getCachedIcon(f);
             if (icon != null) {

@@ -50,7 +50,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 
@@ -73,6 +73,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #installUI
      * @see #createNextButton
      */
+    @Override
     protected Component createPreviousButton() {
         Component c = createArrowButton(SwingConstants.SOUTH);
         installPreviousButtonListenersFromSuper(c);
@@ -93,6 +94,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #installUI
      * @see #createPreviousButton
      */
+    @Override
     protected Component createNextButton() {
         Component c = createArrowButton(SwingConstants.NORTH);
         installNextButtonListenersFromSuper(c);
@@ -142,6 +144,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createPreviousButton
      * @see #createEditor
      */
+    @Override
     protected LayoutManager createLayout() {
         return new ExtBasicSpinnerLayout();
     }
@@ -170,6 +173,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #replaceEditor
      * @see JSpinner#getEditor
      */
+    @Override
     protected JComponent createEditor() {
 		JComponent editor = spinner.getEditor();
 		configureEditorBorder(editor);
@@ -191,6 +195,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * @see #createEditor
      * @see #createPropertyChangeListener
      */
+    @Override
     protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
 		spinner.remove(oldEditor);
 		configureEditorBorder(newEditor);
@@ -225,15 +230,18 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
             super(direction, UIManager.getInt("ScrollBar.width"), true);
         }
 
+        @Override
         protected int calculateArrowHeight(int height, int width) {
             int arrowHeight = Math.min((height - 4) / 3, (width - 4) / 3);
             return Math.max(arrowHeight, 3);
         }
 
+        @Override
         protected int calculateArrowOffset() {
             return 1;
         }
 
+        @Override
         protected boolean isPaintingNorthBottom() {
             return true;
         }

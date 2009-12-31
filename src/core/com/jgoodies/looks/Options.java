@@ -41,7 +41,6 @@ import javax.swing.text.JTextComponent;
 import com.jgoodies.looks.common.ShadowPopup;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
-import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
 
 /**
  * Provides access to optional features of the JGoodies L&amp;Fs
@@ -54,7 +53,7 @@ import com.sun.java.swing.plaf.windows.WindowsComboBoxUI;
  * the String values doesn't require having this class in the class path.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  */
 public final class Options {
 
@@ -346,10 +345,11 @@ public final class Options {
     /**
      * A client property key for combo box renderer components.
      * The Boolean value indicates whether the component's border
-     * can be temporarily removed when painting the current value or not.
-     * This is useful for custom renderers used with Windows combo boxes.
+     * can be temporarily removed when painting the current value or not.<p>
      *
-     * @see WindowsComboBoxUI#paintCurrentValue(java.awt.Graphics, java.awt.Rectangle, boolean)
+     * This is useful for custom renderers used with Windows combo boxes
+     * as described by {@code WindowsComboBoxUI#paintCurrentValue}}.
+     *
      * @since 2.1
      */
     public static final String COMBO_RENDERER_IS_BORDER_REMOVABLE =
@@ -667,8 +667,9 @@ public final class Options {
      * @see #POPUP_DROP_SHADOW_ENABLED_KEY
      */
     public static boolean isPopupDropShadowEnabled() {
-        if (POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE != null)
+        if (POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE != null) {
             return POPUP_DROP_SHADOW_ENABLED_SYSTEM_VALUE.booleanValue();
+        }
 
         Object value = UIManager.get(POPUP_DROP_SHADOW_ENABLED_KEY);
         return value == null
@@ -941,12 +942,13 @@ public final class Options {
      * @see #getCrossPlatformLookAndFeelClassName()
      */
     public static String getSystemLookAndFeelClassName() {
-        if (LookUtils.IS_OS_WINDOWS)
+        if (LookUtils.IS_OS_WINDOWS) {
             return Options.JGOODIES_WINDOWS_NAME;
-        else if (LookUtils.IS_OS_MAC)
+        } else if (LookUtils.IS_OS_MAC) {
             return UIManager.getSystemLookAndFeelClassName();
-        else
+        } else {
             return getCrossPlatformLookAndFeelClassName();
+        }
     }
 
 }

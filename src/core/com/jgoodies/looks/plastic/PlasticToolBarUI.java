@@ -54,7 +54,7 @@ import com.jgoodies.looks.Options;
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public class PlasticToolBarUI extends MetalToolBarUI {
@@ -69,17 +69,20 @@ public class PlasticToolBarUI extends MetalToolBarUI {
 
     // Rollover Borders *****************************************************
 
+    @Override
     protected Border createRolloverBorder() {
         return PlasticBorders.getRolloverButtonBorder();
     }
 
+    @Override
     protected void setBorderToRollover(Component c) {
         if (c instanceof AbstractButton) {
             super.setBorderToRollover(c);
         } else if (c instanceof Container) {
             Container cont = (Container) c;
-            for (int i = 0; i < cont.getComponentCount(); i++)
+            for (int i = 0; i < cont.getComponentCount(); i++) {
                 super.setBorderToRollover(cont.getComponent(i));
+            }
         }
     }
 
@@ -88,17 +91,20 @@ public class PlasticToolBarUI extends MetalToolBarUI {
     /**
      * Installs a special border, if indicated by the <code>HeaderStyle</code>.
      */
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         installSpecialBorder();
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         listener = createBorderStyleListener();
         toolBar.addPropertyChangeListener(listener);
     }
 
+    @Override
     protected void uninstallListeners() {
         toolBar.removePropertyChangeListener(listener);
         super.uninstallListeners();
@@ -131,26 +137,28 @@ public class PlasticToolBarUI extends MetalToolBarUI {
         String suffix;
         BorderStyle borderStyle =
             BorderStyle.from(toolBar, PlasticLookAndFeel.BORDER_STYLE_KEY);
-        if (borderStyle == BorderStyle.EMPTY)
+        if (borderStyle == BorderStyle.EMPTY) {
             suffix = "emptyBorder";
-        else if (borderStyle == BorderStyle.ETCHED)
+        } else if (borderStyle == BorderStyle.ETCHED) {
             suffix = "etchedBorder";
-        else if (borderStyle == BorderStyle.SEPARATOR)
+        } else if (borderStyle == BorderStyle.SEPARATOR) {
             suffix = "separatorBorder";
-        else {
+        } else {
             HeaderStyle headerStyle = HeaderStyle.from(toolBar);
-            if (headerStyle == HeaderStyle.BOTH)
+            if (headerStyle == HeaderStyle.BOTH) {
                 suffix = "headerBorder";
-            else if (headerStyle == HeaderStyle.SINGLE && is3D())
+            } else if (headerStyle == HeaderStyle.SINGLE && is3D()) {
                 suffix = "etchedBorder";
-            else
+            } else {
                 suffix = "border";
+            }
         }
         LookAndFeel.installBorder(toolBar, PROPERTY_PREFIX + suffix);
     }
 
     // 3D Effect ************************************************************
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             g.setColor(c.getBackground());
@@ -170,10 +178,12 @@ public class PlasticToolBarUI extends MetalToolBarUI {
      * Checks and answers if we should add a pseudo 3D effect.
      */
     private boolean is3D() {
-        if (PlasticUtils.force3D(toolBar))
+        if (PlasticUtils.force3D(toolBar)) {
             return true;
-        if (PlasticUtils.forceFlat(toolBar))
+        }
+        if (PlasticUtils.forceFlat(toolBar)) {
             return false;
+        }
         return PlasticUtils.is3D(PROPERTY_PREFIX)
             && (HeaderStyle.from(toolBar) != null)
             && (BorderStyle.from(toolBar, PlasticLookAndFeel.BORDER_STYLE_KEY)

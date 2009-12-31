@@ -46,7 +46,7 @@ import com.jgoodies.looks.Options;
  * <code>Options.IS_ETCHED_KEY</code> is set.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see com.jgoodies.looks.Options#IS_ETCHED_KEY
  */
@@ -58,6 +58,7 @@ public final class WindowsScrollPaneUI extends com.sun.java.swing.plaf.windows.W
         return new WindowsScrollPaneUI();
     }
 
+    @Override
     protected void installDefaults(JScrollPane scrollPane) {
         super.installDefaults(scrollPane);
         installEtchedBorder(scrollPane);
@@ -75,12 +76,14 @@ public final class WindowsScrollPaneUI extends com.sun.java.swing.plaf.windows.W
 
     // Managing the Etched Property *******************************************
 
+    @Override
     public void installListeners(JScrollPane scrollPane) {
         super.installListeners(scrollPane);
         borderStyleChangeHandler = new BorderStyleChangeHandler();
         scrollPane.addPropertyChangeListener(Options.IS_ETCHED_KEY, borderStyleChangeHandler);
     }
 
+    @Override
     protected void uninstallListeners(JComponent c) {
         ((JScrollPane) c).removePropertyChangeListener(Options.IS_ETCHED_KEY,
                 borderStyleChangeHandler);

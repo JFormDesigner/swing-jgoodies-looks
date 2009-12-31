@@ -53,7 +53,7 @@ import com.jgoodies.looks.Options;
  * Thanks to Andrej Golovnin for suggesting a simpler filter formula.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class RGBGrayFilter extends RGBImageFilter {
 
@@ -114,6 +114,7 @@ public final class RGBGrayFilter extends RGBImageFilter {
      * @see ColorModel#getRGBdefault
      * @see #filterRGBPixels
      */
+    @Override
     public int filterRGB(int x, int y, int rgb) {
         // Find the average of red, green, and blue.
         float avg = (((rgb >> 16) & 0xff) / 255f +

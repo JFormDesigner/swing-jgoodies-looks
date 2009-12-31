@@ -41,7 +41,7 @@ import javax.swing.plaf.metal.MetalInternalFrameTitlePane;
  * Paints the internal frame title. Uses JGoodies Plastic colors.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticInternalFrameTitlePane
     extends MetalInternalFrameTitlePane {
@@ -68,6 +68,7 @@ public final class PlasticInternalFrameTitlePane
         super(frame);
     }
 
+    @Override
     public void paintPalette(Graphics g) {
         boolean leftToRight = PlasticUtils.isLeftToRight(frame);
 
@@ -101,6 +102,7 @@ public final class PlasticInternalFrameTitlePane
         paletteBumps.paintIcon(this, g, xOffset, 2);
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         if (isPalette) {
             paintPalette(g);
@@ -176,8 +178,9 @@ public final class PlasticInternalFrameTitlePane
 
         Icon icon = frame.getFrameIcon();
         if (icon != null) {
-            if (!leftToRight)
+            if (!leftToRight) {
                 xOffset -= icon.getIconWidth();
+            }
             int iconY = ((height / 2) - (icon.getIconHeight() / 2));
             icon.paintIcon(frame, g, xOffset, iconY);
             xOffset += leftToRight ? icon.getIconWidth() + 5 : -5;
@@ -236,12 +239,14 @@ public final class PlasticInternalFrameTitlePane
         bumps.paintIcon(this, g, bumpXOffset, bumpYOffset);
     }
 
+    @Override
     protected String getTitle(
         String text,
         FontMetrics fm,
         int availTextWidth) {
-        if ((text == null) || (text.equals("")))
+        if ((text == null) || (text.equals(""))) {
             return "";
+        }
         int textWidth = SwingUtilities.computeStringWidth(fm, text);
         String clipString = "\u2026";
         if (textWidth > availTextWidth) {
@@ -273,29 +278,33 @@ public final class PlasticInternalFrameTitlePane
             if (isPalette) {
                 spacing = 3;
                 x += leftToRight ? -spacing - (buttonWidth + 2) : spacing;
-                if (!leftToRight)
+                if (!leftToRight) {
                     x += (buttonWidth + 2);
+                }
             } else {
                 spacing = 4;
                 x += leftToRight ? -spacing - buttonWidth : spacing;
-                if (!leftToRight)
+                if (!leftToRight) {
                     x += buttonWidth;
+                }
             }
         }
 
         if (frame.isMaximizable() && !isPalette) {
             spacing = frame.isClosable() ? 10 : 4;
             x += leftToRight ? -spacing - buttonWidth : spacing;
-            if (!leftToRight)
+            if (!leftToRight) {
                 x += buttonWidth;
+            }
         }
 
         if (frame.isIconifiable() && !isPalette) {
             spacing =
                 frame.isMaximizable() ? 2 : (frame.isClosable() ? 10 : 4);
             x += leftToRight ? -spacing - buttonWidth : spacing;
-            if (!leftToRight)
+            if (!leftToRight) {
                 x += buttonWidth;
+            }
         }
 
         return leftToRight ? w - x : x;

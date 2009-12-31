@@ -53,7 +53,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * of layout managers and narrow hints.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 final class NarrowTab {
 
@@ -84,8 +84,8 @@ final class NarrowTab {
 
     private Component buildButtonBox(JButton[] buttons) {
         Box box = Box.createHorizontalBox();
-        for (int i = 0; i < buttons.length; i++) {
-            box.add(buttons[i]);
+        for (JButton button : buttons) {
+            box.add(button);
             box.add(Box.createHorizontalStrut(6));
         }
         JPanel panel = new JPanel(new BorderLayout());
@@ -122,8 +122,8 @@ final class NarrowTab {
     private Component buildButtonGrid(JButton[] buttons) {
         JPanel grid = new JPanel(new GridLayout(1, 4, 6, 0));
         grid.setOpaque(false);
-        for (int i = 0; i < buttons.length; i++) {
-            grid.add(buttons[i]);
+        for (JButton button : buttons) {
+            grid.add(button);
         }
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(grid, BorderLayout.CENTER);

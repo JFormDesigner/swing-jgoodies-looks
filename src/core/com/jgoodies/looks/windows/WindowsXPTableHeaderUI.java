@@ -53,7 +53,7 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
  * specified in the XP style.
  *
  * @author Andrej Golovnin
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 
@@ -63,16 +63,19 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
         return new WindowsXPTableHeaderUI();
     }
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         xpRenderer = header.getDefaultRenderer();
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         xpRenderer = null;
         super.uninstallUI(c);
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         TableColumnModel cm = header.getColumnModel();
         if (cm.getColumnCount() <= 0) {

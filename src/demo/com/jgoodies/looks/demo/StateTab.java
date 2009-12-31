@@ -50,7 +50,7 @@ import com.jgoodies.looks.Options;
  * configurations.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 final class StateTab {
 
@@ -129,9 +129,9 @@ final class StateTab {
         buttons[2].setEnabled(false);
         buttons[3].setEnabled(false);
         buttons[3].setSelected(true);
-        for (int i = 0; i < buttons.length; i++) {
-            buttons[i].setBorderPainted(borderPainted);
-            buttons[i].setContentAreaFilled(contentAreaFilled);
+        for (AbstractButton button : buttons) {
+            button.setBorderPainted(borderPainted);
+            button.setContentAreaFilled(contentAreaFilled);
         }
 
         return buildGrid(buttons[0],

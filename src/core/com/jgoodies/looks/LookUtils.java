@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public final class LookUtils {
 
@@ -245,6 +245,7 @@ public final class LookUtils {
      * @deprecated Use {@link #IS_OS_WINDOWS_6_OR_LATER} instead
      * @since 2.0
      */
+    @Deprecated
     public static final boolean IS_OS_WINDOWS_VISTA =
         startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.0");
 
@@ -341,12 +342,13 @@ public final class LookUtils {
     public static Boolean getBooleanSystemProperty(String key, String logMessage) {
         String value = getSystemProperty(key, "");
         Boolean result;
-        if (value.equalsIgnoreCase("false"))
+        if (value.equalsIgnoreCase("false")) {
             result = Boolean.FALSE;
-        else if (value.equalsIgnoreCase("true"))
+        } else if (value.equalsIgnoreCase("true")) {
             result = Boolean.TRUE;
-        else
+        } else {
             result = null;
+        }
         if (result != null) {
             LookUtils.log(
                 logMessage

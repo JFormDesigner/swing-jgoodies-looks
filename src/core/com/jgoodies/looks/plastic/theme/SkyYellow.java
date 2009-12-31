@@ -39,39 +39,47 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * A theme with yellow primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public class SkyYellow extends AbstractSkyTheme {
 
+    @Override
     public String getName() {
         return "Sky Yellow";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.GRAY_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.YELLOW_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.YELLOW_LOW_LIGHTEST;
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return Colors.ORANGE_FOCUS;
     }
 
+    @Override
     public ColorUIResource getPrimaryControlShadow() {
         return getPrimary3();
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedBackground() {
         return Colors.YELLOW_LOW_MEDIUMDARK;
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

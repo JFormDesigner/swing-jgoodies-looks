@@ -58,9 +58,8 @@ import com.jgoodies.looks.Options;
  * the heavy weight popups this PopupFactory uses a Robot to snapshot
  * the screen background to simulate the drop shadow effect.
  *
- * @author Andrej Golovnin
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see java.awt.AWTPermission
  * @see java.awt.Robot
@@ -119,8 +118,9 @@ public final class ShadowPopupFactory extends PopupFactory {
         }
 
         PopupFactory factory = PopupFactory.getSharedInstance();
-        if (factory instanceof ShadowPopupFactory)
+        if (factory instanceof ShadowPopupFactory) {
             return;
+        }
 
         PopupFactory.setSharedInstance(new ShadowPopupFactory(factory));
     }
@@ -133,8 +133,9 @@ public final class ShadowPopupFactory extends PopupFactory {
      */
     public static void uninstall() {
         PopupFactory factory = PopupFactory.getSharedInstance();
-        if (!(factory instanceof ShadowPopupFactory))
+        if (!(factory instanceof ShadowPopupFactory)) {
             return;
+        }
 
         PopupFactory stored = ((ShadowPopupFactory) factory).storedFactory;
         PopupFactory.setSharedInstance(stored);
@@ -170,6 +171,7 @@ public final class ShadowPopupFactory extends PopupFactory {
      *
      * @see Options#isPopupDropShadowActive()
      */
+    @Override
     public Popup getPopup(Component owner, Component contents, int x, int y)
             throws IllegalArgumentException {
         Popup popup = super.getPopup(owner, contents, x, y);

@@ -48,7 +48,7 @@ import com.jgoodies.looks.common.MenuItemRenderer;
  * and may paint disabled text with a shadow.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsMenuItemUI extends ExtBasicMenuItemUI {
 
@@ -58,6 +58,7 @@ public final class WindowsMenuItemUI extends ExtBasicMenuItemUI {
     }
 
 
+    @Override
     protected MenuItemRenderer createRenderer(
             JMenuItem menuItem,
             boolean iconBorderEnabled,

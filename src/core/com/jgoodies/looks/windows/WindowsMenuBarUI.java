@@ -48,7 +48,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.WindowsMenuBarUI {
 
@@ -62,20 +62,23 @@ public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.Wind
 
 	// Handling Special Borders *********************************************************
 
-	protected void installDefaults() {
+	@Override
+    protected void installDefaults() {
 		super.installDefaults();
 		installSpecialBorder();
 	}
 
 
-	protected void installListeners() {
+	@Override
+    protected void installListeners() {
 		super.installListeners();
 		listener = createBorderStyleListener();
 		menuBar.addPropertyChangeListener(listener);
 	}
 
 
-	protected void uninstallListeners() {
+	@Override
+    protected void uninstallListeners() {
 		menuBar.removePropertyChangeListener(listener);
 		super.uninstallListeners();
 	}
@@ -109,16 +112,17 @@ public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.Wind
 		String suffix;
 		BorderStyle borderStyle = BorderStyle.from(menuBar,
 												WindowsLookAndFeel.BORDER_STYLE_KEY);
-		if (borderStyle == BorderStyle.EMPTY)
-			suffix = "emptyBorder";
-		else if (borderStyle == BorderStyle.ETCHED)
-			suffix = "etchedBorder";
-		else if (borderStyle == BorderStyle.SEPARATOR)
-			suffix = "separatorBorder";
-		else if (HeaderStyle.from(menuBar) == HeaderStyle.BOTH)
-			suffix = "headerBorder";
-		else
-			return;
+		if (borderStyle == BorderStyle.EMPTY) {
+            suffix = "emptyBorder";
+        } else if (borderStyle == BorderStyle.ETCHED) {
+            suffix = "etchedBorder";
+        } else if (borderStyle == BorderStyle.SEPARATOR) {
+            suffix = "separatorBorder";
+        } else if (HeaderStyle.from(menuBar) == HeaderStyle.BOTH) {
+            suffix = "headerBorder";
+        } else {
+            return;
+        }
 
 		LookAndFeel.installBorder(menuBar, "MenuBar." + suffix);
 	}

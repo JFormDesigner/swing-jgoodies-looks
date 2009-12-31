@@ -38,10 +38,11 @@ import javax.swing.plaf.ColorUIResource;
  * default desktop settings.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class ExperienceGreen extends ExperienceBlue {
 
+    @Override
     public String getName() {
         return "Experience Green";
     }
@@ -49,18 +50,22 @@ public class ExperienceGreen extends ExperienceBlue {
     private static final ColorUIResource FOCUS =
         new ColorUIResource(245, 165, 16);
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.GREEN_LOW_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.GREEN_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.GREEN_LOW_LIGHTEST;
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return FOCUS;
     }

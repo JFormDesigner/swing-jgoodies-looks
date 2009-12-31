@@ -46,7 +46,7 @@ import javax.swing.text.Position;
  * Used in Java 1.4 and Java 5 only.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class ExtPasswordView extends PasswordView {
 
@@ -54,17 +54,20 @@ public final class ExtPasswordView extends PasswordView {
         super(element);
     }
 
+    @Override
     public float getPreferredSpan(int axis) {
         overrideEchoChar();
         return super.getPreferredSpan(axis);
     }
 
+    @Override
     public Shape modelToView(int pos, Shape a, Position.Bias b) throws BadLocationException {
         overrideEchoChar();
         return super.modelToView(pos, a, b);
     }
 
 
+    @Override
     public int viewToModel(float fx, float fy, Shape a, Position.Bias[] bias) {
         overrideEchoChar();
         return super.viewToModel(fx, fy, a, bias);
@@ -81,6 +84,7 @@ public final class ExtPasswordView extends PasswordView {
      * @param c the echo character
      * @return the updated X position >= 0
      */
+    @Override
     protected int drawEchoCharacter(Graphics g, int x, int y, char c) {
         Container container = getContainer();
         if (!(container instanceof JPasswordField)) {
@@ -134,8 +138,9 @@ public final class ExtPasswordView extends PasswordView {
      */
     private void setFieldEchoChar(JPasswordField field, char newEchoChar) {
         char oldEchoChar = field.getEchoChar();
-        if (oldEchoChar == newEchoChar)
+        if (oldEchoChar == newEchoChar) {
             return;
+        }
         field.setEchoChar(newEchoChar);
     }
 

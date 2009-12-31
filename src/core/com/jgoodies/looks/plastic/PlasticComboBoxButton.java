@@ -51,7 +51,7 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
  * <code>BasicComboBoxRenderer</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -79,6 +79,7 @@ final class PlasticComboBoxButton extends JButton {
             JList listBox) {
         super("");
         setModel(new DefaultButtonModel() {
+            @Override
             public void setArmed(boolean armed) {
                 super.setArmed(isPressed() || armed);
             }
@@ -120,6 +121,7 @@ final class PlasticComboBoxButton extends JButton {
         iconOnly = b;
     }
 
+    @Override
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
         // Set the background and foreground to the combobox colors.
@@ -139,6 +141,7 @@ final class PlasticComboBoxButton extends JButton {
      * Therefore it doesn't help to call <code>setFocusable(false)</code>
      * in the constructor; instead we override this method.
      */
+    @Override
     public boolean isFocusTraversable() {
         return false;
     }
@@ -148,6 +151,7 @@ final class PlasticComboBoxButton extends JButton {
      * Paints the component; honors the 3D settings and
      * tries to switch the renderer component to transparent.
      */
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         boolean leftToRight = PlasticUtils.isLeftToRight(comboBox);
@@ -267,10 +271,12 @@ final class PlasticComboBoxButton extends JButton {
      * Checks and answers if we should paint a pseudo 3D effect.
      */
     private boolean is3D() {
-        if (PlasticUtils.force3D(comboBox))
+        if (PlasticUtils.force3D(comboBox)) {
             return true;
-        if (PlasticUtils.forceFlat(comboBox))
+        }
+        if (PlasticUtils.forceFlat(comboBox)) {
             return false;
+        }
         return PlasticUtils.is3D("ComboBox.");
     }
 

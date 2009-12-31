@@ -40,7 +40,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * A very light color theme intended to be used on Windows Vista in Aero style.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @since 2.0.3
  */
@@ -49,49 +49,60 @@ public class LightGray extends ExperienceBlue {
     private static final ColorUIResource GRAY_VERY_LIGHT =
         new ColorUIResource(244, 244, 244);
 
+    @Override
     public String getName() {
         return "Light Gray";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return new ColorUIResource(51, 153, 255); // Selection
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.GRAY_MEDIUMLIGHT;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return new ColorUIResource(225, 240, 255); // GRAY_VERY_LIGHT;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {  // 3D Schattenseite
         return Colors.GRAY_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {  // Disabled Border
         return getPrimary2();
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return GRAY_VERY_LIGHT; // Window background
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }
 
+    @Override
     public ColorUIResource getTitleTextColor() {
         return Colors.GRAY_DARKEST;
     }
 
+    @Override
     public ColorUIResource getSimpleInternalFrameBackground() {
         return Colors.GRAY_MEDIUMDARK;
     }
 
-   public void addCustomEntriesToTable(UIDefaults table) {
+   @Override
+public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =
             { PlasticScrollBarUI.MAX_BUMPS_WIDTH_KEY, new Integer(30),

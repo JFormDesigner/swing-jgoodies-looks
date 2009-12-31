@@ -41,11 +41,12 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * default desktop settings.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class ExperienceBlue extends DesertBluer {
 
 
+    @Override
     public String getName() {
         return "Experience Blue";
     }
@@ -66,53 +67,66 @@ public class ExperienceBlue extends DesertBluer {
     private static final ColorUIResource SECONDARY3 =
         LUNA_BACKGROUND;
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.BLUE_MEDIUM_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.BLUE_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.BLUE_LOW_LIGHTEST;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return SECONDARY1;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {
         return SECONDARY2;
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return SECONDARY3;
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return Colors.ORANGE_FOCUS;
     }
 
+    @Override
     public ColorUIResource getPrimaryControlShadow() {
         return getPrimary3();
     }
 
+    @Override
     public ColorUIResource getMenuSelectedBackground() {
         return getPrimary1();
     }
+    @Override
     public ColorUIResource getMenuSelectedForeground() {
         return WHITE;
     }
 
+    @Override
     public ColorUIResource getMenuItemBackground() {
         return WHITE;
     }
 
+    @Override
     public ColorUIResource getToggleButtonCheckColor() {
         return Colors.GREEN_CHECK;
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

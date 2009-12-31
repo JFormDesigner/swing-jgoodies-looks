@@ -37,22 +37,26 @@ import javax.swing.plaf.ColorUIResource;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class SkyRed extends AbstractSkyTheme {
 
+    @Override
     public String getName() {
         return "Sky Red";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.RED_LOW_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.RED_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.RED_LOW_LIGHTER;
     }

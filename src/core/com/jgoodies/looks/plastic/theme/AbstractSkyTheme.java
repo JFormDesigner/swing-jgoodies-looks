@@ -40,7 +40,7 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public abstract class AbstractSkyTheme extends SkyBluer {
 
@@ -50,38 +50,47 @@ public abstract class AbstractSkyTheme extends SkyBluer {
     private static final ColorUIResource SECONDARY3 =
         new ColorUIResource(225, 225, 225);
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.GRAY_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.BLUE_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.BLUE_LOW_LIGHTEST;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return Colors.GRAY_MEDIUM;
     }
+    @Override
     protected ColorUIResource getSecondary2() {
         return SECONDARY2;
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return SECONDARY3;
     }
 
     // Background
+    @Override
     public ColorUIResource getPrimaryControlShadow() {
         return getPrimary3();
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedBackground() {
         return getPrimary1();
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

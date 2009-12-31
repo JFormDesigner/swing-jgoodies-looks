@@ -35,10 +35,11 @@ package com.jgoodies.looks.plastic.theme;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class SkyBlue extends AbstractSkyTheme {
 
+    @Override
     public String getName() {
         return "Sky Blue";
     }

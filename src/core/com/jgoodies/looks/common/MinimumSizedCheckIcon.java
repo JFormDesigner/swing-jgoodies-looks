@@ -45,7 +45,7 @@ import javax.swing.UIManager;
  * <code>defaultIconSize</code> key.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see	MinimumSizedIcon
  */
@@ -60,7 +60,8 @@ public final class MinimumSizedCheckIcon extends MinimumSizedIcon {
 	}
 
 
-	public void paintIcon(Component c, Graphics g, int x, int y) {
+	@Override
+    public void paintIcon(Component c, Graphics g, int x, int y) {
 		paintState(g, x, y);
 		super.paintIcon(c, g, x, y);
 	}

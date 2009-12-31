@@ -50,7 +50,7 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * In addition it uses a custom caret if enabled by the L&amp;f.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 
@@ -70,6 +70,7 @@ public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 	 * @param elem the element
 	 * @return the view
 	 */
+    @Override
     public View create(Element elem) {
         return (LookUtils.IS_JAVA_1_4_OR_5)
             ? new ExtPasswordView(elem)
@@ -82,6 +83,7 @@ public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
      *
      * @return the caret
      */
+    @Override
     protected Caret createCaret() {
         return (PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained())
             ? new PlasticFieldCaret()

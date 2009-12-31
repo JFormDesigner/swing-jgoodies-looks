@@ -39,7 +39,7 @@ import javax.swing.UIManager;
  * this works around the Java issue #4530952.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class ComboBoxEditorTextField extends JTextField {
 
@@ -53,6 +53,7 @@ public final class ComboBoxEditorTextField extends JTextField {
     }
 
     // Workaround for 4530952
+    @Override
     public void setText(String s) {
         if (getText().equals(s)) {
             return;

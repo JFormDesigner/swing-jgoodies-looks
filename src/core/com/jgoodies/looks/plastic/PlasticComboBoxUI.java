@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * the JGoodies Plastic L&amp;fs implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -108,17 +108,20 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
 
     // ************************************************************************
 
+    @Override
     public void installUI( JComponent c ) {
         super.installUI(c);
         tableCellEditor = isTableCellEditor();
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         propertyChangeListener = new TableCellEditorPropertyChangeHandler();
         comboBox.addPropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
     }
 
+    @Override
     protected void uninstallListeners() {
         super.uninstallListeners();
         comboBox.removePropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
@@ -133,6 +136,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      *
      * Overridden to use a button that can have a pseudo 3D effect.
      */
+    @Override
     protected JButton createArrowButton() {
         return new PlasticComboBoxButton(
             comboBox,
@@ -147,6 +151,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * This method only gets called if a custom editor has not already
      * been installed in the JComboBox.
      */
+    @Override
     protected ComboBoxEditor createEditor() {
         return new PlasticComboBoxEditor.UIResource(tableCellEditor);
     }
@@ -160,11 +165,13 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      *
      * @return an instance of a layout manager
      */
+    @Override
     protected LayoutManager createLayoutManager() {
         return new PlasticComboBoxLayoutManager();
     }
 
 
+    @Override
     protected ComboPopup createPopup() {
         return new PlasticComboPopup(comboBox);
     }
@@ -182,6 +189,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
+    @Override
     protected ListCellRenderer createRenderer() {
         if (tableCellEditor) {
             return super.createRenderer();
@@ -195,6 +203,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     /**
      * The minumum size is the size of the display area plus insets plus the button.
      */
+    @Override
     public Dimension getMinimumSize(JComponent c) {
         if (!isMinimumSizeDirty) {
             return new Dimension(cachedMinimumSize);
@@ -246,6 +255,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * Delegates to #getMinimumSize(Component).
      * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
      */
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         return getMinimumSize(c);
     }
@@ -254,6 +264,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     /**
      * Returns the area that is reserved for drawing the currently selected item.
      */
+    @Override
     protected Rectangle rectangleForCurrentValue() {
         int width  = comboBox.getWidth();
         int height = comboBox.getHeight();
@@ -280,6 +291,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
 
     // Painting ***************************************************************
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             g.setColor(c.getBackground());
@@ -344,6 +356,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     private final class PlasticComboBoxLayoutManager
         extends MetalComboBoxUI.MetalComboBoxLayoutManager {
 
+        @Override
         public void layoutContainer(Container parent) {
             JComboBox cb = (JComboBox) parent;
 
@@ -382,6 +395,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     }
 
     // Required if we have a combobox button that does not extend MetalComboBoxButton
+    @Override
     public PropertyChangeListener createPropertyChangeListener() {
         return new PlasticPropertyChangeListener();
     }
@@ -393,6 +407,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     private final class PlasticPropertyChangeListener
         extends BasicComboBoxUI.PropertyChangeHandler {
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             super.propertyChange(e);
             String propertyName = e.getPropertyName();
@@ -428,6 +443,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
         /**
          * Configures the list created by #createList().
          */
+        @Override
         protected void configureList() {
             super.configureList();
             list.setForeground(UIManager.getColor("MenuItem.foreground"));
@@ -437,6 +453,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
         /**
          * Configures the JScrollPane created by #createScroller().
          */
+        @Override
         protected void configureScroller() {
             super.configureScroller();
             scroller.getVerticalScrollBar().putClientProperty(
@@ -472,6 +489,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
          * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
          * @see JComboBox#getMaximumRowCount()
          */
+        @Override
         protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
             Rectangle defaultBounds = super.computePopupBounds(px, py, pw, ph);
             Object popupPrototypeDisplayValue = comboBox.getClientProperty(

@@ -44,7 +44,7 @@ import javax.swing.plaf.metal.MetalButtonUI;
  * it can add a pseudo 3D effect and that the border can paint the focus.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticButtonUI extends MetalButtonUI {
 
@@ -59,6 +59,7 @@ public class PlasticButtonUI extends MetalButtonUI {
     /**
      * Installs defaults.
      */
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         borderPaintsFocus =
@@ -68,6 +69,7 @@ public class PlasticButtonUI extends MetalButtonUI {
 
     // Painting ***************************************************************
 
+    @Override
     public void update(Graphics g, JComponent c) {
         if (c.isOpaque()) {
             AbstractButton b = (AbstractButton) c;
@@ -94,6 +96,7 @@ public class PlasticButtonUI extends MetalButtonUI {
     /**
      * Paints the focus with close to the button's border.
      */
+    @Override
     protected void paintFocus(
         Graphics g,
         AbstractButton b,
@@ -137,10 +140,12 @@ public class PlasticButtonUI extends MetalButtonUI {
      * @return true indicates a 3D effect, false flat
      */
     protected boolean is3D(AbstractButton b) {
-        if (PlasticUtils.force3D(b))
+        if (PlasticUtils.force3D(b)) {
             return true;
-        if (PlasticUtils.forceFlat(b))
+        }
+        if (PlasticUtils.forceFlat(b)) {
             return false;
+        }
         ButtonModel model = b.getModel();
         return PlasticUtils.is3D("Button.")
             && b.isBorderPainted()

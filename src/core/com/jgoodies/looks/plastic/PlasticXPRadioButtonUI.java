@@ -42,7 +42,7 @@ import javax.swing.plaf.metal.MetalRadioButtonUI;
  * and has an active border that changes when the mouse is over.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticXPRadioButtonUI extends MetalRadioButtonUI {
 
@@ -53,6 +53,7 @@ public final class PlasticXPRadioButtonUI extends MetalRadioButtonUI {
         return INSTANCE;
     }
 
+    @Override
     protected BasicButtonListener createButtonListener(AbstractButton b) {
         return new ActiveBasicButtonListener(b);
     }

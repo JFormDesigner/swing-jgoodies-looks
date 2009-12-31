@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * Unlike its superclass it returns even and odd preferred heights.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.WindowsButtonUI {
 
@@ -51,6 +51,7 @@ public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.Windo
         return new WindowsButtonUI();
     }
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         AbstractButton b = (AbstractButton) c;
         Dimension d = BasicGraphicsUtils.getPreferredButtonSize(b, b

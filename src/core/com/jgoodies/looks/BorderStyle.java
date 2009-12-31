@@ -39,7 +39,7 @@ import javax.swing.JToolBar;
  * look-dependent and shadow look-independent <code>HeaderStyle</code>s.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see HeaderStyle
  */
@@ -94,8 +94,9 @@ public final class BorderStyle {
      */
     private static BorderStyle from0(JComponent c, String clientPropertyKey) {
         Object value = c.getClientProperty(clientPropertyKey);
-        if (value instanceof BorderStyle)
+        if (value instanceof BorderStyle) {
             return (BorderStyle) value;
+        }
 
         if (value instanceof String) {
             return BorderStyle.valueOf((String) value);
@@ -105,17 +106,19 @@ public final class BorderStyle {
     }
 
     private static BorderStyle valueOf(String name) {
-        if (name.equalsIgnoreCase(EMPTY.name))
+        if (name.equalsIgnoreCase(EMPTY.name)) {
             return EMPTY;
-        else if (name.equalsIgnoreCase(SEPARATOR.name))
+        } else if (name.equalsIgnoreCase(SEPARATOR.name)) {
             return SEPARATOR;
-        else if (name.equalsIgnoreCase(ETCHED.name))
+        } else if (name.equalsIgnoreCase(ETCHED.name)) {
             return ETCHED;
-        else
+        } else {
             throw new IllegalArgumentException("Invalid BorderStyle name "
                     + name);
+        }
     }
 
+    @Override
     public String toString() {
         return name;
     }

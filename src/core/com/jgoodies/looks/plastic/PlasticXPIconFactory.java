@@ -51,7 +51,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class PlasticXPIconFactory {
 
@@ -297,11 +297,13 @@ public final class PlasticXPIconFactory {
      */
     private static boolean isBlank(String str) {
         int length;
-        if ((str == null) || ((length = str.length()) == 0))
+        if ((str == null) || ((length = str.length()) == 0)) {
             return true;
+        }
         for (int i = length-1; i >= 0; i--) {
-            if (!Character.isWhitespace(str.charAt(i)))
+            if (!Character.isWhitespace(str.charAt(i))) {
                 return false;
+            }
         }
         return true;
     }

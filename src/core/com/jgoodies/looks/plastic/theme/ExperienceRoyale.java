@@ -41,12 +41,13 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * using the "Royale" desktop theme.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @since 2.0.3
  */
 public class ExperienceRoyale extends DesertBluer {
 
+    @Override
     public String getName() {
         return "Experience Royale";
     }
@@ -69,53 +70,66 @@ public class ExperienceRoyale extends DesertBluer {
     private static final ColorUIResource SECONDARY3 =
         ROYALE_BACKGROUND;
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return ROYALE_SELECTION;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.BLUE_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.BLUE_LOW_LIGHTEST;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return SECONDARY1;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {
         return SECONDARY2;
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return SECONDARY3;
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return Colors.ORANGE_FOCUS;
     }
 
+    @Override
     public ColorUIResource getPrimaryControlShadow() {
         return getPrimary3();
     }
 
+    @Override
     public ColorUIResource getMenuSelectedBackground() {
         return getPrimary1();
     }
+    @Override
     public ColorUIResource getMenuSelectedForeground() {
         return WHITE;
     }
 
+    @Override
     public ColorUIResource getMenuItemBackground() {
         return WHITE;
     }
 
+    @Override
     public ColorUIResource getToggleButtonCheckColor() {
         return Colors.GREEN_CHECK;
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

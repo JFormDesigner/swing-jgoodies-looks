@@ -40,30 +40,36 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class DesertYellow extends DesertBlue {
 
+    @Override
     public String getName() {
         return "Desert Yellow";
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.YELLOW_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.YELLOW_LOW_LIGHTEST;
     }
 
+    @Override
     public ColorUIResource getTitleTextColor() {
         return Colors.GRAY_DARKER;
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedBackground() {
         return Colors.YELLOW_LOW_MEDIUMDARK;
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

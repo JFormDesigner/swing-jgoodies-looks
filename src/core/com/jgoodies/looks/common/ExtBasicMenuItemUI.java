@@ -50,7 +50,7 @@ import javax.swing.plaf.basic.BasicMenuItemUI;
  * in the UI defaults.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public class ExtBasicMenuItemUI extends BasicMenuItemUI {
@@ -63,6 +63,7 @@ public class ExtBasicMenuItemUI extends BasicMenuItemUI {
         return new ExtBasicMenuItemUI();
     }
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         renderer = createRenderer(
@@ -83,11 +84,13 @@ public class ExtBasicMenuItemUI extends BasicMenuItemUI {
         return false;
     }
 
+    @Override
     protected void uninstallDefaults() {
         super.uninstallDefaults();
         renderer = null;
     }
 
+    @Override
     protected Dimension getPreferredMenuItemSize(
         JComponent c,
         Icon aCheckIcon,
@@ -105,6 +108,7 @@ public class ExtBasicMenuItemUI extends BasicMenuItemUI {
         return new Dimension(width, height);
     }
 
+    @Override
     protected void paintMenuItem(
         Graphics g,
         JComponent c,

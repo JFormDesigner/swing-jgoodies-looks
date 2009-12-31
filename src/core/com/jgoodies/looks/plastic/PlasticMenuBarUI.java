@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticMenuBarUI extends BasicMenuBarUI {
 
@@ -66,20 +66,23 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 
 	// Handling Special Borders *********************************************
 
-	protected void installDefaults() {
+	@Override
+    protected void installDefaults() {
 		super.installDefaults();
 		installSpecialBorder();
 	}
 
 
-	protected void installListeners() {
+	@Override
+    protected void installListeners() {
 		super.installListeners();
 		listener = createBorderStyleListener();
 		menuBar.addPropertyChangeListener(listener);
 	}
 
 
-	protected void uninstallListeners() {
+	@Override
+    protected void uninstallListeners() {
 		menuBar.removePropertyChangeListener(listener);
 		super.uninstallListeners();
 	}
@@ -111,20 +114,21 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 		String suffix;
 		BorderStyle borderStyle = BorderStyle.from(menuBar,
 												PlasticLookAndFeel.BORDER_STYLE_KEY);
-		if (borderStyle == BorderStyle.EMPTY)
-			suffix = "emptyBorder";
-		else if (borderStyle == BorderStyle.ETCHED)
-			suffix = "etchedBorder";
-		else if (borderStyle == BorderStyle.SEPARATOR)
-			suffix = "separatorBorder";
-		else {
+		if (borderStyle == BorderStyle.EMPTY) {
+            suffix = "emptyBorder";
+        } else if (borderStyle == BorderStyle.ETCHED) {
+            suffix = "etchedBorder";
+        } else if (borderStyle == BorderStyle.SEPARATOR) {
+            suffix = "separatorBorder";
+        } else {
 			HeaderStyle headerStyle = HeaderStyle.from(menuBar);
-			if (headerStyle == HeaderStyle.BOTH)
-				suffix = "headerBorder";
-			else if (headerStyle == HeaderStyle.SINGLE && is3D())
-				suffix = "etchedBorder";
-			else
-				return;
+			if (headerStyle == HeaderStyle.BOTH) {
+                suffix = "headerBorder";
+            } else if (headerStyle == HeaderStyle.SINGLE && is3D()) {
+                suffix = "etchedBorder";
+            } else {
+                return;
+            }
 		}
 
 		LookAndFeel.installBorder(menuBar, "MenuBar." + suffix);
@@ -133,7 +137,8 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 
 	// 3D Effect ************************************************************************
 
-	public void update(Graphics g, JComponent c) {
+	@Override
+    public void update(Graphics g, JComponent c) {
 		if (c.isOpaque()) {
 			g.setColor(c.getBackground());
 			g.fillRect(0, 0, c.getWidth(), c.getHeight());
@@ -152,10 +157,12 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 	 * Checks and answers if we should add a pseudo 3D effect.
 	 */
 	private boolean is3D() {
-		if (PlasticUtils.force3D(menuBar))
-			return true;
-		if (PlasticUtils.forceFlat(menuBar))
-			return false;
+		if (PlasticUtils.force3D(menuBar)) {
+            return true;
+        }
+		if (PlasticUtils.forceFlat(menuBar)) {
+            return false;
+        }
 		return	PlasticUtils.is3D("MenuBar.") &&
 				(HeaderStyle.from(menuBar) != null) &&
 				(BorderStyle.from(menuBar, PlasticLookAndFeel.BORDER_STYLE_KEY)

@@ -52,7 +52,7 @@ import javax.swing.text.JTextComponent;
  *
  * @author Karsten Lentzsch
  * @author Andrej Golovnin
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 
 final class PlasticXPBorders {
@@ -172,6 +172,7 @@ final class PlasticXPBorders {
             this.insets = insets;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton button = (AbstractButton) c;
             ButtonModel    model  = button.getModel();
@@ -186,18 +187,21 @@ final class PlasticXPBorders {
                                      && ((JButton) button).isDefaultButton();
             boolean isFocused = button.isFocusPainted() && button.hasFocus();
 
-            if (isPressed)
+            if (isPressed) {
                 PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
-            else if (isFocused)
+            } else if (isFocused) {
                 PlasticXPUtils.drawFocusedButtonBorder(g, x, y, w, h);
-            else if (isDefault)
+            } else if (isDefault) {
                 PlasticXPUtils.drawDefaultButtonBorder(g, x, y, w, h);
-            else
+            } else {
                 PlasticXPUtils.drawPlainButtonBorder(g, x, y, w, h);
+            }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return insets; }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets newInsets) {
             newInsets.top    = insets.top;
             newInsets.left   = insets.left;
@@ -215,6 +219,7 @@ final class PlasticXPBorders {
 
         protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             PlasticComboBoxButton button = (PlasticComboBoxButton) c;
             JComboBox comboBox = button.getComboBox();
@@ -225,12 +230,13 @@ final class PlasticXPBorders {
             } else {
                 boolean isPressed = model.isPressed() && model.isArmed();
                 boolean isFocused = comboBox.hasFocus();
-                if (isPressed)
+                if (isPressed) {
                     PlasticXPUtils.drawPressedButtonBorder(g, x, y, w, h);
-                else if (isFocused)
+                } else if (isFocused) {
                     PlasticXPUtils.drawFocusedButtonBorder(g, x, y, w, h);
-                else
+                } else {
                     PlasticXPUtils.drawPlainButtonBorder(g, x, y, w, h);
+                }
             }
             if (comboBox.isEditable()) {
                 // Paint two pixel on the arrow button's left hand side.
@@ -242,6 +248,7 @@ final class PlasticXPBorders {
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -253,6 +260,7 @@ final class PlasticXPBorders {
 
         private static final Insets INSETS  = new Insets(1, 1, 1, 0);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(c.isEnabled()
                            ? PlasticLookAndFeel.getControlDarkShadow()
@@ -260,6 +268,7 @@ final class PlasticXPBorders {
             PlasticXPUtils.drawRect(g, x, y, w+1, h-1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -271,7 +280,8 @@ final class PlasticXPBorders {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 
             boolean enabled = ((c instanceof JTextComponent)
                                && (c.isEnabled() && ((JTextComponent) c).isEditable()))
@@ -284,8 +294,10 @@ final class PlasticXPBorders {
             PlasticXPUtils.drawRect(g, x, y, w-1, h-1);
     	}
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets newInsets) {
             newInsets.top    = INSETS.top;
             newInsets.left   = INSETS.left;
@@ -305,6 +317,7 @@ final class PlasticXPBorders {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(c.isEnabled()
                     ? PlasticLookAndFeel.getControlDarkShadow()
@@ -312,8 +325,10 @@ final class PlasticXPBorders {
             PlasticXPUtils.drawRect(g, x, y, w-1, h-1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets newInsets) {
             newInsets.top    = INSETS.top;
             newInsets.left   = INSETS.left;
@@ -331,6 +346,7 @@ final class PlasticXPBorders {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.setColor(c.isEnabled()
                     ? PlasticLookAndFeel.getControlDarkShadow()
@@ -344,8 +360,10 @@ final class PlasticXPBorders {
             g.fillRect(x+1, y+h-1, w-1, 1);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets newInsets) {
             newInsets.top    = INSETS.top;
             newInsets.left   = INSETS.left;
@@ -365,12 +383,14 @@ final class PlasticXPBorders {
             super(new Insets(3, 3, 3, 3));
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             AbstractButton b = (AbstractButton) c;
             ButtonModel model = b.getModel();
 
-            if (!model.isEnabled())
+            if (!model.isEnabled()) {
                 return;
+            }
 
             if (!(c instanceof JToggleButton)) {
                 if (model.isRollover() && !(model.isPressed() && !model.isArmed())) {

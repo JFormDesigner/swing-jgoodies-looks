@@ -49,7 +49,7 @@ import com.jgoodies.uif_lite.component.UIFSplitPane;
  * removes obsolete decorations.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see UIFSplitPane
  */
@@ -213,14 +213,18 @@ final class SplitTab {
             this.columnNames = columnNames;
             this.rowData = rowData;
         }
+        @Override
         public String getColumnName(int column) { return columnNames[column].toString(); }
         public int getRowCount() { return rowData.length; }
         public int getColumnCount() { return columnNames.length; }
+        @Override
         public Class getColumnClass(int column) {
             return column == 2 ? Boolean.class : super.getColumnClass(column);
         }
         public Object getValueAt(int row, int col) { return rowData[row][col]; }
+        @Override
         public boolean isCellEditable(int row, int column) { return true; }
+        @Override
         public void setValueAt(Object value, int row, int col) {
             rowData[row][col] = value;
             fireTableCellUpdated(row, col);

@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * Renders and lays out menu items.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 
 public class MenuItemRenderer {
@@ -112,8 +112,9 @@ public class MenuItemRenderer {
 	 */
 	private Icon getIcon(JMenuItem aMenuItem, Icon defaultIcon) {
 		Icon icon = aMenuItem.getIcon();
-		if (icon == null)
-			return defaultIcon;
+		if (icon == null) {
+            return defaultIcon;
+        }
 
 		ButtonModel model = aMenuItem.getModel();
 		if (!model.isEnabled()) {
@@ -126,8 +127,9 @@ public class MenuItemRenderer {
 		} else if (model.isSelected()) {
 			Icon selectedIcon = aMenuItem.getSelectedIcon();
 			return selectedIcon != null ? selectedIcon : icon;
-		} else
-			return icon;
+		} else {
+            return icon;
+        }
 	}
 
 
@@ -143,10 +145,12 @@ public class MenuItemRenderer {
 	 * Answers the wrapped icon.
 	 */
 	private Icon getWrappedIcon(Icon icon) {
-		if (hideIcons())
-			return NO_ICON;
-		if (icon == null)
-			return fillerIcon;
+		if (hideIcons()) {
+            return NO_ICON;
+        }
+		if (icon == null) {
+            return fillerIcon;
+        }
 		return iconBorderEnabled && hasCustomIcon()
 			? new MinimumSizedCheckIcon(icon, menuItem)
 			: new MinimumSizedIcon(icon);
@@ -414,10 +418,12 @@ public class MenuItemRenderer {
 
 		// Paint the Arrow
 		if (arrowIcon != null) {
-			if (model.isArmed() || (c instanceof JMenu && model.isSelected()))
-				g.setColor(foreground);
-			if (useCheckAndArrow())
-				wrappedArrowIcon.paintIcon(c, g, arrowIconRect.x, arrowIconRect.y);
+			if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+                g.setColor(foreground);
+            }
+			if (useCheckAndArrow()) {
+                wrappedArrowIcon.paintIcon(c, g, arrowIconRect.x, arrowIconRect.y);
+            }
 		}
 		g.setColor(holdc);
 		g.setFont(holdf);
@@ -651,8 +657,9 @@ public class MenuItemRenderer {
     	Object value = popupMenu.getClientProperty(Options.NO_ICONS_KEY);
     	if (value == null) {
 	    	Component invoker = popupMenu.getInvoker();
-	    	if (invoker != null && invoker instanceof JMenu)
-		    	value = ((JMenu) invoker).getClientProperty(Options.NO_ICONS_KEY);
+	    	if (invoker != null && invoker instanceof JMenu) {
+                value = ((JMenu) invoker).getClientProperty(Options.NO_ICONS_KEY);
+            }
     	}
     	return Boolean.TRUE.equals(value);
     }

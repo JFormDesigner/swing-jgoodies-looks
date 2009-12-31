@@ -43,7 +43,7 @@ import javax.swing.text.Caret;
  * that selects all text when the field gains focus via the keyboard.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class PlasticFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
@@ -63,6 +63,7 @@ public final class PlasticFormattedTextFieldUI extends BasicFormattedTextFieldUI
      *
      * @return the caret
      */
+    @Override
     protected Caret createCaret() {
         return new PlasticFieldCaret();
     }

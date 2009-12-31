@@ -46,7 +46,7 @@ import com.jgoodies.looks.MicroLayout;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 
@@ -57,14 +57,17 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         // Provide an empty constructor for subclassing.
     }
 
+    @Override
     public String getID() {
         return "JGoodies Plastic XP";
     }
 
+    @Override
     public String getName() {
         return "JGoodies Plastic XP";
     }
 
+    @Override
     public String getDescription() {
         return "The JGoodies Plastic XP Look and Feel"
             + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
@@ -76,6 +79,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
      *
      * @param table   the UIDefaults table to work with
      */
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
 
@@ -102,7 +106,8 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
      *
      * @param table   the UIDefaults table to work with
 	 */
-	protected void initComponentDefaults(UIDefaults table) {
+	@Override
+    protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
         MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout(getName(), table);

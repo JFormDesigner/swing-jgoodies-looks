@@ -39,30 +39,36 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * A theme with pink foreground and a light gray window background color.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class SkyPink extends AbstractSkyTheme {
 
+    @Override
     public String getName() {
         return "Sky Pink";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.PINK_LOW_DARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.PINK_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.PINK_LOW_LIGHTER;
     }
 
+    @Override
     public ColorUIResource getHighlightedTextColor() {
         return getControlTextColor();
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

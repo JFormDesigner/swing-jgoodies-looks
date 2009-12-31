@@ -45,8 +45,7 @@ import javax.swing.border.AbstractBorder;
  * popup windows.
  *
  * @author Karsten Lentzsch
- * @author Andrej Golovnin
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see ShadowPopup
  * @see ShadowPopupFactory
@@ -84,7 +83,8 @@ final class ShadowPopupBorder extends AbstractBorder {
 	 * Paints the border for the specified component with the specified
      * position and size.
 	 */
-	public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+	@Override
+    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 		// fake drop shadow effect in case of heavy weight popups
         JComponent popup = (JComponent) c;
         Image hShadowBg = (Image) popup.getClientProperty(ShadowPopupFactory.PROP_HORIZONTAL_BACKGROUND);
@@ -108,7 +108,8 @@ final class ShadowPopupBorder extends AbstractBorder {
 	/**
 	 * Returns the insets of the border.
 	 */
-	public Insets getBorderInsets(Component c) {
+	@Override
+    public Insets getBorderInsets(Component c) {
 		return new Insets(0, 0, SHADOW_SIZE, SHADOW_SIZE);
 	}
 
@@ -119,6 +120,7 @@ final class ShadowPopupBorder extends AbstractBorder {
      * @param insets the object to be reinitialized
      * @return the <code>insets</code> object
      */
+    @Override
     public Insets getBorderInsets(Component c, Insets insets) {
         insets.left = insets.top = 0;
         insets.right = insets.bottom = SHADOW_SIZE;

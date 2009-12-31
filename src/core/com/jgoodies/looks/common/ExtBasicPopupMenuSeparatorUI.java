@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.BasicPopupMenuSeparatorUI;
  * it uses a shared UI delegate.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorUI {
 
@@ -65,12 +65,14 @@ public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorU
 	}
 
 
-	protected void installDefaults(JSeparator s) {
+	@Override
+    protected void installDefaults(JSeparator s) {
 		super.installDefaults(s);
         insets = UIManager.getInsets("PopupMenuSeparator.margin");
 	}
 
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Dimension s = c.getSize();
 
@@ -99,6 +101,7 @@ public final class ExtBasicPopupMenuSeparatorUI extends BasicPopupMenuSeparatorU
     }
 
 
+    @Override
     public Dimension getPreferredSize(JComponent c) {
     	return new Dimension(0, insets.top + SEPARATOR_HEIGHT + insets.bottom);
     }

@@ -70,7 +70,7 @@ import com.jgoodies.looks.Options;
  * </pre>
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class PlasticTreeUI extends BasicTreeUI {
@@ -85,6 +85,7 @@ public final class PlasticTreeUI extends BasicTreeUI {
 
     // Installation ***********************************************************
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         updateLineStyle(c.getClientProperty(Options.TREE_LINE_STYLE_KEY));
@@ -92,6 +93,7 @@ public final class PlasticTreeUI extends BasicTreeUI {
         c.addPropertyChangeListener(lineStyleHandler);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         c.removePropertyChangeListener(lineStyleHandler);
         super.uninstallUI(c);
@@ -100,12 +102,14 @@ public final class PlasticTreeUI extends BasicTreeUI {
 
     // Painting ***************************************************************
 
+    @Override
     protected void paintVerticalLine(Graphics g, JComponent c, int x, int top, int bottom) {
         if (linesEnabled) {
             drawDashedVerticalLine(g, x, top, bottom);
         }
     }
 
+    @Override
     protected void paintHorizontalLine(Graphics g, JComponent c, int y, int left, int right) {
         if (linesEnabled) {
             drawDashedHorizontalLine(g, y, left, right);
@@ -113,6 +117,7 @@ public final class PlasticTreeUI extends BasicTreeUI {
     }
 
     // Draws the icon centered at (x,y)
+    @Override
     protected void drawCentered(Component c, Graphics graphics, Icon icon, int x, int y) {
         icon.paintIcon(
             c,

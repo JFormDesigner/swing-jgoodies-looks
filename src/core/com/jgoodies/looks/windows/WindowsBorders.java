@@ -50,7 +50,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
  * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 final class WindowsBorders {
 
@@ -231,6 +231,7 @@ final class WindowsBorders {
             this.defaultColor = defaultColor;
         }
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             boolean isPressed = false;
             boolean isDefault = false;
@@ -248,10 +249,12 @@ final class WindowsBorders {
                       darkShadow, highlight, lightHighlight, defaultColor);
         }
 
+        @Override
         public Insets getBorderInsets(Component c)       {
             return getBorderInsets(c, EMPTY_INSETS);
         }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets insets)       {
             // leave room for default visual
             insets.top = 2;
@@ -268,7 +271,8 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;
 			ButtonModel model = button.getModel();
 
@@ -276,13 +280,15 @@ final class WindowsBorders {
 			//System.out.println("Pressed=" + model.isPressed() + "; armed=" + model.isArmed());
 			//if (!model.isArmed()) return;
 
-			if (model.isPressed())
-				WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
-			else
-				WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
+			if (model.isPressed()) {
+                WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
+            } else {
+                WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
+            }
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -291,22 +297,25 @@ final class WindowsBorders {
 	 */
 	private static final class RolloverButtonBorder extends AbstractButtonBorder {
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
 			ButtonModel model = b.getModel();
 
-			if (!model.isEnabled())
-				return;
+			if (!model.isEnabled()) {
+                return;
+            }
 
 			if (!(c instanceof JToggleButton)) {
-				if (model.isRollover()) // && !( model.isPressed() && !model.isArmed()))
-					super.paintBorder(c, g, x, y, w, h);
+				if (model.isRollover()) {
+                    super.paintBorder(c, g, x, y, w, h);
+                }
 				return;
 			}
 
-			if (model.isSelected())
-				WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
-			else if (model.isRollover()) {
+			if (model.isSelected()) {
+                WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
+            } else if (model.isRollover()) {
 				super.paintBorder(c, g, x, y, w, h);
 				/*
 				if (model.isPressed() && model.isArmed()) {
@@ -330,11 +339,13 @@ final class WindowsBorders {
         }
 
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return getBorderInsets(c, new Insets(0, 0, 0, 0));
         }
 
 
+        @Override
         public Insets getBorderInsets(Component c, Insets insets) {
             Insets margin = null;
 
@@ -365,7 +376,8 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(0, 3, 2, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
 	  		g.setColor( UIManager.getColor("Separator.foreground"));
 	  		g.drawLine( 0, h - 2, w - 1, h - 2 );
@@ -375,7 +387,8 @@ final class WindowsBorders {
 			g.translate(-x, -y);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -386,11 +399,13 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -401,11 +416,13 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -418,12 +435,14 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
 			WindowsUtils.drawFlush3DBorder  (g, x + 1, y + 1, w - 2, h - 2);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -436,12 +455,14 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 1, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y, w, h + 1);
 			WindowsUtils.drawFlush3DBorder  (g, x + 1, y + 1, w - 2, h - 1);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -449,6 +470,7 @@ final class WindowsBorders {
 
         private static final Insets INSETS = new Insets(3, 3, 3, 3);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.translate(x, y);
             g.setColor(UIManager.getColor("controlShadow"));
@@ -459,6 +481,7 @@ final class WindowsBorders {
             g.translate(-x, -y);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -467,6 +490,7 @@ final class WindowsBorders {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.translate(x, y);
             g.setColor(UIManager.getColor("controlShadow"));
@@ -476,6 +500,7 @@ final class WindowsBorders {
             g.translate(-x, -y);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -488,12 +513,14 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(1, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			WindowsUtils.drawPressed3DBorder(g, x, y - 1, w, h + 1);
 			WindowsUtils.drawFlush3DBorder  (g, x + 1, y, w - 2, h - 1);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -504,20 +531,23 @@ final class WindowsBorders {
 
 		private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
 			ButtonModel model = b.getModel();
 
 			//System.out.println("rollover=" + model.isRollover());
 			//if ((3 < 4) || model.isRollover()) { // && !(model.isPressed() && !model.isArmed())) {
-			if (model.isSelected())
-				WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
-			else if (model.isRollover())
-				WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
+			if (model.isSelected()) {
+                WindowsUtils.drawPressed3DBorder(g, x, y, w, h);
+            } else if (model.isRollover()) {
+                WindowsUtils.drawFlush3DBorder(g, x, y, w, h);
 			//}
+            }
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 
 	}
 

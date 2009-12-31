@@ -48,7 +48,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 
@@ -60,6 +60,7 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
     private boolean isKeyboardFocusEvent = true;
 
 
+    @Override
     public void focusGained(FocusEvent e) {
         final JTextComponent c = getComponent();
         if (c.isEnabled()) {
@@ -96,6 +97,7 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void focusLost(FocusEvent e) {
         super.focusLost(e);
         if (!e.isTemporary()) {
@@ -107,6 +109,7 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e) || e.isPopupTrigger()) {
             isKeyboardFocusEvent = false;
@@ -116,6 +119,7 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         super.mouseReleased(e);
         if (e.isPopupTrigger()) {

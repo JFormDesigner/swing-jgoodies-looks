@@ -53,7 +53,7 @@ import com.jgoodies.looks.common.PopupMenuLayout;
  * a JScrollPane.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see	com.jgoodies.looks.Options#NO_MARGIN_KEY
  */
@@ -66,6 +66,7 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
 	}
 
 
+    @Override
     public void installDefaults() {
         super.installDefaults();
         installBorder();
@@ -75,12 +76,14 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
         }
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         borderListener = new BorderStyleChangeHandler();
         popupMenu.addPropertyChangeListener(Options.NO_MARGIN_KEY, borderListener);
     }
 
+    @Override
     protected void uninstallListeners() {
         popupMenu.removePropertyChangeListener(Options.NO_MARGIN_KEY, borderListener);
         super.uninstallListeners();

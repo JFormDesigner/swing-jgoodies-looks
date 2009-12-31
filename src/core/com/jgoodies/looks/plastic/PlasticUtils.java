@@ -39,7 +39,7 @@ import javax.swing.UIManager;
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class PlasticUtils {
@@ -260,8 +260,9 @@ public final class PlasticUtils {
 
 	static void add3DEffekt(Graphics g, Rectangle r) {
 		Color brightenStop = UIManager.getColor("Plastic.brightenStop");
-		if (null == brightenStop)
-			brightenStop = PlasticTheme.BRIGHTEN_STOP;
+		if (null == brightenStop) {
+            brightenStop = PlasticTheme.BRIGHTEN_STOP;
+        }
 
 		// Add round sides
 		Graphics2D g2 = (Graphics2D) g;
@@ -279,8 +280,9 @@ public final class PlasticUtils {
 
 	static void addLight3DEffekt(Graphics g, Rectangle r, boolean isHorizontal) {
 		Color ltBrightenStop = UIManager.getColor("Plastic.ltBrightenStop");
-		if (null == ltBrightenStop)
-			ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
+		if (null == ltBrightenStop) {
+            ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
+        }
 
 		add3DEffekt(g, r, isHorizontal, PlasticTheme.BRIGHTEN_START, ltBrightenStop, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP);
 	}
@@ -292,8 +294,9 @@ public final class PlasticUtils {
 	 */
 	public static void addLight3DEffekt(Graphics g, Rectangle r) {
 		Color ltBrightenStop = UIManager.getColor("Plastic.ltBrightenStop");
-		if (null == ltBrightenStop)
-			ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
+		if (null == ltBrightenStop) {
+            ltBrightenStop = PlasticTheme.LT_BRIGHTEN_STOP;
+        }
 
 		add3DEffekt(g, r, true, PlasticTheme.DARKEN_START, PlasticTheme.LT_DARKEN_STOP, PlasticTheme.BRIGHTEN_START, ltBrightenStop);
 	}

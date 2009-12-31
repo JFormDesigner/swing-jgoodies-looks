@@ -50,7 +50,7 @@ import javax.swing.UIDefaults;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *
  * @see     FontPolicy
  * @see     FontSet
@@ -233,8 +233,9 @@ public final class FontPolicies {
         String controlFontKey = lafName + ".controlFont";
         String menuFontKey    = lafName + ".menuFont";
         String decodedControlFont = LookUtils.getSystemProperty(controlFontKey);
-        if (decodedControlFont == null)
+        if (decodedControlFont == null) {
             return null;
+        }
         Font controlFont = Font.decode(decodedControlFont);
         String decodedMenuFont = LookUtils.getSystemProperty(menuFontKey);
         Font menuFont = decodedMenuFont != null

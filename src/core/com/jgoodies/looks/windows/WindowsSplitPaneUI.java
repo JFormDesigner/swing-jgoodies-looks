@@ -40,7 +40,7 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
  * Uses a special divider that paints modified one-touch buttons.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see com.jgoodies.looks.windows.WindowsSplitPaneDivider
  */
@@ -58,7 +58,8 @@ public final class WindowsSplitPaneUI extends com.sun.java.swing.plaf.windows.Wi
 	/**
 	 * Creates and returns the modified default divider.
 	 */
-	public BasicSplitPaneDivider createDefaultDivider() {
+	@Override
+    public BasicSplitPaneDivider createDefaultDivider() {
 		return new WindowsSplitPaneDivider(this);
 	}
 

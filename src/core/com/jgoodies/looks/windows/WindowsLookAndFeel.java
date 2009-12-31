@@ -55,7 +55,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.43 $
+ * @version $Revision: 1.44 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -73,11 +73,13 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      *
      * @see LookAndFeel#getID()
      */
+    @Override
     public String getName() {
         return "JGoodies Windows";
     }
 
 
+    @Override
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
                 + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
@@ -109,8 +111,9 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     public static FontPolicy getFontPolicy() {
         FontPolicy policy =
             (FontPolicy) UIManager.get(Options.WINDOWS_FONT_POLICY_KEY);
-        if (policy != null)
+        if (policy != null) {
             return policy;
+        }
 
         FontPolicy defaultPolicy = FontPolicies.getDefaultWindowsPolicy();
         return FontPolicies.customSettingsPolicy(defaultPolicy);
@@ -179,6 +182,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      *
      * @see #uninitialize
      */
+    @Override
     public void initialize() {
         super.initialize();
         ShadowPopupFactory.install();
@@ -191,6 +195,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      *
      * @see #initialize
      */
+    @Override
     public void uninitialize() {
         super.uninitialize();
         ShadowPopupFactory.uninstall();
@@ -207,6 +212,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      * @param icon the icon to generate disabled icon from.
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
+    @Override
     public Icon getDisabledIcon(JComponent component, Icon icon) {
         Icon disabledIcon = RGBGrayFilter.getDisabledIcon(component, icon);
         return disabledIcon != null
@@ -219,6 +225,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      * Initializes the class defaults, that is, overrides some UI delegates
      * with JGoodies Windows implementations.
      */
+    @Override
     protected void initClassDefaults(UIDefaults table) {
         super.initClassDefaults(table);
         final String windowsPrefix = "com.jgoodies.looks.windows.Windows";
@@ -330,6 +337,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     /**
      * Initializes the component defaults.
      */
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
 
@@ -402,7 +410,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         Object disabledTextBackground = table.getColor("TextField.disabledBackground");
         Object inactiveTextBackground = table.getColor("TextField.inactiveBackground");
 
-        Object comboBoxDisabledBackground = (isVista && isXP)
+        Object comboBoxDisabledBackground = isVista && isXP
             ? table.getColor("ComboBox.background")
             : disabledTextBackground;
 

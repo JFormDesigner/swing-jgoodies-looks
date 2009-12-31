@@ -38,10 +38,11 @@ import javax.swing.plaf.ComponentUI;
  * Renders aligned JCheckBoxMenuItems.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class ExtBasicCheckBoxMenuItemUI extends ExtBasicRadioButtonMenuItemUI {
 
+    @Override
     protected String getPropertyPrefix() { return "CheckBoxMenuItem"; }
 
 

@@ -49,7 +49,7 @@ import com.jgoodies.looks.LookUtils;
  * In addition this class reuses a single UI instance.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsToolBarSeparatorUI
     extends BasicToolBarSeparatorUI {
@@ -69,6 +69,7 @@ public final class WindowsToolBarSeparatorUI
         return toolBarSeparatorUI;
     }
 
+    @Override
     public void paint(Graphics g, JComponent c) {
         Color temp = g.getColor();
 

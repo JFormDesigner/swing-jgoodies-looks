@@ -44,11 +44,12 @@ import javax.swing.plaf.ComponentUI;
  * Renders aligned <code>JRadioButtonMenuItem</code>s.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 
-	protected String getPropertyPrefix() { return "RadioButtonMenuItem"; }
+	@Override
+    protected String getPropertyPrefix() { return "RadioButtonMenuItem"; }
 
 
 	public static ComponentUI createUI(JComponent b) {
@@ -57,7 +58,8 @@ public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 
 
 	// RadioButtonMenuItems and CheckBoxMenuItems will override
-	protected boolean iconBorderEnabled() { return true; }
+	@Override
+    protected boolean iconBorderEnabled() { return true; }
 
 
 	public void processMouseEvent(JMenuItem item, MouseEvent e,
@@ -69,13 +71,15 @@ public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 				manager.clearSelectedPath();
 				item.doClick(0);
 				item.setArmed(false);
-			} else
-				manager.setSelectedPath(path);
+			} else {
+                manager.setSelectedPath(path);
+            }
 		} else if (item.getModel().isArmed()) {
 			MenuElement[] newPath = new MenuElement[path.length - 1];
 			int i, c;
-			for (i = 0, c = path.length - 1; i < c; i++)
-				newPath[i] = path[i];
+			for (i = 0, c = path.length - 1; i < c; i++) {
+                newPath[i] = path[i];
+            }
 			manager.setSelectedPath(newPath);
 		}
 	}

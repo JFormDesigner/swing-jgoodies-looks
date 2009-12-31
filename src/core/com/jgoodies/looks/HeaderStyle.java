@@ -40,7 +40,7 @@ import javax.swing.JToolBar;
  * <code>BorderStyle</code>.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see	BorderStyle
  */
@@ -90,8 +90,9 @@ public final class HeaderStyle {
      */
     private static HeaderStyle from0(JComponent c) {
         Object value = c.getClientProperty(Options.HEADER_STYLE_KEY);
-        if (value instanceof HeaderStyle)
+        if (value instanceof HeaderStyle) {
             return (HeaderStyle) value;
+        }
 
         if (value instanceof String) {
             return HeaderStyle.valueOf((String) value);
@@ -108,16 +109,18 @@ public final class HeaderStyle {
      * @return the associated HeaderStyle
      */
     private static HeaderStyle valueOf(String name) {
-        if (name.equalsIgnoreCase(SINGLE.name))
+        if (name.equalsIgnoreCase(SINGLE.name)) {
             return SINGLE;
-        else if (name.equalsIgnoreCase(BOTH.name))
+        } else if (name.equalsIgnoreCase(BOTH.name)) {
             return BOTH;
-        else
+        } else {
             throw new IllegalArgumentException("Invalid HeaderStyle name "
                     + name);
+        }
     }
 
 
+    @Override
     public String toString() {
         return name;
     }

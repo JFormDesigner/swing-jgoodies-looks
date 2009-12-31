@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicArrowButton;
  * in that the triangle is black and positioned correctly.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 final class WindowsArrowButton extends BasicArrowButton {
 
@@ -55,11 +55,13 @@ final class WindowsArrowButton extends BasicArrowButton {
         super(direction);
     }
 
+    @Override
     public Dimension getPreferredSize() {
         int width = Math.max(5, UIManager.getInt("ScrollBar.width"));
         return new Dimension(width, width);
     }
 
+    @Override
     public void paintTriangle(
         Graphics g,
         int x,

@@ -44,7 +44,7 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 
 public final class ExtButtonAreaLayout
@@ -60,6 +60,7 @@ public final class ExtButtonAreaLayout
         super(syncAllWidths, padding);
     }
 
+    @Override
     public void layoutContainer(Container container) {
         Component[] children = container.getComponents();
 
@@ -159,6 +160,7 @@ public final class ExtButtonAreaLayout
         }
     }
 
+    @Override
     public Dimension minimumLayoutSize(Container c) {
         if (c != null) {
             Component[] children = c.getComponents();

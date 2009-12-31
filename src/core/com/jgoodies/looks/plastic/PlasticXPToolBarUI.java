@@ -40,7 +40,7 @@ import javax.swing.plaf.ComponentUI;
  * corners.
  *
  * @author  Andrej Golovnin
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class PlasticXPToolBarUI extends PlasticToolBarUI {
 
@@ -51,6 +51,7 @@ public final class PlasticXPToolBarUI extends PlasticToolBarUI {
 
     // Rollover Borders *******************************************************
 
+    @Override
     protected Border createRolloverBorder() {
         return PlasticXPBorders.getRolloverButtonBorder();
     }

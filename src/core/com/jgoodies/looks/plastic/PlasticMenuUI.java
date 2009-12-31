@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ExtBasicMenuUI;
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  *
  * @see	com.jgoodies.looks.Options
  */
@@ -63,11 +63,13 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
 		return new PlasticMenuUI();
 	}
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         oldOpaque = menuItem.isOpaque();
     }
 
+    @Override
     protected void uninstallDefaults() {
         super.uninstallDefaults();
         // TODO 1.5: Replace by
@@ -82,7 +84,8 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
 	/**
 	 * Makes the item transparent, if it is not a sub menu and the model is not selected.
 	 */
-	protected void paintMenuItem(Graphics g, JComponent c, Icon aCheckIcon,
+	@Override
+    protected void paintMenuItem(Graphics g, JComponent c, Icon aCheckIcon,
 		Icon anArrowIcon, Color background, Color foreground, int textIconGap) {
         JMenuItem b = (JMenuItem) c;
 

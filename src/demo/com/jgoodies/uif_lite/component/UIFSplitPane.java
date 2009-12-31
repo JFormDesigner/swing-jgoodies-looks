@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * and conversely, others will never show a divider border.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see javax.swing.plaf.basic.BasicSplitPaneUI
  */
@@ -224,8 +224,9 @@ public final class UIFSplitPane extends JSplitPane {
      */
     public void setDividerBorderVisible(boolean newVisibility) {
         boolean oldVisibility = isDividerBorderVisible();
-        if (oldVisibility == newVisibility)
+        if (oldVisibility == newVisibility) {
             return;
+        }
         dividerBorderVisible = newVisibility;
         firePropertyChange(PROPERTYNAME_DIVIDER_BORDER_VISIBLE,
                            oldVisibility,
@@ -240,10 +241,12 @@ public final class UIFSplitPane extends JSplitPane {
      * may be restored by a L&F at UI installation time. And so, we
      * try to reset it each time the UI is changed.
      */
+    @Override
     public void updateUI() {
         super.updateUI();
-        if (!isDividerBorderVisible())
+        if (!isDividerBorderVisible()) {
             setEmptyDividerBorder();
+        }
     }
 
 

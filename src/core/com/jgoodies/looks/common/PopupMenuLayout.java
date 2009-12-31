@@ -44,8 +44,8 @@ import javax.swing.plaf.UIResource;
  * the method {@link #invalidateLayout(Container)} and not in the method
  * {@link #preferredLayoutSize(Container)}.
  *
- * @author Andrej Golovnin
- * @version $Revision: 1.5 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.6 $
  */
 public final class PopupMenuLayout extends BoxLayout implements UIResource {
 
@@ -71,6 +71,7 @@ public final class PopupMenuLayout extends BoxLayout implements UIResource {
      *
      * @param target  the affected container
      */
+    @Override
     public synchronized void invalidateLayout(Container target) {
         if (target instanceof JPopupMenu) {
             JPopupMenu menu = (JPopupMenu) target;

@@ -43,7 +43,7 @@ import javax.swing.text.Caret;
  * focus traversal.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsTextFieldUI extends
         com.sun.java.swing.plaf.windows.WindowsTextFieldUI {
@@ -64,6 +64,7 @@ public final class WindowsTextFieldUI extends
      *
      * @return the caret
      */
+    @Override
     protected Caret createCaret() {
         return new WindowsFieldCaret();
     }
@@ -72,6 +73,7 @@ public final class WindowsTextFieldUI extends
     /**
      * The WindowsFieldCaret requires an extra pixel width.
      */
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         Dimension dim = super.getPreferredSize(c);
         return new Dimension(dim.width + 1, dim.height);

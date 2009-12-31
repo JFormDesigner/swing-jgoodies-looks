@@ -48,7 +48,7 @@ import com.jgoodies.looks.common.MenuItemRenderer;
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see	com.jgoodies.looks.Options
  */
@@ -69,6 +69,7 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
 
     // Install and Uninstall **************************************************
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         if (arrowIcon == null || arrowIcon instanceof UIResource) {
@@ -88,15 +89,18 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
         defaultTextIconGap = gap != null ? gap.intValue() : 2;
     }
 
+    @Override
     protected void uninstallDefaults() {
         super.uninstallDefaults();
         renderer = null;
     }
 
+    @Override
     protected String getPropertyPrefix() {
         return propertyPrefix;
     }
 
+    @Override
     protected Dimension getPreferredMenuItemSize(
         JComponent c,
         Icon aCheckIcon,
@@ -119,12 +123,14 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
                     textIconGap);
             int width = size.width;
             int height = size.height;
-            if (height % 2 == 1)
+            if (height % 2 == 1) {
                 height--;
+            }
             return new Dimension(width, height);
         }
     }
 
+    @Override
     protected void paintMenuItem(
         Graphics g,
         JComponent c,
@@ -159,8 +165,9 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
      * menu in menu bar vs. sub menu; reinstalls if necessary.
      */
     private void ensureSubMenuInstalled() {
-        if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX))
+        if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX)) {
             return;
+        }
 
         ButtonModel model = menuItem.getModel();
 

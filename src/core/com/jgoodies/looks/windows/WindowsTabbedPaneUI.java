@@ -56,7 +56,7 @@ import com.jgoodies.looks.Options;
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -115,6 +115,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      *
      * @see javax.swing.plaf.ComponentUI#installUI(JComponent)
      */
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         embeddedTabs    = (Boolean) c.getClientProperty(Options.EMBEDDED_TABS_KEY);
@@ -145,6 +146,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      * Unlike the superclass BasicTabbedPane, the PlasticTabbedPaneUI
      * uses an extended Handler.
      */
+    @Override
     protected PropertyChangeListener createPropertyChangeListener() {
         return new MyPropertyChangeHandler();
     }
@@ -180,6 +182,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      * In case, we have globally switched of the use tab icons,
      * we answer <code>null</code> if and only if we have a title.
      */
+    @Override
     protected Icon getIconForTab(int tabIndex) {
         String title = tabPane.getTitleAt(tabIndex);
         boolean hasTitle = (title != null) && (title.length() > 0);
@@ -188,6 +191,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                     : super.getIconForTab(tabIndex);
     }
 
+    @Override
     protected Insets getContentBorderInsets(int tabPlacement) {
         if (!hasNoContentBorder()) {
             if (IS_XP_LAF_5_OR_LATER) {
@@ -221,6 +225,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         }
     }
 
+    @Override
     protected int getTabLabelShiftX(int tabPlacement, int tabIndex, boolean isSelected) {
         switch (tabPlacement) {
             case RIGHT :
@@ -234,10 +239,12 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         }
     }
 
+    @Override
     protected int getTabLabelShiftY(int tabPlacement, int tabIndex, boolean isSelected) {
         return 0;
     }
 
+    @Override
     protected Insets getSelectedTabPadInsets(int tabPlacement) {
         if (hasEmbeddedTabs()) {
             return EMPTY_INSETS;
@@ -259,6 +266,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     }
 
 
+    @Override
     protected Insets getTabAreaInsets(int tabPlacement) {
         return hasEmbeddedTabs()
                 ? /*new Insets(1,1,1,1)*/EMPTY_INSETS
@@ -268,6 +276,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the top edge of the pane's content border.
      */
+    @Override
     protected void paintContentBorderTopEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
                                          int x, int y, int w, int h) {
@@ -293,6 +302,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the bottom edge of the pane's content border.
      */
+    @Override
     protected void paintContentBorderBottomEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
                                          int x, int y, int w, int h) {
@@ -326,6 +336,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the left Edge of the pane's content border.
      */
+    @Override
     protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
                                          int x, int y, int w, int h) {
@@ -356,6 +367,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the right Edge of the pane's content border.
      */
+    @Override
     protected void paintContentBorderRightEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
                                          int x, int y, int w, int h) {
@@ -393,6 +405,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
    /**
      * Paints the border for a single tab; it does not paint the tab's background.
      */
+    @Override
     protected void paintTabBorder(
         Graphics g,
         int tabPlacement,
@@ -463,6 +476,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         g.translate(-x + 1, -y + 1);
     }
 
+    @Override
     protected void paintFocusIndicator(
         Graphics g,
         int tabPlacement,
@@ -481,6 +495,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         }
     }
 
+    @Override
     protected boolean shouldRotateTabRuns(int tabPlacement) {
         return !hasEmbeddedTabs();
     }
@@ -489,6 +504,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      * Copied here from super(super)class to avoid labels being centered on
      * vertical tab runs if they consist of icon and text.
      */
+    @Override
     protected void layoutLabel(
         int tabPlacement,
         FontMetrics metrics,
@@ -558,6 +574,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
      */
     private final class MyPropertyChangeHandler extends BasicTabbedPaneUI.PropertyChangeHandler {
 
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             super.propertyChange(e);
 

@@ -42,7 +42,7 @@ import javax.swing.plaf.metal.MetalCheckBoxUI;
  * if the mouse is over.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticXPCheckBoxUI extends MetalCheckBoxUI {
 
@@ -52,6 +52,7 @@ public final class PlasticXPCheckBoxUI extends MetalCheckBoxUI {
         return INSTANCE;
     }
 
+    @Override
     protected BasicButtonListener createButtonListener(AbstractButton b) {
         return new ActiveBasicButtonListener(b);
     }

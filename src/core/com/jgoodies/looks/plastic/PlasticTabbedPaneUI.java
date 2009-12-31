@@ -81,7 +81,7 @@ import com.jgoodies.looks.Options;
  * @author  Karsten Lentzsch
  * @author  Torge Husfeldt
  * @author  Andrej Golovnin
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *
  * @see     Options
  */
@@ -133,6 +133,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      *
      * @see javax.swing.plaf.ComponentUI#installUI(JComponent)
      */
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         embeddedTabs    = (Boolean) c.getClientProperty(Options.EMBEDDED_TABS_KEY);
@@ -144,6 +145,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Uninstalls the UI.
      * @see javax.swing.plaf.ComponentUI#uninstallUI(JComponent)
      */
+    @Override
     public void uninstallUI(JComponent c) {
         renderer = null;
         super.uninstallUI(c);
@@ -154,6 +156,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Invoked by installUI.
      * @see javax.swing.plaf.basic.BasicTabbedPaneUI#installComponents()
      */
+    @Override
     protected void installComponents() {
         if (scrollableTabLayoutEnabled()) {
             if (tabScroller == null) {
@@ -168,6 +171,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Invoked by uninstallUI.
      * @see javax.swing.plaf.basic.BasicTabbedPaneUI#uninstallComponents()
      */
+    @Override
     protected void uninstallComponents() {
         if (scrollableTabLayoutEnabled()) {
             tabPane.remove(tabScroller.viewport);
@@ -177,6 +181,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         // if the layout policy is the SCROLL_TAB_LAYOUT, the super class
@@ -193,6 +198,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
     }
 
+    @Override
     protected void uninstallListeners() {
         if ((mouseListener != null) && (LookUtils.IS_JAVA_1_4)) {
             if (scrollableTabLayoutEnabled()) { // SCROLL_TAB_LAYOUT
@@ -205,6 +211,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         super.uninstallListeners();
     }
 
+    @Override
     protected void installKeyboardActions() {
         super.installKeyboardActions();
         // if the layout policy is the SCROLL_TAB_LAYOUT, then replace
@@ -253,10 +260,12 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Unlike the superclass BasicTabbedPane, the PlasticTabbedPaneUI
      * uses an extended Handler.
      */
+    @Override
     protected PropertyChangeListener createPropertyChangeListener() {
         return new MyPropertyChangeHandler();
     }
 
+    @Override
     protected ChangeListener createChangeListener() {
         return new TabSelectionHandler();
     }
@@ -301,7 +310,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          tabPane.repaint();
      }
 
-     public void paint(Graphics g, JComponent c) {
+     @Override
+    public void paint(Graphics g, JComponent c) {
          int selectedIndex = tabPane.getSelectedIndex();
          int tabPlacement = tabPane.getTabPlacement();
 
@@ -319,7 +329,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          paintContentBorder(g, tabPlacement, selectedIndex);
      }
 
-     protected void paintTab(Graphics g, int tabPlacement, Rectangle[] rects,
+     @Override
+    protected void paintTab(Graphics g, int tabPlacement, Rectangle[] rects,
              int tabIndex, Rectangle iconRect, Rectangle textRect) {
          Rectangle tabRect = rects[tabIndex];
          int selectedIndex = tabPane.getSelectedIndex();
@@ -533,7 +544,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
       * Returns the tab index which intersects the specified point
       * in the JTabbedPane's coordinate space.
       */
-     public int tabForCoordinate(JTabbedPane pane, int x, int y) {
+     @Override
+    public int tabForCoordinate(JTabbedPane pane, int x, int y) {
          ensureCurrentLayout();
          Point p = new Point(x, y);
 
@@ -553,7 +565,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          return -1;
      }
 
-     protected Rectangle getTabBounds(int tabIndex, Rectangle dest) {
+     @Override
+    protected Rectangle getTabBounds(int tabIndex, Rectangle dest) {
          dest.width = rects[tabIndex].width;
          dest.height = rects[tabIndex].height;
          if (scrollableTabLayoutEnabled()) { // SCROLL_TAB_LAYOUT
@@ -624,6 +637,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
          return dest;
      }
 
+    @Override
     protected void paintTabArea(Graphics g, int tabPlacement, int selectedIndex) {
         int tabCount = tabPane.getTabCount();
 
@@ -654,6 +668,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Copied here from super(super)class to avoid labels being centered on
      * vertical tab runs if they consist of icon and text
      */
+    @Override
     protected void layoutLabel(
         int tabPlacement,
         FontMetrics metrics,
@@ -727,6 +742,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * In case, we have globally switched of the use tab icons,
      * we answer <code>null</code> if and only if we have a title.
      */
+    @Override
     protected Icon getIconForTab(int tabIndex) {
         String title = tabPane.getTitleAt(tabIndex);
         boolean hasTitle = (title != null) && (title.length() > 0);
@@ -738,6 +754,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Creates the layout manager used to set the tab's bounds.
      */
+    @Override
     protected LayoutManager createLayoutManager() {
         if (tabPane.getTabLayoutPolicy() == JTabbedPane.SCROLL_TAB_LAYOUT) {
             return new TabbedPaneScrollLayout();
@@ -759,6 +776,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         return getRunForTab(tabPane.getTabCount(), tabIndex) == 0;
     }
 
+    @Override
     protected void paintContentBorder(Graphics g, int tabPlacement, int selectedIndex) {
         int    width  = tabPane.getWidth();
         int    height = tabPane.getHeight();
@@ -812,6 +830,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the insets (i.e. the width) of the content Border.
      */
+    @Override
     protected Insets getContentBorderInsets(int tabPlacement) {
         return renderer.getContentBorderInsets(super.getContentBorderInsets(tabPlacement));
     }
@@ -819,6 +838,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the amount by which the Tab Area is inset.
      */
+    @Override
     protected Insets getTabAreaInsets(int tabPlacement) {
         return renderer.getTabAreaInsets(super.getTabAreaInsets(tabPlacement));
     }
@@ -826,6 +846,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the amount by which the label should be shifted horizontally.
      */
+    @Override
     protected int getTabLabelShiftX(int tabPlacement, int tabIndex, boolean isSelected) {
         return renderer.getTabLabelShiftX(tabIndex, isSelected);
     }
@@ -833,6 +854,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the amount by which the label should be shifted vertically.
      */
+    @Override
     protected int getTabLabelShiftY(int tabPlacement, int tabIndex, boolean isSelected) {
         return renderer.getTabLabelShiftY(tabIndex, isSelected);
     }
@@ -840,6 +862,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the amount (in pixels) by which two runs should overlap.
      */
+    @Override
     protected int getTabRunOverlay(int tabPlacement) {
         return renderer.getTabRunOverlay(tabRunOverlay);
     }
@@ -848,6 +871,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * This boolean controls wheather the given run should be padded to
      * use up as much space as the others (with more tabs in them).
      */
+    @Override
     protected boolean shouldPadTabRun(int tabPlacement, int run) {
         return renderer.shouldPadTabRun(run, super.shouldPadTabRun(tabPlacement, run));
     }
@@ -857,6 +881,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * should be indented. Add six pixels for every run to make
      * diagonal lines align.
      */
+    @Override
     protected int getTabRunIndent(int tabPlacement, int run) {
         return renderer.getTabRunIndent(run);
     }
@@ -864,6 +889,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the insets for this tab.
      */
+    @Override
     protected Insets getTabInsets(int tabPlacement, int tabIndex) {
         return renderer.getTabInsets(tabIndex, tabInsets);
     }
@@ -871,6 +897,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Returns the insets for selected tab.
      */
+    @Override
     protected Insets getSelectedTabPadInsets(int tabPlacement) {
         return renderer.getSelectedTabPadInsets();
     }
@@ -878,6 +905,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Draws the rectancle around the Tab label which indicates keyboard focus.
      */
+    @Override
     protected void paintFocusIndicator(
         Graphics g,
         int tabPlacement,
@@ -894,6 +922,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * tabs is handled correctly.
      * Note: that tab backgrounds seem to be painted somewhere else, too.
      */
+    @Override
     protected void paintTabBackground(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         renderer.paintTabBackground(g, tabIndex, x, y, w, h, isSelected);
     }
@@ -903,6 +932,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * Note that the result is not clipped so you can paint outside that
      * rectangle. Tabs painted later on have a chance to overwrite though.
      */
+    @Override
     protected void paintTabBorder(Graphics g, int tabPlacement, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
         renderer.paintTabBorder(g, tabIndex, x, y, w, h, isSelected);
     }
@@ -912,6 +942,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      * will move the run containing the selected tab so that it touches
      * the content pane.
      */
+    @Override
     protected boolean shouldRotateTabRuns(int tabPlacement) {
         return false;
     }
@@ -948,6 +979,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      */
     private final class MyPropertyChangeHandler
         extends BasicTabbedPaneUI.PropertyChangeHandler {
+        @Override
         public void propertyChange(PropertyChangeEvent e) {
             String pName = e.getPropertyName();
 
@@ -978,6 +1010,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
      */
     private class TabbedPaneLayout extends BasicTabbedPaneUI.TabbedPaneLayout {
 
+        @Override
         protected void calculateTabRects(int tabPlacement, int tabCount) {
             FontMetrics metrics = getFontMetrics();
             Dimension size = tabPane.getSize();
@@ -1189,6 +1222,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * Overridden to insure the same behavior in JDK 6.0 as in JDK 5.0.
          */
+        @Override
         protected void padSelectedTab(int tabPlacement, int selectedIndex) {
             if (selectedIndex >= 0) {
                 Rectangle selRect = rects[selectedIndex];
@@ -1259,14 +1293,17 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     private final class TabbedPaneScrollLayout extends TabbedPaneLayout {
 
+        @Override
         protected int preferredTabAreaHeight(int tabPlacement, int width) {
             return calculateMaxTabHeight(tabPlacement);
         }
 
+        @Override
         protected int preferredTabAreaWidth(int tabPlacement, int height) {
             return calculateMaxTabWidth(tabPlacement);
         }
 
+        @Override
         public void layoutContainer(Container parent) {
             int tabPlacement = tabPane.getTabPlacement();
             int tabCount = tabPane.getTabCount();
@@ -1486,6 +1523,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
 
+        @Override
         protected void calculateTabRects(int tabPlacement, int tabCount) {
             FontMetrics metrics = getFontMetrics();
             Dimension size = tabPane.getSize();
@@ -1802,6 +1840,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             setBackground(bgColor);
         }
 
+        @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             PlasticTabbedPaneUI.this.paintTabArea(g, tabPane.getTabPlacement(),
@@ -1822,6 +1861,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             setRequestFocusEnabled(false);
         }
 
+        @Override
         protected void processMouseEvent(MouseEvent e) {
             super.processMouseEvent(e);
             switch (e.getID()) {
@@ -1838,12 +1878,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
 
+        @Override
         protected void paintBorder(Graphics g) {
             if (mouseIsOver && isEnabled()) {
                 super.paintBorder(g);
             }
         }
 
+        @Override
         protected void paintComponent(Graphics g) {
             if (mouseIsOver) {
                 super.paintComponent(g);
@@ -1936,14 +1978,17 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.setColor(oldColor);
         }
 
+        @Override
         public Dimension getPreferredSize() {
             return new Dimension(buttonWidth, buttonWidth);
         }
 
+        @Override
         public Dimension getMinimumSize() {
             return getPreferredSize();
         }
 
+        @Override
         public Dimension getMaximumSize() {
             return new Dimension(Integer.MAX_VALUE, Integer.MAX_VALUE);
         }
@@ -2205,18 +2250,22 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets insets) {
             return EMPTY_INSETS;
         }
 
+        @Override
         protected Insets getContentBorderInsets(Insets defaultInsets) {
             return SOUTH_INSETS;
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return EMPTY_INSETS;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left, tabInsets.bottom, tabInsets.right);
         }
@@ -2224,6 +2273,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * Paints no focus: minimal decoration is really minimal.
          */
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2234,12 +2284,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             // Embedded tabs paint no focus.
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.setColor(selectColor);
             g.fillRect(x, y, w + 1, h);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h;
@@ -2286,6 +2338,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -y);
         }
 
+        @Override
         protected void paintContentBorderBottomEdge(
             Graphics g,
             int x,
@@ -2312,30 +2365,37 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets defaultInsets) {
             return new Insets(defaultInsets.top, defaultInsets.left + 5, defaultInsets.bottom, defaultInsets.right);
         }
 
-		protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
+		@Override
+        protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
 			return isSelected ? 0 : -1;
 		}
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return tabRunOverlay - 2;
         }
 
+        @Override
         protected int getTabRunIndent(int run) {
             return 6 * run;
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return SOUTH_INSETS;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left - 2, tabInsets.bottom, tabInsets.right - 2);
         }
 
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2344,8 +2404,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle textRect,
             boolean isSelected) {
 
-            if (!tabPane.hasFocus() || !isSelected)
+            if (!tabPane.hasFocus() || !isSelected) {
                 return;
+            }
             Rectangle tabRect = rects[tabIndex];
             int top = tabRect.y;
             int left = tabRect.x + 6;
@@ -2355,12 +2416,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.drawRect(left, top, width, height);
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.setColor(selectColor);
             g.fillRect(x, y, w, h);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h - 1;
@@ -2390,6 +2453,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x + 3, -y);
         }
 
+        @Override
         protected void paintContentBorderBottomEdge(
             Graphics g,
             int x,
@@ -2417,6 +2481,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -bottom);
         }
 
+        @Override
         protected int getTabsOverlay() {
             return 4;
         }
@@ -2432,26 +2497,32 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets insets) {
             return EMPTY_INSETS;
         }
 
+        @Override
         protected Insets getContentBorderInsets(Insets defaultInsets) {
             return WEST_INSETS;
         }
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return 0;
         }
 
+        @Override
         protected boolean shouldPadTabRun(int run, boolean aPriori) {
             return false;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left, tabInsets.bottom, tabInsets.right);
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return EMPTY_INSETS;
         }
@@ -2459,6 +2530,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * minimal decoration is really minimal: no focus.
          */
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2469,11 +2541,13 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             // Embedded tabs paint no focus.
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
             g.setColor(selectColor);
             g.fillRect(x, y, w, h);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h;
@@ -2519,6 +2593,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -y);
         }
 
+        @Override
         protected void paintContentBorderLeftEdge(
             Graphics g,
             int x,
@@ -2542,30 +2617,37 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets defaultInsets) {
             return new Insets(defaultInsets.top + 4, defaultInsets.left, defaultInsets.bottom, defaultInsets.right);
         }
 
+        @Override
         protected int getTabLabelShiftX(int tabIndex, boolean isSelected) {
             return 1;
         }
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return 1;
         }
 
+        @Override
         protected boolean shouldPadTabRun(int run, boolean aPriori) {
             return false;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left - 5, tabInsets.bottom + 1, tabInsets.right - 5);
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return WEST_INSETS;
         }
 
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2574,8 +2656,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle textRect,
             boolean isSelected) {
 
-            if (!tabPane.hasFocus() || !isSelected)
+            if (!tabPane.hasFocus() || !isSelected) {
                 return;
+            }
             Rectangle tabRect = rects[tabIndex];
             int top = tabRect.y + 2;
             int left = tabRect.x + 3;
@@ -2585,6 +2668,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.drawRect(left, top, width, height);
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
             if (!isSelected) {
                 g.setColor(selectLight);
@@ -2595,6 +2679,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h - 1;
@@ -2618,6 +2703,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -y);
         }
 
+        @Override
         protected void paintContentBorderLeftEdge(
             Graphics g,
             int x,
@@ -2650,30 +2736,37 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets insets) {
             return EMPTY_INSETS;
         }
 
+        @Override
         protected Insets getContentBorderInsets(Insets defaultInsets) {
             return EAST_INSETS;
         }
 
+        @Override
         protected int getTabRunIndent(int run) {
             return 4 * run;
         }
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return 0;
         }
 
+        @Override
         protected boolean shouldPadTabRun(int run, boolean aPriori) {
             return false;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left, tabInsets.bottom, tabInsets.right);
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return EMPTY_INSETS;
         }
@@ -2681,6 +2774,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * Minimal decoration: no focus.
          */
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2691,12 +2785,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             // Embedded tabs paint no focus.
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.setColor(selectColor);
             g.fillRect(x, y, w, h);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h;
@@ -2741,6 +2837,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x - 1, -y);
         }
 
+        @Override
         protected void paintContentBorderRightEdge(
             Graphics g,
             int x,
@@ -2765,26 +2862,32 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected int getTabLabelShiftX(int tabIndex, boolean isSelected) {
             return 1;
         }
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return 1;
         }
 
+        @Override
         protected boolean shouldPadTabRun(int run, boolean aPriori) {
             return false;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left - 5, tabInsets.bottom + 1, tabInsets.right - 5);
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return EAST_INSETS;
         }
 
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2793,8 +2896,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle textRect,
             boolean isSelected) {
 
-            if (!tabPane.hasFocus() || !isSelected)
+            if (!tabPane.hasFocus() || !isSelected) {
                 return;
+            }
             Rectangle tabRect = rects[tabIndex];
             int top = tabRect.y + 2;
             int left = tabRect.x + 3;
@@ -2804,6 +2908,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.drawRect(left, top, width, height);
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
             if (!isSelected) {
                 g.setColor(selectLight);
@@ -2814,6 +2919,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int bottom = h - 1;
@@ -2836,6 +2942,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -y);
         }
 
+        @Override
         protected void paintContentBorderRightEdge(
             Graphics g,
             int x,
@@ -2867,18 +2974,22 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets insets) {
             return EMPTY_INSETS;
         }
 
+        @Override
         protected Insets getContentBorderInsets(Insets defaultInsets) {
             return NORTH_INSETS;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top, tabInsets.left + 1, tabInsets.bottom, tabInsets.right);
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return EMPTY_INSETS;
         }
@@ -2886,6 +2997,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * Minimal decoration: no focus.
          */
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -2896,12 +3008,14 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             // Embedded tabs paint no focus.
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.setColor(selectColor);
             g.fillRect(x, y, w, h);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.translate(x, y);
@@ -2950,6 +3064,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x, -y);
         }
 
+        @Override
         protected void paintContentBorderTopEdge(
             Graphics g,
             int x,
@@ -2974,30 +3089,37 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             super(tabPane);
         }
 
+        @Override
         protected Insets getTabAreaInsets(Insets defaultInsets) {
             return new Insets(defaultInsets.top, defaultInsets.left + 4, defaultInsets.bottom, defaultInsets.right);
         }
 
-		protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
+		@Override
+        protected int getTabLabelShiftY(int tabIndex, boolean isSelected) {
 			return isSelected ? -1 : 0;
 		}
 
+        @Override
         protected int getTabRunOverlay(int tabRunOverlay) {
             return tabRunOverlay - 2;
         }
 
+        @Override
         protected int getTabRunIndent(int run) {
             return 6 * run;
         }
 
+        @Override
         protected Insets getSelectedTabPadInsets() {
             return NORTH_INSETS;
         }
 
+        @Override
         protected Insets getTabInsets(int tabIndex, Insets tabInsets) {
             return new Insets(tabInsets.top-1, tabInsets.left - 4, tabInsets.bottom, tabInsets.right - 4);
         }
 
+        @Override
         protected void paintFocusIndicator(
             Graphics g,
             Rectangle[] rects,
@@ -3006,8 +3128,9 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Rectangle textRect,
             boolean isSelected) {
 
-            if (!tabPane.hasFocus() || !isSelected)
+            if (!tabPane.hasFocus() || !isSelected) {
                 return;
+            }
             Rectangle tabRect = rects[tabIndex];
             int top = tabRect.y +1 ;
             int left = tabRect.x + 4;
@@ -3017,6 +3140,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.drawRect(left, top, width, height);
         }
 
+        @Override
         protected void paintTabBackground(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             int sel = (isSelected) ? 0 : 1;
@@ -3025,6 +3149,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.fillRect(x - 1, y + sel + h / 2, w + 2, h - h / 2);
         }
 
+        @Override
         protected void paintTabBorder(Graphics g, int tabIndex, int x, int y, int w, int h, boolean isSelected) {
 
             g.translate(x - 4, y);
@@ -3052,6 +3177,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(-x + 4, -y);
         }
 
+        @Override
         protected void paintContentBorderTopEdge(
             Graphics g,
             int x,
@@ -3078,6 +3204,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             }
         }
 
+        @Override
         protected int getTabsOverlay() {
             return 6;
         }

@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * Paints nicely rendered one touch triangles.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see WindowsSplitPaneUI
  */
@@ -133,6 +133,7 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
      * Creates and return an instance of JButton that can be used to
      * collapse the left component in the metal split pane.
      */
+    @Override
     protected JButton createLeftOneTouchButton() {
         JButton b = new JButton() {
                 // Sprite buffer for the arrow image of the left button
@@ -143,10 +144,12 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
                     0, 3, 3, 3, 3, 3, 3, 3, 3 }
             };
 
+            @Override
             public void setBorder(Border border) {
                 // Ignore borders
             }
 
+            @Override
             public void paint(Graphics g) {
                 JSplitPane theSplitPane = getSplitPaneFromSuper();
                 if (theSplitPane != null) {
@@ -220,6 +223,7 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
      * Creates and return an instance of JButton that can be used to
      * collapse the right component in the metal split pane.
      */
+    @Override
     protected JButton createRightOneTouchButton() {
         JButton b = new JButton() {
                 // Sprite buffer for the arrow image of the right button
@@ -230,10 +234,12 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
                     0, 0, 0, 0, 3, 0, 0, 0 }
             };
 
+            @Override
             public void setBorder(Border border) {
                 // Ignore borders
             }
 
+            @Override
             public void paint(Graphics g) {
                 JSplitPane theSplitPane = getSplitPaneFromSuper();
                 if (theSplitPane != null) {
@@ -330,6 +336,7 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
         return super.splitPane;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (splitPane.isOpaque()) {
             Color bgColor = splitPane.hasFocus()

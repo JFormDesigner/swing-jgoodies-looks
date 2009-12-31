@@ -48,7 +48,7 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
  * <tt>ScrollBar.maxBumpsWidth</tt> to limit the with of the scroll bar bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 
 public final class PlasticScrollBarUI extends MetalScrollBarUI {
@@ -70,24 +70,28 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 	}
 
 
+    @Override
     protected void installDefaults() {
     	super.installDefaults();
 		bumps = new PlasticBumps(10, 10, thumbHighlightColor, thumbShadow, thumbColor);
     }
 
 
-	protected JButton createDecreaseButton(int orientation) {
+	@Override
+    protected JButton createDecreaseButton(int orientation) {
 		decreaseButton = new PlasticArrowButton(orientation, scrollBarWidth, isFreeStanding);
 		return decreaseButton;
 	}
 
 
-	protected JButton createIncreaseButton(int orientation) {
+	@Override
+    protected JButton createIncreaseButton(int orientation) {
 		increaseButton = new PlasticArrowButton(orientation, scrollBarWidth, isFreeStanding);
 		return increaseButton;
 	}
 
 
+    @Override
     protected void configureScrollBarColors() {
         super.configureScrollBarColors();
         shadowColor         = UIManager.getColor(PROPERTY_PREFIX + "shadow");
@@ -99,7 +103,8 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
     }
 
 
-	protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+	@Override
+    protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
 		g.translate(trackBounds.x, trackBounds.y);
 
 		boolean leftToRight = PlasticUtils.isLeftToRight(c);
@@ -179,7 +184,8 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 	}
 
 
-	protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+	@Override
+    protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 		if (!c.isEnabled()) {
 			return;
 		}
@@ -242,8 +248,9 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 		}
 		g.translate(-thumbBounds.x, -thumbBounds.y);
 
-		if (PlasticUtils.is3D(PROPERTY_PREFIX))
-			paintThumb3D(g, thumbBounds);
+		if (PlasticUtils.is3D(PROPERTY_PREFIX)) {
+            paintThumb3D(g, thumbBounds);
+        }
 
 	}
 

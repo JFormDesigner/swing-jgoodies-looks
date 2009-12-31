@@ -44,7 +44,7 @@ import javax.swing.text.View;
  * and that the border can paint the focus.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 
@@ -68,6 +68,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     /**
      * In addition to the superclass we check if the border paints the focus.
      */
+    @Override
     public void installDefaults(AbstractButton b) {
         super.installDefaults(b);
         borderPaintsFocus =
@@ -78,6 +79,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 
     // Painting ***************************************************************
 
+    @Override
     public void update(Graphics g, JComponent c) {
         AbstractButton b = (AbstractButton) c;
         if (c.isOpaque()) {
@@ -104,6 +106,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
     /**
      * Paints the focus close to the button's border.
      */
+    @Override
     protected void paintFocus(
         Graphics g,
         AbstractButton b,
@@ -111,8 +114,9 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
         Rectangle textRect,
         Rectangle iconRect) {
 
-        if (borderPaintsFocus)
+        if (borderPaintsFocus) {
             return;
+        }
 
         boolean isDefault = false;
         int topLeftInset = isDefault ? 3 : 2;
@@ -127,6 +131,7 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
      * Unlike the BasicToggleButtonUI.paint, we don't fill the content area;
      * this has been done by the update method before.
      */
+    @Override
     public void paint(Graphics g, JComponent c) {
         AbstractButton b = (AbstractButton) c;
         ButtonModel model = b.getModel();
@@ -224,10 +229,12 @@ public class PlasticToggleButtonUI extends MetalToggleButtonUI {
      * @return true indicates a 3D effect, false flat
      */
     protected boolean is3D(AbstractButton b) {
-        if (PlasticUtils.force3D(b))
+        if (PlasticUtils.force3D(b)) {
             return true;
-        if (PlasticUtils.forceFlat(b))
+        }
+        if (PlasticUtils.forceFlat(b)) {
             return false;
+        }
         ButtonModel model = b.getModel();
         return PlasticUtils.is3D("ToggleButton.")
             && b.isBorderPainted()

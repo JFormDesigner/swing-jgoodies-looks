@@ -43,7 +43,7 @@ import com.jgoodies.looks.Options;
  * <code>UIManager</code> <code>defaultIconSize</code> key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public class MinimumSizedIcon implements Icon {
@@ -76,8 +76,9 @@ public class MinimumSizedIcon implements Icon {
 
 
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		if (icon != null)
-			icon.paintIcon(c, g, x + xOffset, y + yOffset);
+		if (icon != null) {
+            icon.paintIcon(c, g, x + xOffset, y + yOffset);
+        }
 	}
 
 

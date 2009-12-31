@@ -42,11 +42,12 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class DesertBlue extends DesertBluer {
 
-	public String getName() { return "Desert Blue"; }
+	@Override
+    public String getName() { return "Desert Blue"; }
 
 
 	private static final ColorUIResource SECONDARY2	= new ColorUIResource(148, 144, 140);
@@ -54,26 +55,37 @@ public class DesertBlue extends DesertBluer {
 
 
 
-	protected ColorUIResource getPrimary1()		    { return Colors.GRAY_DARK;         }
-	protected ColorUIResource getPrimary2()		    { return Colors.BLUE_LOW_MEDIUM;   }
-	protected ColorUIResource getPrimary3()		    { return Colors.BLUE_LOW_LIGHTEST; }
+	@Override
+    protected ColorUIResource getPrimary1()		    { return Colors.GRAY_DARK;         }
+	@Override
+    protected ColorUIResource getPrimary2()		    { return Colors.BLUE_LOW_MEDIUM;   }
+	@Override
+    protected ColorUIResource getPrimary3()		    { return Colors.BLUE_LOW_LIGHTEST; }
 
-	protected ColorUIResource getSecondary1()	    { return Colors.GRAY_MEDIUM; }
-	protected ColorUIResource getSecondary2()	    { return SECONDARY2;         }
-	protected ColorUIResource getSecondary3()	    { return SECONDARY3;         }
+	@Override
+    protected ColorUIResource getSecondary1()	    { return Colors.GRAY_MEDIUM; }
+	@Override
+    protected ColorUIResource getSecondary2()	    { return SECONDARY2;         }
+	@Override
+    protected ColorUIResource getSecondary3()	    { return SECONDARY3;         }
 
-	public    ColorUIResource getTitleTextColor()	{ return Colors.BLUE_MEDIUM_DARKEST;}
+	@Override
+    public    ColorUIResource getTitleTextColor()	{ return Colors.BLUE_MEDIUM_DARKEST;}
 
+    @Override
     public ColorUIResource getFocusColor() {
         return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.YELLOW_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }
 	// Background
-	public    ColorUIResource getPrimaryControlShadow()		{ return getPrimary3(); }
-	public    ColorUIResource getMenuItemSelectedBackground()	{ return getPrimary1(); }
+	@Override
+    public    ColorUIResource getPrimaryControlShadow()		{ return getPrimary3(); }
+	@Override
+    public    ColorUIResource getMenuItemSelectedBackground()	{ return getPrimary1(); }
 
-	public void addCustomEntriesToTable(UIDefaults table) {
+	@Override
+    public void addCustomEntriesToTable(UIDefaults table) {
 		super.addCustomEntriesToTable(table);
 		Object[] uiDefaults = {
 			"ScrollBar.is3DEnabled", 				Boolean.FALSE,

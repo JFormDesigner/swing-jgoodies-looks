@@ -47,7 +47,7 @@ import com.jgoodies.looks.common.ExtButtonAreaLayout;
  * UI style guides.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class PlasticOptionPaneUI extends BasicOptionPaneUI {
 
@@ -59,6 +59,7 @@ public final class PlasticOptionPaneUI extends BasicOptionPaneUI {
      * Creates and returns a Container containin the buttons. The buttons
      * are created by calling <code>getButtons</code>.
      */
+    @Override
     protected Container createButtonArea() {
         JPanel bottom = new JPanel(new ExtButtonAreaLayout(true, 6));
         bottom.setBorder(UIManager.getBorder("OptionPane.buttonAreaBorder"));

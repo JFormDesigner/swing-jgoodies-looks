@@ -41,7 +41,7 @@ import javax.swing.text.Caret;
  * after a keyboard focus traversal.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 public final class WindowsFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 
@@ -61,6 +61,7 @@ public final class WindowsFormattedTextFieldUI extends BasicFormattedTextFieldUI
      *
      * @return the caret
      */
+    @Override
     protected Caret createCaret() {
         return new WindowsFieldCaret();
     }

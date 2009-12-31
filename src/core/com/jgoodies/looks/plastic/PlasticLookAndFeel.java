@@ -63,7 +63,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.41 $
+ * @version $Revision: 1.42 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -179,14 +179,17 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     // L&f Description ********************************************************
 
+    @Override
     public String getID() {
         return "JGoodies Plastic";
     }
 
+    @Override
     public String getName() {
         return "JGoodies Plastic";
     }
 
+    @Override
     public String getDescription() {
         return "The JGoodies Plastic Look and Feel"
             + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
@@ -218,8 +221,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     public static FontPolicy getFontPolicy() {
         FontPolicy policy =
             (FontPolicy) UIManager.get(Options.PLASTIC_FONT_POLICY_KEY);
-        if (policy != null)
+        if (policy != null) {
             return policy;
+        }
 
         FontPolicy defaultPolicy = FontPolicies.getDefaultPlasticPolicy();
         return FontPolicies.customSettingsPolicy(defaultPolicy);
@@ -330,6 +334,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *
      * @see #uninitialize
      */
+    @Override
     public void initialize() {
         super.initialize();
         ShadowPopupFactory.install();
@@ -342,6 +347,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *
      * @see #initialize
      */
+    @Override
     public void uninitialize() {
         super.uninitialize();
         ShadowPopupFactory.uninstall();
@@ -358,6 +364,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @param icon the icon to generate disabled icon from.
      * @return disabled icon, or null if a suitable icon can not be generated.
      */
+    @Override
     public Icon getDisabledIcon(JComponent component, Icon icon) {
         Icon disabledIcon = RGBGrayFilter.getDisabledIcon(component, icon);
         return disabledIcon != null
@@ -373,7 +380,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @param table   the UIDefaults table to work with
 	 * @see javax.swing.plaf.basic.BasicLookAndFeel#getDefaults()
 	 */
-	protected void initClassDefaults(UIDefaults table) {
+	@Override
+    protected void initClassDefaults(UIDefaults table) {
 		super.initClassDefaults(table);
 
 		final String plasticPrefix = "com.jgoodies.looks.plastic.Plastic";
@@ -452,7 +460,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	}
 
 
-	protected void initComponentDefaults(UIDefaults table) {
+	@Override
+    protected void initComponentDefaults(UIDefaults table) {
 		super.initComponentDefaults(table);
 
         MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout(getName(), table);
@@ -704,7 +713,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *
      * @param table   the UIDefaults table to work with
 	 */
-	protected void initSystemColorDefaults(UIDefaults table) {
+	@Override
+    protected void initSystemColorDefaults(UIDefaults table) {
 		super.initSystemColorDefaults(table);
 		table.put("unifiedControlShadow", table.getColor("controlDkShadow"));
 		table.put("primaryControlHighlight", getPrimaryControlHighlight());
@@ -792,8 +802,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @return a list of installed color/font themes
 	 */
 	public static List getInstalledThemes() {
-		if (null == installedThemes)
-			installDefaultThemes();
+		if (null == installedThemes) {
+            installDefaultThemes();
+        }
 
 		Collections.sort(installedThemes, new Comparator() {
 			public int compare(Object o1, Object o2) {
@@ -832,8 +843,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		    "SkyPink",
 		    "SkyRed",
 		    "SkyYellow"};
-		for (int i = themeNames.length - 1; i >= 0; i--)
-			installTheme(createTheme(themeNames[i]));
+		for (int i = themeNames.length - 1; i >= 0; i--) {
+            installTheme(createTheme(themeNames[i]));
+        }
 	}
 
 
@@ -848,7 +860,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	    String className = THEME_CLASSNAME_PREFIX + themeName;
 	    try {
 		    Class cl = Class.forName(className);
-            return (PlasticTheme) (cl.newInstance());
+            return (PlasticTheme) cl.newInstance();
         } catch (ClassNotFoundException e) {
             // Ignore the exception here and log below.
         } catch (IllegalAccessException e) {
@@ -867,8 +879,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @param theme    the theme to install
 	 */
 	public static void installTheme(PlasticTheme theme) {
-		if (null == installedThemes)
-			installDefaultThemes();
+		if (null == installedThemes) {
+            installDefaultThemes();
+        }
 		installedThemes.add(theme);
 	}
 
@@ -886,12 +899,14 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     public static PlasticTheme getPlasticTheme() {
         if (LookUtils.IS_JAVA_5_OR_LATER) {
             MetalTheme theme = getCurrentTheme0();
-            if (theme instanceof PlasticTheme)
+            if (theme instanceof PlasticTheme) {
                 return (PlasticTheme) theme;
+            }
         }
         PlasticTheme uimanagerTheme = (PlasticTheme) UIManager.get(THEME_KEY);
-        if (uimanagerTheme != null)
+        if (uimanagerTheme != null) {
             return uimanagerTheme;
+        }
 
         PlasticTheme initialTheme = createMyDefaultTheme();
         setPlasticTheme(initialTheme);
@@ -913,8 +928,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @see #getPlasticTheme()
      */
     public static void setPlasticTheme(PlasticTheme theme) {
-        if (theme == null)
+        if (theme == null) {
             throw new NullPointerException("The theme must not be null.");
+        }
 
         UIManager.put(THEME_KEY, theme);
         // Also set the theme in the superclass.

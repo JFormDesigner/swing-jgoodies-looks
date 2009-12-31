@@ -42,7 +42,7 @@ import javax.swing.plaf.metal.MetalScrollButton;
  * Renders the arrow buttons in scroll bars and spinners.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PlasticArrowButton extends MetalScrollButton {
 
@@ -60,13 +60,15 @@ class PlasticArrowButton extends MetalScrollButton {
 	}
 
 
+    @Override
     public void setFreeStanding(boolean freeStanding) {
     	super.setFreeStanding(freeStanding);
 	    isFreeStanding = freeStanding;
     }
 
 
-	public void paint(Graphics g) {
+	@Override
+    public void paint(Graphics g) {
 		boolean leftToRight = PlasticUtils.isLeftToRight(this);
 		boolean isEnabled   = getParent().isEnabled();
 		boolean isPressed   = getModel().isPressed();
@@ -98,8 +100,9 @@ class PlasticArrowButton extends MetalScrollButton {
 			paintWest(g, isEnabled, arrowColor, isPressed,
 				width, height, w, h, arrowHeight);
 		}
-		if (PlasticUtils.is3D("ScrollBar."))
-			paint3D(g);
+		if (PlasticUtils.is3D("ScrollBar.")) {
+            paint3D(g);
+        }
 	}
 
     /**
@@ -332,15 +335,17 @@ class PlasticArrowButton extends MetalScrollButton {
 
 	private void paint3D(Graphics g) {
 		ButtonModel buttonModel = getModel();
-		if (buttonModel.isArmed() && buttonModel.isPressed() || buttonModel.isSelected())
-			return;
+		if (buttonModel.isArmed() && buttonModel.isPressed() || buttonModel.isSelected()) {
+            return;
+        }
 
 		int width  = getWidth();
 		int height = getHeight();
-		if (getDirection() == EAST)
-			width -= 2;
-		else if (getDirection() == SOUTH)
-			height -= 2;
+		if (getDirection() == EAST) {
+            width -= 2;
+        } else if (getDirection() == SOUTH) {
+            height -= 2;
+        }
 
 		Rectangle r = new Rectangle(1, 1, width, height);
 		boolean isHorizontal = (getDirection() == EAST || getDirection() == WEST);

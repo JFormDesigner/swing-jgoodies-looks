@@ -43,7 +43,7 @@ import com.jgoodies.looks.common.ComboBoxEditorTextField;
  * a compound border with an inner <code>MarginBorder</code>.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 class PlasticComboBoxEditor extends BasicComboBoxEditor {
 
@@ -51,6 +51,7 @@ class PlasticComboBoxEditor extends BasicComboBoxEditor {
         editor = new ComboBoxEditorTextField(isTableCellEditor);
     }
 
+    @Override
     public void setItem(Object item) {
         super.setItem(item);
         editor.selectAll();

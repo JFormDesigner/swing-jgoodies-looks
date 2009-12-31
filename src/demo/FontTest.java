@@ -21,7 +21,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class FontTest {
 
@@ -139,8 +139,7 @@ public final class FontTest {
     private void addSystemProperties(StringBuffer buffer, String description, String[] keys) {
         buffer.append("\n\n");
         buffer.append(description);
-        for (int i = 0; i < keys.length; i++) {
-            String key = keys[i];
+        for (String key : keys) {
             String value = LookUtils.getSystemProperty(key, "n/a");
             buffer.append("\n    ");
             buffer.append(key);
@@ -154,8 +153,7 @@ public final class FontTest {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
         buffer.append(description);
-        for (int i = 0; i < keys.length; i++) {
-            String key = keys[i];
+        for (String key : keys) {
             Object value = toolkit.getDesktopProperty(key);
             String printString;
             if (value == null) {
@@ -195,12 +193,13 @@ public final class FontTest {
 
 
     private static String yesNoDontKnow(Boolean b) {
-        if (Boolean.TRUE.equals(b))
+        if (Boolean.TRUE.equals(b)) {
             return "yes";
-        else if (Boolean.FALSE.equals(b))
+        } else if (Boolean.FALSE.equals(b)) {
             return "no";
-        else
+        } else {
             return "don't know";
+        }
     }
 
 
@@ -305,8 +304,9 @@ public final class FontTest {
      * @return true if the display language is localized, false if not
      */
     private static boolean localeHasLocalizedDisplayLanguage(Locale locale) {
-        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage()))
+        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
             return true;
+        }
         String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
         String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
         return !englishDisplayLanguage.equals(localizedDisplayLanguage);

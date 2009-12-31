@@ -69,7 +69,7 @@ import com.jgoodies.looks.Options;
  * </pre>
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.WindowsTreeUI {
@@ -84,6 +84,7 @@ public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.Windows
 
     // Installation ***********************************************************
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         updateLineStyle(c.getClientProperty(Options.TREE_LINE_STYLE_KEY));
@@ -91,6 +92,7 @@ public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.Windows
         c.addPropertyChangeListener(lineStyleHandler);
     }
 
+    @Override
     public void uninstallUI(JComponent c) {
         c.removePropertyChangeListener(lineStyleHandler);
         super.uninstallUI(c);
@@ -99,12 +101,14 @@ public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.Windows
 
     // Painting ***************************************************************
 
+    @Override
     protected void paintVerticalLine(Graphics g, JComponent c, int x, int top, int bottom) {
         if (linesEnabled) {
             super.paintVerticalLine(g, c, x, top, bottom);
         }
     }
 
+    @Override
     protected void paintHorizontalLine(Graphics g, JComponent c, int y, int left, int right) {
         if (linesEnabled) {
             super.paintHorizontalLine(g, c, y, left, right);
@@ -112,6 +116,7 @@ public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.Windows
     }
 
     // Draws the icon centered at (x,y)
+    @Override
     protected void drawCentered(Component c, Graphics graphics, Icon icon, int x, int y) {
 		icon.paintIcon(c, graphics,
 				x - icon.getIconWidth()  / 2 - 1,

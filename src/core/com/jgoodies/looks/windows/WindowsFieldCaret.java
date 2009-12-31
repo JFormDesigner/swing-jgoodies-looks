@@ -51,7 +51,7 @@ import com.jgoodies.looks.Options;
  * For the latter see also issue #4337647 in Sun's bug database.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  *
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
@@ -70,6 +70,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     private boolean isKeyboardFocusEvent = true;
 
 
+    @Override
     public void focusGained(FocusEvent e) {
         final JTextComponent c = getComponent();
         if (c.isEnabled()) {
@@ -106,6 +107,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void focusLost(FocusEvent e) {
         super.focusLost(e);
         if (!e.isTemporary()) {
@@ -118,6 +120,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void mousePressed(MouseEvent e) {
         if (SwingUtilities.isLeftMouseButton(e) || e.isPopupTrigger()) {
             isKeyboardFocusEvent = false;
@@ -127,6 +130,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
+    @Override
     public void mouseReleased(MouseEvent e) {
         super.mouseReleased(e);
         // super.mousePressed() does not transfer focus on popup clicks.
@@ -149,6 +153,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
      * caret out into the field by about a quarter of
      * a field length if not visible.
      */
+    @Override
     protected void adjustVisibility(Rectangle r) {
         SwingUtilities.invokeLater(new SafeScroller(r));
     }
@@ -159,6 +164,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
      *
      * @return the painter
      */
+    @Override
     protected Highlighter.HighlightPainter getSelectionPainter() {
         return WindowsPainter;
     }
@@ -233,6 +239,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
          * @param bounds the bounding box for the highlight
          * @param c the editor
          */
+        @Override
         public void paint(Graphics g, int offs0, int offs1, Shape bounds,
                 JTextComponent c) {
             Rectangle alloc = bounds.getBounds();
@@ -305,6 +312,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
          * @param view View painting for
          * @return region drawing occured in
          */
+        @Override
         public Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds,
                 JTextComponent c, View view) {
             Color color = getColor();

@@ -41,7 +41,7 @@ import javax.swing.plaf.ComponentUI;
  * the preferred size.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsScrollBarUI extends com.sun.java.swing.plaf.windows.WindowsScrollBarUI {
 
@@ -50,12 +50,14 @@ public final class WindowsScrollBarUI extends com.sun.java.swing.plaf.windows.Wi
 	}
 
 
-	protected JButton createDecreaseButton(int orientation) {
+	@Override
+    protected JButton createDecreaseButton(int orientation) {
 		return new WindowsArrowButton(orientation);
 	}
 
 
-	protected JButton createIncreaseButton(int orientation) {
+	@Override
+    protected JButton createIncreaseButton(int orientation) {
 		return createDecreaseButton(orientation);
 	}
 

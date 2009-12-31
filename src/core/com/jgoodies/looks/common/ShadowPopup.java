@@ -44,8 +44,8 @@ import javax.swing.border.Border;
  * in <code>#show</code> it snapshots the screen background as needed,
  * and in <code>#hide</code> it cleans up all changes made before.
  *
- * @author Andrej Golovnin
- * @version $Revision: 1.9 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.10 $
  *
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -160,9 +160,11 @@ public final class ShadowPopup extends Popup {
      * In addition to the superclass behavior, we reset the stored
      * horizontal and vertical drop shadows - if any.
      */
+    @Override
     public void hide() {
-        if (contents == null)
+        if (contents == null) {
             return;
+        }
 
         JComponent parent = (JComponent) contents.getParent();
         popup.hide();
@@ -187,6 +189,7 @@ public final class ShadowPopup extends Popup {
      * heavy-weight container, we try to snapshot the background.
      * If the <code>Popup</code> is currently visible, it remains visible.
      */
+    @Override
     public void show() {
         if (heavyWeightContainer != null) {
             snapshot();

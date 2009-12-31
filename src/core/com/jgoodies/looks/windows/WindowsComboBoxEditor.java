@@ -42,7 +42,7 @@ import com.jgoodies.looks.common.ComboBoxEditorTextField;
  * text fields: a compound border with an inner <code>MarginBorder</code>.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 class WindowsComboBoxEditor extends BasicComboBoxEditor {
 
@@ -50,6 +50,7 @@ class WindowsComboBoxEditor extends BasicComboBoxEditor {
         editor = new ComboBoxEditorTextField(isTableCellEditor);
     }
 
+    @Override
     public void setItem(Object item) {
         super.setItem(item);
         editor.selectAll();

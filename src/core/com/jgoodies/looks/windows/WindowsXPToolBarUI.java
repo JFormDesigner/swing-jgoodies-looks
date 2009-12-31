@@ -49,7 +49,7 @@ import com.sun.java.swing.plaf.windows.WindowsToolBarUI;
  * Adds behavior for handling different types of borders.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
@@ -62,12 +62,14 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
     // Handling Special Borders *********************************************
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         installSpecialBorder();
     }
 
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         listener = createBorderStyleListener();
@@ -75,6 +77,7 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
     }
 
 
+    @Override
     protected void uninstallListeners() {
         toolBar.removePropertyChangeListener(listener);
         super.uninstallListeners();
@@ -108,29 +111,32 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
         String suffix;
         BorderStyle borderStyle = BorderStyle.from(toolBar,
                 WindowsLookAndFeel.BORDER_STYLE_KEY);
-        if (borderStyle == BorderStyle.EMPTY)
+        if (borderStyle == BorderStyle.EMPTY) {
             suffix = "emptyBorder";
-        else if (borderStyle == BorderStyle.SEPARATOR)
+        } else if (borderStyle == BorderStyle.SEPARATOR) {
             suffix = "separatorBorder";
-        else if (borderStyle == BorderStyle.ETCHED)
+        } else if (borderStyle == BorderStyle.ETCHED) {
             suffix = "etchedBorder";
-        else if (HeaderStyle.from(toolBar) == HeaderStyle.BOTH)
+        } else if (HeaderStyle.from(toolBar) == HeaderStyle.BOTH) {
             suffix = "headerBorder";
-        else
+        } else {
             suffix = "border";
+        }
         LookAndFeel.installBorder(toolBar, "ToolBar." + suffix);
     }
 
 
     // Handling Rollover Borders ********************************************
 
+    @Override
     protected void setBorderToRollover(Component c) {
         if (c instanceof AbstractButton) {
             super.setBorderToRollover(c);
         } else if (c instanceof Container) {
             Container cont = (Container) c;
-            for (int i = 0; i < cont.getComponentCount(); i++)
+            for (int i = 0; i < cont.getComponentCount(); i++) {
                 super.setBorderToRollover(cont.getComponent(i));
+            }
         }
     }
 

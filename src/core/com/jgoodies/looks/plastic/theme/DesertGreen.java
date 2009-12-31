@@ -37,22 +37,26 @@ import javax.swing.plaf.ColorUIResource;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class DesertGreen extends DesertBlue {
 
+    @Override
     public String getName() {
         return "Desert Green";
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.GREEN_LOW_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.GREEN_LOW_LIGHTEST;
     }
 
+    @Override
     public ColorUIResource getTitleTextColor() {
         return Colors.GRAY_DARKER;
     }

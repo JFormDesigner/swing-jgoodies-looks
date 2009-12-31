@@ -57,7 +57,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * constraints made in this class and its superclasses.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
@@ -84,7 +84,8 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	}
 
 
-	public void installUI(JComponent c) {
+	@Override
+    public void installUI(JComponent c) {
 		frame = (JInternalFrame) c;
 
 		paletteListener		= new PaletteListener    (this);
@@ -104,7 +105,8 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	}
 
 
-	public void uninstallUI(JComponent c) {
+	@Override
+    public void uninstallUI(JComponent c) {
 		frame = (JInternalFrame) c;
 
 		c.removePropertyChangeListener(paletteListener);
@@ -121,6 +123,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	}
 
 
+    @Override
     protected void installDefaults() {
     	super.installDefaults();
 
@@ -130,17 +133,20 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 		JComponent contentPane = (JComponent) frame.getContentPane();
 		if (contentPane != null) {
 	          Color bg = contentPane.getBackground();
-		  if (bg instanceof UIResource)
-		    contentPane.setBackground(null);
+		  if (bg instanceof UIResource) {
+            contentPane.setBackground(null);
+        }
 		}
 		frame.setBackground(UIManager.getLookAndFeelDefaults().getColor("control"));
     }
 
 
-	protected void installKeyboardActions()	{
+	@Override
+    protected void installKeyboardActions()	{
     }
 
-	protected void uninstallKeyboardActions()	{
+	@Override
+    protected void uninstallKeyboardActions()	{
     }
 
 
@@ -155,7 +161,8 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	}
 
 
-	protected JComponent createNorthPane(JInternalFrame w) {
+	@Override
+    protected JComponent createNorthPane(JInternalFrame w) {
 		titlePane = new PlasticInternalFrameTitlePane(w);
 		return titlePane;
 	}

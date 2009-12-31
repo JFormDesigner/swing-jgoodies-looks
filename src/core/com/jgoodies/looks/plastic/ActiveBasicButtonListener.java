@@ -41,7 +41,7 @@ import javax.swing.plaf.basic.BasicButtonListener;
  * if the button is pressed.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 
 final class ActiveBasicButtonListener extends BasicButtonListener {
@@ -53,18 +53,21 @@ final class ActiveBasicButtonListener extends BasicButtonListener {
         mouseOver = false;
     }
 
+    @Override
     public void mouseEntered(MouseEvent e){
         super.mouseEntered(e);
         AbstractButton button = (AbstractButton) e.getSource();
         button.getModel().setArmed(mouseOver = true);
     }
 
+    @Override
     public void mouseExited(MouseEvent e){
         super.mouseExited(e);
         AbstractButton button = (AbstractButton) e.getSource();
         button.getModel().setArmed(mouseOver = false);
     }
 
+    @Override
     public void mouseReleased(MouseEvent e){
         super.mouseReleased(e);
         AbstractButton button = (AbstractButton) e.getSource();

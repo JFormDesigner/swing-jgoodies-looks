@@ -46,7 +46,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 
@@ -55,6 +55,7 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 	}
 
 
+    @Override
     protected Component createArrowButton(int direction) {
         return new SpinnerXPArrowButton(direction);
     }
@@ -72,19 +73,23 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
             super(direction, UIManager.getInt("ScrollBar.width") - 1, false);
         }
 
+        @Override
         protected int calculateArrowHeight(int height, int width) {
             int arrowHeight = Math.min((height - 4) / 3, (width - 4) / 3);
             return Math.max(arrowHeight, 3);
         }
 
+        @Override
         protected boolean isPaintingNorthBottom() {
             return true;
         }
 
+        @Override
         protected int calculateArrowOffset() {
             return 1;
         }
 
+        @Override
         protected void paintNorth(Graphics g, boolean leftToRight, boolean isEnabled,
                 Color arrowColor, boolean isPressed,
                 int width, int height, int w, int h, int arrowHeight, int arrowOffset,
@@ -147,6 +152,7 @@ public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
         }
 
 
+        @Override
         protected void paintSouth(Graphics g, boolean leftToRight, boolean isEnabled,
                 Color arrowColor, boolean isPressed,
                 int width, int height, int w, int h, int arrowHeight, int arrowOffset) {

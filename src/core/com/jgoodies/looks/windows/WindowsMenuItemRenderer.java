@@ -45,7 +45,7 @@ import com.jgoodies.looks.common.MenuItemRenderer;
  * and the text shadow feature.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  */
 final class WindowsMenuItemRenderer extends MenuItemRenderer {
 
@@ -63,11 +63,13 @@ final class WindowsMenuItemRenderer extends MenuItemRenderer {
 	}
 
 
+    @Override
     protected boolean isMnemonicHidden() {
         return WindowsLookAndFeel.isMnemonicHidden();
     }
 
 
+    @Override
     protected boolean disabledTextHasShadow() {
         return (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
             || (UIManager.getColor("MenuItem.disabledForeground") == null);

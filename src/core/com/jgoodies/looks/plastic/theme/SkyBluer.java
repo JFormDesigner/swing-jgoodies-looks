@@ -41,50 +41,61 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * A theme with medium blue primary colors and a light gray window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public class SkyBluer extends PlasticTheme {
 
+    @Override
     public String getName() {
         return "Sky Bluer";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.BLUE_MEDIUM_DARKEST;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.BLUE_MEDIUM_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return Colors.BLUE_MEDIUM_LIGHTEST;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return Colors.GRAY_MEDIUMDARK;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {
         return Colors.GRAY_LIGHT;
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return Colors.GRAY_LIGHTER;
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedBackground() {
         return getPrimary2();
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedForeground() {
         return getWhite();
     }
 
+    @Override
     public ColorUIResource getMenuSelectedBackground() {
         return getSecondary2();
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.YELLOW_FOCUS
@@ -98,6 +109,7 @@ public class SkyBluer extends PlasticTheme {
     public    ColorUIResource getWindowTitleForeground() 		{ return WHITE; 		}
     */
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

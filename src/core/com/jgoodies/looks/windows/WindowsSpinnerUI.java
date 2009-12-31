@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds, by setting an empty border with the default text insets.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
@@ -72,9 +72,11 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * @see #installUI
      * @see #createNextButton
      */
+    @Override
     protected Component createPreviousButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             return super.createPreviousButton();
+        }
 
         Component c = new WindowsArrowButton(SwingConstants.SOUTH);
         installPreviousButtonListenersFromSuper(c);
@@ -94,9 +96,11 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * @see #installUI
      * @see #createPreviousButton
      */
+    @Override
     protected Component createNextButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
+        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             return super.createNextButton();
+        }
 
         Component c = new WindowsArrowButton(SwingConstants.NORTH);
         installNextButtonListenersFromSuper(c);
@@ -150,6 +154,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * @see #replaceEditor
      * @see JSpinner#getEditor
      */
+    @Override
     protected JComponent createEditor() {
         JComponent editor = spinner.getEditor();
         configureEditorBorder(editor);
@@ -170,6 +175,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * @see #createPreviousButton
      * @see #createEditor
      */
+    @Override
     protected LayoutManager createLayout() {
         return new ExtBasicSpinnerLayout();
     }
@@ -192,6 +198,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * @see #createEditor
      * @see #createPropertyChangeListener
      */
+    @Override
     protected void replaceEditor(JComponent oldEditor, JComponent newEditor) {
         spinner.remove(oldEditor);
         configureEditorBorder(newEditor);

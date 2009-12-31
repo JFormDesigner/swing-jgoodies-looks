@@ -50,7 +50,7 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
  * where <code>null</code> implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 final class PlasticIconFactory {
@@ -208,7 +208,8 @@ final class PlasticIconFactory {
      * The plus sign button icon used in trees.
      */
     private static class CollapsedTreeIcon extends ExpandedTreeIcon {
-		public void paintIcon(Component c, Graphics g, int x, int y) {
+		@Override
+        public void paintIcon(Component c, Graphics g, int x, int y) {
 			super.paintIcon(c, g, x, y);
 			g.drawLine(x + HALF_SIZE, y + 2, x + HALF_SIZE, y + (SIZE - 3));
 		}

@@ -47,7 +47,7 @@ import javax.swing.plaf.basic.BasicMenuUI;
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {
@@ -69,6 +69,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
 
     // Install and Uninstall ************************************************
 
+    @Override
     protected void installDefaults() {
         super.installDefaults();
         if (arrowIcon == null || arrowIcon instanceof UIResource) {
@@ -89,15 +90,18 @@ public class ExtBasicMenuUI extends BasicMenuUI {
         LookAndFeel.installBorder(menuItem, getPropertyPrefix() + ".border");
     }
 
+    @Override
     protected void uninstallDefaults() {
         super.uninstallDefaults();
         renderer = null;
     }
 
+    @Override
     protected String getPropertyPrefix() {
         return propertyPrefix;
     }
 
+    @Override
     protected Dimension getPreferredMenuItemSize(
         JComponent c,
         Icon aCheckIcon,
@@ -119,6 +123,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
             textIconGap);
     }
 
+    @Override
     protected void paintMenuItem(
         Graphics g,
         JComponent c,
@@ -153,8 +158,9 @@ public class ExtBasicMenuUI extends BasicMenuUI {
      * menu in menu bar vs. sub menu; reinstalls if necessary.
      */
     private void ensureSubMenuInstalled() {
-        if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX))
+        if (propertyPrefix.equals(SUBMENU_PROPERTY_PREFIX)) {
             return;
+        }
 
         ButtonModel model = menuItem.getModel();
 
@@ -176,12 +182,14 @@ public class ExtBasicMenuUI extends BasicMenuUI {
 
     // Rollover Listener ****************************************************
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         mouseListener = new RolloverHandler();
         menuItem.addMouseListener(mouseListener);
     }
 
+    @Override
     protected void uninstallListeners() {
         super.uninstallListeners();
         uninstallRolloverListener();
@@ -204,11 +212,13 @@ public class ExtBasicMenuUI extends BasicMenuUI {
 
     private static final class RolloverHandler extends MouseAdapter {
 
+        @Override
         public void mouseEntered(MouseEvent e) {
             AbstractButton b = (AbstractButton) e.getSource();
             b.getModel().setRollover(true);
         }
 
+        @Override
         public void mouseExited(MouseEvent e) {
             AbstractButton b = (AbstractButton) e.getSource();
             b.getModel().setRollover(false);

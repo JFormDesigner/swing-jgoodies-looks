@@ -46,7 +46,7 @@ import javax.swing.text.JTextComponent;
  * background colors using behavior from BasicTextFieldUI.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.WindowsTextAreaUI {
 
@@ -62,6 +62,7 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
 
 
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         updateBackground((JTextComponent) c);
@@ -74,6 +75,7 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
      * behavior, this UI updates the background if the <em>editable</em> or
      * <em>enabled</em> property changes.
      */
+    @Override
     protected void propertyChange(PropertyChangeEvent evt) {
         super.propertyChange(evt);
         String propertyName = evt.getPropertyName();

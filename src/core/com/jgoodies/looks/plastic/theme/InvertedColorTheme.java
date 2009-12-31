@@ -42,7 +42,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * that have light foreground and dark window background colors.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public abstract class InvertedColorTheme extends PlasticTheme {
 
@@ -67,10 +67,12 @@ public abstract class InvertedColorTheme extends PlasticTheme {
     private final ColorUIResource secondary3 = new ColorUIResource(84, 84, 84);
     // Fläche   134, 104,  22);
 
+    @Override
     public ColorUIResource getSimpleInternalFrameBackground() {
         return getWhite();
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults = {
@@ -86,69 +88,86 @@ public abstract class InvertedColorTheme extends PlasticTheme {
         table.putDefaults(uiDefaults);
     }
 
+    @Override
     public ColorUIResource getControlDisabled() {
         return getSoftWhite();
     }
 
+    @Override
     public ColorUIResource getControlHighlight() {
         return getSoftWhite();
     }
 
+    @Override
     public ColorUIResource getControlInfo() {
         return getWhite();
     }
 
+    @Override
     public ColorUIResource getInactiveSystemTextColor() {
         return getSoftWhite();
     }
 
+    @Override
     public ColorUIResource getMenuDisabledForeground() {
         return getSoftWhite();
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedBackground() {
         return getPrimary3();
     }
 
+    @Override
     public ColorUIResource getMenuItemSelectedForeground() {
         return getBlack();
     }
 
+    @Override
     public ColorUIResource getMenuSelectedBackground() {
         return getPrimary2();
     }
 
+    @Override
     public ColorUIResource getMenuSelectedForeground() {
         return getWhite();
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return primary1;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return primary2;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return primary3;
     }
+    @Override
     public ColorUIResource getPrimaryControlHighlight() {
         return getSoftWhite();
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return secondary1;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {
         return secondary2;
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return secondary3;
     }
 
+    @Override
     public ColorUIResource getSeparatorBackground() {
         return getSoftWhite();
     }
@@ -157,14 +176,17 @@ public abstract class InvertedColorTheme extends PlasticTheme {
         return softWhite;
     }
 
+    @Override
     public ColorUIResource getTitleTextColor() {
         return getControlInfo();
     }
 
+    @Override
     public ColorUIResource getToggleButtonCheckColor() {
         return getWhite();
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return Colors.GRAY_FOCUS;
     }

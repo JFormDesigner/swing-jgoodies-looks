@@ -41,7 +41,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * Uses a special divider that paints modified one-touch buttons.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see com.jgoodies.looks.plastic.PlasticSplitPaneDivider
  */
@@ -56,7 +56,8 @@ public final class PlasticSplitPaneUI extends BasicSplitPaneUI {
     /**
      * Creates and returns the modified default divider.
      */
-	public BasicSplitPaneDivider createDefaultDivider() {
+	@Override
+    public BasicSplitPaneDivider createDefaultDivider() {
 		return new PlasticSplitPaneDivider(this);
 	}
 

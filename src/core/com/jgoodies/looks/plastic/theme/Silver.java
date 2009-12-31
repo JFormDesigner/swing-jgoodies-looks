@@ -41,51 +41,61 @@ import com.jgoodies.looks.plastic.PlasticScrollBarUI;
  * in Windows XP environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class Silver extends ExperienceBlue {
 
     private static final ColorUIResource GRAY_LIGHT_LIGHTER =
         new ColorUIResource(190, 190, 190);
 
+    @Override
     public String getName() {
         return "Silver";
     }
 
+    @Override
     protected ColorUIResource getPrimary1() {
         return Colors.GRAY_MEDIUMDARK;
     }
 
+    @Override
     protected ColorUIResource getPrimary2() {
         return Colors.GRAY_MEDIUMLIGHT;
     }
 
+    @Override
     protected ColorUIResource getPrimary3() {
         return GRAY_LIGHT_LIGHTER;
     }
 
+    @Override
     protected ColorUIResource getSecondary1() {
         return Colors.GRAY_MEDIUM;
     }
 
+    @Override
     protected ColorUIResource getSecondary2() {
         return getPrimary2();
     }
 
+    @Override
     protected ColorUIResource getSecondary3() {
         return Colors.GRAY_LIGHTER2;
     }
 
+    @Override
     public ColorUIResource getFocusColor() {
         return PlasticLookAndFeel.getHighContrastFocusColorsEnabled()
             ? Colors.ORANGE_FOCUS
             : Colors.BLUE_MEDIUM_DARK;
     }
 
+    @Override
     public ColorUIResource getTitleTextColor() {
         return Colors.GRAY_DARKEST;
     }
 
+    @Override
     public void addCustomEntriesToTable(UIDefaults table) {
         super.addCustomEntriesToTable(table);
         Object[] uiDefaults =

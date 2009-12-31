@@ -42,7 +42,7 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
  * Paints a single drag symbol instead of many bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see PlasticSplitPaneUI
  */
@@ -53,18 +53,21 @@ final class PlasticSplitPaneDivider extends BasicSplitPaneDivider {
 		super(ui);
 	}
 
+    @Override
     protected JButton createLeftOneTouchButton() {
         JButton btn = super.createLeftOneTouchButton();
         btn.setOpaque(false);
         return btn;
     }
 
+    @Override
     protected JButton createRightOneTouchButton() {
         JButton btn = super.createRightOneTouchButton();
         btn.setOpaque(false);
         return btn;
     }
 
+    @Override
     public void paint(Graphics g) {
         if (splitPane.isOpaque()) {
     		Color bgColor = getBackground();

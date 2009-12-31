@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  *
  * @see     FontSet
  * @see     FontSets
@@ -233,8 +233,9 @@ public final class Fonts {
      * @throws UnsupportedOperationException on non-Windows platforms
      */
     static Font getLooks1xWindowsControlFont() {
-        if (!LookUtils.IS_OS_WINDOWS)
+        if (!LookUtils.IS_OS_WINDOWS) {
             throw new UnsupportedOperationException();
+        }
 
         return getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
     }
@@ -261,16 +262,18 @@ public final class Fonts {
      * @throws UnsupportedOperationException on non-Windows platforms
      */
     public static Font getWindowsControlFont() {
-        if (!LookUtils.IS_OS_WINDOWS)
+        if (!LookUtils.IS_OS_WINDOWS) {
             throw new UnsupportedOperationException();
+        }
 
         Font defaultGUIFont = getDefaultGUIFont();
         // Return the default GUI font on older Windows versions.
         if (LookUtils.IS_OS_WINDOWS_95
         ||  LookUtils.IS_OS_WINDOWS_98
         ||  LookUtils.IS_OS_WINDOWS_NT
-        ||  LookUtils.IS_OS_WINDOWS_ME)
+        ||  LookUtils.IS_OS_WINDOWS_ME) {
             return defaultGUIFont;
+        }
 
         // Java 1.4 and Java 5 raster the Segoe UI poorly,
         // so we use the older Tahoma, if it can display the localized text.
@@ -336,22 +339,24 @@ public final class Fonts {
         String fontName = font.getName();
         String language = locale.getLanguage();
         if ("Tahoma".equals(fontName)) {
-            if ("hi".equals(language))
+            if ("hi".equals(language)) {
                 return Boolean.FALSE;
-            else if ("ja".equals(language))
+            } else if ("ja".equals(language)) {
                 return Boolean.FALSE;
-            else if ("ko".equals(language))
+            } else if ("ko".equals(language)) {
                 return Boolean.FALSE;
-            else if ("zh".equals(language))
+            } else if ("zh".equals(language)) {
                 return Boolean.FALSE;
+            }
         }
         if ("Microsoft Sans Serif".equals(fontName)) {
-            if ("ja".equals(language))
+            if ("ja".equals(language)) {
                 return Boolean.FALSE;
-            else if ("ko".equals(language))
+            } else if ("ko".equals(language)) {
                 return Boolean.FALSE;
-            else if ("zh".equals(language))
+            } else if ("zh".equals(language)) {
                 return Boolean.FALSE;
+            }
         }
         return null;
     }
@@ -386,8 +391,9 @@ public final class Fonts {
      * @return true if the display language is localized, false if not
      */
     private static boolean localeHasLocalizedDisplayLanguage(Locale locale) {
-        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage()))
+        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
             return true;
+        }
         String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
         String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
         return !(englishDisplayLanguage.equals(localizedDisplayLanguage));

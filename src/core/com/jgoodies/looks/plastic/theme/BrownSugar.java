@@ -37,7 +37,7 @@ import javax.swing.plaf.ColorUIResource;
  * window background.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public class BrownSugar extends InvertedColorTheme {
 
@@ -52,15 +52,23 @@ public class BrownSugar extends InvertedColorTheme {
 	private final ColorUIResource secondary3 = new ColorUIResource( 92,  87,  76); // Fläche   134, 104,  22);
 
 
-	public String getName() { return "Brown Sugar"; }
+	@Override
+    public String getName() { return "Brown Sugar"; }
 
 
-	protected ColorUIResource getPrimary1() { return primary1; }
-	protected ColorUIResource getPrimary2() { return primary2; }
-	protected ColorUIResource getPrimary3() { return primary3; }
-	protected ColorUIResource getSecondary1() { return secondary1; }
-	protected ColorUIResource getSecondary2() { return secondary2; }
-	protected ColorUIResource getSecondary3() { return secondary3; }
-	protected ColorUIResource getSoftWhite() { return softWhite; }
+	@Override
+    protected ColorUIResource getPrimary1() { return primary1; }
+	@Override
+    protected ColorUIResource getPrimary2() { return primary2; }
+	@Override
+    protected ColorUIResource getPrimary3() { return primary3; }
+	@Override
+    protected ColorUIResource getSecondary1() { return secondary1; }
+	@Override
+    protected ColorUIResource getSecondary2() { return secondary2; }
+	@Override
+    protected ColorUIResource getSecondary3() { return secondary3; }
+	@Override
+    protected ColorUIResource getSoftWhite() { return softWhite; }
 
 }

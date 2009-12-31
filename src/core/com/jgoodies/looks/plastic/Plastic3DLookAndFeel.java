@@ -37,7 +37,7 @@ import javax.swing.UIDefaults;
  * look&amp;feel.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
 
@@ -47,19 +47,23 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
     public Plastic3DLookAndFeel() {
     }
 
+    @Override
     public String getID() {
         return "JGoodies Plastic 3D";
     }
 
+    @Override
     public String getName() {
         return "JGoodies Plastic 3D";
     }
 
+    @Override
     public String getDescription() {
         return "The JGoodies Plastic 3D Look and Feel"
             + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
     }
 
+    @Override
     protected boolean is3DEnabled() {
         return true;
     }
@@ -69,6 +73,7 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
      *
      * @param table   the UIDefaults table to work with
      */
+    @Override
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
 

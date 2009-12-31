@@ -43,7 +43,7 @@ import com.jgoodies.looks.FontSet;
  * Unlike its superclass this theme class has relaxed access.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public abstract class PlasticTheme extends DefaultMetalTheme {
 
@@ -77,14 +77,17 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
 
     // Accessing Colors *****************************************************
 
+    @Override
     protected ColorUIResource getBlack() {
         return BLACK;
     }
 
+    @Override
     protected ColorUIResource getWhite() {
         return WHITE;
     }
 
+    @Override
     public ColorUIResource getSystemTextColor() {
         return getControlInfo();
     }
@@ -93,6 +96,7 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
         return getPrimary1();
     }
 
+    @Override
     public ColorUIResource getMenuForeground() {
         return getControlInfo();
     }
@@ -127,26 +131,32 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
         return getFontSet().getTitleFont();
     }
 
+    @Override
     public FontUIResource getControlTextFont() {
         return getFontSet().getControlFont();
     }
 
+    @Override
     public FontUIResource getMenuTextFont() {
         return getFontSet().getMenuFont();
     }
 
+    @Override
     public FontUIResource getSubTextFont() {
         return getFontSet().getSmallFont();
     }
 
+    @Override
     public FontUIResource getSystemTextFont() {
         return getFontSet().getControlFont();
     }
 
+    @Override
     public FontUIResource getUserTextFont() {
         return getFontSet().getControlFont();
     }
 
+    @Override
     public FontUIResource getWindowTitleFont() {
         return getFontSet().getWindowTitleFont();
     }
@@ -167,11 +177,14 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
      *
      * @return true if this theme is equal to the given object
      */
+    @Override
     public boolean equals(Object o) {
-        if (this == o)
+        if (this == o) {
             return true;
-        if (o == null)
+        }
+        if (o == null) {
             return false;
+        }
         return getClass().equals(o.getClass());
     }
 
@@ -181,6 +194,7 @@ public abstract class PlasticTheme extends DefaultMetalTheme {
      *
      * @return this theme's hash code
      */
+    @Override
     public int hashCode() {
         return getClass().hashCode();
     }

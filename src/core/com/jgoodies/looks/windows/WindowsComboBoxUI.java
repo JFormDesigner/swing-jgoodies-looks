@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -102,17 +102,20 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
     // ************************************************************************
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         tableCellEditor = isTableCellEditor();
     }
 
+    @Override
     protected void installListeners() {
         super.installListeners();
         propertyChangeListener = new TableCellEditorPropertyChangeHandler();
         comboBox.addPropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
     }
 
+    @Override
     protected void uninstallListeners() {
         super.uninstallListeners();
         comboBox.removePropertyChangeListener(CELL_EDITOR_KEY, propertyChangeListener);
@@ -125,6 +128,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      *
      * Overridden to paint black triangles.
      */
+    @Override
     protected JButton createArrowButton() {
         return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
                     ? super.createArrowButton()
@@ -137,6 +141,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * This method only gets called if a custom editor has not already
      * been installed in the JComboBox.
      */
+    @Override
     protected ComboBoxEditor createEditor() {
         return new com.jgoodies.looks.windows.WindowsComboBoxEditor.UIResource(tableCellEditor);
     }
@@ -150,11 +155,13 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      *
      * @return an instance of a layout manager
      */
+    @Override
     protected LayoutManager createLayoutManager() {
         return new WindowsComboBoxLayoutManager();
     }
 
 
+    @Override
     protected void configureEditor() {
         super.configureEditor();
         if (!comboBox.isEnabled()) {
@@ -166,6 +173,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * Creates a ComboPopup that honors the optional combo popup display value
      * that is used to compute the popup menu width.
      */
+    @Override
     protected ComboPopup createPopup() {
         return new WindowsComboPopup(comboBox);
     }
@@ -183,6 +191,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * @return a <code>ListCellRender</code> used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
+    @Override
     protected ListCellRenderer createRenderer() {
         if (tableCellEditor) {
             return super.createRenderer();
@@ -196,6 +205,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     /**
      * The minumum size is the size of the display area plus insets plus the button.
      */
+    @Override
     public Dimension getMinimumSize(JComponent c) {
         if (!isMinimumSizeDirty) {
             return new Dimension(cachedMinimumSize);
@@ -240,6 +250,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * Delegates to #getMinimumSize(Component).
      * Overridden to return the same result in JDK 1.5 as in JDK 1.4.
      */
+    @Override
     public Dimension getPreferredSize(JComponent c) {
         return getMinimumSize(c);
     }
@@ -248,6 +259,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     /**
      * Paints the currently selected item.
      */
+    @Override
     public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
         ListCellRenderer renderer = comboBox.getRenderer();
         Component c;
@@ -357,11 +369,13 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * @see #paintCurrentValue(Graphics, Rectangle, boolean)
      */
     protected boolean isRendererBorderRemovable(JComponent rendererComponent) {
-        if (rendererComponent instanceof BasicComboBoxRenderer.UIResource)
+        if (rendererComponent instanceof BasicComboBoxRenderer.UIResource) {
             return true;
+        }
         Object hint = rendererComponent.getClientProperty(Options.COMBO_RENDERER_IS_BORDER_REMOVABLE);
-        if (hint != null)
+        if (hint != null) {
             return Boolean.TRUE.equals(hint);
+        }
         Border border = rendererComponent.getBorder();
         return border instanceof EmptyBorder;
     }
@@ -377,6 +391,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     /**
      * Returns the area that is reserved for drawing the currently selected item.
      */
+    @Override
     protected Rectangle rectangleForCurrentValue() {
         int width  = comboBox.getWidth();
         int height = comboBox.getHeight();
@@ -436,6 +451,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     private final class WindowsComboBoxLayoutManager
         extends BasicComboBoxUI.ComboBoxLayoutManager {
 
+        @Override
         public void layoutContainer(Container parent) {
             JComboBox cb = (JComboBox) parent;
 
@@ -507,6 +523,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
          * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
          * @see JComboBox#getMaximumRowCount()
          */
+        @Override
         protected Rectangle computePopupBounds(int px, int py, int pw, int ph) {
             Rectangle defaultBounds = super.computePopupBounds(px, py, pw, ph);
             Object popupPrototypeDisplayValue = comboBox.getClientProperty(

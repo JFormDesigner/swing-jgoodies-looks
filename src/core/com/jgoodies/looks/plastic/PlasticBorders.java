@@ -51,7 +51,7 @@ import javax.swing.text.JTextComponent;
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 
 final class PlasticBorders {
@@ -341,16 +341,20 @@ final class PlasticBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-			if (c.isEnabled())
-				PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
-			else
-				PlasticUtils.drawDisabledBorder(g, x, y, w, h);
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+			if (c.isEnabled()) {
+                PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
+            } else {
+                PlasticUtils.drawDisabledBorder(g, x, y, w, h);
+            }
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 
-		public Insets getBorderInsets(Component c, Insets newInsets) {
+		@Override
+        public Insets getBorderInsets(Component c, Insets newInsets) {
 			newInsets.top	 = INSETS.top;
 			newInsets.left	 = INSETS.left;
 			newInsets.bottom = INSETS.bottom;
@@ -368,7 +372,8 @@ final class PlasticBorders {
             this.insets = insets;
         }
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton button = (AbstractButton) c;
 			ButtonModel model = button.getModel();
 
@@ -377,22 +382,25 @@ final class PlasticBorders {
 				boolean isDefault = button instanceof JButton
 									 && ((JButton) button).isDefaultButton();
 
-				if (isPressed && isDefault)
-					PlasticUtils.drawDefaultButtonPressedBorder(g, x, y, w, h);
-				else if (isPressed)
-					PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
-				else if (isDefault)
-					PlasticUtils.drawDefaultButtonBorder(g, x, y, w, h, false);
-				else
-					PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
+				if (isPressed && isDefault) {
+                    PlasticUtils.drawDefaultButtonPressedBorder(g, x, y, w, h);
+                } else if (isPressed) {
+                    PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
+                } else if (isDefault) {
+                    PlasticUtils.drawDefaultButtonBorder(g, x, y, w, h, false);
+                } else {
+                    PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
+                }
 			} else { // disabled state
 				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
 			}
 		}
 
-		public Insets getBorderInsets(Component c) { return insets; }
+		@Override
+        public Insets getBorderInsets(Component c) { return insets; }
 
-		public Insets getBorderInsets(Component c, Insets newInsets) {
+		@Override
+        public Insets getBorderInsets(Component c, Insets newInsets) {
 			newInsets.top	 = insets.top;
 			newInsets.left	 = insets.left;
 			newInsets.bottom = insets.bottom;
@@ -406,23 +414,26 @@ final class PlasticBorders {
 
 	    protected static final Insets INSETS = new Insets(1, 1, 1, 1);
 
-	    public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+	    @Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 	        AbstractButton button = (AbstractButton) c;
 	        ButtonModel model = button.getModel();
 
 	        if (model.isEnabled()) {
 	            boolean isPressed = model.isPressed() && model.isArmed();
 
-	            if (isPressed)
-	                PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
-	            else
-	                PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
+	            if (isPressed) {
+                    PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
+                } else {
+                    PlasticUtils.drawButtonBorder(g, x, y, w, h, false);
+                }
 	        } else {
 	            PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
 	        }
 	    }
 
-	    public Insets getBorderInsets(Component c) { return INSETS; }
+	    @Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -430,16 +441,18 @@ final class PlasticBorders {
 
         private static final Insets INSETS  = new Insets(2, 2, 2, 0);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-            if (c.isEnabled())
+            if (c.isEnabled()) {
                 PlasticUtils.drawFlush3DBorder(g, x, y, w + 2, h);
-            else {
+            } else {
                 PlasticUtils.drawDisabledBorder(g, x, y, w + 2, h-1);
                 g.setColor(UIManager.getColor("control"));
                 g.drawLine(x, y + h-1, x + w, y + h-1);
             }
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -453,12 +466,14 @@ final class PlasticBorders {
         private static final Insets MAXIMIZED_INSETS = new Insets(1, 1, 0, 0);
 
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			JInternalFrame frame = (JInternalFrame) c;
-			if (frame.isMaximum())
-				paintMaximizedBorder(g, x, y, w, h);
-			else
+			if (frame.isMaximum()) {
+                paintMaximizedBorder(g, x, y, w, h);
+            } else {
                 PlasticUtils.drawThinFlush3DBorder(g, x, y, w, h);
+            }
 		}
 
 		private void paintMaximizedBorder(Graphics g, int x, int y, int w, int h) {
@@ -469,7 +484,8 @@ final class PlasticBorders {
             g.translate(-x, -y);
 		}
 
-	    public Insets getBorderInsets(Component c) {
+	    @Override
+        public Insets getBorderInsets(Component c) {
 	    	return ((JInternalFrame) c).isMaximum() ? MAXIMIZED_INSETS : NORMAL_INSETS;
 	    }
     }
@@ -482,6 +498,7 @@ final class PlasticBorders {
 
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h ) {
 		    g.translate(x,y);
 		    g.setColor(PlasticLookAndFeel.getControlDarkShadow());
@@ -489,6 +506,7 @@ final class PlasticBorders {
 		    g.translate(-x,-y);
 		}
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -501,7 +519,8 @@ final class PlasticBorders {
 
 		private static final Insets INSETS = new Insets(0, 0, 2, 1);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
 	  		g.setColor( UIManager.getColor("Separator.foreground"));
 	  		g.drawLine( 0, h - 2, w - 1, h - 2 );
@@ -510,29 +529,34 @@ final class PlasticBorders {
 	  		g.drawLine( 0, h - 1, w - 1, h - 1 );
 			g.translate(-x, -y);
 		}
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
 	private static final class ThinRaisedBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			PlasticUtils.drawThinFlush3DBorder(g, x, y, w, h);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
 	private static final class ThinLoweredBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			PlasticUtils.drawThinPressed3DBorder(g, x, y, w, h);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -546,12 +570,14 @@ final class PlasticBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			PlasticUtils.drawThinPressed3DBorder(g, x, y, w, h);
 			PlasticUtils.drawThinFlush3DBorder  (g, x + 1, y + 1, w - 2, h - 2);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -564,12 +590,14 @@ final class PlasticBorders {
 
 		private static final Insets INSETS = new Insets(2, 2, 1, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			PlasticUtils.drawThinPressed3DBorder(g, x, y, w, h + 1);
 			PlasticUtils.drawThinFlush3DBorder  (g, x + 1, y + 1, w - 2, h - 1);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
@@ -582,19 +610,22 @@ final class PlasticBorders {
 
 		private static final Insets INSETS = new Insets(1, 2, 2, 2);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			PlasticUtils.drawThinPressed3DBorder(g, x, y - 1, w, h + 1);
 			PlasticUtils.drawThinFlush3DBorder  (g, x + 1, y, w - 2, h - 1);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
 	private static final class MenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets( 2, 2, 2, 2 );
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			JMenuItem b = (JMenuItem) c;
 			ButtonModel model = b.getModel();
 
@@ -613,8 +644,10 @@ final class PlasticBorders {
 			}
 		}
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
 
+        @Override
         public Insets getBorderInsets(Component c, Insets newInsets) {
 	    	newInsets.top	 = INSETS.top;
 	    	newInsets.left	 = INSETS.left;
@@ -628,7 +661,8 @@ final class PlasticBorders {
 	private static final class PopupMenuBorder extends AbstractBorder implements UIResource {
 		private static final Insets INSETS = new Insets(3, 3, 3, 3);
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
 			g.setColor(PlasticLookAndFeel.getControlDarkShadow());
 			g.drawRect(0, 0, w-1, h-1);
@@ -638,13 +672,15 @@ final class PlasticBorders {
 			g.translate(-x, -y);
 		}
 
-		public Insets getBorderInsets(Component c) { return INSETS; }
+		@Override
+        public Insets getBorderInsets(Component c) { return INSETS; }
 	}
 
 
     private static final class NoMarginPopupMenuBorder extends AbstractBorder implements UIResource {
         private static final Insets INSETS = new Insets(1, 1, 1, 1);
 
+        @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
             g.translate(x, y);
             g.setColor(PlasticLookAndFeel.getControlDarkShadow());
@@ -652,6 +688,7 @@ final class PlasticBorders {
             g.translate(-x, -y);
         }
 
+        @Override
         public Insets getBorderInsets(Component c) { return INSETS; }
     }
 
@@ -662,12 +699,14 @@ final class PlasticBorders {
             super(new Insets(3, 3, 3, 3));
         }
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			AbstractButton b = (AbstractButton) c;
 			ButtonModel model = b.getModel();
 
-			if (!model.isEnabled())
-				return;
+			if (!model.isEnabled()) {
+                return;
+            }
 
 			if (!(c instanceof JToggleButton)) {
             	if ( model.isRollover() && !( model.isPressed() && !model.isArmed() ) ) {
@@ -686,8 +725,9 @@ final class PlasticBorders {
 				} else {
 					PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
 				}
-			} else if (model.isSelected())
-				PlasticUtils.drawDark3DBorder(g, x, y, w, h);
+			} else if (model.isSelected()) {
+                PlasticUtils.drawDark3DBorder(g, x, y, w, h);
+            }
 		}
 	}
 
@@ -703,11 +743,13 @@ final class PlasticBorders {
         }
 
 
+        @Override
         public Insets getBorderInsets(Component c) {
             return getBorderInsets(c, new Insets(0, 0, 0, 0));
         }
 
 
+        @Override
         public Insets getBorderInsets(Component c, Insets insets) {
             Insets margin = null;
 
@@ -738,7 +780,8 @@ final class PlasticBorders {
 	 */
 	private static final class ScrollPaneBorder extends MetalBorders.ScrollPaneBorder {
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			g.translate(x, y);
 
 			g.setColor(PlasticLookAndFeel.getControlDarkShadow());
@@ -753,7 +796,8 @@ final class PlasticBorders {
 
 
     private static final class TextFieldBorder extends Flush3DBorder {
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 
 			if (!(c instanceof JTextComponent)) {
 				// special case for non-text components (bug ID 4144840)
@@ -765,10 +809,11 @@ final class PlasticBorders {
 				return;
 			}
 
-			if (c.isEnabled() && ((JTextComponent) c).isEditable())
-				PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
-			else
-				PlasticUtils.drawDisabledBorder(g, x, y, w, h);
+			if (c.isEnabled() && ((JTextComponent) c).isEditable()) {
+                PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
+            } else {
+                PlasticUtils.drawDisabledBorder(g, x, y, w, h);
+            }
 		}
 	}
 
@@ -779,18 +824,20 @@ final class PlasticBorders {
             super(insets);
         }
 
-		public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+		@Override
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 			if (!c.isEnabled()) {
 				PlasticUtils.drawDisabledBorder(g, x, y, w - 1, h - 1);
 			} else {
 				AbstractButton button = (AbstractButton) c;
 				ButtonModel    model  = button.getModel();
-				if (model.isPressed() && model.isArmed())
-					PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
-				else if (model.isSelected())
-					PlasticUtils.drawDark3DBorder(g, x, y, w, h);
-				else
-					PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
+				if (model.isPressed() && model.isArmed()) {
+                    PlasticUtils.drawPressed3DBorder(g, x, y, w, h);
+                } else if (model.isSelected()) {
+                    PlasticUtils.drawDark3DBorder(g, x, y, w, h);
+                } else {
+                    PlasticUtils.drawFlush3DBorder(g, x, y, w, h);
+                }
 			}
 		}
 

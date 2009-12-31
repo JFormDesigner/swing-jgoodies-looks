@@ -49,7 +49,7 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * Used for Java 1.4 and Java 5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  */
 public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI {
 
@@ -82,6 +82,7 @@ public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.window
 	 * @param elem the element
 	 * @return the view
 	 */
+    @Override
     public View create(Element elem) {
         return (LookUtils.IS_JAVA_1_4_OR_5)
             ? new ExtPasswordView(elem)
@@ -94,6 +95,7 @@ public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.window
      *
      * @return the caret
      */
+    @Override
     protected Caret createCaret() {
         return new WindowsFieldCaret();
     }

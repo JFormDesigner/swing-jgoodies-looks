@@ -47,7 +47,7 @@ import javax.swing.text.JTextComponent;
  * background colors using behavior from BasicTextFieldUI.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticTextAreaUI extends BasicTextAreaUI {
 
@@ -63,6 +63,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
 
 
 
+    @Override
     public void installUI(JComponent c) {
         super.installUI(c);
         updateBackground((JTextComponent) c);
@@ -77,6 +78,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
      *
      * @param evt the property change event
      */
+    @Override
     protected void propertyChange(PropertyChangeEvent evt) {
         super.propertyChange(evt);
         String propertyName = evt.getPropertyName();
