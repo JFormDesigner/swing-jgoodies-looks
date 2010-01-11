@@ -1,5 +1,25 @@
 
                          JGoodies Looks
+                          Version @version.name@
+                          Release Notes
+                        
+
+INTRODUCTION
+
+    This version requires Java 5 and the new JGoodies Common library.
+    Make sure that you include jgoodies-common-0.9.9.jar in your
+    classpath when using this Looks version.
+    
+
+OTHER CHANGES
+
+    o ...
+    
+---------------------------------------------------------------------------
+
+
+
+                         JGoodies Looks
                           Version 2.3.1
                           Release Notes
                         
