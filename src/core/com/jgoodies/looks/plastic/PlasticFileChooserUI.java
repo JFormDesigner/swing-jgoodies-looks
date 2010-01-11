@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -44,11 +44,12 @@ import javax.swing.plaf.metal.MetalFileChooserUI;
 
 /**
  * The JGoodies Plastic L&amp;F implementation of <code>FileChooserUI</code>.
- * Uses {@link FileSystemView#getSystemIcon(File)} to look up icons for files.
+ * Uses {@link FileSystemView#getSystemIcon(File)} to look up icons for files.<p>
  *
- * @author Andrej Golovnin
+ * Thanks to Andrej Golovnin for his feedback and suggestions.
+ *
  * @author Karsten Lentzsch
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  *
  * @see FileSystemView#getSystemIcon(File)
  */
@@ -91,7 +92,7 @@ public final class PlasticFileChooserUI extends MetalFileChooserUI {
             if (icon != null) {
                 return icon;
             }
-            if ((f != null) && UIManager.getBoolean("FileChooser.useSystemIcons")) {
+            if (f != null && UIManager.getBoolean("FileChooser.useSystemIcons")) {
                 icon = getFileChooser().getFileSystemView().getSystemIcon(f);
             }
             if (icon == null) {

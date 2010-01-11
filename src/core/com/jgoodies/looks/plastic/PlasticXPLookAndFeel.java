@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import com.jgoodies.looks.MicroLayout;
  * JGoodies PlasticXP look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
 public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 
@@ -70,7 +70,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
     @Override
     public String getDescription() {
         return "The JGoodies Plastic XP Look and Feel"
-            + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
+            + " - \u00a9 2001-2010 JGoodies Karsten Lentzsch";
     }
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -37,10 +37,12 @@ import javax.swing.plaf.ComponentUI;
 /**
  * The JGoodies PlasticXP Look and Feel implementation of <code>ToolBarUI</code>.
  * It differs from its superclass in that it uses rollover borders with rounded
- * corners.
+ * corners.<p>
  *
- * @author  Andrej Golovnin
- * @version $Revision: 1.6 $
+ * Thanks to Andrej Golovnin for his feedback and suggestions.
+ *
+ * @author  Karsten Lentzsch
+ * @version $Revision: 1.7 $
  */
 public final class PlasticXPToolBarUI extends PlasticToolBarUI {
 

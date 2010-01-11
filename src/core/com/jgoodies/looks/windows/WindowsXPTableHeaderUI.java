@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -50,10 +50,12 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
  * A Windows table header that honors the XP header style even if the user
  * uses custom non-opaque renderers. The renderers should be a subclass of
  * <code>JComponent</code> because we need to replace the border by the one
- * specified in the XP style.
+ * specified in the XP style.<p>
  *
- * @author Andrej Golovnin
- * @version $Revision: 1.8 $
+ * Thanks to Andrej Golovnin for his feedback and suggestions.
+ *
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.9 $
  */
 public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 
@@ -179,8 +181,8 @@ public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
                 // comply with the Windows XP style. It is the one used by
                 // Windows Classis L&F. So replace the border of the custom
                 // renderers component by the one which comply with XP style.
-                if ((c instanceof JComponent)
-                        && (background instanceof JComponent)) {
+                if (c instanceof JComponent
+                        && background instanceof JComponent) {
                     ((JComponent) c).setBorder(
                             ((JComponent) background).getBorder());
                 }

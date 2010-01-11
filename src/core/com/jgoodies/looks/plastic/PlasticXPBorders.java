@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -51,8 +51,7 @@ import javax.swing.text.JTextComponent;
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @author Andrej Golovnin
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 
 final class PlasticXPBorders {
@@ -283,8 +282,8 @@ final class PlasticXPBorders {
 		@Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
 
-            boolean enabled = ((c instanceof JTextComponent)
-                               && (c.isEnabled() && ((JTextComponent) c).isEditable()))
+            boolean enabled = c instanceof JTextComponent
+                               && c.isEnabled() && ((JTextComponent) c).isEditable()
                                ||
                                c.isEnabled();
 

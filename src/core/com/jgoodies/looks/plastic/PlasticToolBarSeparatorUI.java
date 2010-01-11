@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -38,8 +38,8 @@ import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
  * The JGoodies Plastic L&amp;F implementation of <code>ToolBarSeparatorUI</code>.
  * It differs from its superclass in that it uses a shared UI delegate.
  *
- * @author Andrej Golovnin
- * @version $Revision: 1.6 $
+ * @author Karsten Lentzsch
+ * @version $Revision: 1.7 $
  */
 public final class PlasticToolBarSeparatorUI extends BasicToolBarSeparatorUI {
 

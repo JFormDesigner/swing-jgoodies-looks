@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -38,7 +38,6 @@ import java.lang.reflect.Method;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.DimensionUIResource;
 import javax.swing.plaf.IconUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
@@ -55,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.44 $
+ * @version $Revision: 1.45 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -82,7 +81,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     @Override
     public String getDescription() {
         return "The JGoodies Windows Look and Feel"
-                + " - \u00a9 2001-2009 JGoodies Karsten Lentzsch";
+                + " - \u00a9 2001-2010 JGoodies Karsten Lentzsch";
     }
 
 
@@ -273,17 +272,12 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "TreeUI",                windowsPrefix + "TreeUI",
 
             // Just to use shared UI delegate
-            "SeparatorUI",           windowsPrefix + "SeparatorUI"};
+            "SeparatorUI",           windowsPrefix + "SeparatorUI",
 
-        if (LookUtils.IS_JAVA_1_4_2_OR_LATER) {
-            // Modified Border
-            uiDefaults = append(uiDefaults,
-            "SpinnerUI",             windowsPrefix + "SpinnerUI");
-        }
+            "SpinnerUI",             windowsPrefix + "SpinnerUI"};
 
         // Aligned menu items
-        if (  !LookUtils.IS_JAVA_5_OR_LATER
-           || !LookUtils.IS_OS_WINDOWS_6_OR_LATER
+        if (  !LookUtils.IS_OS_WINDOWS_6_OR_LATER
            || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             uiDefaults = append(uiDefaults,
             "MenuItemUI",            windowsPrefix + "MenuItemUI");
@@ -298,7 +292,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
         if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
-            if (!LookUtils.IS_JAVA_5_OR_LATER || !LookUtils.IS_OS_WINDOWS_6_OR_LATER) {
+            if (!LookUtils.IS_OS_WINDOWS_6_OR_LATER) {
                 uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
             }
@@ -324,12 +318,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             // Black arrows
             uiDefaults = append(uiDefaults,
                 "ScrollBarUI",        windowsPrefix + "ScrollBarUI");
-
-            if (!LookUtils.IS_JAVA_1_4_2_OR_LATER) {
-                // Uses unmodified size specified by "ToolBar.separatorSize"
-                uiDefaults = append(uiDefaults,
-                        "ToolBarSeparatorUI", windowsPrefix + "ToolBarSeparatorUI");
-            }
         }
         table.putDefaults(uiDefaults);
     }
@@ -385,9 +373,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
         Object buttonMargin = microLayout.getButtonMargin();
 
-        Object toolBarSeparatorSize = LookUtils.IS_JAVA_1_4_2_OR_LATER
-            ? null
-            : new DimensionUIResource(6, Options.getDefaultIconSize().height);
+        Object toolBarSeparatorSize = null;
 
         Object textInsets = microLayout.getTextInsets();
         Object wrappedTextInsets = microLayout.getWrappedTextInsets();
