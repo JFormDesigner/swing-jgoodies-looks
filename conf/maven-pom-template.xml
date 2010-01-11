@@ -1,11 +1,11 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jgoodies</groupId>
-	<artifactId>looks</artifactId>
+	<artifactId>jgoodies-@shortname@</artifactId>
 	<version>@impl.version</version>
 	<packaging>jar</packaging>
 	<name>JGoodies Looks</name>
-	<url>https://looks.dev.java.net/</url>
+	<url>https://@shortname@.dev.java.net/</url>
 	<description>The JGoodies Looks make your Swing applications and 
 	    applets look better. They have been optimized for readability, 
 	    precise micro-design and usability. And they simplify 
@@ -17,19 +17,51 @@
 			<url>http://www.opensource.org/licenses/bsd-license.html</url>
 		</license>
 	</licenses>
+	<dependencies>
+	    <dependency>
+	        <groupId>com.jgoodies</groupId>
+	        <artifactId>jgoodies-common</artifactId>
+	        <version>0.9.9</version>
+	        <scope>runtime</scope>
+	    </dependency>
+	    <dependency>
+	    	<groupId>junit</groupId>
+	    	<artifactId>junit</artifactId>
+	    	<version>4.0</version>
+	    	<scope>test</scope>
+	    </dependency>
+	</dependencies>
+	<issueManagement>
+		<system>Bugzilla</system>
+		<url>https://@shortname@.dev.java.net/servlets/ProjectIssues</url>
+	</issueManagement>
+	<mailingLists>
+		<mailingList>
+			<name>User List</name>
+			<archive>https://@shortname@.dev.java.net/servlets/SummarizeList?listName=users</archive>
+			<post>users@@shortname@.dev.java.net</post>
+		</mailingList>
+	</mailingLists>
+	<scm>
+		<connection>scm:cvs:pserver:guest@cvs.dev.java.net:/cvs:@shortname@</connection>
+		<tag>head</tag>
+		<url>https://@shortname@.dev.java.net/source/browse/@shortname@/</url>
+	</scm>
+	<organization>
+		<name>JGoodies</name>
+		<url>http://www.jgoodies.com/</url>
+	</organization>
 	<developers>
 		<developer>
-			<id>Karsten</id>
+			<id>karsten</id>
 			<name>Karsten Lentzsch</name>
+			<organization>JGoodies</organization>
+			<organizationUrl>http://www.jgoodies.com/</organizationUrl>
+			<timezone>+0100</timezone>
+			<roles>
+			    <role>Project owner</role>
+			    <role>Developer</role>
+			</roles>
 		</developer>
 	</developers>
-
-	<scm>
-		<connection>scm:cvs:pserver:guest@cvs.dev.java.net:/cvs:looks</connection>
-		<tag>head</tag>
-		<url>https://looks.dev.java.net/source/browse/looks/</url>
-	</scm>
-	<dependencies>
-	<!-- This library doesn't depend on any other library. -->
-	</dependencies>
 </project>
