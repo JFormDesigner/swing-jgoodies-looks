@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -35,12 +35,12 @@ import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticTheme;
 
@@ -48,144 +48,11 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  */
-public final class LookUtils {
+public final class LookUtils extends SystemUtils {
 
     // Basics System Properties **********************************************
-
-    /**
-     * The <code>java.version</code> System Property.<p>
-     *
-     * Defaults to <code>null</code> if the runtime does not have security
-     * access to read this property or the property does not exist.
-     */
-    private static final String JAVA_VERSION = getSystemProperty("java.version");
-
-    /**
-     * The <code>os.name</code> System Property. Operating system name.<p>
-     *
-     * Defaults to <code>null</code> if the runtime does not have security
-     * access to read this property or the property does not exist.
-     */
-    private static final String OS_NAME = getSystemProperty("os.name");
-
-    /**
-     * The <code>os.version</code> System Property. Operating system version.<p>
-     *
-     * Defaults to <code>null</code> if the runtime does not have security
-     * access to read this property or the property does not exist.
-     */
-    private static final String OS_VERSION = getSystemProperty("os.version");
-
-
-    // Requesting the Java Version ********************************************
-
-    /**
-     * True if this is Java 1.4.
-     */
-    public static final boolean IS_JAVA_1_4 =
-        startsWith(JAVA_VERSION, "1.4");
-
-    /**
-     * True if this is Java 1.4.0_*.
-     */
-    public static final boolean IS_JAVA_1_4_0 = startsWith(JAVA_VERSION, "1.4.0");
-
-    /**
-     * True if this is Java 1.4.2 or later. Since we assume Java 1.4
-     * we just check for 1.4.0 and 1.4.1.
-     */
-    public static final boolean IS_JAVA_1_4_2_OR_LATER =
-           !startsWith(JAVA_VERSION, "1.4.0")
-        && !startsWith(JAVA_VERSION, "1.4.1");
-
-    /**
-     * True if this is Java 5.x. We check for a prefix of 1.5.
-     */
-    public static final boolean IS_JAVA_5 =
-        startsWith(JAVA_VERSION, "1.5");
-
-    /**
-     * True if this is Java 1.4 or Java 5.
-     */
-    public static final boolean IS_JAVA_1_4_OR_5 =
-        IS_JAVA_1_4 || IS_JAVA_5;
-
-
-    /**
-     * True if this is Java 5.x or later. Since we don't support Java 1.3,
-     * we can check that it's not 1.4.
-     */
-    public static final boolean IS_JAVA_5_OR_LATER =
-        !IS_JAVA_1_4;
-
-    /**
-     * True if this is Java 6. We check for a prefix of 1.6.
-     */
-    public static final boolean IS_JAVA_6 =
-        startsWith(JAVA_VERSION, "1.6");
-
-    /**
-     * True if this is Java 6.x or later. Since we don't support Java 1.3,
-     * we can check that it's neither 1.4 nor 1.5.
-     */
-    public static final boolean IS_JAVA_6_OR_LATER =
-           !IS_JAVA_1_4
-        && !IS_JAVA_5;
-
-
-    /**
-     * True if this is Java 7. We check for a prefix of 1.7.
-     *
-     * @since 2.3
-     */
-    public static final boolean IS_JAVA_7 =
-        startsWith(JAVA_VERSION, "1.7");
-
-    /**
-     * True if this is Java 6.x or later. Since we don't support Java 1.3,
-     * we can check that it's neither 1.4 nor 1.5 nor 1.6.
-     *
-     * @since 2.3
-     */
-    public static final boolean IS_JAVA_7_OR_LATER =
-           !IS_JAVA_1_4
-        && !IS_JAVA_5
-        && !IS_JAVA_6;
-
-
-    // Requesting the Operating System Name ***********************************
-
-    /**
-     * True if this is FreeBSD.
-     */
-    public static final boolean IS_OS_FREEBSD =
-        startsWithIgnoreCase(OS_NAME, "FreeBSD");
-
-    /**
-     * True if this is Linux.
-     */
-    public static final boolean IS_OS_LINUX =
-        startsWithIgnoreCase(OS_NAME, "Linux");
-
-    /**
-     * True if this is OS/2.
-     */
-    public static final boolean IS_OS_OS2 =
-        startsWith(OS_NAME, "OS/2");
-
-    /**
-     * True if this is the Mac OS X.
-     */
-    public static final boolean IS_OS_MAC =
-        startsWith(OS_NAME, "Mac");
-
-    /**
-     * True if this is Windows.
-     */
-    public static final boolean IS_OS_WINDOWS =
-        startsWith(OS_NAME, "Windows");
 
     /**
      * True if this is Windows 98/ME/2000/Server 2003/XP/VISTA/Server 2008.
@@ -202,70 +69,12 @@ public final class LookUtils {
         startsWith(OS_NAME, "Windows 9") && startsWith(OS_VERSION, "4.0");
 
     /**
-     * True if this is Windows 98.
-     *
-     * @since 2.0
-     */
-    public static final boolean IS_OS_WINDOWS_98 =
-        startsWith(OS_NAME, "Windows 9") && startsWith(OS_VERSION, "4.1");
-
-    /**
      * True if this is Windows NT.
      *
      * @since 2.0
      */
     public static final boolean IS_OS_WINDOWS_NT =
         startsWith(OS_NAME, "Windows NT");
-
-    /**
-     * True if this is Windows ME.
-     *
-     * @since 2.0
-     */
-    public static final boolean IS_OS_WINDOWS_ME =
-        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "4.9");
-
-    /**
-     * True if this is Windows 2000.
-     *
-     * @since 2.0
-     */
-    public static final boolean IS_OS_WINDOWS_2000 =
-        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.0");
-
-    /**
-     * True if this is Windows XP.
-     */
-    public static final boolean IS_OS_WINDOWS_XP =
-        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "5.1");
-
-    /**
-     * True if this is Windows Vista/Server 2008.
-     *
-     * @deprecated Use {@link #IS_OS_WINDOWS_6_OR_LATER} instead
-     * @since 2.0
-     */
-    @Deprecated
-    public static final boolean IS_OS_WINDOWS_VISTA =
-        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.0");
-
-    /**
-     * True if this is Windows Vista/Server 2008/7/2008 R2.
-     *
-     * @since 2.3
-     */
-    public static final boolean IS_OS_WINDOWS_6_OR_LATER =
-        startsWith(OS_NAME, "Windows") && startsWith(OS_VERSION, "6.");
-
-
-    /**
-     * True if this is Solaris.
-     */
-    public static final boolean IS_OS_SOLARIS =
-        startsWith(OS_NAME, "Solaris");
-
-
-    // Other Properties *******************************************************
 
     /**
      * True if the Windows XP Look&amp;Feel is enabled.
@@ -377,7 +186,6 @@ public final class LookUtils {
      */
     private static boolean isWindowsXPLafEnabled() {
         return (IS_OS_WINDOWS_XP || IS_OS_WINDOWS_6_OR_LATER)
-             && IS_JAVA_1_4_2_OR_LATER
              && Boolean.TRUE.equals(Toolkit.getDefaultToolkit().
                      getDesktopProperty("win.xpstyle.themeActive"))
              && getSystemProperty("swing.noxp") == null;
@@ -510,14 +318,6 @@ public final class LookUtils {
      */
     private static boolean isLowResolution() {
         return Toolkit.getDefaultToolkit().getScreenResolution() < 120;
-    }
-
-    private static boolean startsWith(String str, String prefix) {
-        return str != null && str.startsWith(prefix);
-    }
-
-    private static boolean startsWithIgnoreCase(String str, String prefix) {
-        return str != null && str.toUpperCase(Locale.ENGLISH).startsWith(prefix.toUpperCase(Locale.ENGLISH));
     }
 
 

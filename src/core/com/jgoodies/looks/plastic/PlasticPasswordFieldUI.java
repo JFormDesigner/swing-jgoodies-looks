@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -50,7 +50,7 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * In addition it uses a custom caret if enabled by the L&amp;f.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 
@@ -72,7 +72,7 @@ public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 	 */
     @Override
     public View create(Element elem) {
-        return (LookUtils.IS_JAVA_1_4_OR_5)
+        return LookUtils.IS_JAVA_5
             ? new ExtPasswordView(elem)
             : super.create(elem);
     }
@@ -85,7 +85,7 @@ public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
      */
     @Override
     protected Caret createCaret() {
-        return (PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained())
+        return PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained()
             ? new PlasticFieldCaret()
             : super.createCaret();
     }

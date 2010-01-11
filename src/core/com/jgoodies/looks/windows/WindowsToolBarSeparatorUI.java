@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -41,23 +41,16 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
-import com.jgoodies.looks.LookUtils;
-
 /**
  * A Windows tool bar separator that honors the tool bar's border.
  * Used in in 1.4.0, 1.4.1 and 1.4.2 with XP turned off.
  * In addition this class reuses a single UI instance.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsToolBarSeparatorUI
     extends BasicToolBarSeparatorUI {
-
-    /** See bug #4773490 in Sun's bug database. */
-    private static final int VERTICAL = LookUtils.IS_JAVA_1_4_2_OR_LATER
-            ? SwingConstants.VERTICAL
-            : SwingConstants.HORIZONTAL;
 
     /** Shared UI component. */
     private static WindowsToolBarSeparatorUI toolBarSeparatorUI;
@@ -78,14 +71,14 @@ public final class WindowsToolBarSeparatorUI
 
         Dimension size = c.getSize();
 
-        if (((JSeparator) c).getOrientation() == VERTICAL) {
-            int x = (size.width / 2) - 1;
+        if (((JSeparator) c).getOrientation() == SwingConstants.VERTICAL) {
+            int x = size.width / 2 - 1;
             g.setColor(shadowColor);
             g.drawLine(x, 0, x, size.height - 1);
             g.setColor(highlightColor);
             g.drawLine(x + 1, 0, x + 1, size.height - 1);
         } else {
-            int y = (size.height / 2) - 1;
+            int y = size.height / 2 - 1;
             g.setColor(shadowColor);
             g.drawLine(0, y, size.width - 1, y);
             g.setColor(highlightColor);

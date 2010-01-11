@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -46,10 +46,10 @@ import com.jgoodies.looks.common.ExtPasswordView;
  * delegate. It differs from its superclass in that it utilizes a password
  * view that renders a customizable echo char, not a star (&quot;*&quot;).
  *
- * Used for Java 1.4 and Java 5.
+ * Used for Java 5.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.windows.WindowsPasswordFieldUI {
 
@@ -84,7 +84,7 @@ public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.window
 	 */
     @Override
     public View create(Element elem) {
-        return (LookUtils.IS_JAVA_1_4_OR_5)
+        return LookUtils.IS_JAVA_5
             ? new ExtPasswordView(elem)
             : super.create(elem);
     }

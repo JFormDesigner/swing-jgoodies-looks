@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -47,7 +47,7 @@ import java.util.Locale;
  * (Normal/Large/Extra Large).
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  *
  * @see     FontSet
  * @see     FontSets
@@ -277,7 +277,7 @@ public final class Fonts {
 
         // Java 1.4 and Java 5 raster the Segoe UI poorly,
         // so we use the older Tahoma, if it can display the localized text.
-        if (LookUtils.IS_OS_WINDOWS_6_OR_LATER && LookUtils.IS_JAVA_1_4_OR_5) {
+        if (LookUtils.IS_OS_WINDOWS_6_OR_LATER && LookUtils.IS_JAVA_5) {
             Font tahoma = getDefaultGUIFontWesternModernWindowsNormal();
             return Boolean.TRUE.equals(canDisplayLocalizedText(tahoma, Locale.getDefault()))
                 ? tahoma
@@ -396,7 +396,7 @@ public final class Fonts {
         }
         String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
         String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
-        return !(englishDisplayLanguage.equals(localizedDisplayLanguage));
+        return !englishDisplayLanguage.equals(localizedDisplayLanguage);
     }
 
 
