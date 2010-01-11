@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2009 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -37,13 +37,14 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicHTML;
 import javax.swing.text.View;
 
+import com.jgoodies.common.internal.RenderingUtils;
 import com.jgoodies.looks.Options;
 
 /**
  * Renders and lays out menu items.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  */
 
 public class MenuItemRenderer {
@@ -305,8 +306,8 @@ public class MenuItemRenderer {
 
 		viewRect.x += i.left;
 		viewRect.y += i.top;
-		viewRect.width  -= (i.right + viewRect.x);
-		viewRect.height -= (i.bottom + viewRect.y);
+		viewRect.width  -= i.right + viewRect.x;
+		viewRect.height -= i.bottom + viewRect.y;
 
 		Font holdf = g.getFont();
 		Font f = c.getFont();
@@ -351,7 +352,7 @@ public class MenuItemRenderer {
 
 		// Paint icon
 		Color holdc = g.getColor();
-		if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+		if (model.isArmed() || c instanceof JMenu && model.isSelected()) {
 			g.setColor(foreground);
 		}
 		wrappedIcon.paintIcon(c, g, checkIconRect.x, checkIconRect.y);
@@ -405,7 +406,7 @@ public class MenuItemRenderer {
 				}
 			} else {
 				// *** paint the acceleratorText normally
-				if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+				if (model.isArmed() || c instanceof JMenu && model.isSelected()) {
 					g.setColor(acceleratorSelectionForeground);
 				} else {
 					g.setColor(acceleratorForeground);
@@ -418,7 +419,7 @@ public class MenuItemRenderer {
 
 		// Paint the Arrow
 		if (arrowIcon != null) {
-			if (model.isArmed() || (c instanceof JMenu && model.isSelected())) {
+			if (model.isArmed() || c instanceof JMenu && model.isSelected()) {
                 g.setColor(foreground);
             }
 			if (useCheckAndArrow()) {
@@ -458,7 +459,7 @@ public class MenuItemRenderer {
 		 * or and empty String was specified we substitute "" here
 		 * and use 0,0,0,0 for acceleratorTextRect.
 		 */
-		if ((acceleratorText == null) || acceleratorText.equals("")) {
+		if (acceleratorText == null || acceleratorText.equals("")) {
 			acceleratorRectangle.width = acceleratorRectangle.height = 0;
 			acceleratorText = "";
 		} else {
@@ -526,10 +527,10 @@ public class MenuItemRenderer {
 
 		// Align the accelerator text and the check and arrow icons vertically
 		// with the center of the label rect.
-		acceleratorRectangle.y = labelRect.y + (labelRect.height / 2) - (acceleratorRectangle.height / 2);
+		acceleratorRectangle.y = labelRect.y + labelRect.height / 2 - acceleratorRectangle.height / 2;
 		if (useCheckAndArrow) {
-			arrowIconRectangle.y = labelRect.y + (labelRect.height / 2) - (arrowIconRectangle.height / 2);
-			checkIconRectangle.y = labelRect.y + (labelRect.height / 2) - (checkIconRectangle.height / 2);
+			arrowIconRectangle.y = labelRect.y + labelRect.height / 2 - arrowIconRectangle.height / 2;
+			checkIconRectangle.y = labelRect.y + labelRect.height / 2 - checkIconRectangle.height / 2;
 		}
 
 		/*
@@ -578,7 +579,7 @@ public class MenuItemRenderer {
             int menuWidth  = aMenuItem.getWidth();
             int menuHeight = aMenuItem.getHeight();
             Color c = model.isArmed() ||
-                     (aMenuItem instanceof JMenu && model.isSelected())
+                     aMenuItem instanceof JMenu && model.isSelected()
                        ? bgColor
                        : aMenuItem.getBackground();
 			Color oldColor = g.getColor();
@@ -626,7 +627,7 @@ public class MenuItemRenderer {
 		    }
 		} else {
 		    // *** paint the text normally
-		    if (model.isArmed()|| (aMenuItem instanceof JMenu && model.isSelected())) {
+		    if (model.isArmed()|| aMenuItem instanceof JMenu && model.isSelected()) {
 		        g.setColor(selectionForeground); // Uses protected field.
 		    }
             RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
