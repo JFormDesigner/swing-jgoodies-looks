@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
-   $Id: build.xml,v 1.30 2007-05-28 16:10:00 karsten Exp $
+   $Id: build.xml,v 1.31 2010-01-11 22:48:55 karsten Exp $
 
    This is a build file for use with the Jakarta Ant build tool, see
    http://jakarta.apache.org/ant/index.html
@@ -42,18 +42,22 @@
     <!-- ***************************************************************** -->
     <!-- P A T H S                                                         -->
     <!-- ***************************************************************** -->
+    <path id="classpath.core">
+        <pathelement location="${build.core.dir}" 	/> 
+        <pathelement location="${lib.common.jar}" 	/> 
+    </path>
+    
     <path id="classpath.tests">
         <pathelement location="${build.core.dir}"   /> 
         <pathelement location="${build.test.dir}"   /> 
-        <pathelement location="${junit.jar}"        /> 
+        <pathelement location="${lib.common.jar}" 	/> 
+        <pathelement location="${junit4.jar}"       /> 
+    </path>
+	
+    <path id="classpath.javadoc">
+        <pathelement location="${lib.common.jar}"   /> 
     </path>
 
-    <path id="classpath.demo">
-        <pathelement location="${build.core.dir}" 	/> 
-        <pathelement location="${lib.forms.jar}" 	/> 
-    </path>
-    
-  
   
     <!-- ***************************************************************** -->
     <!-- C L E A N                                                         -->
@@ -77,7 +81,6 @@
         </tstamp>
         
 		<mkdir dir="${build.core.dir}"	  />
-		<mkdir dir="${build.demo.dir}"    />
 
         <available
             property="junit.task.present"
@@ -94,8 +97,8 @@
     <!-- C O M P I L A T I O N                                             -->
     <!-- ***************************************************************** -->
 	<target name="compile" 
-			depends="compile-core, compile-demo, compile-tests" 
-	        description="Compiles the l&amp;fs, demo, and tests." />
+			depends="compile-core, compile-tests" 
+	        description="Compiles the l&amp;fs, and tests." />
 	        
     <!-- ***************************************************************** -->
 	<target name="compile-core" depends="prepare"
@@ -114,7 +117,8 @@
             source       ="${build.compile.source}"
 			target       ="${build.compile.target}"
 			verbose      ="${build.compile.verbose}"
-			bootclasspath="${build.boot.classpath}" />
+			bootclasspath="${build.boot.classpath}" 
+		    classpathref ="classpath.core" />
 
 		<copy toDir="${build.core.dir}" >
 			<fileset dir="${src.core.dir}" 
@@ -124,28 +128,8 @@
 		</copy>
 	</target>
 	
-    <!-- ***************************************************************** -->
-	<target name="compile-demo" depends="compile-core"
-	        description="Compiles the demo sources." >
-		<javac 
-			srcdir       ="${src.demo.dir}" 
-			destdir      ="${build.demo.dir}"
-        	encoding     ="${build.encoding}"
-        	executable   ="${build.compile.executable}"
-        	fork         ="${build.compile.fork}"
-			debug        ="${build.compile.debug}"
-			depend       ="${build.compile.depend}"
-			deprecation  ="${build.compile.deprecation}"
-			nowarn       ="${build.compile.nowarn}" 
-			optimize     ="${build.compile.optimize}"
-            source       ="${build.compile.source}"
-			target       ="${build.compile.target}"
-			verbose      ="${build.compile.verbose}"
-			bootclasspath="${build.boot.classpath}" 
-		    classpathref ="classpath.demo" />
-	</target>
 
-    <!-- ***************************************************************** -->
+	<!-- ***************************************************************** -->
     <target name="compile-tests" depends="compile-core" if="junit.jar.present"
             description="Compiles the unit tests." >
         <mkdir dir="${build.test.dir}"/>
@@ -188,7 +172,8 @@
             overview="${javadoc.overview}"
             windowtitle="${Name} ${spec.version} API" 
             doctitle="${Name} ${spec.version} API"
-            bottom="${copyright.message}" >
+            bottom="${copyright.message}" 
+            classpathref ="classpath.javadoc" >
          </javadoc>
     </target>
     
@@ -213,7 +198,7 @@
     <!-- J A R                                       				       -->
     <!-- ***************************************************************** -->
 	<target name="jar" 
-			depends="jar-all, jar-plastic, jar-windows, jar-demo, jar-tiny, jar-fonttest"
+			depends="jar-all, jar-plastic, jar-windows"
 	        description="Creates library and example jars." >
 	</target>
 	
@@ -282,64 +267,6 @@
 	</target>
 	
     <!-- ***************************************************************** -->
-	<target name="jar-demo" depends="jar-plastic"
-	        description="Creates the demo jar." >
-		<jar 
-			destfile="${build.demo.jar}" >
-			<fileset    dir="${build.demo.dir}"    
-                        excludes="Tiny.*, FontTest.*"          />
-			<fileset    dir="${src.demo.dir}" 
-			            includes="com/jgoodies/looks/demo/resources/**/*" />
-			<manifest>
-                <attribute name ="Built-By" 
-                           value="${user.name}"/>
-                <attribute name ="Main-Class" 
-                           value="com.jgoodies.looks.demo.DemoFrame"/>
-                <attribute name ="Class-Path" 
-                           value="../lib/${lib.forms.name} ../${dist.all.name}"/>
-            </manifest>		
-        </jar>
-	</target>
-	
-    <!-- ***************************************************************** -->
-	<target name="jar-tiny" depends="jar-plastic"
-	        description="Creates the tiny jar." >
-		<jar 
-			destfile="${build.tiny.jar}" >
-            <fileset    dir="${build.demo.dir}"    
-                        includes="Tiny.*"          />
-			<manifest>
-                <attribute name ="Built-By" 
-                           value="${user.name}"/>
-                <attribute name ="Main-Class" 
-                           value="Tiny"/>
-                <attribute name ="Class-Path" 
-                           value="../${dist.all.name}"/>
-            </manifest>		
-        </jar>
-	</target>
-	
-	
-    <!-- ***************************************************************** -->
-    <target name="jar-fonttest" depends="jar-plastic"
-            description="Creates the fonttest jar." >
-        <jar 
-            destfile="${build.fonttest.jar}" >
-            <fileset    dir="${build.demo.dir}"    
-                        includes="FontTest.*"          />
-            <manifest>
-                <attribute name ="Built-By" 
-                           value="${user.name}"/>
-                <attribute name ="Main-Class" 
-                           value="FontTest"/>
-                <attribute name ="Class-Path" 
-                           value="../${dist.all.name}"/>
-            </manifest>     
-        </jar>
-    </target>
-    
-    
-    <!-- ***************************************************************** -->
     <!-- C R E A T E                                                       -->
     <!-- ***************************************************************** -->
     <target name="create-all" depends="create-dist-zip, create-maven-bundle"
@@ -358,29 +285,25 @@
 		</copy>
         <move todir="${dist.docs.dir}" file="${build.javadocs.dir}" />
 		
-		<!-- Copy the examples. -->
-		<copy todir="${dist.demo.dir}" file="${build.demo.jar}" />
-		<copy todir="${dist.demo.dir}" file="${build.tiny.jar}" />
-		
-        <!-- Copy the font test. -->
-        <copy todir="${dist.demo.dir}" file="${build.fonttest.jar}" />
-
-        <!-- Copy the libraries. -->
-		<copy todir="${dist.lib.dir}" >
-		    <fileset dir="${lib.dir}" 
-                     includes="forms-*.jar"      />
-		</copy>
-		
 		<!-- Copy the source directories. -->
 		<copy todir="${dist.src.dir}" >
 		    <fileset dir="${src.dir}" />
 		</copy>
 		
+		<!-- Copy the required libraries. -->
+		<copy todir="${dist.lib.dir}" file="${lib.common.jar}" />
+
 		<!-- Copy the distribution files. -->
 		<copy todir="${dist.dir}" >
 			<fileset dir="${top.dir}" 
 				     includes="*.txt, *.html, *.xml, *.properties" 
 				     excludes="todo.txt" />
+			<filterset>
+				<filter token="impl.version"      value="${impl.version}"      />
+				<filter token="version.name"      value="${version.name}"      />
+				<filter token="copyright.message" value="${copyright.message}" />
+				<filter token="copyright.short"   value="${copyright.short}"   />
+			</filterset>
 		</copy>
 
 		<!-- Copy the jar files. -->
@@ -407,11 +330,14 @@
             description="Creates a Maven bundle for the Ibiblio upload." >
             
         <!-- Copy the Maven pom template. -->
-        <copy tofile="${dist.maven.pom}" file="${build.maven.pom.template}" />
-        <!-- Replace the version in the pom.xml. -->
-        <replace file="${dist.maven.pom}"
-            token="@impl.version"
-            value="${impl.version}" />   
+        <copy 
+        	tofile="${dist.maven.pom}" 
+        	file="${build.maven.pom.template}" >
+			<filterset>
+				<filter token="impl.version"      value="${impl.version}"      />
+				<filter token="shortname"         value="${shortname}"      />
+			</filterset>
+    	</copy>
         
         <copy tofile="${dist.maven.bin.jar}" file="${build.all.jar}" />
         <jar 
