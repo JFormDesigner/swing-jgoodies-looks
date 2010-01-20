@@ -33,8 +33,6 @@ package com.jgoodies.looks.plastic;
 import java.awt.Color;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -51,6 +49,7 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
+import com.jgoodies.common.base.Preconditions;
 import com.jgoodies.looks.*;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.RGBGrayFilter;
@@ -63,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.43 $
+ * @version $Revision: 1.44 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -118,14 +117,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         "metal";
 
 
-    /**
-     * A UIManager key used to store and retrieve the PlasticTheme in Java 1.4
-     *
-     * @see #getPlasticTheme()
-     * @see #setPlasticTheme(PlasticTheme)
-     */
-    private static final Object THEME_KEY = new StringBuffer("Plastic.theme");
-
 
     // State *****************************************************************
 
@@ -154,17 +145,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
     private static boolean selectTextOnKeyboardFocusGained =
         LookUtils.IS_OS_WINDOWS;
 
-    /**
-     * In Java 5 or later, this field holds the public static method
-     * <code>MetalLookAndFeel#getCurrentTheme</code>.
-     */
-    private static Method getCurrentThemeMethod = null;
-
-    static {
-        if (LookUtils.IS_JAVA_5_OR_LATER) {
-            getCurrentThemeMethod = getMethodGetCurrentTheme();
-        }
-    }
 
     // Instance Creation ******************************************************
 
@@ -888,26 +868,14 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Lazily initializes and returns the PlasticTheme.
-     * In Java 5 or later, this method looks up the theme
-     * using <code>MetalLookAndFeel#getCurrentTheme</code>.
-     * In Java 1.4 it is requested from the UIManager.
-     * Both access methods use an AppContext to store the theme,
-     * so that applets in different contexts don't share the theme.
      *
      * @return the current PlasticTheme
      */
     public static PlasticTheme getPlasticTheme() {
-        if (LookUtils.IS_JAVA_5_OR_LATER) {
-            MetalTheme theme = getCurrentTheme0();
-            if (theme instanceof PlasticTheme) {
-                return (PlasticTheme) theme;
-            }
+        MetalTheme theme = getCurrentTheme();
+        if (theme instanceof PlasticTheme) {
+            return (PlasticTheme) theme;
         }
-        PlasticTheme uimanagerTheme = (PlasticTheme) UIManager.get(THEME_KEY);
-        if (uimanagerTheme != null) {
-            return uimanagerTheme;
-        }
-
         PlasticTheme initialTheme = createMyDefaultTheme();
         setPlasticTheme(initialTheme);
         return initialTheme;
@@ -928,12 +896,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @see #getPlasticTheme()
      */
     public static void setPlasticTheme(PlasticTheme theme) {
-        if (theme == null) {
-            throw new NullPointerException("The theme must not be null.");
-        }
-
-        UIManager.put(THEME_KEY, theme);
-        // Also set the theme in the superclass.
+        Preconditions.checkNotNull(theme, "The theme must not be null.");
         setCurrentTheme(theme);
     }
 
@@ -1032,37 +995,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	public static FontUIResource getTitleTextFont() {
 		return getPlasticTheme().getTitleTextFont();
 	}
-
-
-    // Helper Code ************************************************************
-
-    private static MetalTheme getCurrentTheme0() {
-        if (getCurrentThemeMethod != null) {
-            try {
-                return (MetalTheme) getCurrentThemeMethod.invoke(null, null);
-            } catch (IllegalArgumentException e) {
-                // Return null
-            } catch (IllegalAccessException e) {
-                // Return null
-            } catch (InvocationTargetException e) {
-                // Return null
-            }
-        }
-        return null;
-    }
-
-
-    private static Method getMethodGetCurrentTheme() {
-        try {
-            Class clazz = MetalLookAndFeel.class;
-            return clazz.getMethod("getCurrentTheme", new Class[] {});
-        } catch (SecurityException e) {
-            // returns null
-        } catch (NoSuchMethodException e) {
-            // returns null
-        }
-        return null;
-    }
 
 
     // Helper Code ************************************************************
