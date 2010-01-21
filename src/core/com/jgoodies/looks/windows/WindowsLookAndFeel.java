@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.45 $
+ * @version $Revision: 1.46 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -338,10 +338,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         if (isClassic) {
             initComponentDefaultsClassic(table);
         }
-        if (isXP && LookUtils.IS_JAVA_1_4) {
-            initComponentDefaultsXP14(table);
-        }
-
         MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout("Windows", table);
         if (!isVista || !LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             initMenuItemDefaults(table, microLayout);
@@ -391,7 +387,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         int treeFontSize = table.getFont("Tree.font").getSize();
         Integer rowHeight = new Integer(treeFontSize + 6);
 
-        Class superclass = getClass().getSuperclass();
         Color controlColor = table.getColor("control");
         Object disabledTextBackground = table.getColor("TextField.disabledBackground");
         Object inactiveTextBackground = table.getColor("TextField.inactiveBackground");
@@ -482,20 +477,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "Tree.selectionBorderColor",  controlColor, // 1.4.1 Bug; active
             "Tree.rowHeight",             rowHeight, // 1.4.1 Bug
         };
-        if (LookUtils.IS_JAVA_1_4) {
-            defaults = append(defaults, new Object[] {
-            "InternalFrame.icon",         makeIcon(superclass, "icons/JavaCup.gif"),
-            "OptionPane.errorIcon",       isXP ? makeIcon(getClass(), "icons/xp/Error.png")
-                                               : makeIcon(superclass, "icons/Error.gif"),
-            "OptionPane.informationIcon", isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
-                                               : makeIcon(superclass, "icons/Inform.gif"),
-            "OptionPane.warningIcon",     isXP ? makeIcon(getClass(), "icons/xp/Warn.png")
-                                               : makeIcon(superclass, "icons/Warn.gif"),
-            "OptionPane.questionIcon",    isXP ? makeIcon(getClass(), "icons/xp/Inform.png")
-                                               : makeIcon(superclass, "icons/Question.gif")
-            });
-        }
-        if (LookUtils.IS_JAVA_1_4 || LookUtils.IS_JAVA_5) {
+        if (LookUtils.IS_JAVA_5) {
             defaults = append(defaults, new Object[] {
             "Tree.openIcon",              isXP ? makeIcon(getClass(), "icons/xp/TreeOpen.png")
                                                : makeIcon(getClass(), "icons/TreeOpen.gif"),
@@ -540,15 +522,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         table.putDefaults(defaults);
     }
 
-    /**
-     * Initializes component defaults required in XP mode on Java 1.4.2 only.
-     */
-    private void initComponentDefaultsXP14(UIDefaults table) {
-        Object[] defaults = {
-            "TitledBorder.titleColor", table.getColor("activeCaption")
-        };
-        table.putDefaults(defaults);
-    }
 
     /**
      * Looks up the correct control font and sets it for all controls.
