@@ -22,7 +22,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * Korean and other non-western Windows editions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  */
 public final class FontTest {
 
@@ -176,8 +176,6 @@ public final class FontTest {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
         buffer.append("Internationalization:");
-        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
-        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
         Locale locale = Locale.getDefault();
         buffer.append("\n    defaultLocale.getDisplayName(Locale.ENGLISH)=");
         buffer.append(locale.getDisplayName(Locale.ENGLISH));
@@ -186,10 +184,16 @@ public final class FontTest {
         buffer.append("\n    defaultLocale.getDisplayLanguage(defaultLocale)=");
         buffer.append(locale.getDisplayLanguage(locale));
         buffer.append("\n    locale has localized display language=" + localeHasLocalizedDisplayLanguage(locale));
-        buffer.append("\n    defaultGUI font can display localized text=");
-        buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(defaultGUIFont, locale)));
-        buffer.append("\n    icon font can display localized text=");
-        buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(iconFont, locale)));
+        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
+        if (defaultGUIFont != null) {
+            buffer.append("\n    defaultGUI font can display localized text=");
+            buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(defaultGUIFont, locale)));
+        }
+        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
+        if (iconFont != null) {
+            buffer.append("\n    icon font can display localized text=");
+            buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(iconFont, locale)));
+        }
     }
 
 
