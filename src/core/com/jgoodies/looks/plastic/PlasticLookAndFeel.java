@@ -62,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.44 $
+ * @version $Revision: 1.45 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -515,7 +515,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         String iconPrefix = "icons/" + (LookUtils.IS_LOW_RESOLUTION ? "32x32/" : "48x48/");
         Object errorIcon       = makeIcon(getClass(), iconPrefix + "dialog-error.png");
         Object informationIcon = makeIcon(getClass(), iconPrefix + "dialog-information.png");
-        Object questionIcon    = makeIcon(getClass(), iconPrefix + "dialog-question.png");
+        Object helpIcon        = makeIcon(getClass(), iconPrefix + "dialog-help.png");
         Object warningIcon     = makeIcon(getClass(), iconPrefix + "dialog-warning.png");
 
 
@@ -576,7 +576,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 		"OptionPane.errorIcon",							errorIcon,
         "OptionPane.informationIcon",                   informationIcon,
-        "OptionPane.questionIcon",                      questionIcon,
+        "OptionPane.questionIcon",                      helpIcon    ,
         "OptionPane.warningIcon",                       warningIcon,
 
         //"DesktopIcon.icon", 							makeIcon(superclass, "icons/DesktopIcon.gif"),
