@@ -11,9 +11,14 @@ INTRODUCTION
     classpath when using this Looks version.
     
 
-OTHER CHANGES
+BUG FIXES
 
     o Fixed bug in the FontTest on non-Windows platforms.
+    o Fixed a potential NPE in PlasticFieldCaret#focusLost().
+
+
+OTHER CHANGES
+
     o Replaced the green Plastic question icon by the standard
       (blue) help icon. Question dialogs shall use a question mark
       in the main instruction, not a question icon. 
