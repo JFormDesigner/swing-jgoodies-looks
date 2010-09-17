@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.46 $
+ * @version $Revision: 1.47 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -713,8 +713,8 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
                     classLoader = getClass().getClassLoader();
                 }
                 c = Class.forName(className, true, classLoader);
-                Method m = c.getMethod(methodName, null);
-                instance = m.invoke(c, null);
+                Method m = c.getMethod(methodName, (Class[]) null);
+                instance = m.invoke(c, (Object[]) null);
             } catch (Throwable t) {
                 LookUtils.log("Problem creating " + className + " with method "
                         + methodName + t);
