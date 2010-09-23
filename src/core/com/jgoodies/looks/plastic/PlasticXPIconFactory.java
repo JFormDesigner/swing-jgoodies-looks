@@ -37,6 +37,7 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
+import com.jgoodies.common.base.Strings;
 import com.jgoodies.looks.LookUtils;
 
 /**
@@ -51,7 +52,7 @@ import com.jgoodies.looks.LookUtils;
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public final class PlasticXPIconFactory {
 
@@ -103,8 +104,8 @@ public final class PlasticXPIconFactory {
             JCheckBox cb = (JCheckBox) c;
             ButtonModel model = cb.getModel();
             Graphics2D g2 = (Graphics2D) g;
-            boolean paintFocus =    (model.isArmed() && !model.isPressed())
-                                 || (cb.hasFocus() && isBlank(cb.getText()));
+            boolean paintFocus =    model.isArmed() && !model.isPressed()
+                                 || cb.hasFocus() && Strings.isBlank(cb.getText());
 
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
@@ -198,8 +199,8 @@ public final class PlasticXPIconFactory {
             Graphics2D g2 = (Graphics2D) g;
             AbstractButton rb = (AbstractButton) c;
             ButtonModel model = rb.getModel();
-            boolean paintFocus =    (model.isArmed() && !model.isPressed())
-                                 || (rb.hasFocus() && isBlank(rb.getText()));
+            boolean paintFocus =    model.isArmed() && !model.isPressed()
+                                 || rb.hasFocus() && Strings.isBlank(rb.getText());
 
             final RenderingHints.Key key = RenderingHints.KEY_ANTIALIASING;
             Object newAAHint = RenderingHints.VALUE_ANTIALIAS_ON;
@@ -273,39 +274,6 @@ public final class PlasticXPIconFactory {
             g2.setStroke(stroke);
         }
 
-    }
-
-
-    // Helper Code ************************************************************
-
-    /**
-     * Checks and answers if the given string is whitespace,
-     * empty ("") or <code>null</code>.
-     *
-     * <pre>
-     * isBlank(null)    == true
-     * isBlank("")      == true
-     * isBlank(" ")     == true
-     * isBlank(" abc")  == false
-     * isBlank("abc ")  == false
-     * isBlank(" abc ") == false
-     * </pre>
-     *
-     * @param str   the string to check, may be <code>null</code>
-     * @return <code>true</code> if the string is whitespace, empty
-     *    or <code>null</code>
-     */
-    private static boolean isBlank(String str) {
-        int length;
-        if ((str == null) || ((length = str.length()) == 0)) {
-            return true;
-        }
-        for (int i = length-1; i >= 0; i--) {
-            if (!Character.isWhitespace(str.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
     }
 
 

@@ -23,6 +23,7 @@ OTHER CHANGES
       (blue) help icon. Question dialogs shall use a question mark
       in the main instruction, not a question icon. 
       The blue question mark icon is for help messages and help windows.  
+    o Removed obsolete #isBlank implementation.
     
 ---------------------------------------------------------------------------
 
