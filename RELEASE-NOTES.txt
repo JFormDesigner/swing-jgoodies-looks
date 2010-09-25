@@ -24,6 +24,7 @@ OTHER CHANGES
       in the main instruction, not a question icon. 
       The blue question mark icon is for help messages and help windows.  
     o Removed obsolete #isBlank implementation.
+    o Removed code used for Java 1.4 that is now obsolete.
     
 ---------------------------------------------------------------------------
 

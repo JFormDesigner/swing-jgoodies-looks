@@ -33,8 +33,6 @@ package com.jgoodies.looks.plastic;
 import java.awt.Component;
 import java.awt.Insets;
 import java.awt.LayoutManager;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -50,7 +48,7 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 
@@ -60,74 +58,8 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
 	}
 
 
-    /**
-     * Create a component that will replace the spinner models value
-     * with the object returned by <code>spinner.getPreviousValue</code>.
-     * By default the <code>previousButton</code> is a JButton
-     * who's <code>ActionListener</code> updates it's <code>JSpinner</code>
-     * ancestors model.  If a previousButton isn't needed (in a subclass)
-     * then override this method to return null.
-     *
-     * @return a component that will replace the spinners model with the
-     *     next value in the sequence, or null
-     * @see #installUI
-     * @see #createNextButton
-     */
-    @Override
-    protected Component createPreviousButton() {
-        Component c = createArrowButton(SwingConstants.SOUTH);
-        installPreviousButtonListenersFromSuper(c);
-        return c;
-    }
-
-
-    /**
-     * Create a component that will replace the spinner models value
-     * with the object returned by <code>spinner.getNextValue</code>.
-     * By default the <code>nextButton</code> is a JButton
-     * who's <code>ActionListener</code> updates it's <code>JSpinner</code>
-     * ancestors model.  If a nextButton isn't needed (in a subclass)
-     * then override this method to return null.
-     *
-     * @return a component that will replace the spinners model with the
-     *     next value in the sequence, or null
-     * @see #installUI
-     * @see #createPreviousButton
-     */
-    @Override
-    protected Component createNextButton() {
-        Component c = createArrowButton(SwingConstants.NORTH);
-        installNextButtonListenersFromSuper(c);
-        return c;
-    }
-
-
     protected Component createArrowButton(int direction) {
         return new SpinnerArrowButton(direction);
-    }
-
-
-    // TODO 1.5: Remove in 1.5
-    protected void installPreviousButtonListenersFromSuper(Component c) {
-        AbstractButton sc = (AbstractButton) super.createPreviousButton();
-        ActionListener[] als = sc.getActionListeners();
-        MouseListener[]  mls = sc.getMouseListeners();
-        if (c instanceof AbstractButton) {
-            ((AbstractButton) c).addActionListener(als[0]);
-        }
-        c.addMouseListener(mls[0]);
-    }
-
-
-    // TODO 1.5: Remove in 1.5
-    protected void installNextButtonListenersFromSuper(Component c) {
-        AbstractButton sc = (AbstractButton) super.createNextButton();
-        ActionListener[] als = sc.getActionListeners();
-        MouseListener[]  mls = sc.getMouseListeners();
-        if (c instanceof AbstractButton) {
-            ((AbstractButton) c).addActionListener(als[0]);
-        }
-        c.addMouseListener(mls[0]);
     }
 
 
@@ -207,14 +139,14 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
      * Sets an empty border with the default text insets.
      */
     private void configureEditorBorder(JComponent editor) {
-        if ((editor instanceof JSpinner.DefaultEditor)) {
+        if (editor instanceof JSpinner.DefaultEditor) {
             JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
             JTextField editorField = defaultEditor.getTextField();
             Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
             editorField.setBorder(new EmptyBorder(insets));
-        } else if (   (editor instanceof JPanel)
-                && (editor.getBorder() == null)
-                && (editor.getComponentCount() > 0)) {
+        } else if (   editor instanceof JPanel
+                && editor.getBorder() == null
+                && editor.getComponentCount() > 0) {
             JComponent editorField = (JComponent) editor.getComponent(0);
             Insets insets = UIManager.getInsets("Spinner.defaultEditorInsets");
             editorField.setBorder(new EmptyBorder(insets));

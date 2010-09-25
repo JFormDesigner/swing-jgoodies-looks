@@ -33,10 +33,7 @@ package com.jgoodies.looks.plastic;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 import javax.swing.plaf.ComponentUI;
 
 import com.jgoodies.looks.LookUtils;
@@ -49,7 +46,7 @@ import com.jgoodies.looks.common.ExtBasicMenuUI;
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  *
  * @see	com.jgoodies.looks.Options
  */
@@ -72,10 +69,8 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
     @Override
     protected void uninstallDefaults() {
         super.uninstallDefaults();
-        // TODO 1.5: Replace by
-        // LookAndFeel.installProperty(menuItem, "opaque", Boolean.valueOf(oldOpaque));
         if (!LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_JAVA_6_OR_LATER) {
-            menuItem.setOpaque(oldOpaque);
+            LookAndFeel.installProperty(menuItem, "opaque", Boolean.valueOf(oldOpaque));
         }
     }
 
