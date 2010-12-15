@@ -43,11 +43,11 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicMenuUI;
 
 /**
- * An implementation of <code>MenuUI</code> used by the JGoodies Windows
+ * An implementation of {@code MenuUI} used by the JGoodies Windows
  * and Plastic looks. Unlike it's superclass, it aligns submenu items.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 
 public class ExtBasicMenuUI extends BasicMenuUI {

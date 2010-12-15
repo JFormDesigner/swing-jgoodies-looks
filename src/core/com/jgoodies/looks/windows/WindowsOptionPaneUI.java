@@ -42,11 +42,11 @@ import com.jgoodies.looks.common.ExtButtonAreaLayout;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of
- * <code>OptionPaneUI</code>. Honors the screen resolution and uses a
+ * {@code OptionPaneUI}. Honors the screen resolution and uses a
  * minimum button with that complies better with the Windows UI style guide.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsOptionPaneUI extends BasicOptionPaneUI {
 
@@ -56,7 +56,7 @@ public final class WindowsOptionPaneUI extends BasicOptionPaneUI {
 
     /**
      * Creates and returns a Container containin the buttons. The buttons
-     * are created by calling <code>getButtons</code>.
+     * are created by calling {@code getButtons}.
      */
     @Override
     protected Container createButtonArea() {

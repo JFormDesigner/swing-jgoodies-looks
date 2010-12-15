@@ -37,12 +37,12 @@ import javax.swing.plaf.basic.BasicButtonListener;
 import javax.swing.plaf.metal.MetalRadioButtonUI;
 
 /**
- * The JGoodies PlasticXP L&amp;F implementation of <code>RadioButtonUI</code>.
+ * The JGoodies PlasticXP L&amp;F implementation of {@code RadioButtonUI}.
  * It differs from its superclass in that it uses a different icon
  * and has an active border that changes when the mouse is over.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticXPRadioButtonUI extends MetalRadioButtonUI {
 

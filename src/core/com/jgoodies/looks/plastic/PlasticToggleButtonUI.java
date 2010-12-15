@@ -39,12 +39,12 @@ import javax.swing.plaf.metal.MetalToggleButtonUI;
 import javax.swing.text.View;
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>ToggleButtonUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code ToggleButtonUI}.
  * It differs from its superclass in that it can add a pseudo 3D effect,
  * and that the border can paint the focus.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticToggleButtonUI extends MetalToggleButtonUI {
 

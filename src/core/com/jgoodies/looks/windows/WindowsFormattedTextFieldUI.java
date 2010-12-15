@@ -36,12 +36,12 @@ import javax.swing.plaf.basic.BasicFormattedTextFieldUI;
 import javax.swing.text.Caret;
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>FormattedTextFieldUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code FormattedTextFieldUI}.
  * It uses a caret that selects all text if the field gains focus
  * after a keyboard focus traversal.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsFormattedTextFieldUI extends BasicFormattedTextFieldUI {
 

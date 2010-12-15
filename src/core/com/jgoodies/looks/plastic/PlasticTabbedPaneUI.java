@@ -50,8 +50,8 @@ import com.jgoodies.looks.Options;
 
 /**
  * The JGoodies Plastic Look&amp;Feel implementation of
- * <code>TabbedPaneUI</code>. It differs from its superclass
- * <code>MetalTabbedPaneUI</code> in that it paints new tab shapes,
+ * {@code TabbedPaneUI}. It differs from its superclass
+ * {@code MetalTabbedPaneUI} in that it paints new tab shapes,
  * provides two options, and supports ClearLook.
  * <p>
  * You can enable or disable icons in tabs globally via
@@ -80,7 +80,7 @@ import com.jgoodies.looks.Options;
  * Thanks to Andrej Golovnin for his feedback and suggestions.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  *
  * @see     Options
  */
@@ -119,7 +119,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     private ScrollableTabSupport tabScroller;
 
     /**
-     * Creates the <code>PlasticTabbedPaneUI</code>.
+     * Creates the {@code PlasticTabbedPaneUI}.
      *
      * @see javax.swing.plaf.ComponentUI#createUI(JComponent)
      */
@@ -710,7 +710,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     /**
      * Answers the icon for the tab with the specified index.
      * In case, we have globally switched of the use tab icons,
-     * we answer <code>null</code> if and only if we have a title.
+     * we answer {@code null} if and only if we have a title.
      */
     @Override
     protected Icon getIconForTab(int tabIndex) {
@@ -847,7 +847,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
     /**
-     * Returns the amount by which the run number <code>run</code>
+     * Returns the amount by which the run number {@code run}
      * should be indented. Add six pixels for every run to make
      * diagonal lines align.
      */
@@ -2079,7 +2079,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         }
 
         /**
-         * Returns the amount by which the run number <code>run</code>
+         * Returns the amount by which the run number {@code run}
          * should be indented. Add a few pixels for every run to make
          * diagonal lines align.
          */

@@ -62,7 +62,7 @@ import com.jgoodies.looks.plastic.theme.SkyBluer;
  * and provides keys and optional features for the Plastic family.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.45 $
+ * @version $Revision: 1.46 $
  */
 public class PlasticLookAndFeel extends MetalLookAndFeel {
 
@@ -212,11 +212,11 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Sets the FontPolicy to be used with the JGoodies Plastic L&amp;F
-     * family. If the specified policy is <code>null</code>, the default will
+     * family. If the specified policy is {@code null}, the default will
      * be reset.
      *
      * @param fontPolicy   the FontPolicy to be used with
-     *     the JGoodies Plastic L&amp;F family, or <code>null</code> to reset
+     *     the JGoodies Plastic L&amp;F family, or {@code null} to reset
      *     to the default
      *
      * @see #getFontPolicy()
@@ -251,10 +251,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
     /**
      * Sets the MicroLayoutPolicy to be used with the JGoodies Plastic L&amp;Fs.
-     * If the specified policy is <code>null</code>, the default will be reset.
+     * If the specified policy is {@code null}, the default will be reset.
      *
      * @param microLayoutPolicy   the MicroLayoutPolicy to be used with
-     *     the JGoodies Plastic L&amp;Fs, or <code>null</code> to reset
+     *     the JGoodies Plastic L&amp;Fs, or {@code null} to reset
      *     to the default
      *
      * @see #getMicroLayoutPolicy()
@@ -309,7 +309,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	// Overriding Superclass Behavior ***************************************
 
     /**
-     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition
+     * Invoked during {@code UIManager#setLookAndFeel}. In addition
      * to the superclass behavior, we install the ShadowPopupFactory.
      *
      * @see #uninitialize
@@ -322,7 +322,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 
     /**
-     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition
+     * Invoked during {@code UIManager#setLookAndFeel}. In addition
      * to the superclass behavior, we uninstall the ShadowPopupFactory.
      *
      * @see #initialize
@@ -776,7 +776,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 
 	/**
-	 * Lazily initializes and returns the <code>List</code> of installed
+	 * Lazily initializes and returns the {@code List} of installed
      * color themes.
      *
      * @return a list of installed color/font themes
@@ -833,7 +833,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Creates and returns a color theme from the specified theme name.
      *
      * @param themeName   the unqualified name of the theme to create
-     * @return the associated color theme or <code>null</code> in case of
+     * @return the associated color theme or {@code null} in case of
      *     a problem
 	 */
 	protected static PlasticTheme createTheme(String themeName) {

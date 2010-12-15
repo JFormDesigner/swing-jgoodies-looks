@@ -39,11 +39,11 @@ import javax.swing.Icon;
 import com.jgoodies.looks.Options;
 
 /**
- * An <code>Icon</code> with a minimum size that is read from the
- * <code>UIManager</code> <code>defaultIconSize</code> key.
+ * An {@code Icon} with a minimum size that is read from the
+ * {@code UIManager} {@code defaultIconSize} key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public class MinimumSizedIcon implements Icon {

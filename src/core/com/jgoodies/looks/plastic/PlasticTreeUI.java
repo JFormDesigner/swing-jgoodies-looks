@@ -43,7 +43,7 @@ import javax.swing.plaf.basic.BasicTreeUI;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Plastic Look&amp;Feel implementation of <code>TreeUI</code>.
+ * The JGoodies Plastic Look&amp;Feel implementation of {@code TreeUI}.
  * It provides two line styles: angled dashed lines, or no lines at all.
  * By default, lines are drawn.
  * <p>
@@ -70,7 +70,7 @@ import com.jgoodies.looks.Options;
  * </pre>
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class PlasticTreeUI extends BasicTreeUI {

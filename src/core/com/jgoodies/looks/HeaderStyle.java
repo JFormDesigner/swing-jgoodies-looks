@@ -37,10 +37,10 @@ import javax.swing.JToolBar;
 /**
  * Describes the header styles for JMenuBar and JToolBar.
  * Header styles are look-independent and can be shadowed by a look-dependent
- * <code>BorderStyle</code>.
+ * {@code BorderStyle}.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see	BorderStyle
  */
@@ -58,7 +58,7 @@ public final class HeaderStyle {
 
 
     /**
-     * Looks up the client property for the <code>HeaderStyle</code>
+     * Looks up the client property for the {@code HeaderStyle}
      * from the JToolBar.
      *
      * @param menuBar   the menu bar to inspect
@@ -70,7 +70,7 @@ public final class HeaderStyle {
 
 
     /**
-     * Looks up the client property for the <code>HeaderStyle</code>
+     * Looks up the client property for the {@code HeaderStyle}
      * from the JToolBar.
      *
      * @param toolBar   the tool bar to inspect
@@ -82,7 +82,7 @@ public final class HeaderStyle {
 
 
     /**
-     * Looks up the client property for the <code>HeaderStyle</code>
+     * Looks up the client property for the {@code HeaderStyle}
      * from the specified JComponent.
      *
      * @param c    the component to inspect
@@ -103,7 +103,7 @@ public final class HeaderStyle {
 
 
     /**
-     * Looks up and answers the <code>HeaderStyle</code> with the specified name.
+     * Looks up and answers the {@code HeaderStyle} with the specified name.
      *
      * @param name    the name of the HeaderStyle object to lookup
      * @return the associated HeaderStyle

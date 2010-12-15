@@ -38,12 +38,12 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
- * The JGoodies Windows look&amp;feel implementation of <code>ButtonUI</code>.<p>
+ * The JGoodies Windows look&amp;feel implementation of {@code ButtonUI}.<p>
  *
  * Unlike its superclass it returns even and odd preferred heights.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsButtonUI extends com.sun.java.swing.plaf.windows.WindowsButtonUI {
 

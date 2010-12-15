@@ -43,12 +43,12 @@ import javax.swing.plaf.metal.MetalScrollBarUI;
 
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>ScrollBarUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code ScrollBarUI}.
  * Can add a pseudo 3D effect and honors the Plastic Option
  * <tt>ScrollBar.maxBumpsWidth</tt> to limit the with of the scroll bar bumps.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public final class PlasticScrollBarUI extends MetalScrollBarUI {

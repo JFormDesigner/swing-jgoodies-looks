@@ -47,17 +47,17 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 
 /**
- * The JGoodies Plastic Look and Feel implementation of <code>InternalFrameUI</code>.<p>
+ * The JGoodies Plastic Look and Feel implementation of {@code InternalFrameUI}.<p>
  *
- * Uses a <code>PlasticInternalFrameTitlePane</code>
- * that in turn uses <code>PlasticTheme</code> colors.<p>
+ * Uses a {@code PlasticInternalFrameTitlePane}
+ * that in turn uses {@code PlasticTheme} colors.<p>
  *
  * Although this class is not intended for subclassing, there's no final marker.
  * If you extend this class, carefully obey all explicit and implicit
  * constraints made in this class and its superclasses.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 

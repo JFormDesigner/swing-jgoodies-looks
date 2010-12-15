@@ -42,13 +42,13 @@ import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Windows look and feel implemenation of <code>MenuBarUI</code>.<p>
+ * The JGoodies Windows look and feel implemenation of {@code MenuBarUI}.<p>
  *
- * Can handle optional <code>Border</code> types as specified by the
- * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
+ * Can handle optional {@code Border} types as specified by the
+ * {@code BorderStyle} or {@code HeaderStyle} client properties.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.WindowsMenuBarUI {
 
@@ -101,8 +101,8 @@ public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.Wind
 
 	/**
 	 * Installs a special border, if either a look-dependent
-	 * <code>BorderStyle</code> or a look-independent
-	 * <code>HeaderStyle</code> has been specified.
+	 * {@code BorderStyle} or a look-independent
+	 * {@code HeaderStyle} has been specified.
 	 * A look specific BorderStyle shadows
 	 * a HeaderStyle.<p>
 	 *

@@ -39,7 +39,7 @@ import javax.swing.plaf.FontUIResource;
  * Provides predefined FontSet implementations.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  *
  * @see     FontSet
  * @see     FontPolicy
@@ -69,7 +69,7 @@ public final class FontSets {
      *
      * @return a FontSet based on the given fonts
      *
-     * @throws NullPointerException  if the control font is <code>null</code>
+     * @throws NullPointerException  if the control font is {@code null}
      */
     public static FontSet createDefaultFontSet(Font controlFont) {
         return createDefaultFontSet(controlFont, null);
@@ -86,7 +86,7 @@ public final class FontSets {
      *
      * @return a FontSet based on the given fonts
      *
-     * @throws NullPointerException  if the control font is <code>null</code>
+     * @throws NullPointerException  if the control font is {@code null}
      */
     public static FontSet createDefaultFontSet(Font controlFont, Font menuFont) {
         return createDefaultFontSet(controlFont, menuFont, null, null, null, null);
@@ -104,7 +104,7 @@ public final class FontSets {
      *
      * @return a FontSet based on the given fonts
      *
-     * @throws NullPointerException  if the control font is <code>null</code>
+     * @throws NullPointerException  if the control font is {@code null}
      */
     public static FontSet createDefaultFontSet(Font controlFont, Font menuFont, Font titleFont) {
         return createDefaultFontSet(controlFont, menuFont, titleFont, null, null, null);
@@ -113,8 +113,8 @@ public final class FontSets {
 
     /**
      * Creates and returns a FontSet for the given fonts.
-     * If a font is <code>null</code>, it uses the control font as
-     * fallback. If the small font is <code>null</code> it will
+     * If a font is {@code null}, it uses the control font as
+     * fallback. If the small font is {@code null} it will
      * be derived from the control font.
      *
      * @param controlFont      used for all controls
@@ -126,7 +126,7 @@ public final class FontSets {
      *
      * @return a FontSet based on the given fonts
      *
-     * @throws NullPointerException  if the control font is <code>null</code>
+     * @throws NullPointerException  if the control font is {@code null}
      */
     public static FontSet createDefaultFontSet(
             Font controlFont,
@@ -172,8 +172,8 @@ public final class FontSets {
 
         /**
          * Constructs a DefaultFontSet for the given fonts.
-         * If a font is <code>null</code>, it uses the control font as
-         * fallback. If the small font is <code>null</code> it will
+         * If a font is {@code null}, it uses the control font as
+         * fallback. If the small font is {@code null} it will
          * be derived from the control font.
          *
          * @param controlFont      used for all controls
@@ -183,7 +183,7 @@ public final class FontSets {
          * @param smallFont        used for tool tips and similar components
          * @param windowTitleFont  used for internal frame window titles
          *
-         * @throws NullPointerException  if the control font is <code>null</code>
+         * @throws NullPointerException  if the control font is {@code null}
          */
         public DefaultFontSet(
                 Font controlFont,

@@ -37,12 +37,12 @@ import javax.swing.plaf.basic.BasicButtonListener;
 import javax.swing.plaf.metal.MetalCheckBoxUI;
 
 /**
- * The JGoodies PlasticXP l&amp;l implementation of <code>CheckBoxUI</code>.
+ * The JGoodies PlasticXP l&amp;l implementation of {@code CheckBoxUI}.
  * Unlike its superclass, it uses a button listener that sets the armed state
  * if the mouse is over.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticXPCheckBoxUI extends MetalCheckBoxUI {
 

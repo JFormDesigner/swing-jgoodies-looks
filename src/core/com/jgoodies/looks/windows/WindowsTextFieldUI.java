@@ -37,13 +37,13 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.text.Caret;
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>TextFieldUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code TextFieldUI}.
  * In addition to its superclass WindowsTextFieldUI, it uses a caret
  * that selects all text if the field gains focus after a keyboard
  * focus traversal.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsTextFieldUI extends
         com.sun.java.swing.plaf.windows.WindowsTextFieldUI {

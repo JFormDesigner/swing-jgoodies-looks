@@ -41,12 +41,12 @@ import javax.swing.text.JTextComponent;
 
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>TextAreaUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code TextAreaUI}.
  * In addition to its superclass WindowsTextAreaUI, it updates the
  * background colors using behavior from BasicTextFieldUI.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.WindowsTextAreaUI {
 

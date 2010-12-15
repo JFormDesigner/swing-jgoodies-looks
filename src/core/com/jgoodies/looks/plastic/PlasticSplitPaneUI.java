@@ -37,11 +37,11 @@ import javax.swing.plaf.basic.BasicSplitPaneUI;
 
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>SplitPaneUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code SplitPaneUI}.
  * Uses a special divider that paints modified one-touch buttons.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see com.jgoodies.looks.plastic.PlasticSplitPaneDivider
  */

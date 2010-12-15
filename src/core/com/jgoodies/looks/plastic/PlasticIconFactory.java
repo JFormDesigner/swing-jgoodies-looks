@@ -40,17 +40,17 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 /**
- * Factory class that vends <code>Icon</code>s for the
+ * Factory class that vends {@code Icon}s for the
  * JGoodies Plastic look and feel.
  * These icons are used extensively in Plastic via the defaults mechanism.
  * While other look and feels often use GIFs for icons, creating icons
  * in code facilitates switching to other themes.
  * <p>
- * Each method in this class returns either an <code>Icon</code> or <code>null</code>,
- * where <code>null</code> implies that there is no default icon.
+ * Each method in this class returns either an {@code Icon} or {@code null},
+ * where {@code null} implies that there is no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 
 final class PlasticIconFactory {
@@ -268,7 +268,7 @@ final class PlasticIconFactory {
 
 
 	/**
-	 * Answers an <code>Icon</code> used for <code>JCheckBox</code>es.
+	 * Answers an {@code Icon} used for {@code JCheckBox}es.
 	 */
     static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
@@ -279,7 +279,7 @@ final class PlasticIconFactory {
 
 
 	/**
-	 * Answers an <code>Icon</code> used for <code>JCheckButtonMenuItem</code>s.
+	 * Answers an {@code Icon} used for {@code JCheckButtonMenuItem}s.
 	 */
     static Icon getCheckBoxMenuItemIcon() {
 		if (checkBoxMenuItemIcon == null) {
@@ -290,7 +290,7 @@ final class PlasticIconFactory {
 
 
 	/**
-	 * Answers an <code>Icon</code> used for <code>JRadioButtonMenuItem</code>s.
+	 * Answers an {@code Icon} used for {@code JRadioButtonMenuItem}s.
 	 */
     static Icon getRadioButtonMenuItemIcon() {
 		if (radioButtonMenuItemIcon == null) {
@@ -301,7 +301,7 @@ final class PlasticIconFactory {
 
 
 	/**
-	 * Answers an <code>Icon</code> used for arrows in <code>JMenu</code>s.
+	 * Answers an {@code Icon} used for arrows in {@code JMenu}s.
 	 */
     static Icon getMenuArrowIcon() {
 		if (menuArrowIcon == null) {
@@ -312,7 +312,7 @@ final class PlasticIconFactory {
 
 
 	/**
-	 * Answers an <code>Icon</code> used in <code>JTree</code>s.
+	 * Answers an {@code Icon} used in {@code JTree}s.
 	 */
     static Icon getExpandedTreeIcon() {
 		if (expandedTreeIcon == null) {
@@ -322,7 +322,7 @@ final class PlasticIconFactory {
     }
 
 	/**
-	 * Answers an <code>Icon</code> used in <code>JTree</code>s.
+	 * Answers an {@code Icon} used in {@code JTree}s.
 	 */
     static Icon getCollapsedTreeIcon() {
 		if (collapsedTreeIcon == null) {
@@ -332,7 +332,7 @@ final class PlasticIconFactory {
     }
 
 	/**
-	 * Answers an <code>Icon</code> used in <code>JComboBox</code>es.
+	 * Answers an {@code Icon} used in {@code JComboBox}es.
 	 */
     static Icon getComboBoxButtonIcon() {
         if (comboBoxButtonIcon == null) {

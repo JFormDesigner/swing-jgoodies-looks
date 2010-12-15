@@ -39,7 +39,7 @@ import javax.swing.UIManager;
  * Consists exclusively of static methods that provide convenience behavior.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class PlasticUtils {
@@ -64,7 +64,7 @@ public final class PlasticUtils {
 
 
 	/*
-	 * Unlike <code>MetalUtils</code> we first draw with highlight then dark shadow
+	 * Unlike {@code MetalUtils} we first draw with highlight then dark shadow
 	 */
 	static void drawFlush3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
@@ -79,7 +79,7 @@ public final class PlasticUtils {
 
 
 	/*
-	 * Copied from <code>MetalUtils</code>.
+	 * Copied from {@code MetalUtils}.
 	 */
 	static void drawPressed3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
@@ -92,7 +92,7 @@ public final class PlasticUtils {
 
 
 	/*
-	 * Copied from <code>MetalUtils</code>.
+	 * Copied from {@code MetalUtils}.
 	 */
     static void drawButtonBorder(Graphics g, int x, int y, int w, int h, boolean active) {
         if (active) {
@@ -103,7 +103,7 @@ public final class PlasticUtils {
     }
 
 	/*
-	 * Copied from <code>MetalUtils</code>.
+	 * Copied from {@code MetalUtils}.
 	 */
     static void drawActiveButtonBorder(Graphics g, int x, int y, int w, int h) {
         drawFlush3DBorder(g, x, y, w, h);

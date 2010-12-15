@@ -36,11 +36,11 @@ import javax.swing.plaf.basic.BasicSplitPaneDivider;
 
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>SplitPaneUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code SplitPaneUI}.
  * Uses a special divider that paints modified one-touch buttons.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see com.jgoodies.looks.windows.WindowsSplitPaneDivider
  */
@@ -48,7 +48,7 @@ public final class WindowsSplitPaneUI extends com.sun.java.swing.plaf.windows.Wi
 
 
 	/**
-	 * Creates and returns a <code>WindowsSplitPaneUI</code> instance.
+	 * Creates and returns a {@code WindowsSplitPaneUI} instance.
 	 */
 	public static ComponentUI createUI(JComponent x) {
 		return new WindowsSplitPaneUI();

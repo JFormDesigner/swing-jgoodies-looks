@@ -49,7 +49,7 @@ import com.sun.java.swing.plaf.windows.WindowsToolBarUI;
  * Adds behavior for handling different types of borders.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
@@ -101,7 +101,7 @@ public final class WindowsXPToolBarUI extends WindowsToolBarUI {
 
     /**
      * Installs a special border, if either a look-dependent
-     * <code>BorderStyle</code> or a look-independent <code>HeaderStyle</code>
+     * {@code BorderStyle} or a look-independent {@code HeaderStyle}
      * has been specified. A look specific BorderStyle shadows
      * a HeaderStyle.<p>
      *

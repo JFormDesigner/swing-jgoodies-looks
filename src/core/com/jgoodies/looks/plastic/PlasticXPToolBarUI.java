@@ -35,14 +35,14 @@ import javax.swing.border.Border;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * The JGoodies PlasticXP Look and Feel implementation of <code>ToolBarUI</code>.
+ * The JGoodies PlasticXP Look and Feel implementation of {@code ToolBarUI}.
  * It differs from its superclass in that it uses rollover borders with rounded
  * corners.<p>
  *
  * Thanks to Andrej Golovnin for his feedback and suggestions.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticXPToolBarUI extends PlasticToolBarUI {
 

@@ -48,7 +48,7 @@ import com.jgoodies.looks.plastic.PlasticTheme;
  * Provides convenience behavior used by the JGoodies Looks.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  */
 public final class LookUtils extends SystemUtils {
 
@@ -101,10 +101,10 @@ public final class LookUtils extends SystemUtils {
     /**
      * Tries to look up the System property for the given key.
      * In untrusted environments this may throw a SecurityException.
-     * In this case we catch the exception and answer <code>null</code>.
+     * In this case we catch the exception and answer {@code null}.
      *
      * @param key   the name of the system property
-     * @return the system property's String value, or <code>null</code> if there's
+     * @return the system property's String value, or {@code null} if there's
      *     no such value, or a SecurityException has been caught
      */
     public static String getSystemProperty(String key) {
@@ -137,16 +137,16 @@ public final class LookUtils extends SystemUtils {
 
     /**
      * Checks if a boolean system property has been set for the given key,
-     * and returns the associated Boolean, or <code>null</code> if no value
+     * and returns the associated Boolean, or {@code null} if no value
      * has been set. The test for the property ignores case.
      * If a Boolean value has been set, a message is logged
      * with the given prefix.
      *
      * @param key          the key used to lookup the system property value
      * @param logMessage   a prefix used when a message is logged
-     * @return <code>Boolean.TRUE</code> if the system property has been set to
-     * "true" (case ignored), <code>Boolean.FALSE</code> if it has been set to
-     * "false", <code>null</code> otherwise
+     * @return {@code Boolean.TRUE} if the system property has been set to
+     * "true" (case ignored), {@code Boolean.FALSE} if it has been set to
+     * "false", {@code null} otherwise
      */
     public static Boolean getBooleanSystemProperty(String key, String logMessage) {
         String value = getSystemProperty(key, "");

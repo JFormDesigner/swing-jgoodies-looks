@@ -54,7 +54,7 @@ import com.jgoodies.looks.common.ShadowPopupFactory;
  * 1.4.2, and 1.5 environments.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.47 $
+ * @version $Revision: 1.48 $
  */
 public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsLookAndFeel {
 
@@ -121,10 +121,10 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
     /**
      * Sets the FontPolicy to be used with the JGoodies Windows L&amp;F.
-     * If the specified policy is <code>null</code>, the default will be reset.
+     * If the specified policy is {@code null}, the default will be reset.
      *
      * @param fontPolicy   the FontPolicy to be used with the JGoodies Windows
-     *     L&amp;F, or <code>null</code> to reset to the default
+     *     L&amp;F, or {@code null} to reset to the default
      *
      * @see #getFontPolicy()
      * @see Options#WINDOWS_FONT_POLICY_KEY
@@ -159,10 +159,10 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
     /**
      * Sets the MicroLayoutPolicy to be used with the JGoodies Windows L&amp;F.
-     * If the specified policy is <code>null</code>, the default will be reset.
+     * If the specified policy is {@code null}, the default will be reset.
      *
      * @param microLayoutPolicy   the MicroLayoutPolicy to be used with
-     *     the JGoodies Windows L&amp;F, or <code>null</code> to reset
+     *     the JGoodies Windows L&amp;F, or {@code null} to reset
      *     to the default
      *
      * @see #getMicroLayoutPolicy()
@@ -176,7 +176,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     // Overriding Superclass Behavior ***************************************
 
     /**
-     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition
+     * Invoked during {@code UIManager#setLookAndFeel}. In addition
      * to the superclass behavior, we install the ShadowPopupFactory.
      *
      * @see #uninitialize
@@ -189,7 +189,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 
 
     /**
-     * Invoked during <code>UIManager#setLookAndFeel</code>. In addition
+     * Invoked during {@code UIManager#setLookAndFeel}. In addition
      * to the superclass behavior, we uninstall the ShadowPopupFactory.
      *
      * @see #initialize
@@ -666,13 +666,13 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     // Helper Class ***********************************************************
 
     /**
-     * This class provides an implementation of <code>LazyValue</code> that
+     * This class provides an implementation of {@code LazyValue} that
      * can be used to delay loading of the Class for the instance to be created.
      * It also avoids creation of an anonymous inner class for the
-     * <code>LazyValue</code>
+     * {@code LazyValue}
      * subclass.  Both of these improve performance at the time that a
      * a Look and Feel is loaded, at the cost of a slight performance
-     * reduction the first time <code>createValue</code> is called
+     * reduction the first time {@code createValue} is called
      * (since Reflection APIs are used).
      */
     private static class SimpleProxyLazyValue implements UIDefaults.LazyValue {
@@ -681,12 +681,12 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         private final String methodName;
 
         /**
-         * Creates a <code>LazyValue</code> which will construct an instance
+         * Creates a {@code LazyValue} which will construct an instance
          * when asked.
          *
-         * @param c    a <code>String</code> specifying the classname of the class
+         * @param c    a {@code String} specifying the classname of the class
          *             	containing a static method to be called for instance creation
-         * @param m    a <code>String</code> specifying the static
+         * @param m    a {@code String} specifying the static
          *		method to be called on class c
          */
         public SimpleProxyLazyValue(String c, String m) {
@@ -695,11 +695,11 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
         }
 
         /**
-         * Creates the value retrieved from the <code>UIDefaults</code> table.
+         * Creates the value retrieved from the {@code UIDefaults} table.
          * The object is created each time it is accessed.
          *
-         * @param table  a <code>UIDefaults</code> table
-         * @return the created <code>Object</code>
+         * @param table  a {@code UIDefaults} table
+         * @return the created {@code Object}
          */
         public Object createValue(UIDefaults table) {
             Object instance = null;

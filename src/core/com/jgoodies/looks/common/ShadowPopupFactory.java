@@ -41,7 +41,7 @@ import com.jgoodies.looks.Options;
 
 
 /**
- * The JGoodies Looks implementation of <code>PopupFactory</code>.
+ * The JGoodies Looks implementation of {@code PopupFactory}.
  * Adds a drop shadow border to all popups except ComboBox popups.
  * It is installed by the JGoodies Plastic L&amp;F, as well as by
  * the JGoodies Windows L&amp;F during the Look&amp;Feel initialization,
@@ -53,13 +53,13 @@ import com.jgoodies.looks.Options;
  * method will have no effect on such platforms.<p>
  *
  * <strong>Note:</strong> To be used in a sandbox environment, this PopupFactory
- * requires two AWT permissions: <code>createRobot</code> and
- * <code>readDisplayPixels</code>. The reason for it is, that in the case of
+ * requires two AWT permissions: {@code createRobot} and
+ * {@code readDisplayPixels}. The reason for it is, that in the case of
  * the heavy weight popups this PopupFactory uses a Robot to snapshot
  * the screen background to simulate the drop shadow effect.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  *
  * @see java.awt.AWTPermission
  * @see java.awt.Robot
@@ -83,8 +83,8 @@ public final class ShadowPopupFactory extends PopupFactory {
 
     /**
      * The PopupFactory used before this PopupFactory has been installed
-     * in <code>#install</code>. Used to restored the original state
-     * in <code>#uninstall</code>.
+     * in {@code #install}. Used to restored the original state
+     * in {@code #uninstall}.
      */
     private final PopupFactory storedFactory;
 
@@ -101,10 +101,10 @@ public final class ShadowPopupFactory extends PopupFactory {
     /**
      * Installs the ShadowPopupFactory as the shared popup factory
      * on non-Mac platforms. Also stores the previously set factory,
-     * so that it can be restored in <code>#uninstall</code>.<p>
+     * so that it can be restored in {@code #uninstall}.<p>
      *
      * In some Mac Java environments the popup factory throws
-     * a NullPointerException when we call <code>#getPopup</code>.<p>
+     * a NullPointerException when we call {@code #getPopup}.<p>
      *
      * TODO: The Mac case shows that we may have problems replacing
      * non PopupFactory instances. Therefore we should consider
@@ -143,22 +143,22 @@ public final class ShadowPopupFactory extends PopupFactory {
 
 
     /**
-     * Creates a <code>Popup</code> for the Component <code>owner</code>
-     * containing the Component <code>contents</code>. In addition to
+     * Creates a {@code Popup} for the Component {@code owner}
+     * containing the Component {@code contents}. In addition to
      * the superclass behavior, we try to return a Popup that has a drop shadow,
      * if popup drop shadows are active - as returned by
-     * <code>Options#isPopupDropShadowActive</code>.<p>
+     * {@code Options#isPopupDropShadowActive}.<p>
      *
-     * <code>owner</code> is used to determine which <code>Window</code> the new
-     * <code>Popup</code> will parent the <code>Component</code> the
-     * <code>Popup</code> creates to. A null <code>owner</code> implies there
-     * is no valid parent. <code>x</code> and
-     * <code>y</code> specify the preferred initial location to place
-     * the <code>Popup</code> at. Based on screen size, or other paramaters,
-     * the <code>Popup</code> may not display at <code>x</code> and
-     * <code>y</code>.<p>
+     * {@code owner} is used to determine which {@code Window} the new
+     * {@code Popup} will parent the {@code Component} the
+     * {@code Popup} creates to. A null {@code owner} implies there
+     * is no valid parent. {@code x} and
+     * {@code y} specify the preferred initial location to place
+     * the {@code Popup} at. Based on screen size, or other paramaters,
+     * the {@code Popup} may not display at {@code x} and
+     * {@code y}.<p>
      *
-     * We invoke the super <code>#getPopup</code>, not the one in the
+     * We invoke the super {@code #getPopup}, not the one in the
      * stored factory, because the popup type is set in this instance,
      * not in the stored one.
      *

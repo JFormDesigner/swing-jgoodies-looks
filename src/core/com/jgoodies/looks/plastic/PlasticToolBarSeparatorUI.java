@@ -35,11 +35,11 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicToolBarSeparatorUI;
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>ToolBarSeparatorUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code ToolBarSeparatorUI}.
  * It differs from its superclass in that it uses a shared UI delegate.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticToolBarSeparatorUI extends BasicToolBarSeparatorUI {
 

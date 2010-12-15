@@ -41,13 +41,13 @@ import javax.swing.plaf.basic.BasicArrowButton;
  * The JGoodies Windows Look&amp;Feel implementation for
  * arrow buttons used in scrollbars and comboboxes.
  * <p>
- * It differs from <code>BasicArrowButton</code> in that the preferred size
+ * It differs from {@code BasicArrowButton} in that the preferred size
  * is always a square.
- * It differs from <code>WindowsScrollBarUI.WindowsArrowButton</code>
+ * It differs from {@code WindowsScrollBarUI.WindowsArrowButton}
  * in that the triangle is black and positioned correctly.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 final class WindowsArrowButton extends BasicArrowButton {
 

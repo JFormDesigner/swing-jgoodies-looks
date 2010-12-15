@@ -36,10 +36,10 @@ import javax.swing.JToolBar;
 
 /**
  * Describes the border styles for JMenuBar and JToolBar. Border styles are
- * look-dependent and shadow look-independent <code>HeaderStyle</code>s.
+ * look-dependent and shadow look-independent {@code HeaderStyle}s.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see HeaderStyle
  */

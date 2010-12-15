@@ -47,11 +47,11 @@ import javax.swing.text.JTextComponent;
 
 
 /**
- * This class consists of a set of <code>Border</code>s used
+ * This class consists of a set of {@code Border}s used
  * by the JGoodies Plastic Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  */
 
 final class PlasticBorders {
@@ -82,7 +82,7 @@ final class PlasticBorders {
 
 
     /**
-     * Returns a border instance for a <code>JButton</code>.
+     * Returns a border instance for a {@code JButton}.
      *
      * @return the lazily created button border
      */
@@ -93,7 +93,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border for a <code>JComboBox</code>'s button.
+     * Returns a border for a {@code JComboBox}'s button.
      *
      * @return the lazily created combo box arrow button border
      */
@@ -107,7 +107,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border for a <code>JComboBox</code>'s editor.
+     * Returns a border for a {@code JComboBox}'s editor.
      *
      * @return the lazily created combo box editor border
      */
@@ -121,8 +121,8 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns an etched border instance for <code>JMenuBar</code> or
-     * <code>JToolBar</code>.
+     * Returns an etched border instance for {@code JMenuBar} or
+     * {@code JToolBar}.
      *
      * @return the lazily created etched border
      */
@@ -148,7 +148,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border for a <code>JInternalFrame</code>.
+     * Returns a border for a {@code JInternalFrame}.
      *
      * @return an internal frame border
      */
@@ -157,8 +157,8 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a special border for a <code>JMenuBar</code> that
-     * is used in a header just above a <code>JToolBar</code>.
+     * Returns a special border for a {@code JMenuBar} that
+     * is used in a header just above a {@code JToolBar}.
      *
      * @return the lazily created menu bar header border
      */
@@ -172,7 +172,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JMenu</code>.
+     * Returns a border instance for a {@code JMenu}.
      *
      * @return the lazily created menu border
      */
@@ -186,7 +186,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JMenuItem</code>.
+     * Returns a border instance for a {@code JMenuItem}.
      *
      * @return the lazily created menu item border
      */
@@ -199,7 +199,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JPopupMenu</code>.
+     * Returns a border instance for a {@code JPopupMenu}.
      *
      * @return the lazily created popup menu border
      */
@@ -211,7 +211,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JPopupMenu</code> that
+     * Returns a border instance for a {@code JPopupMenu} that
      * has no (extra) margin.
      *
      * @return the lazily created no-margin popup menu border
@@ -224,7 +224,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a border for a <code>JInternalFrame</code>'s palette.
+     * Returns a border for a {@code JInternalFrame}'s palette.
      *
      * @return a border for an internal frame in palette mode
      */
@@ -233,7 +233,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a rollover border for buttons in a <code>JToolBar</code>.
+     * Returns a rollover border for buttons in a {@code JToolBar}.
      *
      * @return the lazily created rollover button border
      */
@@ -247,7 +247,7 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a separator border instance for <code>JScrollPane</code>.
+     * Returns a separator border instance for {@code JScrollPane}.
      *
      * @return the lazily created scroll pane border
      */
@@ -259,8 +259,8 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a separator border instance for <code>JMenuBar</code> or
-     * <code>JToolBar</code>.
+     * Returns a separator border instance for {@code JMenuBar} or
+     * {@code JToolBar}.
      *
      * @return the lazily created separator border
      */
@@ -323,8 +323,8 @@ final class PlasticBorders {
     }
 
     /**
-     * Returns a special border for a <code>JToolBar</code> that
-     * is used in a header just below a <code>JMenuBar</code>.
+     * Returns a special border for a {@code JToolBar} that
+     * is used in a header just below a {@code JMenuBar}.
      *
      * @return the lazily created toolbar header border
      */
@@ -458,7 +458,7 @@ final class PlasticBorders {
 
 
 	/**
-	 * A border used for <code>JInternalFrame</code>s.
+	 * A border used for {@code JInternalFrame}s.
 	 */
     private static final class InternalFrameBorder extends AbstractBorder implements UIResource {
 
@@ -492,7 +492,7 @@ final class PlasticBorders {
 
 
 	/**
-	 * A border used for the palette of <code>JInternalFrame</code>s.
+	 * A border used for the palette of {@code JInternalFrame}s.
 	 */
     private static final class PaletteBorder extends AbstractBorder implements UIResource {
 
@@ -562,7 +562,7 @@ final class PlasticBorders {
 
 	/**
 	 * A border used for menu bars and tool bars in
-     * <code>HeaderStyle.SINGLE</code>. The bar is wrapped by an inner thin
+     * {@code HeaderStyle.SINGLE}. The bar is wrapped by an inner thin
      * raised border, which in turn is wrapped by an outer thin lowered
      * border.
 	 */
@@ -582,7 +582,7 @@ final class PlasticBorders {
 
 
 	/**
-	 * A border used for menu bars in <code>HeaderStyle.BOTH</code>.
+	 * A border used for menu bars in {@code HeaderStyle.BOTH}.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
@@ -602,7 +602,7 @@ final class PlasticBorders {
 
 
 	/**
-	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
+	 * A border used for tool bars in {@code HeaderStyle.BOTH}.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */

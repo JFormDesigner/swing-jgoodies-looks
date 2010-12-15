@@ -40,12 +40,12 @@ import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 
 /**
- * An implementation of the <code>Icon</code> interface that has a minimum size
- * and active border. The minimum size is read from the <code>UIManager</code>
- * <code>defaultIconSize</code> key.
+ * An implementation of the {@code Icon} interface that has a minimum size
+ * and active border. The minimum size is read from the {@code UIManager}
+ * {@code defaultIconSize} key.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see	MinimumSizedIcon
  */

@@ -45,7 +45,7 @@ import javax.swing.border.AbstractBorder;
  * popup windows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see ShadowPopup
  * @see ShadowPopupFactory
@@ -118,7 +118,7 @@ final class ShadowPopupBorder extends AbstractBorder {
      * Reinitializes the insets parameter with this Border's current Insets.
      * @param c the component for which this border insets value applies
      * @param insets the object to be reinitialized
-     * @return the <code>insets</code> object
+     * @return the {@code insets} object
      */
     @Override
     public Insets getBorderInsets(Component c, Insets insets) {

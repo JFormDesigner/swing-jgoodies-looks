@@ -44,7 +44,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
 
 /**
  * Provides access to optional features of the JGoodies L&amp;Fs
- * via a key to the system properties, via a key for the <code>UIDefaults</code>
+ * via a key to the system properties, via a key for the {@code UIDefaults}
  * table, via a method, or all of them.<p>
  *
  * API users can use this class' constants or their values to configure
@@ -53,7 +53,7 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * the String values doesn't require having this class in the class path.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  */
 public final class Options {
 
@@ -264,8 +264,8 @@ public final class Options {
 
     /**
      * A client property key for JMenuBar and JToolBar style hints.
-     * Available styles are: <code>HeaderStyle.Single</code> and
-     * <code>HeaderStyle.Both</code>.
+     * Available styles are: {@code HeaderStyle.Single} and
+     * {@code HeaderStyle.Both}.
      *
      * @see HeaderStyle
      * @see BorderStyle
@@ -474,7 +474,7 @@ public final class Options {
      * This property just set the feature's enablement, not its actual
      * activation. For example, drop shadows are always inactive on
      * the Mac OS X, because this platform already provides shadows.
-     * The activation is requested in <code>#isPopupDropShadowActive</code>.
+     * The activation is requested in {@code #isPopupDropShadowActive}.
      *
      * @see #isPopupDropShadowEnabled()
      * @see #isPopupDropShadowActive()
@@ -497,7 +497,7 @@ public final class Options {
     // Accessing Options ******************************************************
 
     /**
-     * Returns whether native system fonts shall be used, <code>true</code>
+     * Returns whether native system fonts shall be used, {@code true}
      * by default unless disabled in the system properties or UIManager.
      *
      * @return true unless disabled in the system properties or UIManager
@@ -553,7 +553,7 @@ public final class Options {
 
     /**
      * Checks and answers if we shall use narrow button margins of 4 pixels.
-     * As of the Looks version 1.4 the default value is <code>true</code>
+     * As of the Looks version 1.4 the default value is {@code true}
      * (narrow) for the JGoodies Windows L&amp;F and the JGoodies Plastic
      * L&amp;F family. The native Windows L&amp;F uses narrow margins too.
      * The default can be disabled in the system properties or UIManager.<p>
@@ -561,7 +561,7 @@ public final class Options {
      * <strong>Note:</strong> Using narrow button margins can potentially cause
      * compatibility issues, if you don't take care that command buttons with
      * short labels (OK) get a reasonable minimum width. Therefore you can
-     * get back to wide button margins using <code>#setUseNarrowButtons</code>.
+     * get back to wide button margins using {@code #setUseNarrowButtons}.
      * Sun's L&amp;F implementations use a wider button margin of 14 pixels.<p>
      *
      * Narrow button margins make it easier to give buttons in a button bar
@@ -580,8 +580,8 @@ public final class Options {
      * The JGoodies Forms contains a ButtonBarBuilder to build command button
      * bars, and a ButtonBarFactory that vends frequently used button bars.
      *
-     * @return <code>true</code> (default) if all buttons shall use narrow
-     *     margins, <code>false</code> for wider margins
+     * @return {@code true} (default) if all buttons shall use narrow
+     *     margins, {@code false} for wider margins
      *
      * @see #setUseNarrowButtons(boolean)
      * @see #USE_NARROW_BUTTONS_KEY
@@ -732,7 +732,7 @@ public final class Options {
     /**
      * Enables or disables the new high-resolution gray filter globally.
      * This gray filter can be disabled for individual components using the
-     * client property key <code>HI_RES_DISABLED_ICON_CLIENT_KEY</code>.
+     * client property key {@code HI_RES_DISABLED_ICON_CLIENT_KEY}.
      *
      * @param b  true to enable the high-resolution gray filter,
      *     false to disable them
@@ -769,7 +769,7 @@ public final class Options {
     /**
      * Enables or disables the select on focus gain feature globally.
      * This feature can be disabled for individual components using the
-     * client property key <code>SELECT_ALL_ON_FOCUS_GAIN_CLIENT_KEY</code>.
+     * client property key {@code SELECT_ALL_ON_FOCUS_GAIN_CLIENT_KEY}.
      * It is enabled by default.<p>
      *
      * <b>Background:</b> If users are more likely going to reenter the entire
@@ -795,8 +795,8 @@ public final class Options {
      * and the global default.
      *
      * @param c  the component to check
-     * @return true if the feature is enabled for <code>c</code> or globally,
-     *     false if the feature is disabled for <code>c</code> or globally
+     * @return true if the feature is enabled for {@code c} or globally,
+     *     false if the feature is disabled for {@code c} or globally
      *     disabled.
      *
      * @since 2.2
@@ -845,7 +845,7 @@ public final class Options {
     // Look And Feel Replacements *********************************************
 
     /**
-     * Puts a replacement name for a given <code>LookAndFeel</code>
+     * Puts a replacement name for a given {@code LookAndFeel}
      * class name in the list of all look and feel replacements.
      *
      * @param original   the name of the look-and-feel to replace
@@ -860,7 +860,7 @@ public final class Options {
     }
 
     /**
-     * Removes a replacement name for a given <code>LookAndFeel</code>
+     * Removes a replacement name for a given {@code LookAndFeel}
      * class name from the list of all look and feel replacements.
      *
      * @param original   the name of the look-and-feel that has been replaced
@@ -906,7 +906,7 @@ public final class Options {
 
     /**
      * Returns the class name that can be used to replace the specified
-     * <code>LookAndFeel</code> class name.
+     * {@code LookAndFeel} class name.
      *
      * @param className   the name of the look-and-feel class
      * @return the name of the suggested replacement class
@@ -926,7 +926,7 @@ public final class Options {
     }
 
     /**
-     * Returns the class name for a cross-platform <code>LookAndFeel</code>.
+     * Returns the class name for a cross-platform {@code LookAndFeel}.
      *
      * @return the name of a cross platform look-and-feel class
      * @see #getSystemLookAndFeelClassName()
@@ -936,7 +936,7 @@ public final class Options {
     }
 
     /**
-     * Returns the class name for a system specific <code>LookAndFeel</code>.
+     * Returns the class name for a system specific {@code LookAndFeel}.
      *
      * @return the name of the system look-and-feel class
      * @see #getCrossPlatformLookAndFeelClassName()

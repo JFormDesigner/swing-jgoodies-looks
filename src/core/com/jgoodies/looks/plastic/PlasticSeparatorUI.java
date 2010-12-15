@@ -36,13 +36,13 @@ import javax.swing.plaf.metal.MetalSeparatorUI;
 
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>SeparatorUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code SeparatorUI}.
  * It differs from its superclass in that it uses a shared UI delegate.<p>
  *
  * Thanks to Andrej Golovnin for his feedback and suggestions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PlasticSeparatorUI extends MetalSeparatorUI {
 

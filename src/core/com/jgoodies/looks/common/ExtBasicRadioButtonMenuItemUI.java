@@ -41,10 +41,10 @@ import javax.swing.plaf.ComponentUI;
 
 
 /**
- * Renders aligned <code>JRadioButtonMenuItem</code>s.
+ * Renders aligned {@code JRadioButtonMenuItem}s.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public class ExtBasicRadioButtonMenuItemUI extends ExtBasicMenuItemUI {
 

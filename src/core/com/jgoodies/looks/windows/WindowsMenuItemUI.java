@@ -41,14 +41,14 @@ import com.jgoodies.looks.common.ExtBasicMenuItemUI;
 import com.jgoodies.looks.common.MenuItemRenderer;
 
 /**
- * The JGoodies Windows look&amp;feel implementation of <code>MenuItemUI</code>.<p>
+ * The JGoodies Windows look&amp;feel implementation of {@code MenuItemUI}.<p>
  *
  * It differs from the superclass in that it uses a Windows specific
  * menu item renderer that checks if mnemonics shall be shown or hidden
  * and may paint disabled text with a shadow.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class WindowsMenuItemUI extends ExtBasicMenuItemUI {
 

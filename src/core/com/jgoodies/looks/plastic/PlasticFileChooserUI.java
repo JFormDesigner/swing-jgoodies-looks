@@ -43,13 +43,13 @@ import javax.swing.plaf.metal.MetalFileChooserUI;
 
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>FileChooserUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code FileChooserUI}.
  * Uses {@link FileSystemView#getSystemIcon(File)} to look up icons for files.<p>
  *
  * Thanks to Andrej Golovnin for his feedback and suggestions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  *
  * @see FileSystemView#getSystemIcon(File)
  */

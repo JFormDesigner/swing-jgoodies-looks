@@ -35,13 +35,13 @@ import javax.swing.JComponent;
 import javax.swing.plaf.ComponentUI;
 
 /**
- * The JGoodies Windows L&amp;F implementation of* <code>ScrollBarUI</code>.
+ * The JGoodies Windows L&amp;F implementation of* {@code ScrollBarUI}.
  * It differs from Sun's Windows Look in that it paints black button triangles
- * and that it honors the <code>ScrollBar.width</code> property to determine
+ * and that it honors the {@code ScrollBar.width} property to determine
  * the preferred size.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class WindowsScrollBarUI extends com.sun.java.swing.plaf.windows.WindowsScrollBarUI {
 

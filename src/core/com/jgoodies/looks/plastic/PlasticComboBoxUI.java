@@ -50,7 +50,7 @@ import com.jgoodies.looks.Options;
 
 
 /**
- * The JGoodies Plastic Look and Feel implementation of <code>ComboBoxUI</code>.
+ * The JGoodies Plastic Look and Feel implementation of {@code ComboBoxUI}.
  * Has the same height as text fields - unless you change the renderer.<p>
  *
  * Also, this class offers to use the combo's popup prototype display value
@@ -58,7 +58,7 @@ import com.jgoodies.looks.Options;
  * the JGoodies Plastic L&amp;fs implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -180,13 +180,13 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     /**
      * Creates the default renderer that will be used in a non-editiable combo
      * box. A default renderer will used only if a renderer has not been
-     * explicitly set with <code>setRenderer</code>.<p>
+     * explicitly set with {@code setRenderer}.<p>
      *
      * This method differs from the superclass implementation
      * in that it uses an empty border with wider left and right margins
      * of 2 pixels instead of 1.
      *
-     * @return a <code>ListCellRender</code> used for the combo box
+     * @return a {@code ListCellRender} used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
     @Override
@@ -336,8 +336,8 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * Checks and answers if this UI's combo has a client property
      * that indicates that the combo is used as a table cell editor.
      *
-     * @return <code>true</code> if the table cell editor client property
-     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     * @return {@code true} if the table cell editor client property
+     *    is set to {@code Boolean.TRUE}, {@code false} otherwise
      */
     private boolean isTableCellEditor() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));

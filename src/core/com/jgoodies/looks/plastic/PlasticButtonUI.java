@@ -39,12 +39,12 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.metal.MetalButtonUI;
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>ButtonUI</code>.
- * It differs from the superclass <code>MetalButtonUI</code> in that
+ * The JGoodies Plastic L&amp;F implementation of {@code ButtonUI}.
+ * It differs from the superclass {@code MetalButtonUI} in that
  * it can add a pseudo 3D effect and that the border can paint the focus.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public class PlasticButtonUI extends MetalButtonUI {
 

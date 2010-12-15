@@ -47,11 +47,11 @@ import javax.swing.text.JTextComponent;
 
 
 /**
- * This class consists of a set of <code>Border</code>s used
+ * This class consists of a set of {@code Border}s used
  * by the JGoodies Plastic XP Look and Feel UI delegates.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  */
 
 final class PlasticXPBorders {
@@ -72,7 +72,7 @@ final class PlasticXPBorders {
 
 
     /*
-     * Returns a border instance for a <code>JButton</code>.
+     * Returns a border instance for a {@code JButton}.
      */
     static Border getButtonBorder(Insets buttonMargin) {
         return new BorderUIResource.CompoundBorderUIResource(
@@ -81,7 +81,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JComboBox</code>'s arrow button.
+     * Returns a border instance for a {@code JComboBox}'s arrow button.
      */
     static Border getComboBoxArrowButtonBorder() {
         if (comboBoxArrowButtonBorder == null) {
@@ -93,7 +93,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JComboBox</code>'s editor.
+     * Returns a border instance for a {@code JComboBox}'s editor.
      */
     static Border getComboBoxEditorBorder() {
         if (comboBoxEditorBorder == null) {
@@ -105,7 +105,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JScrollPane</code>.
+     * Returns a border instance for a {@code JScrollPane}.
      */
     static Border getScrollPaneBorder() {
         if (scrollPaneBorder == null) {
@@ -115,7 +115,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JTextField</code>.
+     * Returns a border instance for a {@code JTextField}.
      */
     static Border getTextFieldBorder() {
         if (textFieldBorder == null) {
@@ -127,7 +127,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JToggleButton</code>.
+     * Returns a border instance for a {@code JToggleButton}.
      */
     static Border getToggleButtonBorder(Insets buttonMargin) {
          return new BorderUIResource.CompoundBorderUIResource(
@@ -136,7 +136,7 @@ final class PlasticXPBorders {
     }
 
     /*
-     * Returns a border instance for a <code>JSpinner</code>.
+     * Returns a border instance for a {@code JSpinner}.
      */
     static Border getSpinnerBorder() {
         if (spinnerBorder == null) {
@@ -147,7 +147,7 @@ final class PlasticXPBorders {
 
 
     /**
-     * Returns a rollover border for buttons in a <code>JToolBar</code>.
+     * Returns a rollover border for buttons in a {@code JToolBar}.
      *
      * @return the lazily created rollover button border
      */
@@ -339,7 +339,7 @@ final class PlasticXPBorders {
 
 
     /**
-     * A border for <code>JSpinner</code> components.
+     * A border for {@code JSpinner} components.
      */
     private static final class XPSpinnerBorder extends MetalBorders.ScrollPaneBorder  {
 

@@ -50,13 +50,13 @@ import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>TabbedPaneUI</code>.<p>
+ * The JGoodies Windows L&amp;F implementation of {@code TabbedPaneUI}.<p>
  *
  * The flat appearance is work in progress; currently it works only
  * for a single line of tabs and paints distored tabs for multiple lines.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
@@ -101,7 +101,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     private Boolean embeddedTabs;
 
     /**
-     * Creates and answers the <code>WindowsTabbedPaneUI</code>.
+     * Creates and answers the {@code WindowsTabbedPaneUI}.
      *
      * @see javax.swing.plaf.ComponentUI#createUI(JComponent)
      */
@@ -180,7 +180,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Answers the icon for the tab with the specified index.
      * In case, we have globally switched of the use tab icons,
-     * we answer <code>null</code> if and only if we have a title.
+     * we answer {@code null} if and only if we have a title.
      */
     @Override
     protected Icon getIconForTab(int tabIndex) {

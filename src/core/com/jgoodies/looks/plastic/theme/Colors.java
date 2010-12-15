@@ -39,16 +39,16 @@ import javax.swing.plaf.ColorUIResource;
  * <p>
  * The field names use the following naming convention:
  * &lt;color name&gt;_&lt;saturation&gt;_&lt;brightness&gt;,
- * for example: <code>BLUE_HIGH_LIGHT</code> and <code>GREEN_MEDIUM_LIGHTER</code>.<p>
+ * for example: {@code BLUE_HIGH_LIGHT} and {@code GREEN_MEDIUM_LIGHTER}.<p>
  *
- * The saturation values are: <code>LOW</code>, <code>MEDIUM</code>,
- * and <code>HIGH</code>. Brightness values are:
- * <code>DARKEST</code>, <code>DARKER</code>, <code>DARK</code>,
- * <code>MEDIUM</code>, <code>LIGHT</code>, <code>LIGHTER</code>,
- * and <code>LIGHTEST</code>.
+ * The saturation values are: {@code LOW}, {@code MEDIUM},
+ * and {@code HIGH}. Brightness values are:
+ * {@code DARKEST}, {@code DARKER}, {@code DARK},
+ * {@code MEDIUM}, {@code LIGHT}, {@code LIGHTER},
+ * and {@code LIGHTEST}.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 final class Colors {
 

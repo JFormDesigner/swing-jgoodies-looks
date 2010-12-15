@@ -38,10 +38,10 @@ import javax.swing.*;
 import javax.swing.plaf.UIResource;
 
 /**
- * Factory class that vends <code>Icon</code>s used in the JGoodies Windows look&amp;feel.
+ * Factory class that vends {@code Icon}s used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 final class WindowsIconFactory {
 
@@ -56,7 +56,7 @@ final class WindowsIconFactory {
 
 
     /**
-     * Returns an <code>Icon</code> for a <code>JCheckBox</code>.
+     * Returns an {@code Icon} for a {@code JCheckBox}.
      */
     static Icon getCheckBoxIcon() {
 		if (checkBoxIcon == null) {
@@ -67,7 +67,7 @@ final class WindowsIconFactory {
 
 
     /**
-     * Returns an <code>Icon</code> for a <code>JCheckBox</code>.
+     * Returns an {@code Icon} for a {@code JCheckBox}.
      */
     static Icon getRadioButtonIcon() {
 		if (radioButtonIcon == null) {

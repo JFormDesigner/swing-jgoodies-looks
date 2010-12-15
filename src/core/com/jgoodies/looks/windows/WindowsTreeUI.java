@@ -42,7 +42,7 @@ import javax.swing.plaf.ComponentUI;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Windows Look&amp;Feel implementation of <code>TreeUI</code>.
+ * The JGoodies Windows Look&amp;Feel implementation of {@code TreeUI}.
  * Corrects the position of the tree button icon and provides two line styles:
  * angled dashed lines, or no lines at all. By default, lines are drawn.<p>
  *
@@ -69,7 +69,7 @@ import com.jgoodies.looks.Options;
  * </pre>
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 
 public final class WindowsTreeUI extends com.sun.java.swing.plaf.windows.WindowsTreeUI {

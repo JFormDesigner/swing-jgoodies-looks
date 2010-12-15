@@ -44,7 +44,7 @@ import javax.swing.Icon;
  * Creates, adjusts and paints the bumps used in the JGoodies Plastic L&amp;Fs.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 final class PlasticBumps implements Icon {
 
@@ -186,7 +186,7 @@ final class PlasticBumps implements Icon {
 
 	    /**
 	     * Returns the Image containing the bumps appropriate for the passed in
-	     * <code>GraphicsConfiguration</code>.
+	     * {@code GraphicsConfiguration}.
 	     */
 	    Image getImage() { return image; }
 
@@ -224,7 +224,7 @@ final class PlasticBumps implements Icon {
 
 	    /**
 	     * Creates the image appropriate for the passed in
-	     * <code>GraphicsConfiguration</code>, which may be null.
+	     * {@code GraphicsConfiguration}, which may be null.
 	     */
 	    private void createImage() {
 	        if (gc != null) {

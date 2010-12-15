@@ -43,12 +43,12 @@ import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 
 /**
- * The JGoodies Plastic Look&amp;Feel implementation of <code>SpinnerUI</code>.
+ * The JGoodies Plastic Look&amp;Feel implementation of {@code SpinnerUI}.
  * Configures the default editor to adjust font baselines and component
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public class PlasticSpinnerUI extends BasicSpinnerUI {
 
@@ -64,8 +64,8 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
 
 
     /**
-     * Create a <code>LayoutManager</code> that manages the <code>editor</code>,
-     * <code>nextButton</code>, and <code>previousButton</code> children
+     * Create a {@code LayoutManager} that manages the {@code editor},
+     * {@code nextButton}, and {@code previousButton} children
      * of the JSpinner. These three children must be added with a constraint
      * that identifies their role: "Editor", "Next", and "Previous". The
      * default layout manager can handle the absence of any of these children.
@@ -84,21 +84,21 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
 
     /**
      * This method is called by installUI to get the editor component
-     * of the <code>JSpinner</code>.  By default it just returns
-     * <code>JSpinner.getEditor()</code>.  Subclasses can override
-     * <code>createEditor</code> to return a component that contains
+     * of the {@code JSpinner}.  By default it just returns
+     * {@code JSpinner.getEditor()}.  Subclasses can override
+     * {@code createEditor} to return a component that contains
      * the spinner's editor or null, if they're going to handle adding
-     * the editor to the <code>JSpinner</code> in an
-     * <code>installUI</code> override.
+     * the editor to the {@code JSpinner} in an
+     * {@code installUI} override.
      * <p>
      * Typically this method would be overridden to wrap the editor
      * with a container with a custom border, since one can't assume
      * that the editors border can be set directly.
      * <p>
-     * The <code>replaceEditor</code> method is called when the spinners
-     * editor is changed with <code>JSpinner.setEditor</code>.  If you've
+     * The {@code replaceEditor} method is called when the spinners
+     * editor is changed with {@code JSpinner.setEditor}.  If you've
      * overriden this method, then you'll probably want to override
-     * <code>replaceEditor</code> as well.
+     * {@code replaceEditor} as well.
      *
      * @return the JSpinners editor JComponent, spinner.getEditor() by default
      * @see #installUI
@@ -113,16 +113,16 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
     }
 
     /**
-     * Called by the <code>PropertyChangeListener</code> when the
-     * <code>JSpinner</code> editor property changes.  It's the responsibility
+     * Called by the {@code PropertyChangeListener} when the
+     * {@code JSpinner} editor property changes.  It's the responsibility
      * of this method to remove the old editor and add the new one.  By
      * default this operation is just:
      * <pre>
      * spinner.remove(oldEditor);
      * spinner.add(newEditor, "Editor");
      * </pre>
-     * The implementation of <code>replaceEditor</code> should be coordinated
-     * with the <code>createEditor</code> method.
+     * The implementation of {@code replaceEditor} should be coordinated
+     * with the {@code createEditor} method.
      *
      * @see #createEditor
      * @see #createPropertyChangeListener

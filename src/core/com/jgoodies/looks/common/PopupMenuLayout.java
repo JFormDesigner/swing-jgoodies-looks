@@ -40,12 +40,12 @@ import javax.swing.plaf.UIResource;
 /**
  * The JGoodies implementation of a layout manager for Popup menus.
  * In comparison to the JDK's implementation it flushes the values of the client
- * properties <code>maxTextWidth</code> and <code>maxAccWidth</code> in
+ * properties {@code maxTextWidth} and {@code maxAccWidth} in
  * the method {@link #invalidateLayout(Container)} and not in the method
  * {@link #preferredLayoutSize(Container)}.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  */
 public final class PopupMenuLayout extends BoxLayout implements UIResource {
 
@@ -67,7 +67,7 @@ public final class PopupMenuLayout extends BoxLayout implements UIResource {
      * and thus any cached calculations should be flushed.
      * <p>
      * In case the target is an instance of JPopupMenu it flushes the values of
-     * the client properties <code>maxTextWidth</code> and <code>maxAccWidth</code>.
+     * the client properties {@code maxTextWidth} and {@code maxAccWidth}.
      *
      * @param target  the affected container
      */

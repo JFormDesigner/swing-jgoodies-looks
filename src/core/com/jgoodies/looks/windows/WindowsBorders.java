@@ -47,10 +47,10 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 
 /**
  * Consists of static inner classes that define different
- * <code>Borders</code> used in the JGoodies Windows look&amp;feel.
+ * {@code Borders} used in the JGoodies Windows look&amp;feel.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 final class WindowsBorders {
 
@@ -73,7 +73,7 @@ final class WindowsBorders {
 
 
 	/**
-	 * Returns a <code>Border</code> for a <code>JButton</code>.
+	 * Returns a {@code Border} for a {@code JButton}.
 	 */
     public static Border getButtonBorder() {
         UIDefaults table = UIManager.getLookAndFeelDefaults();
@@ -112,7 +112,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JMenuItem</code>.
+     * Returns a border instance for a {@code JMenuItem}.
      */
     static Border getMenuItemBorder() {
 		if (menuItemBorder == null) {
@@ -122,7 +122,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a separator border instance for <code>JMenuBar</code> or <code>JToolBar</code>.
+     * Returns a separator border instance for {@code JMenuBar} or {@code JToolBar}.
      */
     static Border getSeparatorBorder() {
 		if (separatorBorder == null) {
@@ -134,7 +134,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns an etched border instance for <code>JMenuBar</code> or <code>JToolBar</code>.
+     * Returns an etched border instance for {@code JMenuBar} or {@code JToolBar}.
      */
     static Border getEtchedBorder() {
 		if (etchedBorder == null) {
@@ -146,8 +146,8 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a special border for a <code>JMenuBar</code> that
-     * is used in a header just above a <code>JToolBar</code>.
+     * Returns a special border for a {@code JMenuBar} that
+     * is used in a header just above a {@code JToolBar}.
      */
     static Border getMenuBarHeaderBorder() {
 		if (menuBarHeaderBorder == null) {
@@ -159,7 +159,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a border instance for a <code>JPopupMenu</code>.
+     * Returns a border instance for a {@code JPopupMenu}.
      *
      * @return the lazily created popup menu border
      */
@@ -171,7 +171,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a no-margin border instance for a <code>JPopupMenu</code>.
+     * Returns a no-margin border instance for a {@code JPopupMenu}.
      *
      * @return the lazily created no-margin popup menu border
      */
@@ -183,8 +183,8 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a special border for a <code>JToolBar</code> that
-     * is used in a header just below a <code>JMenuBar</code>.
+     * Returns a special border for a {@code JToolBar} that
+     * is used in a header just below a {@code JMenuBar}.
      */
     static Border getToolBarHeaderBorder() {
 		if (toolBarHeaderBorder == null) {
@@ -196,7 +196,7 @@ final class WindowsBorders {
     }
 
     /**
-     * Returns a border for a rollover <code>AbstractButton</code>.
+     * Returns a border for a rollover {@code AbstractButton}.
      */
     static Border getRolloverButtonBorder() {
 		if (rolloverButtonBorder == null) {
@@ -293,7 +293,7 @@ final class WindowsBorders {
 
 
 	/**
-	 * A border used for <code>Buttons</code> that have the rollover property enabled.
+	 * A border used for {@code Buttons} that have the rollover property enabled.
 	 */
 	private static final class RolloverButtonBorder extends AbstractButtonBorder {
 
@@ -427,7 +427,7 @@ final class WindowsBorders {
 
 
 	/**
-	 * A border used for menu bars and tool bars in <code>HeaderStyle.SINGLE</code>.
+	 * A border used for menu bars and tool bars in {@code HeaderStyle.SINGLE}.
 	 * The bar is wrapped by an inner thin raised border,
 	 * which in turn is wrapped by an outer thin lowered border.
 	 */
@@ -447,7 +447,7 @@ final class WindowsBorders {
 
 
 	/**
-	 * A border used for menu bars in <code>HeaderStyle.BOTH</code>.
+	 * A border used for menu bars in {@code HeaderStyle.BOTH}.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */
@@ -505,7 +505,7 @@ final class WindowsBorders {
     }
 
 	/**
-	 * A border used for tool bars in <code>HeaderStyle.BOTH</code>.
+	 * A border used for tool bars in {@code HeaderStyle.BOTH}.
 	 * The menu bar and tool bar are wrapped by a thin raised border,
 	 * both together are wrapped by a thin lowered border.
 	 */

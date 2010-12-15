@@ -42,16 +42,16 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
 /**
  * The default button for combo boxes in the JGoodies Plastic Look&amp;Feel.
  * <p>
- * It differs from <code>MetalComboBoxButton</code> in that the border
+ * It differs from {@code MetalComboBoxButton} in that the border
  * is quite the same as for text fields: a compound border with an inner
- * <code>MarginBorder</code>.
+ * {@code MarginBorder}.
  * <p>
- * Also, we try to switch the <code>ListCellRenderer</code> to transparent,
- * which works for most <code>JComponent</code> renderes including the
- * <code>BasicComboBoxRenderer</code>.
+ * Also, we try to switch the {@code ListCellRenderer} to transparent,
+ * which works for most {@code JComponent} renderes including the
+ * {@code BasicComboBoxRenderer}.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 final class PlasticComboBoxButton extends JButton {
 
@@ -69,7 +69,7 @@ final class PlasticComboBoxButton extends JButton {
     private final boolean   borderPaintsFocus;
 
     /**
-     * Constructs a <code>PlasticComboBoxButton</code>.
+     * Constructs a {@code PlasticComboBoxButton}.
      */
     PlasticComboBoxButton(
             JComboBox comboBox,
@@ -137,8 +137,8 @@ final class PlasticComboBoxButton extends JButton {
     /**
      * The combo's arrow button should be excluded from the focus traversal.
      * Since Java 6 the arrow button is configured as being focusable
-     * in <code>BasicComboBoxUI#configureArrowButton</code>.
-     * Therefore it doesn't help to call <code>setFocusable(false)</code>
+     * in {@code BasicComboBoxUI#configureArrowButton}.
+     * Therefore it doesn't help to call {@code setFocusable(false)}
      * in the constructor; instead we override this method.
      */
     @Override
@@ -285,8 +285,8 @@ final class PlasticComboBoxButton extends JButton {
      * Checks and answers if this UI's combo has a client property
      * that indicates that the combo is used as a table cell editor.
      *
-     * @return <code>true</code> if the table cell editor client property
-     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     * @return {@code true} if the table cell editor client property
+     *    is set to {@code Boolean.TRUE}, {@code false} otherwise
      */
     private boolean isTableCellEditor() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(PlasticComboBoxUI.CELL_EDITOR_KEY));

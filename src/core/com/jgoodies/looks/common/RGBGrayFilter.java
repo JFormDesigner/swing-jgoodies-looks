@@ -48,12 +48,12 @@ import com.jgoodies.looks.Options;
  * {@link Options#setHiResGrayFilterEnabled(boolean)}; it is enabled by default.
  * The global setting can be overridden per component by setting
  * the client property key {@link Options#HI_RES_DISABLED_ICON_CLIENT_KEY}
- * to <code>Boolean.FALSE</code>.<p>
+ * to {@code Boolean.FALSE}.<p>
  *
  * Thanks to Andrej Golovnin for suggesting a simpler filter formula.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class RGBGrayFilter extends RGBImageFilter {
 

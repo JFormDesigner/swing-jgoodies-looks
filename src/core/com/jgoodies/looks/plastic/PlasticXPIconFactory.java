@@ -41,18 +41,18 @@ import com.jgoodies.common.base.Strings;
 import com.jgoodies.looks.LookUtils;
 
 /**
- * Factory class that vends <code>Icon</code>s for the JGoodies
+ * Factory class that vends {@code Icon}s for the JGoodies
  * Plastic XP look&amp;feel.
  * These icons are used extensively in PlasticXP via the defaults mechanism.
  * While other look and feels often use GIFs for icons, creating icons
  * in code facilitates switching to other themes.
  * <p>
- * Each method in this class returns either an <code>Icon</code> or
- * <code>null</code>, where <code>null</code> implies that there is
+ * Each method in this class returns either an {@code Icon} or
+ * {@code null}, where {@code null} implies that there is
  * no default icon.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class PlasticXPIconFactory {
 

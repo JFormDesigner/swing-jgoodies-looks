@@ -44,7 +44,7 @@ import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.PopupMenuLayout;
 
 /**
- * The JGoodies Plastic look&amp;feel implementation of <code>PopMenuUI</code>.
+ * The JGoodies Plastic look&amp;feel implementation of {@code PopMenuUI}.
  * It differs from the superclass in that it provides an option to get a
  * narrow border. You can set a client property
  * {@link Options#NO_MARGIN_KEY} to indicate that this popup menu
@@ -53,7 +53,7 @@ import com.jgoodies.looks.common.PopupMenuLayout;
  * a JScrollPane.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  *
  * @see	com.jgoodies.looks.Options#NO_MARGIN_KEY
  */
@@ -101,7 +101,7 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
 
     /**
      * Installs a border without margin, iff the client property
-     * <code>Options.NO_MARGIN_KEY</code> is set to <code>Boolean.TRUE</code>.
+     * {@code Options.NO_MARGIN_KEY} is set to {@code Boolean.TRUE}.
      */
     private void installBorder() {
         boolean useNarrowBorder = Boolean.TRUE.equals(

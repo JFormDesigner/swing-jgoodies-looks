@@ -40,10 +40,10 @@ import com.jgoodies.looks.common.ComboBoxEditorTextField;
  *
  * It differs from {@link javax.swing.plaf.metal.MetalComboBoxEditor} in that
  * the border is quite the same as for text fields:
- * a compound border with an inner <code>MarginBorder</code>.
+ * a compound border with an inner {@code MarginBorder}.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 class PlasticComboBoxEditor extends BasicComboBoxEditor {
 

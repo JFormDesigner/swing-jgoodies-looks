@@ -41,11 +41,11 @@ import javax.swing.border.Border;
 /**
  * Does all the magic for getting popups with drop shadows.
  * It adds the drop shadow border to the Popup,
- * in <code>#show</code> it snapshots the screen background as needed,
- * and in <code>#hide</code> it cleans up all changes made before.
+ * in {@code #show} it snapshots the screen background as needed,
+ * and in {@code #hide} it cleans up all changes made before.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  *
  * @see com.jgoodies.looks.common.ShadowPopupBorder
  * @see com.jgoodies.looks.common.ShadowPopupFactory
@@ -114,7 +114,7 @@ public final class ShadowPopup extends Popup {
     private Container heavyWeightContainer;
 
     /**
-     * Returns a previously used <code>ShadowPopup</code>, or a new one
+     * Returns a previously used {@code ShadowPopup}, or a new one
      * if none of the popups have been recycled.
      */
     static Popup getInstance(Component owner, Component contents, int x,
@@ -150,11 +150,11 @@ public final class ShadowPopup extends Popup {
     }
 
     /**
-     * Hides and disposes of the <code>Popup</code>. Once a <code>Popup</code>
+     * Hides and disposes of the {@code Popup}. Once a {@code Popup}
      * has been disposed you should no longer invoke methods on it. A
-     * <code>dispose</code>d <code>Popup</code> may be reclaimed and later used
-     * based on the <code>PopupFactory</code>. As such, if you invoke methods
-     * on a <code>disposed</code> <code>Popup</code>, indeterminate
+     * {@code dispose}d {@code Popup} may be reclaimed and later used
+     * based on the {@code PopupFactory}. As such, if you invoke methods
+     * on a {@code disposed} {@code Popup}, indeterminate
      * behavior will result.<p>
      *
      * In addition to the superclass behavior, we reset the stored
@@ -185,9 +185,9 @@ public final class ShadowPopup extends Popup {
     }
 
     /**
-     * Makes the <code>Popup</code> visible. If the popup has a
+     * Makes the {@code Popup} visible. If the popup has a
      * heavy-weight container, we try to snapshot the background.
-     * If the <code>Popup</code> is currently visible, it remains visible.
+     * If the {@code Popup} is currently visible, it remains visible.
      */
     @Override
     public void show() {

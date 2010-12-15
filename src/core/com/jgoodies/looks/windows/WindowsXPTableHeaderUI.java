@@ -46,16 +46,16 @@ import com.sun.java.swing.plaf.windows.WindowsTableHeaderUI;
 
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>TableHeaderUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code TableHeaderUI}.
  * A Windows table header that honors the XP header style even if the user
  * uses custom non-opaque renderers. The renderers should be a subclass of
- * <code>JComponent</code> because we need to replace the border by the one
+ * {@code JComponent} because we need to replace the border by the one
  * specified in the XP style.<p>
  *
  * Thanks to Andrej Golovnin for his feedback and suggestions.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsXPTableHeaderUI extends WindowsTableHeaderUI {
 

@@ -52,7 +52,7 @@ import com.jgoodies.looks.Options;
  * and adds behavior for handling different types of borders.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 public final class WindowsToolBarUI extends MetalToolBarUI {
 
@@ -99,8 +99,8 @@ public final class WindowsToolBarUI extends MetalToolBarUI {
 
     /**
      * Installs a special border, if either a look-dependent
-     * <code>BorderStyle</code> or a look-independent
-     * <code>HeaderStyle</code> has been specified.
+     * {@code BorderStyle} or a look-independent
+     * {@code HeaderStyle} has been specified.
      * A look specific BorderStyle shadows a HeaderStyle.<p>
      *
      * Specifying a HeaderStyle is recommend.

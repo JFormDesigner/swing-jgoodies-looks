@@ -46,12 +46,12 @@ import com.jgoodies.looks.Options;
 
 
 /**
- * The JGoodies Plastic look and feel implemenation of <code>MenuBarUI</code>.
- * Can handle optional <code>Border</code> types as specified by the
- * <code>BorderStyle</code> or <code>HeaderStyle</code> client properties.
+ * The JGoodies Plastic look and feel implemenation of {@code MenuBarUI}.
+ * Can handle optional {@code Border} types as specified by the
+ * {@code BorderStyle} or {@code HeaderStyle} client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticMenuBarUI extends BasicMenuBarUI {
 
@@ -104,11 +104,11 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
 
 
 	/**
-	 * Installs a special border, if either a look-dependent <code>BorderStyle</code>
-	 * or a look-independent <code>HeaderStyle</code> has been specified.
-	 * A look specific <code>BorderStyle</code> shadows a <code>HeaderStyle</code>.<p>
+	 * Installs a special border, if either a look-dependent {@code BorderStyle}
+	 * or a look-independent {@code HeaderStyle} has been specified.
+	 * A look specific {@code BorderStyle} shadows a {@code HeaderStyle}.<p>
 	 *
-	 * We recommend to specify a <code>HeaderStyle</code>.
+	 * We recommend to specify a {@code HeaderStyle}.
 	 */
 	public void installSpecialBorder() {
 		String suffix;

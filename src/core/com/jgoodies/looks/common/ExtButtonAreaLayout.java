@@ -44,14 +44,14 @@ import com.jgoodies.looks.LookUtils;
  * that complies with Mac and Windows UI style guides.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 
 public final class ExtButtonAreaLayout
     extends BasicOptionPaneUI.ButtonAreaLayout {
 
     /**
-     * Constructs an <code>ExtButtonAreaLayout</code>.
+     * Constructs an {@code ExtButtonAreaLayout}.
      *
      * @param syncAllWidths  true indicates that all buttons get the same size
      * @param padding        the padding between buttons

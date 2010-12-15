@@ -42,12 +42,12 @@ import com.jgoodies.looks.common.ExtButtonAreaLayout;
 
 /**
  * The JGoodies Plastic Look&amp;Feel implementation of
- * <code>OptionPaneUI</code>. Honors the screen resolution and
+ * {@code OptionPaneUI}. Honors the screen resolution and
  * uses a minimum button with that complies better with the Mac and Windows
  * UI style guides.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticOptionPaneUI extends BasicOptionPaneUI {
 
@@ -57,7 +57,7 @@ public final class PlasticOptionPaneUI extends BasicOptionPaneUI {
 
     /**
      * Creates and returns a Container containin the buttons. The buttons
-     * are created by calling <code>getButtons</code>.
+     * are created by calling {@code getButtons}.
      */
     @Override
     protected Container createButtonArea() {

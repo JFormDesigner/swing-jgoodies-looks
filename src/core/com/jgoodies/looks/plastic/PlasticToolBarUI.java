@@ -47,14 +47,14 @@ import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Plastic look and feel implementation of <code>ToolBarUI</code>.<p>
+ * The JGoodies Plastic look and feel implementation of {@code ToolBarUI}.<p>
  *
- * Corrects the rollover borders and can handle optional <code>Border</code> types,
- * as specified by the <code>BorderStyle</code> or <code>HeaderStyle</code>
+ * Corrects the rollover borders and can handle optional {@code Border} types,
+ * as specified by the {@code BorderStyle} or {@code HeaderStyle}
  * client properties.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  */
 
 public class PlasticToolBarUI extends MetalToolBarUI {
@@ -89,7 +89,7 @@ public class PlasticToolBarUI extends MetalToolBarUI {
     // Handling Special Borders *********************************************
 
     /**
-     * Installs a special border, if indicated by the <code>HeaderStyle</code>.
+     * Installs a special border, if indicated by the {@code HeaderStyle}.
      */
     @Override
     protected void installDefaults() {
@@ -126,12 +126,12 @@ public class PlasticToolBarUI extends MetalToolBarUI {
 
     /**
      * Installs a special border, if either a look-dependent
-     * <code>BorderStyle</code> or a look-independent
-     * <code>HeaderStyle</code> has been specified.
-     * A look specific <code>BorderStyle</code> shadows
-     * a <code>HeaderStyle</code>.<p>
+     * {@code BorderStyle} or a look-independent
+     * {@code HeaderStyle} has been specified.
+     * A look specific {@code BorderStyle} shadows
+     * a {@code HeaderStyle}.<p>
      *
-     * Specifying a <code>HeaderStyle</code> is recommend.
+     * Specifying a {@code HeaderStyle} is recommend.
      */
     private void installSpecialBorder() {
         String suffix;

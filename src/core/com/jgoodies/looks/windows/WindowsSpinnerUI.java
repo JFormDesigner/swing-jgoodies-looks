@@ -42,12 +42,12 @@ import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>SpinnerUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code SpinnerUI}.
  * Configures the default editor to adjust font baselines and component
  * bounds, by setting an empty border with the default text insets.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  */
 public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.WindowsSpinnerUI {
 
@@ -59,9 +59,9 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
 
     /**
      * Create a component that will replace the spinner models value with the
-     * object returned by <code>spinner.getPreviousValue</code>. By default
-     * the <code>previousButton</code> is a JButton who's <code>ActionListener</code>
-     * updates it's <code>JSpinner</code> ancestors model. If a
+     * object returned by {@code spinner.getPreviousValue}. By default
+     * the {@code previousButton} is a JButton who's {@code ActionListener}
+     * updates it's {@code JSpinner} ancestors model. If a
      * previousButton isn't needed (in a subclass) then override this method to
      * return null.
      *
@@ -84,9 +84,9 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
 
     /**
      * Create a component that will replace the spinner models value with the
-     * object returned by <code>spinner.getNextValue</code>. By default the
-     * <code>nextButton</code> is a JButton who's <code>ActionListener</code>
-     * updates it's <code>JSpinner</code> ancestors model. If a nextButton
+     * object returned by {@code spinner.getNextValue}. By default the
+     * {@code nextButton} is a JButton who's {@code ActionListener}
+     * updates it's {@code JSpinner} ancestors model. If a nextButton
      * isn't needed (in a subclass) then override this method to return null.
      *
      * @return a component that will replace the spinners model with the next
@@ -108,19 +108,19 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
 
     /**
      * This method is called by installUI to get the editor component of the
-     * <code>JSpinner</code>. By default it just returns <code>JSpinner.getEditor()</code>.
-     * Subclasses can override <code>createEditor</code> to return a
+     * {@code JSpinner}. By default it just returns {@code JSpinner.getEditor()}.
+     * Subclasses can override {@code createEditor} to return a
      * component that contains the spinner's editor or null, if they're going
-     * to handle adding the editor to the <code>JSpinner</code> in an <code>installUI</code>
+     * to handle adding the editor to the {@code JSpinner} in an {@code installUI}
      * override.
      * <p>
      * Typically this method would be overridden to wrap the editor with a
      * container with a custom border, since one can't assume that the editors
      * border can be set directly.
      * <p>
-     * The <code>replaceEditor</code> method is called when the spinners
-     * editor is changed with <code>JSpinner.setEditor</code>. If you've
-     * overriden this method, then you'll probably want to override <code>replaceEditor</code>
+     * The {@code replaceEditor} method is called when the spinners
+     * editor is changed with {@code JSpinner.setEditor}. If you've
+     * overriden this method, then you'll probably want to override {@code replaceEditor}
      * as well.
      *
      * @return the JSpinners editor JComponent, spinner.getEditor() by default
@@ -137,8 +137,8 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
 
 
     /**
-     * Create a <code>LayoutManager</code> that manages the <code>editor</code>,
-     * <code>nextButton</code>, and <code>previousButton</code> children
+     * Create a {@code LayoutManager} that manages the {@code editor},
+     * {@code nextButton}, and {@code previousButton} children
      * of the JSpinner. These three children must be added with a constraint
      * that identifies their role: "Editor", "Next", and "Previous". The
      * default layout manager can handle the absence of any of these children.
@@ -156,7 +156,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
 
 
     /**
-     * Called by the <code>PropertyChangeListener</code> when the <code>JSpinner</code>
+     * Called by the {@code PropertyChangeListener} when the {@code JSpinner}
      * editor property changes. It's the responsibility of this method to
      * remove the old editor and add the new one. By default this operation is
      * just:
@@ -166,8 +166,8 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      * </pre>
      *
      *
-     * The implementation of <code>replaceEditor</code> should be coordinated
-     * with the <code>createEditor</code> method.
+     * The implementation of {@code replaceEditor} should be coordinated
+     * with the {@code createEditor} method.
      *
      * @see #createEditor
      * @see #createPropertyChangeListener

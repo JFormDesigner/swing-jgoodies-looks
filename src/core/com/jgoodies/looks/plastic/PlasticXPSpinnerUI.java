@@ -41,12 +41,12 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 
 
 /**
- * The JGoodies PlasticXP Look&amp;Feel implementation of <code>SpinnerUI</code>.
+ * The JGoodies PlasticXP Look&amp;Feel implementation of {@code SpinnerUI}.
  * Configures the default editor to adjust font baselines and component
  * bounds. Also, changes the border of the buttons and the size of the arrows.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  */
 public final class PlasticXPSpinnerUI extends PlasticSpinnerUI {
 

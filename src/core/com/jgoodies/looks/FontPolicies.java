@@ -50,7 +50,7 @@ import javax.swing.UIDefaults;
  * Vista on 120dpi with large fonts ("Vista-large-120"), etc.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  *
  * @see     FontPolicy
  * @see     FontSet
@@ -222,12 +222,12 @@ public final class FontPolicies {
 
     /**
      * Looks up and returns a custom FontSet for the given
-     * Look&amp;Feel name, or <code>null</code> if no custom font set
+     * Look&amp;Feel name, or {@code null} if no custom font set
      * has been defined for this Look&amp;Feel.
      *
-     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
-     *     <code>"Windows"</code>
-     * @return a custom FontPolicy - if any - or otherwise <code>null</code>
+     * @param the name of the Look&amp;Feel, one of {@code "Plastic"} or
+     *     {@code "Windows"}
+     * @return a custom FontPolicy - if any - or otherwise {@code null}
      */
     private static FontSet getCustomFontSet(String lafName) {
         String controlFontKey = lafName + ".controlFont";
@@ -250,12 +250,12 @@ public final class FontPolicies {
 
     /**
      * Looks up and returns a custom FontPolicy for the given
-     * Look&amp;Feel name, or <code>null</code> if no custom policy has been
+     * Look&amp;Feel name, or {@code null} if no custom policy has been
      * defined for this Look&amp;Feel.
      *
-     * @param the name of the Look&amp;Feel, one of <code>"Plastic"</code> or
-     *     <code>"Windows"</code>
-     * @return a custom FontPolicy - if any - or otherwise <code>null</code>
+     * @param the name of the Look&amp;Feel, one of {@code "Plastic"} or
+     *     {@code "Windows"}
+     * @return a custom FontPolicy - if any - or otherwise {@code null}
      */
     private static FontPolicy getCustomPolicy(String lafName) {
         // TODO: Look up predefined font choice policies

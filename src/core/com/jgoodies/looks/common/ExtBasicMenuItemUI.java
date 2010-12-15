@@ -43,14 +43,14 @@ import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicMenuItemUI;
 
 /**
- * An implementation of <code>MenuItemUI</code> used by the
+ * An implementation of {@code MenuItemUI} used by the
  * JGoodies Windows and Plastic looks.
  * Unlike it's superclass it aligns menu items, uses a slightly
  * smaller gap between text and icon, which you can override
  * in the UI defaults.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  */
 
 public class ExtBasicMenuItemUI extends BasicMenuItemUI {

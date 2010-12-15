@@ -41,12 +41,12 @@ import javax.swing.plaf.ComponentUI;
 import com.jgoodies.looks.Options;
 
 /**
- * The JGoodies Windows L&amp;F implementation of <code>ScrollPaneUI</code>.
+ * The JGoodies Windows L&amp;F implementation of {@code ScrollPaneUI}.
  * Installs an etched border if the client property
- * <code>Options.IS_ETCHED_KEY</code> is set.
+ * {@code Options.IS_ETCHED_KEY} is set.
  *
  * @author  Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  *
  * @see com.jgoodies.looks.Options#IS_ETCHED_KEY
  */

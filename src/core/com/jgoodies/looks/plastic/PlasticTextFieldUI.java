@@ -38,12 +38,12 @@ import javax.swing.text.Caret;
 
 
 /**
- * The JGoodies Plastic L&amp;F implementation of <code>TextFieldUI</code>.
+ * The JGoodies Plastic L&amp;F implementation of {@code TextFieldUI}.
  * In addition to its superclass MetalTextFieldUI, it can use a caret
  * that selects all text when the field gains focus via the keyboard.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  */
 public final class PlasticTextFieldUI extends MetalTextFieldUI {
 

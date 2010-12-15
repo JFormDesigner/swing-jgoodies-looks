@@ -60,7 +60,7 @@ import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
  * the JGoodies Windows L&amp;f implemented via a client property key.
  *
  * @author Karsten Lentzsch
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  *
  * @see Options#COMBO_POPUP_PROTOTYPE_DISPLAY_VALUE_KEY
  */
@@ -182,13 +182,13 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     /**
      * Creates the default renderer that will be used in a non-editiable combo
      * box. A default renderer will used only if a renderer has not been
-     * explicitly set with <code>setRenderer</code>.<p>
+     * explicitly set with {@code setRenderer}.<p>
      *
      * This method differs from the superclass implementation in that
      * it uses an empty border with the default left and right text insets,
      * the same as used by a combo box editor.
      *
-     * @return a <code>ListCellRender</code> used for the combo box
+     * @return a {@code ListCellRender} used for the combo box
      * @see javax.swing.JComboBox#setRenderer
      */
     @Override
@@ -352,16 +352,16 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * Checks and answer whether the border of the given renderer component
      * can be removed temporarily, so the combo's selection background will
      * be consistent with the default renderer and native appearance.
-     * This test is invoked from <code>#paintCurrentValue</code>.<p>
+     * This test is invoked from {@code #paintCurrentValue}.<p>
      *
      * It is safe to remove an EmptyBorder if the component doesn't override
-     * <code>#update</code>, <code>#paint</code> and <code>#paintBorder</code>.
+     * {@code #update}, {@code #paint} and {@code #paintBorder}.
      * Since we know the default renderer, we can remove its border.<p>
      *
      * Custom renderers may set a hint to make their border removable.
      * To do so, set the client property "isBorderRemovable"
-     * to <code>Boolean.TRUE</code>. If this client property is set,
-     * its value will be returned. If it is not set, <code>true</code> is returned
+     * to {@code Boolean.TRUE}. If this client property is set,
+     * its value will be returned. If it is not set, {@code true} is returned
      * if and only if the component's border is an EmptyBorder.
      *
      * @param rendererComponent  the renderer component to check
@@ -431,8 +431,8 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * Checks and answers if this UI's combo has a client property
      * that indicates that the combo is used as a table cell editor.
      *
-     * @return <code>true</code> if the table cell editor client property
-     *    is set to <code>Boolean.TRUE</code>, <code>false</code> otherwise
+     * @return {@code true} if the table cell editor client property
+     *    is set to {@code Boolean.TRUE}, {@code false} otherwise
      */
     private boolean isTableCellEditor() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
