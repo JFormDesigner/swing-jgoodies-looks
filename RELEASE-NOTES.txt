@@ -6,6 +6,18 @@
 
 INTRODUCTION
 
+    This version requires the JGoodies Common library version 1.2.0.
+    
+
+OTHER CHANGES
+
+    o Uses the Common SystemUtils.
+    
+    
+CHANGES IN 2.4.0 --------------------------------------------------------
+                        
+INTRODUCTION
+
     This version requires Java 5 and the new JGoodies Common library.
     Make sure that you include jgoodies-common-1.1.1.jar in your
     classpath when using this Looks version.
@@ -27,13 +39,8 @@ OTHER CHANGES
     o Removed code used for Java 1.4 that is now obsolete.
     o Updated HTML docs.
     
----------------------------------------------------------------------------
-
-
-
-                         JGoodies Looks
-                          Version 2.3.1
-                          Release Notes
+    
+CHANGES IN 2.3.1 --------------------------------------------------------
                         
 
 INTRODUCTION
@@ -47,12 +54,8 @@ BUG FIXES
     o The Windows classic L&f combo box arrow button paints the arrow icon
       always in black, ignoring the desktop color theme.
     
----------------------------------------------------------------------------
-
-
-                         JGoodies Looks
-                          Version 2.3.0
-                          Release Notes
+    
+CHANGES IN 2.3.0 --------------------------------------------------------
                         
 
 INTRODUCTION

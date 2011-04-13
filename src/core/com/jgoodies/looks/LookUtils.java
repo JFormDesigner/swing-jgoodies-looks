@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2011 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -78,15 +78,23 @@ public final class LookUtils extends SystemUtils {
 
     /**
      * True if the Windows XP Look&amp;Feel is enabled.
+     *
+     * @deprecated Replaced by {@link SystemUtils.IS_LAF_WINDOWS_XP_ENABLED}
      */
-    public static final boolean IS_LAF_WINDOWS_XP_ENABLED = isWindowsXPLafEnabled();
+    @Deprecated
+    public static final boolean IS_LAF_WINDOWS_XP_ENABLED =
+        SystemUtils.IS_LAF_WINDOWS_XP_ENABLED;
 
     /**
      * True if if the screen resolution is smaller than 120 dpi.
      *
      * @see Toolkit#getScreenResolution()
+     *
+     * @deprecated Replaced by {@link SystemUtils.IS_LOW_RESOLUTION}
      */
-    public static final boolean IS_LOW_RESOLUTION = isLowResolution();
+    @Deprecated
+    public static final boolean IS_LOW_RESOLUTION =
+        SystemUtils.IS_LOW_RESOLUTION;
 
     private static boolean loggingEnabled = true;
 
@@ -166,29 +174,6 @@ public final class LookUtils extends SystemUtils {
                     + "abled in the system properties.");
         }
         return result;
-    }
-
-
-    /**
-     * Checks and answers whether the Windows XP style is enabled.
-     * This method is intended to be called only if a Windows look&feel
-     * is about to be installed or already active in the UIManager.
-     * The XP style of the Windows look&amp;feel is enabled by default on
-     * Windows XP platforms since the J2SE 1.4.2; it can be disabled either
-     * in the Windows desktop as well as in the Java runtime by setting
-     * a System property.<p>
-     *
-     * First checks the platform, platform version and Java version. Then
-     * checks whether the desktop property <tt>win.xpstyle.themeActive</tt>
-     * is set or not.
-     *
-     * @return true if the Windows XP style is enabled
-     */
-    private static boolean isWindowsXPLafEnabled() {
-        return (IS_OS_WINDOWS_XP || IS_OS_WINDOWS_6_OR_LATER)
-             && Boolean.TRUE.equals(Toolkit.getDefaultToolkit().
-                     getDesktopProperty("win.xpstyle.themeActive"))
-             && getSystemProperty("swing.noxp") == null;
     }
 
 
@@ -306,18 +291,6 @@ public final class LookUtils extends SystemUtils {
         if (loggingEnabled) {
             System.out.println("JGoodies Looks: " + message);
         }
-    }
-
-    // Private Helper Methods ***********************************************
-
-    /**
-     * Checks and answers whether the screen resolution is low or high.
-     * Resolutions below 120 dpi are considere low, all others are high.
-     *
-     * @return true if the screen resolution is smaller than 120 dpi
-     */
-    private static boolean isLowResolution() {
-        return Toolkit.getDefaultToolkit().getScreenResolution() < 120;
     }
 
 

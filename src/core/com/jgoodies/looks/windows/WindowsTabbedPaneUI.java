@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2001-2010 JGoodies Karsten Lentzsch. All Rights Reserved.
+ * Copyright (c) 2001-2011 JGoodies Karsten Lentzsch. All Rights Reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
@@ -46,7 +46,7 @@ import javax.swing.plaf.basic.BasicGraphicsUtils;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 import javax.swing.text.View;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.Options;
 
 /**
@@ -60,14 +60,12 @@ import com.jgoodies.looks.Options;
  */
 public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.WindowsTabbedPaneUI {
 
-    private static final boolean IS_XP_LAF_5_OR_LATER =
-        LookUtils.IS_JAVA_5_OR_LATER && LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
 
     /** Insets used for the embedded style content border. */
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
 
     /** Insets used if we paint no content border. */
-    private static final int INSET = IS_XP_LAF_5_OR_LATER ? -1 : 1;
+    private static final int INSET = SystemUtils.IS_LAF_WINDOWS_XP_ENABLED ? -1 : 1;
     private static final Insets NO_CONTENT_BORDER_NORTH_INSETS = new Insets(INSET, 0, 0, 0);
     private static final Insets NO_CONTENT_BORDER_WEST_INSETS  = new Insets(0, INSET, 0, 0);
     private static final Insets NO_CONTENT_BORDER_SOUTH_INSETS = new Insets(0, 0, INSET, 0);
@@ -185,7 +183,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     @Override
     protected Icon getIconForTab(int tabIndex) {
         String title = tabPane.getTitleAt(tabIndex);
-        boolean hasTitle = (title != null) && (title.length() > 0);
+        boolean hasTitle = title != null && title.length() > 0;
         return !isTabIconsEnabled  && hasTitle
                     ? null
                     : super.getIconForTab(tabIndex);
@@ -194,7 +192,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     @Override
     protected Insets getContentBorderInsets(int tabPlacement) {
         if (!hasNoContentBorder()) {
-            if (IS_XP_LAF_5_OR_LATER) {
+            if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
                 switch (tabPlacement) {
                     case RIGHT :
                         return CONTENT_BORDER_EAST_INSETS;
@@ -249,7 +247,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
         if (hasEmbeddedTabs()) {
             return EMPTY_INSETS;
         } else if (hasNoContentBorder()) {
-            int inset = IS_XP_LAF_5_OR_LATER ? 1 : 0;
+            int inset = SystemUtils.IS_LAF_WINDOWS_XP_ENABLED ? 1 : 0;
             switch (tabPlacement) {
                 case LEFT:   return new Insets(1, 2, 1, inset);
                 case RIGHT:  return new Insets(1, inset, 1, 2);
@@ -287,8 +285,8 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
                             ? null
                             : getTabBounds(selectedIndex, calcRect);
         if (tabPlacement != TOP || selectedIndex < 0 ||
-           (selRect.y + selRect.height + 1 < y) ||
-           (selRect.x < x || selRect.x > x + w)) {
+           selRect.y + selRect.height + 1 < y ||
+           selRect.x < x || selRect.x > x + w) {
             // no special case, do the super thing
             super.paintContentBorderTopEdge(g, tabPlacement, selectedIndex, x, y, w, h);
         } else {
@@ -310,8 +308,8 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
             Rectangle selRect = selectedIndex < 0 ? null :
                            getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != BOTTOM || selectedIndex < 0 ||
-             (selRect.y - 1 > h + y) ||
-         (selRect.x < x || selRect.x > x + w)) {
+             selRect.y - 1 > h + y ||
+         selRect.x < x || selRect.x > x + w) {
            // no special case, do the super thing
             super.paintContentBorderBottomEdge(g, tabPlacement, selectedIndex, x, y, w, h);
          } else {
@@ -344,8 +342,8 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
             Rectangle selRect = selectedIndex < 0 ? null :
                            getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != LEFT || selectedIndex < 0 ||
-                (selRect.x + selRect.width + 1 < x) ||
-                (selRect.y < y || selRect.y > y + h)) {
+                selRect.x + selRect.width + 1 < x ||
+                selRect.y < y || selRect.y > y + h) {
                  // no special case, do the super thing
                 super.paintContentBorderLeftEdge(g, tabPlacement, selectedIndex, x, y, w, h);
             } else {
@@ -375,8 +373,8 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
             Rectangle selRect = selectedIndex < 0 ? null :
                            getTabBounds(selectedIndex, calcRect);
             if (tabPlacement != RIGHT || selectedIndex < 0 ||
-               (selRect.x - 1 > x+w) ||
-               (selRect.y < y || selRect.y > y + h)) {
+               selRect.x - 1 > x+w ||
+               selRect.y < y || selRect.y > y + h) {
                 // no special case, do the super thing
                 super.paintContentBorderRightEdge(g, tabPlacement, selectedIndex, x, y, w, h);
              } else {
