@@ -87,7 +87,7 @@ final class PlasticBumps implements Icon {
 	// Icon Implementation ****************************************************
 
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		GraphicsConfiguration gc = (g instanceof Graphics2D)
+		GraphicsConfiguration gc = g instanceof Graphics2D
 				? (GraphicsConfiguration) ((Graphics2D) g).getDeviceConfiguration()
 				: null;
 
@@ -119,7 +119,7 @@ final class PlasticBumps implements Icon {
 
     private BumpBuffer getBuffer(GraphicsConfiguration gc,
             Color aTopColor, Color aShadowColor, Color aBackColor) {
-            if ((buffer != null)
+            if (buffer != null
                 && buffer.hasSameConfiguration(gc, aTopColor, aShadowColor, aBackColor)) {
                 return buffer;
             }
@@ -191,7 +191,7 @@ final class PlasticBumps implements Icon {
 	    Image getImage() { return image; }
 
 
-	    Dimension getImageSize() { return imageSize; }
+	    static Dimension getImageSize() { return imageSize; }
 
 
 	    /**

@@ -112,7 +112,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 		c.removePropertyChangeListener(paletteListener);
 		c.removePropertyChangeListener(contentPaneListener);
 
-		Container cont = ((JInternalFrame) (c)).getContentPane();
+		Container cont = ((JInternalFrame) c).getContentPane();
 		if (cont instanceof JComponent) {
 			JComponent content = (JComponent) cont;
 			if (content.getBorder() == EMPTY_BORDER) {
@@ -150,7 +150,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
     }
 
 
-	private void stripContentBorder(Object c) {
+	private static void stripContentBorder(Object c) {
 		if (c instanceof JComponent) {
 			JComponent contentComp = (JComponent) c;
 			Border contentBorder = contentComp.getBorder();

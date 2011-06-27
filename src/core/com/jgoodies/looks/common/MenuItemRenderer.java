@@ -111,7 +111,7 @@ public class MenuItemRenderer {
 	/**
 	 * Looks up and answers the appropriate menu item icon.
 	 */
-	private Icon getIcon(JMenuItem aMenuItem, Icon defaultIcon) {
+	private static Icon getIcon(JMenuItem aMenuItem, Icon defaultIcon) {
 		Icon icon = aMenuItem.getIcon();
 		if (icon == null) {
             return defaultIcon;
@@ -158,7 +158,7 @@ public class MenuItemRenderer {
 	}
 
 
-	private void resetRects() {
+	private static void resetRects() {
 		iconRect.setBounds(zeroRect);
 		textRect.setBounds(zeroRect);
 		acceleratorRect.setBounds(zeroRect);
@@ -554,7 +554,7 @@ public class MenuItemRenderer {
 	}
 
 
-	private boolean isLeftToRight(Component c) {
+	private static boolean isLeftToRight(Component c) {
         return c.getComponentOrientation().isLeftToRight();
     }
 
@@ -572,7 +572,7 @@ public class MenuItemRenderer {
      * @param bgColor selection background color
      * @since 1.4
      */
-    private void paintBackground(Graphics g, JMenuItem aMenuItem, Color bgColor) {
+    private static void paintBackground(Graphics g, JMenuItem aMenuItem, Color bgColor) {
 		ButtonModel model = aMenuItem.getModel();
 
 		if (aMenuItem.isOpaque()) {

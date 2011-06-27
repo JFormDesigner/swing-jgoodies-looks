@@ -130,14 +130,14 @@ public final class PlasticXPIconFactory {
             }
         }
 
-        private void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int width, int height) {
+        private static void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int width, int height) {
             g2.setColor(enabled
                     ? PlasticLookAndFeel.getControlDarkShadow()
                     : MetalLookAndFeel.getControlDisabled());
             g2.drawRect(x, y, width, height);
         }
 
-        private void drawCheck(Graphics2D g2, boolean enabled, int x, int y, int width, int height) {
+        private static void drawCheck(Graphics2D g2, boolean enabled, int x, int y, int width, int height) {
             g2.setColor(enabled
                     ? UIManager.getColor("CheckBox.check")
                     : MetalLookAndFeel.getControlDisabled());
@@ -153,7 +153,7 @@ public final class PlasticXPIconFactory {
 			g2.drawLine(turnX + 1, bottom    , right, y + 2   );
         }
 
-        private void drawFill(Graphics2D g2, boolean pressed, int x, int y, int w, int h) {
+        private static void drawFill(Graphics2D g2, boolean pressed, int x, int y, int w, int h) {
             Color upperLeft;
             Color lowerRight;
             if (pressed) {
@@ -167,7 +167,7 @@ public final class PlasticXPIconFactory {
             g2.fillRect(x, y, w, h);
         }
 
-        private void drawFocus(Graphics2D g2, int x, int y, int width, int height) {
+        private static void drawFocus(Graphics2D g2, int x, int y, int width, int height) {
             g2.setPaint(new GradientPaint(
                     x,
                     y,
@@ -225,14 +225,14 @@ public final class PlasticXPIconFactory {
             }
         }
 
-        private void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int w, int h) {
+        private static void drawBorder(Graphics2D g2, boolean enabled, int x, int y, int w, int h) {
             g2.setColor(enabled
                 ? PlasticLookAndFeel.getControlDarkShadow()
                 : MetalLookAndFeel.getControlDisabled());
             g2.drawOval(x, y, w, h);
         }
 
-        private void drawCheck(Graphics2D g2, Component c, boolean enabled, int x, int y, int w, int h) {
+        private static void drawCheck(Graphics2D g2, Component c, boolean enabled, int x, int y, int w, int h) {
             g2.translate(x,y);
             if (enabled) {
                 g2.setColor(UIManager.getColor("RadioButton.check"));
@@ -245,7 +245,7 @@ public final class PlasticXPIconFactory {
             g2.translate(-x, -y);
         }
 
-        private void drawFill(Graphics2D g2, boolean pressed, int x, int y, int w, int h) {
+        private static void drawFill(Graphics2D g2, boolean pressed, int x, int y, int w, int h) {
             Color upperLeft;
             Color lowerRight;
             if (pressed) {
@@ -259,7 +259,7 @@ public final class PlasticXPIconFactory {
             g2.fillOval(x, y, w, h);
         }
 
-        private void drawFocus(Graphics2D g2, int x, int y, int w, int h) {
+        private static void drawFocus(Graphics2D g2, int x, int y, int w, int h) {
             g2.setPaint(
                 new GradientPaint(
                     x,

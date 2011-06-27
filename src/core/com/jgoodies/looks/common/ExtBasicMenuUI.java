@@ -205,7 +205,7 @@ public class ExtBasicMenuUI extends BasicMenuUI {
 
     // Helper Code **********************************************************
 
-    private boolean isSubMenu(JMenuItem aMenuItem) {
+    private static boolean isSubMenu(JMenuItem aMenuItem) {
         return !((JMenu) aMenuItem).isTopLevelMenu();
     }
 

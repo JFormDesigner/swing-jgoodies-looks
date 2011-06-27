@@ -138,7 +138,7 @@ public class PlasticSpinnerUI extends BasicSpinnerUI {
     /**
      * Sets an empty border with the default text insets.
      */
-    private void configureEditorBorder(JComponent editor) {
+    private static void configureEditorBorder(JComponent editor) {
         if (editor instanceof JSpinner.DefaultEditor) {
             JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
             JTextField editorField = defaultEditor.getTextField();
