@@ -4,6 +4,15 @@
                           Release Notes
                         
 
+CHANGES IN 2.4.2 --------------------------------------------------------
+
+BUG FIXES
+
+    o Fixed a potential NPE in Windows- and PlasticFieldCaret#selectAll
+    
+                        
+CHANGES IN 2.4.1 --------------------------------------------------------
+                        
 INTRODUCTION
 
     This version requires the JGoodies Common library version 1.2.0.

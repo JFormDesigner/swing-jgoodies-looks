@@ -63,6 +63,9 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
     @Override
     public void focusGained(FocusEvent e) {
         final JTextComponent c = getComponent();
+        if (c == null) {
+            return;
+        }
         if (c.isEnabled()) {
             setVisible(true);
             setSelectionVisible(true);
@@ -86,6 +89,9 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
 
     private void selectAll() {
         final JTextComponent c = getComponent();
+        if (c == null) {
+            return;
+        }
         boolean backward = Boolean.TRUE.equals(c.getClientProperty(Options.INVERT_SELECTION_CLIENT_KEY));
         if (backward) {
             setDot(c.getDocument().getLength());
@@ -125,7 +131,7 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
         super.mouseReleased(e);
         if (e.isPopupTrigger()) {
             isKeyboardFocusEvent = false;
-            if (   getComponent() != null 
+            if (   getComponent() != null
                 && getComponent().isEnabled()
                 && getComponent().isRequestFocusEnabled()) {
                 getComponent().requestFocus();

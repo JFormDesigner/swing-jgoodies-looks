@@ -73,6 +73,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     @Override
     public void focusGained(FocusEvent e) {
         final JTextComponent c = getComponent();
+        if (c == null) {
+            return;
+        }
         if (c.isEnabled()) {
             setVisible(true);
             setSelectionVisible(true);
@@ -96,6 +99,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
     private void selectAll() {
         final JTextComponent c = getComponent();
+        if (c == null) {
+            return;
+        }
         boolean backward = Boolean.TRUE.equals(c.getClientProperty(Options.INVERT_SELECTION_CLIENT_KEY));
         if (backward) {
             setDot(c.getDocument().getLength());
@@ -112,7 +118,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         super.focusLost(e);
         if (!e.isTemporary()) {
             isKeyboardFocusEvent = true;
-            if (  (getComponent() != null)
+            if (  getComponent() != null
                 && Boolean.TRUE.equals(getComponent().getClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY))) {
                 setDot(0);
             }
@@ -137,7 +143,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         // Windows does.
         if (e.isPopupTrigger()) {
             isKeyboardFocusEvent = false;
-            if (  (getComponent() != null)
+            if (  getComponent() != null
                 && getComponent().isEnabled()
                 && getComponent().isRequestFocusEnabled()) {
                 getComponent().requestFocus();
@@ -197,8 +203,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             int quarterSpan = vis.getExtent() / 4;
             if (r.x < i.left) {
                 vis.setValue(x - quarterSpan);
-            } else if (r.x + r.width > (i.left + vis.getExtent()+1)) {
-                vis.setValue(x - (3 * quarterSpan));
+            } else if (r.x + r.width > i.left + vis.getExtent()+1) {
+                vis.setValue(x - 3 * quarterSpan);
             }
             // If we scroll, our visual location will have changed,
             // but we won't have updated our internal location as
@@ -261,8 +267,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                 boolean secondIsDot = false;
                 if (c.isEditable()) {
                     int dot = c.getCaretPosition();
-                    firstIsDot = (offs0 == dot);
-                    secondIsDot = (offs1 == dot);
+                    firstIsDot = offs0 == dot;
+                    secondIsDot = offs1 == dot;
                 }
                 if (p0.y == p1.y) {
                     // same line, render a rectangle
@@ -284,14 +290,14 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                         p0ToMarginWidth--;
                     }
                     g.fillRect(p0.x, p0.y, p0ToMarginWidth, p0.height);
-                    if ((p0.y + p0.height) != p1.y) {
+                    if (p0.y + p0.height != p1.y) {
                         g.fillRect(alloc.x, p0.y + p0.height, alloc.width, p1.y
                                 - (p0.y + p0.height));
                     }
                     if (secondIsDot && p1.x > alloc.x) {
                         p1.x--;
                     }
-                    g.fillRect(alloc.x, p1.y, (p1.x - alloc.x), p1.height);
+                    g.fillRect(alloc.x, p1.y, p1.x - alloc.x, p1.height);
                 }
             } catch (BadLocationException e) {
                 // can't render
@@ -326,8 +332,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             boolean secondIsDot = false;
             if (c.isEditable()) {
                 int dot = c.getCaretPosition();
-                firstIsDot = (offs0 == dot);
-                secondIsDot = (offs1 == dot);
+                firstIsDot = offs0 == dot;
+                secondIsDot = offs1 == dot;
             }
             if (offs0 == view.getStartOffset() && offs1 == view.getEndOffset()) {
                 // Contained in view, can just use bounds.
@@ -353,7 +359,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                     Shape shape = view.modelToView(offs0,
                             Position.Bias.Forward, offs1,
                             Position.Bias.Backward, bounds);
-                    Rectangle r = (shape instanceof Rectangle)
+                    Rectangle r = shape instanceof Rectangle
                             ? (Rectangle) shape
                             : shape.getBounds();
                     if (firstIsDot && r.width > 0) {
