@@ -89,7 +89,7 @@ public final class PlasticTextAreaUI extends BasicTextAreaUI {
     }
 
 
-    private void updateBackground(JTextComponent c) {
+    private static void updateBackground(JTextComponent c) {
         Color background = c.getBackground();
         if (!(background instanceof UIResource)) {
             return;

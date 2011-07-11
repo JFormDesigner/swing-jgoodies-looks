@@ -89,7 +89,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 		frame = (JInternalFrame) c;
 
 		paletteListener		= new PaletteListener    (this);
-		contentPaneListener = new ContentPaneListener(this);
+		contentPaneListener = new ContentPaneListener();
 		c.addPropertyChangeListener(paletteListener);
 		c.addPropertyChangeListener(contentPaneListener);
 
@@ -211,14 +211,10 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
 	private static final class ContentPaneListener implements PropertyChangeListener {
 
-		private final PlasticInternalFrameUI ui;
-
-		private ContentPaneListener(PlasticInternalFrameUI ui) { this.ui = ui; }
-
 		public void propertyChange(PropertyChangeEvent e) {
 			String name = e.getPropertyName();
 			if (name.equals(JInternalFrame.CONTENT_PANE_PROPERTY)) {
-				ui.stripContentBorder(e.getNewValue());
+			    PlasticInternalFrameUI.stripContentBorder(e.getNewValue());
 			}
 		}
 	}

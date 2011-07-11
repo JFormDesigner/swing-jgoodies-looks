@@ -37,7 +37,7 @@ import java.awt.Insets;
 
 import javax.swing.plaf.basic.BasicOptionPaneUI;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 
 /**
  * Unlike its superclass, this layout uses a minimum button width
@@ -93,7 +93,7 @@ public final class ExtButtonAreaLayout
                         xLocation = 0;
                         xOffset =
                             (container.getSize().width
-                                - (maxWidth * numChildren))
+                                - maxWidth * numChildren)
                                 / (numChildren - 1)
                                 + maxWidth;
                     } else {
@@ -104,7 +104,7 @@ public final class ExtButtonAreaLayout
                 boolean ltr = container.getComponentOrientation()
                                        .isLeftToRight();
                 for (counter = 0; counter < numChildren; counter++) {
-                    int index = (ltr)
+                    int index = ltr
                               ? counter
                               : numChildren - counter - 1;
                     children[index].setBounds(
@@ -121,7 +121,7 @@ public final class ExtButtonAreaLayout
                     sizes[counter] = children[counter].getPreferredSize();
                     totalWidth += sizes[counter].width;
                 }
-                totalWidth += ((numChildren - 1) * padding);
+                totalWidth += (numChildren - 1) * padding;
 
                 boolean cc = getCentersChildren();
                 int xOffset;
@@ -146,7 +146,7 @@ public final class ExtButtonAreaLayout
                 boolean ltr = container.getComponentOrientation()
                                        .isLeftToRight();
                 for (counter = 0; counter < numChildren; counter++) {
-                    int index = (ltr)
+                    int index = ltr
                               ? counter
                               : numChildren - counter - 1;
                     children[index].setBounds(
@@ -191,7 +191,7 @@ public final class ExtButtonAreaLayout
                     height = Math.max(height, aSize.height);
                     totalWidth += aSize.width;
                 }
-                totalWidth += ((numChildren - 1) * padding);
+                totalWidth += (numChildren - 1) * padding;
                 return new Dimension(totalWidth, extraHeight + height);
             }
         }
@@ -215,8 +215,8 @@ public final class ExtButtonAreaLayout
      *
      * @return the minimum button width
      */
-    private int getMinimumButtonWidth() {
-        return LookUtils.IS_LOW_RESOLUTION ? 75 : 100;
+    private static int getMinimumButtonWidth() {
+        return SystemUtils.IS_LOW_RESOLUTION ? 75 : 100;
     }
 
 }

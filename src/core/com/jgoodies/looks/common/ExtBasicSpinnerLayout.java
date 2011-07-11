@@ -79,8 +79,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    private Dimension preferredSize(Component c) {
-        return (c == null) ? ZERO_SIZE : c.getPreferredSize();
+    private static Dimension preferredSize(Component c) {
+        return c == null ? ZERO_SIZE : c.getPreferredSize();
     }
 
 
@@ -103,7 +103,7 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    private void setBounds(Component c, int x, int y, int width, int height) {
+    private static void setBounds(Component c, int x, int y, int width, int height) {
         if (c != null) {
             c.setBounds(x, y, width, height);
         }
@@ -148,7 +148,7 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
         }
 
         int nextY = buttonInsets.top;
-        int nextHeight = (height / 2) + (height % 2) - nextY;
+        int nextHeight = height / 2 + height % 2 - nextY;
         int previousY = buttonInsets.top + nextHeight;
         int previousHeight = height - previousY - buttonInsets.bottom;
 

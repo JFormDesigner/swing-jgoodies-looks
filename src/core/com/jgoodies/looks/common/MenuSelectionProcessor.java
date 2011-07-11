@@ -115,7 +115,7 @@ public final class MenuSelectionProcessor implements KeyEventPostProcessor {
     }
 
 
-    private JMenuBar getMenuBar(KeyEvent ev) {
+    private static JMenuBar getMenuBar(KeyEvent ev) {
         JRootPane root = SwingUtilities.getRootPane(ev.getComponent());
         Window winAncestor = root == null ? null : SwingUtilities.getWindowAncestor(root);
         JMenuBar mbar = root != null ? root.getJMenuBar() : null;

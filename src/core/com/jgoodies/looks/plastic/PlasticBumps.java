@@ -93,8 +93,8 @@ final class PlasticBumps implements Icon {
 
 		buffer = getBuffer(gc, topColor, shadowColor, backColor);
 
-		int bufferWidth  = buffer.getImageSize().width;
-		int bufferHeight = buffer.getImageSize().height;
+		int bufferWidth  = BumpBuffer.getImageSize().width;
+		int bufferHeight = BumpBuffer.getImageSize().height;
 		int iconWidth = getIconWidth();
 		int iconHeight = getIconHeight();
 		int x2 = x + iconWidth;

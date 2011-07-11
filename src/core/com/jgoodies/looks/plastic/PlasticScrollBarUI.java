@@ -280,9 +280,9 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 	}
 
 
-	// Accessing Special Client Properties **********************************************
+	// Accessing Special Client Properties ************************************
 
-	private boolean useNarrowBumps() {
+	private static boolean useNarrowBumps() {
 		Object value = UIManager.get(MAX_BUMPS_WIDTH_KEY);
 		return value != null && value instanceof Integer;
 	}

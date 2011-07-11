@@ -175,7 +175,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 
     protected static void installDefaultThemes() {}
 
-    private ColorUIResource getToggleButtonCheckColor() {
+    private static ColorUIResource getToggleButtonCheckColor() {
         return getPlasticTheme().getToggleButtonCheckColor();
     }
 

@@ -476,7 +476,7 @@ final class PlasticBorders {
             }
 		}
 
-		private void paintMaximizedBorder(Graphics g, int x, int y, int w, int h) {
+		private static void paintMaximizedBorder(Graphics g, int x, int y, int w, int h) {
             g.translate(x, y);
             g.setColor(PlasticLookAndFeel.getControlHighlight());
             g.drawLine(0, 0, w - 2, 0);

@@ -125,7 +125,7 @@ public final class ExtPasswordView extends PasswordView {
     }
 
 
-    private boolean canOverrideEchoChar(JPasswordField field) {
+    private static boolean canOverrideEchoChar(JPasswordField field) {
         return field.echoCharIsSet() && field.getEchoChar() == '*';
     }
 
@@ -136,7 +136,7 @@ public final class ExtPasswordView extends PasswordView {
      * @param field        the JPasswordField to change
      * @param newEchoChar  the echo char that shall be set
      */
-    private void setFieldEchoChar(JPasswordField field, char newEchoChar) {
+    private static void setFieldEchoChar(JPasswordField field, char newEchoChar) {
         char oldEchoChar = field.getEchoChar();
         if (oldEchoChar == newEchoChar) {
             return;

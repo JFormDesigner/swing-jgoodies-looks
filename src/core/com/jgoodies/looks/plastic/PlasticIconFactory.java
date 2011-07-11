@@ -142,7 +142,7 @@ final class PlasticIconFactory {
 		    }
  		}
 
- 		private void drawDot(Graphics g, int x, int y) {
+ 		private static void drawDot(Graphics g, int x, int y) {
 	 		g.translate(x, y);
 			g.drawLine(5, 4, 8, 4);
 			g.fillRect(4, 5, 6, 4);
@@ -196,7 +196,7 @@ final class PlasticIconFactory {
 			g.setColor(Color.GRAY);
 			g.drawRect(x, y, SIZE - 1, SIZE - 1);
 			g.setColor(Color.BLACK);
-			g.drawLine(x + 2, y + HALF_SIZE, x + (SIZE - 3), y + HALF_SIZE);
+			g.drawLine(x + 2, y + HALF_SIZE, x + SIZE - 3, y + HALF_SIZE);
 		}
 
 		public int getIconWidth()  { return SIZE; }
@@ -211,7 +211,7 @@ final class PlasticIconFactory {
 		@Override
         public void paintIcon(Component c, Graphics g, int x, int y) {
 			super.paintIcon(c, g, x, y);
-			g.drawLine(x + HALF_SIZE, y + 2, x + HALF_SIZE, y + (SIZE - 3));
+			g.drawLine(x + HALF_SIZE, y + 2, x + HALF_SIZE, y + SIZE - 3);
 		}
     }
 
@@ -231,9 +231,9 @@ final class PlasticIconFactory {
 						? MetalLookAndFeel.getControlInfo()
 						: MetalLookAndFeel.getControlShadow() );
 			g.drawLine( 0, 0, iconWidth - 1, 0 );
-			g.drawLine( 1, 1, 1 + (iconWidth - 3), 1 );
-			g.drawLine( 2, 2, 2 + (iconWidth - 5), 2 );
-			g.drawLine( 3, 3, 3 + (iconWidth - 7), 3 );
+			g.drawLine( 1, 1, 1 + iconWidth - 3, 1 );
+			g.drawLine( 2, 2, 2 + iconWidth - 5, 2 );
+			g.drawLine( 3, 3, 3 + iconWidth - 7, 3 );
 
 /*
 		int startY = (((h + 1) - arrowHeight) / 2) + arrowHeight - 1;
