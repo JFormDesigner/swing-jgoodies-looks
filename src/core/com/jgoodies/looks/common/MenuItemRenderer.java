@@ -370,7 +370,7 @@ public class MenuItemRenderer {
 		}
 
 		// Draw the Accelerator Text
-		if (acceleratorText != null && !acceleratorText.equals("")) {
+		if (!acceleratorText.equals("")) {
 
 			//Get the maxAccWidth from the parent to calculate the offset.
 			int accOffset = 0;

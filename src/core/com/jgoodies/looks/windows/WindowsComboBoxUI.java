@@ -236,7 +236,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
         // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
-        size.height = (LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
+        size.height = LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED
            ? textFieldSize.height
            : Math.max(textFieldSize.height, size.height);
 
@@ -281,7 +281,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         }
         Border oldBorder = null;
         Rectangle originalBounds = new Rectangle(bounds);
-        if ((c instanceof JComponent) && !tableCellEditor) {
+        if (c instanceof JComponent && !tableCellEditor) {
             JComponent component = (JComponent) c;
             if (isRendererBorderRemovable(component)) {
                 oldBorder = component.getBorder();
@@ -317,7 +317,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         boolean shouldValidate = c instanceof JPanel;
 
         Boolean oldOpaque = null;
-        if (isVistaReadOnlyCombo && (c instanceof JComponent) && !(c instanceof DefaultListCellRenderer)) {
+        if (isVistaReadOnlyCombo && c instanceof JComponent && !(c instanceof DefaultListCellRenderer)) {
             oldOpaque = Boolean.valueOf(c.isOpaque());
             ((JComponent) c).setOpaque(false);
         }
@@ -328,7 +328,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
             g.setColor(comboBox.getForeground());
             if (isVistaReadOnlyCombo) {
                 int width = originalBounds.width - 2;
-                if ((width % 2) == 0) {
+                if (width % 2 == 0) {
                     width += 1;
                 }
                 WindowsUtils.drawRoundedDashedRect(g,
@@ -423,7 +423,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      *
      * @return the width of the arrow button in editable state
      */
-    private int getEditableButtonWidth() {
+    private static int getEditableButtonWidth() {
         return UIManager.getInt("ScrollBar.width");
     }
 

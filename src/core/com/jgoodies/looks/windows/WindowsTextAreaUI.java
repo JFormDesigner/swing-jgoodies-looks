@@ -86,7 +86,7 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
     }
 
 
-    private void updateBackground(JTextComponent c) {
+    private static void updateBackground(JTextComponent c) {
         Color background = c.getBackground();
         if (!(background instanceof UIResource)) {
             return;

@@ -188,7 +188,7 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
 
     // Helper Code **********************************************************
 
-    private boolean isSubMenu(JMenuItem aMenuItem) {
+    private static boolean isSubMenu(JMenuItem aMenuItem) {
         return !((JMenu) aMenuItem).isTopLevelMenu();
     }
 

@@ -75,7 +75,7 @@ public final class FontTest {
     /**
      * Locates the frame on the screen center.
      */
-    private void locateOnScreen(Frame frame) {
+    private static void locateOnScreen(Frame frame) {
         Dimension paneSize   = frame.getSize();
         Dimension screenSize = frame.getToolkit().getScreenSize();
         frame.setLocation(
@@ -86,7 +86,7 @@ public final class FontTest {
 
     // Configuration **********************************************************
 
-    private String readConfiguration() {
+    private static String readConfiguration() {
         StringBuffer buffer = new StringBuffer();
 
         buffer.append("Please copy the information below to your clipboard");
@@ -137,7 +137,7 @@ public final class FontTest {
     }
 
 
-    private void addSystemProperties(StringBuffer buffer, String description, String[] keys) {
+    private static void addSystemProperties(StringBuffer buffer, String description, String[] keys) {
         buffer.append("\n\n");
         buffer.append(description);
         for (String key : keys) {
@@ -150,7 +150,7 @@ public final class FontTest {
     }
 
 
-    private void addDesktopProperties(StringBuffer buffer, String description, String[] keys) {
+    private static void addDesktopProperties(StringBuffer buffer, String description, String[] keys) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
         buffer.append(description);
@@ -172,7 +172,7 @@ public final class FontTest {
     }
 
 
-    private void addInternationalizationProperties(StringBuffer buffer) {
+    private static void addInternationalizationProperties(StringBuffer buffer) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
         buffer.append("Internationalization:");
@@ -208,7 +208,7 @@ public final class FontTest {
     }
 
 
-    private void addFontSet(StringBuffer buffer, String description, FontSet fontSet) {
+    private static void addFontSet(StringBuffer buffer, String description, FontSet fontSet) {
         buffer.append("\n\n");
         buffer.append(description);
         if (fontSet == null) {
@@ -230,7 +230,7 @@ public final class FontTest {
     }
 
 
-    private void addWindowsSettings(StringBuffer buffer, String description) {
+    private static void addWindowsSettings(StringBuffer buffer, String description) {
         buffer.append("\n\n");
         buffer.append(description);
         buffer.append("\n    Modern Windows=");
@@ -244,7 +244,7 @@ public final class FontTest {
     }
 
 
-    private void addAWTProperties(StringBuffer buffer, String description) {
+    private static void addAWTProperties(StringBuffer buffer, String description) {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         buffer.append("\n\n");
         buffer.append(description);
@@ -261,11 +261,11 @@ public final class FontTest {
     }
 
 
-    private String encodeFont(Font font) {
+    private static String encodeFont(Font font) {
         StringBuffer buffer = new StringBuffer(font.getName());
         buffer.append('-');
         String style = font.isBold()
-            ? (font.isItalic() ? "bolditalic" : "bold")
+            ? font.isItalic() ? "bolditalic" : "bold"
             : font.isItalic() ? "italic" : "plain";
         buffer.append(style);
         buffer.append('-');
@@ -278,7 +278,7 @@ public final class FontTest {
     }
 
 
-    private FontSet getWindowsFontSet() {
+    private static FontSet getWindowsFontSet() {
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
             return WindowsLookAndFeel.getFontPolicy().getFontSet("Windows", UIManager.getDefaults());
@@ -288,7 +288,7 @@ public final class FontTest {
     }
 
 
-    private FontSet getPlasticFontSet() {
+    private static FontSet getPlasticFontSet() {
         try {
             UIManager.setLookAndFeel(new PlasticXPLookAndFeel());
             return PlasticLookAndFeel.getFontPolicy().getFontSet("Plastic", UIManager.getDefaults());

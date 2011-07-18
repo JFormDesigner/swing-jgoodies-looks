@@ -496,7 +496,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     /**
      * Initializes component defaults required in classic mode only.
      */
-    private void initComponentDefaultsClassic(UIDefaults table) {
+    private static void initComponentDefaultsClassic(UIDefaults table) {
         Object checkBoxIcon = new SimpleProxyLazyValue(
                 "com.jgoodies.looks.windows.WindowsLookAndFeel",
                 "getCheckBoxIcon");
@@ -526,14 +526,14 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     /**
      * Looks up the correct control font and sets it for all controls.
      */
-    private void initFontDefaults(UIDefaults table) {
+    private static void initFontDefaults(UIDefaults table) {
         FontPolicy fontChoicePolicy = getFontPolicy();
         FontSet fontSet = fontChoicePolicy.getFontSet("Windows", table);
         initFontDefaults(table, fontSet);
     }
 
 
-    private void initMenuItemDefaults(UIDefaults table, MicroLayout microLayout) {
+    private static void initMenuItemDefaults(UIDefaults table, MicroLayout microLayout) {
         Object menuMargin     = microLayout.getMenuMargin();
         Object menuItemMargin = microLayout.getMenuItemMargin();
         Icon menuItemCheckIcon = new MinimumSizedIcon();

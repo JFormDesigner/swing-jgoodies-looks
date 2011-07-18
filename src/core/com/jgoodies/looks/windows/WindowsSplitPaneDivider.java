@@ -308,15 +308,15 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
         return b;
     }
 
-    int getBlockSize() {
+    static int getBlockSize() {
         return EXT_BLOCKSIZE;
     }
 
-    int getOneTouchOffset() {
+    static int getOneTouchOffset() {
         return EXT_ONE_TOUCH_OFFSET;
     }
 
-    int getOneTouchSize() {
+    static int getOneTouchSize() {
         return EXT_ONE_TOUCH_SIZE;
     }
 

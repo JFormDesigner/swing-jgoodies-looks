@@ -183,7 +183,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
     /**
      * Sets an empty border with consistent insets.
      */
-    private void configureEditorBorder(JComponent editor) {
+    private static void configureEditorBorder(JComponent editor) {
         if (editor instanceof JSpinner.DefaultEditor) {
             JSpinner.DefaultEditor defaultEditor = (JSpinner.DefaultEditor) editor;
             JTextField editorField = defaultEditor.getTextField();

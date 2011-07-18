@@ -64,7 +64,7 @@ public final class WindowsScrollPaneUI extends com.sun.java.swing.plaf.windows.W
         installEtchedBorder(scrollPane);
     }
 
-    protected void installEtchedBorder(JScrollPane scrollPane) {
+    private static void installEtchedBorder(JScrollPane scrollPane) {
         Object value = scrollPane.getClientProperty(Options.IS_ETCHED_KEY);
         boolean hasEtchedBorder = Boolean.TRUE.equals(value);
         LookAndFeel.installBorder(scrollPane,

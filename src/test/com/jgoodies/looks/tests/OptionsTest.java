@@ -49,7 +49,7 @@ public final class OptionsTest extends TestCase {
     /**
      * Checks that tab icons can be enabled and disabled via the Options.
      */
-    public void testTabIconsEnablement() {
+    public static void testTabIconsEnablement() {
         Boolean systemDefault = LookUtils.getBooleanSystemProperty(
                 Options.TAB_ICONS_ENABLED_KEY,
                 "Test: tab icons");

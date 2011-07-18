@@ -49,7 +49,7 @@ public final class FontsTest extends TestCase {
      * Checks the localization display test for a bunch of combinations
      * of font and locale.
      */
-    public void testCanDisplayLocalizedText() {
+    public static void testCanDisplayLocalizedText() {
         Font tahoma = new Font("Tahoma", Font.PLAIN, 12);
         if (tahoma.getName().equals(tahoma.getFontName())) {
             canDisplayLocalizedText(tahoma, Locale.ENGLISH, true);
@@ -77,7 +77,7 @@ public final class FontsTest extends TestCase {
     }
 
 
-    private void canDisplayLocalizedText(Font font, Locale locale, boolean expectedResult) {
+    private static void canDisplayLocalizedText(Font font, Locale locale, boolean expectedResult) {
         boolean result = Boolean.TRUE.equals(Fonts.canDisplayLocalizedText(font, locale));
         assertEquals("Failed display test. Font=" + font + "; Locale=" + locale,
                 expectedResult,

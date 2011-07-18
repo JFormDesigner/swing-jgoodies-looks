@@ -85,7 +85,7 @@ public final class PlasticScrollPaneUI extends MetalScrollPaneUI {
         super.uninstallListeners(c);
     }
 
-    protected void installEtchedBorder(JScrollPane scrollPane) {
+    private static void installEtchedBorder(JScrollPane scrollPane) {
         Object value = scrollPane.getClientProperty(Options.IS_ETCHED_KEY);
         boolean hasEtchedBorder = Boolean.TRUE.equals(value);
         LookAndFeel.installBorder(scrollPane,
