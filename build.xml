@@ -118,7 +118,8 @@
 			target       ="${build.compile.target}"
 			verbose      ="${build.compile.verbose}"
 			bootclasspath="${build.boot.classpath}" 
-		    classpathref ="classpath.core" />
+		    classpathref ="classpath.core" 
+			includeAntRuntime="false" />
 
 		<copy toDir="${build.core.dir}" >
 			<fileset dir="${src.core.dir}" 
@@ -148,7 +149,8 @@
             target       ="${build.compile.target}"
             verbose      ="${build.compile.verbose}"
             bootclasspath="${build.boot.classpath}"
-            classpathref ="classpath.tests" />
+            classpathref ="classpath.tests" 
+			includeAntRuntime="false" />
     </target>   
     
     	
