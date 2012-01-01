@@ -4,6 +4,16 @@
                           Release Notes
                         
 
+CHANGES IN 2.5.0 --------------------------------------------------------
+
+    o Requires Java 6 and JGoodies Common 1.3.
+    o Removed deprecated code:
+      - LookUtils#IS_LAF_WINDOWS_XP_ENABLED
+      - LookUtils#IS_LOW_RESOLUTION
+    o Generified several members.
+    o Removed code that is obsolete in Java 6.
+    
+                        
 CHANGES IN 2.4.2 --------------------------------------------------------
 
 BUG FIXES
