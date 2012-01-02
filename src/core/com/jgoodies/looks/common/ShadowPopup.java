@@ -30,12 +30,28 @@
 
 package com.jgoodies.looks.common;
 
-import java.awt.*;
+import java.awt.AWTException;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Panel;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Window;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.*;
+import javax.swing.JApplet;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JInternalFrame;
+import javax.swing.JRootPane;
+import javax.swing.JWindow;
+import javax.swing.Popup;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 
 /**
@@ -60,7 +76,7 @@ public final class ShadowPopup extends Popup {
     /**
      * The cache to use for ShadowPopups.
      */
-    private static List cache;
+    private static List<ShadowPopup> cache;
 
     /**
      * The singleton instance used to draw all borders.
@@ -122,7 +138,7 @@ public final class ShadowPopup extends Popup {
         ShadowPopup result;
         synchronized (ShadowPopup.class) {
             if (cache == null) {
-                cache = new ArrayList(MAX_CACHE_SIZE);
+                cache = new ArrayList<ShadowPopup>(MAX_CACHE_SIZE);
             }
             if (cache.size() > 0) {
                 result = (ShadowPopup) cache.remove(0);

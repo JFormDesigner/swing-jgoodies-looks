@@ -670,9 +670,12 @@ public class MenuItemRenderer {
      * Used as a placeholder if icons are disabled.
      */
     private static class NullIcon implements Icon {
-    	public int getIconWidth()	{ return 0; }
-    	public int getIconHeight() { return 0; }
-    	public void paintIcon(Component c, Graphics g, int x, int y) {
+    	@Override
+		public int getIconWidth()	{ return 0; }
+    	@Override
+		public int getIconHeight() { return 0; }
+    	@Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
             // The NullIcon doesn't paint anything.
         }
     }

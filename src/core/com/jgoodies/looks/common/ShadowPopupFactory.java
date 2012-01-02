@@ -36,7 +36,7 @@ import javax.swing.LookAndFeel;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.Options;
 
 
@@ -113,7 +113,7 @@ public final class ShadowPopupFactory extends PopupFactory {
      * @see #uninstall()
      */
     public static void install() {
-        if (LookUtils.IS_OS_MAC) {
+        if (SystemUtils.IS_OS_MAC) {
             return;
         }
 

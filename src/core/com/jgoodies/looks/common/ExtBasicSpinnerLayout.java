@@ -57,7 +57,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     private Component editor         = null;
 
 
-    public void addLayoutComponent(String name, Component c) {
+    @Override
+	public void addLayoutComponent(String name, Component c) {
         if ("Next".equals(name)) {
             nextButton = c;
         } else if ("Previous".equals(name)) {
@@ -68,7 +69,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    public void removeLayoutComponent(Component c) {
+    @Override
+	public void removeLayoutComponent(Component c) {
         if (c == nextButton) {
             c = null;
         } else if (c == previousButton) {
@@ -84,7 +86,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    public Dimension preferredLayoutSize(Container parent) {
+    @Override
+	public Dimension preferredLayoutSize(Container parent) {
         Dimension nextD = preferredSize(nextButton);
         Dimension previousD = preferredSize(previousButton);
         Dimension editorD = preferredSize(editor);
@@ -98,7 +101,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    public Dimension minimumLayoutSize(Container parent) {
+    @Override
+	public Dimension minimumLayoutSize(Container parent) {
         return preferredLayoutSize(parent);
     }
 
@@ -110,7 +114,8 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
     }
 
 
-    public void layoutContainer(Container parent) {
+    @Override
+	public void layoutContainer(Container parent) {
         int width = parent.getWidth();
         int height = parent.getHeight();
 

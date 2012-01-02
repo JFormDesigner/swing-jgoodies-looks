@@ -50,7 +50,8 @@ public final class MenuSelectionProcessor implements KeyEventPostProcessor {
     private boolean altKeyPressed = false;
     private boolean menuCanceledOnPress = false;
 
-    public boolean postProcessKeyEvent(KeyEvent ev) {
+    @Override
+	public boolean postProcessKeyEvent(KeyEvent ev) {
         if (ev.isConsumed()) {
             return false;
         }

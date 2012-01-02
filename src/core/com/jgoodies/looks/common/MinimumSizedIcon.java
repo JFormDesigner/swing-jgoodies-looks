@@ -71,10 +71,13 @@ public class MinimumSizedIcon implements Icon {
 	}
 
 
+	@Override
 	public int getIconHeight() {  return height;	}
+	@Override
 	public int getIconWidth()	{  return width;	}
 
 
+	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		if (icon != null) {
             icon.paintIcon(c, g, x + xOffset, y + yOffset);
