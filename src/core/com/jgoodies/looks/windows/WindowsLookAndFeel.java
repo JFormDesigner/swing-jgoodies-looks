@@ -35,14 +35,26 @@ import java.awt.Font;
 import java.awt.Insets;
 import java.lang.reflect.Method;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.LookAndFeel;
+import javax.swing.UIDefaults;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.IconUIResource;
 import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 
-import com.jgoodies.looks.*;
+import com.jgoodies.common.base.SystemUtils;
+import com.jgoodies.looks.FontPolicies;
+import com.jgoodies.looks.FontPolicy;
+import com.jgoodies.looks.FontSet;
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.MicroLayout;
+import com.jgoodies.looks.MicroLayoutPolicies;
+import com.jgoodies.looks.MicroLayoutPolicy;
+import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.RGBGrayFilter;
 import com.jgoodies.looks.common.ShadowPopupFactory;
@@ -277,8 +289,8 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "SpinnerUI",             windowsPrefix + "SpinnerUI"};
 
         // Aligned menu items
-        if (  !LookUtils.IS_OS_WINDOWS_6_OR_LATER
-           || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (  !SystemUtils.IS_OS_WINDOWS_6_OR_LATER
+           || !SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             uiDefaults = append(uiDefaults,
             "MenuItemUI",            windowsPrefix + "MenuItemUI");
             uiDefaults = append(uiDefaults,
@@ -290,9 +302,9 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "PopupMenuSeparatorUI",  commonPrefix + "PopupMenuSeparatorUI");
         }
 
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             // Aligned menu items
-            if (!LookUtils.IS_OS_WINDOWS_6_OR_LATER) {
+            if (!SystemUtils.IS_OS_WINDOWS_6_OR_LATER) {
                 uiDefaults = append(uiDefaults,
                 "MenuUI",             windowsPrefix + "XPMenuUI");
             }
@@ -329,9 +341,9 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     protected void initComponentDefaults(UIDefaults table) {
         super.initComponentDefaults(table);
 
-        final boolean isXP = LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
+        final boolean isXP = SystemUtils.IS_LAF_WINDOWS_XP_ENABLED;
         final boolean isClassic = !isXP;
-        final boolean isVista = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
+        final boolean isVista = SystemUtils.IS_OS_WINDOWS_6_OR_LATER;
 
         initFontDefaults(table);
 
@@ -339,7 +351,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             initComponentDefaultsClassic(table);
         }
         MicroLayout microLayout = getMicroLayoutPolicy().getMicroLayout("Windows", table);
-        if (!isVista || !LookUtils.IS_JAVA_6_OR_LATER || !LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (!isVista || !SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             initMenuItemDefaults(table, microLayout);
         }
 
@@ -460,6 +472,8 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "RadioButton.border",         marginBorder,
             "RadioButton.margin",         checkBoxMargin,
 
+            "Spinner.border",             table.get("TextField.border"),
+            
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
             "TextArea.margin",            wrappedTextInsets, // 1.4.1 Bug
             "TextArea.disabledBackground", disabledTextBackground,
@@ -477,19 +491,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "Tree.selectionBorderColor",  controlColor, // 1.4.1 Bug; active
             "Tree.rowHeight",             rowHeight, // 1.4.1 Bug
         };
-        if (LookUtils.IS_JAVA_5) {
-            defaults = append(defaults, new Object[] {
-            "Tree.openIcon",              isXP ? makeIcon(getClass(), "icons/xp/TreeOpen.png")
-                                               : makeIcon(getClass(), "icons/TreeOpen.gif"),
-            "Tree.closedIcon",            isXP ? makeIcon(getClass(), "icons/xp/TreeClosed.png")
-                                               : makeIcon(getClass(), "icons/TreeClosed.gif")
-            });
-        }
-        if (LookUtils.IS_JAVA_6_OR_LATER) {
-            defaults = append(defaults, new Object[] {
-            "Spinner.border",             table.get("TextField.border")
-            });
-        }
         table.putDefaults(defaults);
     }
 
@@ -647,22 +648,6 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
     }
 
 
-    /**
-     * Appends the key and value to the given source array and returns
-     * a copy that has the two new elements at its end.
-     *
-     * @return an array with the key and value appended
-     */
-    private static Object[] append(Object[] source, Object[] keysAndValues) {
-        int length = source.length;
-        Object[] destination = new Object[length + keysAndValues.length];
-        System.arraycopy(source, 0, destination, 0, length);
-        for (int i = 0; i < keysAndValues.length; i++) {
-            destination[length + i] = keysAndValues[i];
-        }
-        return destination;
-    }
-
     // Helper Class ***********************************************************
 
     /**
@@ -701,7 +686,8 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
          * @param table  a {@code UIDefaults} table
          * @return the created {@code Object}
          */
-        public Object createValue(UIDefaults table) {
+        @Override
+		public Object createValue(UIDefaults table) {
             Object instance = null;
             try {
                 Class c;
