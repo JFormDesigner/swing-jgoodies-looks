@@ -32,7 +32,6 @@ package com.jgoodies.looks;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Toolkit;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,26 +74,6 @@ public final class LookUtils extends SystemUtils {
      */
     public static final boolean IS_OS_WINDOWS_NT =
         startsWith(OS_NAME, "Windows NT");
-
-    /**
-     * True if the Windows XP Look&amp;Feel is enabled.
-     *
-     * @deprecated Replaced by {@link SystemUtils.IS_LAF_WINDOWS_XP_ENABLED}
-     */
-    @Deprecated
-    public static final boolean IS_LAF_WINDOWS_XP_ENABLED =
-        SystemUtils.IS_LAF_WINDOWS_XP_ENABLED;
-
-    /**
-     * True if if the screen resolution is smaller than 120 dpi.
-     *
-     * @see Toolkit#getScreenResolution()
-     *
-     * @deprecated Replaced by {@link SystemUtils.IS_LOW_RESOLUTION}
-     */
-    @Deprecated
-    public static final boolean IS_LOW_RESOLUTION =
-        SystemUtils.IS_LOW_RESOLUTION;
 
     private static boolean loggingEnabled = true;
 
