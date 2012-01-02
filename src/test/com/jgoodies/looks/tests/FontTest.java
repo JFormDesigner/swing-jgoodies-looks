@@ -7,6 +7,7 @@ import java.util.Locale;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.FontSet;
 import com.jgoodies.looks.Fonts;
 import com.jgoodies.looks.LookUtils;
@@ -104,7 +105,7 @@ public final class FontTest {
                 new String[]{
                     "os.name",
                     "os.version"});
-        if (LookUtils.IS_OS_WINDOWS) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             addWindowsSettings(buffer, "Windows Settings:");
         }
 
@@ -236,11 +237,11 @@ public final class FontTest {
         buffer.append("\n    Modern Windows=");
         buffer.append(LookUtils.IS_OS_WINDOWS_MODERN);
         buffer.append("\n    Windows XP=");
-        buffer.append(LookUtils.IS_OS_WINDOWS_XP);
+        buffer.append(SystemUtils.IS_OS_WINDOWS_XP);
         buffer.append("\n    Windows 6 or later=");
-        buffer.append(LookUtils.IS_OS_WINDOWS_6_OR_LATER);
+        buffer.append(SystemUtils.IS_OS_WINDOWS_6_OR_LATER);
         buffer.append("\n    Windows L&f XP Mode=");
-        buffer.append(LookUtils.IS_LAF_WINDOWS_XP_ENABLED);
+        buffer.append(SystemUtils.IS_LAF_WINDOWS_XP_ENABLED);
     }
 
 
@@ -257,7 +258,7 @@ public final class FontTest {
         buffer.append("\n    screen.resolution=");
         buffer.append(toolkit.getScreenResolution());
         buffer.append("  ");
-        buffer.append(LookUtils.IS_LOW_RESOLUTION ? "(low)" : "(high)");
+        buffer.append(SystemUtils.IS_LOW_RESOLUTION ? "(low)" : "(high)");
     }
 
 
