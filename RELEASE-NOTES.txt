@@ -1,6 +1,5 @@
 
                          JGoodies Looks
-                          Version @version.name@
                           Release Notes
                         
 
@@ -12,6 +11,7 @@ CHANGES IN 2.5.0 --------------------------------------------------------
       - LookUtils#IS_LOW_RESOLUTION
     o Generified several members.
     o Removed code that is obsolete in Java 6.
+    o Simplified the UI class and component setup for Java 6.
     
                         
 CHANGES IN 2.4.2 --------------------------------------------------------
