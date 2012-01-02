@@ -92,7 +92,8 @@ public final class WindowsPopupMenuUI extends com.sun.java.swing.plaf.windows.Wi
 
     private final class BorderStyleChangeHandler implements PropertyChangeListener {
 
-        public void propertyChange(PropertyChangeEvent e) {
+        @Override
+		public void propertyChange(PropertyChangeEvent e) {
             installBorder();
         }
 

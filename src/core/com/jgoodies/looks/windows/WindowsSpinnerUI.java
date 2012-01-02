@@ -38,7 +38,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.common.ExtBasicSpinnerLayout;
 
 /**
@@ -72,7 +72,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      */
     @Override
     protected Component createPreviousButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             return super.createPreviousButton();
         }
 
@@ -96,7 +96,7 @@ public final class WindowsSpinnerUI extends com.sun.java.swing.plaf.windows.Wind
      */
     @Override
     protected Component createNextButton() {
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             return super.createNextButton();
         }
 

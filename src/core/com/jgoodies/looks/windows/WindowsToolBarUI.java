@@ -86,7 +86,8 @@ public final class WindowsToolBarUI extends MetalToolBarUI {
     private PropertyChangeListener createBorderStyleListener() {
         return new PropertyChangeListener() {
 
-            public void propertyChange(PropertyChangeEvent e) {
+            @Override
+			public void propertyChange(PropertyChangeEvent e) {
                 String prop = e.getPropertyName();
                 if (prop.equals(Options.HEADER_STYLE_KEY)
                     || prop.equals(WindowsLookAndFeel.BORDER_STYLE_KEY)) {

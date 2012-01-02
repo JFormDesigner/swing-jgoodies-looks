@@ -34,7 +34,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
-import javax.swing.*;
+import javax.swing.ButtonModel;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 
@@ -114,20 +119,19 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
                 aCheckIcon,
                 anArrowIcon,
                 textIconGap);
-        } else {
-            Dimension size =
-                super.getPreferredMenuItemSize(
-                    c,
-                    aCheckIcon,
-                    anArrowIcon,
-                    textIconGap);
-            int width = size.width;
-            int height = size.height;
-            if (height % 2 == 1) {
-                height--;
-            }
-            return new Dimension(width, height);
+        } 
+        Dimension size =
+            super.getPreferredMenuItemSize(
+                c,
+                aCheckIcon,
+                anArrowIcon,
+                textIconGap);
+        int width = size.width;
+        int height = size.height;
+        if (height % 2 == 1) {
+            height--;
         }
+        return new Dimension(width, height);
     }
 
     @Override

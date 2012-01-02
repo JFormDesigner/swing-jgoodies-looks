@@ -62,7 +62,8 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
      * Instantiate it only within subclasses of MetalSplitPaneDivider.
      */
     public final class ExtWindowsDividerLayout implements LayoutManager {
-        public void layoutContainer(Container c) {
+        @Override
+		public void layoutContainer(Container c) {
             JButton theLeftButton = getLeftButtonFromSuper();
             JButton theRightButton = getRightButtonFromSuper();
             JSplitPane theSplitPane = getSplitPaneFromSuper();
@@ -110,16 +111,20 @@ final class WindowsSplitPaneDivider extends BasicSplitPaneDivider {
             }
         }
 
-        public Dimension minimumLayoutSize(Container c) {
+        @Override
+		public Dimension minimumLayoutSize(Container c) {
             return new Dimension(0, 0);
         }
-        public Dimension preferredLayoutSize(Container c) {
+        @Override
+		public Dimension preferredLayoutSize(Container c) {
             return new Dimension(0, 0);
         }
-        public void removeLayoutComponent(Component c) {
+        @Override
+		public void removeLayoutComponent(Component c) {
             // Unused method; implements LayoutManager.
         }
-        public void addLayoutComponent(String string, Component c) {
+        @Override
+		public void addLayoutComponent(String string, Component c) {
             // Unused method; implements LayoutManager.
         }
     }

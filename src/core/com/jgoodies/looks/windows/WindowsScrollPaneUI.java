@@ -92,7 +92,8 @@ public final class WindowsScrollPaneUI extends com.sun.java.swing.plaf.windows.W
 
     private class BorderStyleChangeHandler implements PropertyChangeListener {
 
-        public void propertyChange(PropertyChangeEvent evt) {
+        @Override
+		public void propertyChange(PropertyChangeEvent evt) {
             JScrollPane scrollPane = (JScrollPane) evt.getSource();
             installEtchedBorder(scrollPane);
         }
