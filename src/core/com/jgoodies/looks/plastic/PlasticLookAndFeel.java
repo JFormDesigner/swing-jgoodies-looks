@@ -44,13 +44,24 @@ import javax.swing.UIDefaults;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.plaf.*;
+import javax.swing.plaf.BorderUIResource;
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.plaf.IconUIResource;
+import javax.swing.plaf.InsetsUIResource;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
 import com.jgoodies.common.base.Preconditions;
-import com.jgoodies.looks.*;
+import com.jgoodies.common.base.SystemUtils;
+import com.jgoodies.looks.FontPolicies;
+import com.jgoodies.looks.FontPolicy;
+import com.jgoodies.looks.LookUtils;
+import com.jgoodies.looks.MicroLayout;
+import com.jgoodies.looks.MicroLayoutPolicies;
+import com.jgoodies.looks.MicroLayoutPolicy;
+import com.jgoodies.looks.Options;
 import com.jgoodies.looks.common.MinimumSizedIcon;
 import com.jgoodies.looks.common.RGBGrayFilter;
 import com.jgoodies.looks.common.ShadowPopupFactory;
@@ -136,7 +147,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	/**
      * The List of installed Plastic themes.
      */
-	private static List	installedThemes;
+	private static List<PlasticTheme>	installedThemes;
 
 	/** The look-global state for the 3D enablement. */
 	private static boolean is3DEnabled = false;
@@ -299,7 +310,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * via the keyboard. This is enabled on Windows by default and
      * disabled on all other platforms.
      *
-     * @param b
+     * @param b   <code>true</code> to enabled, <code>false</code> to disable
      */
     public static void setSelectTextOnKeyboardFocusGained(boolean b) {
         selectTextOnKeyboardFocusGained = b;
@@ -403,7 +414,6 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
                 // Uses a modified split divider
 				"SplitPaneUI", 				plasticPrefix + "SplitPaneUI",
 
-                // Renders a circle, not a star '*' in Java 1.4 and Java 5
                 // Selects all text after focus gain via keyboard.
                 "PasswordFieldUI",          plasticPrefix + "PasswordFieldUI",
 
@@ -510,9 +520,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 		Boolean is3D					= Boolean.valueOf(is3DEnabled());
 
-        Character  passwordEchoChar     = new Character(LookUtils.IS_OS_WINDOWS ? '\u25CF' : '\u2022');
+        Character  passwordEchoChar     = new Character(SystemUtils.IS_OS_WINDOWS ? '\u25CF' : '\u2022');
 
-        String iconPrefix = "icons/" + (LookUtils.IS_LOW_RESOLUTION ? "32x32/" : "48x48/");
+        String iconPrefix = "icons/" + (SystemUtils.IS_LOW_RESOLUTION ? "32x32/" : "48x48/");
         Object errorIcon       = makeIcon(getClass(), iconPrefix + "dialog-error.png");
         Object informationIcon = makeIcon(getClass(), iconPrefix + "dialog-information.png");
         Object helpIcon        = makeIcon(getClass(), iconPrefix + "dialog-help.png");
@@ -713,7 +723,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 */
 	public static PlasticTheme createMyDefaultTheme() {
 		String defaultName;
-        if (LookUtils.IS_LAF_WINDOWS_XP_ENABLED) {
+        if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             defaultName = getDefaultXPTheme();
         } else if (LookUtils.IS_OS_WINDOWS_MODERN) {
             defaultName = "DesertBluer";
@@ -787,6 +797,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
         }
 
 		Collections.sort(installedThemes, new Comparator() {
+			@Override
 			public int compare(Object o1, Object o2) {
 				MetalTheme theme1 = (MetalTheme) o1;
 				MetalTheme theme2 = (MetalTheme) o2;
@@ -802,7 +813,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Install the default color themes.
 	 */
 	protected static void installDefaultThemes() {
-		installedThemes = new ArrayList();
+		installedThemes = new ArrayList<PlasticTheme>();
 		String[] themeNames = {
 		    "BrownSugar",
 		    "DarkStar",

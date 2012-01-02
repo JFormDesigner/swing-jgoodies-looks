@@ -37,7 +37,7 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ColorUIResource;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.MicroLayout;
 
 
@@ -123,7 +123,7 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
         Object textFieldBorder      = PlasticXPBorders.getTextFieldBorder();
         Object spinnerBorder        = PlasticXPBorders.getSpinnerBorder();
 
-        String radioCheckIconName   = LookUtils.IS_LOW_RESOLUTION
+        String radioCheckIconName   = SystemUtils.IS_LOW_RESOLUTION
                                             ? "icons/RadioLight5x5.png"
                                             : "icons/RadioLight7x7.png";
 
@@ -173,7 +173,6 @@ public class PlasticXPLookAndFeel extends Plastic3DLookAndFeel {
 		table.putDefaults(defaults);
 	}
 
-    protected static void installDefaultThemes() {}
 
     private static ColorUIResource getToggleButtonCheckColor() {
         return getPlasticTheme().getToggleButtonCheckColor();

@@ -87,5 +87,4 @@ public class Plastic3DLookAndFeel extends PlasticLookAndFeel {
         table.putDefaults(defaults);
     }
 
-    protected static void installDefaultThemes() {}
 }
