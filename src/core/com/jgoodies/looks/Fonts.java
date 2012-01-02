@@ -34,6 +34,8 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.util.Locale;
 
+import com.jgoodies.common.base.SystemUtils;
+
 
 /**
  * Provides static access to popular Windows fonts.
@@ -200,19 +202,19 @@ public final class Fonts {
     // Font Lookup ************************************************************
 
     static Font getDefaultGUIFontWesternModernWindowsNormal() {
-        return LookUtils.IS_LOW_RESOLUTION
+        return SystemUtils.IS_LOW_RESOLUTION
             ? WINDOWS_XP_96DPI_DEFAULT_GUI
             : WINDOWS_XP_120DPI_DEFAULT_GUI;
     }
 
     static Font getDefaultIconFontWesternModernWindowsNormal() {
-        return LookUtils.IS_LOW_RESOLUTION
+        return SystemUtils.IS_LOW_RESOLUTION
             ? WINDOWS_XP_96DPI_NORMAL
             : WINDOWS_XP_120DPI_NORMAL;
     }
 
     static Font getDefaultIconFontWesternWindowsVistaNormal() {
-        return LookUtils.IS_LOW_RESOLUTION
+        return SystemUtils.IS_LOW_RESOLUTION
             ? WINDOWS_VISTA_96DPI_NORMAL
             : WINDOWS_VISTA_120DPI_NORMAL;
     }
@@ -233,7 +235,7 @@ public final class Fonts {
      * @throws UnsupportedOperationException on non-Windows platforms
      */
     static Font getLooks1xWindowsControlFont() {
-        if (!LookUtils.IS_OS_WINDOWS) {
+        if (!SystemUtils.IS_OS_WINDOWS) {
             throw new UnsupportedOperationException();
         }
 
@@ -262,26 +264,17 @@ public final class Fonts {
      * @throws UnsupportedOperationException on non-Windows platforms
      */
     public static Font getWindowsControlFont() {
-        if (!LookUtils.IS_OS_WINDOWS) {
+        if (!SystemUtils.IS_OS_WINDOWS) {
             throw new UnsupportedOperationException();
         }
 
         Font defaultGUIFont = getDefaultGUIFont();
         // Return the default GUI font on older Windows versions.
         if (LookUtils.IS_OS_WINDOWS_95
-        ||  LookUtils.IS_OS_WINDOWS_98
+        ||  SystemUtils.IS_OS_WINDOWS_98
         ||  LookUtils.IS_OS_WINDOWS_NT
-        ||  LookUtils.IS_OS_WINDOWS_ME) {
+        ||  SystemUtils.IS_OS_WINDOWS_ME) {
             return defaultGUIFont;
-        }
-
-        // Java 1.4 and Java 5 raster the Segoe UI poorly,
-        // so we use the older Tahoma, if it can display the localized text.
-        if (LookUtils.IS_OS_WINDOWS_6_OR_LATER && LookUtils.IS_JAVA_5) {
-            Font tahoma = getDefaultGUIFontWesternModernWindowsNormal();
-            return Boolean.TRUE.equals(canDisplayLocalizedText(tahoma, Locale.getDefault()))
-                ? tahoma
-                : defaultGUIFont;
         }
 
         Font iconFont = getDesktopFont(WINDOWS_ICON_FONT_KEY);

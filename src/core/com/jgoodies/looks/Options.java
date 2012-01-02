@@ -38,6 +38,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.text.JTextComponent;
 
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.common.ShadowPopup;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.windows.WindowsLookAndFeel;
@@ -98,9 +99,9 @@ public final class Options {
      * @see #putLookAndFeelReplacement(String, String)
      * @see #removeLookAndFeelReplacement(String)
      */
-    private static final Map LAF_REPLACEMENTS;
+    private static final Map<String, String> LAF_REPLACEMENTS;
     static {
-        LAF_REPLACEMENTS = new HashMap();
+        LAF_REPLACEMENTS = new HashMap<String, String>();
         initializeDefaultReplacements();
     }
 
@@ -942,9 +943,9 @@ public final class Options {
      * @see #getCrossPlatformLookAndFeelClassName()
      */
     public static String getSystemLookAndFeelClassName() {
-        if (LookUtils.IS_OS_WINDOWS) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             return Options.JGOODIES_WINDOWS_NAME;
-        } else if (LookUtils.IS_OS_MAC) {
+        } else if (SystemUtils.IS_OS_MAC) {
             return UIManager.getSystemLookAndFeelClassName();
         } else {
             return getCrossPlatformLookAndFeelClassName();

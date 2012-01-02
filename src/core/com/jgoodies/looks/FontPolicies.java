@@ -34,6 +34,8 @@ import java.awt.Font;
 
 import javax.swing.UIDefaults;
 
+import com.jgoodies.common.base.SystemUtils;
+
 
 /**
  * Provides predefined FontPolicy implementations.<p>
@@ -135,7 +137,7 @@ public final class FontPolicies {
      *    on all other platforms
      */
     public static FontPolicy getDefaultPlasticPolicy() {
-        if (LookUtils.IS_OS_WINDOWS) {
+        if (SystemUtils.IS_OS_WINDOWS) {
             return getDefaultPlasticOnWindowsPolicy();
         }
         return getLogicalFontsPolicy();
@@ -212,7 +214,7 @@ public final class FontPolicies {
      *     the JGoodies Looks 1.x on other Platforms.
      */
     public static FontPolicy getTransitionalPlasticPolicy() {
-        return LookUtils.IS_OS_WINDOWS
+        return SystemUtils.IS_OS_WINDOWS
             ? getDefaultPlasticOnWindowsPolicy()
             : getLooks1xPlasticPolicy();
     }
@@ -271,7 +273,8 @@ public final class FontPolicies {
             this.wrappedPolicy = wrappedPolicy;
         }
 
-        public FontSet getFontSet(String lafName, UIDefaults table) {
+        @Override
+		public FontSet getFontSet(String lafName, UIDefaults table) {
             FontPolicy customPolicy = getCustomPolicy(lafName);
             if (customPolicy != null) {
                 return customPolicy.getFontSet(null, table);
@@ -302,7 +305,8 @@ public final class FontPolicies {
      */
     private static final class DefaultPlasticOnWindowsPolicy implements FontPolicy {
 
-        public FontSet getFontSet(String lafName, UIDefaults table) {
+        @Override
+		public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getWindowsControlFont();
             Font controlFont;
             if (windowsControlFont != null) {
@@ -328,7 +332,8 @@ public final class FontPolicies {
      */
     private static final class DefaultWindowsPolicy implements FontPolicy {
 
-        public FontSet getFontSet(String lafName, UIDefaults table) {
+        @Override
+		public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getWindowsControlFont();
             Font controlFont;
             if (windowsControlFont != null) {
@@ -374,7 +379,8 @@ public final class FontPolicies {
             this.fontSet = fontSet;
         }
 
-        public FontSet getFontSet(String lafName, UIDefaults table) {
+        @Override
+		public FontSet getFontSet(String lafName, UIDefaults table) {
             return fontSet;
         }
     }
@@ -385,7 +391,8 @@ public final class FontPolicies {
      */
     private static final class Looks1xWindowsPolicy implements FontPolicy {
 
-        public FontSet getFontSet(String lafName, UIDefaults table) {
+        @Override
+		public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getLooks1xWindowsControlFont();
             Font controlFont;
             if (windowsControlFont != null) {

@@ -32,6 +32,8 @@ package com.jgoodies.looks;
 
 import javax.swing.UIDefaults;
 
+import com.jgoodies.common.base.SystemUtils;
+
 
 /**
  * Provides predefined MicroLayoutPolicy implementations.
@@ -86,32 +88,30 @@ public final class MicroLayoutPolicies {
      */
     private static final class DefaultPlasticPolicy implements MicroLayoutPolicy {
 
-        public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
-            boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-            boolean is6OrLater = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
-            boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
+        @Override
+		public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
+            boolean isClassic = !SystemUtils.IS_LAF_WINDOWS_XP_ENABLED;
+            boolean is6OrLater = SystemUtils.IS_OS_WINDOWS_6_OR_LATER;
+            boolean isLowRes = SystemUtils.IS_LOW_RESOLUTION;
             boolean isPlasticXP = lafName.equals("JGoodies Plastic XP");
             if (isPlasticXP) {
                 if (is6OrLater) {
                     return isClassic
                         ? MicroLayouts.createPlasticXPVistaClassicMicroLayout()
                         : MicroLayouts.createPlasticXPVistaMicroLayout();
-                } else {
-                    return isLowRes
-                        ? MicroLayouts.createPlasticXPLowResMicroLayout()
-                        : MicroLayouts.createPlasticXPHiResMicroLayout();
-                }
-            } else {
-                if (is6OrLater) {
-                    return isClassic
-                        ? MicroLayouts.createPlasticVistaClassicMicroLayout()
-                        : MicroLayouts.createPlasticVistaMicroLayout();
-                } else {
-                    return isLowRes
-                        ? MicroLayouts.createPlasticLowResMicroLayout()
-                        : MicroLayouts.createPlasticHiResMicroLayout();
-                }
-            }
+                } 
+                return isLowRes
+                    ? MicroLayouts.createPlasticXPLowResMicroLayout()
+                    : MicroLayouts.createPlasticXPHiResMicroLayout();
+            } 
+            if (is6OrLater) {
+                return isClassic
+                    ? MicroLayouts.createPlasticVistaClassicMicroLayout()
+                    : MicroLayouts.createPlasticVistaMicroLayout();
+            } 
+            return isLowRes
+                ? MicroLayouts.createPlasticLowResMicroLayout()
+                : MicroLayouts.createPlasticHiResMicroLayout();
         }
 
     }
@@ -122,10 +122,11 @@ public final class MicroLayoutPolicies {
      */
     private static final class DefaultWindowsPolicy implements MicroLayoutPolicy {
 
-        public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
-            boolean isClassic = !LookUtils.IS_LAF_WINDOWS_XP_ENABLED;
-            boolean isVista = LookUtils.IS_OS_WINDOWS_6_OR_LATER;
-            boolean isLowRes = LookUtils.IS_LOW_RESOLUTION;
+        @Override
+		public MicroLayout getMicroLayout(String lafName, UIDefaults table) {
+            boolean isClassic = !SystemUtils.IS_LAF_WINDOWS_XP_ENABLED;
+            boolean isVista = SystemUtils.IS_OS_WINDOWS_6_OR_LATER;
+            boolean isLowRes = SystemUtils.IS_LOW_RESOLUTION;
             if (isClassic) {
                 return isLowRes
                     ? MicroLayouts.createWindowsClassicLowResMicroLayout()

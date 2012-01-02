@@ -213,27 +213,33 @@ public final class FontSets {
 
         // FontSet API --------------------------------------------------------
 
-        public FontUIResource getControlFont() {
+        @Override
+		public FontUIResource getControlFont() {
             return controlFont;
         }
 
-        public FontUIResource getMenuFont() {
+        @Override
+		public FontUIResource getMenuFont() {
             return menuFont;
         }
 
-        public FontUIResource getTitleFont() {
+        @Override
+		public FontUIResource getTitleFont() {
             return titleFont;
         }
 
-        public FontUIResource getWindowTitleFont() {
+        @Override
+		public FontUIResource getWindowTitleFont() {
             return windowTitleFont;
         }
 
-        public FontUIResource getSmallFont() {
+        @Override
+		public FontUIResource getSmallFont() {
             return smallFont;
         }
 
-        public FontUIResource getMessageFont() {
+        @Override
+		public FontUIResource getMessageFont() {
             return messageFont;
         }
 
@@ -252,7 +258,8 @@ public final class FontSets {
         private FontUIResource smallFont;
 
 
-        public FontUIResource getControlFont() {
+        @Override
+		public FontUIResource getControlFont() {
             if (controlFont == null) {
                 controlFont = new FontUIResource(
                         Font.getFont(
@@ -263,11 +270,13 @@ public final class FontSets {
             return controlFont;
         }
 
-        public FontUIResource getMenuFont() {
+        @Override
+		public FontUIResource getMenuFont() {
             return getControlFont();
         }
 
-        public FontUIResource getTitleFont() {
+        @Override
+		public FontUIResource getTitleFont() {
             if (titleFont == null) {
                 titleFont =
                     new FontUIResource(
@@ -276,7 +285,8 @@ public final class FontSets {
             return titleFont;
         }
 
-        public FontUIResource getSmallFont() {
+        @Override
+		public FontUIResource getSmallFont() {
             if (smallFont == null) {
                 smallFont =
                     new FontUIResource(
@@ -287,7 +297,8 @@ public final class FontSets {
             return smallFont;
         }
 
-        public FontUIResource getMessageFont() {
+        @Override
+		public FontUIResource getMessageFont() {
             if (systemFont == null) {
                 systemFont =
                     new FontUIResource(
@@ -298,7 +309,8 @@ public final class FontSets {
             return systemFont;
         }
 
-        public FontUIResource getWindowTitleFont() {
+        @Override
+		public FontUIResource getWindowTitleFont() {
             return getTitleFont();
         }
 
