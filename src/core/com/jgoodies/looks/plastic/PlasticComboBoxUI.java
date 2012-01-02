@@ -30,11 +30,26 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.ComboBoxEditor;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JScrollBar;
+import javax.swing.JTextField;
+import javax.swing.JToolBar;
+import javax.swing.ListCellRenderer;
+import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.TextUI;
 import javax.swing.plaf.UIResource;
@@ -279,13 +294,12 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
                     insets.top,
                     width  - (insets.left + insets.right + buttonWidth),
                     height - (insets.top  + insets.bottom));
-        } else {
-            return new Rectangle(
-                    insets.left + buttonWidth,
-                    insets.top ,
-                    width  - (insets.left + insets.right + buttonWidth),
-                    height - (insets.top  + insets.bottom));
         }
+        return new Rectangle(
+                insets.left + buttonWidth,
+                insets.top ,
+                width  - (insets.left + insets.right + buttonWidth),
+                height - (insets.top  + insets.bottom));
     }
 
 
@@ -526,7 +540,8 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * insets for this case.
      */
     private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent evt) {
+        @Override
+		public void propertyChange(PropertyChangeEvent evt) {
             tableCellEditor = isTableCellEditor();
             if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
                 comboBox.setRenderer(createRenderer());

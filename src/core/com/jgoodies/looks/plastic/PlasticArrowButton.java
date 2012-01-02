@@ -36,6 +36,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ButtonModel;
 import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalScrollButton;
 
 /**
@@ -74,8 +75,8 @@ class PlasticArrowButton extends MetalScrollButton {
 		boolean isPressed   = getModel().isPressed();
 
 		Color arrowColor = isEnabled
-				? PlasticLookAndFeel.getControlInfo()
-				: PlasticLookAndFeel.getControlDisabled();
+				? MetalLookAndFeel.getControlInfo()
+				: MetalLookAndFeel.getControlDisabled();
 		int width  = getWidth();
 		int height = getHeight();
 		int w = width;
@@ -84,7 +85,7 @@ class PlasticArrowButton extends MetalScrollButton {
         int arrowOffset = calculateArrowOffset();
         boolean paintNorthBottom = isPaintingNorthBottom();
 
-		g.setColor(isPressed ? PlasticLookAndFeel.getControlShadow() : getBackground());
+		g.setColor(isPressed ? MetalLookAndFeel.getControlShadow() : getBackground());
 		g.fillRect(0, 0, width, height);
 
 		if (getDirection() == NORTH) {
@@ -316,7 +317,7 @@ class PlasticArrowButton extends MetalScrollButton {
 		} else {
 			PlasticUtils.drawDisabledBorder(g, 0, 0, width, height + 1);
             if (paintBottom) {
-                g.setColor(PlasticLookAndFeel.getControlShadow());
+                g.setColor(MetalLookAndFeel.getControlShadow());
                 g.fillRect(0, height - 1, width - 1, 1);
             }
 		}

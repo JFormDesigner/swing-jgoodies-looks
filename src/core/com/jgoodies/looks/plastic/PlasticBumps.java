@@ -30,7 +30,13 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.IndexColorModel;
@@ -48,7 +54,7 @@ import javax.swing.Icon;
  */
 final class PlasticBumps implements Icon {
 
-    private static final List BUFFERS = new ArrayList();
+    private static final List<BumpBuffer> BUFFERS = new ArrayList<BumpBuffer>();
 
     private int xBumps;
 	private int yBumps;
@@ -86,6 +92,7 @@ final class PlasticBumps implements Icon {
 
 	// Icon Implementation ****************************************************
 
+	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		GraphicsConfiguration gc = g instanceof Graphics2D
 				? (GraphicsConfiguration) ((Graphics2D) g).getDeviceConfiguration()
@@ -111,7 +118,9 @@ final class PlasticBumps implements Icon {
 		}
 	}
 
+	@Override
 	public int getIconWidth()  { return xBumps * 2; }
+	@Override
 	public int getIconHeight() { return yBumps * 2; }
 
 

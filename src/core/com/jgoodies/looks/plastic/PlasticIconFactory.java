@@ -77,9 +77,12 @@ final class PlasticIconFactory {
 
 		private static final int SIZE = 13;
 
+		@Override
 		public int getIconWidth()	{ return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
 
+		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 			JCheckBox cb = (JCheckBox) c;
 			ButtonModel model = cb.getModel();
@@ -116,10 +119,13 @@ final class PlasticIconFactory {
 
     	private static final int SIZE = 13;
 
+		@Override
 		public int getIconWidth()	{ return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
 
- 		public void paintIcon(Component c, Graphics g, int x, int y) {
+ 		@Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
 		    JMenuItem b = (JMenuItem) c;
 		    if (b.isSelected()) {
 		    	drawCheck(g, x, y + 1);
@@ -132,10 +138,13 @@ final class PlasticIconFactory {
 
     	private static final int SIZE = 13;
 
+		@Override
 		public int getIconWidth()	{ return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
 
- 		public void paintIcon(Component c, Graphics g, int x, int y) {
+ 		@Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
 		    JMenuItem b = (JMenuItem) c;
 		    if (b.isSelected()) {
 		    	drawDot(g, x, y);
@@ -157,6 +166,7 @@ final class PlasticIconFactory {
     	private static final int WIDTH  = 4;
     	private static final int HEIGHT = 8;
 
+		@Override
 		public void paintIcon( Component c, Graphics g, int x, int y ) {
 		    JMenuItem b = (JMenuItem) c;
 
@@ -175,7 +185,9 @@ final class PlasticIconFactory {
 		    g.translate( -x, -y );
 		}
 
+		@Override
 		public int getIconWidth()	{ return WIDTH; }
+		@Override
 		public int getIconHeight() { return HEIGHT; }
 
     }
@@ -190,6 +202,7 @@ final class PlasticIconFactory {
 		protected static final int SIZE      = 9;
 		protected static final int HALF_SIZE = 4;
 
+		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
             g.setColor(Color.WHITE);
 			g.fillRect(x, y, SIZE - 1, SIZE - 1);
@@ -199,7 +212,9 @@ final class PlasticIconFactory {
 			g.drawLine(x + 2, y + HALF_SIZE, x + SIZE - 3, y + HALF_SIZE);
 		}
 
+		@Override
 		public int getIconWidth()  { return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
     }
 
@@ -221,7 +236,8 @@ final class PlasticIconFactory {
      */
     private static class ComboBoxButtonIcon implements Icon, Serializable {
 
-	    public void paintIcon(Component c, Graphics g, int x, int y) {
+	    @Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
 	        JComponent component = (JComponent) c;
 			int iconWidth = getIconWidth();
 
@@ -251,8 +267,10 @@ final class PlasticIconFactory {
 			g.translate( -x, -y );
 	    }
 
-	    public int getIconWidth()  { return 8; }
-	    public int getIconHeight() { return 4; }
+	    @Override
+		public int getIconWidth()  { return 8; }
+	    @Override
+		public int getIconHeight() { return 4; }
     }
 
 

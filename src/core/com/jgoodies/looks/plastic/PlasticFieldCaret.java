@@ -77,7 +77,8 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
         }
         if (c instanceof JFormattedTextField) {
             EventQueue.invokeLater(new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     selectAll();
                 }
             });

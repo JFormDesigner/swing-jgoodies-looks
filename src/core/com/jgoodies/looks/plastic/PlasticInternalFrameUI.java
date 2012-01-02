@@ -196,6 +196,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
 		private PaletteListener(PlasticInternalFrameUI ui) { this.ui = ui; }
 
+		@Override
 		public void propertyChange(PropertyChangeEvent e) {
 			String name  = e.getPropertyName();
 			Object value = e.getNewValue();
@@ -211,6 +212,7 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
 	private static final class ContentPaneListener implements PropertyChangeListener {
 
+		@Override
 		public void propertyChange(PropertyChangeEvent e) {
 			String name = e.getPropertyName();
 			if (name.equals(JInternalFrame.CONTENT_PANE_PROPERTY)) {
