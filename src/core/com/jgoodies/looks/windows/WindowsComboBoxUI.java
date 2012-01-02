@@ -30,11 +30,28 @@
 
 package com.jgoodies.looks.windows;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.LayoutManager;
+import java.awt.Rectangle;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.ComboBoxEditor;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.ComponentUI;
@@ -44,7 +61,7 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.plaf.basic.ComboPopup;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.Options;
 import com.sun.java.swing.plaf.windows.WindowsTextFieldUI;
 
@@ -130,7 +147,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      */
     @Override
     protected JButton createArrowButton() {
-        return LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+        return SystemUtils.IS_LAF_WINDOWS_XP_ENABLED
                     ? super.createArrowButton()
                     : new WindowsArrowButton(SwingConstants.SOUTH);
     }
@@ -236,7 +253,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
         // The height is oriented on the JTextField height
         Dimension textFieldSize = PHANTOM.getMinimumSize();
-        size.height = LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+        size.height = SystemUtils.IS_OS_WINDOWS_6_OR_LATER && !SystemUtils.IS_LAF_WINDOWS_XP_ENABLED
            ? textFieldSize.height
            : Math.max(textFieldSize.height, size.height);
 
@@ -382,8 +399,8 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
 
     private boolean isVistaXPStyleReadOnlyCombo() {
-        return     LookUtils.IS_OS_WINDOWS_6_OR_LATER
-                && LookUtils.IS_LAF_WINDOWS_XP_ENABLED
+        return     SystemUtils.IS_OS_WINDOWS_6_OR_LATER
+                && SystemUtils.IS_LAF_WINDOWS_XP_ENABLED
                 && !comboBox.isEditable();
     }
 
@@ -406,13 +423,12 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                     insets.top,
                     width  - (insets.left + insets.right + buttonWidth),
                     height - (insets.top  + insets.bottom));
-        } else {
-            return new Rectangle(
-                    insets.left + buttonWidth,
-                    insets.top ,
-                    width  - (insets.left + insets.right + buttonWidth),
-                    height - (insets.top  + insets.bottom));
         }
+        return new Rectangle(
+                insets.left + buttonWidth,
+                insets.top ,
+                width  - (insets.left + insets.right + buttonWidth),
+                height - (insets.top  + insets.bottom));
     }
 
 
@@ -560,7 +576,8 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * insets for this case.
      */
     private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent evt) {
+        @Override
+		public void propertyChange(PropertyChangeEvent evt) {
             tableCellEditor = isTableCellEditor();
             if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
                 comboBox.setRenderer(createRenderer());

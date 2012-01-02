@@ -87,6 +87,7 @@ public final class WindowsMenuBarUI extends com.sun.java.swing.plaf.windows.Wind
 	private PropertyChangeListener createBorderStyleListener() {
 		return new PropertyChangeListener() {
 
+			@Override
 			public void propertyChange(PropertyChangeEvent e) {
 				String prop = e.getPropertyName();
 				if (prop.equals(Options.HEADER_STYLE_KEY) ||

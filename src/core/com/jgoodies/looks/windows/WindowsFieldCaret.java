@@ -30,7 +30,12 @@
 
 package com.jgoodies.looks.windows;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Graphics;
+import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 
@@ -40,7 +45,14 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.TextUI;
 import javax.swing.plaf.UIResource;
-import javax.swing.text.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
+import javax.swing.text.DefaultHighlighter;
+import javax.swing.text.Highlighter;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.LayeredHighlighter;
+import javax.swing.text.Position;
+import javax.swing.text.View;
 
 import com.jgoodies.looks.Options;
 
@@ -87,7 +99,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         }
         if (c instanceof JFormattedTextField) {
             EventQueue.invokeLater(new Runnable() {
-                public void run() {
+                @Override
+				public void run() {
                     selectAll();
                 }
             });
@@ -183,7 +196,8 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
         }
 
 
-        public void run() {
+        @Override
+		public void run() {
             JTextField field = (JTextField) getComponent();
             if (field == null) {
                 return;
@@ -352,30 +366,27 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                     g.fillRect(alloc.x, alloc.y, alloc.width, alloc.height);
                 }
                 return alloc;
-            } else {
-                // Should only render part of View.
-                try {
-                    // --- determine locations ---
-                    Shape shape = view.modelToView(offs0,
-                            Position.Bias.Forward, offs1,
-                            Position.Bias.Backward, bounds);
-                    Rectangle r = shape instanceof Rectangle
-                            ? (Rectangle) shape
-                            : shape.getBounds();
-                    if (firstIsDot && r.width > 0) {
-                        g.fillRect(r.x + 1, r.y, r.width - 1, r.height);
-                    } else if (secondIsDot && r.width > 0) {
-                        g.fillRect(r.x, r.y, r.width - 1, r.height);
-                    } else {
-                        g.fillRect(r.x, r.y, r.width, r.height);
-                    }
-                    return r;
-                } catch (BadLocationException e) {
-                    // can't render
+            } 
+            // Should only render part of View.
+            try {
+                // --- determine locations ---
+                Shape shape = view.modelToView(offs0,
+                        Position.Bias.Forward, offs1,
+                        Position.Bias.Backward, bounds);
+                Rectangle r = shape instanceof Rectangle
+                        ? (Rectangle) shape
+                        : shape.getBounds();
+                if (firstIsDot && r.width > 0) {
+                    g.fillRect(r.x + 1, r.y, r.width - 1, r.height);
+                } else if (secondIsDot && r.width > 0) {
+                    g.fillRect(r.x, r.y, r.width - 1, r.height);
+                } else {
+                    g.fillRect(r.x, r.y, r.width, r.height);
                 }
+                return r;
+            } catch (BadLocationException e) {
+            	return null;
             }
-            // Only if exception
-            return null;
         }
 
     }

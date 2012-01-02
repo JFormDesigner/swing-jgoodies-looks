@@ -36,7 +36,7 @@ import java.awt.Font;
 import javax.swing.JMenuItem;
 import javax.swing.UIManager;
 
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.common.MenuItemRenderer;
 
 /**
@@ -65,13 +65,13 @@ final class WindowsMenuItemRenderer extends MenuItemRenderer {
 
     @Override
     protected boolean isMnemonicHidden() {
-        return WindowsLookAndFeel.isMnemonicHidden();
+        return com.sun.java.swing.plaf.windows.WindowsLookAndFeel.isMnemonicHidden();
     }
 
 
     @Override
     protected boolean disabledTextHasShadow() {
-        return (!LookUtils.IS_LAF_WINDOWS_XP_ENABLED)
+        return (!SystemUtils.IS_LAF_WINDOWS_XP_ENABLED)
             || (UIManager.getColor("MenuItem.disabledForeground") == null);
     }
 

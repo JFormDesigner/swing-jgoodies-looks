@@ -84,6 +84,7 @@ final class WindowsIconFactory {
 
 		private static final int SIZE  = 13;
 
+		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 		    JCheckBox cb = (JCheckBox) c;
 		    ButtonModel model = cb.getModel();
@@ -138,7 +139,9 @@ final class WindowsIconFactory {
 		    }
 		}
 
+		@Override
 		public int getIconWidth()  { return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
     }
 
@@ -148,6 +151,7 @@ final class WindowsIconFactory {
 
 		private static final int SIZE  = 13;
 
+		@Override
 		public void paintIcon(Component c, Graphics g, int x, int y) {
 		    AbstractButton b = (AbstractButton) c;
 		    ButtonModel model = b.getModel();
@@ -207,7 +211,9 @@ final class WindowsIconFactory {
 		    }
 		}
 
+		@Override
 		public int getIconWidth()  { return SIZE; }
+		@Override
 		public int getIconHeight() { return SIZE; }
 
     }
