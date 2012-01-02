@@ -35,18 +35,10 @@ import javax.swing.JComponent;
 import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.text.Caret;
-import javax.swing.text.Element;
-import javax.swing.text.View;
-
-import com.jgoodies.looks.LookUtils;
-import com.jgoodies.looks.common.ExtPasswordView;
 
 /**
  * The JGoodies Windows Look&amp;Feel implementation of a password field UI
- * delegate. It differs from its superclass in that it utilizes a password
- * view that renders a customizable echo char, not a star (&quot;*&quot;).
- *
- * Used for Java 5.
+ * delegate. It differs from its superclass in that it utilizes a custom caret.
  *
  * @author Karsten Lentzsch
  * @version $Revision: 1.9 $
@@ -61,32 +53,6 @@ public final class WindowsPasswordFieldUI extends com.sun.java.swing.plaf.window
 	 */
     public static ComponentUI createUI(JComponent c) {
         return new WindowsPasswordFieldUI();
-    }
-
-    /*
-     * We'd like to just set the dot as echo character.
-     * But the JPasswordField (in Java 1.4 and Java 5)
-     * installs the UI in a superclass and then sets the echo character.
-     * The latter would override our call to #setEchoChar.
-     */
-//    protected void installDefaults() {
-//        super.installDefaults();
-//        JPasswordField field = (JPasswordField) getComponent();
-//        field.setEchoChar('\u25CF');
-//    }
-
-
-    /**
-	 * Creates and returns a view (an {@code ExtPasswordView}) for an element.
-	 *
-	 * @param elem the element
-	 * @return the view
-	 */
-    @Override
-    public View create(Element elem) {
-        return LookUtils.IS_JAVA_5
-            ? new ExtPasswordView(elem)
-            : super.create(elem);
     }
 
 
