@@ -33,10 +33,12 @@ package com.jgoodies.looks.plastic;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.*;
+import javax.swing.Icon;
+import javax.swing.JComponent;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.plaf.ComponentUI;
 
-import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.common.ExtBasicMenuUI;
 
 /**
@@ -64,14 +66,6 @@ public final class PlasticMenuUI extends ExtBasicMenuUI {
     protected void installDefaults() {
         super.installDefaults();
         oldOpaque = menuItem.isOpaque();
-    }
-
-    @Override
-    protected void uninstallDefaults() {
-        super.uninstallDefaults();
-        if (!LookUtils.IS_OS_WINDOWS_6_OR_LATER && !LookUtils.IS_JAVA_6_OR_LATER) {
-            LookAndFeel.installProperty(menuItem, "opaque", Boolean.valueOf(oldOpaque));
-        }
     }
 
 
