@@ -96,7 +96,8 @@ public final class PlasticScrollPaneUI extends MetalScrollPaneUI {
 
     private class BorderStyleChangeHandler implements PropertyChangeListener {
 
-        public void propertyChange(PropertyChangeEvent evt) {
+        @Override
+		public void propertyChange(PropertyChangeEvent evt) {
             JScrollPane scrollPane = (JScrollPane) evt.getSource();
             installEtchedBorder(scrollPane);
         }

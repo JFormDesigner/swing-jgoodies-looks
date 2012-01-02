@@ -43,6 +43,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTabbedPaneUI;
 import javax.swing.text.View;
 
@@ -921,7 +922,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
         private final Rectangle rect = new Rectangle();
 
-        public void stateChanged(ChangeEvent e) {
+        @Override
+		public void stateChanged(ChangeEvent e) {
             JTabbedPane tabPane = (JTabbedPane) e.getSource();
             tabPane.revalidate();
             tabPane.repaint();
@@ -1223,7 +1225,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     private static class ScrollTabsForwardAction extends AbstractAction {
 
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = null;
             Object src = e.getSource();
             if (src instanceof JTabbedPane) {
@@ -1243,7 +1246,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
 
     private static class ScrollTabsBackwardAction extends AbstractAction {
 
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
             JTabbedPane pane = null;
             Object src = e.getSource();
             if (src instanceof JTabbedPane) {
@@ -1693,7 +1697,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             viewport.setViewPosition(tabViewPosition);
         }
 
-        public void stateChanged(ChangeEvent e) {
+        @Override
+		public void stateChanged(ChangeEvent e) {
             JViewport viewport = (JViewport) e.getSource();
             int tabPlacement = tabPane.getTabPlacement();
             int tabCount = tabPane.getTabCount();
@@ -1760,7 +1765,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         /**
          * ActionListener for the scroll buttons.
          */
-        public void actionPerformed(ActionEvent e) {
+        @Override
+		public void actionPerformed(ActionEvent e) {
             ActionMap map = tabPane.getActionMap();
 
             if (map != null) {
@@ -1870,8 +1876,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             Color oldColor = g.getColor();
 
             boolean isEnabled = isEnabled();
-            g.setColor(isEnabled ? PlasticLookAndFeel.getControlInfo()
-                                 : PlasticLookAndFeel.getControlDisabled());
+            g.setColor(isEnabled ? MetalLookAndFeel.getControlInfo()
+                                 : MetalLookAndFeel.getControlDisabled());
 
             int arrowWidth, arrowHeight;
             switch (direction) {
@@ -1892,7 +1898,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             g.translate(x, y);
 
             boolean paintShadow = !mouseIsOver || !isEnabled;
-            Color shadow = isEnabled ? PlasticLookAndFeel.getControlShadow()
+            Color shadow = isEnabled ? MetalLookAndFeel.getControlShadow()
                                      : UIManager.getColor("ScrollBar.highlight");
 
             switch (direction) {

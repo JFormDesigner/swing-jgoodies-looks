@@ -34,6 +34,7 @@ import java.awt.*;
 
 import javax.swing.JComponent;
 import javax.swing.UIManager;
+import javax.swing.plaf.metal.MetalLookAndFeel;
 
 /**
  * Consists exclusively of static methods that provide convenience behavior.
@@ -58,7 +59,7 @@ public final class PlasticUtils {
 
 
 	static void drawDisabledBorder(Graphics g, int x, int y, int w, int h) {
-		g.setColor(PlasticLookAndFeel.getControlShadow());
+		g.setColor(MetalLookAndFeel.getControlShadow());
 		drawRect(g, x, y, w - 1, h - 1);
 	}
 
@@ -84,7 +85,7 @@ public final class PlasticUtils {
 	static void drawPressed3DBorder(Graphics g, int x, int y, int w, int h) {
 		g.translate(x, y);
 		drawFlush3DBorder(g, 0, 0, w, h);
-		g.setColor(PlasticLookAndFeel.getControlShadow());
+		g.setColor(MetalLookAndFeel.getControlShadow());
 		g.drawLine(1, 1, 1, h - 3);
 		g.drawLine(1, 1, w - 3, 1);
 		g.translate(-x, -y);

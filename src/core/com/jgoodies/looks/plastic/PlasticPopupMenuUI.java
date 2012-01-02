@@ -93,7 +93,8 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
 
     private final class BorderStyleChangeHandler implements PropertyChangeListener {
 
-        public void propertyChange(PropertyChangeEvent e) {
+        @Override
+		public void propertyChange(PropertyChangeEvent e) {
             installBorder();
         }
 

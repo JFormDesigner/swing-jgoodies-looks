@@ -97,10 +97,13 @@ public final class PlasticXPIconFactory {
 
         private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
 
-        public int getIconWidth()  { return SIZE; }
-        public int getIconHeight() { return SIZE; }
+        @Override
+		public int getIconWidth()  { return SIZE; }
+        @Override
+		public int getIconHeight() { return SIZE; }
 
-        public void paintIcon(Component c, Graphics g, int x, int y) {
+        @Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
             JCheckBox cb = (JCheckBox) c;
             ButtonModel model = cb.getModel();
             Graphics2D g2 = (Graphics2D) g;
@@ -192,10 +195,13 @@ public final class PlasticXPIconFactory {
 
         private static final Stroke FOCUS_STROKE = new BasicStroke(2);
 
-        public int getIconWidth()  { return SIZE; }
-        public int getIconHeight() { return SIZE; }
+        @Override
+		public int getIconWidth()  { return SIZE; }
+        @Override
+		public int getIconHeight() { return SIZE; }
 
-        public void paintIcon(Component c, Graphics g, int x, int y) {
+        @Override
+		public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g;
             AbstractButton rb = (AbstractButton) c;
             ButtonModel model = rb.getModel();

@@ -134,7 +134,8 @@ public final class PlasticTreeUI extends BasicTreeUI {
 
     // Listens for changes of the line style property
     private class LineStyleHandler implements PropertyChangeListener {
-        public void propertyChange(PropertyChangeEvent e) {
+        @Override
+		public void propertyChange(PropertyChangeEvent e) {
             String name  = e.getPropertyName();
             Object value = e.getNewValue();
             if (name.equals(Options.TREE_LINE_STYLE_KEY)) {
