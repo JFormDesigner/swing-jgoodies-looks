@@ -3,6 +3,11 @@
                           Release Notes
                         
 
+CHANGES IN 2.5.1 --------------------------------------------------------
+
+    o The javadocs, main and test sources are delivered as JARs.
+
+
 CHANGES IN 2.5.0 --------------------------------------------------------
 
     o Requires Java 6 and JGoodies Common 1.3.
