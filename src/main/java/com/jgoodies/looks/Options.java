@@ -446,7 +446,7 @@ public final class Options {
     /**
      * Holds the Boolean system property value for the use of narrow buttons
      * or null, if it has not been set. If this property has been
-     * set, we log a message about the choosen value.
+     * set, we log a message about the chosen value.
      *
      * @see #getUseNarrowButtons()
      */
@@ -458,7 +458,7 @@ public final class Options {
     /**
      * Holds the Boolean system property value for the tab icon enablement,
      * or null, if it has not been set. If this property has been
-     * set, we log a message about the choosen value.
+     * set, we log a message about the chosen value.
      *
      * @see #isTabIconsEnabled()
      */
@@ -470,7 +470,7 @@ public final class Options {
     /**
      * Holds the Boolean system property value for the popup drop shadow
      * enablement, or null, if it has not been set. If this property has been
-     * set, we log a message about the choosen value.<p>
+     * set, we log a message about the chosen value.<p>
      *
      * This property just set the feature's enablement, not its actual
      * activation. For example, drop shadows are always inactive on
