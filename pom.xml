@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.jgoodies</groupId>
 	<artifactId>jgoodies-looks</artifactId>
-	<version>@impl.version</version>
+	<version>@impl.version@</version>
 	<packaging>jar</packaging>
 	<name>JGoodies Looks</name>
 	<url>https://looks.java.net/</url>

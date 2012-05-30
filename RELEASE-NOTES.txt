@@ -3,6 +3,11 @@
                           Release Notes
                         
 
+CHANGES IN 2.5.2 --------------------------------------------------------
+
+    o Fixed the broken version in the pom.xml.
+
+
 CHANGES IN 2.5.1 --------------------------------------------------------
 
     o The javadocs, main and test sources are delivered as JARs.
