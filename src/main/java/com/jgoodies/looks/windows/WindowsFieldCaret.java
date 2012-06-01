@@ -209,7 +209,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
             Rectangle startRect = null;
             try {
                 startRect = ui.modelToView(field, dot, bias);
-            } catch (BadLocationException ble) {}
+            } catch (BadLocationException ble) {
+            	// Ignore
+            }
 
             Insets i = field.getInsets();
             BoundedRangeModel vis = field.getHorizontalVisibility();
@@ -233,7 +235,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                 if (endRect != null && !endRect.equals(startRect)){
                     damage(endRect);
                 }
-            } catch (BadLocationException ble) {}
+            } catch (BadLocationException ble) {
+            	// Ignore
+            }
         }
 
         private final Rectangle r;

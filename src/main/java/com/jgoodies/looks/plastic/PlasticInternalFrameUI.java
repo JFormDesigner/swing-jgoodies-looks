@@ -143,10 +143,12 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 
 	@Override
     protected void installKeyboardActions()	{
+		// Do nothing
     }
 
 	@Override
     protected void uninstallKeyboardActions()	{
+		// Do nothing
     }
 
 
