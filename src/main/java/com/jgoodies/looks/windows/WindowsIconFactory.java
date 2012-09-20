@@ -208,7 +208,7 @@ final class WindowsIconFactory {
 
 
 		    // indicate whether selected or not
-		    if(model.isSelected()) {
+		    if (model.isSelected()) {
 				g.setColor(UIManager.getColor("RadioButton.checkColor")); // Modified by JGoodies
 				g.fillRect(x+4, y+5, 4, 2);
 				g.fillRect(x+5, y+4, 2, 4);

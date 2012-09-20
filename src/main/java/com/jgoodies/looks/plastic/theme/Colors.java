@@ -52,6 +52,10 @@ import javax.swing.plaf.ColorUIResource;
  */
 final class Colors {
 
+	private Colors() {
+		// Overrides default constructor; prevents instantiation.
+	}
+
     // Gray Colors **********************************************************************
 
     static final ColorUIResource GRAY_DARKEST           = new ColorUIResource( 64,  64,  64);

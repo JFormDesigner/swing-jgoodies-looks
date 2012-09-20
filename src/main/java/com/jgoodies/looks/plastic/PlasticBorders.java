@@ -699,7 +699,7 @@ final class PlasticBorders {
     }
 
 
-	private static class RolloverButtonBorder extends ButtonBorder {
+	private static final class RolloverButtonBorder extends ButtonBorder {
 
         private RolloverButtonBorder() {
             super(new Insets(3, 3, 3, 3));

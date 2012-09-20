@@ -40,6 +40,11 @@ public final class FontTest {
     private JTextComponent textArea;
 
 
+    private FontTest() {
+    	// Overrides default constructor; prevents instantiation.
+    }
+
+
     // Launching **************************************************************
 
     /**

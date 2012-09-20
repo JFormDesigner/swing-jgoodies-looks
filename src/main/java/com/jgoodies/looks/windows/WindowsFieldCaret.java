@@ -68,7 +68,7 @@ import com.jgoodies.looks.Options;
  */
 final class WindowsFieldCaret extends DefaultCaret implements UIResource {
 
-    private static final LayeredHighlighter.LayerPainter WindowsPainter =
+    private static final LayeredHighlighter.LayerPainter WINDOWS_PAINTER =
         new WindowsHighlightPainter(null);
 
 
@@ -185,7 +185,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
      */
     @Override
     protected Highlighter.HighlightPainter getSelectionPainter() {
-        return WindowsPainter;
+        return WINDOWS_PAINTER;
     }
 
 

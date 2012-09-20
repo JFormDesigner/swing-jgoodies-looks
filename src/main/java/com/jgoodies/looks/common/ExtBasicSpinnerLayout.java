@@ -166,4 +166,5 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
         setBounds(previousButton, buttonsX, previousY, buttonsWidth,
                 previousHeight);
     }
+
 }

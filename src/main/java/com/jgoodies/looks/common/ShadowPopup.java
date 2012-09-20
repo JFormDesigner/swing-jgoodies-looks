@@ -239,7 +239,7 @@ public final class ShadowPopup extends Popup {
         if ((contentsPrefSize.width <= 0) || (contentsPrefSize.height <= 0)) {
             return;
         }
-        for(Container p = contents.getParent(); p != null; p = p.getParent()) {
+        for (Container p = contents.getParent(); p != null; p = p.getParent()) {
             if ((p instanceof JWindow) || (p instanceof Panel)) {
                 // Workaround for the gray rect problem.
                 p.setBackground(contents.getBackground());

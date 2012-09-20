@@ -643,7 +643,7 @@ public class MenuItemRenderer {
 		    }
 		} else {
 		    // *** paint the text normally
-		    if (model.isArmed()|| aMenuItem instanceof JMenu && model.isSelected()) {
+		    if (model.isArmed() || aMenuItem instanceof JMenu && model.isSelected()) {
 		        g.setColor(selectionForeground); // Uses protected field.
 		    }
             RenderingUtils.drawStringUnderlineCharAt(aMenuItem, g, text, mnemIndex,
@@ -695,7 +695,6 @@ public class MenuItemRenderer {
             // The NullIcon doesn't paint anything.
         }
     }
-
 
 
 }
