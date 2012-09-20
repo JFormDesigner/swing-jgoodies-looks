@@ -30,7 +30,12 @@
 
 package com.jgoodies.looks.windows;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.LayoutManager;
 
 import javax.swing.JButton;
 import javax.swing.JSplitPane;

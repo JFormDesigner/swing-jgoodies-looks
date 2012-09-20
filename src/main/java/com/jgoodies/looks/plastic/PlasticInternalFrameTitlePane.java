@@ -30,7 +30,11 @@
 
 package com.jgoodies.looks.plastic;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import javax.swing.Icon;
 import javax.swing.JInternalFrame;

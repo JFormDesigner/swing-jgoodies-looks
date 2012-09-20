@@ -34,7 +34,13 @@ import java.awt.KeyEventPostProcessor;
 import java.awt.Window;
 import java.awt.event.KeyEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JRootPane;
+import javax.swing.MenuElement;
+import javax.swing.MenuSelectionManager;
+import javax.swing.SwingUtilities;
 import javax.swing.plaf.basic.ComboPopup;
 
 import com.sun.java.swing.plaf.windows.WindowsRootPaneUI;
