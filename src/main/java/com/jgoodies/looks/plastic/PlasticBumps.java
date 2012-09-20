@@ -41,7 +41,6 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.IndexColorModel;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.swing.Icon;
@@ -133,8 +132,8 @@ final class PlasticBumps implements Icon {
                 return buffer;
             }
             BumpBuffer result = null;
-            for (Iterator iterator = BUFFERS.iterator(); iterator.hasNext();) {
-                BumpBuffer aBuffer = (BumpBuffer) iterator.next();
+            for (Object element : BUFFERS) {
+                BumpBuffer aBuffer = (BumpBuffer) element;
                 if (aBuffer.hasSameConfiguration(gc, aTopColor, aShadowColor, aBackColor)) {
                     result = aBuffer;
                     break;

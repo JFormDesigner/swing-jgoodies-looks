@@ -99,16 +99,16 @@ public final class MicroLayoutPolicies {
                     return isClassic
                         ? MicroLayouts.createPlasticXPVistaClassicMicroLayout()
                         : MicroLayouts.createPlasticXPVistaMicroLayout();
-                } 
+                }
                 return isLowRes
                     ? MicroLayouts.createPlasticXPLowResMicroLayout()
                     : MicroLayouts.createPlasticXPHiResMicroLayout();
-            } 
+            }
             if (is6OrLater) {
                 return isClassic
                     ? MicroLayouts.createPlasticVistaClassicMicroLayout()
                     : MicroLayouts.createPlasticVistaMicroLayout();
-            } 
+            }
             return isLowRes
                 ? MicroLayouts.createPlasticLowResMicroLayout()
                 : MicroLayouts.createPlasticHiResMicroLayout();

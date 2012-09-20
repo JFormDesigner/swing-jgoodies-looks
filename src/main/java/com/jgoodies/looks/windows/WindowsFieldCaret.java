@@ -370,7 +370,7 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
                     g.fillRect(alloc.x, alloc.y, alloc.width, alloc.height);
                 }
                 return alloc;
-            } 
+            }
             // Should only render part of View.
             try {
                 // --- determine locations ---

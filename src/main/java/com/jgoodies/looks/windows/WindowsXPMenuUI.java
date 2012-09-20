@@ -119,7 +119,7 @@ public final class WindowsXPMenuUI extends com.sun.java.swing.plaf.windows.Windo
                 aCheckIcon,
                 anArrowIcon,
                 textIconGap);
-        } 
+        }
         Dimension size =
             super.getPreferredMenuItemSize(
                 c,

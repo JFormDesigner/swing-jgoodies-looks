@@ -141,7 +141,7 @@ public final class ShadowPopup extends Popup {
                 cache = new ArrayList<ShadowPopup>(MAX_CACHE_SIZE);
             }
             if (cache.size() > 0) {
-                result = (ShadowPopup) cache.remove(0);
+                result = cache.remove(0);
             } else {
                 result = new ShadowPopup();
             }

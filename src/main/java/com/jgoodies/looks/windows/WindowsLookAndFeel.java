@@ -473,7 +473,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
             "RadioButton.margin",         checkBoxMargin,
 
             "Spinner.border",             table.get("TextField.border"),
-            
+
             "Table.gridColor",            controlColor, // 1.4.1 Bug; active
             "TextArea.margin",            wrappedTextInsets, // 1.4.1 Bug
             "TextArea.disabledBackground", disabledTextBackground,
