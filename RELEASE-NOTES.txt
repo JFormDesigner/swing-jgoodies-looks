@@ -3,6 +3,12 @@
                           Release Notes
                         
 
+CHANGES IN 2.5.3 --------------------------------------------------------
+
+    o Compiled against the JGoodies Common 1.5.
+    o Source code cleanup.
+
+
 CHANGES IN 2.5.2 --------------------------------------------------------
 
     o Fixed the broken version in the pom.xml.
