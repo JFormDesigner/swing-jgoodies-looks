@@ -30,6 +30,9 @@
 
 package com.jgoodies.looks.plastic;
 
+import static com.jgoodies.common.base.Preconditions.checkNotNull;
+import static com.jgoodies.common.internal.Messages.MUST_NOT_BE_NULL;
+
 import java.awt.Color;
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -53,7 +56,6 @@ import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.MetalTheme;
 
-import com.jgoodies.common.base.Preconditions;
 import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.FontPolicies;
 import com.jgoodies.looks.FontPolicy;
@@ -907,7 +909,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @see #getPlasticTheme()
      */
     public static void setPlasticTheme(PlasticTheme theme) {
-        Preconditions.checkNotNull(theme, "The theme must not be null.");
+        checkNotNull(theme, MUST_NOT_BE_NULL, "theme");
         setCurrentTheme(theme);
     }
 
