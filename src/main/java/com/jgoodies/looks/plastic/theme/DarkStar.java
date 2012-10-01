@@ -40,18 +40,17 @@ import javax.swing.plaf.ColorUIResource;
  * @author Karsten Lentzsch
  * @version $Revision: 1.8 $
  */
-
 public class DarkStar extends InvertedColorTheme {
 
 	private final ColorUIResource softWhite  = new ColorUIResource(154, 154, 154);
 
-	private final ColorUIResource primary1   = new ColorUIResource( 83,  83,  61); //90,  90,  66);// Dunkel: Rollbalkenrahmen-Dunkel
-	private final ColorUIResource primary2   = new ColorUIResource(115, 107,  82); //132, 123,  90);// Mittel: Rollbalkenhintergrund
-	private final ColorUIResource primary3   = new ColorUIResource(156, 156, 123); //148, 140, 107); //181, 173, 148); // Hell:   Ordnerfläche, Selektion, Rollbalken-Hoch, Menühintergrund
+	private final ColorUIResource primary1   = new ColorUIResource( 83,  83,  61); 
+	private final ColorUIResource primary2   = new ColorUIResource(115, 107,  82); 
+	private final ColorUIResource primary3   = new ColorUIResource(156, 156, 123); 
 
-	private final ColorUIResource secondary1 = new ColorUIResource( 32,  32,  32); // Abwärts  (dunkler)73,  59,  23);
-	private final ColorUIResource secondary2 = new ColorUIResource( 96,  96,  96); // Aufwärts (heller)136, 112,  46);
-	private final ColorUIResource secondary3 = new ColorUIResource( 84,  84,  84); // Fläche   134, 104,  22);
+	private final ColorUIResource secondary1 = new ColorUIResource( 32,  32,  32); 
+	private final ColorUIResource secondary2 = new ColorUIResource( 96,  96,  96); 
+	private final ColorUIResource secondary3 = new ColorUIResource( 84,  84,  84); 
 
 
 	@Override

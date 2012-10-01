@@ -43,13 +43,13 @@ public class BrownSugar extends InvertedColorTheme {
 
 	private final ColorUIResource softWhite  = new ColorUIResource(165, 157, 143);
 
-	private final ColorUIResource primary1   = new ColorUIResource( 83,  83,  61); //90,  90,  66);// Dunkel: Rollbalkenrahmen-Dunkel
-	private final ColorUIResource primary2   = new ColorUIResource(115, 107,  82); //132, 123,  90);// Mittel: Rollbalkenhintergrund
-	private final ColorUIResource primary3   = new ColorUIResource(156, 156, 123); //148, 140, 107); //181, 173, 148); // Hell:   Ordnerfläche, Selektion, Rollbalken-Hoch, Menühintergrund
+	private final ColorUIResource primary1   = new ColorUIResource( 83,  83,  61);
+	private final ColorUIResource primary2   = new ColorUIResource(115, 107,  82);
+	private final ColorUIResource primary3   = new ColorUIResource(156, 156, 123);
 
-	private final ColorUIResource secondary1 = new ColorUIResource( 35,  33,  29); // Abwärts  (dunkler)73,  59,  23);
-	private final ColorUIResource secondary2 = new ColorUIResource(105,  99,  87); // Aufwärts (heller)136, 112,  46);
-	private final ColorUIResource secondary3 = new ColorUIResource( 92,  87,  76); // Fläche   134, 104,  22);
+	private final ColorUIResource secondary1 = new ColorUIResource( 35,  33,  29);
+	private final ColorUIResource secondary2 = new ColorUIResource(105,  99,  87);
+	private final ColorUIResource secondary3 = new ColorUIResource( 92,  87,  76);
 
 
 	@Override
