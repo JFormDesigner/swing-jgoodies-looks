@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Toolkit;
-import java.util.Locale;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -19,7 +18,6 @@ import javax.swing.text.JTextComponent;
 
 import com.jgoodies.common.base.SystemUtils;
 import com.jgoodies.looks.FontSet;
-import com.jgoodies.looks.Fonts;
 import com.jgoodies.looks.LookUtils;
 import com.jgoodies.looks.plastic.PlasticLookAndFeel;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
@@ -143,8 +141,6 @@ public final class FontTest {
                 "win.frame.captionFont",
                 "win.tooltip.font"});
 
-        addInternationalizationProperties(buffer);
-
         addFontSet(buffer, "JGoodies Windows L&f:", getWindowsFontSet());
         addFontSet(buffer, "JGoodies Plastic L&fs:", getPlasticFontSet());
 
@@ -184,42 +180,6 @@ public final class FontTest {
             buffer.append(key);
             buffer.append('=');
             buffer.append(printString);
-        }
-    }
-
-
-    private static void addInternationalizationProperties(StringBuffer buffer) {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-        buffer.append("\n\n");
-        buffer.append("Internationalization:");
-        Locale locale = Locale.getDefault();
-        buffer.append("\n    defaultLocale.getDisplayName(Locale.ENGLISH)=");
-        buffer.append(locale.getDisplayName(Locale.ENGLISH));
-        buffer.append("\n    defaultLocale.getDisplayLanguage(Locale.ENGLISH)=");
-        buffer.append(locale.getDisplayLanguage(Locale.ENGLISH));
-        buffer.append("\n    defaultLocale.getDisplayLanguage(defaultLocale)=");
-        buffer.append(locale.getDisplayLanguage(locale));
-        buffer.append("\n    locale has localized display language=" + localeHasLocalizedDisplayLanguage(locale));
-        Font defaultGUIFont = (Font) toolkit.getDesktopProperty("win.defaultGUI.font");
-        if (defaultGUIFont != null) {
-            buffer.append("\n    defaultGUI font can display localized text=");
-            buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(defaultGUIFont, locale)));
-        }
-        Font iconFont = (Font) toolkit.getDesktopProperty("win.icon.font");
-        if (iconFont != null) {
-            buffer.append("\n    icon font can display localized text=");
-            buffer.append(yesNoDontKnow(Fonts.canDisplayLocalizedText(iconFont, locale)));
-        }
-    }
-
-
-    private static String yesNoDontKnow(Boolean b) {
-        if (Boolean.TRUE.equals(b)) {
-            return "yes";
-        } else if (Boolean.FALSE.equals(b)) {
-            return "no";
-        } else {
-            return "don't know";
         }
     }
 
@@ -311,26 +271,6 @@ public final class FontTest {
         } catch (UnsupportedLookAndFeelException e) {
             return null;
         }
-    }
-
-
-    // Helper Code ************************************************************
-
-    /**
-     * Checks and answers whether the locale's display language
-     * is available in a localized form, for example "Deutsch" for the
-     * German locale.
-     *
-     * @param locale   the Locale to test
-     * @return true if the display language is localized, false if not
-     */
-    private static boolean localeHasLocalizedDisplayLanguage(Locale locale) {
-        if (locale.getLanguage().equals(Locale.ENGLISH.getLanguage())) {
-            return true;
-        }
-        String englishDisplayLanguage = locale.getDisplayLanguage(Locale.ENGLISH);
-        String localizedDisplayLanguage = locale.getDisplayLanguage(locale);
-        return !englishDisplayLanguage.equals(localizedDisplayLanguage);
     }
 
 

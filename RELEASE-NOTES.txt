@@ -3,6 +3,18 @@
                           Release Notes
                         
 
+CHANGES IN 2.6.0 --------------------------------------------------------
+
+    o Improved the display of non-western fonts.
+      Overhauled the lookup of the Windows control font for the default 
+      Windows font policy and the default Plastic-on-Windows font policy. 
+      These font policies now try to build composite fonts.
+    o Removed unnecessary code.
+    o Adjusted tests.
+    o Source cleanup.
+    o Compiled against the JGoodies Common 1.8.
+
+
 CHANGES IN 2.5.3 --------------------------------------------------------
 
     o Compiled against the JGoodies Common 1.5.

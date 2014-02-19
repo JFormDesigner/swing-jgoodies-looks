@@ -158,7 +158,7 @@ public final class FontSets {
 
     // Helper Code ************************************************************
 
-    private static final class DefaultFontSet implements FontSet {
+    static final class DefaultFontSet implements FontSet {
 
         private final FontUIResource controlFont;
         private final FontUIResource menuFont;

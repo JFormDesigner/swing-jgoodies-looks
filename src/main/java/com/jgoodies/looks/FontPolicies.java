@@ -31,10 +31,13 @@
 package com.jgoodies.looks;
 
 import java.awt.Font;
+import java.lang.reflect.Method;
 
 import javax.swing.UIDefaults;
+import javax.swing.plaf.FontUIResource;
 
 import com.jgoodies.common.base.SystemUtils;
+import com.jgoodies.looks.FontSets.DefaultFontSet;
 
 
 /**
@@ -303,26 +306,22 @@ public final class FontPolicies {
      * Implements the default font lookup for the Plastic L&f family
      * when running in a Windows environment.
      */
-    private static final class DefaultPlasticOnWindowsPolicy implements FontPolicy {
+    private static final class DefaultPlasticOnWindowsPolicy extends DefaultWindowsPolicy {
 
         @Override
 		public FontSet getFontSet(String lafName, UIDefaults table) {
-            Font windowsControlFont = Fonts.getWindowsControlFont();
-            Font controlFont;
-            if (windowsControlFont != null) {
-                controlFont = windowsControlFont;
-            } else if (table != null) {
-                controlFont = table.getFont("Button.font");
-            } else {
-                controlFont = new Font("Dialog", Font.PLAIN, 12);
-            }
+            FontSet fontSet = super.getFontSet(lafName, table);
+            
+           
+            Font titleFont = fontSet.getTitleFont().deriveFont(Font.BOLD);
 
-            Font menuFont = table == null
-                ? controlFont
-                : table.getFont("Menu.font");
-            Font titleFont = controlFont.deriveFont(Font.BOLD);
-
-            return FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);
+            return new DefaultFontSet(
+                    fontSet.getControlFont(),
+                    fontSet.getMenuFont(),
+                    titleFont,
+                    fontSet.getMessageFont(),
+                    fontSet.getSmallFont(),
+                    fontSet.getWindowTitleFont());
         }
     }
 
@@ -330,19 +329,17 @@ public final class FontPolicies {
     /**
      * Implements the default font lookup on the Windows platform.
      */
-    private static final class DefaultWindowsPolicy implements FontPolicy {
+    private static class DefaultWindowsPolicy implements FontPolicy {
+        
+        private static final String FONT_UTILITIES_CLASS_NAME =
+                SystemUtils.IS_JAVA_6
+                    ? "sun.font.FontManager"
+                    : "sun.font.FontUtilities";
 
         @Override
 		public FontSet getFontSet(String lafName, UIDefaults table) {
             Font windowsControlFont = Fonts.getWindowsControlFont();
-            Font controlFont;
-            if (windowsControlFont != null) {
-                controlFont = windowsControlFont;
-            } else if (table != null) {
-                controlFont = table.getFont("Button.font");
-            } else {
-                controlFont = new Font("Dialog", Font.PLAIN, 12);
-            }
+            Font controlFont = lookUpControlFont(windowsControlFont, table);
             Font menuFont = table == null
                 ? controlFont
                 : table.getFont("Menu.font");
@@ -353,7 +350,7 @@ public final class FontPolicies {
             Font smallFont = table == null
                 ? controlFont.deriveFont(controlFont.getSize2D() - 2f)
                 : table.getFont("ToolTip.font");
-            Font windowTitleFont  = table == null
+            Font windowTitleFont = table == null
                 ? controlFont
                 : table.getFont("InternalFrame.titleFont");
             return FontSets.createDefaultFontSet(
@@ -364,6 +361,71 @@ public final class FontPolicies {
                     smallFont,
                     windowTitleFont);
         }
+        
+        
+        private static Font lookUpControlFont(Font windowsControlFont, UIDefaults table) {
+            // Return a general fallback if no windows control font is provided.
+            // Happens, if Fonts#getWindowsControlFont cannot access the icon font.
+            if (windowsControlFont == null) {
+                return new Font("Dialog", Font.PLAIN, 12);
+            }
+            if (table == null) {
+                return windowsControlFont;
+            }
+            // Obtain the table's button font and compare it with the windows control font.
+            final Font buttonFont = table.getFont("Button.font");
+            if (   buttonFont != null
+                && buttonFont.getName().equals(windowsControlFont.getName())) {
+                // If size and style are the same, we're done.
+                if(   buttonFont.getSize()  == windowsControlFont.getSize()
+                   || buttonFont.getStyle() == windowsControlFont.getStyle()) {
+                    return buttonFont;
+                }
+                // Otherwise derive a font with the the style and size we want.
+                return buttonFont.deriveFont(
+                        windowsControlFont.getStyle(),
+                        windowsControlFont.getSize2D());
+            }
+            // In case we want a font other than the Oracle Windows L&amp;F,
+            // we try to use private Sun classes to obtain a a composite font.
+            // This is necessary to for using a fallback font chain.
+            if (fontSupportsDefaultEncoding(windowsControlFont)) {
+                return windowsControlFont;
+            }
+            FontUIResource fuir = getCompositeFontUIResource(windowsControlFont);
+            return fuir != null ? fuir : windowsControlFont;
+        }
+        
+        
+        private static boolean fontSupportsDefaultEncoding(Font font) {
+            try {
+                Method m = Class.forName(FONT_UTILITIES_CLASS_NAME).getMethod(
+                    "fontSupportsDefaultEncoding", Font.class);
+                if (m != null) {
+                    return ((Boolean) m.invoke(null, font)).booleanValue();
+                }
+                return true;
+            } catch (Exception ex) {
+                // Ignore
+            }
+            return true;
+        }
+        
+        
+        private static FontUIResource getCompositeFontUIResource(Font font) {
+            try {
+                Method m = Class.forName(FONT_UTILITIES_CLASS_NAME).getMethod(
+                    "getCompositeFontUIResource", Font.class);
+                if (m != null) {
+                    return (FontUIResource) m.invoke(null, font);
+                }
+                return null;
+            } catch (Exception ex) {
+                // Ignore
+            }
+            return null;
+        }
+        
     }
 
 

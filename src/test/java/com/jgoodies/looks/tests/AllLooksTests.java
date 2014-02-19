@@ -41,7 +41,6 @@ import org.junit.runners.Suite;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    FontsTest.class,
     OptionsTest.class
 })
 public final class AllLooksTests {
