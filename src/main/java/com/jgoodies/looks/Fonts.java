@@ -151,14 +151,6 @@ public final class Fonts {
     public static final Font WINDOWS_VISTA_96DPI_LARGE = SEGOE_UI_15PT;
 
     /**
-     * The default icon font on western Windows Vista with 101dpi
-     * and the dialog font desktop setting "Normal".<P>
-     *
-     * TODO: Check if this shall be removed or not.
-     */
-    static final Font WINDOWS_VISTA_101DPI_NORMAL = SEGOE_UI_13PT;
-
-    /**
      * The default icon font on western Windows Vista with 120dpi
      * and the dialog font desktop setting "Normal".
      */
