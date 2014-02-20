@@ -192,21 +192,21 @@ public final class FontSets {
                 Font messageFont,
                 Font smallFont,
                 Font windowTitleFont) {
-            this.controlFont = new FontUIResource(controlFont);
+            this.controlFont = asFontUIResource(controlFont);
             this.menuFont = menuFont != null
-                ? new FontUIResource(menuFont)
+                ? asFontUIResource(menuFont)
                 : this.controlFont;
             this.titleFont = titleFont != null
-                ? new FontUIResource(titleFont)
+                ? asFontUIResource(titleFont)
                 : this.controlFont; //new FontUIResource(controlFont.deriveFont(Font.BOLD))
             this.messageFont = messageFont != null
-                ? new FontUIResource(messageFont)
+                ? asFontUIResource(messageFont)
                 : this.controlFont;
             this.smallFont = new FontUIResource(smallFont != null
                 ? smallFont
                 : controlFont.deriveFont(controlFont.getSize2D() - 2f));
             this.windowTitleFont = windowTitleFont != null
-                ? new FontUIResource(windowTitleFont)
+                ? asFontUIResource(windowTitleFont)
                 : this.titleFont;
         }
 
@@ -241,6 +241,15 @@ public final class FontSets {
         @Override
 		public FontUIResource getMessageFont() {
             return messageFont;
+        }
+        
+        
+        // Helper Code -----------------------------------------------------
+        
+        private static FontUIResource asFontUIResource(Font font) {
+            return font instanceof FontUIResource
+                    ? (FontUIResource) font
+                    : new FontUIResource(font);
         }
 
     }
