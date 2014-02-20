@@ -202,7 +202,7 @@ public final class FontSets {
             this.messageFont = messageFont != null
                 ? asFontUIResource(messageFont)
                 : this.controlFont;
-            this.smallFont = new FontUIResource(smallFont != null
+            this.smallFont = asFontUIResource(smallFont != null
                 ? smallFont
                 : controlFont.deriveFont(controlFont.getSize2D() - 2f));
             this.windowTitleFont = windowTitleFont != null
@@ -244,14 +244,6 @@ public final class FontSets {
         }
         
         
-        // Helper Code -----------------------------------------------------
-        
-        private static FontUIResource asFontUIResource(Font font) {
-            return font instanceof FontUIResource
-                    ? (FontUIResource) font
-                    : new FontUIResource(font);
-        }
-
     }
 
 
@@ -270,7 +262,7 @@ public final class FontSets {
         @Override
 		public FontUIResource getControlFont() {
             if (controlFont == null) {
-                controlFont = new FontUIResource(
+                controlFont = asFontUIResource(
                         Font.getFont(
                             "swing.plaf.metal.controlFont",
                             new Font("Dialog", Font.PLAIN, 12)));
@@ -287,8 +279,7 @@ public final class FontSets {
         @Override
 		public FontUIResource getTitleFont() {
             if (titleFont == null) {
-                titleFont =
-                    new FontUIResource(
+                titleFont = asFontUIResource(
                         getControlFont().deriveFont(Font.BOLD));
             }
             return titleFont;
@@ -298,7 +289,7 @@ public final class FontSets {
 		public FontUIResource getSmallFont() {
             if (smallFont == null) {
                 smallFont =
-                    new FontUIResource(
+                    asFontUIResource(
                         Font.getFont(
                             "swing.plaf.metal.smallFont",
                             new Font("Dialog", Font.PLAIN, 10)));
@@ -310,7 +301,7 @@ public final class FontSets {
 		public FontUIResource getMessageFont() {
             if (systemFont == null) {
                 systemFont =
-                    new FontUIResource(
+                    asFontUIResource(
                         Font.getFont(
                             "swing.plaf.metal.systemFont",
                             new Font("Dialog", Font.PLAIN, 12)));
@@ -325,6 +316,16 @@ public final class FontSets {
 
 
     }
+
+    
+    // Helper Code ************************************************************
+    
+    static FontUIResource asFontUIResource(Font font) {
+        return font instanceof FontUIResource
+                ? (FontUIResource) font
+                : new FontUIResource(font);
+    }
+
 
 
 }
