@@ -5,10 +5,11 @@
 
 CHANGES IN 2.6.0 --------------------------------------------------------
 
-    o Improved the display of non-western fonts.
-      Overhauled the lookup of the Windows control font for the default 
-      Windows font policy and the default Plastic-on-Windows font policy. 
+    o Improved the display of non-western fonts. Overhauled the lookup 
+      of the Windows control font for the default Windows font policy 
+      and the default Plastic-on-Windows font policy. 
       These font policies now try to build composite fonts.
+    o Removed font policies for the Looks 1.x. 
     o Removed unnecessary code.
     o Adjusted tests.
     o Source cleanup.

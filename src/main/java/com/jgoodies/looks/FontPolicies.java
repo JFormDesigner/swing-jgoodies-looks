@@ -30,6 +30,8 @@
 
 package com.jgoodies.looks;
 
+import static com.jgoodies.common.base.Preconditions.checkNotNull;
+
 import java.awt.Font;
 import java.lang.reflect.Method;
 
@@ -37,6 +39,7 @@ import javax.swing.UIDefaults;
 import javax.swing.plaf.FontUIResource;
 
 import com.jgoodies.common.base.SystemUtils;
+import com.jgoodies.common.internal.Messages;
 import com.jgoodies.looks.FontSets.DefaultFontSet;
 
 
@@ -172,54 +175,6 @@ public final class FontPolicies {
      */
     public static FontPolicy getLogicalFontsPolicy() {
         return createFixedPolicy(FontSets.getLogicalFontSet());
-    }
-
-
-    /**
-     * Returns a font policy for getting a Plastic appearance that aims to be
-     * visual backward compatible with the JGoodies Looks version 1.x.
-     * It uses a font choice similar to the choice implemented
-     * by the Plastic L&amp;fs in the JGoodies Looks version 1.x.
-     *
-     * @return a font policy that aims to reproduce the Plastic font choice
-     *     in the JGoodies Looks 1.x.
-     */
-    public static FontPolicy getLooks1xPlasticPolicy() {
-        Font controlFont = Fonts.getDefaultGUIFontWesternModernWindowsNormal();
-        Font menuFont = controlFont;
-        Font titleFont = controlFont.deriveFont(Font.BOLD);
-        FontSet fontSet = FontSets.createDefaultFontSet(controlFont, menuFont, titleFont);
-        return createFixedPolicy(fontSet);
-    }
-
-
-    /**
-     * Returns a font policy for getting a Windows appearance that aims to be
-     * visual backward compatible with the JGoodies Looks version 1.x.
-     * It uses a font choice similar to the choice implemented
-     * by the Windows L&amp;f in the JGoodies Looks version 1.x.
-     *
-     * @return a font policy that aims to reproduce the Windows font choice
-     *     in the JGoodies Looks 1.x.
-     */
-    public static FontPolicy getLooks1xWindowsPolicy() {
-        return new Looks1xWindowsPolicy();
-    }
-
-
-    /**
-     * Returns a font policy intended for API users that want to
-     * move Plastic code from the Looks 1.x to the Looks 2.0.
-     * On Windows, it uses the Looks 2.0 Plastic fonts,
-     * on other platforms it uses the Looks 1.x Plastic fonts.
-     *
-     * @return the recent Plastic font policy on Windows,
-     *     the JGoodies Looks 1.x on other Platforms.
-     */
-    public static FontPolicy getTransitionalPlasticPolicy() {
-        return SystemUtils.IS_OS_WINDOWS
-            ? getDefaultPlasticOnWindowsPolicy()
-            : getLooks1xPlasticPolicy();
     }
 
 
@@ -364,11 +319,7 @@ public final class FontPolicies {
         
         
         private static Font lookUpControlFont(Font windowsControlFont, UIDefaults table) {
-            // Return a general fallback if no windows control font is provided.
-            // Happens, if Fonts#getWindowsControlFont cannot access the icon font.
-            if (windowsControlFont == null) {
-                return new Font("Dialog", Font.PLAIN, 12);
-            }
+            checkNotNull(windowsControlFont, Messages.MUST_NOT_BE_NULL, "Windows control font");
             if (table == null) {
                 return windowsControlFont;
             }
@@ -444,27 +395,6 @@ public final class FontPolicies {
         @Override
 		public FontSet getFontSet(String lafName, UIDefaults table) {
             return fontSet;
-        }
-    }
-
-
-    /**
-     * Aims to mimic the font choice as used in the JGoodies Looks 1.x.
-     */
-    private static final class Looks1xWindowsPolicy implements FontPolicy {
-
-        @Override
-		public FontSet getFontSet(String lafName, UIDefaults table) {
-            Font windowsControlFont = Fonts.getLooks1xWindowsControlFont();
-            Font controlFont;
-            if (windowsControlFont != null) {
-                controlFont = windowsControlFont;
-            } else if (table != null) {
-                controlFont = table.getFont("Button.font");
-            } else {
-                controlFont = new Font("Dialog", Font.PLAIN, 12);
-            }
-            return FontSets.createDefaultFontSet(controlFont);
         }
     }
 
