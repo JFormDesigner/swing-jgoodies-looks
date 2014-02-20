@@ -251,16 +251,14 @@ public final class Fonts {
             throw new UnsupportedOperationException("The Windows control font can be computed only on the Windows platform.");
         }
 
-        Font defaultGUIFont = getDefaultGUIFont();
         // Return the default GUI font on older Windows versions.
         if (LookUtils.IS_OS_WINDOWS_95
         ||  SystemUtils.IS_OS_WINDOWS_98
         ||  LookUtils.IS_OS_WINDOWS_NT
         ||  SystemUtils.IS_OS_WINDOWS_ME) {
-            return defaultGUIFont;
+            return getDefaultGUIFont();
         }
-
-        return getDesktopFont(WINDOWS_ICON_FONT_KEY);
+        return getIconFont();
     }
 
 
@@ -275,9 +273,21 @@ public final class Fonts {
      */
     private static Font getDefaultGUIFont() {
         Font font = getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
-        if (font != null) {
-            return font;
-        }
+        return font != null
+                ? font
+                : getFallbackFont();
+    }
+    
+    
+    private static Font getIconFont() {
+        Font font = getDesktopFont(WINDOWS_ICON_FONT_KEY);
+        return font != null
+                ? font
+                : getFallbackFont();
+    }
+    
+    
+    private static Font getFallbackFont() {
         return new Font("Dialog", Font.PLAIN, 12);
     }
 
