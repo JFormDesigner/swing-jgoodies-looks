@@ -2007,19 +2007,16 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
         protected static final Insets EAST_INSETS  = new Insets(0, 0, 0, 1);
 
         protected final JTabbedPane tabPane;
-        protected final int tabPlacement;
         protected Color shadowColor;
         protected Color darkShadow;
         protected Color selectColor;
         protected Color selectLight;
         protected Color selectHighlight;
-        protected Color lightHighlight;
         protected Color focus;
 
         private AbstractRenderer(JTabbedPane tabPane) {
             initColors();
             this.tabPane = tabPane;
-            this.tabPlacement = tabPane.getTabPlacement();
         }
 
         private static AbstractRenderer createRenderer(JTabbedPane tabPane) {
@@ -2058,7 +2055,6 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
             selectColor     = UIManager.getColor("TabbedPane.selected");
             focus           = UIManager.getColor("TabbedPane.focus");
             selectHighlight = UIManager.getColor("TabbedPane.selectHighlight");
-            lightHighlight  = UIManager.getColor("TabbedPane.highlight");
             selectLight =
                 new Color(
                     (2 * selectColor.getRed()   + selectHighlight.getRed())   / 3,

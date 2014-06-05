@@ -5,6 +5,7 @@
 
 CHANGES IN 2.6.1 --------------------------------------------------------
 
+    o Removed obsolete code.
     o Suppressed compiler warnings. 
 
 

@@ -44,7 +44,7 @@ import com.jgoodies.looks.common.ExtBasicMenuUI;
 /**
  * The JGoodies Plastic look&amp;feel implementation of {@code MenuUI}.
  * It differs from the superclass in that it uses an overhauled menu
- * rendering an aligmnent system. Furthermore, you can set a client property
+ * rendering and alignment system. Furthermore, you can set a client property
  * <tt>Options.NO_ICONS_KEY</tt> to indicate that this menu has no icons.
  *
  * @author  Karsten Lentzsch
@@ -55,19 +55,10 @@ import com.jgoodies.looks.common.ExtBasicMenuUI;
 public final class PlasticMenuUI extends ExtBasicMenuUI {
 
 
-    private boolean oldOpaque;
-
 
 	public static ComponentUI createUI(JComponent b) {
 		return new PlasticMenuUI();
 	}
-
-    @Override
-    protected void installDefaults() {
-        super.installDefaults();
-        oldOpaque = menuItem.isOpaque();
-    }
-
 
 
 	/**
