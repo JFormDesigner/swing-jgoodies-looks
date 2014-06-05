@@ -3,6 +3,11 @@
                           Release Notes
                         
 
+CHANGES IN 2.6.1 --------------------------------------------------------
+
+    o Suppressed compiler warnings. 
+
+
 CHANGES IN 2.6.0 --------------------------------------------------------
 
     o Improved the display of non-western fonts. Overhauled the lookup 

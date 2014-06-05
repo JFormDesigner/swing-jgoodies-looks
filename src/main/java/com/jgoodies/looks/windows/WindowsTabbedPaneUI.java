@@ -274,6 +274,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the top edge of the pane's content border.
      */
+    @SuppressWarnings("null")
     @Override
     protected void paintContentBorderTopEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
@@ -300,6 +301,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the bottom edge of the pane's content border.
      */
+    @SuppressWarnings("null")
     @Override
     protected void paintContentBorderBottomEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
@@ -334,6 +336,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the left Edge of the pane's content border.
      */
+    @SuppressWarnings("null")
     @Override
     protected void paintContentBorderLeftEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
@@ -365,6 +368,7 @@ public final class WindowsTabbedPaneUI extends com.sun.java.swing.plaf.windows.W
     /**
      * Paints the right Edge of the pane's content border.
      */
+    @SuppressWarnings("null")
     @Override
     protected void paintContentBorderRightEdge(Graphics g, int tabPlacement,
                                          int selectedIndex,
