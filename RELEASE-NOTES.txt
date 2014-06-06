@@ -3,8 +3,9 @@
                           Release Notes
                         
 
-CHANGES IN 2.6.1 --------------------------------------------------------
+CHANGES IN 2.7.0 --------------------------------------------------------
 
+    o Removed the Look&Feel replacement information from the Options.
     o Removed obsolete code.
     o Suppressed compiler warnings. 
 
