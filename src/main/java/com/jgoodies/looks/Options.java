@@ -31,8 +31,6 @@
 package com.jgoodies.looks;
 
 import java.awt.Dimension;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -89,21 +87,6 @@ public final class Options {
      */
     public static final String DEFAULT_LOOK_NAME =
         PLASTICXP_NAME;
-
-    /**
-     * Holds a Map that enables the look&amp;feel replacement
-     * mechanism to replace one look by another.
-     * Maps the original class names to their replacement class names.
-     *
-     * @see #getReplacementClassNameFor(String)
-     * @see #putLookAndFeelReplacement(String, String)
-     * @see #removeLookAndFeelReplacement(String)
-     */
-    private static final Map<String, String> LAF_REPLACEMENTS;
-    static {
-        LAF_REPLACEMENTS = new HashMap<String, String>();
-        initializeDefaultReplacements();
-    }
 
 
     // Keys for Overriding Font Settings **************************************
@@ -842,89 +825,6 @@ public final class Options {
         field.putClientProperty(SELECT_ON_FOCUS_GAIN_CLIENT_KEY, b);
     }
 
-
-    // Look And Feel Replacements *********************************************
-
-    /**
-     * Puts a replacement name for a given {@code LookAndFeel}
-     * class name in the list of all look and feel replacements.
-     *
-     * @param original   the name of the look-and-feel to replace
-     * @param replacement   the name of the replacement look-and-feel
-     * @see #removeLookAndFeelReplacement(String)
-     * @see #getReplacementClassNameFor(String)
-     */
-    public static void putLookAndFeelReplacement(
-        String original,
-        String replacement) {
-        LAF_REPLACEMENTS.put(original, replacement);
-    }
-
-    /**
-     * Removes a replacement name for a given {@code LookAndFeel}
-     * class name from the list of all look and feel replacements.
-     *
-     * @param original   the name of the look-and-feel that has been replaced
-     * @see #putLookAndFeelReplacement(String, String)
-     * @see #getReplacementClassNameFor(String)
-     */
-    public static void removeLookAndFeelReplacement(String original) {
-        LAF_REPLACEMENTS.remove(original);
-    }
-
-
-    /**
-     * A replacement used to replace a given L&f with nothing,
-     * that indicates that it should not be used. For example,
-     * by default we mark the WindowsClass L&f this way,
-     * to remove it from L&f lists that replace the Sun Windows L&f
-     * with the JGoodies Windows L&f.
-     *
-     * @since 2.1.3
-     */
-    public static final String NO_REPLACEMENT = "none";
-
-    /**
-     * Initializes some default class name replacements, that replace
-     * Sun's Java look and feel, and Sun's Windows look and feel by
-     * the appropriate JGoodies replacements.
-     *
-     * @see #putLookAndFeelReplacement(String, String)
-     * @see #removeLookAndFeelReplacement(String)
-     * @see #getReplacementClassNameFor(String)
-     */
-    private static void initializeDefaultReplacements() {
-        putLookAndFeelReplacement(
-            "javax.swing.plaf.metal.MetalLookAndFeel",
-            PLASTIC3D_NAME);
-        putLookAndFeelReplacement(
-            "com.sun.java.swing.plaf.windows.WindowsLookAndFeel",
-            JGOODIES_WINDOWS_NAME);
-        putLookAndFeelReplacement(
-                "com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel",
-                NO_REPLACEMENT);
-    }
-
-    /**
-     * Returns the class name that can be used to replace the specified
-     * {@code LookAndFeel} class name.
-     *
-     * @param className   the name of the look-and-feel class
-     * @return the name of the suggested replacement class
-     *
-     * @see #putLookAndFeelReplacement(String, String)
-     * @see #removeLookAndFeelReplacement(String)
-     */
-    public static String getReplacementClassNameFor(String className) {
-        String replacement = LAF_REPLACEMENTS.get(className);
-        if (replacement == null) {
-            return className;
-        } else if (replacement.equals(NO_REPLACEMENT)) {
-            return null;
-        } else {
-            return replacement;
-        }
-    }
 
     /**
      * Returns the class name for a cross-platform {@code LookAndFeel}.
