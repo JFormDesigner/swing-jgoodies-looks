@@ -33,12 +33,12 @@ import com.jgoodies.looks.windows.WindowsLookAndFeel;
  * @author Karsten Lentzsch
  * @version $Revision: 1.2 $
  */
-public final class FontTest {
+public final class FontTestApp {
 
     private JTextComponent textArea;
 
 
-    private FontTest() {
+    private FontTestApp() {
     	// Overrides default constructor; prevents instantiation.
     }
 
@@ -49,7 +49,7 @@ public final class FontTest {
      * Builds and the UI.
      */
     public static void main(String[] args) {
-        FontTest instance = new FontTest();
+        FontTestApp instance = new FontTestApp();
         instance.buildInterface();
     }
 

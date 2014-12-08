@@ -273,7 +273,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      * @see #getMicroLayoutPolicy()
      * @see Options#PLASTIC_MICRO_LAYOUT_POLICY_KEY
      */
-    public static void setMicroLayoutPolicy(MicroLayout microLayoutPolicy) {
+    public static void setMicroLayoutPolicy(MicroLayoutPolicy microLayoutPolicy) {
         UIManager.put(Options.PLASTIC_MICRO_LAYOUT_POLICY_KEY, microLayoutPolicy);
     }
 

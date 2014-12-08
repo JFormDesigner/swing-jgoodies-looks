@@ -175,7 +175,7 @@ public final class Options {
      * for the Plastic L&amp;fs.
      *
      * @see PlasticLookAndFeel#getMicroLayoutPolicy()
-     * @see PlasticLookAndFeel#setMicroLayoutPolicy(MicroLayout)
+     * @see PlasticLookAndFeel#setMicroLayoutPolicy(MicroLayoutPolicy)
      */
     public static final String PLASTIC_MICRO_LAYOUT_POLICY_KEY =
         "Plastic.MicroLayoutPolicy";
@@ -186,7 +186,7 @@ public final class Options {
      * for the Windows L&amp;f.
      *
      * @see WindowsLookAndFeel#getMicroLayoutPolicy()
-     * @see WindowsLookAndFeel#setMicroLayoutPolicy(MicroLayout)
+     * @see WindowsLookAndFeel#setMicroLayoutPolicy(MicroLayoutPolicy)
      */
     public static final String WINDOWS_MICRO_LAYOUT_POLICY_KEY =
         "Windows.MicroLayoutPolicy";

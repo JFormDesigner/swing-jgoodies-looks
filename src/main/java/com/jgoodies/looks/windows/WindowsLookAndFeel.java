@@ -180,7 +180,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
      * @see #getMicroLayoutPolicy()
      * @see Options#WINDOWS_MICRO_LAYOUT_POLICY_KEY
      */
-    public static void setMicroLayoutPolicy(MicroLayout microLayoutPolicy) {
+    public static void setMicroLayoutPolicy(MicroLayoutPolicy microLayoutPolicy) {
         UIManager.put(Options.WINDOWS_MICRO_LAYOUT_POLICY_KEY, microLayoutPolicy);
     }
 
