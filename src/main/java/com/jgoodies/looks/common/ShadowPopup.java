@@ -138,7 +138,7 @@ public final class ShadowPopup extends Popup {
         ShadowPopup result;
         synchronized (ShadowPopup.class) {
             if (cache == null) {
-                cache = new ArrayList<ShadowPopup>(MAX_CACHE_SIZE);
+                cache = new ArrayList<>(MAX_CACHE_SIZE);
             }
             if (cache.size() > 0) {
                 result = cache.remove(0);
@@ -184,7 +184,7 @@ public final class ShadowPopup extends Popup {
 
         JComponent parent = (JComponent) contents.getParent();
         popup.hide();
-        if ((parent != null) && parent.getBorder() == SHADOW_BORDER) {
+        if (parent != null && parent.getBorder() == SHADOW_BORDER) {
             parent.setBorder(oldBorder);
             parent.setOpaque(oldOpaque);
             oldBorder = null;
@@ -236,11 +236,11 @@ public final class ShadowPopup extends Popup {
         // has a preferred size less than or equal to 0.
         // We can't use the size, because it is(0, 0) for new popups.
         Dimension contentsPrefSize = contents.getPreferredSize();
-        if ((contentsPrefSize.width <= 0) || (contentsPrefSize.height <= 0)) {
+        if (contentsPrefSize.width <= 0 || contentsPrefSize.height <= 0) {
             return;
         }
         for (Container p = contents.getParent(); p != null; p = p.getParent()) {
-            if ((p instanceof JWindow) || (p instanceof Panel)) {
+            if (p instanceof JWindow || p instanceof Panel) {
                 // Workaround for the gray rect problem.
                 p.setBackground(contents.getBackground());
                 heavyWeightContainer = p;
@@ -293,7 +293,7 @@ public final class ShadowPopup extends Popup {
 
             // Avoid unnecessary and illegal screen captures
             // for degenerated popups.
-            if ((width <= 0) || (height <= SHADOW_SIZE)) {
+            if (width <= 0 || height <= SHADOW_SIZE) {
                 return;
             }
 
@@ -329,10 +329,10 @@ public final class ShadowPopup extends Popup {
             RECT.width = width;
             RECT.height = SHADOW_SIZE;
 
-            if ((RECT.x + RECT.width) > layeredPaneWidth) {
+            if (RECT.x + RECT.width > layeredPaneWidth) {
                 RECT.width = layeredPaneWidth - RECT.x;
             }
-            if ((RECT.y + RECT.height) > layeredPaneHeight) {
+            if (RECT.y + RECT.height > layeredPaneHeight) {
                 RECT.height = layeredPaneHeight - RECT.y;
             }
             if (!RECT.isEmpty()) {
@@ -357,10 +357,10 @@ public final class ShadowPopup extends Popup {
             RECT.width = SHADOW_SIZE;
             RECT.height = height - SHADOW_SIZE;
 
-            if ((RECT.x + RECT.width) > layeredPaneWidth) {
+            if (RECT.x + RECT.width > layeredPaneWidth) {
                 RECT.width = layeredPaneWidth - RECT.x;
             }
-            if ((RECT.y + RECT.height) > layeredPaneHeight) {
+            if (RECT.y + RECT.height > layeredPaneHeight) {
                 RECT.height = layeredPaneHeight - RECT.y;
             }
             if (!RECT.isEmpty()) {

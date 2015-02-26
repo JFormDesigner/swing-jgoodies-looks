@@ -69,7 +69,8 @@ public class PlasticInternalFrameUI extends BasicInternalFrameUI {
 	private static final Border EMPTY_BORDER	= new EmptyBorder(0, 0, 0, 0);
 
 
-  	private PlasticInternalFrameTitlePane	titlePane;
+  	@SuppressWarnings("hiding")
+    private PlasticInternalFrameTitlePane	titlePane;
  	private PropertyChangeListener			paletteListener;
  	private PropertyChangeListener			contentPaneListener;
 

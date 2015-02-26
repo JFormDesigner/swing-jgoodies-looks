@@ -96,6 +96,8 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
 
 
     private boolean tableCellEditor;
+    
+    @SuppressWarnings("hiding")
     private PropertyChangeListener propertyChangeListener;
 
 
@@ -113,7 +115,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     private static void ensurePhantomHasPlasticUI() {
         TextUI ui = PHANTOM.getUI();
         Class lafClass = UIManager.getLookAndFeel().getClass();
-        if (   (phantomLafClass != lafClass)
+        if (   phantomLafClass != lafClass
             || !(ui instanceof MetalTextFieldUI)) {
             phantomLafClass = lafClass;
             PHANTOM.updateUI();
@@ -126,7 +128,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     @Override
     public void installUI( JComponent c ) {
         super.installUI(c);
-        tableCellEditor = isTableCellEditor();
+        tableCellEditor = isTableCellEditorReplaced();
     }
 
     @Override
@@ -353,7 +355,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * @return {@code true} if the table cell editor client property
      *    is set to {@code Boolean.TRUE}, {@code false} otherwise
      */
-    private boolean isTableCellEditor() {
+    private boolean isTableCellEditorReplaced() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
     }
 
@@ -424,22 +426,26 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
         @Override
         public void propertyChange(PropertyChangeEvent e) {
             super.propertyChange(e);
-            String propertyName = e.getPropertyName();
-
-            if (propertyName.equals("editable")) {
+            switch (e.getPropertyName()) {
+            case "editable":
                 PlasticComboBoxButton button =
                     (PlasticComboBoxButton) arrowButton;
                 button.setIconOnly(comboBox.isEditable());
                 comboBox.repaint();
-            } else if (propertyName.equals("background")) {
-                Color color = (Color) e.getNewValue();
-                arrowButton.setBackground(color);
-                listBox.setBackground(color);
+                break;
+            case "background":
+                Color color1 = (Color) e.getNewValue();
+                arrowButton.setBackground(color1);
+                listBox.setBackground(color1);
+                break;
 
-            } else if (propertyName.equals("foreground")) {
-                Color color = (Color) e.getNewValue();
-                arrowButton.setForeground(color);
-                listBox.setForeground(color);
+            case "foreground":
+                Color color2 = (Color) e.getNewValue();
+                arrowButton.setForeground(color2);
+                listBox.setForeground(color2);
+                break;
+            
+            default:
             }
         }
     }
@@ -542,7 +548,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
     private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
         @Override
 		public void propertyChange(PropertyChangeEvent evt) {
-            tableCellEditor = isTableCellEditor();
+            tableCellEditor = isTableCellEditorReplaced();
             if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
                 comboBox.setRenderer(createRenderer());
             }

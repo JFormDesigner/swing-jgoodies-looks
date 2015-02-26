@@ -1233,7 +1233,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
     }
 
 
-    private boolean requestFocusForVisibleComponent() {
+    private boolean requestFocusForVisibleComponentReplaced() {
         Component visibleComponent = getVisibleComponent();
         if (visibleComponent.isFocusable()) {
             visibleComponent.requestFocus();
@@ -1513,7 +1513,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                         }
                     }
                     if (shouldChangeFocus) {
-                        if (!requestFocusForVisibleComponent()) {
+                        if (!requestFocusForVisibleComponentReplaced()) {
                            tabPane.requestFocus();
                         }
                     }
@@ -1717,6 +1717,8 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                                 viewSize.height - tabViewPosition.y);
                         viewport.setExtentSize(extentSize);
                     }
+                    break;
+                default:
             }
             viewport.setViewPosition(tabViewPosition);
         }
@@ -1747,6 +1749,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                             leadingTabIndex++;
                         }
                         break;
+                    default:
                 }
             }
             Insets contentInsets = getContentBorderInsets(tabPlacement);
@@ -1875,6 +1878,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                     revalidate();
                     repaint();
                     break;
+                default:
             }
         }
 
@@ -1972,6 +1976,7 @@ public final class PlasticTabbedPaneUI extends MetalTabbedPaneUI {
                         g.drawLine(1, 9, 5, 5);
                     }
                     break;
+                default:
             }
 
             g.translate(-x, -y);

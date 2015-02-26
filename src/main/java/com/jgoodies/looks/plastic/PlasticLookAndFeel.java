@@ -815,7 +815,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	 * Install the default color themes.
 	 */
 	protected static void installDefaultThemes() {
-		installedThemes = new ArrayList<PlasticTheme>();
+		installedThemes = new ArrayList<>();
 		String[] themeNames = {
 		    "BrownSugar",
 		    "DarkStar",
@@ -854,15 +854,10 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	    try {
 		    Class cl = Class.forName(className);
             return (PlasticTheme) cl.newInstance();
-        } catch (ClassNotFoundException e) {
-            // Ignore the exception here and log below.
-        } catch (IllegalAccessException e) {
-            // Ignore the exception here and log below.
-	    } catch (InstantiationException e) {
-            // Ignore the exception here and log below.
+        } catch (ClassNotFoundException | IllegalAccessException |InstantiationException e) {
+            LookUtils.log("Can't create theme " + className);
+            return null;
 	    }
-	    LookUtils.log("Can't create theme " + className);
-	    return null;
 	}
 
 

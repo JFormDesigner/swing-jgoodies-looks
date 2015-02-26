@@ -134,6 +134,7 @@ final class WindowsArrowButton extends BasicArrowButton {
                     j++;
                 }
                 break;
+            default:
         }
         g.translate(-x, -y);
         g.setColor(oldColor);

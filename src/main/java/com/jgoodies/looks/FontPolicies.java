@@ -287,9 +287,7 @@ public final class FontPolicies {
     private static class DefaultWindowsPolicy implements FontPolicy {
         
         private static final String FONT_UTILITIES_CLASS_NAME =
-                SystemUtils.IS_JAVA_6
-                    ? "sun.font.FontManager"
-                    : "sun.font.FontUtilities";
+                "sun.font.FontUtilities";
 
         @Override
 		public FontSet getFontSet(String lafName, UIDefaults table) {

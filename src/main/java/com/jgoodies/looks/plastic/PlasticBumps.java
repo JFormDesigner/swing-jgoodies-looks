@@ -53,7 +53,7 @@ import javax.swing.Icon;
  */
 final class PlasticBumps implements Icon {
 
-    private static final List<BumpBuffer> BUFFERS = new ArrayList<BumpBuffer>();
+    private static final List<BumpBuffer> BUFFERS = new ArrayList<>();
 
     private int xBumps;
 	private int yBumps;

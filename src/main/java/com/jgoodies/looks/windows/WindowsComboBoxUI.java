@@ -96,6 +96,8 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
 
     private boolean tableCellEditor;
+    
+    @SuppressWarnings("hiding")
     private PropertyChangeListener propertyChangeListener;
 
 
@@ -122,7 +124,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     @Override
     public void installUI(JComponent c) {
         super.installUI(c);
-        tableCellEditor = isTableCellEditor();
+        tableCellEditor = isTableCellEditorReplaced();
     }
 
     @Override
@@ -450,7 +452,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      * @return {@code true} if the table cell editor client property
      *    is set to {@code Boolean.TRUE}, {@code false} otherwise
      */
-    private boolean isTableCellEditor() {
+    private boolean isTableCellEditorReplaced() {
         return Boolean.TRUE.equals(comboBox.getClientProperty(CELL_EDITOR_KEY));
     }
 
@@ -578,7 +580,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
     private final class TableCellEditorPropertyChangeHandler implements PropertyChangeListener {
         @Override
 		public void propertyChange(PropertyChangeEvent evt) {
-            tableCellEditor = isTableCellEditor();
+            tableCellEditor = isTableCellEditorReplaced();
             if (comboBox.getRenderer() == null || comboBox.getRenderer() instanceof UIResource) {
                 comboBox.setRenderer(createRenderer());
             }

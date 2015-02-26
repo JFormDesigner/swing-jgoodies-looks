@@ -3,6 +3,12 @@
                           Release Notes
                         
 
+CHANGES IN 2.8.0 --------------------------------------------------------
+
+    o Moved to Java 7.
+    o Requires the JGoodies Common 1.9.
+
+
 CHANGES IN 2.7.0 --------------------------------------------------------
 
     o Fixed #setMicroLayoutPolicy(MicroLayoutPolicy) signature in

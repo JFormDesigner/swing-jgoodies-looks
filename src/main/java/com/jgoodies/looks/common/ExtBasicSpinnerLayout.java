@@ -63,12 +63,17 @@ public final class ExtBasicSpinnerLayout implements LayoutManager {
 
     @Override
 	public void addLayoutComponent(String name, Component c) {
-        if ("Next".equals(name)) {
+        switch (name) {
+        case "Next":
             nextButton = c;
-        } else if ("Previous".equals(name)) {
+            break;
+        case "Previous":
             previousButton = c;
-        } else if ("Editor".equals(name)) {
+            break;
+        case "Editor":
             editor = c;
+            break;
+        default:
         }
     }
 

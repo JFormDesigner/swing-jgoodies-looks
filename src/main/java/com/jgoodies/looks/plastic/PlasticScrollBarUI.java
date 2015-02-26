@@ -63,6 +63,7 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
     private Color thumbShadow;
     private Color thumbHighlightColor;
 
+    @SuppressWarnings("hiding")
     private PlasticBumps bumps;
 
 	public static ComponentUI createUI(JComponent b) {
