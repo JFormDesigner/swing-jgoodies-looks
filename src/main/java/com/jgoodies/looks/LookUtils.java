@@ -136,13 +136,16 @@ public final class LookUtils extends SystemUtils {
      * "false", {@code null} otherwise
      */
     public static Boolean getBooleanSystemProperty(String key, String logMessage) {
-        String value = getSystemProperty(key, "");
+        String value = getSystemProperty(key, "").toLowerCase();
         Boolean result;
-        if (value.equalsIgnoreCase("false")) {
+        switch (value) {
+        case "false":
             result = Boolean.FALSE;
-        } else if (value.equalsIgnoreCase("true")) {
+            break;
+        case "true":
             result = Boolean.TRUE;
-        } else {
+            break;
+        default:
             result = null;
         }
         if (result != null) {

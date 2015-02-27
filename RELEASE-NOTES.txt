@@ -7,6 +7,7 @@ CHANGES IN 2.8.0 --------------------------------------------------------
 
     o Moved to Java 7.
     o Requires the JGoodies Common 1.9.
+    o Turned BorderStyle and HeaderStyle into enumerations.
 
 
 CHANGES IN 2.7.0 --------------------------------------------------------

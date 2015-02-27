@@ -43,23 +43,11 @@ import javax.swing.JToolBar;
  *
  * @see HeaderStyle
  */
-public final class BorderStyle {
+public enum BorderStyle {
 
-    public static final BorderStyle EMPTY     = new BorderStyle("Empty");
-    public static final BorderStyle SEPARATOR = new BorderStyle("Separator");
-    public static final BorderStyle ETCHED    = new BorderStyle("Etched");
-
-    private final String name;
-
-
-    // Instance Creation ******************************************************
-
-    private BorderStyle(String name) {
-        this.name = name;
-    }
-
-
-    // ************************************************************************
+    EMPTY,
+    SEPARATOR,
+    ETCHED;
 
     /**
      * Looks up the client property for the header style from the JToolBar.
@@ -87,7 +75,7 @@ public final class BorderStyle {
      * Looks up the client property for the header style from the specified
      * JComponent.
      *
-     * @param c    the compoent to inspect
+     * @param c    the component to inspect
      * @param clientPropertyKey
      *            the key used to lookup the property
      * @return the border style used to choose a border in the UI delegate
@@ -97,30 +85,12 @@ public final class BorderStyle {
         if (value instanceof BorderStyle) {
             return (BorderStyle) value;
         }
-
         if (value instanceof String) {
-            return BorderStyle.valueOf((String) value);
+            String name = ((String) value).toUpperCase();
+            return valueOf(name);
         }
-
         return null;
     }
 
-    private static BorderStyle valueOf(String name) {
-        if (name.equalsIgnoreCase(EMPTY.name)) {
-            return EMPTY;
-        } else if (name.equalsIgnoreCase(SEPARATOR.name)) {
-            return SEPARATOR;
-        } else if (name.equalsIgnoreCase(ETCHED.name)) {
-            return ETCHED;
-        } else {
-            throw new IllegalArgumentException("Invalid BorderStyle name "
-                    + name);
-        }
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
 
 }

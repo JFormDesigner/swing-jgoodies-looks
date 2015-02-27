@@ -44,18 +44,10 @@ import javax.swing.JToolBar;
  *
  * @see	BorderStyle
  */
-public final class HeaderStyle {
+public enum HeaderStyle {
 
-    public static final HeaderStyle SINGLE = new HeaderStyle("Single");
-    public static final HeaderStyle BOTH   = new HeaderStyle("Both");
-
-    private final String name;
-
-
-    private HeaderStyle(String name) {
-        this.name = name;
-    }
-
+    SINGLE,
+    BOTH;
 
     /**
      * Looks up the client property for the {@code HeaderStyle}
@@ -93,36 +85,12 @@ public final class HeaderStyle {
         if (value instanceof HeaderStyle) {
             return (HeaderStyle) value;
         }
-
         if (value instanceof String) {
-            return HeaderStyle.valueOf((String) value);
+            String name = ((String) value).toUpperCase();
+            return valueOf(name);
         }
-
         return null;
     }
 
-
-    /**
-     * Looks up and answers the {@code HeaderStyle} with the specified name.
-     *
-     * @param name    the name of the HeaderStyle object to lookup
-     * @return the associated HeaderStyle
-     */
-    private static HeaderStyle valueOf(String name) {
-        if (name.equalsIgnoreCase(SINGLE.name)) {
-            return SINGLE;
-        } else if (name.equalsIgnoreCase(BOTH.name)) {
-            return BOTH;
-        } else {
-            throw new IllegalArgumentException("Invalid HeaderStyle name "
-                    + name);
-        }
-    }
-
-
-    @Override
-    public String toString() {
-        return name;
-    }
 
 }
