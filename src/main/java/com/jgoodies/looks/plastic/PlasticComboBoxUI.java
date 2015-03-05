@@ -97,7 +97,6 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
 
     private boolean tableCellEditor;
     
-    @SuppressWarnings("hiding")
     private PropertyChangeListener propertyChangeListener;
 
 
