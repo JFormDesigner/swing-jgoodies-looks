@@ -72,7 +72,7 @@ final class PlasticComboBoxButton extends JButton {
     private final JList listBox;
     private final CellRendererPane rendererPane;
 
-    private JComboBox comboBox;
+    private JComboBox<?> comboBox;
     private Icon      comboIcon;
     private boolean   iconOnly = false;
     private final boolean   borderPaintsFocus;
@@ -81,7 +81,7 @@ final class PlasticComboBoxButton extends JButton {
      * Constructs a {@code PlasticComboBoxButton}.
      */
     PlasticComboBoxButton(
-            JComboBox comboBox,
+            JComboBox<?> comboBox,
             Icon comboIcon,
             boolean iconOnly,
             CellRendererPane rendererPane,
@@ -110,7 +110,7 @@ final class PlasticComboBoxButton extends JButton {
         return comboBox;
     }
 
-    public void setComboBox(JComboBox cb) {
+    public void setComboBox(JComboBox<?> cb) {
         comboBox = cb;
     }
 
