@@ -209,8 +209,6 @@ public final class FontTestApp {
     private static void addWindowsSettings(StringBuffer buffer, String description) {
         buffer.append("\n\n");
         buffer.append(description);
-        buffer.append("\n    Modern Windows=");
-        buffer.append(LookUtils.IS_OS_WINDOWS_MODERN);
         buffer.append("\n    Windows XP=");
         buffer.append(SystemUtils.IS_OS_WINDOWS_XP);
         buffer.append("\n    Windows 6 or later=");
