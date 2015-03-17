@@ -53,28 +53,6 @@ public final class LookUtils extends SystemUtils {
 
     // Basics System Properties **********************************************
 
-    /**
-     * True if this is Windows 98/ME/2000/Server 2003/XP/VISTA/Server 2008.
-     */
-    public static final boolean IS_OS_WINDOWS_MODERN =
-        startsWith(OS_NAME, "Windows") && !startsWith(OS_VERSION, "4.0");
-
-    /**
-     * True if this is Windows 95.
-     *
-     * @since 2.0
-     */
-    public static final boolean IS_OS_WINDOWS_95 =
-        startsWith(OS_NAME, "Windows 9") && startsWith(OS_VERSION, "4.0");
-
-    /**
-     * True if this is Windows NT.
-     *
-     * @since 2.0
-     */
-    public static final boolean IS_OS_WINDOWS_NT =
-        startsWith(OS_NAME, "Windows NT");
-
     private static boolean loggingEnabled = true;
 
 
@@ -231,13 +209,13 @@ public final class LookUtils extends SystemUtils {
         UIManager.setLookAndFeel(laf);
     }
 
-    public static Object getDefaultTheme(LookAndFeel laf) {
+    public static PlasticTheme getDefaultTheme(LookAndFeel laf) {
         return laf instanceof PlasticLookAndFeel
             ? PlasticLookAndFeel.createMyDefaultTheme()
             : null;
     }
 
-    public static List getInstalledThemes(LookAndFeel laf) {
+    public static List<PlasticTheme> getInstalledThemes(LookAndFeel laf) {
         return laf instanceof PlasticLookAndFeel
             ? PlasticLookAndFeel.getInstalledThemes()
             : Collections.EMPTY_LIST;
