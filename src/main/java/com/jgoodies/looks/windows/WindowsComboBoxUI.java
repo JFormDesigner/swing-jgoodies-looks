@@ -97,6 +97,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
     private boolean tableCellEditor;
     
+    @SuppressWarnings("hiding")
     private PropertyChangeListener propertyChangeListener;
 
 
