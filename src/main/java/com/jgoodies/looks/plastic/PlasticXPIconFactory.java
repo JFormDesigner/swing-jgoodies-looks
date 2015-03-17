@@ -49,7 +49,7 @@ import javax.swing.plaf.UIResource;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 
 import com.jgoodies.common.base.Strings;
-import com.jgoodies.looks.LookUtils;
+import com.jgoodies.common.base.SystemUtils;
 
 /**
  * Factory class that vends {@code Icon}s for the JGoodies
@@ -106,7 +106,7 @@ public final class PlasticXPIconFactory {
      */
     private static final class CheckBoxIcon implements Icon, UIResource, Serializable {
 
-        private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
+        private static final int SIZE = SystemUtils.IS_LOW_RESOLUTION ? 13 : 15;
 
         @Override
 		public int getIconWidth()  { return SIZE; }
@@ -202,7 +202,7 @@ public final class PlasticXPIconFactory {
      */
     private static final class RadioButtonIcon implements Icon, UIResource, Serializable {
 
-        private static final int SIZE = LookUtils.IS_LOW_RESOLUTION ? 13 : 15;
+        private static final int SIZE = SystemUtils.IS_LOW_RESOLUTION ? 13 : 15;
 
         private static final Stroke FOCUS_STROKE = new BasicStroke(2);
 
