@@ -693,7 +693,7 @@ public final class Options {
      * @return false
      */
     private static boolean isPopupDropShadowEnabledDefault() {
-        return LookUtils.IS_OS_WINDOWS_MODERN;
+        return true;
     }
 
 
