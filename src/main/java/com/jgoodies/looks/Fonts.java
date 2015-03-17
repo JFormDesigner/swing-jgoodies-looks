@@ -251,34 +251,10 @@ public final class Fonts {
             throw new UnsupportedOperationException("The Windows control font can be computed only on the Windows platform.");
         }
 
-        // Return the default GUI font on older Windows versions.
-        if (LookUtils.IS_OS_WINDOWS_95
-        ||  SystemUtils.IS_OS_WINDOWS_98
-        ||  LookUtils.IS_OS_WINDOWS_NT
-        ||  SystemUtils.IS_OS_WINDOWS_ME) {
-            return getDefaultGUIFont();
-        }
         return getIconFont();
     }
 
 
-    /**
-     * Looks up and returns the Windows defaultGUI font.
-     * Works around a bug with Java 1.4.2_17, 1.5.0_15, and 1.6.0
-     * on Vista, where the win.defaultGUI.font desktop property
-     * returns {@code null}. In this case a logical "Dialog" font
-     * is used as fallback.
-     *
-     * @return the Windows defaultGUI font, or a dialog font as fallback.
-     */
-    private static Font getDefaultGUIFont() {
-        Font font = getDesktopFont(WINDOWS_DEFAULT_GUI_FONT_KEY);
-        return font != null
-                ? font
-                : getFallbackFont();
-    }
-    
-    
     private static Font getIconFont() {
         Font font = getDesktopFont(WINDOWS_ICON_FONT_KEY);
         return font != null
