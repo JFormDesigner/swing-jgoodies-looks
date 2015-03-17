@@ -156,7 +156,7 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 
 
     private static boolean selectTextOnKeyboardFocusGained =
-        LookUtils.IS_OS_WINDOWS;
+        SystemUtils.IS_OS_WINDOWS;
 
 
     // Instance Creation ******************************************************
@@ -727,10 +727,8 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 		String defaultName;
         if (SystemUtils.IS_LAF_WINDOWS_XP_ENABLED) {
             defaultName = getDefaultXPTheme();
-        } else if (LookUtils.IS_OS_WINDOWS_MODERN) {
-            defaultName = "DesertBluer";
         } else {
-            defaultName = "SkyBlue";
+            defaultName = "DesertBluer";
         }
 		// Don't use the default now, so we can detect that the users tried to set one.
 		String userName  = LookUtils.getSystemProperty(DEFAULT_THEME_KEY, "");
@@ -793,16 +791,16 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
      *
      * @return a list of installed color/font themes
 	 */
-	public static List getInstalledThemes() {
+	public static List<PlasticTheme> getInstalledThemes() {
 		if (null == installedThemes) {
             installDefaultThemes();
         }
 
-		Collections.sort(installedThemes, new Comparator() {
+		Collections.sort(installedThemes, new Comparator<PlasticTheme>() {
 			@Override
-			public int compare(Object o1, Object o2) {
-				MetalTheme theme1 = (MetalTheme) o1;
-				MetalTheme theme2 = (MetalTheme) o2;
+			public int compare(PlasticTheme o1, PlasticTheme o2) {
+				MetalTheme theme1 = o1;
+				MetalTheme theme2 = o2;
 				return theme1.getName().compareTo(theme2.getName());
 			}
 		});
@@ -852,8 +850,9 @@ public class PlasticLookAndFeel extends MetalLookAndFeel {
 	protected static PlasticTheme createTheme(String themeName) {
 	    String className = THEME_CLASSNAME_PREFIX + themeName;
 	    try {
-		    Class cl = Class.forName(className);
-            return (PlasticTheme) cl.newInstance();
+		    Class<? extends PlasticTheme> cl =
+		            (Class<? extends PlasticTheme>) Class.forName(className);
+            return cl.newInstance();
         } catch (ClassNotFoundException | IllegalAccessException |InstantiationException e) {
             LookUtils.log("Can't create theme " + className);
             return null;

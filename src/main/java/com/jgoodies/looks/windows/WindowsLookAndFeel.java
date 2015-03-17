@@ -690,7 +690,7 @@ public class WindowsLookAndFeel extends com.sun.java.swing.plaf.windows.WindowsL
 		public Object createValue(UIDefaults table) {
             Object instance = null;
             try {
-                Class c;
+                Class<?> c;
                 // We use a separate ClassLoader
                 ClassLoader classLoader = table != null
                         ? (ClassLoader) table.get("ClassLoader")

@@ -225,8 +225,8 @@ final class PlasticXPBorders {
 
         @Override
         public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
-            PlasticComboBoxButton button = (PlasticComboBoxButton) c;
-            JComboBox comboBox = button.getComboBox();
+            PlasticComboBoxButton<?> button = (PlasticComboBoxButton<?>) c;
+            JComboBox<?> comboBox = button.getComboBox();
             ButtonModel model = button.getModel();
 
             if (!model.isEnabled()) {

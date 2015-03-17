@@ -471,7 +471,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
 
         @Override
         public void layoutContainer(Container parent) {
-            JComboBox cb = (JComboBox) parent;
+            JComboBox<?> cb = (JComboBox<?>) parent;
 
             int width  = cb.getWidth();
             int height = cb.getHeight();

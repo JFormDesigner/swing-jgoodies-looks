@@ -62,17 +62,17 @@ import javax.swing.plaf.basic.BasicComboBoxRenderer;
  * @author  Karsten Lentzsch
  * @version $Revision: 1.13 $
  */
-final class PlasticComboBoxButton extends JButton {
+final class PlasticComboBoxButton<E> extends JButton {
 
     private static final Insets EMPTY_INSETS = new Insets(0, 0, 0, 0);
     private static final Border EMPTY_BORDER = new EmptyBorder(EMPTY_INSETS);
     private static final int    LEFT_MARGIN  = 2;
     private static final int    RIGHT_MARGIN = 2;
 
-    private final JList listBox;
+    private final JList<E> listBox;
     private final CellRendererPane rendererPane;
 
-    private JComboBox<?> comboBox;
+    private JComboBox<E> comboBox;
     private Icon      comboIcon;
     private boolean   iconOnly = false;
     private final boolean   borderPaintsFocus;
@@ -81,11 +81,11 @@ final class PlasticComboBoxButton extends JButton {
      * Constructs a {@code PlasticComboBoxButton}.
      */
     PlasticComboBoxButton(
-            JComboBox<?> comboBox,
+            JComboBox<E> comboBox,
             Icon comboIcon,
             boolean iconOnly,
             CellRendererPane rendererPane,
-            JList listBox) {
+            JList<E> listBox) {
         super("");
         setModel(new DefaultButtonModel() {
             @Override
@@ -106,11 +106,11 @@ final class PlasticComboBoxButton extends JButton {
         borderPaintsFocus = UIManager.getBoolean("ComboBox.borderPaintsFocus");
     }
 
-    public JComboBox getComboBox() {
+    public JComboBox<E> getComboBox() {
         return comboBox;
     }
 
-    public void setComboBox(JComboBox<?> cb) {
+    public void setComboBox(JComboBox<E> cb) {
         comboBox = cb;
     }
 
@@ -172,10 +172,10 @@ final class PlasticComboBoxButton extends JButton {
         }
         int left   = insets.left;
         int top    = insets.top;
-        int right  = left + (width - 1);
+        int right  = left + width - 1;
 
         int iconWidth = 0;
-        int iconLeft = (leftToRight) ? right : left;
+        int iconLeft = leftToRight ? right : left;
 
         // Paint the icon
         if (comboIcon != null) {
@@ -188,7 +188,7 @@ final class PlasticComboBoxButton extends JButton {
                 iconTop  = (getHeight() - iconHeight) / 2;
             } else {
                 iconLeft = leftToRight
-                    ? left + (width - 1) - iconWidth
+                    ? left + width - 1 - iconWidth
                     : left;
                 iconTop = (getHeight() - iconHeight) / 2;
             }
@@ -208,7 +208,7 @@ final class PlasticComboBoxButton extends JButton {
             int h = height;
 
             Border oldBorder = null;
-            if ((c instanceof JComponent) && !isTableCellEditor()) {
+            if (c instanceof JComponent && !isTableCellEditor()) {
                 JComponent component = (JComponent) c;
                 if (c instanceof BasicComboBoxRenderer.UIResource) {
                     oldBorder = component.getBorder();

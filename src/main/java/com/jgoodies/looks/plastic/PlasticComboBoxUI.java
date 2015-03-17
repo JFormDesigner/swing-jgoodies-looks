@@ -49,6 +49,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.ListCellRenderer;
+import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.TextUI;
@@ -92,7 +93,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      * Therefore we store the LookAndFeel class and update the
      * phantom UI whenever the Look&amp;Feel changes.
      */
-    private static Class phantomLafClass;
+    private static Class<? extends LookAndFeel> phantomLafClass;
 
 
     private boolean tableCellEditor;
@@ -114,7 +115,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      */
     private static void ensurePhantomHasPlasticUI() {
         TextUI ui = PHANTOM.getUI();
-        Class lafClass = UIManager.getLookAndFeel().getClass();
+        Class<? extends LookAndFeel> lafClass = UIManager.getLookAndFeel().getClass();
         if (   phantomLafClass != lafClass
             || !(ui instanceof MetalTextFieldUI)) {
             phantomLafClass = lafClass;
@@ -155,7 +156,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      */
     @Override
     protected JButton createArrowButton() {
-        return new PlasticComboBoxButton(
+        return new PlasticComboBoxButton<>(
             comboBox,
             PlasticIconFactory.getComboBoxButtonIcon(),
             comboBox.isEditable(),
@@ -244,7 +245,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
         size.width +=  insets.left + insets.right + buttonWidth;
 
         // Honor corrections made in #paintCurrentValue
-        ListCellRenderer renderer = comboBox.getRenderer();
+        ListCellRenderer<?> renderer = comboBox.getRenderer();
         if (renderer instanceof JComponent) {
             JComponent component = (JComponent) renderer;
             Insets rendererInsets = component.getInsets();
@@ -374,7 +375,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
 
         @Override
         public void layoutContainer(Container parent) {
-            JComboBox cb = (JComboBox) parent;
+            JComboBox<?> cb = (JComboBox<?>) parent;
 
             // Use superclass behavior if the combobox is not editable.
             if (!cb.isEditable()) {
@@ -428,8 +429,8 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
             super.propertyChange(e);
             switch (e.getPropertyName()) {
             case "editable":
-                PlasticComboBoxButton button =
-                    (PlasticComboBoxButton) arrowButton;
+                PlasticComboBoxButton<?> button =
+                    (PlasticComboBoxButton<?>) arrowButton;
                 button.setIconOnly(comboBox.isEditable());
                 comboBox.repaint();
                 break;
@@ -456,7 +457,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
      */
     private static final class PlasticComboPopup extends BasicComboPopup {
 
-        private PlasticComboPopup(JComboBox combo) {
+        private PlasticComboPopup(JComboBox<?> combo) {
             super(combo);
         }
 
@@ -518,7 +519,7 @@ public class PlasticComboBoxUI extends MetalComboBoxUI {
                 return defaultBounds;
             }
 
-            ListCellRenderer renderer = list.getCellRenderer();
+            ListCellRenderer<Object> renderer = list.getCellRenderer();
             Component c = renderer.getListCellRendererComponent(
                     list, popupPrototypeDisplayValue, -1, true, true);
             pw = c.getPreferredSize().width;
