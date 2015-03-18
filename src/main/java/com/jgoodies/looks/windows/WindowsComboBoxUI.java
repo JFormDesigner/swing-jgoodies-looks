@@ -240,7 +240,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
         size.width += 1;
 
         // Honor corrections made in #paintCurrentValue
-        ListCellRenderer renderer = comboBox.getRenderer();
+        ListCellRenderer<?> renderer = comboBox.getRenderer();
         if (renderer instanceof JComponent) {
             JComponent component = (JComponent) renderer;
             Insets rendererInsets = component.getInsets();
@@ -280,7 +280,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      */
     @Override
     public void paintCurrentValue(Graphics g, Rectangle bounds, boolean hasFocus) {
-        ListCellRenderer renderer = comboBox.getRenderer();
+        ListCellRenderer<Object> renderer = comboBox.getRenderer();
         Component c;
         boolean isVistaReadOnlyCombo = isVistaXPStyleReadOnlyCombo();
 
@@ -509,7 +509,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
      */
     private static final class WindowsComboPopup extends BasicComboPopup {
 
-        private WindowsComboPopup(JComboBox combo) {
+        private WindowsComboPopup(JComboBox<?> combo) {
             super(combo);
         }
 
@@ -550,7 +550,7 @@ public class WindowsComboBoxUI extends com.sun.java.swing.plaf.windows.WindowsCo
                 return defaultBounds;
             }
 
-            ListCellRenderer renderer = list.getCellRenderer();
+            ListCellRenderer<Object> renderer = list.getCellRenderer();
             Component c = renderer.getListCellRendererComponent(
                     list, popupPrototypeDisplayValue, -1, true, true);
             pw = c.getPreferredSize().width;

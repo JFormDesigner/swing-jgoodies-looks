@@ -197,6 +197,7 @@ final class PlasticComboBoxButton<E> extends JButton {
 
         // Let the renderer paint
         if (!iconOnly && comboBox != null) {
+            @SuppressWarnings("rawtypes")
             ListCellRenderer renderer = comboBox.getRenderer();
             boolean renderPressed = getModel().isPressed();
             Component c = renderer.getListCellRendererComponent(
