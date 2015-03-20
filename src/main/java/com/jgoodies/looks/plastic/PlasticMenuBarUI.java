@@ -165,9 +165,10 @@ public final class PlasticMenuBarUI extends BasicMenuBarUI {
             return false;
         }
 		return	PlasticUtils.is3D("MenuBar.") &&
-				(HeaderStyle.from(menuBar) != null) &&
-				(BorderStyle.from(menuBar, PlasticLookAndFeel.BORDER_STYLE_KEY)
-					!= BorderStyle.EMPTY);
+				HeaderStyle.from(menuBar) != null &&
+				BorderStyle.from(menuBar, PlasticLookAndFeel.BORDER_STYLE_KEY)
+					!= BorderStyle.EMPTY;
 	}
 
+	
 }

@@ -70,8 +70,8 @@ public final class PlasticPopupMenuUI extends BasicPopupMenuUI {
     public void installDefaults() {
         super.installDefaults();
         installBorder();
-        if (   (popupMenu.getLayout() == null)
-            || (popupMenu.getLayout() instanceof UIResource)) {
+        if (   popupMenu.getLayout() == null
+            || popupMenu.getLayout() instanceof UIResource) {
             popupMenu.setLayout(new PopupMenuLayout(popupMenu, BoxLayout.Y_AXIS));
         }
     }

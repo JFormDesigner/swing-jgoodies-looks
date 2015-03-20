@@ -287,4 +287,6 @@ public final class PlasticScrollBarUI extends MetalScrollBarUI {
 		Object value = UIManager.get(MAX_BUMPS_WIDTH_KEY);
 		return value != null && value instanceof Integer;
 	}
+	
+	
 }

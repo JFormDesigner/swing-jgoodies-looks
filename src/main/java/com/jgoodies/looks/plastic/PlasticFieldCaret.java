@@ -140,4 +140,5 @@ final class PlasticFieldCaret extends DefaultCaret implements UIResource {
         }
     }
 
+
 }

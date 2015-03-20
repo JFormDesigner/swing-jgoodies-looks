@@ -139,8 +139,8 @@ class PlasticArrowButton extends MetalScrollButton {
 		// Draw the arrow
 		g.setColor(arrowColor);
 
-		int startX = (((w + 1) - arrowHeight) / 2);
-		int startY = (h / 2);
+		int startX = (w + 1 - arrowHeight) / 2;
+		int startY = h / 2;
 
 		for (int line = 0; line < arrowHeight; line++) {
 			g.drawLine(
@@ -185,8 +185,8 @@ class PlasticArrowButton extends MetalScrollButton {
 		// Draw the arrow
 		g.setColor(arrowColor);
 
-		int startX = (((w + 1) - arrowHeight) / 2) + arrowHeight - 1;
-		int startY = (h / 2);
+		int startX = (w + 1 - arrowHeight) / 2 + arrowHeight - 1;
+		int startY = h / 2;
 		for (int line = 0; line < arrowHeight; line++) {
 			g.drawLine(
 				startX - line,
@@ -235,7 +235,7 @@ class PlasticArrowButton extends MetalScrollButton {
 		// Draw the arrow
 		g.setColor(arrowColor);
 
-		int startY = (((h + 0) - arrowHeight) / 2) + arrowHeight - 1; // KL was h + 1
+		int startY = (h + 0 - arrowHeight) / 2 + arrowHeight - 1; // KL was h + 1
 		int startX = w / 2;
 
 		//	    System.out.println( "startX2 :" + startX + " startY2 :"+startY);
@@ -290,7 +290,7 @@ class PlasticArrowButton extends MetalScrollButton {
 
 		// Draw the arrow
 		g.setColor(arrowColor);
-		int startY = ((h + 1) - arrowHeight) / 2;  // KL was (h + 1)
+		int startY = (h + 1 - arrowHeight) / 2;  // KL was (h + 1)
 		int startX = w / 2;
 		// System.out.println( "startX :" + startX + " startY :"+startY);
 		for (int line = 0; line < arrowHeight; line++) {
@@ -349,7 +349,8 @@ class PlasticArrowButton extends MetalScrollButton {
         }
 
 		Rectangle r = new Rectangle(1, 1, width, height);
-		boolean isHorizontal = (getDirection() == EAST || getDirection() == WEST);
+		boolean isHorizontal = getDirection() == EAST || getDirection() == WEST;
 		PlasticUtils.addLight3DEffekt(g, r, isHorizontal);
 	}
+	
 }
