@@ -37,6 +37,7 @@ import javax.swing.JComponent;
 import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
+import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 
 
@@ -50,12 +51,6 @@ import javax.swing.text.JTextComponent;
  */
 public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.WindowsTextAreaUI {
 
-    /**
-     * Creates a UI for a JTextArea.
-     *
-     * @param c the text area
-     * @return the UI
-     */
     public static ComponentUI createUI(JComponent c) {
         return new WindowsTextAreaUI();
     }
@@ -66,6 +61,12 @@ public final class WindowsTextAreaUI extends com.sun.java.swing.plaf.windows.Win
     public void installUI(JComponent c) {
         super.installUI(c);
         updateBackground((JTextComponent) c);
+    }
+
+
+    @Override
+    protected Caret createCaret() {
+        return new WindowsTextComponentCaret();
     }
 
 
