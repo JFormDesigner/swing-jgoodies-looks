@@ -50,9 +50,9 @@ import com.jgoodies.looks.Options;
  * @author Karsten Lentzsch
  * @version $Revision: 1.13 $
  */
-final class PlasticFieldCaret extends DefaultCaret implements UIResource {
+final class PlasticTextComponentCaret extends DefaultCaret implements UIResource {
 
-    PlasticFieldCaret() {
+    PlasticTextComponentCaret() {
         super();
     }
 
