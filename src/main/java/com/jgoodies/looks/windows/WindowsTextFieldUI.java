@@ -48,31 +48,17 @@ import javax.swing.text.Caret;
 public final class WindowsTextFieldUI extends
         com.sun.java.swing.plaf.windows.WindowsTextFieldUI {
 
-    /**
-     * Creates a UI for a JTextField.
-     *
-     * @param c the text field
-     * @return the UI
-     */
     public static ComponentUI createUI(JComponent c) {
         return new WindowsTextFieldUI();
     }
 
 
-    /**
-     * Creates the caret for a field.
-     *
-     * @return the caret
-     */
     @Override
     protected Caret createCaret() {
         return new WindowsFieldCaret();
     }
 
 
-    /**
-     * The WindowsFieldCaret requires an extra pixel width.
-     */
     @Override
     public Dimension getPreferredSize(JComponent c) {
         Dimension dim = super.getPreferredSize(c);
