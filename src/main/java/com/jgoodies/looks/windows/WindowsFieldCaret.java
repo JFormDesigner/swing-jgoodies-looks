@@ -31,30 +31,22 @@
 package com.jgoodies.looks.windows;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.event.FocusEvent;
-import java.awt.event.MouseEvent;
 
 import javax.swing.BoundedRangeModel;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.plaf.TextUI;
-import javax.swing.plaf.UIResource;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultCaret;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.Highlighter;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.LayeredHighlighter;
 import javax.swing.text.Position;
 import javax.swing.text.View;
-
-import com.jgoodies.looks.Options;
 
 /**
  * WindowsFieldCaret has different scrolling behavior than the DefaultCaret.
@@ -66,8 +58,9 @@ import com.jgoodies.looks.Options;
  * @version $Revision: 1.16 $
  *
  */
-final class WindowsFieldCaret extends DefaultCaret implements UIResource {
+final class WindowsFieldCaret extends WindowsTextComponentCaret {
 
+    
     private static final LayeredHighlighter.LayerPainter WINDOWS_PAINTER =
         new WindowsHighlightPainter(null);
 
@@ -77,95 +70,6 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
     }
 
 
-    // Begin of Added Code ----------------------------------------------
-
-    private boolean isKeyboardFocusEvent = true;
-
-
-    @Override
-    public void focusGained(FocusEvent e) {
-        final JTextComponent c = getComponent();
-        if (c == null) {
-            return;
-        }
-        if (c.isEnabled()) {
-            setVisible(true);
-            setSelectionVisible(true);
-        }
-        if (   !c.isEnabled()
-            || !isKeyboardFocusEvent
-            || !Options.isSelectOnFocusGainActive(c)) {
-            return;
-        }
-        if (c instanceof JFormattedTextField) {
-            EventQueue.invokeLater(new Runnable() {
-                @Override
-				public void run() {
-                    selectAll();
-                }
-            });
-        } else {
-            selectAll();
-        }
-    }
-
-
-    private void selectAll() {
-        final JTextComponent c = getComponent();
-        if (c == null) {
-            return;
-        }
-        boolean backward = Boolean.TRUE.equals(c.getClientProperty(Options.INVERT_SELECTION_CLIENT_KEY));
-        if (backward) {
-            setDot(c.getDocument().getLength());
-            moveDot(0);
-        } else {
-            setDot(0);
-            moveDot(c.getDocument().getLength());
-        }
-    }
-
-
-    @Override
-    public void focusLost(FocusEvent e) {
-        super.focusLost(e);
-        if (!e.isTemporary()) {
-            isKeyboardFocusEvent = true;
-            if (  getComponent() != null
-                && Boolean.TRUE.equals(getComponent().getClientProperty(Options.SET_CARET_TO_START_ON_FOCUS_LOST_CLIENT_KEY))) {
-                setDot(0);
-            }
-        }
-    }
-
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        if (SwingUtilities.isLeftMouseButton(e) || e.isPopupTrigger()) {
-            isKeyboardFocusEvent = false;
-        }
-        super.mousePressed(e);
-
-    }
-
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        super.mouseReleased(e);
-        // super.mousePressed() does not transfer focus on popup clicks.
-        // Windows does.
-        if (e.isPopupTrigger()) {
-            isKeyboardFocusEvent = false;
-            if (  getComponent() != null
-                && getComponent().isEnabled()
-                && getComponent().isRequestFocusEnabled()) {
-                getComponent().requestFocus();
-            }
-        }
-    }
-
-    // End of Added Code ------------------------------------------------
-
     /**
      * Adjusts the visibility of the caret according to
      * the windows feel which seems to be to move the
@@ -174,6 +78,9 @@ final class WindowsFieldCaret extends DefaultCaret implements UIResource {
      */
     @Override
     protected void adjustVisibility(Rectangle r) {
+        if (!(getComponent() instanceof JTextField)) {
+            return;
+        }
         SwingUtilities.invokeLater(new SafeScroller(r));
     }
 
