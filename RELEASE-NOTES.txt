@@ -3,6 +3,12 @@
                           Release Notes
                         
 
+CHANGES IN 2.8.1 --------------------------------------------------------
+
+    o Uses the text-selecting carets also for JTextArea
+      where it was used for fields only before.
+
+
 CHANGES IN 2.8.0 --------------------------------------------------------
 
     o Moved to Java 7.
