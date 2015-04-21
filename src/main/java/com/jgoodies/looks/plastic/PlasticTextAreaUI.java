@@ -38,6 +38,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.UIResource;
 import javax.swing.plaf.basic.BasicTextAreaUI;
+import javax.swing.text.Caret;
 import javax.swing.text.JTextComponent;
 
 
@@ -51,16 +52,18 @@ import javax.swing.text.JTextComponent;
  */
 public final class PlasticTextAreaUI extends BasicTextAreaUI {
 
-    /**
-     * Creates a UI for a JTextArea.
-     *
-     * @param c the text area
-     * @return the UI
-     */
     public static ComponentUI createUI(JComponent c) {
         return new PlasticTextAreaUI();
     }
 
+
+
+    @Override
+    protected Caret createCaret() {
+        return PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained()
+            ? new PlasticTextComponentCaret()
+            : super.createCaret();
+    }
 
 
     @Override

@@ -65,7 +65,7 @@ public final class PlasticTextFieldUI extends MetalTextFieldUI {
      */
     @Override
     protected Caret createCaret() {
-        return new PlasticFieldCaret();
+        return new PlasticTextComponentCaret();
     }
 
 

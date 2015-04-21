@@ -32,7 +32,6 @@ package com.jgoodies.looks.plastic;
 
 
 import javax.swing.JComponent;
-import javax.swing.JPasswordField;
 import javax.swing.plaf.ComponentUI;
 import javax.swing.plaf.basic.BasicPasswordFieldUI;
 import javax.swing.text.Caret;
@@ -47,26 +46,15 @@ import javax.swing.text.Caret;
  */
 public final class PlasticPasswordFieldUI extends BasicPasswordFieldUI {
 
-    /**
-	 * Creates a UI for a {@link JPasswordField}.
-	 *
-	 * @param c the password field component
-	 * @return the UI
-	 */
     public static ComponentUI createUI(JComponent c) {
         return new PlasticPasswordFieldUI();
     }
 
 
-    /**
-     * Creates the caret for a field.
-     *
-     * @return the caret
-     */
     @Override
     protected Caret createCaret() {
         return PlasticLookAndFeel.isSelectTextOnKeyboardFocusGained()
-            ? new PlasticFieldCaret()
+            ? new PlasticTextComponentCaret()
             : super.createCaret();
     }
 

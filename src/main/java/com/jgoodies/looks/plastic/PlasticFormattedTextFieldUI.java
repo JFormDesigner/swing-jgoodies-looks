@@ -65,7 +65,7 @@ public final class PlasticFormattedTextFieldUI extends BasicFormattedTextFieldUI
      */
     @Override
     protected Caret createCaret() {
-        return new PlasticFieldCaret();
+        return new PlasticTextComponentCaret();
     }
 
 
