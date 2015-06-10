@@ -31,6 +31,7 @@
 package com.jgoodies.looks.windows;
 
 import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Insets;
 import java.awt.Rectangle;
@@ -38,7 +39,6 @@ import java.awt.Shape;
 
 import javax.swing.BoundedRangeModel;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.plaf.TextUI;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -81,7 +81,7 @@ final class WindowsFieldCaret extends WindowsTextComponentCaret {
         if (!(getComponent() instanceof JTextField)) {
             return;
         }
-        SwingUtilities.invokeLater(new SafeScroller(r));
+        EventQueue.invokeLater(new SafeScroller(r));
     }
 
 
